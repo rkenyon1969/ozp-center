@@ -1,6 +1,6 @@
-# React JS Template App
+# Center UI
 
-This is a starter template [based on](https://github.com/johnthethird/react-starter-template) for building your first [React](http://facebook.github.io/react/) application. Based on a [Gulp](http://gulpjs.com/) and [Webpack](http://webpack.github.io/) build system. If you look at the /gulp, it implements some nifty features:
+Center UI built on [React](http://facebook.github.io/react/), [Gulp](http://gulpjs.com/) and [Webpack](http://webpack.github.io/) build system. If you look at the /gulp, it implements some nifty features:
 
 * `gulp` shows all available commands.
 * `gulp dev` implements an http server and a live reload server.
@@ -8,11 +8,7 @@ This is a starter template [based on](https://github.com/johnthethird/react-star
 * Uses the awesome Webpack project to combine all the javascript files into one.
 
 ## Getting Started
-First clone the repo...
-
-`git clone https://github.com/nishp1/react-starter-template.git`
-
-Then install the bower and npm modules
+First clone the repo. Then, install the bower and npm modules.
 
 ```
 npm install
