@@ -1,0 +1,23 @@
+#search {
+    position: relative;
+    padding-top: 15px;
+
+    > aside {
+        float: left;
+        width: 280px;
+        height: 55px;
+        padding: 10px 30px;
+        height: auto;
+    }
+
+    > section {
+        float: left;
+        width: 980px;
+    }
+
+    .listings {
+        padding: 0;
+        overflow: hidden;
+    }
+
+}

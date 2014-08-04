@@ -1,0 +1,68 @@
+#header {
+    position: relative;
+    height: 55px;
+    background: #fff;
+    border-bottom: 1px solid #d5d5d5;
+
+    .navbar-form {
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        top: 0;
+        right: 69px;
+        left: 280px;
+        height: 54px;
+        border: 1px solid #d5d5d5;
+        border-top: none;
+        border-bottom: none;
+        border-right: none;
+
+        > .form-group {
+            width: 100%;
+
+            > .form-control {
+                padding: 12px 35px 16px 75px;
+                width: 100%;
+                height: 54px;
+                border: 0;
+            }
+        }
+    }
+
+
+}
+
+
+#logo-container {
+    float: left;
+    width: 280px;
+    height: 55px;
+    padding: 16px 0 0 30px;
+}
+
+#appsmall-logo-link {
+    > img {
+        width: 112px;
+    }
+}
+
+#user-menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    .btn {
+        height: 54px;
+        background: #fff;
+        padding: 15px 34px 0 30px;
+        font-size: 18px;
+        color: #858585 !important;
+        border-left: 1px solid #d5d5d5;
+    }
+
+
+    .dropdown-menu {
+        margin-top: 0;
+        border-color: #d5d5d5;
+    }
+}
