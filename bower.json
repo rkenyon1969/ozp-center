@@ -1,0 +1,19 @@
+{
+  "name": "react-starter",
+  "version": "0.0.1",
+  "authors": [
+    "Nish Patel <nishantpatel611@gmail.com>"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "es5-shim": "~4.0.0"
+  }
+}
