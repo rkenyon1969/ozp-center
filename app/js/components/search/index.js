@@ -1,6 +1,9 @@
 /** @jsx React.DOM */
-var React = require('react/addons');
+var React = require('react');
+
 var ListingTile = require('./ListingTile');
+var Carousel = require('../carousel');
+
 var NewArrivals = require('../../data/NewArrivals');
 var MostPopular = require('../../data/MostPopular');
 
@@ -33,9 +36,9 @@ var Search = React.createClass({
         return (
             <section>
                 <h4>New Arrivals</h4>
-                <ul className="list-unstyled listings">
+                <Carousel>
                     { newArrivals }
-                </ul>
+                </Carousel>
             </section>
         );
     },
@@ -48,9 +51,9 @@ var Search = React.createClass({
         return (
             <section>
                 <h4>Most Popular</h4>
-                <ul className="list-unstyled listings">
+                <Carousel>
                     { mostPopular }
-                </ul>
+                </Carousel>
             </section>
         );
     }

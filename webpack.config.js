@@ -19,7 +19,8 @@ module.exports = {
         alias: {
             react$: "react/addons",
             jquery$: "jquery/dist/jquery",
-            bootstrap$: "bootstrap-sass-official/assets/javascripts/bootstrap"
+            bootstrap$: "bootstrap-sass-official/assets/javascripts/bootstrap",
+            carouFredSel$: "carouFredSel/jquery.carouFredSel-6.2.1"
         },
         // Tell webpack to look for required files in bower and node
         modulesDirectories: ['bower_components', 'node_modules'],
