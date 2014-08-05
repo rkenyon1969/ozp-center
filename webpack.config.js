@@ -18,7 +18,8 @@ module.exports = {
     resolve: {
         alias: {
             react$: "react/addons",
-            jquery$: "jquery/dist/jquery"
+            jquery$: "jquery/dist/jquery",
+            bootstrap$: "bootstrap-sass-official/assets/javascripts/bootstrap"
         },
         // Tell webpack to look for required files in bower and node
         modulesDirectories: ['bower_components', 'node_modules'],
