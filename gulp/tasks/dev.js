@@ -30,11 +30,12 @@ var createServers = function(port, lrport) {
 };
 
 gulp.task('dev', ['build'], function() {
-    var servers;
-    servers = createServers(httpPort, liveReloadPort);
+    var servers = createServers(httpPort, liveReloadPort);
+
     gulp.watch(['app/**/*'], function(evt) {
         return gulp.run('build');
     });
+
     return gulp.watch(['dist/**/*'], function(evt) {
         gutil.log(gutil.colors.cyan(evt.path), 'changed');
         return servers.lr.changed({
