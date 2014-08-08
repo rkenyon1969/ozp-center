@@ -1,5 +1,6 @@
 /** @jsx React.DOM */
 var React = require('react/addons');
+var IconRating = require('react-icon-rating');
 
 var ListingTile = React.createClass({
 
@@ -19,7 +20,12 @@ var ListingTile = React.createClass({
                     <img src={ imageLargeUrl } />
                     <div className="slide-up">
                         <h5 className="title">{ name }</h5>
-                        <span className="rating" data-rate={ avgRate }>Rating: { avgRate }</span>
+                        <IconRating
+                            className="icon-rating"
+                            viewOnly
+                            currentRating = { avgRate }
+                            toggledClassName="glyphicon glyphicon-star"
+                            untoggledClassName="glyphicon glyphicon-star-empty" />
                         <span className="rating-total">({ totalVotes })</span>
                         <p className="description">{ description }</p>
                     </div>

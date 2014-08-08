@@ -28,6 +28,10 @@
     .slide-up {
         line-height: 20px;
         padding: 0 8px;
+
+        > :nth-child(2) {
+            display: inline-block;
+        }
     }
 
     > a {
