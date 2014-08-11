@@ -2,7 +2,7 @@
 
 var React = require('react/addons');
 var UserMenu = require('./UserMenu');
-var logo  = '../../images/appsmall-logo.png';
+var logo  = './images/appsmall-logo.png';
 
 var Header = React.createClass({
 

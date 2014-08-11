@@ -1,3 +1,3 @@
 var gulp = require('gulp');
 
-gulp.task('build', ['webpack', 'sass', 'copy', 'vendor', 'fonts']);
+gulp.task('build', ['sass', 'copy', 'vendor', 'fonts', 'webpack:prod']);

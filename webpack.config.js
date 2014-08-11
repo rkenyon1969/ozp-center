@@ -8,8 +8,8 @@ module.exports = {
     debug: true,
     cache: true,
     output: {
-        path: path.join(__dirname, "dist", "assets"),
-        publicPath: "/assets/",
+        path: path.join(__dirname, "dist/assets"),
+        publicPath: "dist/assets",
         // If you want to generate a filename with a hash of the content (for cache-busting)
         // filename: "main-[hash].js",
         filename: "main.js",

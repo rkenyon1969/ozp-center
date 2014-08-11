@@ -34,12 +34,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/SearchWell64.png",
-        "imageLargeUrl": "/images/sample-listings/SearchWell.png",
+        "imageMediumUrl": "images/sample-listings/SearchWell64.png",
+        "imageLargeUrl": "images/sample-listings/SearchWell.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/SearchWell.png",
+        "launchUrl": "images/sample-listings/SearchWell.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -100,7 +100,7 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/SearchWell16.png",
+        "imageSmallUrl": "images/sample-listings/SearchWell16.png",
     },
     {
         "editedDate": "2014-05-20T15:12:04Z",
@@ -137,12 +137,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/Skybox64.png",
-        "imageLargeUrl": "/images/sample-listings/Skybox.png",
+        "imageMediumUrl": "images/sample-listings/Skybox64.png",
+        "imageLargeUrl": "images/sample-listings/Skybox.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/Skybox.png",
+        "launchUrl": "images/sample-listings/Skybox.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -203,7 +203,7 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/Skybox16.png",
+        "imageSmallUrl": "images/sample-listings/Skybox16.png",
     },
     {
         "editedDate": "2014-05-20T15:12:49Z",
@@ -240,12 +240,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/TreeNote64.png",
-        "imageLargeUrl": "/images/sample-listings/TreeNote.png",
+        "imageMediumUrl": "images/sample-listings/TreeNote64.png",
+        "imageLargeUrl": "images/sample-listings/TreeNote.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/TreeNote.png",
+        "launchUrl": "images/sample-listings/TreeNote.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -306,7 +306,7 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/TreeNote16.png",
+        "imageSmallUrl": "images/sample-listings/TreeNote16.png",
     },
     {
         "editedDate": "2014-05-20T15:13:45Z",
@@ -343,12 +343,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/WhiteboardGraphs64.png",
-        "imageLargeUrl": "/images/sample-listings/WhiteboardGraphs.png",
+        "imageMediumUrl": "images/sample-listings/WhiteboardGraphs64.png",
+        "imageLargeUrl": "images/sample-listings/WhiteboardGraphs.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/WhiteboardGraphs.png",
+        "launchUrl": "images/sample-listings/WhiteboardGraphs.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -409,7 +409,7 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/WhiteboardGraphs16.png",
+        "imageSmallUrl": "images/sample-listings/WhiteboardGraphs16.png",
     },
     {
         "editedDate": "2014-05-20T14:52:03Z",
@@ -446,12 +446,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/Airmail64.png",
-        "imageLargeUrl": "/images/sample-listings/AirMail.png",
+        "imageMediumUrl": "images/sample-listings/Airmail64.png",
+        "imageLargeUrl": "images/sample-listings/AirMail.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/AirMail.png",
+        "launchUrl": "images/sample-listings/AirMail.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -512,7 +512,7 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/Airmail16.png",
+        "imageSmallUrl": "images/sample-listings/Airmail16.png",
     },
     {
         "editedDate": "2014-05-20T14:54:29Z",
@@ -549,12 +549,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/Breadbasket64.png",
-        "imageLargeUrl": "/images/sample-listings/BreadBasket.png",
+        "imageMediumUrl": "images/sample-listings/Breadbasket64.png",
+        "imageLargeUrl": "images/sample-listings/BreadBasket.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/BreadBasket.png",
+        "launchUrl": "images/sample-listings/BreadBasket.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -615,7 +615,7 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/Breadbasket16.png",
+        "imageSmallUrl": "images/sample-listings/Breadbasket16.png",
     },
     {
         "editedDate": "2014-05-20T14:55:28Z",
@@ -652,12 +652,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/ChartCourse64.png",
-        "imageLargeUrl": "/images/sample-listings/ChartCourse.png",
+        "imageMediumUrl": "images/sample-listings/ChartCourse64.png",
+        "imageLargeUrl": "images/sample-listings/ChartCourse.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/ChartCourse.png",
+        "launchUrl": "images/sample-listings/ChartCourse.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -718,7 +718,7 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/ChartCourse16.png",
+        "imageSmallUrl": "images/sample-listings/ChartCourse16.png",
     },
     {
         "editedDate": "2014-05-20T14:56:15Z",
@@ -755,12 +755,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/Chatterbox64.png",
-        "imageLargeUrl": "/images/sample-listings/ChatterBox.png",
+        "imageMediumUrl": "images/sample-listings/Chatterbox64.png",
+        "imageLargeUrl": "images/sample-listings/ChatterBox.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/ChatterBox.png",
+        "launchUrl": "images/sample-listings/ChatterBox.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -821,7 +821,7 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/Chatterbox16.png",
+        "imageSmallUrl": "images/sample-listings/Chatterbox16.png",
     },
     {
         "editedDate": "2014-05-20T14:57:55Z",
@@ -858,12 +858,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/Clipboard64.png",
-        "imageLargeUrl": "/images/sample-listings/Clipboard.png",
+        "imageMediumUrl": "images/sample-listings/Clipboard64.png",
+        "imageLargeUrl": "images/sample-listings/Clipboard.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/Clipboard.png",
+        "launchUrl": "images/sample-listings/Clipboard.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -924,7 +924,7 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/Clipboard16.png",
+        "imageSmallUrl": "images/sample-listings/Clipboard16.png",
     },
     {
         "editedDate": "2014-05-20T14:59:17Z",
@@ -961,12 +961,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/HatchLatch64.png",
-        "imageLargeUrl": "/images/sample-listings/HatchLatch.png",
+        "imageMediumUrl": "images/sample-listings/HatchLatch64.png",
+        "imageLargeUrl": "images/sample-listings/HatchLatch.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/HatchLatch.png",
+        "launchUrl": "images/sample-listings/HatchLatch.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -1027,7 +1027,7 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/HatchLatch16.png",
+        "imageSmallUrl": "images/sample-listings/HatchLatch16.png",
     },
     {
         "editedDate": "2014-05-20T15:00:10Z",
@@ -1064,12 +1064,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/JotSpot64.png",
-        "imageLargeUrl": "/images/sample-listings/JotSpot.png",
+        "imageMediumUrl": "images/sample-listings/JotSpot64.png",
+        "imageLargeUrl": "images/sample-listings/JotSpot.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/JotSpot.png",
+        "launchUrl": "images/sample-listings/JotSpot.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -1130,7 +1130,7 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/JotSpot16.png",
+        "imageSmallUrl": "images/sample-listings/JotSpot16.png",
     },
     {
         "editedDate": "2014-05-20T15:01:09Z",
@@ -1167,12 +1167,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/JournalForge64.png",
-        "imageLargeUrl": "/images/sample-listings/JournalForge.png",
+        "imageMediumUrl": "images/sample-listings/JournalForge64.png",
+        "imageLargeUrl": "images/sample-listings/JournalForge.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/JournalForge.png",
+        "launchUrl": "images/sample-listings/JournalForge.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -1233,7 +1233,7 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/JournalForge16.png",
+        "imageSmallUrl": "images/sample-listings/JournalForge16.png",
     },
     {
         "editedDate": "2014-05-20T15:03:03Z",
@@ -1270,12 +1270,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/LunarLantern64.png",
-        "imageLargeUrl": "/images/sample-listings/LunarLantern.png",
+        "imageMediumUrl": "images/sample-listings/LunarLantern64.png",
+        "imageLargeUrl": "images/sample-listings/LunarLantern.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/LunarLantern.png",
+        "launchUrl": "images/sample-listings/LunarLantern.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -1336,7 +1336,7 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/LunarLantern16.png",
+        "imageSmallUrl": "images/sample-listings/LunarLantern16.png",
     },
     {
         "editedDate": "2014-05-20T15:03:48Z",
@@ -1373,12 +1373,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/Manilla64.png",
-        "imageLargeUrl": "/images/sample-listings/Manilla.png",
+        "imageMediumUrl": "images/sample-listings/Manilla64.png",
+        "imageLargeUrl": "images/sample-listings/Manilla.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/Manilla.png",
+        "launchUrl": "images/sample-listings/Manilla.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -1439,7 +1439,7 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/Manilla16.png",
+        "imageSmallUrl": "images/sample-listings/Manilla16.png",
     },
     {
         "editedDate": "2014-05-20T15:04:32Z",
@@ -1476,12 +1476,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/MAPP64.png",
-        "imageLargeUrl": "/images/sample-listings/MAPP.png",
+        "imageMediumUrl": "images/sample-listings/MAPP64.png",
+        "imageLargeUrl": "images/sample-listings/MAPP.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/MAPP.png",
+        "launchUrl": "images/sample-listings/MAPP.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -1542,7 +1542,7 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/MAPP16.png",
+        "imageSmallUrl": "images/sample-listings/MAPP16.png",
     },
     {
         "editedDate": "2014-05-20T15:05:32Z",
@@ -1579,12 +1579,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/Musicbox64.png",
-        "imageLargeUrl": "/images/sample-listings/MusicBox.png",
+        "imageMediumUrl": "images/sample-listings/Musicbox64.png",
+        "imageLargeUrl": "images/sample-listings/MusicBox.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/MusicBox.png",
+        "launchUrl": "images/sample-listings/MusicBox.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -1645,7 +1645,7 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/Musicbox16.png",
+        "imageSmallUrl": "images/sample-listings/Musicbox16.png",
     },
     {
         "editedDate": "2014-05-20T15:06:24Z",
@@ -1682,12 +1682,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/MyCalc64.png",
-        "imageLargeUrl": "/images/sample-listings/MyCalc.png",
+        "imageMediumUrl": "images/sample-listings/MyCalc64.png",
+        "imageLargeUrl": "images/sample-listings/MyCalc.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/MyCalc.png",
+        "launchUrl": "images/sample-listings/MyCalc.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -1748,7 +1748,7 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/MyCalc16.png",
+        "imageSmallUrl": "images/sample-listings/MyCalc16.png",
     },
     {
         "editedDate": "2014-05-20T15:07:42Z",
@@ -1785,12 +1785,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/Photogenic64.png",
-        "imageLargeUrl": "/images/sample-listings/Photogenic.png",
+        "imageMediumUrl": "images/sample-listings/Photogenic64.png",
+        "imageLargeUrl": "images/sample-listings/Photogenic.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/Photogenic.png",
+        "launchUrl": "images/sample-listings/Photogenic.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -1851,7 +1851,7 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/Photogenic16.png",
+        "imageSmallUrl": "images/sample-listings/Photogenic16.png",
     },
     {
         "editedDate": "2014-05-20T15:08:22Z",
@@ -1888,12 +1888,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/Playback64.png",
-        "imageLargeUrl": "/images/sample-listings/Playback.png",
+        "imageMediumUrl": "images/sample-listings/Playback64.png",
+        "imageLargeUrl": "images/sample-listings/Playback.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/Playback.png",
+        "launchUrl": "images/sample-listings/Playback.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -1954,7 +1954,7 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/Playback16.png",
+        "imageSmallUrl": "images/sample-listings/Playback16.png",
     },
     {
         "editedDate": "2014-05-20T15:09:21Z",
@@ -1991,12 +1991,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/PlotPossum64.png",
-        "imageLargeUrl": "/images/sample-listings/PlotPossum.png",
+        "imageMediumUrl": "images/sample-listings/PlotPossum64.png",
+        "imageLargeUrl": "images/sample-listings/PlotPossum.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/PlotPossum.png",
+        "launchUrl": "images/sample-listings/PlotPossum.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -2057,7 +2057,7 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/PlotPossum16.png",
+        "imageSmallUrl": "images/sample-listings/PlotPossum16.png",
     },
     {
         "editedDate": "2014-05-20T15:10:26Z",
@@ -2094,12 +2094,12 @@ module.exports = [
                 "name": "Test Admin 1"
             }
         ],
-        "imageMediumUrl": "/images/sample-listings/PrimeSight64.png",
-        "imageLargeUrl": "/images/sample-listings/PrimeSight.png",
+        "imageMediumUrl": "images/sample-listings/PrimeSight64.png",
+        "imageLargeUrl": "images/sample-listings/PrimeSight.png",
         "opensInNewBrowserTab": false,
         "totalComments": 0,
         "scoreCard.score": 0,
-        "launchUrl": "/images/sample-listings/PrimeSight.png",
+        "launchUrl": "images/sample-listings/PrimeSight.png",
         "validLaunchUrl": true,
         "state": {
             "id": 1,
@@ -2160,6 +2160,6 @@ module.exports = [
         },
         "intents": [],
         "categories": [],
-        "imageSmallUrl": "/images/sample-listings/PrimeSight16.png",
+        "imageSmallUrl": "images/sample-listings/PrimeSight16.png",
     }
 ];

@@ -14,6 +14,6 @@ First clone the repo. Then, install the bower and npm modules.
 npm install
 ```
 
-`npm start` or `gulp dev` then go to http://localhost:4000
+`npm start` or `gulp dev` then go to http://localhost:8080/webpack-dev-server/dist
 
 Your browser will automatically reload when any file in /app changes.
