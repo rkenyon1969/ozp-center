@@ -24,8 +24,8 @@ var ListingTile = React.createClass({
                             className="icon-rating"
                             viewOnly
                             currentRating = { avgRate }
-                            toggledClassName="glyphicon glyphicon-star"
-                            untoggledClassName="glyphicon glyphicon-star-empty" />
+                            toggledClassName="fa fa-star"
+                            untoggledClassName="fa fa-star-o" />
                         <span className="rating-total">({ totalVotes })</span>
                         <p className="description">{ description }</p>
                     </div>

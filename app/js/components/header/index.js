@@ -14,8 +14,8 @@ var Header = React.createClass({
                 </div>
                 <form className="navbar-form navbar-left" role="search">
                     <div className="form-group">
-                        <i className="glyphicon glyphicon-search"></i>
-                        <input type="text" className="form-control" placeholder="Search" />
+                        <i className="fa fa-search"></i>
+                        <input type="text" className="form-control" placeholder="Search..." />
                     </div>
                 </form>
                 <UserMenu />

@@ -8,11 +8,11 @@ var Header = React.createClass({
         return (
             <div id="user-menu" className="dropdown navbar-right">
                 <a className="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i className="glyphicon glyphicon-align-justify"></i>
+                    <i className="fa fa-bars"></i>
                 </a>
                 <ul className="dropdown-menu" role="menu">
-                    <li><a href="#"><i className="glyphicon glyphicon-book"></i> Help</a></li>
-                    <li><a href="#"><i className="glyphicon glyphicon-off"></i> Logout</a></li>
+                    <li><a href="#"><i className="fa fa-list"></i> My Listings</a></li>
+                    <li><a href="#"><i className="fa fa-sign-out"></i> Logout</a></li>
                 </ul>
             </div>
         );

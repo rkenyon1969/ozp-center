@@ -3,9 +3,7 @@ var path = require('path');
 
 var VENDOR_PATHS = [
     'es5-shim/es5-sham.js',
-    'es5-shim/es5-shim.js',
-    'gridster/dist/jquery.gridster.css',
-    'jquery-ui/themes/base/jquery.ui.resizable.css'
+    'es5-shim/es5-shim.js'
 ];
 
 gulp.task('vendor', function() {
