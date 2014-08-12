@@ -1,13 +1,34 @@
 /** @jsx React.DOM */
 var React = require('react');
+var Reflux = require('reflux');
 
 var ListingTile = require('./ListingTile');
 var Carousel = require('../carousel');
 
-var NewArrivals = require('../../data/NewArrivals');
-var MostPopular = require('../../data/MostPopular');
+var ListingStore = require('../../stores/ListingsStore');
 
 var Search = React.createClass({
+
+    mixins: [ Reflux.ListenerMixin ],
+
+    getInitialState: function () {
+        return this.getState();
+    },
+
+    getState: function () {
+        return {
+            newArrivals: ListingStore.getNewArrivals(),
+            mostPopular: ListingStore.getMostPopular()
+        };
+    },
+
+    _onChange: function () {
+        this.setState(this.getState());
+    },
+
+    componentDidMount: function() {
+        this.listenTo(ListingStore, this._onChange);
+    },
 
     render: function () {
         return (
@@ -29,7 +50,11 @@ var Search = React.createClass({
     },
 
     renderNewArrivals: function () {
-        var newArrivals = NewArrivals.map(function (listing) {
+        if(!this.state.newArrivals.length) {
+            return;
+        }
+
+        var newArrivals = this.state.newArrivals.map(function (listing) {
             return <ListingTile listing={listing} />
         });
 
@@ -44,7 +69,11 @@ var Search = React.createClass({
     },
 
     renderMostPopular: function () {
-        var mostPopular = MostPopular.map(function (listing) {
+        if(!this.state.mostPopular.length) {
+            return;
+        }
+
+        var mostPopular = this.state.mostPopular.map(function (listing) {
             return <ListingTile listing={listing} />
         });
 
