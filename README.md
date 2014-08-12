@@ -1,4 +1,4 @@
-# Center UI
+# Center UI [![Build Status][travis-image]][travis-url]
 
 Center UI built on [React](http://facebook.github.io/react/), [Gulp](http://gulpjs.com/) and [Webpack](http://webpack.github.io/) build system. If you look at the /gulp, it implements some nifty features:
 
