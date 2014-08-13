@@ -27,20 +27,3 @@ gulp.task("webpack:prod", function (callback) {
     });
 
 });
-
-gulp.task("webpack:dev", function (callback) {
-    var devConfig = Object.create(webpackConfig);
-    devConfig.devtool = "eval";
-    devConfig.debug = true;
-
-    // Start a webpack-dev-server
-    new WebpackDevServer(webpack(devConfig), {
-        publicPath: "/" + devConfig.output.publicPath,
-        stats: {
-            colors: true
-        }
-    }).listen(8080, "localhost", function (err) {
-        if(err) throw new gutil.PluginError("webpack-dev-server", err);
-        gutil.log("[webpack-dev-server]", "http://localhost:8080/webpack-dev-server/dist");
-    });
-});

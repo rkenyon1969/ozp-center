@@ -1,13 +1,45 @@
 /** @jsx React.DOM */
 var React = require('react');
+var Reflux = require('reflux');
 
+// actions
+var fetchNewArrivals = require('../../actions/ListingActions').fetchNewArrivals;
+var fetchMostPopular = require('../../actions/ListingActions').fetchMostPopular;
+
+// component dependencies
 var ListingTile = require('./ListingTile');
 var Carousel = require('../carousel');
 
-var NewArrivals = require('../../data/NewArrivals');
-var MostPopular = require('../../data/MostPopular');
+// store dependencies
+var DiscoveryPageStore = require('../../stores/DiscoveryPageStore');
 
+// component definition
 var Search = React.createClass({
+
+    mixins: [ Reflux.ListenerMixin ],
+
+    getInitialState: function () {
+        // fetch data when instantiated
+        fetchNewArrivals();
+        fetchMostPopular();
+
+        return this.getState();
+    },
+
+    getState: function () {
+        return {
+            newArrivals: DiscoveryPageStore.getNewArrivals(),
+            mostPopular: DiscoveryPageStore.getMostPopular()
+        };
+    },
+
+    _onChange: function () {
+        this.setState(this.getState());
+    },
+
+    componentDidMount: function() {
+        this.listenTo(DiscoveryPageStore, this._onChange);
+    },
 
     render: function () {
         return (
@@ -29,7 +61,11 @@ var Search = React.createClass({
     },
 
     renderNewArrivals: function () {
-        var newArrivals = NewArrivals.map(function (listing) {
+        if(!this.state.newArrivals.length) {
+            return;
+        }
+
+        var newArrivals = this.state.newArrivals.map(function (listing) {
             return <ListingTile listing={listing} />
         });
 
@@ -44,7 +80,11 @@ var Search = React.createClass({
     },
 
     renderMostPopular: function () {
-        var mostPopular = MostPopular.map(function (listing) {
+        if(!this.state.mostPopular.length) {
+            return;
+        }
+
+        var mostPopular = this.state.mostPopular.map(function (listing) {
             return <ListingTile listing={listing} />
         });
 
