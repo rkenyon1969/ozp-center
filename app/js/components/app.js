@@ -33,8 +33,8 @@ var APP = React.createClass({
                 <Dropdown data={temp.data} placeholder={temp.placeholder} multiple={temp.multiple} />
 
                 <Dropdown>
-                  <option>A</option>
-                  <option>B</option>
+                  <option id="A">A</option>
+                  <option id="B">B</option>
                   <option id="C">C</option>
                 </Dropdown>
             </div>

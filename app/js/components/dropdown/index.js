@@ -5,6 +5,19 @@ require('select2');
 
 var Dropdown = React.createClass({
 
+  propTypes: {
+    children: React.PropTypes.array,
+    data: React.PropTypes.array,
+    multiple: React.PropTypes.bool,
+    allowClear: React.PropTypes.bool,
+    placeholder: React.PropTypes.string,
+    onChange: React.PropTypes.func,
+    defaultValue: React.PropTypes.string,
+    minimumInputLength: React.PropTypes.number,
+    ajax: React.PropTypes.object
+
+  },
+
   render: function() {
 
     return this.props.data ? this.renderInputDropdown() : this.renderSelectDropdown();
@@ -13,13 +26,14 @@ var Dropdown = React.createClass({
 
   renderSelectDropdown: function () {
     return (
-      <select class="select2" ref="element">{ this.props.children }</select>
+      <select class="select2" ref="element">
+        { this.props.children }
+      </select>
     );
   },
 
-
   renderInputDropdown: function () {
-    return (<input class="select2" ref="element" />)
+    return (<input class="select2" ref="element" />);
   },
 
   componentDidMount: function() {
@@ -28,7 +42,8 @@ var Dropdown = React.createClass({
   },
 
   componentWillUnmount: function () {
-    $(this.refs.element.getDOMNode()).off('')
+    var rootNode = this.getDOMNode();
+    $(rootNode).select2("destroy");
   }
 });
 
