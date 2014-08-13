@@ -2,23 +2,34 @@
 var React = require('react');
 var Reflux = require('reflux');
 
+// actions
+var fetchNewArrivals = require('../../actions/ListingActions').fetchNewArrivals;
+var fetchMostPopular = require('../../actions/ListingActions').fetchMostPopular;
+
+// component dependencies
 var ListingTile = require('./ListingTile');
 var Carousel = require('../carousel');
 
-var ListingStore = require('../../stores/ListingsStore');
+// store dependencies
+var DiscoveryPageStore = require('../../stores/DiscoveryPageStore');
 
+// component definition
 var Search = React.createClass({
 
     mixins: [ Reflux.ListenerMixin ],
 
     getInitialState: function () {
+        // fetch data when instantiated
+        fetchNewArrivals();
+        fetchMostPopular();
+
         return this.getState();
     },
 
     getState: function () {
         return {
-            newArrivals: ListingStore.getNewArrivals(),
-            mostPopular: ListingStore.getMostPopular()
+            newArrivals: DiscoveryPageStore.getNewArrivals(),
+            mostPopular: DiscoveryPageStore.getMostPopular()
         };
     },
 
@@ -27,7 +38,7 @@ var Search = React.createClass({
     },
 
     componentDidMount: function() {
-        this.listenTo(ListingStore, this._onChange);
+        this.listenTo(DiscoveryPageStore, this._onChange);
     },
 
     render: function () {

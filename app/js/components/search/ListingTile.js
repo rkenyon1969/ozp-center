@@ -7,12 +7,11 @@ var ListingTile = React.createClass({
     render: function () {
         var listing = this.props.listing;
 
-        var name = listing.title;
-        var description = listing.description && listing.description.substr(0, 140);
-        var imageLargeUrl = listing.imageLargeUrl;
-        var name = listing.title;
-        var totalVotes = listing.totalVotes;
-        var avgRate = listing.avgRate;
+        var name = listing.title();
+        var description = listing.description() && listing.description().substr(0, 140);
+        var imageLargeUrl = listing.imageLargeUrl();
+        var totalVotes = listing.totalVotes();
+        var avgRate = listing.avgRate();
 
         return (
             <li className="listing listing-tile">
