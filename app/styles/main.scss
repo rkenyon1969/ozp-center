@@ -5,6 +5,7 @@ $fa-font-path: "../../bower_components/font-awesome/fonts/";
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
 @import "../../bower_components/font-awesome/scss/font-awesome.scss";
 @import "../../bower_components/select2/select2.css";
+@import 'fonts';
 
 * {
     border-radius: 0px !important;
@@ -12,14 +13,33 @@ $fa-font-path: "../../bower_components/font-awesome/fonts/";
 
 html, body {
     background: $page-bg;
+    font-family: 'Ubuntu Regular', 'Ubuntu';
 }
 
-#main {
-    margin: 0 auto;
-    display: block;
-    min-height: 100%;
-    height: auto !important;
-    width: 1260px;
+// #main {
+//     margin: 0 auto;
+//     display: block;
+//     min-height: 100%;
+//     height: auto !important;
+//     width: 1260px;
+//
+//     background: #e8e8e8;
+//     -moz-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+//     -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+//     box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+// }
+//
+// @media (max-width: 1023px) and (min-width: 800px) {
+//     #main {
+//         width: 800px !important;
+//         transition: all .25s linear;
+//     }
+// }
+//
+// @import 'carousel';
+// @import 'header';
+// @import 'listing-tile';
+// @import 'search';
 
     background: #e8e8e8;
     -moz-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
@@ -38,3 +58,4 @@ html, body {
 @import 'header';
 @import 'listing-tile';
 @import 'search';
+@import 'createEdit';

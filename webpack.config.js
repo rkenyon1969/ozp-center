@@ -27,6 +27,9 @@ module.exports = {
         modulesDirectories: ['bower_components', 'node_modules'],
     },
     module: {
+        preLoaders: [
+            { test: /\.js$/, loader: "jshint-loader", exclude: /node_modules|bower_components|gulp|dist/ }
+        ],
         loaders: [
             { test: /\.css/, loader: "style-loader!css-loader" },
             { test: /\.gif/, loader: "url-loader?limit=10000&mimetype=image/gif" },

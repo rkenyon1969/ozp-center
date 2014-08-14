@@ -1,4 +1,6 @@
 /** @jsx React.DOM */
+'use strict';
+
 var React = require('react');
 
 require('carouFredSel');
@@ -11,6 +13,7 @@ var Carousel = React.createClass({
     },
 
     render: function () {
+        /*jshint ignore:start */
         return (
             <div className="carousel-wrapper">
                 <div className="carousel">
@@ -18,11 +21,12 @@ var Carousel = React.createClass({
                         { this.props.children }
                     </ul>
                     <div className="clearfix"></div>
-                    <a className="prev" href="#" ref="prev"><i className="fa fa-angle-left"></i></a>
-                    <a className="next" href="#" ref="next"><i className="fa fa-angle-right"></i></a>
+                    <button className="prev btn" href="#" ref="prev"><i className="fa fa-angle-left"></i></button>
+                    <button className="next btn" href="#" ref="next"><i className="fa fa-angle-right"></i></button>
                 </div>
             </div>
         );
+        /*jshint ignore:end */
     },
 
     componentDidMount: function () {

@@ -1,3 +1,5 @@
+'use strict';
+
 var Reflux = require('reflux');
 
 var newArrivalsFetched = require('../actions/ListingActions').newArrivalsFetched;

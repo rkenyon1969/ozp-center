@@ -19,6 +19,8 @@
     "es5-shim": "~4.0.0",
     "carouFredSel": "*",
     "select2": "3.5.1"
+    "ubuntu-font": "*"
+
   },
   "devDependencies": {
     "font-awesome": "~4.1.0"
