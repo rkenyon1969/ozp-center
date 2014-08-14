@@ -21,8 +21,8 @@ var Carousel = React.createClass({
                         { this.props.children }
                     </ul>
                     <div className="clearfix"></div>
-                    <a className="prev" href="#" ref="prev"><i className="fa fa-angle-left"></i></a>
-                    <a className="next" href="#" ref="next"><i className="fa fa-angle-right"></i></a>
+                    <button className="prev btn" href="#" ref="prev"><i className="fa fa-angle-left"></i></button>
+                    <button className="next btn" href="#" ref="next"><i className="fa fa-angle-right"></i></button>
                 </div>
             </div>
         );
