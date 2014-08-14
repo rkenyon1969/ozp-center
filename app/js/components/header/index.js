@@ -1,4 +1,5 @@
 /** @jsx React.DOM */
+'use strict';
 
 var React = require('react/addons');
 var UserMenu = require('./UserMenu');
@@ -7,6 +8,7 @@ var logo  = './images/appsmall-logo.png';
 var Header = React.createClass({
 
     render: function () {
+        /*jshint ignore:start */
         return (
             <div id="header">
                 <div id="logo-container">
@@ -21,6 +23,7 @@ var Header = React.createClass({
                 <UserMenu />
             </div>
         );
+        /*jshint ignore:end */
     }
 
 });

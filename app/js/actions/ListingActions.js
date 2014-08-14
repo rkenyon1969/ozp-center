@@ -1,3 +1,5 @@
+'use strict';
+
 var Reflux = require('reflux');
 
 var ListingApi = require('../data/Listing').ListingApi;
@@ -10,13 +12,13 @@ var mostPopularFetched = Reflux.createAction();
 
 fetchNewArrivals.listen(function () {
     ListingApi.getNewArrivals().then(function (listings) {
-        newArrivalsFetched(listings)
+        newArrivalsFetched(listings);
     });
 });
 
 fetchMostPopular.listen(function () {
     ListingApi.getMostPopular().then(function (listings) {
-        mostPopularFetched(listings)
+        mostPopularFetched(listings);
     });
 });
 

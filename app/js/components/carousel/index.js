@@ -1,4 +1,6 @@
 /** @jsx React.DOM */
+'use strict';
+
 var React = require('react');
 
 require('carouFredSel');
@@ -11,6 +13,7 @@ var Carousel = React.createClass({
     },
 
     render: function () {
+        /*jshint ignore:start */
         return (
             <div className="carousel-wrapper">
                 <div className="carousel">
@@ -23,6 +26,7 @@ var Carousel = React.createClass({
                 </div>
             </div>
         );
+        /*jshint ignore:end */
     },
 
     componentDidMount: function () {

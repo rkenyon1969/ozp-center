@@ -7,12 +7,14 @@ var Search = require('./search');
 var APP = React.createClass({
 
     render: function () {
+        /*jshint ignore:start */
         return (
             <div>
                 <Header />
                 <Search />
             </div>
         );
+        /*jshint ignore:end */
     }
 
 });

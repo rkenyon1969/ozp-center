@@ -1,4 +1,6 @@
 /** @jsx React.DOM */
+'use strict';
+
 var APP = require('./components/app');
 var React = require('react');
 var jQuery = require('jquery');
@@ -10,4 +12,6 @@ window.React = React;
 window.jQuery = jQuery;
 window.$ = jQuery;
 
+/*jshint ignore:start */
 React.renderComponent(<APP />, document.getElementById('main'));
+/*jshint ignore:end */

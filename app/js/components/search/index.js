@@ -1,4 +1,6 @@
 /** @jsx React.DOM */
+'use strict';
+
 var React = require('react');
 var Reflux = require('reflux');
 
@@ -42,6 +44,7 @@ var Search = React.createClass({
     },
 
     render: function () {
+        /*jshint ignore:start */
         return (
             <div id="search">
                 <aside className="sidebar">
@@ -58,6 +61,7 @@ var Search = React.createClass({
                 <div className="clearfix"></div>
             </div>
         );
+        /*jshint ignore:end */
     },
 
     renderNewArrivals: function () {
@@ -65,6 +69,7 @@ var Search = React.createClass({
             return;
         }
 
+        /*jshint ignore:start */
         var newArrivals = this.state.newArrivals.map(function (listing) {
             return <ListingTile listing={listing} />
         });
@@ -77,6 +82,7 @@ var Search = React.createClass({
                 </Carousel>
             </section>
         );
+        /*jshint ignore:end */
     },
 
     renderMostPopular: function () {
@@ -84,6 +90,7 @@ var Search = React.createClass({
             return;
         }
 
+        /*jshint ignore:start */
         var mostPopular = this.state.mostPopular.map(function (listing) {
             return <ListingTile listing={listing} />
         });
@@ -96,6 +103,7 @@ var Search = React.createClass({
                 </Carousel>
             </section>
         );
+        /*jshint ignore:end */
     }
 
 });

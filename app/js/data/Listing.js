@@ -1,3 +1,5 @@
+'use strict';
+
 var prop = require('../utils/prop');
 
 function Listing (json) {
@@ -32,7 +34,7 @@ var ListingApi = {
             });
         });
     }
-}
+};
 
 module.exports.Listing = Listing;
 module.exports.ListingApi = ListingApi;
