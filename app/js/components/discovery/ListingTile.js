@@ -15,6 +15,7 @@ var ListingTile = React.createClass({
         var imageLargeUrl = listing.imageLargeUrl();
         var totalVotes = listing.totalVotes();
         var avgRate = listing.avgRate();
+        var company = listing.company();
 
         /*jshint ignore:start */
         return (
@@ -22,14 +23,18 @@ var ListingTile = React.createClass({
                 <a href="#quickview/1">
                     <img src={ imageLargeUrl } />
                     <div className="slide-up">
-                        <h5 className="title">{ name }</h5>
+                        <p className="title">{ name }</p>
                         <IconRating
                             className="icon-rating"
                             viewOnly
                             currentRating = { avgRate }
                             toggledClassName="fa fa-star"
-                            untoggledClassName="fa fa-star-o" />
-                        <span className="rating-total">({ totalVotes })</span>
+                            untoggledClassName="fa fa-star-o"
+                            halfClassName="fa fa-star-half-o" />
+                        {
+                            company &&
+                                <span className="company">{ company }</span>
+                        }
                         <p className="description">{ description }</p>
                     </div>
                 </a>

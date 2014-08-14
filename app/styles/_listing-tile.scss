@@ -28,6 +28,7 @@
     .slide-up {
         line-height: 20px;
         padding: 0 8px;
+        position: relative;
 
         > :nth-child(2) {
             display: inline-block;
@@ -36,6 +37,7 @@
 
     > a {
         display: block;
+        color: $text-color;
     }
 
     img {
@@ -48,23 +50,29 @@
         // @include transition(all .2s ease-out 0.1s);
     }
 
-    [class^="icon-"], [class*=" icon-"] {
-        display: inline-block;
+    i {
+        margin-right: 2px;
     }
 
     .title {
-        margin-bottom: 1px;
+        margin: 6px 0 1px 0;
         @extend .ellipsis;
-    }
-
-    .rating-total {
-        margin-left: 5px;
     }
 
     .description {
         margin-top: 6px;
         height: 120px;
         overflow: hidden;
+    }
+
+    .company {
+        background: #e8e8e8;
+        padding: 2px 10px;
+        border-radius: 10px;
+        display: inline-block;
+        position: absolute;
+        right: 8px;
+        top: 8px;
     }
 
     .btn-add {

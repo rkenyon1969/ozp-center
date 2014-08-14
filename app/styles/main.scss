@@ -9,12 +9,8 @@ $fa-font-path: "../../bower_components/font-awesome/fonts/";
 
 $header-height: 55px;
 
-* {
-    border-radius: 0px !important;
-}
-
 html, body {
-    background: $page-bg;
+    background: $body-bg;
     font-family: 'Ubuntu Regular', 'Ubuntu';
 }
 
@@ -86,6 +82,10 @@ html, body {
         width: 800px !important;
         transition: all .25s linear;
     }
+}
+
+i.fa-star, i.fa-star-half-o {
+    color: $star-color;
 }
 
 @import 'carousel';
