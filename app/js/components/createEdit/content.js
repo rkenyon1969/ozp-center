@@ -31,7 +31,7 @@ var Content = React.createClass({
                     </div>
                 </div>
 
-                <div id="content">
+                <div id="create-edit">
                     {this.props.children}
                 </div>
             </div>

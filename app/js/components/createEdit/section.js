@@ -15,7 +15,6 @@ var Content = React.createClass({
                 </div>
                 <div className="row">
                     {this.props.children}
-                    <div className="col-sm-2"></div>
                 </div>
             </div>
         );
