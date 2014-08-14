@@ -8,7 +8,7 @@ function Listing (json) {
         'avgRate', 'totalRate1', 'totalRate2', 'totalRate3','totalRate4',
         'totalRate5','totalVotes', 'state', 'tags', 'types','uuid',
         'versionName', 'imageLargeUrl', 'imageSmallUrl', 'imageMediumUrl',
-        'company'
+        'launchUrl', 'company'
     ];
 
     keys.forEach(function (key) {

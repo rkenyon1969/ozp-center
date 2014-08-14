@@ -12,6 +12,7 @@ var ListingTile = React.createClass({
 
         var name = listing.title();
         var description = listing.description() && listing.description().substr(0, 140);
+        var launchUrl = listing.launchUrl();
         var imageLargeUrl = listing.imageLargeUrl();
         var totalVotes = listing.totalVotes();
         var avgRate = listing.avgRate();
@@ -36,6 +37,10 @@ var ListingTile = React.createClass({
                                 <span className="company">{ company }</span>
                         }
                         <p className="description">{ description }</p>
+                        <div className="btn-group actions">
+                            <a className="btn btn-default" href={ launchUrl } target="_blank"><i className="fa fa-external-link"></i></a>
+                            <button type="button" className="btn btn-default"><i className="fa fa-link"></i> Connect</button>
+                        </div>
                     </div>
                 </a>
             </li>
