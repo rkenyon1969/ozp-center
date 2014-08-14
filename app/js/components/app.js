@@ -13,25 +13,6 @@ var CreateEditPage = require('./createEdit');
 var APP = React.createClass({
 
     render: function () {
-
-      var temp =
-      {
-        placeholder: "Select state",
-        multiple: true,
-        data: [
-        {
-          id: 0,
-          text: "Arizona"
-        }, {
-          id: 1,
-          text: "Maryland"
-        }, {
-          id: 2,
-          text:"Maine"
-        }]
-      };
-
-
         return this.renderCreateEditPage();
         // return this.renderSearchPage();
     },

@@ -41,11 +41,11 @@ html, body {
 // @import 'listing-tile';
 // @import 'search';
 
-    background: #e8e8e8;
-    -moz-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
-    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
-    box-shadow: 0 0 3px rgba(0, 0, 0, .1);
-}
+//     background: #e8e8e8;
+//     -moz-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+//     -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+//     box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+// }
 
 @media (max-width: 1023px) and (min-width: 800px) {
     #main {
@@ -58,4 +58,4 @@ html, body {
 @import 'header';
 @import 'listing-tile';
 @import 'search';
-@import 'createEdit';
+@import 'create-edit';

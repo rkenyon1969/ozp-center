@@ -1,4 +1,5 @@
 /** @jsx React.DOM */
+'use strict';
 
 var React = require('react/addons');
 require('select2');
@@ -9,13 +10,13 @@ var Dropdown = React.createClass({
     children: React.PropTypes.array,
     data: React.PropTypes.array,
     multiple: React.PropTypes.bool,
-    allowClear: React.PropTypes.bool,
+    // allowClear: React.PropTypes.bool,
     placeholder: React.PropTypes.string,
-    onChange: React.PropTypes.func,
-    defaultValue: React.PropTypes.string,
-    minimumInputLength: React.PropTypes.number,
-    ajax: React.PropTypes.object
-
+    // onChange: React.PropTypes.func,
+    // defaultValue: React.PropTypes.string,
+    // minimumInputLength: React.PropTypes.number,
+    // ajax: React.PropTypes.object,
+    className: React.PropTypes.string
   },
 
   render: function() {

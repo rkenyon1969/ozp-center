@@ -6,6 +6,7 @@ var Content = require('./content');
 var Section = require('./section');
 var Actions = require('./actions');
 var Section = require('./section');
+var Dropdown = require('../dropdown');
 
 var $ = require('jquery');
 require('bootstrap');
@@ -25,6 +26,41 @@ var CreateEditPage = React.createClass({
 
     /*jshint ignore:start */
     render: function () {
+      var tags = {
+        data: [
+          {
+            text: "tag1",
+            id: 0
+          },
+          {
+            text: "tag2",
+            id: 1
+          },{
+            text: "tag3",
+            id: 2
+          }
+        ],
+        multiple: true
+      }
+
+      var categories = {
+        data: [
+          {
+            text: 'Category A',
+            id: 0
+          },
+          {
+            text: 'Category B',
+            id: 1
+          },
+          {
+            text: 'Category C',
+            id: 2
+          }
+        ],
+        multiple: true
+      };
+
         return (
             <div>
                 <div id="header">
@@ -47,9 +83,13 @@ var CreateEditPage = React.createClass({
                             <label>Name</label>
                             <input type="text" className="form-control"></input>
                             <label>Category</label>
-                            <input type="text" className="form-control"></input>
+
+                            <Dropdown data={categories.data} multiple={categories.multiple} />
+
                             <label>Tags</label>
-                            <input type="text" className="form-control"></input>
+
+                            <Dropdown data={tags.data} multiple={tags.multiple} />
+
                         </div>
                         <div className="col-sm-4">
                             <label>Short Description</label>
