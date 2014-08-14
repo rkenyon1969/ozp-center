@@ -1,8 +1,8 @@
 #header {
-    position: relative;
-    height: 55px;
-    background: #fff;
-    border-bottom: 1px solid #d5d5d5;
+
+    > .row {
+        position: relative;
+    }
 
     .navbar-form {
         margin: 0;
@@ -38,7 +38,11 @@
         }
     }
 
-
+    .spacer {
+        height: 20px;
+        background: #e8e8e8;
+        width: 100%;
+    }
 }
 
 

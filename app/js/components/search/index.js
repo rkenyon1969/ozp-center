@@ -9,6 +9,7 @@ var fetchNewArrivals = require('../../actions/ListingActions').fetchNewArrivals;
 var fetchMostPopular = require('../../actions/ListingActions').fetchMostPopular;
 
 // component dependencies
+var Header = require('../header');
 var ListingTile = require('./ListingTile');
 var Carousel = require('../carousel');
 
@@ -46,19 +47,29 @@ var Search = React.createClass({
     render: function () {
         /*jshint ignore:start */
         return (
-            <div id="search">
-                <aside className="sidebar">
-                    <ul className="list-unstyled">
-                        <li>Home</li>
-                        <li>New Arrivals</li>
-                        <li>Most Popular</li>
-                    </ul>
-                </aside>
-                <section>
-                    { this.renderNewArrivals() }
-                    { this.renderMostPopular() }
-                </section>
-                <div className="clearfix"></div>
+            <div>
+                <Header>
+                    <form className="navbar-form navbar-left" role="search">
+                        <div className="form-group">
+                            <i className="fa fa-search"></i>
+                            <input type="text" className="form-control" placeholder="Search..." />
+                        </div>
+                    </form>
+                </Header>
+                <div id="search">
+                    <aside className="sidebar">
+                        <ul className="list-unstyled">
+                            <li>Home</li>
+                            <li>New Arrivals</li>
+                            <li>Most Popular</li>
+                        </ul>
+                    </aside>
+                    <section>
+                        { this.renderNewArrivals() }
+                        { this.renderMostPopular() }
+                    </section>
+                    <div className="clearfix"></div>
+                </div>
             </div>
         );
         /*jshint ignore:end */

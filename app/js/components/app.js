@@ -3,7 +3,7 @@
 
 var React = require('react/addons');
 var Header = require('./header');
-var Search = require('./search');
+var DiscoveryPage = require('./search');
 var CreateEditPage = require('./createEdit');
 
 var APP = React.createClass({
@@ -13,14 +13,10 @@ var APP = React.createClass({
         // return this.renderSearchPage();
     },
 
-
     /*jshint ignore:start */
     renderSearchPage: function () {
         return (
-            <div>
-                <Header />
-                <Search />
-            </div>
+            <DiscoveryPage />
         );
     },
     /*jshint ignore:end */
