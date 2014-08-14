@@ -19,9 +19,7 @@ var CreateEditPage = React.createClass({
     render: function () {
         return (
             <div>
-                <div id="header">
-                    <Header />
-                </div>
+                <Header />
                 <Actions title="Edit 'New Listing'">
                     <button className="btn btn-default">Preview</button>
                     <button className="btn btn-default">Save</button>
@@ -30,7 +28,7 @@ var CreateEditPage = React.createClass({
                 </Actions>
                 <Content>
                     <Section id="basic-info" title="Basic Information">
-                        <div className="col-sm-4">
+                        <div className="col-sm-5">
                             <h2>Basic Listing Information</h2>
                             <label>Name</label>
                             <input type="text" className="form-control"></input>
@@ -39,7 +37,7 @@ var CreateEditPage = React.createClass({
                             <label>Tags</label>
                             <input type="text" className="form-control"></input>
                         </div>
-                        <div className="col-sm-4">
+                        <div className="col-sm-5">
                             <label>Short Description</label>
                             <textarea className="form-control"></textarea>
                             <label>Full Description</label>
@@ -47,7 +45,7 @@ var CreateEditPage = React.createClass({
                         </div>
                     </Section>
                     <Section id="details" title="Details">
-                        <div className="col-sm-4">
+                        <div className="col-sm-5">
                             <h2>Listing Details</h2>
                             <label>Version Number</label>
                             <input type="text" className="form-control"></input>
@@ -58,7 +56,7 @@ var CreateEditPage = React.createClass({
                             <label>What&rsquo;s New</label>
                             <textarea className="form-control"></textarea>
                         </div>
-                        <div className="col-sm-4">
+                        <div className="col-sm-5">
                             <h2>Graphics</h2>
                             <label>Featured Banner</label>
                             <input type="text" className="form-control"></input>
@@ -72,7 +70,7 @@ var CreateEditPage = React.createClass({
                         </div>
                     </Section>
                     <Section id="resources-contacts" title="Resources and Contact">
-                        <div className="col-sm-4">
+                        <div className="col-sm-5">
                             <h2>Owner Information</h2>
                             <label>Associated Organization</label>
                             <input type="text" className="form-control"></input>
@@ -86,7 +84,7 @@ var CreateEditPage = React.createClass({
                             <label>Additional Resources</label>
                             <input type="text" className="form-control"></input>
                         </div>
-                        <div className="col-sm-4">
+                        <div className="col-sm-5">
                             <h2>Technical Support Point of Contact</h2>
                             <label>Name</label>
                             <input type="text" className="form-control"></input>
