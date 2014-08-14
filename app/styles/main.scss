@@ -4,6 +4,7 @@ $fa-font-path: "../../bower_components/font-awesome/fonts/";
 @import 'colors';
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
 @import "../../bower_components/font-awesome/scss/font-awesome.scss";
+@import 'fonts';
 
 * {
     border-radius: 0px !important;
@@ -11,6 +12,7 @@ $fa-font-path: "../../bower_components/font-awesome/fonts/";
 
 html, body {
     background: $page-bg;
+    font-family: 'Ubuntu Regular', 'Ubuntu';
 }
 
 // #main {

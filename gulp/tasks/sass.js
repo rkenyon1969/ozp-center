@@ -17,5 +17,6 @@ gulp.task('sass', function() {
         .pipe(gulp.env.production ? rev() : gutil.noop())
         .pipe(replace('../bower_components/bootstrap-sass-official/assets/fonts/bootstrap', 'fonts'))
         .pipe(replace('../bower_components/font-awesome/fonts', 'fonts'))
+        .pipe(replace('../bower_components/ubuntu-font', 'fonts'))
         .pipe(gulp.dest('dist/assets'));
 });
