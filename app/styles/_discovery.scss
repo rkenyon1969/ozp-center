@@ -1,10 +1,10 @@
-#search {
+#discovery {
     position: relative;
-    padding-top: 20px;
+    padding-top: $header-height + 20px;
 
     > aside {
         float: left;
-        width: 280px;
+        width: 265px;
         height: 55px;
         padding: 10px 30px;
         height: auto;
@@ -12,7 +12,7 @@
 
     > section {
         float: left;
-        width: 980px;
+        width: 965px;
         margin-bottom: 20px;
     }
 

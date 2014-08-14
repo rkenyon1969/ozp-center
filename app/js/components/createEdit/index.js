@@ -2,6 +2,9 @@
 'use strict';
 
 var React = require('react');
+
+var Logo = require('../header/Logo');
+var Header = require('../header');
 var Content = require('./content');
 var Section = require('./section');
 var Actions = require('./actions');
@@ -12,17 +15,6 @@ var $ = require('jquery');
 require('bootstrap');
 
 var CreateEditPage = React.createClass({
-    componentDidMount: function () {
-        var scrollspy = $('body').scrollspy({
-            target: '#content-nav'
-        }).data('bs.scrollspy');
-
-        this._$scrollspy = scrollspy;
-    },
-
-    componentWillUnmount: function () {
-        this._$scrollspy.destroy();
-    },
 
     /*jshint ignore:start */
     render: function () {
@@ -64,11 +56,7 @@ var CreateEditPage = React.createClass({
         return (
             <div>
                 <div id="header">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-sm-12"><h1>Apps Mall</h1></div>
-                        </div>
-                    </div>
+                    <Header />
                 </div>
                 <Actions title="Edit 'New Listing'">
                     <button className="btn btn-default">Preview</button>
@@ -152,8 +140,20 @@ var CreateEditPage = React.createClass({
                 </Content>
             </div>
         );
-    }
+    },
     /*jshint ignore:end */
+
+    componentDidMount: function () {
+        var scrollspy = $('body').scrollspy({
+            target: '#content-nav'
+        }).data('bs.scrollspy');
+
+        this._$scrollspy = scrollspy;
+    },
+
+    componentWillUnmount: function () {
+        this._$scrollspy.destroy();
+    }
 
 });
 

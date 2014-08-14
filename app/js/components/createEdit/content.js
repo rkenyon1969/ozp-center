@@ -23,22 +23,16 @@ var Content = React.createClass({
 
         return (
             <div>
-                <div id="content-nav">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-sm-12">
-                                <ul className="nav nav-tabs">
-                                    {navLinks}
-                                </ul>
-                            </div>
-                        </div>
+                <div id="create-edit-tab-container">
+                    <div className="row">
+                        <ul className="nav nav-tabs">
+                            {navLinks}
+                        </ul>
                     </div>
                 </div>
 
-                <div className="container">
-                    <div id="content">
-                        {this.props.children}
-                    </div>
+                <div id="content">
+                    {this.props.children}
                 </div>
             </div>
         );

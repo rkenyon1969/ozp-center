@@ -23,37 +23,17 @@ h2 {
     min-width: 768px;
 }
 
-#header {
-    z-index: 99;
+#create-edit-tab-container {
+    z-index: 1;
     position: fixed;
-    height: 60px;
-    width: 100%;
-
-    .row {
-        background: #fff;
-    }
-}
-
-#actions {
-    z-index: 99;
-    position: fixed;
-    height: 60px;
-    top: 60px;
-    width: 100%;
-
-    .row {
-        background: #fff;
-    }
-}
-
-#content-nav {
-    z-index: 99;
-    position: fixed;
-    top: 120px;
+    left: 0;
+    top: 135px;
     height: 40px;
     width: 100%;
 
-    .row {
+    > .row {
+        width: 1260px;
+        margin: 0 auto;
         background: #fff;
         border-bottom: 3px solid $highlight-bg;
         height: 43px;
@@ -94,7 +74,7 @@ h2 {
 
 #content {
     z-index: 9;
-    padding-top: 160px;
+    padding-top: 200px;
     .row {
         background: #e8e8e8;
     }

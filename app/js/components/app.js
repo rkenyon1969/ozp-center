@@ -3,10 +3,14 @@
 
 var React = require('react/addons');
 var Header = require('./header');
+<<<<<<< HEAD
 var Search = require('./search');
 
 var Dropdown = require('./dropdown');
 
+=======
+var DiscoveryPage = require('./discovery');
+>>>>>>> createEdit
 var CreateEditPage = require('./createEdit');
 
 
@@ -14,31 +18,27 @@ var APP = React.createClass({
 
     render: function () {
         return this.renderCreateEditPage();
-        // return this.renderSearchPage();
+        // return this.renderDiscoveryPage();
     },
 
-
     /*jshint ignore:start */
+
     renderSearchPage: function () {
 
         return (
             <div>
                 <Header />
                 <Search />
-
-                <Dropdown data={temp.data} placeholder={temp.placeholder} multiple={temp.multiple} />
-
-                <Dropdown>
-                  <option id="A">A</option>
-                  <option id="B">B</option>
-                  <option id="C">C</option>
-                </Dropdown>
             </div>
+          );
+    },
+
+    renderDiscoveryPage: function () {
+        return (
+            <DiscoveryPage />
         );
     },
-    /*jshint ignore:end */
 
-    /*jshint ignore:start */
     renderCreateEditPage: function () {
         return (
             <CreateEditPage />
