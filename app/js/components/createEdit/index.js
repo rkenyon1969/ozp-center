@@ -67,7 +67,7 @@ var CreateEditPage = React.createClass({
                             <input type="text" className="form-control"></input>
                             <label>Usage Requirements</label>
                             <textarea className="form-control"></textarea>
-                            <label>What's New</label>
+                            <label>What&rsquo;s New</label>
                             <textarea className="form-control"></textarea>
                         </div>
                         <div className="col-sm-4">
