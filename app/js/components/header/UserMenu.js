@@ -1,10 +1,12 @@
 /** @jsx React.DOM */
+'use strict';
 
 var React = require('react/addons');
 
 var Header = React.createClass({
 
     render: function () {
+        /*jshint ignore:start */
         return (
             <div id="user-menu" className="dropdown navbar-right">
                 <a className="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -16,6 +18,7 @@ var Header = React.createClass({
                 </ul>
             </div>
         );
+        /*jshint ignore:end */
     }
 
 });

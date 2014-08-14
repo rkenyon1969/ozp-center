@@ -13,6 +13,7 @@ var APP = React.createClass({
     },
 
     renderSearchPage: function () {
+        /*jshint ignore:start */
         return (
             <div>
                 <Header />
@@ -25,6 +26,7 @@ var APP = React.createClass({
         return (
             <CreateEditPage />
         );
+        /*jshint ignore:end */
     }
 
 });

@@ -1,5 +1,8 @@
 /** @jsx React.DOM */
-var React = require('react/addons');
+'use strict';
+
+var React = require('react');
+
 var IconRating = require('react-icon-rating');
 
 var ListingTile = React.createClass({
@@ -7,13 +10,13 @@ var ListingTile = React.createClass({
     render: function () {
         var listing = this.props.listing;
 
-        var name = listing.title;
-        var description = listing.description && listing.description.substr(0, 140);
-        var imageLargeUrl = listing.imageLargeUrl;
-        var name = listing.title;
-        var totalVotes = listing.totalVotes;
-        var avgRate = listing.avgRate;
+        var name = listing.title();
+        var description = listing.description() && listing.description().substr(0, 140);
+        var imageLargeUrl = listing.imageLargeUrl();
+        var totalVotes = listing.totalVotes();
+        var avgRate = listing.avgRate();
 
+        /*jshint ignore:start */
         return (
             <li className="listing listing-tile">
                 <a href="#quickview/1">
@@ -32,6 +35,7 @@ var ListingTile = React.createClass({
                 </a>
             </li>
         );
+        /*jshint ignore:end */
     }
 
 });
