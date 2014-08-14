@@ -56,7 +56,7 @@ var Search = React.createClass({
                         </div>
                     </form>
                 </Header>
-                <div id="search">
+                <div id="discovery">
                     <aside className="sidebar">
                         <ul className="list-unstyled">
                             <li>Home</li>

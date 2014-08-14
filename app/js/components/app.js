@@ -3,18 +3,18 @@
 
 var React = require('react/addons');
 var Header = require('./header');
-var DiscoveryPage = require('./search');
+var DiscoveryPage = require('./discovery');
 var CreateEditPage = require('./createEdit');
 
 var APP = React.createClass({
 
     render: function () {
         return this.renderCreateEditPage();
-        // return this.renderSearchPage();
+        // return this.renderDiscoveryPage();
     },
 
     /*jshint ignore:start */
-    renderSearchPage: function () {
+    renderDiscoveryPage: function () {
         return (
             <DiscoveryPage />
         );
