@@ -1,9 +1,11 @@
 /** @jsx React.DOM */
+'use strict';
 
 var React = require('react');
 
 var ActionBar = React.createClass({
     render: function () {
+        /*jshint ignore:start */
         return (
             <div id="actions">
                 <div className="container">
@@ -20,6 +22,7 @@ var ActionBar = React.createClass({
                 </div>
             </div>
         );
+        /*jshint ignore:end */
     }
 });
 

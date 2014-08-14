@@ -1,4 +1,5 @@
 /** @jsx React.DOM */
+'use strict';
 
 var React = require('react/addons');
 var Header = require('./header');
@@ -12,8 +13,9 @@ var APP = React.createClass({
         // return this.renderSearchPage();
     },
 
+
+    /*jshint ignore:start */
     renderSearchPage: function () {
-        /*jshint ignore:start */
         return (
             <div>
                 <Header />
@@ -21,13 +23,15 @@ var APP = React.createClass({
             </div>
         );
     },
+    /*jshint ignore:end */
 
+    /*jshint ignore:start */
     renderCreateEditPage: function () {
         return (
             <CreateEditPage />
         );
-        /*jshint ignore:end */
     }
+    /*jshint ignore:end */
 
 });
 

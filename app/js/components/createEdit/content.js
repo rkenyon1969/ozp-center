@@ -1,9 +1,12 @@
 /** @jsx React.DOM */
+'use strict';
 
 var React = require('react/addons');
 var classSet = React.addons.classSet;
 
 var Content = React.createClass({
+
+    /*jshint ignore:start */
     render: function () {
         var firstElement = true;
         var navLinks = React.Children.map(this.props.children, function(child) {
@@ -40,6 +43,8 @@ var Content = React.createClass({
             </div>
         );
     }
+    /*jshint ignore:end */
+
 });
 
 module.exports = Content;

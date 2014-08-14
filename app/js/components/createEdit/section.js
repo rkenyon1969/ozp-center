@@ -3,6 +3,8 @@
 var React = require('react');
 
 var Content = React.createClass({
+
+    /*jshint ignore:start */
     render: function () {
         return (
             <div className="content-section">
@@ -18,6 +20,8 @@ var Content = React.createClass({
             </div>
         );
     }
+    /*jshint ignore:end */
+
 });
 
 module.exports = Content;

@@ -1,4 +1,5 @@
 /** @jsx React.DOM */
+'use strict';
 
 var React = require('react');
 var Content = require('./content');
@@ -22,6 +23,7 @@ var CreateEditPage = React.createClass({
         this._$scrollspy.destroy();
     },
 
+    /*jshint ignore:start */
     render: function () {
         return (
             <div>
@@ -111,6 +113,8 @@ var CreateEditPage = React.createClass({
             </div>
         );
     }
+    /*jshint ignore:end */
+
 });
 
 module.exports = CreateEditPage;
