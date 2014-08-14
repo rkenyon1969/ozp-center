@@ -3,20 +3,30 @@
 var React = require('react/addons');
 var Header = require('./header');
 var Search = require('./search');
+var CreateEditPage = require('./createEdit');
 
 var APP = React.createClass({
 
     render: function () {
+        return this.renderCreateEditPage();
+        // return this.renderSearchPage();
+    },
+
+    renderSearchPage: function () {
         return (
             <div>
                 <Header />
                 <Search />
             </div>
         );
+    },
+
+    renderCreateEditPage: function () {
+        return (
+            <CreateEditPage />
+        );
     }
 
 });
-
-
 
 module.exports = APP;
