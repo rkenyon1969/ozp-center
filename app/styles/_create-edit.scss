@@ -13,14 +13,17 @@ body {
 
 h1 {
     font-size: 28px;
+    font-weight: 500;
 }
 
 h2 {
     font-size: 24px;
+    font-weight: 400;
 }
 
 .row {
     min-width: 768px;
+    height: auto;
 }
 
 #create-edit-tab-container {
@@ -61,6 +64,7 @@ h2 {
 
                 a {
                     color: $highlight-text;
+                    font-weight: 400;
                 }
             }
         }
@@ -80,9 +84,29 @@ h2 {
     }
 }
 
+.content-section {
+    .row {
+        padding-bottom: 20px;
+    }
+
+}
+
 .nav-anchor {
     top: -160px;
     display: block;
     position: relative;
     visibility: hidden;
+}
+
+label {
+    font-weight: 400;
+}
+
+input {
+    margin: 0 0 20px 0;
+    height: 25px !important;
+}
+
+textarea {
+    height: 100px !important;
 }
