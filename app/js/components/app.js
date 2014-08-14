@@ -3,14 +3,8 @@
 
 var React = require('react/addons');
 var Header = require('./header');
-<<<<<<< HEAD
-var Search = require('./search');
-
 var Dropdown = require('./dropdown');
-
-=======
 var DiscoveryPage = require('./discovery');
->>>>>>> createEdit
 var CreateEditPage = require('./createEdit');
 
 

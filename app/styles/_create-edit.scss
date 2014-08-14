@@ -13,14 +13,17 @@ body {
 
 h1 {
     font-size: 28px;
+    font-weight: 500;
 }
 
 h2 {
     font-size: 24px;
+    font-weight: 400;
 }
 
 .row {
     min-width: 768px;
+    height: auto;
 }
 
 #create-edit-tab-container {
@@ -61,6 +64,7 @@ h2 {
 
                 a {
                     color: $highlight-text;
+                    font-weight: 400;
                 }
             }
         }
@@ -72,11 +76,51 @@ h2 {
     }
 }
 
-#content {
+#create-edit {
     z-index: 9;
     padding-top: 200px;
     .row {
         background: #e8e8e8;
+    }
+
+    .content-section {
+        .row {
+            padding-bottom: 20px;
+
+            div {
+                label:first-child {
+                    margin-top: 20px;
+                }
+
+                h2:not(:first-child) {
+                    margin-top: 40px;
+                }
+            }
+        }
+
+        label {
+            font-weight: 500;
+        }
+
+        input {
+            margin: 0 0 20px 0;
+            height: 25px !important;
+        }
+
+        textarea {
+            height: 100px !important;
+            margin: 0 0 20px 0;
+        }
+
+        p.small {
+            width: 80%;
+        }
+    }
+
+    .content-section:last-child {
+        .row:last-child {
+            padding-bottom: 100px;
+        }
     }
 }
 
@@ -88,5 +132,11 @@ h2 {
 }
 
 .select2-container {
-  min-width: 100%;
+    width: 100%;
+    height: 30px !important;
+
+    .select2-choices {
+      height: 30px !important;
+      border: 1px solid #ccc;
+    }
 }
