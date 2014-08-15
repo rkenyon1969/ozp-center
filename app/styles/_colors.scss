@@ -1,3 +1,9 @@
+$gray-darker:            lighten(#000, 13.5%) !default; // #222
+$gray-dark:              lighten(#000, 20%) !default;   // #333
+$gray:                   lighten(#000, 33.5%) !default; // #555
+$gray-light:             #8f9194 !default;
+$gray-lighter:           #c2c3c7 !default;
+
 $border-radius-base:        0px !default;
 $border-radius-large:       0px !default;
 $border-radius-small:       0px !default;
