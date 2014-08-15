@@ -58,7 +58,7 @@ var TabSelect = React.createClass({
         var tabList = this.state.tabProps.map(function (props) {
             return (
                 <Tab>
-                    <div class="tab-selector">
+                    <div className="tab-selector">
                         <input onChange={this.handleChange} type="radio"
                                name={this.props.name} value={props.value}
                                checked={props.checked}

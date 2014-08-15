@@ -3,15 +3,16 @@
 
 var React = require('react');
 
-var Header    = require('../header'),
-    Content   = require('./content'),
-    Section   = require('./section'),
-    Actions   = require('./actions'),
-    Section   = require('./section'),
-    Dropdown  = require('../dropdown'),
-    TabPanel  = require('react-tabs').TabPanel,
-    TabSelect = require('../tabselect'),
-    $         = require('jquery');
+var Header      = require('../header'),
+    Content     = require('./content'),
+    Section     = require('./section'),
+    Actions     = require('./actions'),
+    Section     = require('./section'),
+    Dropdown    = require('../dropdown'),
+    AddItemList = require('../addItemList'),
+    TabPanel    = require('react-tabs').TabPanel,
+    TabSelect   = require('../tabselect'),
+    $           = require('jquery');
 
 require('bootstrap');
 
@@ -143,7 +144,7 @@ var CreateEditPage = React.createClass({
                             <h2>Ozone Properties</h2>
                             <label>Intents <small>(optional)</small></label>
                             <p className="small">Intents are special instructions used for communicating between applications. If this application uses intents, list them here.</p>
-                            <textarea className="form-control"></textarea>
+                            <AddItemList itemFormType={require('./intents/intentForm')} itemType={require('./intents/intent')} />
                         </div>
                     </Section>
                     <Section id="resources-contacts" title="Resources and Contact">
