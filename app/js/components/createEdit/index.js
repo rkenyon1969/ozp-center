@@ -3,14 +3,16 @@
 
 var React = require('react');
 
-var Header = require('../header');
-var Content = require('./content');
-var Section = require('./section');
-var Actions = require('./actions');
-var Section = require('./section');
-var Dropdown = require('../dropdown');
+var Header    = require('../header'),
+    Content   = require('./content'),
+    Section   = require('./section'),
+    Actions   = require('./actions'),
+    Section   = require('./section'),
+    Dropdown  = require('../dropdown'),
+    TabPanel  = require('react-tabs').TabPanel,
+    TabSelect = require('../tabSelect'),
+    $         = require('jquery');
 
-var $ = require('jquery');
 require('bootstrap');
 
 var CreateEditPage = React.createClass({
@@ -65,27 +67,50 @@ var CreateEditPage = React.createClass({
                     <Section id="basic-info" title="Basic Information">
                         <div className="col-sm-5">
                             <h2>Basic Listing Information</h2>
+
                             <label>Name</label>
                             <p className="small">Title of the listing</p>
                             <input type="text" className="form-control"></input>
-                            <label>Category</label>
 
-<p className="small">The category or categories in the existing AppsMall structure where this listing fits best.</p>
+                            <label>Type</label>
+                            <TabSelect name="type-selection">
+                                <TabPanel title="Widget">
+                                    <h3>Widget</h3>
+                                    <p className="small">A small or highly specialized application</p>
+                                </TabPanel>
+                                <TabPanel title="Web Application">
+                                    <h3>Web Application</h3>
+                                    <p className="small">A web-based tool that uses the browser as a client</p>
+                                </TabPanel>
+                                <TabPanel title="Dashboard">
+                                    <h3>Dashboard</h3>
+                                    <p className="small">A layout incorporating widgets and/or web appications</p>
+                                </TabPanel>
+                                <TabPanel title="Suite">
+                                    <h3>Suite</h3>
+                                    <p className="small">A collection of applications and/or widgets that can be downloaded as a set</p>
+                                </TabPanel>
+                            </TabSelect>
+
+                            <label>Category</label>
+                            <p className="small">The category or categories in the existing AppsMall structure where this listing fits best.</p>
                             <Dropdown data={categories.data} multiple={categories.multiple} />
 
                             <label>Tags</label>
-<p className="small">Keywords that describe the listing which can be used when searching.</p>
+                            <p className="small">Keywords that describe the listing which can be used when searching.</p>
                             <Dropdown data={tags.data} multiple={tags.multiple} />
-
 
                         </div>
                         <div className="col-sm-5">
+
                             <label>Short Description</label>
                             <p className="small">A brief overview describing the listing. It will appear in the mouseover listing view. It must be less than 150 characters.</p>
                             <textarea className="form-control"></textarea>
+
                             <label>Full Description</label>
                             <p className="small">An overview describing the listing, discussing the available features and its purpose. It will appear in the detailed listing view.</p>
                             <textarea className="form-control"></textarea>
+
                         </div>
                     </Section>
                     <Section id="details" title="Details">

@@ -25,17 +25,19 @@ var Dropdown = React.createClass({
 
   },
 
+  /*jshint ignore:start */
   renderSelectDropdown: function () {
     return (
-      <select class="select2" ref="element">
+      <select className="select2" ref="element">
         { this.props.children }
       </select>
     );
   },
 
   renderInputDropdown: function () {
-    return (<input class="select2" ref="element" />);
+    return (<input className="select2" ref="element" />);
   },
+  /*jshint ignore:end */
 
   componentDidMount: function() {
     var select = $(this.refs.element.getDOMNode());
@@ -44,7 +46,7 @@ var Dropdown = React.createClass({
 
   componentWillUnmount: function () {
     var rootNode = this.getDOMNode();
-    $(rootNode).select2("destroy");
+    $(rootNode).select2('destroy');
   }
 });
 

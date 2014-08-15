@@ -26,14 +26,14 @@ var Dropdown = React.createClass({
 
   renderSelectDropdown: function () {
     return (
-      <select class="select2" ref="element">
+      <select className="select2" ref="element">
         { this.props.children }
       </select>
     );
   },
 
   renderInputDropdown: function () {
-    return (<input class="select2" ref="element" />);
+    return (<input className="select2" ref="element" />);
   },
 
   componentDidMount: function() {
