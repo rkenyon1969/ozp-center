@@ -5,6 +5,10 @@
         margin: 0 !important;
     }
 
+    .caroufredsel_wrapper {
+        width: 100% !important;
+    }
+
     .prev, .next {
         min-width: 30px;
         position: absolute;
@@ -19,6 +23,6 @@
     }
 
     .next {
-        right: 25px;
+        right: 10px;
     }
 }

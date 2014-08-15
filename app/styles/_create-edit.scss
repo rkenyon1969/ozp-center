@@ -1,0 +1,185 @@
+$page-bg: #c6c6c6;
+$content-bg: #d6d6d6;
+$header-bg: #fff;
+$header-border-bg: #d5d5d5;
+$header-text: #858585;
+$highlight-bg: #316DA5;
+$highlight-text: #FFFFFF;
+
+
+body {
+    position: relative;
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: 500;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.row {
+    min-width: 768px;
+    height: auto;
+}
+
+#create-edit-tab-container {
+    z-index: 1;
+    position: fixed;
+    left: 0;
+    top: 135px;
+    height: 40px;
+    width: 100%;
+
+    > .row {
+        width: 1260px;
+        margin: 0 auto;
+        background: #fff;
+        border-bottom: 3px solid $highlight-bg;
+        height: 43px;
+    }
+
+    .nav {
+        border-bottom: none;
+
+        li {
+            border-top: 1px solid $header-border-bg;
+            border-right: 1px solid $header-border-bg;
+            height: 40px;
+            text-align: center;
+
+            a {
+                border: 0;
+                height: 40px;
+                background: transparent;
+                color: $header-text;
+            }
+
+            &.active {
+                background: $highlight-bg;
+                border-bottom: none;
+
+                a {
+                    color: $highlight-text;
+                    font-weight: 400;
+                }
+            }
+        }
+
+        li:first-child {
+            margin-left: 30px;
+            border-left: 1px solid $header-border-bg;
+        }
+    }
+}
+
+#create-edit {
+    z-index: 9;
+    padding-top: 160px;
+    .row {
+        background: #e8e8e8;
+    }
+
+    .content-section {
+        .row {
+            padding-bottom: 20px;
+
+            div {
+                label:first-child {
+                    margin-top: 20px;
+                }
+
+                h2:not(:first-child) {
+                    margin-top: 40px;
+                }
+            }
+        }
+
+        label {
+            font-weight: 500;
+        }
+
+        input[type="text"] {
+            margin: 0 0 20px 0;
+            height: 25px !important;
+        }
+
+        textarea {
+            height: 100px !important;
+            margin: 0 0 20px 0;
+        }
+
+        p.small {
+            width: 80%;
+        }
+
+        .select2-container {
+            margin: 0 0 20px 0;
+        }
+
+        .react-tabs {
+            vertical-align: top;
+
+            input {
+                margin: 0;
+            }
+
+            label {
+                margin: 0 0 0 5px;
+                font-weight: 400;
+            }
+
+            ul {
+                display: inline-block;
+                width: 40%;
+                list-style: none;
+                padding: 0 10px;
+            }
+
+            .tab-selector {
+                width: 100%;
+            }
+
+            div[role="tabpanel"] {
+                display: inline-block;
+                width: 60%;
+                float: right;
+
+                h3 {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+
+    .content-section:last-child {
+        .row:last-child {
+            padding-bottom: 100px;
+        }
+    }
+}
+
+.nav-anchor {
+    top: -160px;
+    display: block;
+    position: relative;
+    visibility: hidden;
+}
+
+.select2-container {
+    width: 100%;
+    height: 30px !important;
+
+    .select2-choices {
+      height: 30px !important;
+      border: 1px solid #ccc;
+    }
+}

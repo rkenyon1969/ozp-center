@@ -1,24 +1,45 @@
 /** @jsx React.DOM */
+'use strict';
 
 var React = require('react/addons');
 var Header = require('./header');
-var Search = require('./search');
+var Dropdown = require('./dropdown');
+var DiscoveryPage = require('./discovery');
+var CreateEditPage = require('./createEdit');
+
 
 var APP = React.createClass({
 
     render: function () {
-        /*jshint ignore:start */
+        // return this.renderCreateEditPage();
+        return this.renderDiscoveryPage();
+    },
+
+    /*jshint ignore:start */
+
+    renderSearchPage: function () {
+
         return (
             <div>
                 <Header />
                 <Search />
             </div>
+          );
+    },
+
+    renderDiscoveryPage: function () {
+        return (
+            <DiscoveryPage />
         );
-        /*jshint ignore:end */
+    },
+
+    renderCreateEditPage: function () {
+        return (
+            <CreateEditPage />
+        );
     }
+    /*jshint ignore:end */
 
 });
-
-
 
 module.exports = APP;

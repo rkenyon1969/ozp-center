@@ -4,18 +4,48 @@ $fa-font-path: "../../bower_components/font-awesome/fonts/";
 @import 'colors';
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
 @import "../../bower_components/font-awesome/scss/font-awesome.scss";
+@import "../../bower_components/select2/select2.css";
+@import 'fonts';
 
-* {
-    border-radius: 0px !important;
-}
+$header-height: 55px;
 
 html, body {
-    background: $page-bg;
+    background: $body-bg;
+    font-family: 'Ubuntu Regular', 'Ubuntu';
 }
 
+// #main {
+//     margin: 0 auto;
+//     display: block;
+//     min-height: 100%;
+//     height: auto !important;
+//     width: 1260px;
+//
+//     background: #e8e8e8;
+//     -moz-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+//     -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+//     box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+// }
+//
+// @media (max-width: 1023px) and (min-width: 800px) {
+//     #main {
+//         width: 800px !important;
+//         transition: all .25s linear;
+//     }
+// }
+//
+// @import 'carousel';
+// @import 'header';
+// @import 'listing-tile';
+// @import 'search';
+
+//     background: #e8e8e8;
+//     -moz-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+//     -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+//     box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+// }
+
 #main {
-    margin: 0 auto;
-    display: block;
     min-height: 100%;
     height: auto !important;
     width: 1260px;
@@ -26,6 +56,27 @@ html, body {
     box-shadow: 0 0 3px rgba(0, 0, 0, .1);
 }
 
+#header, #sub-header {
+    z-index: 2;
+    position: fixed;
+    height: $header-height;
+    width: 100%;
+    left: 0;
+
+    > .row {
+        background: #fff;
+        margin: 0 auto;
+        width: 1260px;
+    }
+}
+
+#sub-header {
+    z-index: 1;
+    position: fixed;
+    height: 60px;
+    top: $header-height + 20px;
+}
+
 @media (max-width: 1023px) and (min-width: 800px) {
     #main {
         width: 800px !important;
@@ -33,7 +84,12 @@ html, body {
     }
 }
 
+i.fa-star, i.fa-star-half-o {
+    color: $star-color;
+}
+
 @import 'carousel';
 @import 'header';
 @import 'listing-tile';
-@import 'search';
+@import 'discovery';
+@import 'create-edit';

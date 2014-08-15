@@ -2,8 +2,9 @@
 'use strict';
 
 var React = require('react/addons');
+
+var Logo = require('./Logo');
 var UserMenu = require('./UserMenu');
-var logo  = './images/appsmall-logo.png';
 
 var Header = React.createClass({
 
@@ -11,16 +12,14 @@ var Header = React.createClass({
         /*jshint ignore:start */
         return (
             <div id="header">
-                <div id="logo-container">
-                    <a id="appsmall-logo-link"><img src={logo} /></a>
+                <div className="row">
+                    <Logo />
+                    { this.props.children }
+                    <UserMenu />
                 </div>
-                <form className="navbar-form navbar-left" role="search">
-                    <div className="form-group">
-                        <i className="fa fa-search"></i>
-                        <input type="text" className="form-control" placeholder="Search..." />
-                    </div>
-                </form>
-                <UserMenu />
+                <div className="row">
+                    <div className="spacer"></div>
+                </div>
             </div>
         );
         /*jshint ignore:end */

@@ -5,7 +5,8 @@ var filter = require('gulp-filter');
 // web font paths, flattened into dist/fonts directory
 var FONT_PATHS = [
     'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/**/*',
-    'bower_components/font-awesome/fonts/**/*'
+    'bower_components/font-awesome/fonts/**/*',
+    'bower_components/ubuntu-font/**/*'
 ];
 
 gulp.task('fonts', function () {

@@ -9,6 +9,7 @@ var fetchNewArrivals = require('../../actions/ListingActions').fetchNewArrivals;
 var fetchMostPopular = require('../../actions/ListingActions').fetchMostPopular;
 
 // component dependencies
+var Header = require('../header');
 var ListingTile = require('./ListingTile');
 var Carousel = require('../carousel');
 
@@ -46,19 +47,44 @@ var Search = React.createClass({
     render: function () {
         /*jshint ignore:start */
         return (
-            <div id="search">
-                <aside className="sidebar">
-                    <ul className="list-unstyled">
-                        <li>Home</li>
-                        <li>New Arrivals</li>
-                        <li>Most Popular</li>
-                    </ul>
-                </aside>
-                <section>
-                    { this.renderNewArrivals() }
-                    { this.renderMostPopular() }
-                </section>
-                <div className="clearfix"></div>
+            <div>
+                <Header>
+                    <form className="navbar-form navbar-left" role="search">
+                        <div className="form-group">
+                            <i className="fa fa-search"></i>
+                            <input type="text" className="form-control" placeholder="Search..." />
+                        </div>
+                    </form>
+                </Header>
+                <div id="discovery">
+                    <aside className="sidebar">
+                        <ul className="list-unstyled facet-group">
+                            <li className="active facet-group-item">Home</li>
+                        </ul>
+                        <ul className="list-unstyled facet-group">
+                            <li className=" facet-group-item">Categories</li>
+                            <ul className="list-unstyled">
+                                <li className="facet-group-item">Books and Reference</li>
+                                <li className="facet-group-item">Business</li>
+                                <li className="facet-group-item">Communication</li>
+                                <li className="facet-group-item">Education</li>
+                                <li className="facet-group-item">Entertainment</li>
+                                <li className="facet-group-item">Finance</li>
+                                <li className="facet-group-item">Health and Fitness
+</li>
+                                <li className="facet-group-item">Media and Video</li>
+                                <li className="facet-group-item">News</li>
+                                <li className="facet-group-item">Productivity</li>
+                                <li className="facet-group-item">Tools</li>
+                            </ul>
+                        </ul>
+                    </aside>
+                    <section>
+                        { this.renderNewArrivals() }
+                        { this.renderMostPopular() }
+                    </section>
+                    <div className="clearfix"></div>
+                </div>
             </div>
         );
         /*jshint ignore:end */
