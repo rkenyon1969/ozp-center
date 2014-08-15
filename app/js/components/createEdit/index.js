@@ -128,7 +128,7 @@ var CreateEditPage = React.createClass({
                             <label>Associated Organization</label>
                             <p className="small">Organization overseeing this listing.</p>
 
-                            <Chosen value="Organization 2" data-placeholder="Select Organization" width="100%">
+                            <Chosen defaultValue="Organization 2" data-placeholder="Select Organization" width="100%">
                                 <option value="Organization 1">Organization 1</option>
                                 <option value="Organization 2">Organization 2</option>
                                 <option value="Organization 3">Organization 3</option>

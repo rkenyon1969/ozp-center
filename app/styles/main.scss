@@ -79,6 +79,10 @@ html, body {
     position: fixed;
     height: 60px;
     top: $header-height + 20px;
+
+    .btn-group {
+        padding: 10px;
+    }
 }
 
 @media (max-width: 1023px) and (min-width: 800px) {
