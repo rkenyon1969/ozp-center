@@ -3,7 +3,6 @@
 
 var React = require('react/addons');
 var Header = require('./header');
-var Dropdown = require('./dropdown');
 var DiscoveryPage = require('./discovery');
 var CreateEditPage = require('./createEdit');
 

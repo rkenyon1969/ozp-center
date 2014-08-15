@@ -8,10 +8,11 @@ var Header    = require('../header'),
     Section   = require('./section'),
     Actions   = require('./actions'),
     Section   = require('./section'),
-    Dropdown  = require('../dropdown'),
+    //Dropdown  = require('./dropdown'),
     TabPanel  = require('react-tabs').TabPanel,
     TabSelect = require('../tabselect'),
-    $         = require('jquery');
+    $         = require('jquery'),
+    Chosen    = require('react-chosen');
 
 require('bootstrap');
 
@@ -19,41 +20,6 @@ var CreateEditPage = React.createClass({
 
     /*jshint ignore:start */
     render: function () {
-      var tags = {
-        data: [
-          {
-            text: "tag1",
-            id: 0
-          },
-          {
-            text: "tag2",
-            id: 1
-          },{
-            text: "tag3",
-            id: 2
-          }
-        ],
-        multiple: true
-      }
-
-      var categories = {
-        data: [
-          {
-            text: 'Category A',
-            id: 0
-          },
-          {
-            text: 'Category B',
-            id: 1
-          },
-          {
-            text: 'Category C',
-            id: 2
-          }
-        ],
-        multiple: true
-      };
-
         return (
             <div>
                 <Header />
@@ -94,11 +60,21 @@ var CreateEditPage = React.createClass({
 
                             <label>Category</label>
                             <p className="small">The category or categories in the existing AppsMall structure where this listing fits best.</p>
-                            <Dropdown data={categories.data} multiple={categories.multiple} />
+
+                            <Chosen defaultValue={["Category A"]} data-placeholder="Select Category" width="100%" multiple>
+                                <option value="Category A">Category A</option>
+                                <option value="Category B">Category B</option>
+                                <option value="Category C">Category C</option>
+                            </Chosen>
 
                             <label>Tags</label>
                             <p className="small">Keywords that describe the listing which can be used when searching.</p>
-                            <Dropdown data={tags.data} multiple={tags.multiple} />
+
+                            <Chosen data-placeholder="Add tags" width="100%" multiple>
+                                <option value="tag1">tag1</option>
+                                <option value="tag2">tag2</option>
+                                <option value="tag3">tag3</option>
+                            </Chosen>
 
                         </div>
                         <div className="col-sm-5">
@@ -151,7 +127,13 @@ var CreateEditPage = React.createClass({
                             <h2>Owner Information</h2>
                             <label>Associated Organization</label>
                             <p className="small">Organization overseeing this listing.</p>
-                            <input type="text" className="form-control"></input>
+
+                            <Chosen value="Organization 2" data-placeholder="Select Organization" width="100%">
+                                <option value="Organization 1">Organization 1</option>
+                                <option value="Organization 2">Organization 2</option>
+                                <option value="Organization 3">Organization 3</option>
+                            </Chosen>
+
                             <label>Owner</label>
                             <p className="small">Person(s) responsible for this listing.</p>
                             <input type="text" className="form-control"></input>

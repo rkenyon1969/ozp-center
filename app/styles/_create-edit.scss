@@ -174,12 +174,13 @@ h3 {
     visibility: hidden;
 }
 
-.select2-container {
+.chosen-container {
     width: 100%;
     height: 30px !important;
 
-    .select2-choices {
-      height: 30px !important;
-      border: 1px solid #ccc;
+    .chosen-choices {
+        width: 100%;
+        height: 30px !important;
+        border: 1px solid #ccc;
     }
 }
