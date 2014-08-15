@@ -38,7 +38,8 @@ var ListingTile = React.createClass({
                         }
                         <p className="description">{ description }</p>
                         <div className="btn-group actions">
-                            <a className="btn btn-default" href={ launchUrl } target="_blank"><i className="fa fa-external-link"></i></a>
+                            {/* can't nest anchor tags, using button here with onClick listener */}
+                            <button className="btn btn-default" onClick={ this.launchListing }><i className="fa fa-external-link"></i></button>
                             <button type="button" className="btn btn-default"><i className="fa fa-link"></i> Connect</button>
                         </div>
                     </div>
@@ -46,6 +47,10 @@ var ListingTile = React.createClass({
             </li>
         );
         /*jshint ignore:end */
+    },
+
+    launchListing: function () {
+        window.open(this.props.listing.launchUrl());
     }
 
 });
