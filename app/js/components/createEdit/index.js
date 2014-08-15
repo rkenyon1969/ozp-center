@@ -10,7 +10,7 @@ var Header    = require('../header'),
     Section   = require('./section'),
     Dropdown  = require('../dropdown'),
     TabPanel  = require('react-tabs').TabPanel,
-    TabSelect = require('../tabSelect'),
+    TabSelect = require('../tabselect'),
     $         = require('jquery');
 
 require('bootstrap');
