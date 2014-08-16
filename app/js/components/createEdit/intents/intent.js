@@ -1,13 +1,13 @@
 /** @jsx React.DOM */
 'use scrict';
 
-var React    = require('react');
+var React = require('react');
 
 module.exports = React.createClass({
     /*jshint ignore: start */
     render: function () {
         return (
-            <div key={this.props.key}>
+            <div>
                 <div className="col-sm-4">{this.props.data.action}</div>
                 <div className="col-sm-4">{this.props.data.dataType}</div>
                 <div className="col-sm-4">

@@ -1,16 +1,12 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React    = require('react'),
-    Dropdown = require('../select'),
-    merge    = require('react/lib/merge');
+var React = require('react'),
+    merge = require('react/lib/merge');
 
 module.exports = React.createClass({
     getInitialState: function () {
-        return {
-            items: [],
-            currentItem: null
-        };
+        return {items: [], currentItem: null};
     },
 
     handleSave: function (key, data) {
@@ -29,15 +25,11 @@ module.exports = React.createClass({
             newItems = oldItems.concat(merge(data, {key: oldItems.length}));
         }
 
-        this.setState({
-            items: newItems,
-            currentItem: null
-        });
+        this.setState({items: newItems, currentItem: null});
     },
 
     handleEdit: function (key) {
         var currentItem;
-
         this.state.items.forEach(function (intent) {
             if(intent.key === key) {
                 currentItem = intent;
@@ -51,10 +43,8 @@ module.exports = React.createClass({
         this.setState({currentItem: null});
     },
 
-    handleDelete: function () {
+    handleDelete: function (key) {
         var oldItems = this.state.items;
-        var key = arguments[0];
-
         var newItems = oldItems.filter(function (item) {
             return item.key !== key;
         });
@@ -67,11 +57,9 @@ module.exports = React.createClass({
         var ItemType = this.props.itemType;
         var items = this.state.items.map(function (item) {
             return (
-                <div>
-                    <ItemType removeHandler={this.handleDelete.bind(this, item.key)}
-                            editHandler={this.handleEdit.bind(this, item.key)}
-                            key={item.key} data={item} />
-                </div>
+                <ItemType removeHandler={this.handleDelete.bind(this, item.key)}
+                        editHandler={this.handleEdit.bind(this, item.key)}
+                        key={item.key} data={item} />
             );
         }, this);
 
@@ -79,7 +67,7 @@ module.exports = React.createClass({
             currentItem = this.state.currentItem,
             key         = currentItem && currentItem.key;
 
-        return (
+        return this.transferPropsTo(
             <div>
                 <ItemForm currentItem={currentItem}
                         clearHandler={this.handleClear}

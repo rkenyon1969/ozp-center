@@ -8,10 +8,10 @@ var Header      = require('../header'),
     Section     = require('./section'),
     Actions     = require('./actions'),
     Section     = require('./section'),
-    Dropdown    = require('../dropdown'),
-    AddItemList = require('../addItemList'),
+    Dropdown    = require('../input/dropdown'),
+    AddItemList = require('../input/addItemList'),
     TabPanel    = require('react-tabs').TabPanel,
-    TabSelect   = require('../tabselect'),
+    TabSelect   = require('../input/tabselect'),
     $           = require('jquery');
 
 require('bootstrap');
@@ -169,13 +169,7 @@ var CreateEditPage = React.createClass({
                         <div className="col-sm-5">
                             <h2>Technical Support Point of Contact</h2>
                             <p className="small">Point of Contact for users to seek technical support for this listing.</p>
-                            <label>Name</label>
-                            <input type="text" className="form-control"></input>
-                            <label>Email</label>
-                            <input type="text" className="form-control"></input>
-                            <label>Phone</label>
-                            <input type="text" className="form-control"></input>
-                            <button className="btn btn-default">Add Contact</button>
+                            <AddItemList itemFormType={require('./contacts/contactForm')} itemType={require('./contacts/contact')} />
                         </div>
                     </Section>
                 </Content>

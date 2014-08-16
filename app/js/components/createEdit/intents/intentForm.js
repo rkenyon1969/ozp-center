@@ -2,7 +2,7 @@
 'use strict';
 
 var React    = require('react'),
-    Dropdown = require('../../select');
+    Dropdown = require('../../input/select');
 
 var actions = [
     'edit',
@@ -24,10 +24,7 @@ var types = [
 
 module.exports = React.createClass({
     handleSave: function () {
-        var key = this.props.currentItem && this.props.currentItem.key;
-
         var data = {
-            key: key,
             action: this.refs.action.getDOMNode().value,
             dataType: this.refs.dataType.getDOMNode().value
         };
