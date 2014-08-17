@@ -164,7 +164,7 @@ var CreateEditPage = React.createClass({
                             <p className="small">URL of the API documentation for this listing.</p>
                             <input type="text" className="form-control"></input>
                             <label>Additional Resources</label>
-                            <input type="text" className="form-control"></input>
+                            <AddItemList itemFormType={require('./resources/resourceForm')} itemType={require('./resources/resource')} />
                         </div>
                         <div className="col-sm-5">
                             <h2>Technical Support Point of Contact</h2>

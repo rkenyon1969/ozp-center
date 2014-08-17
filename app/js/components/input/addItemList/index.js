@@ -3,10 +3,50 @@
 
 var React = require('react'),
     merge = require('react/lib/merge');
+/**
+    Renders a list of items and a form to add new items to the list.
 
+*/
 module.exports = React.createClass({
+
+    propTypes: {
+        itemType: React.PropTypes.component.isRequired,
+        itemForm: React.PropTypes.component.isRequired,
+        items: React.PropTypes.array
+    },
+
+    /*jshint ignore:start */
+    render: function () {
+        var ItemType = this.props.itemType;
+        var items = this.state.items.map(function (item) {
+            return (
+                <ItemType removeHandler={this.handleDelete.bind(this, item.key)}
+                        editHandler={this.handleEdit.bind(this, item.key)}
+                        key={item.key} data={item} />
+            );
+        }, this);
+
+        var ItemForm    = this.props.itemFormType,
+            currentItem = this.state.currentItem,
+            key         = currentItem && currentItem.key;
+
+        return this.transferPropsTo(
+            <div>
+                <ItemForm currentItem={currentItem}
+                        clearHandler={this.handleClear}
+                        saveHandler={this.handleSave.bind(this, key)} />
+                {items}
+            </div>
+        );
+    },
+    /*jshint ignore:end */
+
+    getDefaultProps: function () {
+        return {items: []};
+    },
+
     getInitialState: function () {
-        return {items: [], currentItem: null};
+        return {items: this.props.items, currentItem: null};
     },
 
     handleSave: function (key, data) {
@@ -50,31 +90,5 @@ module.exports = React.createClass({
         });
 
         this.setState({items: newItems || []});
-    },
-
-    /*jshint ignore:start */
-    render: function () {
-        var ItemType = this.props.itemType;
-        var items = this.state.items.map(function (item) {
-            return (
-                <ItemType removeHandler={this.handleDelete.bind(this, item.key)}
-                        editHandler={this.handleEdit.bind(this, item.key)}
-                        key={item.key} data={item} />
-            );
-        }, this);
-
-        var ItemForm    = this.props.itemFormType,
-            currentItem = this.state.currentItem,
-            key         = currentItem && currentItem.key;
-
-        return this.transferPropsTo(
-            <div>
-                <ItemForm currentItem={currentItem}
-                        clearHandler={this.handleClear}
-                        saveHandler={this.handleSave.bind(this, key)} />
-                {items}
-            </div>
-        );
     }
-    /*jshint ignore:end */
 });
