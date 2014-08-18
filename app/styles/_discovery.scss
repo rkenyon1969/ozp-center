@@ -61,4 +61,16 @@
         overflow: hidden;
     }
 
+    .listings-search-results, .carousel {
+        .listing-tile:nth-child(4n+4) {
+            margin-right: 0px;
+        }
+    }
+
+    .carousel {
+        .listing-tile {
+            margin-bottom: 0;
+        }
+    }
+
 }
