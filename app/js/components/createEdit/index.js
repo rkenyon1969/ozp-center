@@ -3,16 +3,18 @@
 
 var React = require('react');
 
-var Header    = require('../header'),
-    Content   = require('./content'),
-    Section   = require('./section'),
-    Actions   = require('./actions'),
-    Section   = require('./section'),
-    //Dropdown  = require('./dropdown'),
-    TabPanel  = require('react-tabs').TabPanel,
-    TabSelect = require('../tabselect'),
-    $         = require('jquery'),
+var Header      = require('../header'),
+    Content     = require('./content'),
+    Section     = require('./section'),
+    Actions     = require('./actions'),
+    Section     = require('./section'),
+    Dropdown    = require('../input/dropdown'),
+    AddItemList = require('../input/addItemList'),
+    TabPanel    = require('react-tabs').TabPanel,
+    TabSelect   = require('../input/tabselect'),
+    $           = require('jquery'),
     Chosen    = require('react-chosen');
+
 
 require('bootstrap');
 
@@ -119,7 +121,7 @@ var CreateEditPage = React.createClass({
                             <h2>Ozone Properties</h2>
                             <label>Intents <small>(optional)</small></label>
                             <p className="small">Intents are special instructions used for communicating between applications. If this application uses intents, list them here.</p>
-                            <textarea className="form-control"></textarea>
+                            <AddItemList itemFormType={require('./intents/intentForm')} itemType={require('./intents/intent')} />
                         </div>
                     </Section>
                     <Section id="resources-contacts" title="Resources and Contact">
@@ -150,13 +152,7 @@ var CreateEditPage = React.createClass({
                         <div className="col-sm-5">
                             <h2>Technical Support Point of Contact</h2>
                             <p className="small">Point of Contact for users to seek technical support for this listing.</p>
-                            <label>Name</label>
-                            <input type="text" className="form-control"></input>
-                            <label>Email</label>
-                            <input type="text" className="form-control"></input>
-                            <label>Phone</label>
-                            <input type="text" className="form-control"></input>
-                            <button className="btn btn-default">Add Contact</button>
+                            <AddItemList itemFormType={require('./contacts/contactForm')} itemType={require('./contacts/contact')} />
                         </div>
                     </Section>
                 </Content>
