@@ -7,7 +7,7 @@ module.exports = React.createClass({
     render: function () {
         return (
             <div>
-                <a href={this.props.data.url}>{this.props.data.type}</a>
+                <a href={this.props.item.url.val()}>{this.props.item.type.val()}</a>
                 <button onClick={this.props.removeHandler} className="btn btn-primary">x</button>
             </div>
         );

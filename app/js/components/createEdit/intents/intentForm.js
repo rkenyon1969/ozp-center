@@ -22,7 +22,7 @@ var types = [
     'video'
 ];
 
-module.exports = React.createClass({
+var IntentForm = React.createClass({
     handleSave: function () {
         var data = {
             action: this.refs.action.getDOMNode().value,
@@ -35,8 +35,8 @@ module.exports = React.createClass({
     /*jshint ignore: start */
     render: function () {
         var currentItem = this.props.currentItem,
-            action      = currentItem ? currentItem.action : '',
-            dataType    = currentItem ? currentItem.dataType : '';
+            action = currentItem ? currentItem.action : '',
+            dataType = currentItem ? currentItem.dataType : '';
 
         return (
             <div>
@@ -49,3 +49,5 @@ module.exports = React.createClass({
     }
     /*jshint ignore: end */
 });
+
+module.exports = IntentForm;

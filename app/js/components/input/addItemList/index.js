@@ -1,94 +1,77 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React = require('react'),
-    merge = require('react/lib/merge');
+var React = require('react');
+
 /**
     Renders a list of items and a form to add new items to the list.
 
 */
 module.exports = React.createClass({
-
-    propTypes: {
-        itemType: React.PropTypes.component.isRequired,
-        itemForm: React.PropTypes.component.isRequired,
-        items: React.PropTypes.array
-    },
-
     /*jshint ignore:start */
     render: function () {
-        var ItemType = this.props.itemType;
-        var items = this.state.items.map(function (item) {
-            return (
-                <ItemType removeHandler={this.handleDelete.bind(this, item.key)}
-                        editHandler={this.handleEdit.bind(this, item.key)}
-                        key={item.key} data={item} />
-            );
-        }, this);
+        var key = 0,
+            ItemType = this.props.itemType,
+            me = this;
 
-        var ItemForm    = this.props.itemFormType,
+        var items = this.props.items.map(function (item) {
+            var _key = key;
+            key += 1;
+            return (
+                <ItemType removeHandler={me.handleDelete.bind(me, _key)}
+                        editHandler={me.handleEdit.bind(me, _key)}
+                        key={_key} item={item} />
+            );
+        });
+
+        var ItemForm = this.props.itemFormType,
             currentItem = this.state.currentItem,
-            key         = currentItem && currentItem.key;
+            currentKey = this.state.currentKey;
 
         return this.transferPropsTo(
-            <div>
+            <div className="create-edit-input-element">
+                {this.props.label && this.renderLabel()}
+                {this.props.description && this.renderDescription()}
                 <ItemForm currentItem={currentItem}
                         clearHandler={this.handleClear}
-                        saveHandler={this.handleSave.bind(this, key)} />
+                        saveHandler={this.handleSave.bind(this, currentKey)} />
                 {items}
             </div>
         );
     },
-    /*jshint ignore:end */
 
-    getDefaultProps: function () {
-        return {items: []};
+    renderLabel: function () {
+        return <label>{this.props.label}</label>;
     },
 
+    renderDescription: function () {
+        return <p className="small">Title of the listing</p>;
+    },
+
+    /*jshint ignore:end */
+
     getInitialState: function () {
-        return {items: this.props.items, currentItem: null};
+        return {currentItem: null, currentKey: -1};
     },
 
     handleSave: function (key, data) {
-        var oldItems = this.state.items,
-            newItems;
-
-        if(key || key === 0) {
-            newItems = oldItems.map(function (item) {
-                if (item.key === key) {
-                    return merge(data, {key: item.key});
-                } else {
-                    return item;
-                }
-            });
+        if (key > -1) {
+            this.props.items[key].set(data);
         } else {
-            newItems = oldItems.concat(merge(data, {key: oldItems.length}));
+            this.props.items.push(data);
         }
-
-        this.setState({items: newItems, currentItem: null});
+        this.handleClear();
     },
 
     handleEdit: function (key) {
-        var currentItem;
-        this.state.items.forEach(function (intent) {
-            if(intent.key === key) {
-                currentItem = intent;
-            }
-        });
-
-        this.setState({currentItem: currentItem});
+        this.setState({currentItem: this.props.items[key].val(), currentKey: key});
     },
 
     handleClear: function () {
-        this.setState({currentItem: null});
+        this.setState({currentItem: null, currentKey: -1});
     },
 
     handleDelete: function (key) {
-        var oldItems = this.state.items;
-        var newItems = oldItems.filter(function (item) {
-            return item.key !== key;
-        });
-
-        this.setState({items: newItems || []});
+        this.props.items.removeAt(key);
     }
 });

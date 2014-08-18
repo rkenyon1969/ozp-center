@@ -92,12 +92,12 @@ h3 {
         .row {
             padding-bottom: 20px;
 
-            div {
-                label:first-child {
+            >div {
+                >.create-edit-input-element:first-child {
                     margin-top: 56px;
                 }
 
-                h2:not(:first-child) {
+                >h2:not(:first-child) {
                     margin-top: 40px;
                 }
             }

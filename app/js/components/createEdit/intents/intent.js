@@ -3,13 +3,13 @@
 
 var React = require('react');
 
-module.exports = React.createClass({
+var Intent = React.createClass({
     /*jshint ignore: start */
     render: function () {
         return (
             <div>
-                <div className="col-sm-4">{this.props.data.action}</div>
-                <div className="col-sm-4">{this.props.data.dataType}</div>
+                <div className="col-sm-4">{this.props.item.action.val()}</div>
+                <div className="col-sm-4">{this.props.item.dataType.val()}</div>
                 <div className="col-sm-4">
                     <button onClick={this.props.editHandler}>Edit</button>
                     <button onClick={this.props.removeHandler}>Remove</button>
@@ -19,3 +19,5 @@ module.exports = React.createClass({
     }
     /*jshint ignore:end */
 });
+
+module.exports = Intent;

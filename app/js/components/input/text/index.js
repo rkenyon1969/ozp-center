@@ -1,45 +1,81 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React = require('react');
+var React = require('react/addons'),
+    clone = React.addons.cloneWithProps;
+
+function isWrappedValue (value) {
+    return value && typeof value.val === 'function';
+}
 
 module.exports = React.createClass({
-    getInitialState: function () {
-        return {value: this.props.value};
-    },
-
-    handleChange: function (event) {
-        this.setState({value: event.target.value});
-    },
-
-    componentWillReceiveProps: function (nextProps) {
-        this.setState({value: nextProps.value});
-    },
-
     /*jshint ignore:start */
     render: function () {
-        return (
-            <div>
-                <label>{this.props.label}</label>
-                {this.props.type === 'textarea' ?
-                    this.renderTextArea() : this.renderTextInput()}
+        return this.transferPropsTo(
+            <div className="create-edit-input-element">
+                {this.props.label && this.renderLabel()}
+                {this.props.description && this.renderDescription()}
+                {this.renderInput()}
             </div>
         );
     },
 
-    renderTextArea: function () {
-        return (
-            <textarea className="form-control" value={this.state.value}
-                    onChange={this.handleChange}>
-            </textarea>
-        );
+    renderLabel: function () {
+        return <label>{this.props.label}</label>;
     },
 
-    renderTextInput: function () {
-        return (
-            <input type="text" className="form-control" value={this.state.value}
-                    onChange={this.handleChange} />
-        );
-    }
+    renderDescription: function () {
+        return <p className="small">Title of the listing</p>;
+    },
+
+    renderInput: function () {
+        var props = {
+            onChange: this.handleChange,
+            className: "form-control",
+            value: this.getValue()
+        };
+
+        var textArea = <textarea></textarea>;
+        var text = <input type="text" />;
+        switch (this.props.type) {
+            case 'textarea':
+                return clone(textArea, props);
+            case 'text':
+                return clone(text, props);
+            default:
+                return clone(text, props);
+        }
+    },
     /*jshint ignore:end */
+
+    getInitialState: function () {
+        //if this is a cortex wrapped value, then we don't need state
+        if (isWrappedValue(this.props.value)) {
+            return {};
+        }
+
+        return {value: this.props.value || ''};
+    },
+
+    componentWillReceiveProps: function (nextProps) {
+        if (!isWrappedValue(nextProps.value)) {
+            this.setState({value: nextProps.value});
+        }
+    },
+
+    getValue: function () {
+        if (isWrappedValue(this.props.value)) {
+            return this.props.value.val();
+        } else {
+            return this.state.value;
+        }
+    },
+
+    handleChange: function (event) {
+        if (isWrappedValue(this.props.value)) {
+            this.props.value.set(event.target.value);
+        } else {
+            this.setState({value: event.target.value});
+        }
+    }
 });

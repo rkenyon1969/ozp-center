@@ -12,49 +12,51 @@ var Header      = require('../header'),
     AddItemList = require('../input/addItemList'),
     TabPanel    = require('react-tabs').TabPanel,
     TabSelect   = require('../input/tabselect'),
+    TextInput   = require('../input/text'),
     $           = require('jquery');
 
 require('bootstrap');
+
+var tags = {
+    data: [
+        {
+            text: 'tag1',
+            id: 0
+        },
+        {
+            text: 'tag2',
+            id: 1
+        },{
+            text: 'tag3',
+            id: 2
+        }
+    ],
+    multiple: true
+};
+
+var categories = {
+    data: [
+        {
+            text: 'Category A',
+            id: 0
+        },
+        {
+            text: 'Category B',
+            id: 1
+        },
+        {
+            text: 'Category C',
+            id: 2
+        }
+    ],
+    multiple: true
+};
 
 var CreateEditPage = React.createClass({
 
     /*jshint ignore:start */
     render: function () {
-      var tags = {
-        data: [
-          {
-            text: "tag1",
-            id: 0
-          },
-          {
-            text: "tag2",
-            id: 1
-          },{
-            text: "tag3",
-            id: 2
-          }
-        ],
-        multiple: true
-      }
-
-      var categories = {
-        data: [
-          {
-            text: 'Category A',
-            id: 0
-          },
-          {
-            text: 'Category B',
-            id: 1
-          },
-          {
-            text: 'Category C',
-            id: 2
-          }
-        ],
-        multiple: true
-      };
-
+        var listing = this.props.listing;
         return (
             <div>
                 <Header />
@@ -69,9 +71,8 @@ var CreateEditPage = React.createClass({
                         <div className="col-sm-5">
                             <h2>Basic Listing Information</h2>
 
-                            <label>Name</label>
-                            <p className="small">Title of the listing</p>
-                            <input type="text" className="form-control"></input>
+                            <TextInput type="text" value={listing.title}
+                                    label="Name" description="Title of the listing"/>
 
                             <label>Type</label>
                             <TabSelect name="type-selection">
@@ -104,47 +105,47 @@ var CreateEditPage = React.createClass({
                         </div>
                         <div className="col-sm-5">
 
-                            <label>Short Description</label>
-                            <p className="small">A brief overview describing the listing. It will appear in the mouseover listing view. It must be less than 150 characters.</p>
-                            <textarea className="form-control"></textarea>
+                            <TextInput type="textarea" value={listing.descriptionShort}
+                                    label="Short Description" description="A brief overview describing the listing. It will appear in the mouseover listing view. It must be less than 150 characters." />
 
-                            <label>Full Description</label>
-                            <p className="small">An overview describing the listing, discussing the available features and its purpose. It will appear in the detailed listing view.</p>
-                            <textarea className="form-control"></textarea>
+                            <TextInput type="textarea" value={listing.description}
+                                    label="Full Description" description="An overview describing the listing, discussing the available features and its purpose. It will appear in the detailed listing view."/>
 
                         </div>
                     </Section>
                     <Section id="details" title="Details">
                         <div className="col-sm-5">
                             <h2>Listing Details</h2>
-                            <label>Version Number</label>
-                            <p className="small">Numerical identification of what the release version is.</p>
-                            <input type="text" className="form-control"></input>
-                            <label>Listing URL</label>
-                            <p className="small">URL where this listing can be reached by users.</p>
-                            <input type="text" className="form-control"></input>
-                            <label>Usage Requirements</label>
-                            <p className="small">Details about what system, security, or other requirements must be met in order to use this listing. If none apply, write &quot;None.&quot;</p>
-                            <textarea className="form-control"></textarea>
-                            <label>What&rsquo;s New</label>
-                            <p className="small">Provide a description of what is new or different in this version.</p>
-                            <textarea className="form-control"></textarea>
+
+                            <TextInput type="text" value={listing.launchUrl}
+                                    label="Listing URL" description="URL where this listing can be reached by users" />
+
+                            <TextInput type="textarea" value={listing.requirements}
+                                    label="Usage Requirements" description="Details about what system, security, or other requirements must be met in order to use this listing. If none apply, write &quot;None.&quot;"/>
+
+                            <TextInput type="textarea" value={listing.whatIsNew}
+                                    label="What&rsquo;s New" description="Provide a description of what is new or different in this version."/>
                         </div>
                         <div className="col-sm-5">
                             <h2>Graphics</h2>
+
                             <label>Featured Banner <small>(optional)</small></label>
                             <p className="small">Must be at least 280px tall x 454px wide.</p>
                             <input type="text" className="form-control"></input>
+
                             <label>Small Banner</label>
                             <p className="small">Must be at least 137px tall x 220px wide.</p>
                             <input type="text" className="form-control"></input>
+
                             <label>Icon</label>
                             <p className="small">Must be at least 16px tall x 16px wide.</p>
                             <input type="text" className="form-control"></input>
+
                             <h2>Ozone Properties</h2>
-                            <label>Intents <small>(optional)</small></label>
-                            <p className="small">Intents are special instructions used for communicating between applications. If this application uses intents, list them here.</p>
-                            <AddItemList itemFormType={require('./intents/intentForm')} itemType={require('./intents/intent')} />
+
+                            <AddItemList itemFormType={require('./intents/intentForm')} itemType={require('./intents/intent')}
+                                    items={listing.intents} label="Intents (optional)"
+                                    description="Intents are special instructions used for communicating between applications. If this application uses intents, list them here" />
                         </div>
                     </Section>
                     <Section id="resources-contacts" title="Resources and Contact">
@@ -163,13 +164,15 @@ var CreateEditPage = React.createClass({
                             <label>API Documentation</label>
                             <p className="small">URL of the API documentation for this listing.</p>
                             <input type="text" className="form-control"></input>
-                            <label>Additional Resources</label>
-                            <AddItemList itemFormType={require('./resources/resourceForm')} itemType={require('./resources/resource')} />
+
+                            <AddItemList itemFormType={require('./resources/resourceForm')} itemType={require('./resources/resource')}
+                                    items={listing.docUrls} label="Additional Resources" />
                         </div>
                         <div className="col-sm-5">
                             <h2>Technical Support Point of Contact</h2>
-                            <p className="small">Point of Contact for users to seek technical support for this listing.</p>
-                            <AddItemList itemFormType={require('./contacts/contactForm')} itemType={require('./contacts/contact')} />
+
+                            <AddItemList itemFormType={require('./contacts/contactForm')} itemType={require('./contacts/contact')}
+                                    items={listing.contacts} description="Point of Contact for users to seek technical support for this listing."/>
                         </div>
                     </Section>
                 </Content>
