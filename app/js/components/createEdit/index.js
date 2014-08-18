@@ -13,7 +13,22 @@ var Header      = require('../header'),
     TabPanel    = require('react-tabs').TabPanel,
     TabSelect   = require('../input/tabselect'),
     TextInput   = require('../input/text'),
-    $           = require('jquery');
+    $           = require('jquery'),
+    Cortex      = require('cortexjs');
+
+var data = {
+    title: 'My Application',
+    descriptionShort: "This is my application's short description",
+    description: "This is my application's long, long, long, long description",
+    launchUrl: 'https://www.google.com',
+    requirements: 'This application goes great with bacon.',
+    whatIsNew: 'now includes two strips of bacon.',
+    intents: [{action: 'save', dataType: 'audio'}],
+    contacts: [{type: 'Technical POC', email: 'me@here.com', name: 'Morpheus', phones: ['555-5555', '555-5556']}],
+    docUrls: [{type: 'Configuration Guide', url: 'https://www.google.com'}]
+};
+
+var listingCortex = new Cortex(data);
 
 require('bootstrap');
 
@@ -56,7 +71,7 @@ var CreateEditPage = React.createClass({
 
     /*jshint ignore:start */
     render: function () {
-        var listing = this.props.listing;
+        var listing = this.state.listing;
         return (
             <div>
                 <Header />
@@ -181,7 +196,17 @@ var CreateEditPage = React.createClass({
     },
     /*jshint ignore:end */
 
+    getInitialState: function () {
+        return {listing: listingCortex};
+    },
+
     componentDidMount: function () {
+        var me = this;
+
+        listingCortex.on('update', function () {
+            me.setState({listing: listingCortex});
+        });
+
         var scrollspy = $('body').scrollspy({
             target: '#create-edit-tab-container'
         }).data('bs.scrollspy');
@@ -190,6 +215,7 @@ var CreateEditPage = React.createClass({
     },
 
     componentWillUnmount: function () {
+        listingCortex.off('update');
         this._$scrollspy.destroy();
     }
 

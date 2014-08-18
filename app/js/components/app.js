@@ -1,23 +1,19 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React = require('react/addons');
-var Header = require('./header');
-var DiscoveryPage = require('./discovery');
-var CreateEditPage = require('./createEdit');
-
+var React          = require('react/addons'),
+    Header         = require('./header'),
+    DiscoveryPage  = require('./discovery'),
+    CreateEditPage = require('./createEdit');
 
 var APP = React.createClass({
-
     render: function () {
         return this.renderCreateEditPage();
         // return this.renderDiscoveryPage();
     },
 
     /*jshint ignore:start */
-
     renderSearchPage: function () {
-
         return (
             <div>
                 <Header />
