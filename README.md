@@ -8,7 +8,7 @@ Install Node.js and npm. Head over to [the Node.js website](http://nodejs.org/) 
 npm install -g gulp bower
 ```
 
-## Getting Started
+## Setup
 First clone the repo. Install module dependencies.
 
 ```
