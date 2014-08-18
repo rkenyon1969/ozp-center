@@ -6,10 +6,11 @@ var React = require('react');
 module.exports = React.createClass({
     /*jshint ignore:start */
     render: function () {
-        var contact = this.props.item
+        var contact = this.props.item;
         var phones = contact.phones.map(function (phone) {
             return <p>Phone: <small>{phone.val()}</small></p>;
         });
+
         return (
             <div>
                 <h4>{contact.type.val()}</h4>

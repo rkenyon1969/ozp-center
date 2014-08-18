@@ -6,21 +6,6 @@ var React     = require('react'),
     $         = require('jquery');
 
 module.exports = React.createClass({
-    handleSave: function () {
-        var type  = $('.form-control', this.refs.type.getDOMNode())[0].value,
-            name  = $('.form-control', this.refs.name.getDOMNode())[0].value,
-            email = $('.form-control', this.refs.email.getDOMNode())[0].value;
-
-        var data = {
-            type: type,
-            name: name,
-            email: email,
-            phones: []
-        };
-
-        this.props.saveHandler(data);
-    },
-
     /*jshint ignore:start */
     render: function () {
         var currentContact = this.props.currentItem,
@@ -37,6 +22,15 @@ module.exports = React.createClass({
                 <button onClick={this.handleSave} className="btn btn-primary">Save</button>
             </div>
         );
-    }
+    },
     /*jshint ignore:end */
+
+    handleSave: function () {
+        this.props.saveHandler({
+            type: this.refs.type.value(),
+            name: this.refs.name.value(),
+            email: this.refs.email.value(),
+            phones: []
+        });
+    }
 });

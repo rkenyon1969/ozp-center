@@ -32,7 +32,7 @@ module.exports = React.createClass({
         var props = {
             onChange: this.handleChange,
             className: "form-control",
-            value: this.getValue()
+            value: this.value()
         };
 
         var textArea = <textarea></textarea>;
@@ -63,7 +63,7 @@ module.exports = React.createClass({
         }
     },
 
-    getValue: function () {
+    value: function () {
         if (isWrappedValue(this.props.value)) {
             return this.props.value.val();
         } else {

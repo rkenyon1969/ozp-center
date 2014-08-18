@@ -23,15 +23,6 @@ var types = [
 ];
 
 var IntentForm = React.createClass({
-    handleSave: function () {
-        var data = {
-            action: this.refs.action.getDOMNode().value,
-            dataType: this.refs.dataType.getDOMNode().value
-        };
-
-        this.props.saveHandler(data);
-    },
-
     /*jshint ignore: start */
     render: function () {
         var currentItem = this.props.currentItem,
@@ -46,8 +37,15 @@ var IntentForm = React.createClass({
                 <button onClick={this.handleSave} className="btn btn-primary">Save</button>
             </div>
         );
-    }
+    },
+    
     /*jshint ignore: end */
+    handleSave: function () {
+        this.props.saveHandler({
+            action: this.refs.action.getDOMNode().value,
+            dataType: this.refs.dataType.getDOMNode().value
+        });
+    }
 });
 
 module.exports = IntentForm;

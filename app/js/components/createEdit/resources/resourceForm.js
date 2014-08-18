@@ -23,8 +23,9 @@ module.exports = React.createClass({
     /*jshint ignore:end */
 
     handleSave: function () {
-        var type = $('.form-control', this.refs.type.getDOMNode())[0].value;
-        var url = $('.form-control', this.refs.url.getDOMNode())[0].value;
-        this.props.saveHandler({type: type, url: url});
+        this.props.saveHandler({
+            type: this.refs.type.value(),
+            url: this.refs.url.value()
+        });
     }
 });
