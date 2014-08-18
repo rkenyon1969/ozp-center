@@ -1,22 +1,28 @@
 # Center UI [![Build Status][travis-image]][travis-url]
 
-Center UI built on [React](http://facebook.github.io/react/), [Gulp](http://gulpjs.com/) and [Webpack](http://webpack.github.io/) build system. If you look at the /gulp, it implements some nifty features:
+Center UI built on [React](http://facebook.github.io/react/), [Gulp](http://gulpjs.com/) and [Webpack](http://webpack.github.io/).
 
-* `gulp` shows all available commands.
-* `gulp dev` implements an http server and a live reload server.
-* `gulp --production` shows how to use command line flags to switch to building minified versions.
-* Uses the awesome Webpack project to combine all the javascript files into one.
+## Prerequisites
+Install Node.js and npm. Head over to [the Node.js website](http://nodejs.org/) if you need to do that. Next, install Bower and Gulp, you might need to run them as sudo.
+```
+npm install -g gulp bower
+```
 
 ## Getting Started
-First clone the repo. Then, install the bower and npm modules.
+First clone the repo. Install module dependencies.
 
 ```
+git clone https://github.com/ozone-development/center-ui.git
+cd center-ui
 npm install
 ```
 
-`npm start` or `gulp dev` then go to http://localhost:8000/webpack-dev-server/dist
+Next, run `npm start` or `gulp dev`. Go to http://localhost:8000/webpack-dev-server/dist and browser will automatically reload when any file in /app changes. Alternatively, you can also go to http://localhost:8000/dist, if auto reload is undesirable.
 
-Your browser will automatically reload when any file in /app changes.
+## Available tasks
+* `gulp` shows all available commands.
+* `gulp dev` implements an http server and a live reload server.
+* `gulp build --production` generates production build at ./dist directory with minified versions of JS and CSS. Contents of ./dist directory can then be copied to a web server.
 
 [travis-url]: https://travis-ci.org/ozone-development/center-ui
 [travis-image]: https://travis-ci.org/ozone-development/center-ui.svg
