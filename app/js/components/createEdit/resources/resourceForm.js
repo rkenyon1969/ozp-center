@@ -8,9 +8,9 @@ var React     = require('react'),
 module.exports = React.createClass({
     /*jshint ignore:start */
     render: function () {
-        var currentResource = this.props.currentItem,
-            type = currentResource ? currentResource.type : '',
-            url  = currentResource ? currentResource.url : '';
+        var resource = this.props.item,
+            type = resource ? resource.type : '',
+            url  = resource ? resource.url : '';
 
         return (
             <div>

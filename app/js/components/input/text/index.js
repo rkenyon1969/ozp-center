@@ -25,7 +25,7 @@ module.exports = React.createClass({
     },
 
     renderDescription: function () {
-        return <p className="small">Title of the listing</p>;
+        return <p className="small">{this.props.description}</p>;
     },
 
     renderInput: function () {

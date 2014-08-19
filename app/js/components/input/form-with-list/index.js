@@ -7,51 +7,56 @@ var React = require('react');
     Renders a list of items and a form to add new items to the list.
 
 */
-module.exports = React.createClass({
-    /*jshint ignore:start */
+var FormWithList = React.createClass({
     render: function () {
         var key = 0,
-            ItemType = this.props.itemType,
+            ItemMarkup = this.props.itemMarkup,
             me = this;
 
         var items = this.props.items.map(function (item) {
             var _key = key;
             key += 1;
             return (
-                <ItemType removeHandler={me.handleDelete.bind(me, _key)}
+                /*jshint ignore: start */
+                <ItemMarkup removeHandler={me.handleDelete.bind(me, _key)}
                         editHandler={me.handleEdit.bind(me, _key)}
                         key={_key} item={item} />
+                /*jshint ignore: end */
             );
         });
 
-        var ItemForm = this.props.itemFormType,
-            currentItem = this.state.currentItem,
+        var ItemForm = this.props.itemForm,
+            formItem = this.state.formItem,
             currentKey = this.state.currentKey;
 
         return this.transferPropsTo(
+            /*jshint ignore: start */
             <div className="create-edit-input-element">
                 {this.props.label && this.renderLabel()}
                 {this.props.description && this.renderDescription()}
-                <ItemForm currentItem={currentItem}
+                <ItemForm item={formItem}
                         clearHandler={this.handleClear}
                         saveHandler={this.handleSave.bind(this, currentKey)} />
                 {items}
             </div>
+            /*jshint ignore: end */
         );
     },
 
     renderLabel: function () {
+        /*jshint ignore: start */
         return <label>{this.props.label}</label>;
+        /*jshint ignore: end */
     },
 
     renderDescription: function () {
-        return <p className="small">Title of the listing</p>;
+        /*jshint ignore: start */
+        return <p className="small">{this.props.description}</p>;
+        /*jshint ignore: end */
     },
 
-    /*jshint ignore:end */
-
     getInitialState: function () {
-        return {currentItem: null, currentKey: -1};
+        return {formItem: null, currentKey: -1};
     },
 
     handleSave: function (key, data) {
@@ -64,14 +69,16 @@ module.exports = React.createClass({
     },
 
     handleEdit: function (key) {
-        this.setState({currentItem: this.props.items[key].val(), currentKey: key});
+        this.setState({formItem: this.props.items[key].val(), currentKey: key});
     },
 
     handleClear: function () {
-        this.setState({currentItem: null, currentKey: -1});
+        this.setState({formItem: null, currentKey: -1});
     },
 
     handleDelete: function (key) {
         this.props.items.removeAt(key);
     }
 });
+
+module.exports = FormWithList;

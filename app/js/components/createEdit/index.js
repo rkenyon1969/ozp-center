@@ -1,30 +1,30 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React = require('react');
-
-var Header      = require('../header'),
-    Content     = require('./content'),
-    Section     = require('./section'),
-    Actions     = require('./actions'),
-    Section     = require('./section'),
-    Dropdown    = require('../input/dropdown'),
-    AddItemList = require('../input/addItemList'),
-    TabPanel    = require('react-tabs').TabPanel,
-    TabSelect   = require('../input/tabselect'),
-    TextInput   = require('../input/text'),
-    $           = require('jquery'),
-    Cortex      = require('cortexjs');
+var React        = require('react'),
+    Input        = require('../input'),
+    Header       = require('../header'),
+    Content      = require('./content'),
+    Section      = require('./section'),
+    Actions      = require('./actions'),
+    Dropdown     = Input.Dropdown,
+    FormWithList = Input.FormWithList,
+    ListOfForms  = Input.ListOfForms,
+    TabPanel     = require('react-tabs').TabPanel,
+    TabSelect    = Input.TabSelect,
+    TextInput    = Input.Text,
+    $            = require('jquery'),
+    Cortex       = require('cortexjs');
 
 var data = {
     title: 'My Application',
-    descriptionShort: "This is my application's short description",
-    description: "This is my application's long, long, long, long description",
+    descriptionShort: 'This is my application\'s short description',
+    description: 'This is my application\'s long, long, long, long description',
     launchUrl: 'https://www.google.com',
     requirements: 'This application goes great with bacon.',
     whatIsNew: 'now includes two strips of bacon.',
     intents: [{action: 'save', dataType: 'audio'}],
-    contacts: [{type: 'Technical POC', email: 'me@here.com', name: 'Morpheus', phones: ['555-5555', '555-5556']}],
+    contacts: [{type: 'Technical POC', email: 'me@here.com', name: 'Morpheus', securePhone: '555-5555', unsecurePhone: '555-5556'}],
     docUrls: [{type: 'Configuration Guide', url: 'https://www.google.com'}]
 };
 
@@ -158,9 +158,10 @@ var CreateEditPage = React.createClass({
 
                             <h2>Ozone Properties</h2>
 
-                            <AddItemList itemFormType={require('./intents/intentForm')} itemType={require('./intents/intent')}
+                            <ListOfForms itemForm={require('./intents/intentForm')} itemSchema={require('../../data/Intent')}
                                     items={listing.intents} label="Intents (optional)"
                                     description="Intents are special instructions used for communicating between applications. If this application uses intents, list them here" />
+
                         </div>
                     </Section>
                     <Section id="resources-contacts" title="Resources and Contact">
@@ -180,13 +181,13 @@ var CreateEditPage = React.createClass({
                             <p className="small">URL of the API documentation for this listing.</p>
                             <input type="text" className="form-control"></input>
 
-                            <AddItemList itemFormType={require('./resources/resourceForm')} itemType={require('./resources/resource')}
+                            <FormWithList itemForm={require('./resources/resourceForm')} itemMarkup={require('./resources/resource')}
                                     items={listing.docUrls} label="Additional Resources" />
                         </div>
                         <div className="col-sm-5">
                             <h2>Technical Support Point of Contact</h2>
 
-                            <AddItemList itemFormType={require('./contacts/contactForm')} itemType={require('./contacts/contact')}
+                            <ListOfForms itemForm={require('./contacts/contactForm')} itemSchema={require('../../data/Contact')}
                                     items={listing.contacts} description="Point of Contact for users to seek technical support for this listing."/>
                         </div>
                     </Section>

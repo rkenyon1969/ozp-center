@@ -2,7 +2,7 @@
 'use strict';
 
 var React    = require('react'),
-    Dropdown = require('../../input/select');
+    Dropdown = require('../../input').Select;
 
 var actions = [
     'edit',
@@ -23,28 +23,19 @@ var types = [
 ];
 
 var IntentForm = React.createClass({
-    /*jshint ignore: start */
     render: function () {
-        var currentItem = this.props.currentItem,
-            action = currentItem ? currentItem.action : '',
-            dataType = currentItem ? currentItem.dataType : '';
+        var intent = this.props.item,
+            action = intent ? intent.action : 'edit',
+            dataType = intent ? intent.dataType : 'audio';
 
         return (
+            /*jshint ignore: start */
             <div>
-                <Dropdown data={actions} ref="action" value={action} />
-                <Dropdown data={types} ref="dataType" value={dataType} />
-                <button onClick={this.props.clearHandler} className="btn btn-primary">Clear</button>
-                <button onClick={this.handleSave} className="btn btn-primary">Save</button>
+                <Dropdown options={actions} ref="action" value={action} />
+                <Dropdown options={types} ref="dataType" value={dataType} />
             </div>
+            /*jshint ignore: end */
         );
-    },
-    
-    /*jshint ignore: end */
-    handleSave: function () {
-        this.props.saveHandler({
-            action: this.refs.action.getDOMNode().value,
-            dataType: this.refs.dataType.getDOMNode().value
-        });
     }
 });
 
