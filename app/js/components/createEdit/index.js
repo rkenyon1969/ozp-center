@@ -72,11 +72,7 @@ var CreateEditPage = React.createClass({
                             <label>Tags</label>
                             <p className="small">Keywords that describe the listing which can be used when searching.</p>
 
-                            <Chosen data-placeholder="Add tags" width="100%" multiple>
-                                <option value="tag1">tag1</option>
-                                <option value="tag2">tag2</option>
-                                <option value="tag3">tag3</option>
-                            </Chosen>
+                            <AddItemList itemFormType={require('./tags/tagForm')} itemType={require('./tags/tag')} />
 
                         </div>
                         <div className="col-sm-5">

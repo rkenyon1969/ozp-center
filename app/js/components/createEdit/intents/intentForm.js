@@ -47,7 +47,7 @@ module.exports = React.createClass({
                     <option value="json">json</option>
                     <option value="text">text</option>
                     <option value="uri">uri</option>
-                    <option value="video">view</option>
+                    <option value="video">video</option>
                 </Chosen>
                 <button onClick={this.handleClear} className="btn btn-primary">Clear</button>
                 <button onClick={this.handleSave} className="btn btn-primary">Save</button>

@@ -184,3 +184,18 @@ h3 {
         border: 1px solid #ccc;
     }
 }
+
+#tag_chosen {
+    width: 75%;
+}
+
+.tag {
+    float: left;
+    padding: 2px;
+    border: 1px solid #ccc;
+    margin: 5px;
+
+    span {
+        padding: 2px;
+    }
+}
