@@ -32,13 +32,13 @@ module.exports = React.createClass({
             dataType    = currentItem ? currentItem.dataType : '';
 
         return (
-            <div>
-
-                <Dropdown options={actions} multiple={false} ref="action" />
-                <Dropdown options={types} multiple={false} ref="type" />
-                <button onClick={this.handleClear} className="btn btn-primary">Clear</button>
-                <button onClick={this.handleSave} className="btn btn-primary">Save</button>
-            </div>
+                <div className="col-sm-10">
+                    <Dropdown options={actions} ref="action" value={action} />
+                    <Dropdown options={types} ref="dataType" value={dataType} />
+                </div>
+                <div className="col-sm-2">
+                    <button className="btn btn-primary" onClick={this.props.removeHandler}>Remove</button>
+                </div>
         );
     }
     /*jshint ignore: end */
