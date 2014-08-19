@@ -1,36 +1,47 @@
 'use strict';
 
-var Reflux = require('reflux');
+var Reflux              = require('reflux'),
+    ListingActions      = require('../actions/ListingActions'),
+    newArrivalsFetched  = ListingActions.newArrivalsFetched,
+    mostPopularFetched  = ListingActions.mostPopularFetched,
+    searchCompleted     = ListingActions.searchCompleted;
 
-var newArrivalsFetched = require('../actions/ListingActions').newArrivalsFetched;
-var mostPopularFetched = require('../actions/ListingActions').mostPopularFetched;
+var _newArrivals     = [],
+    _mostPopular     = [],
+    _searchResults   = [];
 
 var DiscoveryPageStore = Reflux.createStore({
-
-    newArrivals: [],
-
-    mostPopular: [],
 
     init: function() {
         // update cache on new data
         this.listenTo(newArrivalsFetched, function (newArrivals) {
-            this.newArrivals = newArrivals;
+            _newArrivals = newArrivals;
             this.trigger();
         });
 
         // update cache on new data
         this.listenTo(mostPopularFetched, function (mostPopular) {
-            this.mostPopular = mostPopular;
+            _mostPopular = mostPopular;
+            this.trigger();
+        });
+
+        // update cache on new data
+        this.listenTo(searchCompleted, function (searchResults) {
+            _searchResults = searchResults;
             this.trigger();
         });
     },
 
     getNewArrivals: function () {
-        return this.newArrivals;
+        return _newArrivals;
     },
 
     getMostPopular: function () {
-        return this.mostPopular;
+        return _mostPopular;
+    },
+
+    getSearchResults: function () {
+        return _searchResults;
     }
 
 });

@@ -8,6 +8,7 @@ require('carouFredSel');
 
 var Carousel = React.createClass({
 
+    // http://docs.dev7studios.com/jquery-plugins/caroufredsel-advanced
     propTypes: {
         children: React.PropTypes.array
     },
@@ -33,7 +34,12 @@ var Carousel = React.createClass({
         this._$carousel = $(this.refs.list.getDOMNode()).carouFredSel({
             prev: $(this.refs.prev.getDOMNode()),
             next: $(this.refs.next.getDOMNode()),
-            auto: false
+            auto: false,
+            scroll: {
+                easing: 'quadratic'
+            }
+        }, {
+            wrapper: 'parent'
         });
     },
 
