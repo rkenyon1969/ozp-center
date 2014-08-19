@@ -31,8 +31,13 @@ var IntentForm = React.createClass({
         return (
             /*jshint ignore: start */
             <div>
-                <Dropdown options={actions} ref="action" value={action} />
-                <Dropdown options={types} ref="dataType" value={dataType} />
+                <div className="col-sm-10">
+                    <Dropdown options={actions} ref="action" value={action} />
+                    <Dropdown options={types} ref="dataType" value={dataType} />
+                </div>
+                <div className="col-sm-2">
+                    <button className="btn btn-primary" onClick={this.props.removeHandler}>Remove</button>
+                </div>
             </div>
             /*jshint ignore: end */
         );
