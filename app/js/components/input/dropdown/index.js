@@ -1,53 +1,80 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React = require('react/addons');
-require('select2');
+var React = require('react'),
+    Chosen= require('drmonty-chosen');
+
+function isWrappedValue (value) {
+    return value && typeof value.val === 'function';
+}
 
 var Dropdown = React.createClass({
 
-  propTypes: {
-    children: React.PropTypes.array,
-    data: React.PropTypes.array,
-    multiple: React.PropTypes.bool,
-    // allowClear: React.PropTypes.bool,
-    placeholder: React.PropTypes.string,
-    // onChange: React.PropTypes.func,
-    // defaultValue: React.PropTypes.string,
-    // minimumInputLength: React.PropTypes.number,
-    // ajax: React.PropTypes.object,
-    className: React.PropTypes.string
-  },
+    /*jshint ignore:start */
+    render: function () {
+        var options = this.props.options.map(function (option) {
+            return <option value={option}>{option}</option>;
+        });
 
-  render: function() {
+        return (
+            <div className="create-edit-input-element">
+                {this.props.label && this.renderLabel()}
+                {this.props.description && this.renderDescription()}
+                <select className="form-control" onChange={this.handleChange} value={this.value()} ref="select" multiple={this.props.multiple}>
+                    {options}
+                </select>
+            </div>
+        );
+    },
 
-    return this.props.data ? this.renderInputDropdown() : this.renderSelectDropdown();
+    componentDidUpdate: function() {
 
-  },
+    },
 
-  /*jshint ignore:start */
-  renderSelectDropdown: function () {
-    return (
-      <select className="select2" ref="element">
-        { this.props.children }
-      </select>
-    );
-  },
+    componentDidMount: function() {
+        var select = $(this.refs.select.getDOMNode());
+        select.chosen();
+    },
 
-  renderInputDropdown: function () {
-    return (<input className="select2" ref="element" />);
-  },
-  /*jshint ignore:end */
+    renderLabel: function () {
+        return <label>{this.props.label}</label>;
+    },
 
-  componentDidMount: function() {
-    var select = $(this.refs.element.getDOMNode());
-    select.select2(this.props);
-  },
+    renderDescription: function () {
+        return <p className="small">{this.props.description}</p>;
+    },
+    /*jshint ignore:end */
 
-  componentWillUnmount: function () {
-    var rootNode = this.getDOMNode();
-    $(rootNode).select2('destroy');
-  }
+    getInitialState: function () {
+        //if this is a cortex wrapped value, then we don't need state
+        if (isWrappedValue(this.props.value)) {
+            return {};
+        }
+
+        return {value: this.props.value};
+    },
+
+    handleChange: function (event) {
+        if (isWrappedValue(this.props.value)) {
+            this.props.value.set(event.target.value);
+        } else {
+            this.setState({value: event.target.value});
+        }
+    },
+
+    componentWillReceiveProps: function (nextProps) {
+        if (!isWrappedValue(nextProps.value)) {
+            this.setState({value: nextProps.value});
+        }
+    },
+
+    value: function () {
+        if (isWrappedValue(this.props.value)) {
+            return this.props.value.val();
+        } else {
+            return this.state.value;
+        }
+    },
 });
 
 

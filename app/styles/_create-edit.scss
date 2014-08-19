@@ -174,12 +174,24 @@ h3 {
     visibility: hidden;
 }
 
-.select2-container {
-    width: 100%;
+.chosen-container {
+    width: 100% !important;
     height: 30px !important;
 
-    .select2-choices {
-      height: 30px !important;
-      border: 1px solid #ccc;
+    .chosen-choices {
+        width: 100%;
+        height: 30px !important;
+        border: 1px solid #ccc;
+    }
+}
+
+.tag {
+    float: left;
+    padding: 2px;
+    border: 1px solid #ccc;
+    margin: 5px;
+
+    span {
+        padding: 2px;
     }
 }

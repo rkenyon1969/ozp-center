@@ -1,20 +1,22 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React        = require('react'),
-    Input        = require('../input'),
-    Header       = require('../header'),
-    Content      = require('./content'),
-    Section      = require('./section'),
-    Actions      = require('./actions'),
-    Dropdown     = Input.Dropdown,
-    FormWithList = Input.FormWithList,
-    ListOfForms  = Input.ListOfForms,
-    TabPanel     = require('react-tabs').TabPanel,
-    TabSelect    = Input.TabSelect,
-    TextInput    = Input.Text,
-    $            = require('jquery'),
-    Cortex       = require('cortexjs');
+var React       = require('react'),
+    Header      = require('../header'),
+    Content     = require('./content'),
+    Section     = require('./section'),
+    Actions     = require('./actions'),
+    Section     = require('./section'),
+    FormWithList= require('../input/form-with-list'),
+    ListOfForms = require('../input/list-of-forms'),
+    TabPanel    = require('react-tabs').TabPanel,
+    TabSelect   = require('../input/tab-select'),
+    TextInput   = require('../input/text'),
+    $           = require('jquery'),
+    Dropdown    = require('../input/dropdown'),
+    Cortex      = require('cortexjs');
+
+require('bootstrap');
 
 var data = {
     title: 'My Application',
@@ -25,47 +27,14 @@ var data = {
     whatIsNew: 'now includes two strips of bacon.',
     intents: [{action: 'save', dataType: 'audio'}],
     contacts: [{type: 'Technical POC', email: 'me@here.com', name: 'Morpheus', securePhone: '555-5555', unsecurePhone: '555-5556'}],
-    docUrls: [{type: 'Configuration Guide', url: 'https://www.google.com'}]
+    docUrls: [{type: 'Configuration Guide', url: 'https://www.google.com'}],
+    tags: [{tag: 'tag1'}]
 };
 
 var listingCortex = new Cortex(data);
 
-require('bootstrap');
-
-var tags = {
-    data: [
-        {
-            text: 'tag1',
-            id: 0
-        },
-        {
-            text: 'tag2',
-            id: 1
-        },{
-            text: 'tag3',
-            id: 2
-        }
-    ],
-    multiple: true
-};
-
-var categories = {
-    data: [
-        {
-            text: 'Category A',
-            id: 0
-        },
-        {
-            text: 'Category B',
-            id: 1
-        },
-        {
-            text: 'Category C',
-            id: 2
-        }
-    ],
-    multiple: true
-};
+var categories = ['Category A', 'Category B', 'Category C'];
+var organizations = ['Organization 1', 'Organization 2', 'Organization 3'];
 
 var CreateEditPage = React.createClass({
 
@@ -111,11 +80,13 @@ var CreateEditPage = React.createClass({
 
                             <label>Category</label>
                             <p className="small">The category or categories in the existing AppsMall structure where this listing fits best.</p>
-                            <Dropdown data={categories.data} multiple={categories.multiple} />
+
+                            <Dropdown value={["Category A"]} options={categories} multiple={true} />
 
                             <label>Tags</label>
                             <p className="small">Keywords that describe the listing which can be used when searching.</p>
-                            <Dropdown data={tags.data} multiple={tags.multiple} />
+                            <FormWithList itemForm={require('./tags/tagForm')} itemMarkup={require('./tags/tag')}
+                                items={listing.tags} label="Tags" />
 
                         </div>
                         <div className="col-sm-5">
@@ -167,9 +138,8 @@ var CreateEditPage = React.createClass({
                     <Section id="resources-contacts" title="Resources and Contact">
                         <div className="col-sm-5">
                             <h2>Owner Information</h2>
-                            <label>Associated Organization</label>
-                            <p className="small">Organization overseeing this listing.</p>
-                            <input type="text" className="form-control"></input>
+                            <Dropdown label="Associated Organization" description="Organization overseeing this listing" value={["Organization 2"]} options={organizations} multiple={false} />
+
                             <label>Owner</label>
                             <p className="small">Person(s) responsible for this listing.</p>
                             <input type="text" className="form-control"></input>

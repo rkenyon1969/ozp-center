@@ -4,50 +4,15 @@ $fa-font-path: "../../bower_components/font-awesome/fonts/";
 @import 'colors';
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
 @import "../../bower_components/font-awesome/scss/font-awesome.scss";
-@import "../../bower_components/select2/select2.css";
+@import "../../bower_components/drmonty-chosen/css/chosen.css";
 @import 'fonts';
 
 $header-height: 55px;
 
-* {
-    border-radius: 0px !important;
-}
-
 html, body {
-    background: $page-bg;
+    background: $body-bg;
     font-family: 'Ubuntu Regular', 'Ubuntu';
 }
-
-// #main {
-//     margin: 0 auto;
-//     display: block;
-//     min-height: 100%;
-//     height: auto !important;
-//     width: 1260px;
-//
-//     background: #e8e8e8;
-//     -moz-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
-//     -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
-//     box-shadow: 0 0 3px rgba(0, 0, 0, .1);
-// }
-//
-// @media (max-width: 1023px) and (min-width: 800px) {
-//     #main {
-//         width: 800px !important;
-//         transition: all .25s linear;
-//     }
-// }
-//
-// @import 'carousel';
-// @import 'header';
-// @import 'listing-tile';
-// @import 'search';
-
-//     background: #e8e8e8;
-//     -moz-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
-//     -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
-//     box-shadow: 0 0 3px rgba(0, 0, 0, .1);
-// }
 
 #main {
     min-height: 100%;
@@ -79,6 +44,10 @@ html, body {
     position: fixed;
     height: 60px;
     top: $header-height + 20px;
+
+    .btn-group {
+        padding: 10px;
+    }
 }
 
 @media (max-width: 1023px) and (min-width: 800px) {
@@ -86,6 +55,15 @@ html, body {
         width: 800px !important;
         transition: all .25s linear;
     }
+}
+
+.btn.btn-default:hover {
+    background-color: $btn-primary-bg;
+    color: $btn-primary-color;
+}
+
+i.fa-star, i.fa-star-half-o {
+    color: $star-color;
 }
 
 @import 'carousel';

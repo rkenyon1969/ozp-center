@@ -2,41 +2,44 @@
 'use strict';
 
 var React    = require('react'),
-    Dropdown = require('../../input').Select;
+    Dropdown    = require('../../input/dropdown');
 
-var actions = [
-    'edit',
-    'pick',
-    'save',
-    'share',
-    'subscribe',
-    'view'
-];
+module.exports = React.createClass({
 
-var types = [
-    'audio',
-    'image',
-    'json',
-    'text',
-    'uri',
-    'video'
-];
+    handleSave: function () {
+        // var item = {
+        //     action: $('#action_chosen').val(),
+        //     dataType: $('#dataType_chosen').val()
+        // };
+        //
+        // this.props.saveHandler(item);
+        // this.handleClear();
+    },
 
-var IntentForm = React.createClass({
+    handleClear:function() {
+        // $('#action_chosen').val('').trigger('liszt:updated');
+        // $('#dataType_chosen').val('').trigger('liszt:updated');
+        this.props.clearHandler();
+    },
+
+    /*jshint ignore: start */
     render: function () {
-        var intent = this.props.item,
-            action = intent ? intent.action : 'edit',
-            dataType = intent ? intent.dataType : 'audio';
+        var actions = ['edit', 'pick', 'save', 'share', 'subscribe', 'view'];
+        var types = ['audio', 'image', 'json', 'text', 'uri', 'video'];
+
+        var currentItem = this.props.currentItem,
+            action      = currentItem ? currentItem.action : '',
+            dataType    = currentItem ? currentItem.dataType : '';
 
         return (
-            /*jshint ignore: start */
             <div>
-                <Dropdown options={actions} ref="action" value={action} />
-                <Dropdown options={types} ref="dataType" value={dataType} />
+
+                <Dropdown options={actions} multiple={false} ref="action" />
+                <Dropdown options={types} multiple={false} ref="type" />
+                <button onClick={this.handleClear} className="btn btn-primary">Clear</button>
+                <button onClick={this.handleSave} className="btn btn-primary">Save</button>
             </div>
-            /*jshint ignore: end */
         );
     }
+    /*jshint ignore: end */
 });
-
-module.exports = IntentForm;
