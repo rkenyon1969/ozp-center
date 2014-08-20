@@ -26,11 +26,6 @@ h3 {
     font-weight: 400;
 }
 
-.row {
-    min-width: 768px;
-    height: auto;
-}
-
 #create-edit-tab-container {
     z-index: 1;
     position: fixed;
@@ -98,7 +93,7 @@ h3 {
     }
 
     .content-section {
-        .row {
+        >.row {
             padding-bottom: 20px;
 
             >div {
@@ -128,10 +123,6 @@ h3 {
 
         p.small {
             width: 80%;
-        }
-
-        .select2-container {
-            margin: 0 0 20px 0;
         }
 
         .react-tabs {
@@ -165,6 +156,41 @@ h3 {
                 h3 {
                     margin-top: 0;
                 }
+            }
+        }
+
+        .create-edit-input-element {
+            .contact-form:nth-child(n+2) {
+                margin-top: 20px;
+            }
+        }
+
+        .contact-form {
+            >button {
+                margin-left: 12px;
+                margin-top: 5px;
+            }
+        }
+
+        .contact-card {
+            border: 1px solid #c6c6c6;
+            padding: 10px 5px;
+            margin: 10px 0px 5px 5px;
+            box-shadow: 2px 2px 4px gray;
+
+            .btn {
+                color: gray;
+                padding: 0;
+                float: right;
+                margin-right: -10px;
+                margin-top: -5px;
+            }
+            .create-edit-input-element:nth-child(n+6) {
+                width: 49%;
+                display: inline-block;
+            }
+            .create-edit-input-element:last-child {
+                margin-left: 5px;
             }
         }
     }

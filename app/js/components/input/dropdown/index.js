@@ -1,8 +1,8 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React = require('react'),
-    Chosen= require('drmonty-chosen');
+var React  = require('react'),
+    Chosen = require('drmonty-chosen');
 
 function isWrappedValue (value) {
     return value && typeof value.val === 'function';

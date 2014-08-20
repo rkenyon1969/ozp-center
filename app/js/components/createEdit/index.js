@@ -155,9 +155,9 @@ var CreateEditPage = React.createClass({
                                     items={listing.docUrls} label="Additional Resources" />
                         </div>
                         <div className="col-sm-5">
-                            <h2>Technical Support Point of Contact</h2>
+                            <h2>Contacts</h2>
 
-                            <ListOfForms itemForm={require('./contacts/contactForm')} itemSchema={require('../../data/Contact')}
+                            <ListOfForms className="contact-form" itemForm={require('./contacts/contactForm')} itemSchema={require('../../data/Contact')}
                                     items={listing.contacts} description="Point of Contact for users to seek technical support for this listing."/>
                         </div>
                     </Section>
