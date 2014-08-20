@@ -29,8 +29,12 @@ module.exports = React.createClass({
 
         return (
             <div>
-                <Dropdown label="Select" options={tags} ref="dropdown" />
-                <button onClick={this.handleSave} className="btn btn-primary">+</button>
+                <div className="col-sm-10">
+                    <Dropdown options={tags} ref="dropdown" />
+                </div>
+                <div className="col-sm-2">
+                    <button onClick={this.handleSave} className="btn btn-primary">+</button>
+                </div>
             </div>
         );
     }

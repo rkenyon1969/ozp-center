@@ -84,6 +84,15 @@ h3 {
 #create-edit {
     z-index: 9;
     padding-top: 160px;
+
+    .input-form-container {
+        overflow: hidden;
+
+        .btn {
+            
+        }
+    }
+
     .row {
         background: #e8e8e8;
     }

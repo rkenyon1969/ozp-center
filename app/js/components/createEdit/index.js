@@ -86,7 +86,7 @@ var CreateEditPage = React.createClass({
                             <label>Tags</label>
                             <p className="small">Keywords that describe the listing which can be used when searching.</p>
                             <FormWithList itemForm={require('./tags/tagForm')} itemMarkup={require('./tags/tag')}
-                                items={listing.tags} label="Tags" />
+                                items={listing.tags} />
 
                         </div>
                         <div className="col-sm-5">

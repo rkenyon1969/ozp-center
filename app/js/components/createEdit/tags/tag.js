@@ -9,7 +9,7 @@ module.exports = React.createClass({
         return (
             <div className="tag">
                 <span>{this.props.item.val()}</span>
-                <button onClick={this.props.removeHandler}>-</button>
+                <button className="btn btn-link" onClick={this.props.removeHandler}>-</button>
             </div>
         );
     }

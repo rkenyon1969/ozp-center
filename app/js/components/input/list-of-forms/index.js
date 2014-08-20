@@ -25,7 +25,9 @@ var ListOfForms = React.createClass({
             <div className="create-edit-input-element">
                 {this.props.label && this.renderLabel()}
                 {this.props.description && this.renderDescription()}
-                {items}
+                <div className="input-form-container">
+                    {items}
+                </div>
                 <button className="btn btn-primary" onClick={this.handleNew}>Add</button>
             </div>
             /*jshint ignore: end */
