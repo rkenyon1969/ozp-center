@@ -1,0 +1,86 @@
+.quickview {
+
+    .modal-body {
+        padding: 0;
+    }
+
+    .tabs-container {
+        position: relative;
+    }
+
+    .nav-tabs {
+        padding: 0 $panel-body-padding;
+    }
+    .tab-content {
+        overflow: auto;
+        height: 416px;
+        padding: $panel-body-padding;
+    }
+}
+
+.quickview-header {
+    position: relative;
+    padding: 20px 25px;
+
+    .quickview-header-info {
+        position: relative;
+
+        > div {
+            position: absolute;
+            top: 25px;
+            font-size: 18px;
+            line-height: 18px;
+            font-weight: normal;
+            padding: 0 0 0 20px;
+            margin: 0;
+            display: inline-block;
+        }
+
+        i {
+            font-size: $font-size-small;
+            margin-right: 3px;
+        }
+    }
+
+    .quickview-header-actions {
+        position: absolute;
+        right: 60px;
+        top: 23px;
+    }
+
+    .listing-icon {
+        width: 40px;
+        height: 40px;
+    }
+    .listing-title {
+        position: absolute;
+        top: 0;
+        font-size: 18px;
+        line-height: 18px;
+        font-weight: normal;
+        padding: 0 0 0 20px;
+        margin: 0;
+        display: inline-block;
+    }
+}
+
+.quickview-overview {
+
+    .carousel-wrapper {
+        position: absolute;
+        top: 42px + $panel-body-padding;
+        width: 600px;
+        height: 375px;
+
+        img {
+            width: 600px;
+            height: 375px;
+        }
+    }
+
+    .description {
+        float: right;
+        width: 235px;
+        word-wrap: break-word;
+    }
+}

@@ -10,7 +10,16 @@ var Carousel = React.createClass({
 
     // http://docs.dev7studios.com/jquery-plugins/caroufredsel-advanced
     propTypes: {
-        children: React.PropTypes.array
+        children: React.PropTypes.array,
+
+        // auto init jquery plugin on mount
+        autoInit: React.PropTypes.bool
+    },
+
+    getDefaultProps: function() {
+        return {
+            autoInit: true
+        };
     },
 
     render: function () {
@@ -31,16 +40,28 @@ var Carousel = React.createClass({
     },
 
     componentDidMount: function () {
-        this._$carousel = $(this.refs.list.getDOMNode()).carouFredSel({
-            prev: $(this.refs.prev.getDOMNode()),
-            next: $(this.refs.next.getDOMNode()),
-            auto: false,
-            scroll: {
-                easing: 'quadratic'
-            }
-        }, {
-            wrapper: 'parent'
-        });
+        this.renderCarousel();
+    },
+
+    componentDidUpdate: function (prevProps, prevState) {
+        if (prevProps.autoInit === false && this.props.autoInit === true) {
+            this.renderCarousel();
+        }
+    },
+
+    renderCarousel: function () {
+        if (this.props.autoInit) {
+            this._$carousel = $(this.refs.list.getDOMNode()).carouFredSel({
+                prev: $(this.refs.prev.getDOMNode()),
+                next: $(this.refs.next.getDOMNode()),
+                auto: false,
+                scroll: {
+                    easing: 'quadratic'
+                }
+            }, {
+                wrapper: 'parent'
+            });
+        }
     },
 
     componentWillUnmount: function(nextProps, nextState) {

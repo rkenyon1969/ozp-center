@@ -2,7 +2,6 @@
 'use strict';
 
 var React = require('react');
-
 var IconRating = require('react-icon-rating');
 
 var ListingTile = React.createClass({
@@ -19,7 +18,7 @@ var ListingTile = React.createClass({
         var company = listing.company();
 
         /*jshint ignore:start */
-        return (
+        return this.transferPropsTo(
             <li className="listing listing-tile">
                 <a href="#quickview/1">
                     <img src={ imageLargeUrl } />
