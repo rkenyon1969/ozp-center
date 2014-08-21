@@ -20,6 +20,7 @@ require('bootstrap');
 
 var data = {
     title: 'My Application',
+    categories: ['Category A'],
     descriptionShort: 'This is my application\'s short description',
     description: 'This is my application\'s long, long, long, long description',
     launchUrl: 'https://www.google.com',
@@ -28,13 +29,14 @@ var data = {
     intents: [{action: 'save', dataType: 'audio'}],
     contacts: [{type: 'Technical POC', email: 'me@here.com', name: 'Morpheus', securePhone: '555-5555', unsecurePhone: '555-5556'}],
     docUrls: [{type: 'Configuration Guide', url: 'https://www.google.com'}],
-    tags: [{tag: 'tag1'}]
+    tags: ['tag1']
 };
 
 var listingCortex = new Cortex(data);
 
 var categories = ['Category A', 'Category B', 'Category C'];
 var organizations = ['Organization 1', 'Organization 2', 'Organization 3'];
+var tags = ['tag1', 'tag2', 'tag3', 'tag4', 'tag5'];
 
 var CreateEditPage = React.createClass({
 
@@ -78,15 +80,10 @@ var CreateEditPage = React.createClass({
                                 </TabPanel>
                             </TabSelect>
 
-                            <label>Category</label>
-                            <p className="small">The category or categories in the existing AppsMall structure where this listing fits best.</p>
-
-                            <Dropdown value={["Category A"]} options={categories} multiple={true} />
-
-                            <label>Tags</label>
-                            <p className="small">Keywords that describe the listing which can be used when searching.</p>
-                            <FormWithList itemForm={require('./tags/tagForm')} itemMarkup={require('./tags/tag')}
-                                items={listing.tags} />
+                            <Dropdown label="Category" description="The category or categories in the existing AppsMall structure where this listing fits best."
+                                placeholder="Select Categories" value={data.categories} options={categories} multiple={true} />
+                            <Dropdown label="Tags" description="Keywords that describe the listing which can be used when searching."
+                                placeholder="Select Tags" value={data.tags} options={tags} multiple={true} />
 
                         </div>
                         <div className="col-sm-5">

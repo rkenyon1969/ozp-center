@@ -20,7 +20,7 @@ var Dropdown = React.createClass({
             <div className="create-edit-input-element">
                 {this.props.label && this.renderLabel()}
                 {this.props.description && this.renderDescription()}
-                <select className="form-control" onChange={this.handleChange} value={this.value()} ref="select" multiple={this.props.multiple}>
+                <select data-placeholder={this.props.placeholder} className="form-control" onChange={this.handleChange} value={this.value()} ref="select" multiple={this.props.multiple}>
                     {options}
                 </select>
             </div>
