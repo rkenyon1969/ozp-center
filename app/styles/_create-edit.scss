@@ -80,14 +80,6 @@ h3 {
     z-index: 9;
     padding-top: 160px;
 
-    .input-form-container {
-        overflow: hidden;
-
-        .btn {
-
-        }
-    }
-
     .row {
         background: #e8e8e8;
     }
@@ -191,6 +183,41 @@ h3 {
             }
             .create-edit-input-element:last-child {
                 margin-left: 5px;
+            }
+        }
+
+        .intent-form {
+            >button {
+                margin-left: 12px;
+                margin-top: 5px;
+            }
+        }
+
+        .intent-card {
+            border: 1px solid #c6c6c6;
+            padding: 10px 5px;
+            margin: 15px 5px 5px 5px;
+            box-shadow: 2px 2px 4px gray;
+
+            .btn {
+                color: gray;
+                padding: 0;
+                float: right;
+                margin-right: -10px;
+                margin-top: -5px;
+            }
+
+            .create-edit-input-element:nth-child(2) {
+                width: 35%;
+                display: inline-block;
+                margin-top: 10px;
+            }
+
+            .create-edit-input-element:last-child {
+                width: 60%;
+                display: inline-block;
+                margin-left: 5px;
+                margin-top: 10px;
             }
         }
     }

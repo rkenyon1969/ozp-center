@@ -1,10 +1,10 @@
 'use strict';
 
-var merge  = require('react/lib/merge');
+var merge = require('react/lib/merge');
 
 var schema = {
-    dataType: '',
-    action: ''
+    dataType: {id: null},
+    action: {id: null}
 };
 
 function Intent(json) {

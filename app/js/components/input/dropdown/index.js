@@ -13,27 +13,32 @@ var Dropdown = React.createClass({
     /*jshint ignore:start */
     render: function () {
         var options = this.props.options.map(function (option) {
-            return <option value={option}>{option}</option>;
+            return <option value={option.value}>{option.name}</option>;
         });
 
         return (
             <div className="create-edit-input-element">
                 {this.props.label && this.renderLabel()}
                 {this.props.description && this.renderDescription()}
-                <select className="form-control" onChange={this.handleChange} value={this.value()} ref="select" multiple={this.props.multiple}>
+                <select className="form-control" value={this.value()} ref="select" multiple={this.props.multiple}>
                     {options}
                 </select>
             </div>
         );
     },
 
-    componentDidUpdate: function() {
-
-    },
-
     componentDidMount: function() {
         var select = $(this.refs.select.getDOMNode());
-        select.chosen();
+        var chosen = select.chosen().data('chosen');
+        select.on('change', this.handleChange);
+
+        this._$chosen = chosen;
+        this._$select = select;
+    },
+
+    componentWillUnmount: function () {
+        this._$select.off('change');
+        this._$chosen.destroy();
     },
 
     renderLabel: function () {
