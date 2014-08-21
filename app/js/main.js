@@ -13,9 +13,10 @@ window.React = React;
 window.jQuery = jQuery;
 window.$ = jQuery;
 
-/*jshint ignore:start */
-React.renderComponent(
-    <APP />, document.getElementById('main')
-);
-
-/*jshint ignore:end */
+jQuery.getJSON('./mocks/config.json', function (json) {
+    /*jshint ignore:start */
+    React.renderComponent(
+        <APP config={json} />, document.getElementById('main')
+    );
+    /*jshint ignore:end */
+});

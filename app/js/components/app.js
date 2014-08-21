@@ -10,7 +10,6 @@ var APP = React.createClass({
     render: function () {
         return this.renderCreateEditPage();
         // return this.renderDiscoveryPage();
-
     },
 
     /*jshint ignore:start */
@@ -31,7 +30,7 @@ var APP = React.createClass({
 
     renderCreateEditPage: function () {
         return (
-            <CreateEditPage />
+            <CreateEditPage config={this.props.config} />
         );
     }
     /*jshint ignore:end */
