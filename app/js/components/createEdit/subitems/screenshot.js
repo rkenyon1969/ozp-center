@@ -1,10 +1,11 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React  = require('react'),
-    Input = require('../../form/input');
+var React = require('react'),
+    Input = require('../../form/input'),
+    merge = require('react/lib/merge');
 
-module.exports = React.createClass({
+module.exports.form = React.createClass({
     render: function () {
         var screenshot = this.props.item;
         /*jshint ignore: start */
@@ -32,3 +33,17 @@ module.exports = React.createClass({
         /*jshint ignore: end */
     }
 });
+
+var schema = {
+    name: '',
+    securePhone: '',
+    unsecurePhone: '',
+    email: '',
+    type: {id: null}
+};
+
+function Contact(json) {
+    return merge(schema, json);
+}
+
+module.exports.schema = Contact;

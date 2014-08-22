@@ -17,7 +17,10 @@ var React        = require('react'),
     Select       = require('../form/select'),
     Chosen       = require('../form/chosen'),
     Cortex       = require('cortexjs'),
-    Screenshot   = require('../../data/Screenshot');
+    screenshot   = require('./subitems/screenshot'),
+    intent       = require('./subitems/intent'),
+    resource     = require('./subitems/resource'),
+    contact      = require('./subitems/contact');
 
 require('bootstrap');
 
@@ -119,7 +122,7 @@ var CreateEditPage = React.createClass({
 
                             <h2>Ozone Properties</h2>
 
-                            <ListOfForms className="intent-form" itemForm={require('./intents/intentForm')} itemSchema={require('../../data/Intent')}
+                            <ListOfForms className="intent-form" itemForm={intent.form} itemSchema={intent.schema}
                                     items={listing.owfProperties.intents} label="Intents (optional)"
                                     description="Intents are special instructions used for communicating between applications. If this application uses intents, list them here" />
 
@@ -141,7 +144,7 @@ var CreateEditPage = React.createClass({
 
                             {this.renderScreenshots()}
 
-                            <ListOfForms className="resource-form" itemForm={require('./resources/form')} itemSchema={require('../../data/Resource')}
+                            <ListOfForms className="resource-form" itemForm={resource.form} itemSchema={resource.schema}
                                     items={listing.docUrls} label="Resources" />
 
                         </div>
@@ -159,7 +162,7 @@ var CreateEditPage = React.createClass({
                         <div className="col-sm-5">
                             <h2>Contacts</h2>
 
-                            <ListOfForms className="contact-form" itemForm={require('./contacts/contactForm')} itemSchema={require('../../data/Contact')}
+                            <ListOfForms className="contact-form" itemForm={contact.form} itemSchema={contact.schema}
                                     items={listing.contacts} description="Point of Contact for users to seek technical support for this listing."/>
                         </div>
                     </Section>
@@ -234,9 +237,9 @@ var CreateEditPage = React.createClass({
     renderScreenshots: function () {
         var screenshots = this.state.listing.screenshots;
 
-        screenshots.val().length === 0 && screenshots.push(new Screenshot({}));
+        screenshots.val().length === 0 && screenshots.push(new screenshot.schema({}));
 
-        return <ListOfForms className="screenshot-form" itemForm={require('./screenshots/form')} itemSchema={Screenshot}
+        return <ListOfForms className="screenshot-form" itemForm={screenshot.form} itemSchema={screenshot.schema}
                         items={screenshots} label="Screenshots" description="At least one screenshot is required"
                         locked={[0]}/>;
     },

@@ -5,11 +5,11 @@ var React  = require('react'),
     Reflux = require('reflux'),
     Input  = require('../../form/input'),
     Select = require('../../form/select'),
-    $      = require('jquery');
+    merge  = require('react/lib/merge');
 
 var ConfigStore = require('../../../stores/ConfigStore');
 
-module.exports = React.createClass({
+module.exports.form = React.createClass({
     mixins: [ Reflux.ListenerMixin ],
 
     render: function () {
@@ -52,3 +52,17 @@ module.exports = React.createClass({
         this.listenTo(ConfigStore, this._onChange);
     }
 });
+
+var schema = {
+    name: '',
+    securePhone: '',
+    unsecurePhone: '',
+    email: '',
+    type: {id: null}
+};
+
+function Contact(json) {
+    return merge(schema, json);
+}
+
+module.exports.schema = Contact;

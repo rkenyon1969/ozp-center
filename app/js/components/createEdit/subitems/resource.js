@@ -2,9 +2,10 @@
 'use strict';
 
 var React = require('react'),
-    Input = require('../../form/input');
+    Input = require('../../form/input'),
+    merge = require('react/lib/merge');
 
-module.exports = React.createClass({
+module.exports.form = React.createClass({
     render: function () {
         var resource = this.props.item;
         /*jshint ignore: start */
@@ -30,3 +31,14 @@ module.exports = React.createClass({
         /*jshint ignore: end */
     }
 });
+
+var schema = {
+    name: '',
+    url: ''
+};
+
+function Resource(json) {
+    return merge(schema, json);
+}
+
+module.exports.schema = Resource;
