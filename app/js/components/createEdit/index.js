@@ -15,7 +15,7 @@ var React        = require('react'),
     Input        = require('../form/input'),
     $            = require('jquery'),
     Select       = require('../form/select'),
-    Dropdown     = require('../form/dropdown'),
+    Chosen       = require('../form/chosen'),
     Cortex       = require('cortexjs');
 
 require('bootstrap');
@@ -191,7 +191,7 @@ var CreateEditPage = React.createClass({
             });
         }
 
-        return <Dropdown label="Category" description="The category or categories in the existing AppsMall structure where this listing fits best."
+        return <Chosen label="Category" description="The category or categories in the existing AppsMall structure where this listing fits best."
             placeholder="Select Categories" value={this.state.listing.categories} options={categories} multiple={true} />;
     },
 
@@ -202,7 +202,7 @@ var CreateEditPage = React.createClass({
             return {name: tag, value: 0};
         });
 
-        return <Dropdown label="Tags" description="Keywords that describe the listing which can be used when searching."
+        return <Chosen label="Tags" description="Keywords that describe the listing which can be used when searching."
             placeholder="Select Tags" value={this.state.listing.tags} options={tags} multiple={true} />
 
     },

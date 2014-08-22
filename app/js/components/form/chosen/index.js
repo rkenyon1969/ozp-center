@@ -8,7 +8,7 @@ function isWrappedValue (value) {
     return value && typeof value.val === 'function';
 }
 
-var Dropdown = React.createClass({
+var Chosen = React.createClass({
 
     /*jshint ignore:start */
     render: function () {
@@ -64,17 +64,12 @@ var Dropdown = React.createClass({
 
     handleChange: function (event) {
         var me = this;
-        var items = $(this.refs.select.getDOMNode()).val();
-        var value = items.map( function (option) {
+        var value = $(this.refs.select.getDOMNode()).val().map( function (option) {
             return {id: option, title:$(me.refs.select.getDOMNode()).find('option[value=' + option +']').html()};
         });
 
         if (isWrappedValue(this.props.value)) {
-            if(this.props.multiple){
-                this.props.value.push(value);
-            } else {
-                this.props.value.set(value);
-            }
+            this.props.value.push(value);
         } else {
             this.setState({value: value});
         }
@@ -97,4 +92,4 @@ var Dropdown = React.createClass({
 
 
 
-module.exports = Dropdown;
+module.exports = Chosen;
