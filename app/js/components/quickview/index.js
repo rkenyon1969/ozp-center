@@ -61,6 +61,7 @@ var Quickview = React.createClass({
                                     <li className="active"><a href=".quickview-overview" role="tab" data-toggle="tab">Overview</a></li>
                                     <li><a href=".quickview-reviews" role="tab" data-toggle="tab">Reviews</a></li>
                                     <li><a href=".quickview-details" role="tab" data-toggle="tab">Details</a></li>
+                                    <li><a href=".quickview-resources" role="tab" data-toggle="tab">Resources</a></li>
                                 </ul>
                                 <div className="tab-content">
                                     <div className="tab-pane active row quickview-overview">
@@ -74,6 +75,7 @@ var Quickview = React.createClass({
                                     </div>
                                     <ReviewsTab listing={ listing } />
                                     <div className="tab-pane quickview-details">Details...</div>
+                                    <div className="tab-pane quickview-resources">Resources...</div>
                                 </div>
                             </div>
                         </Modal>
