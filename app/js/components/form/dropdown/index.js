@@ -10,15 +10,6 @@ function isWrappedValue (value) {
 
 var Dropdown = React.createClass({
 
-    propTypes: {
-        placeholder: React.PropTypes.string,
-        options: React.PropTypes.array.isRequired,
-        onChange: React.PropTypes.func,
-        multiple: React.PropTypes.bool,
-        label: React.PropTypes.string,
-        description: React.PropTypes.string
-    },
-
     /*jshint ignore:start */
     render: function () {
         var options = this.props.options.map(function (option) {
@@ -39,7 +30,7 @@ var Dropdown = React.createClass({
 
     componentDidMount: function() {
         var select = $(this.refs.select.getDOMNode());
-        var chosen = select.chosen().data('chosen');
+        var chosen = select.chosen();
         select.on('change', this.handleChange);
 
         this._$chosen = chosen;
@@ -72,10 +63,20 @@ var Dropdown = React.createClass({
     },
 
     handleChange: function (event) {
+        var me = this;
+        var items = $(this.refs.select.getDOMNode()).val();
+        var value = items.map( function (option) {
+            return {id: option, title:$(me.refs.select.getDOMNode()).find('option[value=' + option +']').html()};
+        });
+
         if (isWrappedValue(this.props.value)) {
-            this.props.value.set(event.target.value);
+            if(this.props.multiple){
+                this.props.value.push(value);
+            } else {
+                this.props.value.set(value);
+            }
         } else {
-            this.setState({value: event.target.value});
+            this.setState({value: value});
         }
     },
 

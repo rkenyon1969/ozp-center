@@ -54,8 +54,6 @@ var ConfigStore = require('../../stores/ConfigStore');
 
 var listingCortex = new Cortex(data);
 
-var tags = ['tag1', 'tag2', 'tag3', 'tag4', 'tag5'];
-
 function printItem () {
     console.log(listingCortex.val());
 }
@@ -71,7 +69,7 @@ var CreateEditPage = React.createClass({
                 <Header />
                 <Actions title="Edit 'New Listing'">
                     <button className="btn btn-default">Preview</button>
-                    <button onClick={printItem} className="btn btn-default">Save</button>
+                    <button onClick={printItem} className="btn btn-default">Save Draft</button>
                     <button className="btn btn-default">Submit</button>
                     <button className="btn btn-default">Delete</button>
                 </Actions>
@@ -88,8 +86,7 @@ var CreateEditPage = React.createClass({
 
                             {this.renderCategories()}
 
-                            <Dropdown label="Tags" description="Keywords that describe the listing which can be used when searching."
-                                placeholder="Select Tags" value={data.tags} options={tags} multiple={true} />
+                            {this.renderTags()}
 
                         </div>
                         <div className="col-sm-5">
@@ -184,14 +181,29 @@ var CreateEditPage = React.createClass({
 
     renderCategories: function () {
         var categories = [];
-        if (!this.state.config.loading) {
+
+        if (this.state.config.loading) {
+            return <div>Loading</div>;
+        } else {
             categories = this.state.config.categories.map(function (json) {
                 return {name: json.title, value: json.id};
             });
         }
 
         return <Dropdown label="Category" description="The category or categories in the existing AppsMall structure where this listing fits best."
-            placeholder="Select Categories" value={data.categories} options={categories} multiple={true} />;
+            placeholder="Select Categories" value={this.state.listing.categories} options={categories} multiple={true} />;
+    },
+
+    renderTags: function() {
+        var defaultTags = ['tag1', 'tag2', 'tag3'];
+
+        var tags = defaultTags.map(function(tag) {
+            return {name: tag, value: 0};
+        });
+
+        return <Dropdown label="Tags" description="Keywords that describe the listing which can be used when searching."
+            placeholder="Select Tags" value={this.state.listing.tags} options={tags} multiple={true} />
+
     },
 
     renderOrganizations: function () {

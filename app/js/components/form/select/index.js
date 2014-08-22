@@ -7,7 +7,7 @@ function isWrappedValue (value) {
     return value && typeof value.val === 'function';
 }
 
-var Dropdown = React.createClass({
+var Select = React.createClass({
 
     /*jshint ignore:start */
     render: function () {
@@ -71,4 +71,4 @@ var Dropdown = React.createClass({
 
 
 
-module.exports = Dropdown;
+module.exports = Select;
