@@ -1,7 +1,6 @@
 $quickview-nav-tabs-height: 42px;
 
 .quickview {
-
     .modal-dialog {
         width: 1000px;
     }
@@ -21,6 +20,18 @@ $quickview-nav-tabs-height: 42px;
         overflow: auto;
         height: 416px;
         padding: $panel-body-padding;
+    }
+
+    section > h5 {
+        margin: 0;
+
+        + hr {
+            margin: $panel-body-padding/4 0 $panel-body-padding/2 0;
+        }
+    }
+
+    section + section {
+        margin-top: $panel-body-padding/2;
     }
 }
 
@@ -155,6 +166,5 @@ $quickview-nav-tabs-height: 42px;
             }
         }
     }
-
 
 }

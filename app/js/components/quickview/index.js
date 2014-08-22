@@ -9,6 +9,7 @@ var IconRating = require('react-icon-rating');
 var Carousel = require('../carousel');
 var Header = require('./Header');
 var ReviewsTab = require('./ReviewsTab');
+var DetailsTab = require('./DetailsTab');
 
 /**
 *
@@ -53,7 +54,7 @@ var Quickview = React.createClass({
                             </div>
                         </div>
                         <ReviewsTab listing={ listing } />
-                        <div className="tab-pane quickview-details">Details...</div>
+                        <DetailsTab listing={ listing } />
                         <div className="tab-pane quickview-resources">Resources...</div>
                     </div>
                 </div>

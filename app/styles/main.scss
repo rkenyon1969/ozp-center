@@ -12,6 +12,7 @@ $header-height: 55px;
 html, body {
     background: $body-bg;
     font-family: 'Ubuntu Regular', 'Ubuntu';
+    font-weight: 300;
 }
 
 #main {
@@ -72,4 +73,8 @@ i {
 
 i.fa-star, i.fa-star-half-o {
     color: $star-color;
+}
+
+label {
+    font-weight: 400;
 }
