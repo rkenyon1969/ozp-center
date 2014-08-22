@@ -10,6 +10,7 @@ var Carousel = require('../carousel');
 var Header = require('./Header');
 var ReviewsTab = require('./ReviewsTab');
 var DetailsTab = require('./DetailsTab');
+var ResourcesTab = require('./ResourcesTab');
 
 /**
 *
@@ -55,7 +56,7 @@ var Quickview = React.createClass({
                         </div>
                         <ReviewsTab listing={ listing } />
                         <DetailsTab listing={ listing } />
-                        <div className="tab-pane quickview-resources">Resources...</div>
+                        <ResourcesTab listing={ listing } />
                     </div>
                 </div>
             </Modal>

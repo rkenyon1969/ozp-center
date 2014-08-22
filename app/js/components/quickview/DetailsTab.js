@@ -34,11 +34,11 @@ var DetailsTab = React.createClass({
                         <p className="col-md-offset-1">TOTP</p>
                         <label>Government Sponsor</label>
                         <div className="col-md-offset-1">
-                            <label>Name:</label><span> Joe Montana</span><br />
-                            <label>Secure Email:</label><span> jmontana@ugov.com</span><br />
-                            <label>Name:</label><span> Joe Montana</span><br />
-                            <label>Unsecure Phone:</label><span> (123) 456-789</span><br />
-                            <label>Secure Phone:</label><span> (123) 456-789</span><br />
+                            <p><label>Name:</label><span> Joe Montana</span></p>
+                            <p><label>Secure Email:</label><span> jmontana@ugov.com</span></p>
+                            <p><label>Name:</label><span> Joe Montana</span></p>
+                            <p><label>Unsecure Phone:</label><span> (123) 456-789</span></p>
+                            <p><label>Secure Phone:</label><span> (123) 456-789</span></p>
                         </div>
                     </section>
                 </div>
@@ -46,20 +46,20 @@ var DetailsTab = React.createClass({
                     <section className="ownership">
                         <h5>Listing Details</h5>
                         <hr/>
-                        <label>Type:</label><span> Joe Montana</span><br />
-                        <label>URL:</label><span> jmontana@ugov.com</span><br />
-                        <label>Categories:</label><span> Utilities, Tools</span><br />
-                        <label>Tags:</label><span> Searching, research, tools, utilities, find</span><br />
-                        <label>Last Updated:</label><span> Yesterday</span><br />
-                        <label>Original Release Date:</label><span> 08/14/2014</span><br />
+                        <p><label>Type:</label><span> Joe Montana</span></p>
+                        <p><label>URL:</label><span> jmontana@ugov.com</span></p>
+                        <p><label>Categories:</label><span> Utilities, Tools</span></p>
+                        <p><label>Tags:</label><span> Searching, research, tools, utilities, find</span></p>
+                        <p><label>Last Updated:</label><span> Yesterday</span></p>
+                        <p><label>Original Release Date:</label><span> 08/14/2014</span></p>
                     </section>
                     <section className="ownership">
                         <h5>Ozone Properties</h5>
                         <hr/>
                         <label>Intents:</label>
                         <div className="col-md-offset-1">
-                            <label>View:</label><span> Image</span><br />
-                            <label>View:</label><span> Video</span><br />
+                            <p><label>View:</label><span> Image</span></p>
+                            <p><label>View:</label><span> Video</span></p>
                         </div>
                     </section>
                 </div>
