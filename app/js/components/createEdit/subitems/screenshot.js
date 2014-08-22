@@ -1,11 +1,14 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React = require('react'),
-    Input = require('../../form/input'),
-    merge = require('react/lib/merge');
+var React     = require('react'),
+    Input     = require('../../form/input'),
+    merge     = require('react/lib/merge'),
+    DeleteBtn = require('./mixins/deleteBtn');
 
 module.exports.form = React.createClass({
+    mixins: [ DeleteBtn ],
+
     render: function () {
         var screenshot = this.props.item;
         /*jshint ignore: start */
@@ -19,16 +22,6 @@ module.exports.form = React.createClass({
                             description="960px wide by 600px tall" />
                 </div>
             </div>
-        );
-        /*jshint ignore: end */
-    },
-
-    renderDeleteBtn: function () {
-        /*jshint ignore: start */
-        return (
-            <button onClick={this.props.removeHandler} className="btn btn-link">
-                <i className="fa fa-times"></i>
-            </button>
         );
         /*jshint ignore: end */
     }

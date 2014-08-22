@@ -1,20 +1,20 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React  = require('react'),
-    Reflux = require('reflux'),
-    Input  = require('../../form/input'),
-    Select = require('../../form/select'),
-    merge  = require('react/lib/merge');
-
-var ConfigStore = require('../../../stores/ConfigStore');
+var React       = require('react'),
+    Reflux      = require('reflux'),
+    Input       = require('../../form/input'),
+    Select      = require('../../form/select'),
+    merge       = require('react/lib/merge'),
+    DeleteBtn   = require('./mixins/deleteBtn'),
+    ConfigStore = require('./mixins/configStore');
 
 module.exports.form = React.createClass({
-    mixins: [ Reflux.ListenerMixin ],
+    mixins: [ Reflux.ListenerMixin, DeleteBtn, ConfigStore ],
 
     render: function () {
         var contactTypes = [];
-        if (!this.state.config.loading) {
+        if (!this.configIsLoading()) {
             contactTypes = this.state.config.contactTypes.map(function (json) {
                 return {value: json.id, name: json.title};
             });
@@ -25,9 +25,7 @@ module.exports.form = React.createClass({
         return (
             <div className="row contact-card">
                 <div className="col-sm-12">
-                    <button onClick={this.props.removeHandler} className="btn btn-link">
-                        <i className="fa fa-times"></i>
-                    </button>
+                    {!this.props.locked && this.renderDeleteBtn()}
                     <Select ref="type" options={contactTypes} value={contact.type.id} label="Contact Type" />
                     <Input type="text" ref="name" itemValue={contact.name} label="Name" />
                     <Input type="text" ref="organization" itemValue={contact.organization} label="Organization" />
@@ -38,18 +36,6 @@ module.exports.form = React.createClass({
             </div>
         );
         /*jshint ignore:end */
-    },
-
-    getInitialState: function () {
-        return {config: ConfigStore.getConfig()};
-    },
-
-    _onChange: function () {
-        this.replaceState({config: ConfigStore.getConfig()});
-    },
-
-    componentDidMount: function () {
-        this.listenTo(ConfigStore, this._onChange);
     }
 });
 

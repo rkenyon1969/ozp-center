@@ -1,20 +1,21 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React  = require('react'),
-    Reflux = require('reflux'),
-    Select = require('../../form/select'),
-    merge  = require('react/lib/merge');
-
-var ConfigStore = require('../../../stores/ConfigStore');
+var React       = require('react'),
+    Reflux      = require('reflux'),
+    Select      = require('../../form/select'),
+    merge       = require('react/lib/merge'),
+    DeleteBtn   = require('./mixins/deleteBtn'),
+    ConfigStore = require('./mixins/configStore');
 
 module.exports.form = React.createClass({
-    mixins: [ Reflux.ListenerMixin ],
+    mixins: [ Reflux.ListenerMixin, DeleteBtn, ConfigStore ],
 
     render: function () {
         var dataTypes = [],
             actions = [];
-        if (!this.state.config.loading) {
+
+        if (!this.configIsLoading()) {
             actions = this.state.config.intentActions.map(function (json) {
                 return {name: json.title, value: json.id};
             });
@@ -35,28 +36,6 @@ module.exports.form = React.createClass({
             </div>
         );
         /*jshint ignore: end */
-    },
-
-    renderDeleteBtn: function () {
-        /*jshint ignore: start */
-        return (
-            <button onClick={this.props.removeHandler} className="btn btn-link">
-                <i className="fa fa-times"></i>
-            </button>
-        );
-        /*jshint ignore: end */
-    },
-
-    getInitialState: function () {
-        return {config: ConfigStore.getConfig()};
-    },
-
-    _onChange: function () {
-        this.replaceState({config: ConfigStore.getConfig()});
-    },
-
-    componentDidMount: function () {
-        this.listenTo(ConfigStore, this._onChange);
     }
 });
 
