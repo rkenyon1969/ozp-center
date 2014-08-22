@@ -1,3 +1,5 @@
+$quickview-nav-tabs-height: 42px;
+
 .quickview {
 
     .modal-body {
@@ -68,9 +70,14 @@
 
     .carousel-wrapper {
         position: absolute;
-        top: 42px + $panel-body-padding;
+        top: $quickview-nav-tabs-height + $panel-body-padding;
         width: 600px;
         height: 375px;
+
+        > .carousel {
+            height: 100%;
+            overflow: hidden;
+        }
 
         img {
             width: 600px;
@@ -83,4 +90,67 @@
         width: 235px;
         word-wrap: break-word;
     }
+}
+
+.quickview-reviews {
+    .col-right {
+        position: fixed;
+        right: 0;
+
+        textarea {
+            padding: $table-cell-padding;
+            resize: none;
+            margin: 1em 0;
+            width: 100%;
+            height: 12em;
+            display: block;
+        }
+
+        P {
+            font-size: $font-size-small;
+        }
+    }
+
+    .review-filters {
+        .progress {
+            display: inline-block;
+            width: 123px;
+            height: 14px;
+            margin: 0;
+            margin-left: 6px;
+        }
+
+        .count {
+            margin-left: 6px;
+        }
+    }
+
+    .user-review {
+        > div {
+            display: inline-block;
+        }
+        .author {
+            margin-left: 6px;
+        }
+        .date {
+            margin-left: 6px;
+        }
+        .review {
+            border-bottom: 1px solid transparent;
+            &:hover {
+                // border-bottom: 1px solid $gray-lighter;
+            }
+        }
+
+        .user-review-editing {
+            margin-bottom: $panel-body-padding;
+
+            > textarea {
+                width: 100%;
+                resize: none;
+            }
+        }
+    }
+
+
 }

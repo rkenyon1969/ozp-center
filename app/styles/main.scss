@@ -53,10 +53,6 @@ html, body {
     }
 }
 
-i.fa-star, i.fa-star-half-o {
-    color: $star-color;
-}
-
 @import 'carousel';
 @import 'header';
 @import 'listing-tile';
@@ -68,4 +64,12 @@ i.fa-star, i.fa-star-half-o {
 .close {
     font-size: 3em;
     font-weight: lighter;
+}
+
+i {
+    margin-right: 2px;
+}
+
+i.fa-star, i.fa-star-half-o {
+    color: $star-color;
 }

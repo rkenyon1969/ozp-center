@@ -7,7 +7,7 @@ var React = require('react');
 var Modal = require('../shared/Modal');
 var IconRating = require('react-icon-rating');
 var Carousel = require('../carousel');
-
+var ReviewsTab = require('./ReviewsTab');
 
 /**
 *
@@ -26,9 +26,10 @@ var Quickview = React.createClass({
     /*jshint ignore:start */
     render: function () {
         var shown = this.state.shown;
-        var title = this.props.listing.title();
-        var description = this.props.listing.description() || 'No description provided!';
-        var avgRate = this.props.listing.avgRate();
+        var listing = this.props.listing;
+        var title = listing.title();
+        var description = listing.description() || 'No description provided!';
+        var avgRate = listing.avgRate();
 
         return (
             <div>
@@ -57,24 +58,22 @@ var Quickview = React.createClass({
                             </div>
                             <div className="tabs-container">
                                 <ul className="nav nav-tabs" role="tablist">
-                                    <li className="active"><a href="#overview" role="tab" data-toggle="tab">Overview</a></li>
-                                    <li><a href="#reviews" role="tab" data-toggle="tab">Reviews</a></li>
-                                    <li><a href="#details" role="tab" data-toggle="tab">Details</a></li>
+                                    <li className="active"><a href=".quickview-overview" role="tab" data-toggle="tab">Overview</a></li>
+                                    <li><a href=".quickview-reviews" role="tab" data-toggle="tab">Reviews</a></li>
+                                    <li><a href=".quickview-details" role="tab" data-toggle="tab">Details</a></li>
                                 </ul>
                                 <div className="tab-content">
-                                    <div className="tab-pane active" id="overview">
-                                        <div className="quickview-overview">
-                                            <Carousel autoInit={ shown }>
-                                                <img src="http://localhost:3000/api/persistence/store/apps/drive/images/53d282f310478a5bb6066546" />
-                                                <img src="http://localhost:3000/api/persistence/store/apps/drive/images/53d282f310478a5bb6066546" />
-                                            </Carousel>
-                                            <div className="description">
-                                                <p>{ description }</p>
-                                            </div>
+                                    <div className="tab-pane active quickview-overview">
+                                        <Carousel autoInit={ shown }>
+                                            <img src="http://localhost:3000/api/persistence/store/apps/drive/images/53d282f310478a5bb6066546" />
+                                            <img src="http://localhost:3000/api/persistence/store/apps/drive/images/53d282f310478a5bb6066546" />
+                                        </Carousel>
+                                        <div className="description">
+                                            <p>{ description }</p>
                                         </div>
                                     </div>
-                                    <div className="tab-pane" id="reviews">Reviews...</div>
-                                    <div className="tab-pane" id="details">Details...</div>
+                                    <ReviewsTab listing={ listing } />
+                                    <div className="tab-pane quickview-details">Details...</div>
                                 </div>
                             </div>
                         </Modal>
