@@ -20,7 +20,7 @@ var Chosen = React.createClass({
             <div className="create-edit-input-element">
                 {this.props.label && this.renderLabel()}
                 {this.props.description && this.renderDescription()}
-                <select data-placeholder={this.props.placeholder} className="form-control" onChange={this.handleChange} value={this.value()} ref="select" multiple={this.props.multiple}>
+                <select data-placeholder={this.props.placeholder} className="form-control" value={this.value()} ref="select" multiple={this.props.multiple}>
                     {options}
                 </select>
             </div>
@@ -29,9 +29,14 @@ var Chosen = React.createClass({
     /*jshint ignore:end */
 
     componentDidMount: function() {
+        var me = this;
         var select = $(this.refs.select.getDOMNode());
         var chosen = select.chosen();
-        select.on('change', this.handleChange);
+        select.on('change', function(evt, params) {
+
+            me.handleChange(params);
+
+        });
 
         this._$chosen = chosen;
         this._$select = select;
@@ -62,16 +67,21 @@ var Chosen = React.createClass({
         return {value: this.props.value};
     },
 
-    handleChange: function (event) {
+    handleChange: function (params) {
         var me = this;
-        var value = $(this.refs.select.getDOMNode()).val().map( function (option) {
-            return {id: option, title:$(me.refs.select.getDOMNode()).find('option[value=' + option +']').html()};
-        });
-
-        if (isWrappedValue(this.props.value)) {
-            this.props.value.push(value);
-        } else {
-            this.setState({value: value});
+        var title = '';
+        if(params.selected){
+            title = $(me.refs.select.getDOMNode()).find('option[value=' + params.selected + ']').html();
+            me.addToArray({
+                id: params.selected,
+                title: title
+            });
+        } else if (params.deselected) {
+            title = $(me.refs.select.getDOMNode()).find('option[value=' + params.deselected + ']').html();
+            me.removeFromArray({
+                id: params.deselected,
+                title: title
+            });
         }
     },
 
@@ -88,6 +98,26 @@ var Chosen = React.createClass({
             return this.state.value;
         }
     },
+
+    addToArray: function (item) {
+        if (isWrappedValue(this.props.value)) {
+            this.props.value.push(item);
+        } else {
+            this.setState({value: item});
+        }
+    },
+
+    removeFromArray: function (item) {
+        if (isWrappedValue(this.props.value)) {
+            var index = this.props.value.findIndex(function(wi, i, w) {
+                return wi.val().id === item.id;
+            });
+
+            this.props.value.removeAt(index, 1);
+        } else {
+            this.setState({value: item});
+        }
+    }
 });
 
 
