@@ -112,6 +112,13 @@ var CreateEditPage = React.createClass({
 
                             <Input type="text" itemValue={listing.whatIsNew}
                                     label="What&rsquo;s New" description="Provide a description of what is new or different in this version."/>
+
+                            <h2>Ozone Properties</h2>
+
+                            <ListOfForms className="intent-form" itemForm={require('./intents/intentForm')} itemSchema={require('../../data/Intent')}
+                                    items={listing.owfProperties.intents} label="Intents (optional)"
+                                    description="Intents are special instructions used for communicating between applications. If this application uses intents, list them here" />
+
                         </div>
                         <div className="col-sm-5">
                             <h2>Graphics</h2>
@@ -119,15 +126,20 @@ var CreateEditPage = React.createClass({
                             <Input type="text" label="Featured Banner (optional)" itemValue={listing.imageXlargeUrl}
                                     description="Must be at least 280px tall x 454px wide." />
 
-                            <Input type="text" label="Small Banner" description="Must be at least 137px tall x 220px wide." />
+                            <Input type="text" label="Small Banner" itemValue={listing.imageMediumUrl}
+                                    description="Must be at least 137px tall x 220px wide." />
 
-                            <Input type="text" label="Icon" description="Must be at least 16px tall x 16px wide." />
+                            <Input type="text" label="Large Icon" itemValue={listing.imageMediumUrl}
+                                    description="Must be 30px tall x 30px wide." />
 
-                            <h2>Ozone Properties</h2>
+                            <Input type="text" label="Small Icon" itemValue={listing.imageSmallUrl}
+                                    description="Must be at least 16px tall x 16px wide." />
 
-                            <ListOfForms className="intent-form" itemForm={require('./intents/intentForm')} itemSchema={require('../../data/Intent')}
-                                    items={listing.owfProperties.intents} label="Intents (optional)"
-                                    description="Intents are special instructions used for communicating between applications. If this application uses intents, list them here" />
+                            <ListOfForms className="screenshot-form" itemForm={require('./screenshots/form')} itemSchema={require('../../data/Screenshot')}
+                                    items={listing.screenshots} label="Screenshots" description="At least one screenshot is required" />
+
+                            <ListOfForms className="resource-form" itemForm={require('./resources/form')} itemSchema={require('../../data/Resource')}
+                                    items={listing.docUrls} label="Resources" />
 
                         </div>
                     </Section>
@@ -139,10 +151,8 @@ var CreateEditPage = React.createClass({
                             <label>Owner</label>
                             <p className="small">Person(s) responsible for this listing.</p>
                             <input type="text" className="form-control"></input>
-
-                            {/*<FormWithList itemForm={require('./resources/resourceForm')} itemMarkup={require('./resources/resource')}
-                                    items={listing.docUrls} label="Additional Resources" />*/}
                         </div>
+
                         <div className="col-sm-5">
                             <h2>Contacts</h2>
 

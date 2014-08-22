@@ -29,11 +29,11 @@ module.exports = React.createClass({
                         <i className="fa fa-times"></i>
                     </button>
                     <Select ref="type" options={contactTypes} value={contact.type.id} label="Contact Type" />
-                    <Input type="text" ref="name" value={contact.name} label="Name" />
-                    <Input type="text" ref="organization" value={contact.organization} label="Organization" />
-                    <Input type="text" ref="email" value={contact.email} label="Email" />
-                    <Input type="text" ref="securePhone" value={contact.securePhone} label="Secure Phone" />
-                    <Input type="text" ref="unsecurePhone" value={contact.unsecurePhone} label="Unsecure Phone" />
+                    <Input type="text" ref="name" itemValue={contact.name} label="Name" />
+                    <Input type="text" ref="organization" itemValue={contact.organization} label="Organization" />
+                    <Input type="text" ref="email" itemValue={contact.email} label="Email" />
+                    <Input type="text" ref="securePhone" itemValue={contact.securePhone} label="Secure Phone" />
+                    <Input type="text" ref="unsecurePhone" itemValue={contact.unsecurePhone} label="Unsecure Phone" />
                 </div>
             </div>
         );
