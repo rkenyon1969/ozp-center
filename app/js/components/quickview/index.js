@@ -63,13 +63,13 @@ var Quickview = React.createClass({
                                     <li><a href=".quickview-details" role="tab" data-toggle="tab">Details</a></li>
                                 </ul>
                                 <div className="tab-content">
-                                    <div className="tab-pane active quickview-overview">
-                                        <Carousel autoInit={ shown }>
+                                    <div className="tab-pane active row quickview-overview">
+                                        <Carousel autoInit={ shown } className="col-md-8">
                                             <img src="http://localhost:3000/api/persistence/store/apps/drive/images/53d282f310478a5bb6066546" />
                                             <img src="http://localhost:3000/api/persistence/store/apps/drive/images/53d282f310478a5bb6066546" />
                                         </Carousel>
-                                        <div className="description">
-                                            <p>{ description }</p>
+                                        <div className="col-md-4">
+                                            <p>{ description }{description}</p>
                                         </div>
                                     </div>
                                     <ReviewsTab listing={ listing } />

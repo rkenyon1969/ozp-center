@@ -24,7 +24,7 @@ var Carousel = React.createClass({
 
     render: function () {
         /*jshint ignore:start */
-        return (
+        return this.transferPropsTo(
             <div className="carousel-wrapper">
                 <div className="carousel">
                     <ul ref="list" className="list-unstyled">

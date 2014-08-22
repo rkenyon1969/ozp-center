@@ -38,6 +38,7 @@ var UserReview = React.createClass({
             hidden: this.state.editing
         });
 
+        /* jshint ignore:start */
         return (
             <li className="user-review">
                 <IconRating currentRating = { 2 } viewOnly />
@@ -58,6 +59,7 @@ var UserReview = React.createClass({
                 }
             </li>
         );
+        /* jshint ignore:end */
     }
 });
 
@@ -70,17 +72,17 @@ var ReviewsTab = React.createClass({
     },
 
     onRatingChange: function (val) {
-        this.setState({ currentUserRating: val })
+        this.setState({ currentUserRating: val });
     },
 
     onSubmit: function () {
-        alert('save review...');
+        console.log('save review...');
     },
 
     render: function() {
         var currentUserRating = this.state.currentUserRating;
 
-        /*jshint ignore:start */
+        /* jshint ignore:start */
         return (
             <div className="tab-pane quickview-reviews row">
                 <section className="col-md-3 col-left">
@@ -98,11 +100,11 @@ var ReviewsTab = React.createClass({
                 </section>
             </div>
         );
-        /*jshint ignore:end */
+        /* jshint ignore:end */
     },
 
     renderReviewFilters: function () {
-        /*jshint ignore:start */
+        /* jshint ignore:start */
         return (
             <div className="review-filters">
                 <div className="star-rating">
@@ -142,7 +144,7 @@ var ReviewsTab = React.createClass({
                 </div>
             </div>
         );
-        /*jshint ignore:end */
+        /* jshint ignore:end */
     },
 
     renderUserReviews: function () {
@@ -154,7 +156,7 @@ var ReviewsTab = React.createClass({
                 <UserReview />
             </ul>
         );
-        /*jshint ignore:end */
+        /* jshint ignore:end */
     }
 
 });
