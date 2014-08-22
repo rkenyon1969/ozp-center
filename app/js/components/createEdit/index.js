@@ -24,6 +24,7 @@ var data = {
     categories: [],
     agency: {id: null},
     contacts: [],
+    descriptionShort: '',
     customFields: [],
     requirements: '',
     description: '',
@@ -78,7 +79,7 @@ var CreateEditPage = React.createClass({
                         <div className="col-sm-5">
                             <h2>Basic Listing Information</h2>
 
-                            <Input type="text" value={listing.title}
+                            <Input type="text" itemValue={listing.title}
                                     label="Name" description="Title of the listing"/>
 
                             <label>Type</label>
@@ -91,10 +92,10 @@ var CreateEditPage = React.createClass({
                         </div>
                         <div className="col-sm-5">
 
-                            <Input type="text" value={listing.descriptionShort}
+                            <Input type="text" itemValue={listing.descriptionShort}
                                     label="Short Description" description="A brief overview describing the listing. It will appear in the mouseover listing view. It must be less than 150 characters." />
 
-                            <Input type="text" value={listing.description}
+                            <Input type="text" itemValue={listing.description}
                                     label="Full Description" description="An overview describing the listing, discussing the available features and its purpose. It will appear in the detailed listing view."/>
 
                         </div>
@@ -103,19 +104,19 @@ var CreateEditPage = React.createClass({
                         <div className="col-sm-5">
                             <h2>Listing Details</h2>
 
-                            <Input type="text" value={listing.launchUrl}
+                            <Input type="text" itemValue={listing.launchUrl}
                                     label="Listing URL" description="URL where this listing can be reached by users" />
 
-                            <Input type="text" value={listing.requirements}
+                            <Input type="text" itemValue={listing.requirements}
                                     label="Usage Requirements" description="Details about what system, security, or other requirements must be met in order to use this listing. If none apply, write &quot;None.&quot;"/>
 
-                            <Input type="text" value={listing.whatIsNew}
+                            <Input type="text" itemValue={listing.whatIsNew}
                                     label="What&rsquo;s New" description="Provide a description of what is new or different in this version."/>
                         </div>
                         <div className="col-sm-5">
                             <h2>Graphics</h2>
 
-                            <Input type="text" label="Featured Banner (optional)"
+                            <Input type="text" label="Featured Banner (optional)" itemValue={listing.imageXlargeUrl}
                                     description="Must be at least 280px tall x 454px wide." />
 
                             <Input type="text" label="Small Banner" description="Must be at least 137px tall x 220px wide." />
@@ -165,7 +166,7 @@ var CreateEditPage = React.createClass({
 
         var tabs = this.state.config.types.map(function (json) {
             return (
-                <TabPanel title={json.title}>
+                <TabPanel label={json.title} value={json.id}>
                     <h3>{json.title}</h3>
                     <p className="small">{json.description}</p>
                 </TabPanel>
@@ -173,7 +174,7 @@ var CreateEditPage = React.createClass({
         });
 
         return (
-            <TabSelect name="type-selection">
+            <TabSelect name="type-select" itemValue={this.state.listing.types.id}>
                 {tabs}
             </TabSelect>
         );

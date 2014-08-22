@@ -6,7 +6,8 @@ var React     = require('react'),
     Tab       = ReactTabs.Tab,
     Tabs      = ReactTabs.Tabs,
     TabList   = ReactTabs.TabList,
-    merge     = require('react/lib/merge');
+    merge     = require('react/lib/merge'),
+    Input     = require('../input');
 
 var getId = (function () {
     var counter = 0;
@@ -18,56 +19,32 @@ var getId = (function () {
 
 var TabSelect = React.createClass({
     getInitialState: function () {
-        var tabProps = [];
+        var tabs = [],
+            values = {};
 
         React.Children.forEach(this.props.children, function (child) {
-            tabProps.push({
-                checked: false,
-                value: child.props.title,
-                id: getId()
-            });
+            var id = getId();
+            tabs.push({id: id, label: child.props.label});
+            values[id] = child.props.value;
         });
 
-        tabProps[0].checked = true;
-
-        return {tabProps: tabProps};
+        return {tabs: tabs, values: values};
     },
 
     handleChange: function (event) {
         //change is triggered via the input - so, trigger the tab switch
         $(event.target).closest('li').click();
-
-        var newValue = event.target.value;
-        var newProps = this.state.tabProps.map(function (props) {
-            var checked = props.value === newValue ? true : false;
-            return {
-                value: props.value,
-                checked: checked,
-                id: props.id
-            };
-        });
-
-        this.setState({tabProps: newProps});
+        
+        var id = $(event.target).attr('id');
+        this.props.itemValue.set(this.state.values[id]);
     },
 
     /*jshint ignore:start */
     render: function () {
-
-        var inputId = getId();
-
-        var tabList = this.state.tabProps.map(function (props) {
+        var tabs = this.state.tabs.map(function (tab) {
             return (
                 <Tab>
-                    <div className="tab-selector">
-                        <input onChange={this.handleChange} type="radio"
-                               name={this.props.name} value={props.value}
-                               checked={props.checked}
-                               id={props.id}>
-                        </input>
-                        <label htmlFor={props.id}>
-                            <small>{props.value}</small>
-                        </label>
-                    </div>
+                    <Input onChange={this.handleChange} id={tab.id} label={tab.label} type="radio" name={this.props.name} />
                 </Tab>
             );
         }, this);
@@ -75,7 +52,7 @@ var TabSelect = React.createClass({
         return (
             <Tabs>
                 <TabList>
-                    {tabList}
+                    {tabs}
                 </TabList>
                 {this.props.children}
             </Tabs>
