@@ -33,12 +33,12 @@ module.exports = React.createClass({
 
         return (
             <div>
-                <div className="col-sm-10">
+                <div className="col-sm-8">
                     <Dropdown options={actions} ref="action" value={action} />
                     <Dropdown options={types} ref="dataType" value={dataType} />
                 </div>
 
-                <div className="col-sm-2">
+                <div className="col-sm-4">
                     <button className="btn btn-primary" onClick={this.props.removeHandler}>Remove</button>
                 </div>
             </div>

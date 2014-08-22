@@ -10,6 +10,15 @@ function isWrappedValue (value) {
 
 var Dropdown = React.createClass({
 
+    propTypes: {
+        placeholder: React.PropTypes.string,
+        options: React.PropTypes.array.isRequired,
+        onChange: React.PropTypes.func,
+        multiple: React.PropTypes.bool,
+        label: React.PropTypes.string,
+        description: React.PropTypes.string
+    },
+
     /*jshint ignore:start */
     render: function () {
         var options = this.props.options.map(function (option) {
@@ -26,6 +35,7 @@ var Dropdown = React.createClass({
             </div>
         );
     },
+    /*jshint ignore:end */
 
     componentDidUpdate: function() {
 
@@ -35,11 +45,13 @@ var Dropdown = React.createClass({
         var select = $(this.refs.select.getDOMNode());
         select.chosen();
     },
-
+    /*jshint ignore:start */
     renderLabel: function () {
         return <label>{this.props.label}</label>;
     },
+    /*jshint ignore:end */
 
+    /*jshint ignore:start */
     renderDescription: function () {
         return <p className="small">{this.props.description}</p>;
     },

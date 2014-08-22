@@ -212,6 +212,24 @@ h3 {
         height: 30px !important;
         border: 1px solid #ccc;
     }
+
+    .chosen-results {
+
+        li.highlighted {
+            background-color: $blue;
+            background-image: none;
+            color: #fff;
+        }
+    }
+}
+
+.chosen-container-multi {
+    .chosen-choices {
+        li.search-choice {
+            background-color: $blue-lighter;
+            background-image: none;
+        }
+    }
 }
 
 .tag {

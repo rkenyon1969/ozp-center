@@ -48,7 +48,7 @@ var CreateEditPage = React.createClass({
                 <Header />
                 <Actions title="Edit 'New Listing'">
                     <button className="btn btn-default">Preview</button>
-                    <button className="btn btn-default">Save</button>
+                    <button className="btn btn-default">Save Draft</button>
                     <button className="btn btn-default">Submit</button>
                     <button className="btn btn-default">Delete</button>
                 </Actions>
