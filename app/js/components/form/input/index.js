@@ -1,27 +1,21 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React = require('react');
+var React = require('react/addons'),
+    clone = React.addons.cloneWithProps;
 
 function isWrappedValue (value) {
     return value && typeof value.val === 'function';
 }
 
-var Dropdown = React.createClass({
-
+module.exports = React.createClass({
     /*jshint ignore:start */
     render: function () {
-        var options = this.props.options.map(function (option) {
-            return <option value={option}>{option}</option>;
-        });
-
-        return (
+        return this.transferPropsTo(
             <div className="create-edit-input-element">
                 {this.props.label && this.renderLabel()}
                 {this.props.description && this.renderDescription()}
-                <select className="form-control" onChange={this.handleChange} value={this.value()}>
-                    {options}
-                </select>
+                {this.renderInput()}
             </div>
         );
     },
@@ -33,6 +27,15 @@ var Dropdown = React.createClass({
     renderDescription: function () {
         return <p className="small">{this.props.description}</p>;
     },
+
+    renderInput: function () {
+        return clone(<input />, {
+            onChange: this.handleChange,
+            className: "form-control",
+            value: this.value(),
+            type: this.props.type
+        });
+    },
     /*jshint ignore:end */
 
     getInitialState: function () {
@@ -41,15 +44,7 @@ var Dropdown = React.createClass({
             return {};
         }
 
-        return {value: this.props.value};
-    },
-
-    handleChange: function (event) {
-        if (isWrappedValue(this.props.value)) {
-            this.props.value.set(event.target.value);
-        } else {
-            this.setState({value: event.target.value});
-        }
+        return {value: this.props.value || ''};
     },
 
     componentWillReceiveProps: function (nextProps) {
@@ -65,8 +60,12 @@ var Dropdown = React.createClass({
             return this.state.value;
         }
     },
+
+    handleChange: function (event) {
+        if (isWrappedValue(this.props.value)) {
+            this.props.value.set(event.target.value);
+        } else {
+            this.setState({value: event.target.value});
+        }
+    }
 });
-
-
-
-module.exports = Dropdown;

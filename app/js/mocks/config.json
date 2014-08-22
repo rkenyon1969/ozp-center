@@ -56,9 +56,9 @@
     },
 
     "types": [
-        {"id":2,"title":"App Component","description":"app component","hasLaunchUrl":true,"hasIcons":true,"uuid":"14fcc218-86c7-43c9-90bf-9b932cb11eb5","ozoneAware":true,"isPermanent":true},
-        {"id":3,"title":"OZONE App","description":"OZONE app","hasLaunchUrl":false,"hasIcons":false,"uuid":"73b36df6-f48f-4e6f-9061-14ef6f39d4c8","ozoneAware":true,"isPermanent":true},
-        {"id":1,"title":"Web App","description":"web app","hasLaunchUrl":true,"hasIcons":false,"uuid":"092e5c7d-fdf8-48b8-95ec-fbae3f741f83","ozoneAware":false,"isPermanent":false}
+        {"id":2,"title":"Widget","description":"A small or highly specialized application","hasLaunchUrl":true,"hasIcons":true,"uuid":"14fcc218-86c7-43c9-90bf-9b932cb11eb5","ozoneAware":true,"isPermanent":false},
+        {"id":3,"title":"Web Application","description":"A web-based tool that uses the browser as a client","hasLaunchUrl":true,"hasIcons":true,"uuid":"73b36df6-f48f-4e6f-9061-14ef6f39d4c8","ozoneAware":true,"isPermanent":false},
+        {"id":1,"title":"Dashboard","description":"A layout incorporating widgets and/or web applications","hasLaunchUrl":true,"hasIcons":true,"uuid":"092e5c7d-fdf8-48b8-95ec-fbae3f741f83","ozoneAware":true,"isPermanent":false}
     ],
 
     "contactTypes":[
@@ -68,6 +68,41 @@
         {"id":4,"title":"Optional Contact Type 1","required":false},
         {"id":5,"title":"Optional Contact Type 2","required":false},
         {"id":6,"title":"Optional Contact Type 3","required":false}
+    ],
+
+    "categories": [
+        {"id": 1, "title": "Category A", "description": "Example Category A"},
+        {"id": 2, "title": "Category B", "description": "Example Category B"},
+        {"id": 3, "title": "Category C", "description": "Example Category C"},
+        {"id": 4, "title": "Geospatial", "description": "Analytics based on geographic data"},
+        {"id": 5, "title": "Query", "description": "Data set retrieval"},
+        {"id": 6, "title": "Reporting", "description": "Data set summarization"},
+        {"id": 7, "title": "Temporal", "description": "Amaltics based on temporal data"}
+    ],
+
+    "agencies": [
+        {"id": 1, "title": "Company 1"},
+        {"id": 2, "title": "Company 2"},
+        {"id": 3, "title": "Company 3"},
+        {"id": 4, "title": "Company 4"}
+    ],
+
+    "intentDataTypes": [
+        {"id": 1, "title": "audio"},
+        {"id": 2, "title": "image"},
+        {"id": 3, "title": "json"},
+        {"id": 4, "title": "text"},
+        {"id": 5, "title": "uri"},
+        {"id": 6, "title": "video"}
+    ],
+
+    "intentActions": [
+        {"id": 2, "title": "edit"},
+        {"id": 4, "title": "pick"},
+        {"id": 6, "title": "save"},
+        {"id": 1, "title": "share"},
+        {"id": 5, "title": "subscribe"},
+        {"id": 3, "title": "view"}
     ],
 
     "headerLogoTooltip": "Store",

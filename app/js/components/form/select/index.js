@@ -1,21 +1,27 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React = require('react/addons'),
-    clone = React.addons.cloneWithProps;
+var React = require('react');
 
 function isWrappedValue (value) {
     return value && typeof value.val === 'function';
 }
 
-module.exports = React.createClass({
+var Dropdown = React.createClass({
+
     /*jshint ignore:start */
     render: function () {
-        return this.transferPropsTo(
+        var options = this.props.options.map(function (option) {
+            return <option value={option.value}>{option.name}</option>;
+        });
+
+        return (
             <div className="create-edit-input-element">
                 {this.props.label && this.renderLabel()}
                 {this.props.description && this.renderDescription()}
-                {this.renderInput()}
+                <select className="form-control" onChange={this.handleChange} value={this.value()} multiple={this.props.multiple}>
+                    {options}
+                </select>
             </div>
         );
     },
@@ -27,25 +33,6 @@ module.exports = React.createClass({
     renderDescription: function () {
         return <p className="small">{this.props.description}</p>;
     },
-
-    renderInput: function () {
-        var props = {
-            onChange: this.handleChange,
-            className: "form-control",
-            value: this.value()
-        };
-
-        var textArea = <textarea></textarea>;
-        var text = <input type="text" />;
-        switch (this.props.type) {
-            case 'textarea':
-                return clone(textArea, props);
-            case 'text':
-                return clone(text, props);
-            default:
-                return clone(text, props);
-        }
-    },
     /*jshint ignore:end */
 
     getInitialState: function () {
@@ -54,7 +41,17 @@ module.exports = React.createClass({
             return {};
         }
 
-        return {value: this.props.value || ''};
+        return {value: this.props.value};
+    },
+
+    handleChange: function (event) {
+        var value = event.target.value;
+
+        if (isWrappedValue(this.props.value)) {
+            this.props.value.set(value);
+        } else {
+            this.setState({value: value});
+        }
     },
 
     componentWillReceiveProps: function (nextProps) {
@@ -70,12 +67,8 @@ module.exports = React.createClass({
             return this.state.value;
         }
     },
-
-    handleChange: function (event) {
-        if (isWrappedValue(this.props.value)) {
-            this.props.value.set(event.target.value);
-        } else {
-            this.setState({value: event.target.value});
-        }
-    }
 });
+
+
+
+module.exports = Dropdown;
