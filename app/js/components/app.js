@@ -2,9 +2,11 @@
 'use strict';
 
 var React          = require('react/addons'),
+    Reflux         = require('reflux'),
     Header         = require('./header'),
     DiscoveryPage  = require('./discovery'),
-    CreateEditPage = require('./createEdit');
+    CreateEditPage = require('./createEdit'),
+    fetchConfig    = require('../actions/ConfigActions').fetchConfig;
 
 var APP = React.createClass({
     render: function () {
@@ -32,9 +34,12 @@ var APP = React.createClass({
         return (
             <CreateEditPage config={this.props.config} />
         );
-    }
+    },
     /*jshint ignore:end */
 
+    componentWillMount: function () {
+        fetchConfig();
+    }
 });
 
 module.exports = APP;

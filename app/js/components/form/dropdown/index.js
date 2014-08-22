@@ -22,7 +22,7 @@ var Dropdown = React.createClass({
     /*jshint ignore:start */
     render: function () {
         var options = this.props.options.map(function (option) {
-            return <option value={option}>{option}</option>;
+            return <option value={option.value}>{option.name}</option>;
         });
 
         return (
@@ -37,13 +37,18 @@ var Dropdown = React.createClass({
     },
     /*jshint ignore:end */
 
-    componentDidUpdate: function() {
-
-    },
-
     componentDidMount: function() {
         var select = $(this.refs.select.getDOMNode());
-        select.chosen();
+        var chosen = select.chosen().data('chosen');
+        select.on('change', this.handleChange);
+
+        this._$chosen = chosen;
+        this._$select = select;
+    },
+
+    componentWillUnmount: function () {
+        this._$select.off('change');
+        this._$chosen.destroy();
     },
     /*jshint ignore:start */
     renderLabel: function () {

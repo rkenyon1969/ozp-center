@@ -1,13 +1,13 @@
 'use strict';
 
-var merge  = require('react/lib/merge');
+var merge = require('react/lib/merge');
 
 var schema = {
     name: '',
-    type: '',
     securePhone: '',
     unsecurePhone: '',
-    email: ''
+    email: '',
+    type: {id: null}
 };
 
 function Contact(json) {

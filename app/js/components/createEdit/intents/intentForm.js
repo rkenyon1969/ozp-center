@@ -1,48 +1,52 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React    = require('react'),
-    Dropdown    = require('../../input/dropdown');
+var React  = require('react'),
+    Reflux = require('reflux'),
+    Select = require('../../form/select');
+
+var ConfigStore = require('../../../stores/ConfigStore');
 
 module.exports = React.createClass({
+    mixins: [ Reflux.ListenerMixin ],
 
-    handleSave: function () {
-        // var item = {
-        //     action: $('#action_chosen').val(),
-        //     dataType: $('#dataType_chosen').val()
-        // };
-        //
-        // this.props.saveHandler(item);
-        // this.handleClear();
-    },
-
-    handleClear:function() {
-        // $('#action_chosen').val('').trigger('liszt:updated');
-        // $('#dataType_chosen').val('').trigger('liszt:updated');
-        this.props.clearHandler();
-    },
-
-    /*jshint ignore: start */
     render: function () {
-        var actions = ['edit', 'pick', 'save', 'share', 'subscribe', 'view'];
-        var types = ['audio', 'image', 'json', 'text', 'uri', 'video'];
+        var dataTypes = [],
+            actions = [];
+        if (!this.state.config.loading) {
+            actions = this.state.config.intentActions.map(function (json) {
+                return {name: json.title, value: json.id};
+            });
+            dataTypes = this.state.config.intentDataTypes.map(function (json) {
+                return {value: json.id, name: json.title};
+            });
+        }
 
-        var currentItem = this.props.currentItem,
-            action      = currentItem ? currentItem.action : '',
-            dataType    = currentItem ? currentItem.dataType : '';
-
+        var intent = this.props.item;
+        /*jshint ignore: start */
         return (
-            <div>
-                <div className="col-sm-8">
-                    <Dropdown options={actions} ref="action" value={action} />
-                    <Dropdown options={types} ref="dataType" value={dataType} />
-                </div>
-
-                <div className="col-sm-4">
-                    <button className="btn btn-primary" onClick={this.props.removeHandler}>Remove</button>
+            <div className="row intent-card">
+                <div className="col-sm-12">
+                    <button onClick={this.props.removeHandler} className="btn btn-link">
+                        <i className="fa fa-times"></i>
+                    </button>
+                    <Select label="Action" options={actions} value={intent.action.id} />
+                    <Select label="Data Type" options={dataTypes} value={intent.dataType.id} />
                 </div>
             </div>
         );
+        /*jshint ignore: end */
+    },
+
+    getInitialState: function () {
+        return {config: ConfigStore.getConfig()};
+    },
+
+    _onChange: function () {
+        this.replaceState({config: ConfigStore.getConfig()});
+    },
+
+    componentDidMount: function () {
+        this.listenTo(ConfigStore, this._onChange);
     }
-    /*jshint ignore: end */
 });
