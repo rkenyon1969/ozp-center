@@ -26,7 +26,7 @@ module.exports = React.createClass({
     },
 
     renderDescription: function () {
-        return <p>{this.props.description}</p>;
+        return <p><small>{this.props.description}</small></p>;
     },
 
     renderInput: function () {

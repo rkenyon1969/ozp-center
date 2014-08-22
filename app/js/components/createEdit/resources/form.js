@@ -11,13 +11,21 @@ module.exports = React.createClass({
         return (
             <div className="row resource-card">
                 <div className="col-sm-12">
-                    <button onClick={this.props.removeHandler} className="btn btn-link">
-                        <i className="fa fa-times"></i>
-                    </button>
+                    {!this.props.locked && this.renderDeleteBtn()}
                     <Input label="Type of Resource" itemValue={resource.name} />
                     <Input label="URL" itemValue={resource.url} />
                 </div>
             </div>
+        );
+        /*jshint ignore: end */
+    },
+
+    renderDeleteBtn: function () {
+        /*jshint ignore: start */
+        return (
+            <button onClick={this.props.removeHandler} className="btn btn-link">
+                <i className="fa fa-times"></i>
+            </button>
         );
         /*jshint ignore: end */
     }

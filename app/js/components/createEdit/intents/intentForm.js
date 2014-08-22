@@ -27,13 +27,21 @@ module.exports = React.createClass({
         return (
             <div className="row intent-card">
                 <div className="col-sm-12">
-                    <button onClick={this.props.removeHandler} className="btn btn-link">
-                        <i className="fa fa-times"></i>
-                    </button>
+                    {!this.props.locked && this.renderDeleteBtn()}
                     <Select label="Action" options={actions} value={intent.action.id} />
                     <Select label="Data Type" options={dataTypes} value={intent.dataType.id} />
                 </div>
             </div>
+        );
+        /*jshint ignore: end */
+    },
+
+    renderDeleteBtn: function () {
+        /*jshint ignore: start */
+        return (
+            <button onClick={this.props.removeHandler} className="btn btn-link">
+                <i className="fa fa-times"></i>
+            </button>
         );
         /*jshint ignore: end */
     },

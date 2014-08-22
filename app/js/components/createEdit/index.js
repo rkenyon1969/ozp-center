@@ -16,7 +16,8 @@ var React        = require('react'),
     $            = require('jquery'),
     Select       = require('../form/select'),
     Chosen       = require('../form/chosen'),
-    Cortex       = require('cortexjs');
+    Cortex       = require('cortexjs'),
+    Screenshot   = require('../../data/Screenshot');
 
 require('bootstrap');
 
@@ -104,6 +105,9 @@ var CreateEditPage = React.createClass({
                         <div className="col-sm-5">
                             <h2>Listing Details</h2>
 
+                            <Input type="text" itemValue={listing.versionName}
+                                    label="Version Number" description="Numerical identification of what the release version is" />
+
                             <Input type="text" itemValue={listing.launchUrl}
                                     label="Listing URL" description="URL where this listing can be reached by users" />
 
@@ -135,8 +139,7 @@ var CreateEditPage = React.createClass({
                             <Input type="text" label="Small Icon" itemValue={listing.imageSmallUrl}
                                     description="Must be at least 16px tall x 16px wide." />
 
-                            <ListOfForms className="screenshot-form" itemForm={require('./screenshots/form')} itemSchema={require('../../data/Screenshot')}
-                                    items={listing.screenshots} label="Screenshots" description="At least one screenshot is required" />
+                            {this.renderScreenshots()}
 
                             <ListOfForms className="resource-form" itemForm={require('./resources/form')} itemSchema={require('../../data/Resource')}
                                     items={listing.docUrls} label="Resources" />
@@ -226,6 +229,20 @@ var CreateEditPage = React.createClass({
         }
 
         return <Select options={organizations} value={this.state.listing.agency.id} />;
+    },
+
+    renderScreenshots: function () {
+        var screenshots = this.state.listing.screenshots;
+
+        screenshots.val().length === 0 && screenshots.push(new Screenshot({}));
+
+        return <ListOfForms className="screenshot-form" itemForm={require('./screenshots/form')} itemSchema={Screenshot}
+                        items={screenshots} label="Screenshots" description="At least one screenshot is required"
+                        locked={[0]}/>;
+    },
+
+    renderContacts: function () {
+        var contacts = this.state.contacts;
     },
 
     /*jshint ignore:end */
