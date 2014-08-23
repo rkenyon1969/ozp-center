@@ -12,7 +12,7 @@ module.exports = React.createClass({
     /*jshint ignore:start */
     render: function () {
         return (
-            <div className="create-edit-input-element">
+            <div className="form-group">
                 {this.props.label && this.renderLabel()}
                 {this.props.description && this.renderDescription()}
                 {this.renderInput()}
@@ -21,12 +21,11 @@ module.exports = React.createClass({
     },
 
     renderLabel: function () {
-        var idFor = this.props.id ? this.props.id : null;
-        return <label htmlFor={idFor}>{this.props.label}</label>;
+        return <label htmlFor={this.props.id}>{this.props.label}</label>;
     },
 
     renderDescription: function () {
-        return <p><small>{this.props.description}</small></p>;
+        return <p className="small">{this.props.description}</p>;
     },
 
     renderInput: function () {

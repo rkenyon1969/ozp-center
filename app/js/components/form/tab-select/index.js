@@ -34,7 +34,7 @@ var TabSelect = React.createClass({
     handleChange: function (event) {
         //change is triggered via the input - so, trigger the tab switch
         $(event.target).closest('li').click();
-        
+
         var id = $(event.target).attr('id');
         this.props.itemValue.set(this.state.values[id]);
     },
@@ -44,19 +44,31 @@ var TabSelect = React.createClass({
         var tabs = this.state.tabs.map(function (tab) {
             return (
                 <Tab>
-                    <Input onChange={this.handleChange} id={tab.id} label={tab.label} type="radio" name={this.props.name} />
+                    <Input onChange={this.handleChange} id={tab.id} label={tab.label} type="radio" name={this.props.inputName} />
                 </Tab>
             );
         }, this);
 
-        return (
-            <Tabs>
-                <TabList>
-                    {tabs}
-                </TabList>
-                {this.props.children}
-            </Tabs>
+        return this.transferPropsTo(
+            <div>
+                {this.props.label && this.renderLabel()}
+                {this.props.description && this.renderDescription()}
+                <Tabs>
+                    <TabList>
+                        {tabs}
+                    </TabList>
+                    {this.props.children}
+                </Tabs>
+            </div>
         );
+    },
+
+    renderLabel: function () {
+        return <label htmlFor={this.props.id}>{this.props.label}</label>;
+    },
+
+    renderDescription: function () {
+        return <p className="small">{this.props.description}</p>;
     }
     /*jshint ignore:end */
 });
