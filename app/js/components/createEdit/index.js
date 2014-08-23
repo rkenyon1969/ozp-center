@@ -234,17 +234,16 @@ var CreateEditPage = React.createClass({
     },
 
     renderScreenshots: function () {
-        var screenshots = this.state.listing.screenshots;
+        var screenshots = this.state.listing.screenshots,
+            ScreenshotSchema = screenshot.schema;
 
-        screenshots.val().length === 0 && screenshots.push(new screenshot.schema({}));
+        screenshots.val().length === 0 && screenshots.push(new ScreenshotSchema({}));
 
-        return <ListOfForms className="screenshot-form" itemForm={screenshot.form} itemSchema={screenshot.schema}
-                        items={screenshots} label="Screenshots" description="At least one screenshot is required"
-                        locked={[0]} />;
-    },
-
-    renderContacts: function () {
-        var contacts = this.state.contacts;
+        return (
+            <ListOfForms className="screenshot-form" itemForm={screenshot.form} itemSchema={screenshot.schema}
+                    items={screenshots} label="Screenshots" description="At least one screenshot is required"
+                    locked={[0]} />
+        );
     },
     /*jshint ignore:end */
 
