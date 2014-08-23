@@ -7,7 +7,7 @@ var React     = require('react'),
     Tabs      = ReactTabs.Tabs,
     TabList   = ReactTabs.TabList,
     merge     = require('react/lib/merge'),
-    Input     = require('.').Input;
+    Input     = require('./input');
 
 var getId = (function () {
     var counter = 0;
