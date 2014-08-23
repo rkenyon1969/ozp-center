@@ -7,7 +7,7 @@ function isWrappedValue (value) {
     return value && typeof value.val === 'function';
 }
 
-var Select = React.createClass({
+module.exports = {
 
     /*jshint ignore:start */
     render: function () {
@@ -15,7 +15,7 @@ var Select = React.createClass({
             <div className="form-group">
                 {this.props.label && this.renderLabel()}
                 {this.props.description && this.renderDescription()}
-                {this.renderSelect()}
+                {this.renderInputElement()}
             </div>
         );
     },
@@ -27,57 +27,42 @@ var Select = React.createClass({
     renderDescription: function () {
         return <p className="small">{this.props.description}</p>;
     },
-
-    renderSelect: function () {
-        var options = this.props.options.map(function (option) {
-            return <option value={option.value}>{option.name}</option>;
-        });
-
-        options.unshift(<option value="" disabled>Choose an option</option>);
-
-        return this.transferPropsTo(
-            <select className="form-control" onChange={this.handleChange} value={this.value()} multiple={this.props.multiple}>
-                {options}
-            </select>
-        );
-    },
-
     /*jshint ignore:end */
 
     getInitialState: function () {
         //if this is a cortex wrapped value, then we don't need state
-        if (isWrappedValue(this.props.value)) {
+        if (isWrappedValue(this.props.itemValue)) {
             return {};
         }
 
-        return {value: this.props.value};
+        return {value: this.props.itemValue};
     },
 
     handleChange: function (event) {
         var value = event.target.value;
 
-        if (isWrappedValue(this.props.value)) {
-            this.props.value.set(value);
+        if (isWrappedValue(this.props.itemValue)) {
+            this.props.itemValue.set(value);
         } else {
             this.setState({value: value});
+        }
+
+        if (this.props.onChange) {
+            this.props.onChange(event);
         }
     },
 
     componentWillReceiveProps: function (nextProps) {
-        if (!isWrappedValue(nextProps.value)) {
-            this.setState({value: nextProps.value});
+        if (!isWrappedValue(nextProps.itemValue)) {
+            this.setState({value: nextProps.itemValue});
         }
     },
 
     value: function () {
-        if (isWrappedValue(this.props.value)) {
-            return this.props.value.val();
+        if (isWrappedValue(this.props.itemValue)) {
+            return this.props.itemValue.val();
         } else {
             return this.state.value;
         }
     },
-});
-
-
-
-module.exports = Select;
+};

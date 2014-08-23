@@ -8,13 +8,13 @@ var React            = require('react'),
     Section          = require('./section'),
     Actions          = require('./actions'),
     Section          = require('./section'),
-    FormWithList     = require('../form/form-with-list'),
-    ListOfForms      = require('../form/list-of-forms'),
+    ListOfForms      = require('../form').ListOfForms,
     TabPanel         = require('react-tabs').TabPanel,
-    TabSelect        = require('../form/tab-select'),
-    Input            = require('../form/input'),
+    TabSelect        = require('../form').TabSelect,
+    Input            = require('../form').Input,
+    TextArea         = require('../form').TextArea,
     $                = require('jquery'),
-    Select           = require('../form/select'),
+    Select           = require('../form').Select,
     Chosen           = require('../form/chosen'),
     Cortex           = require('cortexjs'),
     screenshot       = require('./subitems/screenshot'),
@@ -85,7 +85,6 @@ var CreateEditPage = React.createClass({
                             <Input type="text" itemValue={listing.title}
                                     label="Name" description="Title of the listing"/>
 
-                            <label>Type</label>
                             {this.renderTypeSelector()}
 
                             {this.renderCategories()}
@@ -95,10 +94,10 @@ var CreateEditPage = React.createClass({
                         </div>
                         <div className="col-sm-5">
 
-                            <Input type="text" itemValue={listing.descriptionShort}
+                            <TextArea type="text" itemValue={listing.descriptionShort}
                                     label="Short Description" description="A brief overview describing the listing. It will appear in the mouseover listing view. It must be less than 150 characters." />
 
-                            <Input type="text" itemValue={listing.description}
+                            <TextArea type="text" itemValue={listing.description}
                                     label="Full Description" description="An overview describing the listing, discussing the available features and its purpose. It will appear in the detailed listing view."/>
 
                         </div>
@@ -113,10 +112,10 @@ var CreateEditPage = React.createClass({
                             <Input type="text" itemValue={listing.launchUrl}
                                     label="Listing URL" description="URL where this listing can be reached by users" />
 
-                            <Input type="text" itemValue={listing.requirements}
+                            <TextArea type="text" itemValue={listing.requirements}
                                     label="Usage Requirements" description="Details about what system, security, or other requirements must be met in order to use this listing. If none apply, write &quot;None.&quot;"/>
 
-                            <Input type="text" itemValue={listing.whatIsNew}
+                            <TextArea type="text" itemValue={listing.whatIsNew}
                                     label="What&rsquo;s New" description="Provide a description of what is new or different in this version."/>
 
                             <h2>Ozone Properties</h2>
@@ -189,7 +188,8 @@ var CreateEditPage = React.createClass({
         });
 
         return (
-            <TabSelect name="type-select" itemValue={this.state.listing.types.id}>
+            <TabSelect className="type-select" inputName="type-select" label="Listing Type"
+                    itemValue={this.state.listing.types.id}>
                 {tabs}
             </TabSelect>
         );
@@ -230,7 +230,10 @@ var CreateEditPage = React.createClass({
             });
         }
 
-        return <Select options={organizations} value={this.state.listing.agency.id} />;
+        return (
+            <Select options={organizations} itemValue={this.state.listing.agency.id}
+                    label="Associated Organization" description="Organization overseeing this listing" />
+        );
     },
 
     renderScreenshots: function () {

@@ -3,8 +3,8 @@
 
 var React            = require('react'),
     Reflux           = require('reflux'),
-    Input            = require('../../form/input'),
-    Select           = require('../../form/select'),
+    Input             = require('../../form').Input,
+    Select           = require('../../form').Select,
     merge            = require('react/lib/merge'),
     DeleteBtnMixin   = require('./deleteBtnMixin'),
     ConfigStoreMixin = require('../../../stores/ConfigStore').mixin;
@@ -26,7 +26,7 @@ module.exports.form = React.createClass({
             <div className="row contact-card">
                 <div className="col-sm-12">
                     {!this.props.locked && this.renderDeleteBtn()}
-                    <Select options={contactTypes} value={contact.type.id} label="Contact Type" />
+                    <Select options={contactTypes} itemValue={contact.type.id} label="Contact Type" />
                     <Input type="text" ref="name" itemValue={contact.name} label="Name" />
                     <Input type="text" ref="organization" itemValue={contact.organization} label="Organization" />
                     <Input type="text" ref="email" itemValue={contact.email} label="Email" />

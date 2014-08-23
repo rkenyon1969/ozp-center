@@ -2,7 +2,7 @@
 'use strict';
 
 var React          = require('react'),
-    Input          = require('../../form/input'),
+    Input          = require('../../form').Input,
     merge          = require('react/lib/merge'),
     DeleteBtnMixin = require('./deleteBtnMixin');
 
