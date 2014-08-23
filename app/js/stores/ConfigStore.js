@@ -3,7 +3,7 @@
 var Reflux        = require('reflux'),
     configFetched = require('../actions/ConfigActions').configFetched;
 
-var _config = {loading: true};
+var _config = null;
 
 var ConfigStore = Reflux.createStore({
     init: function () {
@@ -18,4 +18,23 @@ var ConfigStore = Reflux.createStore({
     }
 });
 
-module.exports = ConfigStore;
+var ConfigStoreMixin = {
+    mixins: [Reflux.ListenerMixin],
+
+    getInitialState: function () {
+        return {config: ConfigStore.getConfig()};
+    },
+
+    handleConfigStoreChange: function () {
+        this.setState({config: ConfigStore.getConfig()});
+    },
+
+    componentDidMount: function () {
+        this.listenTo(ConfigStore, this.handleConfigStoreChange);
+    }
+};
+
+module.exports = {
+    store: ConfigStore,
+    mixin: ConfigStoreMixin
+};

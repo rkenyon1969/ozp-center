@@ -1,21 +1,21 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React       = require('react'),
-    Reflux      = require('reflux'),
-    Select      = require('../../form/select'),
-    merge       = require('react/lib/merge'),
-    DeleteBtn   = require('./mixins/deleteBtn'),
-    ConfigStore = require('./mixins/configStore');
+var React            = require('react'),
+    Reflux           = require('reflux'),
+    Select           = require('../../form/select'),
+    merge            = require('react/lib/merge'),
+    DeleteBtnMixin   = require('./deleteBtnMixin'),
+    ConfigStoreMixin = require('../../../stores/ConfigStore').mixin;
 
 module.exports.form = React.createClass({
-    mixins: [ Reflux.ListenerMixin, DeleteBtn, ConfigStore ],
+    mixins: [DeleteBtnMixin, ConfigStoreMixin],
 
     render: function () {
         var dataTypes = [],
             actions = [];
 
-        if (!this.configIsLoading()) {
+        if (this.state.config) {
             actions = this.state.config.intentActions.map(function (json) {
                 return {name: json.title, value: json.id};
             });

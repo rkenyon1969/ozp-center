@@ -1,26 +1,27 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React        = require('react'),
-    Reflux       = require('reflux'),
-    Header       = require('../header'),
-    Content      = require('./content'),
-    Section      = require('./section'),
-    Actions      = require('./actions'),
-    Section      = require('./section'),
-    FormWithList = require('../form/form-with-list'),
-    ListOfForms  = require('../form/list-of-forms'),
-    TabPanel     = require('react-tabs').TabPanel,
-    TabSelect    = require('../form/tab-select'),
-    Input        = require('../form/input'),
-    $            = require('jquery'),
-    Select       = require('../form/select'),
-    Chosen       = require('../form/chosen'),
-    Cortex       = require('cortexjs'),
-    screenshot   = require('./subitems/screenshot'),
-    intent       = require('./subitems/intent'),
-    resource     = require('./subitems/resource'),
-    contact      = require('./subitems/contact');
+var React            = require('react'),
+    Reflux           = require('reflux'),
+    Header           = require('../header'),
+    Content          = require('./content'),
+    Section          = require('./section'),
+    Actions          = require('./actions'),
+    Section          = require('./section'),
+    FormWithList     = require('../form/form-with-list'),
+    ListOfForms      = require('../form/list-of-forms'),
+    TabPanel         = require('react-tabs').TabPanel,
+    TabSelect        = require('../form/tab-select'),
+    Input            = require('../form/input'),
+    $                = require('jquery'),
+    Select           = require('../form/select'),
+    Chosen           = require('../form/chosen'),
+    Cortex           = require('cortexjs'),
+    screenshot       = require('./subitems/screenshot'),
+    intent           = require('./subitems/intent'),
+    resource         = require('./subitems/resource'),
+    contact          = require('./subitems/contact'),
+    ConfigStoreMixin = require('../../stores/ConfigStore').mixin;
 
 require('bootstrap');
 
@@ -55,8 +56,6 @@ var data = {
     versionName: ''
 };
 
-var ConfigStore = require('../../stores/ConfigStore');
-
 var listingCortex = new Cortex(data);
 
 function printItem () {
@@ -64,7 +63,7 @@ function printItem () {
 }
 
 var CreateEditPage = React.createClass({
-    mixins: [ Reflux.ListenerMixin ],
+    mixins: [ConfigStoreMixin],
 
     /*jshint ignore:start */
     render: function () {
@@ -172,7 +171,7 @@ var CreateEditPage = React.createClass({
     },
 
     renderTypeSelector: function () {
-        if (this.state.config.loading) {
+        if (!this.state.config) {
             return (
                 <div>
                     loading!
@@ -199,7 +198,7 @@ var CreateEditPage = React.createClass({
     renderCategories: function () {
         var categories = [];
 
-        if (this.state.config.loading) {
+        if (!this.state.config) {
             return <div>Loading</div>;
         } else {
             categories = this.state.config.categories.map(function (json) {
@@ -225,7 +224,7 @@ var CreateEditPage = React.createClass({
 
     renderOrganizations: function () {
         var organizations = [];
-        if (!this.state.config.loading) {
+        if (this.state.config) {
             organizations = this.state.config.agencies.map(function (json) {
                 return {name: json.title, value: json.id};
             });
@@ -241,27 +240,20 @@ var CreateEditPage = React.createClass({
 
         return <ListOfForms className="screenshot-form" itemForm={screenshot.form} itemSchema={screenshot.schema}
                         items={screenshots} label="Screenshots" description="At least one screenshot is required"
-                        locked={[0]}/>;
+                        locked={[0]} />;
     },
 
     renderContacts: function () {
         var contacts = this.state.contacts;
     },
-
     /*jshint ignore:end */
 
     getInitialState: function () {
-        return {listing: listingCortex, config: ConfigStore.getConfig()};
-    },
-
-    _onChange: function () {
-        this.setState({config: ConfigStore.getConfig()});
+        return {listing: listingCortex};
     },
 
     componentDidMount: function () {
         var me = this;
-
-        this.listenTo(ConfigStore, this._onChange);
 
         listingCortex.on('update', function () {
             me.setState({listing: listingCortex});

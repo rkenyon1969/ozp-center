@@ -1,13 +1,13 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React     = require('react'),
-    Input     = require('../../form/input'),
-    merge     = require('react/lib/merge'),
-    DeleteBtn = require('./mixins/deleteBtn');
+var React          = require('react'),
+    Input          = require('../../form/input'),
+    merge          = require('react/lib/merge'),
+    DeleteBtnMixin = require('./deleteBtnMixin');
 
 module.exports.form = React.createClass({
-    mixins: [ DeleteBtn ],
+    mixins: [DeleteBtnMixin],
 
     render: function () {
         var screenshot = this.props.item;
