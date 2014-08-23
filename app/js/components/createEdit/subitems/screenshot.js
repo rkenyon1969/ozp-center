@@ -27,9 +27,9 @@ module.exports.form = React.createClass({
     }
 });
 
-var schema = {smallImageUrl: '', largeImageUrl: ''};
-
 function Contact(json) {
+    var schema = {smallImageUrl: '', largeImageUrl: ''};
+
     return merge(schema, json);
 }
 

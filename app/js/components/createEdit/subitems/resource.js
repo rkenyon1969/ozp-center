@@ -25,12 +25,12 @@ module.exports.form = React.createClass({
     }
 });
 
-var schema = {
-    name: '',
-    url: ''
-};
-
 function Resource(json) {
+    var schema = {
+        name: '',
+        url: ''
+    };
+
     return merge(schema, json);
 }
 

@@ -39,12 +39,12 @@ module.exports.form = React.createClass({
     }
 });
 
-var schema = {
-    dataType: {id: null},
-    action: {id: null}
-};
-
 function Intent(json) {
+    var schema = {
+        dataType: {id: null},
+        action: {id: null}
+    };
+
     return merge(schema, json);
 }
 

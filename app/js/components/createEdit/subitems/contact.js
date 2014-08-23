@@ -26,7 +26,7 @@ module.exports.form = React.createClass({
             <div className="row contact-card">
                 <div className="col-sm-12">
                     {!this.props.locked && this.renderDeleteBtn()}
-                    <Select ref="type" options={contactTypes} value={contact.type.id} label="Contact Type" />
+                    <Select options={contactTypes} value={contact.type.id} label="Contact Type" />
                     <Input type="text" ref="name" itemValue={contact.name} label="Name" />
                     <Input type="text" ref="organization" itemValue={contact.organization} label="Organization" />
                     <Input type="text" ref="email" itemValue={contact.email} label="Email" />
@@ -39,15 +39,16 @@ module.exports.form = React.createClass({
     }
 });
 
-var schema = {
-    name: '',
-    securePhone: '',
-    unsecurePhone: '',
-    email: '',
-    type: {id: null}
-};
-
 function Contact(json) {
+    var schema = {
+        name: '',
+        securePhone: '',
+        unsecurePhone: '',
+        email: '',
+        organization: '',
+        type: {id: null}
+    };
+
     return merge(schema, json);
 }
 
