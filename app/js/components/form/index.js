@@ -7,6 +7,4 @@ module.exports = {
     ListOfForms  : require('./listOfForms'),
     Chosen       : require('./chosen'),
     Input        : require('./input'),
-    Select       : require('./select'),
-    TextArea     : require('./textarea')
 };

@@ -16,10 +16,10 @@ module.exports.form = React.createClass({
             <div className="row screenshot-card">
                 <div className="col-sm-12">
                     {!this.props.locked && this.renderDeleteBtn()}
-                    <Input label="Preview Image" itemValue={screenshot.smallImageUrl}
-                            description="600px wide by 375px tall" />
-                    <Input label="Full Size Image" itemValue={screenshot.largeImageUrl}
-                            description="960px wide by 600px tall" />
+                    <Input elementType="input" type="url" required label="Preview Image"
+                            itemValue={screenshot.smallImageUrl} description="600px wide by 375px tall" />
+                    <Input elementType="input" type="url" required label="Full Size Image"
+                            itemValue={screenshot.largeImageUrl} description="960px wide by 600px tall" />
                 </div>
             </div>
         );

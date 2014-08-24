@@ -44,7 +44,8 @@ var TabSelect = React.createClass({
         var tabs = this.state.tabs.map(function (tab) {
             return (
                 <Tab>
-                    <Input onChange={this.handleChange} id={tab.id} label={tab.label} type="radio" name={this.props.inputName} />
+                    <Input elementType="input" type="radio" onChange={this.handleChange}
+                            id={tab.id} label={tab.label} name={this.props.inputName} />
                 </Tab>
             );
         }, this);

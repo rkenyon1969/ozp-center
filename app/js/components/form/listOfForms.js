@@ -96,6 +96,7 @@ var ListOfForms = React.createClass({
     handleNew: function () {
         var Item = this.props.itemSchema;
         this.props.items.push(new Item({}));
+        return false;
     }
 });
 

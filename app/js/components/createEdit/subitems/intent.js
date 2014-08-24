@@ -3,7 +3,7 @@
 
 var React            = require('react'),
     Reflux           = require('reflux'),
-    Select           = require('../../form').Select,
+    Input            = require('../../form').Input,
     merge            = require('react/lib/merge'),
     DeleteBtnMixin   = require('./deleteBtnMixin'),
     ConfigStoreMixin = require('../../../stores/ConfigStore').mixin;
@@ -30,8 +30,8 @@ module.exports.form = React.createClass({
             <div className="row intent-card">
                 <div className="col-sm-12">
                     {!this.props.locked && this.renderDeleteBtn()}
-                    <Select label="Action" options={actions} itemValue={intent.action.id} />
-                    <Select label="Data Type" options={dataTypes} itemValue={intent.dataType.id} />
+                    <Input elementType="select" required label="Action" options={actions} itemValue={intent.action.id} />
+                    <Input elementType="select" required label="Data Type" options={dataTypes} itemValue={intent.dataType.id} />
                 </div>
             </div>
         );

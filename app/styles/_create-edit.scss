@@ -101,7 +101,7 @@ h3 {
 
         .form-group {
             p.small {
-                width: 80%;
+                width: 75%;
             }
 
             label {
@@ -110,6 +110,21 @@ h3 {
 
             textarea {
                 height: 100px;
+            }
+
+            .validation-err-msg {
+                display: none;
+                color: red;
+            }
+
+            &.input-invalid {
+                .validation-err-msg {
+                    display: block;
+                }
+
+                input, textarea {
+                    border-color: red;
+                }
             }
         }
 

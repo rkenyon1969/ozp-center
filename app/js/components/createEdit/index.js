@@ -12,9 +12,7 @@ var React            = require('react'),
     TabPanel         = require('react-tabs').TabPanel,
     TabSelect        = require('../form').TabSelect,
     Input            = require('../form').Input,
-    TextArea         = require('../form').TextArea,
     $                = require('jquery'),
-    Select           = require('../form').Select,
     Chosen           = require('../form/chosen'),
     Cortex           = require('cortexjs'),
     screenshot       = require('./subitems/screenshot'),
@@ -69,7 +67,7 @@ var CreateEditPage = React.createClass({
     render: function () {
         var listing = this.state.listing;
         return (
-            <div>
+            <form>
                 <Header />
                 <Actions title="Edit 'New Listing'">
                     <button className="btn btn-default">Preview</button>
@@ -82,8 +80,8 @@ var CreateEditPage = React.createClass({
                         <div className="col-sm-5">
                             <h2>Basic Listing Information</h2>
 
-                            <Input type="text" itemValue={listing.title}
-                                    label="Name" description="Title of the listing"/>
+                            <Input elementType="input" type="text" required itemValue={listing.title}
+                                    label="Name" description="Title of the listing" />
 
                             {this.renderTypeSelector()}
 
@@ -94,11 +92,11 @@ var CreateEditPage = React.createClass({
                         </div>
                         <div className="col-sm-5">
 
-                            <TextArea type="text" itemValue={listing.descriptionShort}
-                                    label="Short Description" description="A brief overview describing the listing. It will appear in the mouseover listing view. It must be less than 150 characters." />
+                            <Input elementType="textarea" required itemValue={listing.descriptionShort} label="Short Description"
+                                    description="A brief overview describing the listing. It will appear in the mouseover listing view. It must be less than 150 characters." />
 
-                            <TextArea type="text" itemValue={listing.description}
-                                    label="Full Description" description="An overview describing the listing, discussing the available features and its purpose. It will appear in the detailed listing view."/>
+                            <Input elementType="textarea" required itemValue={listing.description} label="Full Description"
+                                    description="An overview describing the listing, discussing the available features and its purpose. It will appear in the detailed listing view."/>
 
                         </div>
                     </Section>
@@ -106,17 +104,17 @@ var CreateEditPage = React.createClass({
                         <div className="col-sm-5">
                             <h2>Listing Details</h2>
 
-                            <Input type="text" itemValue={listing.versionName}
-                                    label="Version Number" description="Numerical identification of what the release version is" />
+                            <Input elementType="input" type="text" itemValue={listing.versionName} label="Version Number (optional)"
+                                    description="Numerical identification of what the release version is" />
 
-                            <Input type="text" itemValue={listing.launchUrl}
+                            <Input type="url" required itemValue={listing.launchUrl}
                                     label="Listing URL" description="URL where this listing can be reached by users" />
 
-                            <TextArea type="text" itemValue={listing.requirements}
-                                    label="Usage Requirements" description="Details about what system, security, or other requirements must be met in order to use this listing. If none apply, write &quot;None.&quot;"/>
+                            <Input elementType="textarea" required itemValue={listing.requirements} label="Usage Requirements"
+                                    description="Details about what system, security, or other requirements must be met in order to use this listing. If none apply, write &quot;None.&quot;"/>
 
-                            <TextArea type="text" itemValue={listing.whatIsNew}
-                                    label="What&rsquo;s New" description="Provide a description of what is new or different in this version."/>
+                            <Input elementType="textarea" itemValue={listing.whatIsNew} label="What&rsquo;s New (optional)"
+                                    description="Provide a description of what is new or different in this version."/>
 
                             <h2>Ozone Properties</h2>
 
@@ -128,16 +126,16 @@ var CreateEditPage = React.createClass({
                         <div className="col-sm-5">
                             <h2>Graphics</h2>
 
-                            <Input type="text" label="Featured Banner (optional)" itemValue={listing.imageXlargeUrl}
+                            <Input elementType="input" type="url" label="Featured Banner (optional)" itemValue={listing.imageXlargeUrl}
                                     description="Must be at least 280px tall x 454px wide." />
 
-                            <Input type="text" label="Small Banner" itemValue={listing.imageMediumUrl}
+                            <Input elementType="input" type="url" required label="Small Banner" itemValue={listing.imageLargeUrl}
                                     description="Must be at least 137px tall x 220px wide." />
 
-                            <Input type="text" label="Large Icon" itemValue={listing.imageMediumUrl}
+                            <Input elementType="input" type="url" required label="Large Icon" itemValue={listing.imageMediumUrl}
                                     description="Must be 30px tall x 30px wide." />
 
-                            <Input type="text" label="Small Icon" itemValue={listing.imageSmallUrl}
+                            <Input elementType="input" type="url" required label="Small Icon" itemValue={listing.imageSmallUrl}
                                     description="Must be at least 16px tall x 16px wide." />
 
                             {this.renderScreenshots()}
@@ -165,7 +163,7 @@ var CreateEditPage = React.createClass({
                         </div>
                     </Section>
                 </Content>
-            </div>
+            </form>
         );
     },
 
@@ -231,8 +229,9 @@ var CreateEditPage = React.createClass({
         }
 
         return (
-            <Select options={organizations} itemValue={this.state.listing.agency.id}
-                    label="Associated Organization" description="Organization overseeing this listing" />
+            <Input elementType="select" options={organizations} itemValue={this.state.listing.agency.id}
+                    label="Associated Organization" description="Organization overseeing this listing"
+                    required />
         );
     },
 
