@@ -46,7 +46,7 @@ module.exports = React.createClass({
             className: 'form-control',
             onChange: this.handleChange,
             value: this.value(),
-            onBlur: this.handleBlur,
+            onBlur: this.props.onBlur || this.handleBlur,
             ref: 'input'
         };
 
@@ -98,10 +98,11 @@ module.exports = React.createClass({
         };
 
         if (isWrappedValue(this.props.itemValue)) {
-            return state;
+            state.value = this.props.itemValue.val();
+        } else {
+            state.value = this.props.itemValue;
         }
 
-        state.value = this.props.itemValue;
         return state;
     },
 
@@ -118,20 +119,14 @@ module.exports = React.createClass({
         var value = inputNode.value;
         if (isWrappedValue(this.props.itemValue)) {
             this.props.itemValue.set(value);
-        } else {
-            state.value = value;
         }
+
+        state.value = value;
 
         this.setState(state);
 
         if (this.props.onChange) {
             this.props.onChange(event);
-        }
-    },
-
-    componentWillReceiveProps: function (nextProps) {
-        if (!isWrappedValue(nextProps.itemValue)) {
-            this.setState({value: nextProps.itemValue});
         }
     },
 
@@ -142,7 +137,9 @@ module.exports = React.createClass({
     },
 
     componentDidUpdate: function () {
-        var inputNode = this.refs.input.getDOMNode();
+        var inputNode = this.refs.input.getDOMNode(),
+            activeNode = document.activeElement;
+
         if (this.props.error) {
             inputNode.setCustomValidity(this.props.error);
         } else {
@@ -151,11 +148,7 @@ module.exports = React.createClass({
     },
 
     value: function () {
-        if (isWrappedValue(this.props.itemValue)) {
-            return this.props.itemValue.val();
-        } else {
-            return this.state.value;
-        }
+        return this.state.value;
     },
 
     isValid: function () {
@@ -167,9 +160,11 @@ module.exports = React.createClass({
     },
 
     handleBlur: function () {
-        this.setState({
-            valid: this.refs.input.getDOMNode().checkValidity(),
-            error: this.refs.input.getDOMNode().validationMessage
-        });
+        if (!this.props.error) {
+            this.setState({
+                valid: this.refs.input.getDOMNode().checkValidity(),
+                error: this.refs.input.getDOMNode().validationMessage
+            });
+        }
     }
 });
