@@ -30,14 +30,14 @@ module.exports.form = React.createClass({
                 <div className="col-sm-12">
                     {!this.props.locked && this.renderDeleteBtn()}
                     <Input elementType="select" options={contactTypes} itemValue={contact.type.id} label="Contact Type" required />
-                    <Input elementType="input" type="text" itemValue={contact.name} label="Name" required />
-                    <Input elementType="input" type="text" itemValue={contact.organization} label="Organization" />
-                    <Input elementType="input" type="email" ref="email" itemValue={contact.email} label="Email" required />
+                    <Input elementType="input" type="text" itemValue={contact.name} label="Name" required maxLength={100} />
+                    <Input elementType="input" type="text" itemValue={contact.organization} label="Organization" maxLength={100} />
+                    <Input elementType="input" type="email" ref="email" itemValue={contact.email} label="Email" required maxLength={100} />
                     <Input elementType="input" type="text" ref="securePhone" itemValue={contact.securePhone}
-                            label="Secure Phone" error={this.state.securePhoneError}
+                            label="Secure Phone" error={this.state.securePhoneError} maxLength={50}
                             onFocus={this.validatePhone.bind(this, 'secure')} onBlur={this.validatePhone.bind(this, 'secure')} />
                     <Input elementType="input" type="text" ref="unsecurePhone" itemValue={contact.unsecurePhone}
-                            label="Unsecure Phone" error={this.state.unsecurePhoneError}
+                            label="Unsecure Phone" error={this.state.unsecurePhoneError} maxLength={50}
                             onFocus={this.validatePhone.bind(this, 'unsecure')} onBlur={this.validatePhone.bind(this, 'unsecure')} />
                 </div>
             </div>

@@ -81,7 +81,7 @@ var CreateEditPage = React.createClass({
                             <h2>Basic Listing Information</h2>
 
                             <Input elementType="input" type="text" required itemValue={listing.title}
-                                    label="Name" description="Title of the listing" />
+                                    label="Name" description="Title of the listing" maxLength={256} />
 
                             {this.renderTypeSelector()}
 
@@ -92,10 +92,10 @@ var CreateEditPage = React.createClass({
                         </div>
                         <div className="col-sm-5">
 
-                            <Input elementType="textarea" required itemValue={listing.descriptionShort} label="Short Description"
+                            <Input elementType="textarea" required itemValue={listing.descriptionShort} label="Short Description" maxLength={150}
                                     description="A brief overview describing the listing. It will appear in the mouseover listing view. It must be less than 150 characters." />
 
-                            <Input elementType="textarea" required itemValue={listing.description} label="Full Description"
+                            <Input elementType="textarea" required itemValue={listing.description} label="Full Description" maxLength={4000}
                                     description="An overview describing the listing, discussing the available features and its purpose. It will appear in the detailed listing view."/>
 
                         </div>
@@ -105,16 +105,16 @@ var CreateEditPage = React.createClass({
                             <h2>Listing Details</h2>
 
                             <Input elementType="input" type="text" itemValue={listing.versionName} label="Version Number"
-                                    description="Numerical identification of what the release version is" />
+                                    description="Numerical identification of what the release version is" maxLength={256} />
 
                             <Input type="url" required itemValue={listing.launchUrl}
-                                    label="Listing URL" description="URL where this listing can be reached by users" />
+                                    label="Listing URL" description="URL where this listing can be reached by users" maxLength={2083} />
 
                             <Input elementType="textarea" required itemValue={listing.requirements} label="Usage Requirements"
                                     description="Details about what system, security, or other requirements must be met in order to use this listing. If none apply, write &quot;None.&quot;"/>
 
-                            <Input elementType="textarea" itemValue={listing.whatIsNew} label="What&rsquo;s New"
-                                    description="Provide a description of what is new or different in this version."/>
+                            <Input elementType="textarea" itemValue={listing.whatIsNew} label="What&rsquo;s New" maxLength={1000}
+                                    description="Provide a description of what is new or different in this version." />
 
                             <h2>Ozone Properties</h2>
 
@@ -127,16 +127,16 @@ var CreateEditPage = React.createClass({
                             <h2>Graphics</h2>
 
                             <Input elementType="input" type="url" label="Featured Banner" itemValue={listing.imageXlargeUrl}
-                                    description="Must be at least 280px tall x 454px wide." />
+                                    description="Must be at least 280px tall x 454px wide." maxLength={2083} />
 
                             <Input elementType="input" type="url" required label="Small Banner" itemValue={listing.imageLargeUrl}
-                                    description="Must be at least 137px tall x 220px wide." />
+                                    description="Must be at least 137px tall x 220px wide." maxLength={2083} />
 
                             <Input elementType="input" type="url" required label="Large Icon" itemValue={listing.imageMediumUrl}
-                                    description="Must be 30px tall x 30px wide." />
+                                    description="Must be 30px tall x 30px wide." maxLength={2083} />
 
                             <Input elementType="input" type="url" required label="Small Icon" itemValue={listing.imageSmallUrl}
-                                    description="Must be at least 16px tall x 16px wide." />
+                                    description="Must be at least 16px tall x 16px wide." maxLength={2083} />
 
                             {this.renderScreenshots()}
 
