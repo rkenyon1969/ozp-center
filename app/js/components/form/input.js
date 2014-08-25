@@ -87,7 +87,8 @@ module.exports = React.createClass({
     getClasses: function () {
         return classSet({
             'input-invalid': !this.isValid(),
-            'form-group': true
+            'form-group': true,
+            'input-optional': !this.props.required
         });
     },
 

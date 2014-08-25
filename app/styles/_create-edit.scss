@@ -104,6 +104,14 @@ h3 {
                 width: 85%;
             }
 
+            &.input-optional {
+                label::after {
+                    content: " (optional)";
+                    font-size: smaller;
+                    font-weight: 500;
+                }
+            }
+
             label {
                 font-weight: 500;
             }

@@ -104,7 +104,7 @@ var CreateEditPage = React.createClass({
                         <div className="col-sm-5">
                             <h2>Listing Details</h2>
 
-                            <Input elementType="input" type="text" itemValue={listing.versionName} label="Version Number (optional)"
+                            <Input elementType="input" type="text" itemValue={listing.versionName} label="Version Number"
                                     description="Numerical identification of what the release version is" />
 
                             <Input type="url" required itemValue={listing.launchUrl}
@@ -113,20 +113,20 @@ var CreateEditPage = React.createClass({
                             <Input elementType="textarea" required itemValue={listing.requirements} label="Usage Requirements"
                                     description="Details about what system, security, or other requirements must be met in order to use this listing. If none apply, write &quot;None.&quot;"/>
 
-                            <Input elementType="textarea" itemValue={listing.whatIsNew} label="What&rsquo;s New (optional)"
+                            <Input elementType="textarea" itemValue={listing.whatIsNew} label="What&rsquo;s New"
                                     description="Provide a description of what is new or different in this version."/>
 
                             <h2>Ozone Properties</h2>
 
                             <ListOfForms className="intent-form" itemForm={intent.form} itemSchema={intent.schema}
-                                    items={listing.owfProperties.intents} label="Intents (optional)"
+                                    items={listing.owfProperties.intents} label="Intents"
                                     description="Intents are special instructions used for communicating between applications. If this application uses intents, list them here" />
 
                         </div>
                         <div className="col-sm-5">
                             <h2>Graphics</h2>
 
-                            <Input elementType="input" type="url" label="Featured Banner (optional)" itemValue={listing.imageXlargeUrl}
+                            <Input elementType="input" type="url" label="Featured Banner" itemValue={listing.imageXlargeUrl}
                                     description="Must be at least 280px tall x 454px wide." />
 
                             <Input elementType="input" type="url" required label="Small Banner" itemValue={listing.imageLargeUrl}
