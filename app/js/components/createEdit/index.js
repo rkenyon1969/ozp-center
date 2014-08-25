@@ -5,12 +5,9 @@ var React            = require('react'),
     Reflux           = require('reflux'),
     Header           = require('../header'),
     Content          = require('./content'),
-    Section          = require('./section'),
     Actions          = require('./actions'),
     Section          = require('./section'),
     ListOfForms      = require('../form').ListOfForms,
-    TabPanel         = require('react-tabs').TabPanel,
-    TabSelect        = require('../form').TabSelect,
     Input            = require('../form').Input,
     $                = require('jquery'),
     Chosen           = require('../form/chosen'),
@@ -168,28 +165,35 @@ var CreateEditPage = React.createClass({
     },
 
     renderTypeSelector: function () {
-        if (!this.state.config) {
-            return (
-                <div>
-                    loading!
-                </div>
-            );
+        var types = [],
+            typeDefs = [],
+            typeId = this.state.listing.types.id.val();
+
+        if (this.state.config) {
+            this.state.config.types.forEach(function (json) {
+                var className = json.id.toString() === typeId ? 'type-descriptor active' : 'type-descriptor';
+
+                types.push({name: json.title, value: json.id});
+
+                typeDefs.push(
+                    <div className={className}>
+                        <h3>{json.title}</h3>
+                        <p className="small">{json.description}</p>
+                    </div>
+                );
+            });
         }
 
-        var tabs = this.state.config.types.map(function (json) {
-            return (
-                <TabPanel label={json.title} value={json.id}>
-                    <h3>{json.title}</h3>
-                    <p className="small">{json.description}</p>
-                </TabPanel>
-            );
-        });
-
         return (
-            <TabSelect className="type-select" inputName="type-select" label="Listing Type"
-                    itemValue={this.state.listing.types.id}>
-                {tabs}
-            </TabSelect>
+            <div className="row type-select">
+                <div className="col-sm-4">
+                    <Input elementType="select" options={types} itemValue={this.state.listing.types.id}
+                            label="Listing Type" required />
+                </div>
+                <div className="col-sm-8">
+                    {typeDefs}
+                </div>
+            </div>
         );
     },
 

@@ -88,7 +88,7 @@ module.exports = React.createClass({
         return classSet({
             'input-invalid': !this.isValid(),
             'form-group': true,
-            'input-optional': !this.props.required && this.props.type != 'radio'
+            'input-optional': !this.props.required
         });
     },
 
@@ -125,10 +125,6 @@ module.exports = React.createClass({
         state.value = value;
 
         this.setState(state);
-
-        if (this.props.onChange) {
-            this.props.onChange(event);
-        }
     },
 
     componentDidMount: function () {

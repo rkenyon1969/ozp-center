@@ -137,46 +137,11 @@ h3 {
         }
 
         .type-select {
-            .form-group {
-                margin: 0;
+            .type-descriptor {
+                display: none;
 
-                input {
-                    box-shadow: none;
-                    margin: 0;
-                }
-
-                label {
-                    margin: 0;
-                    float: left;
-                    position: relative;
-                    top: 8px;
-                    left: 25px;
-                    font-weight: 400;
-                }
-            }
-
-            ul {
-                display: inline-block;
-                width: 40%;
-                list-style: none !important;
-                padding: 0 10px;
-
-                li {
-                    height: 25px;
-                }
-            }
-
-            .tab-selector {
-                width: 100%;
-            }
-
-            div[role="tabpanel"] {
-                display: inline-block;
-                width: 60%;
-                float: right;
-
-                h3 {
-                    margin-top: 0;
+                &.active {
+                    display: inline-block;
                 }
             }
         }
