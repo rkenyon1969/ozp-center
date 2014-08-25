@@ -51,7 +51,7 @@ var Quickview = React.createClass({
                                 <img src="http://localhost:3000/api/persistence/store/apps/drive/images/53d282f310478a5bb6066546" />
                             </Carousel>
                             <div className="col-md-4">
-                                <p>{ description }{description}</p>
+                                <p>{ description }</p>
                             </div>
                         </div>
                         <ReviewsTab listing={ listing } />
