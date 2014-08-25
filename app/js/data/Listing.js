@@ -8,7 +8,8 @@ function Listing (json) {
         'avgRate', 'totalRate1', 'totalRate2', 'totalRate3','totalRate4',
         'totalRate5','totalVotes', 'state', 'tags', 'types','uuid',
         'versionName', 'imageLargeUrl', 'imageSmallUrl', 'imageMediumUrl',
-        'launchUrl', 'company'
+        'launchUrl', 'company', 'whatsNew', 'owners', 'organization',
+        'categories', 'releaseDate', 'editedDate', 'intents'
     ];
 
     keys.forEach(function (key) {
