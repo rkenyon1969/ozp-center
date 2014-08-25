@@ -4,7 +4,8 @@ $fa-font-path: "../../bower_components/font-awesome/fonts/";
 @import 'colors';
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
 @import "../../bower_components/font-awesome/scss/font-awesome.scss";
-@import "../../bower_components/drmonty-chosen/css/chosen.css";
+@import "../../node_modules/select2/select2.css";
+@import "../../node_modules/select2/select2-bootstrap.css";
 @import 'fonts';
 
 $header-height: 55px;

@@ -2,36 +2,29 @@
 'use strict';
 
 var React          = require('react'),
-    Input          = require('../../form').Input,
-    merge          = require('react/lib/merge'),
-    DeleteBtnMixin = require('./deleteBtnMixin');
+    TextInput      = require('../../form/textInput'),
+    DeleteBtnMixin = require('./deleteBtnMixin'),
+    dataBinder     = require('../../../utils/binder');
 
-module.exports.form = React.createClass({
+module.exports = React.createClass({
     mixins: [DeleteBtnMixin],
 
     render: function () {
         var resource = this.props.item;
+        var binder = function (cortex) {
+            return dataBinder(function(){return cortex.val();}, function(val){cortex.set(val);});
+        };
+        
         /*jshint ignore: start */
         return (
             <div className="row resource-card">
                 <div className="col-sm-12">
                     {!this.props.locked && this.renderDeleteBtn()}
-                    <Input elementType="input" type="url" requried label="Type of Resource" itemValue={resource.name} maxLength={2083} />
-                    <Input elementType="input" type="url" requried label="URL" itemValue={resource.url} maxLength={2083} />
+                    <TextInput type="url" requried label="Type of Resource" dataBinder={binder(resource.name)} maxLength={2083} required />
+                    <TextInput type="url" requried label="URL" dataBinder={binder(resource.url)} maxLength={2083} required />
                 </div>
             </div>
         );
         /*jshint ignore: end */
     }
 });
-
-function Resource(json) {
-    var schema = {
-        name: '',
-        url: ''
-    };
-
-    return merge(schema, json);
-}
-
-module.exports.schema = Resource;

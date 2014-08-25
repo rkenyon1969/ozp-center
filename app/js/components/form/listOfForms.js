@@ -87,13 +87,15 @@ var ListOfForms = React.createClass({
         /*jshint ignore: end */
     },
 
-    handleDelete: function (key) {
+    handleDelete: function (key, event) {
+        event.preventDefault();
         if (this.props.locked.indexOf(key) === -1) {
             this.props.items.removeAt(key);
         }
     },
 
-    handleNew: function () {
+    handleNew: function (event) {
+        event.preventDefault();
         var Item = this.props.itemSchema;
         this.props.items.push(new Item({}));
         return false;

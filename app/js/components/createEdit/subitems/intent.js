@@ -2,27 +2,27 @@
 'use strict';
 
 var React            = require('react'),
-    Reflux           = require('reflux'),
-    Input            = require('../../form').Input,
-    merge            = require('react/lib/merge'),
+    Select           = require('../../form/select'),
     DeleteBtnMixin   = require('./deleteBtnMixin'),
-    ConfigStoreMixin = require('../../../stores/ConfigStore').mixin;
+    ConfigStoreMixin = require('../../../stores/ConfigStore').mixin,
+    dataBinder       = require('../../../utils/binder');
 
-module.exports.form = React.createClass({
+module.exports = React.createClass({
     mixins: [DeleteBtnMixin, ConfigStoreMixin],
 
     render: function () {
-        var dataTypes = [],
-            actions = [];
+        var optionMap = function (json) {
+            /*jshint ignore:start */
+            return <option value={json.id}>{json.title}</option>;
+            /*jshint ignore:end */
+        };
 
-        if (this.state.config) {
-            actions = this.state.config.intentActions.map(function (json) {
-                return {name: json.title, value: json.id};
-            });
-            dataTypes = this.state.config.intentDataTypes.map(function (json) {
-                return {value: json.id, name: json.title};
-            });
-        }
+        var binder = function (cortex) {
+            return dataBinder(function(){return cortex.val();}, function(val){cortex.set(val);});
+        };
+
+        var actions = this.state.config.intentActions.map(optionMap);
+        var dataTypes = this.state.config.intentDataTypes.map(optionMap);
 
         var intent = this.props.item;
         /*jshint ignore: start */
@@ -30,22 +30,15 @@ module.exports.form = React.createClass({
             <div className="row intent-card">
                 <div className="col-sm-12">
                     {!this.props.locked && this.renderDeleteBtn()}
-                    <Input elementType="select" required label="Action" options={actions} itemValue={intent.action.id} />
-                    <Input elementType="select" required label="Data Type" options={dataTypes} itemValue={intent.dataType.id} />
+                    <Select required label="Action" dataBinder={binder(intent.action.id)}>
+                        {actions}
+                    </Select>
+                    <Select required label="Data Type" dataBinder={binder(intent.dataType.id)}>
+                        {dataTypes}
+                    </Select>
                 </div>
             </div>
         );
         /*jshint ignore: end */
     }
 });
-
-function Intent(json) {
-    var schema = {
-        dataType: {id: null},
-        action: {id: null}
-    };
-
-    return merge(schema, json);
-}
-
-module.exports.schema = Intent;

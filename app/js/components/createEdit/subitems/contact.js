@@ -2,26 +2,29 @@
 'use strict';
 
 var React            = require('react'),
-    Reflux           = require('reflux'),
-    Input            = require('../../form').Input,
-    merge            = require('react/lib/merge'),
+    TextInput        = require('../../form/textInput'),
+    Select           = require('../../form/select'),
     DeleteBtnMixin   = require('./deleteBtnMixin'),
-    ConfigStoreMixin = require('../../../stores/ConfigStore').mixin;
+    ConfigStoreMixin = require('../../../stores/ConfigStore').mixin,
+    dataBinder       = require('../../../utils/binder');
 
 var phoneRegex = /(^\+\d((([\s.-])?\d+)?)+$)|(^(\(\d{3}\)\s?|^\d{3}[\s.-]?)?\d{3}[\s.-]?\d{4}$)/,
     NEED_ONE_PHONE = 'Please provide at least one valid phone number',
     INVALID_PHONE = 'Please enter a valid phone number (e.g. 555-5555, 555-555-5555)';
 
-module.exports.form = React.createClass({
+module.exports = React.createClass({
     mixins: [DeleteBtnMixin, ConfigStoreMixin],
 
     render: function () {
-        var contactTypes = [];
-        if (this.state.config) {
-            contactTypes = this.state.config.contactTypes.map(function (json) {
-                return {value: json.id, name: json.title};
-            });
-        }
+        var binder = function (cortex) {
+            return dataBinder(function(){return cortex.val();}, function(val){cortex.set(val);});
+        };
+
+        var contactTypes = this.state.config.contactTypes.map(function (json) {
+            /*jshint ignore:start */
+            return <option value={json.id}>{json.title}</option>;
+            /*jshint ignore:end */
+        });
 
         var contact = this.props.item;
         /*jshint ignore:start */
@@ -29,14 +32,16 @@ module.exports.form = React.createClass({
             <div className="row contact-card">
                 <div className="col-sm-12">
                     {!this.props.locked && this.renderDeleteBtn()}
-                    <Input elementType="select" options={contactTypes} itemValue={contact.type.id} label="Contact Type" required />
-                    <Input elementType="input" type="text" itemValue={contact.name} label="Name" required maxLength={100} />
-                    <Input elementType="input" type="text" itemValue={contact.organization} label="Organization" maxLength={100} />
-                    <Input elementType="input" type="email" ref="email" itemValue={contact.email} label="Email" required maxLength={100} />
-                    <Input elementType="input" type="text" ref="securePhone" itemValue={contact.securePhone}
+                    <Select dataBinder={binder(contact.type.id)} label="Contact Type" disabled={this.props.locked} required>
+                        {contactTypes}
+                    </Select>
+                    <TextInput type="text" dataBinder={binder(contact.name)} label="Name" required maxLength={100} />
+                    <TextInput type="text" dataBinder={binder(contact.organization)} label="Organization" maxLength={100} />
+                    <TextInput type="email" ref="email" dataBinder={binder(contact.email)} label="Email" required maxLength={100} />
+                    <TextInput type="text" ref="securePhone" dataBinder={binder(contact.securePhone)}
                             label="Secure Phone" error={this.state.securePhoneError} maxLength={50}
                             onFocus={this.validatePhone.bind(this, 'secure')} onBlur={this.validatePhone.bind(this, 'secure')} />
-                    <Input elementType="input" type="text" ref="unsecurePhone" itemValue={contact.unsecurePhone}
+                    <TextInput type="text" ref="unsecurePhone" dataBinder={binder(contact.unsecurePhone)}
                             label="Unsecure Phone" error={this.state.unsecurePhoneError} maxLength={50}
                             onFocus={this.validatePhone.bind(this, 'unsecure')} onBlur={this.validatePhone.bind(this, 'unsecure')} />
                 </div>
@@ -99,18 +104,3 @@ module.exports.form = React.createClass({
         this.validatePhone(null, {type: 'change'});
     }
 });
-
-function Contact(json) {
-    var schema = {
-        name: '',
-        securePhone: '',
-        unsecurePhone: '',
-        email: '',
-        organization: '',
-        type: {id: null}
-    };
-
-    return merge(schema, json);
-}
-
-module.exports.schema = Contact;
