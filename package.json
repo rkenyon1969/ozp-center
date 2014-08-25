@@ -26,7 +26,6 @@
     "jshint": "^2.5.3",
     "jshint-loader": "^0.8.0",
     "jsx-loader": "^0.11.0",
-    "react-tabs": "^0.1.2",
     "reactify": "^0.14.0",
     "script-loader": "^0.5.2",
     "url-loader": "^0.5.5",
@@ -36,6 +35,8 @@
   "name": "react-starter",
   "version": "0.0.1",
   "dependencies": {
+    "cortexjs": "^0.6.0",
+    "lodash-amd": "^2.4.1",
     "react": "^0.11.1",
     "react-icon-rating": "git://github.com/nishp1/react-icon-rating",
     "reflux": "^0.1.6"

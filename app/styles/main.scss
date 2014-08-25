@@ -4,7 +4,7 @@ $fa-font-path: "../../bower_components/font-awesome/fonts/";
 @import 'colors';
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
 @import "../../bower_components/font-awesome/scss/font-awesome.scss";
-@import "../../bower_components/select2/select2.css";
+@import "../../bower_components/drmonty-chosen/css/chosen.css";
 @import 'fonts';
 
 $header-height: 55px;
@@ -45,6 +45,10 @@ html, body {
     position: fixed;
     height: 60px;
     top: $header-height + 20px;
+
+    .btn-group {
+        padding: 10px;
+    }
 }
 
 @media (max-width: 1023px) and (min-width: 800px) {
@@ -52,6 +56,11 @@ html, body {
         width: 800px !important;
         transition: all .25s linear;
     }
+}
+
+.btn.btn-default:hover {
+    background-color: $btn-primary-bg;
+    color: $btn-primary-color;
 }
 
 @import 'carousel';

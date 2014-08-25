@@ -1,24 +1,21 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React = require('react/addons');
-var Header = require('./header');
-var Dropdown = require('./dropdown');
-var DiscoveryPage = require('./discovery');
-var CreateEditPage = require('./createEdit');
-
+var React          = require('react/addons'),
+    Reflux         = require('reflux'),
+    Header         = require('./header'),
+    DiscoveryPage  = require('./discovery'),
+    CreateEditPage = require('./createEdit'),
+    fetchConfig    = require('../actions/ConfigActions').fetchConfig;
 
 var APP = React.createClass({
-
     render: function () {
-        // return this.renderCreateEditPage();
-        return this.renderDiscoveryPage();
+        return this.renderCreateEditPage();
+        // return this.renderDiscoveryPage();
     },
 
     /*jshint ignore:start */
-
     renderSearchPage: function () {
-
         return (
             <div>
                 <Header />
@@ -35,11 +32,14 @@ var APP = React.createClass({
 
     renderCreateEditPage: function () {
         return (
-            <CreateEditPage />
+            <CreateEditPage config={this.props.config} />
         );
-    }
+    },
     /*jshint ignore:end */
 
+    componentWillMount: function () {
+        fetchConfig();
+    }
 });
 
 module.exports = APP;

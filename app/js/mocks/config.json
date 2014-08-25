@@ -1,0 +1,159 @@
+{
+    "appconfigs": [
+        {"id":22,"code":"store.insideOutside.behavior","value":"ADMIN_SELECTED","title":" ","mutable":true,"description":null,"type":"String","groupName":"ADDITIONAL_CONFIGURATION","subGroupName":null,"subGroupOrder":1,"help":null},
+        {"id":23,"code":"store.enable.ext.serviceitem","value":"false","title":" ","mutable":true,"description":null,"type":"Boolean","groupName":"ADDITIONAL_CONFIGURATION","subGroupName":null,"subGroupOrder":2,"help":null},
+        {"id":24,"code":"store.allow.owner.to.edit.approved.listing","value":"true","title":" ","mutable":true,"description":null,"type":"Boolean","groupName":"ADDITIONAL_CONFIGURATION","subGroupName":null,"subGroupOrder":3,"help":null},
+        {"id":25,"code":"store.amp.search.result.size","value":"30","title":" ","mutable":true,"description":null,"type":"Integer","groupName":"ADDITIONAL_CONFIGURATION","subGroupName":"Partner Store Search","subGroupOrder":1,"help":null},
+        {"id":26,"code":"store.amp.search.default.timeout","value":"30000","title":" ","mutable":true,"description":null,"type":"Integer","groupName":"ADDITIONAL_CONFIGURATION","subGroupName":"Partner Store Search","subGroupOrder":2,"help":null},
+        {"id":27,"code":"store.image.allow.upload","value":"true","title":" ","mutable":true,"description":null,"type":"Boolean","groupName":"ADDITIONAL_CONFIGURATION","subGroupName":"Partner Store Image Configurations","subGroupOrder":1,"help":null},
+        {"id":28,"code":"store.type.image.max.size","value":"1048576","title":" ","mutable":true,"description":null,"type":"Integer","groupName":"ADDITIONAL_CONFIGURATION","subGroupName":"Partner Store Image Configurations","subGroupOrder":2,"help":null},
+        {"id":29,"code":"store.amp.image.max.size","value":"1048576","title":" ","mutable":true,"description":null,"type":"Integer","groupName":"ADDITIONAL_CONFIGURATION","subGroupName":"Partner Store Image Configurations","subGroupOrder":3,"help":null},
+        {"id":30,"code":"store.owf.sync.urls","value":null,"title":" ","mutable":true,"description":null,"type":"List","groupName":"ADDITIONAL_CONFIGURATION","subGroupName":"OWF Sync","subGroupOrder":1,"help":null},
+        {"id":31,"code":"store.contact.email","value":null,"title":" ","mutable":true,"description":null,"type":"String","groupName":"ADDITIONAL_CONFIGURATION","subGroupName":"Store Contact Information","subGroupOrder":1,"help":null},
+        {"id":32,"code":"store.quick.view.detail.fields","value":"types, categories, state, releaseDate, lastActivity, owners, organization, Alternate POC Info, Technical POC Info, Support POC Info, launchUrl","title":" ","mutable":true,"description":null,"type":"String","groupName":"ADDITIONAL_CONFIGURATION","subGroupName":"Quick View","subGroupOrder":1,"help":null},
+        {"id":42,"code":"store.enable.cef.logging","value":"true","title":" ","mutable":true,"description":null,"type":"Boolean","groupName":"AUDITING","subGroupName":null,"subGroupOrder":1,"help":null},
+        {"id":43,"code":"store.enable.cef.object.access.logging","value":"false","title":" ","mutable":true,"description":null,"type":"Boolean","groupName":"AUDITING","subGroupName":null,"subGroupOrder":2,"help":null},
+        {"id":44,"code":"store.enable.cef.log.sweep","value":"true","title":" ","mutable":true,"description":null,"type":"Boolean","groupName":"AUDITING","subGroupName":null,"subGroupOrder":3,"help":null},
+        {"id":45,"code":"store.cef.log.location","value":"/usr/share/tomcat6","title":" ","mutable":true,"description":null,"type":"String","groupName":"AUDITING","subGroupName":null,"subGroupOrder":4,"help":null},
+        {"id":46,"code":"store.cef.sweep.log.location","value":"/var/log/cef","title":" ","mutable":true,"description":null,"type":"String","groupName":"AUDITING","subGroupName":null,"subGroupOrder":5,"help":null},
+        {"id":47,"code":"store.security.level","value":null,"title":" ","mutable":true,"description":null,"type":"String","groupName":"AUDITING","subGroupName":null,"subGroupOrder":6,"help":null},
+        {"id":1,"code":"store.name","value":"test","title":" ","mutable":true,"description":null,"type":"String","groupName":"BRANDING","subGroupName":null,"subGroupOrder":1,"help":null},
+        {"id":2,"code":"store.logo","value":"/marketplace/themes/gold.theme/images/Mp_logo.png","title":" ","mutable":true,"description":null,"type":"Image","groupName":"BRANDING","subGroupName":null,"subGroupOrder":2,"help":null},
+        {"id":3,"code":"store.icon","value":"/marketplace/themes/common/images/agency/agencyDefault.png","title":" ","mutable":true,"description":null,"type":"Image","groupName":"BRANDING","subGroupName":null,"subGroupOrder":3,"help":null},
+        {"id":4,"code":"free.warning.content","value":"","title":" ","mutable":true,"description":null,"type":"String","groupName":"BRANDING","subGroupName":null,"subGroupOrder":4,"help":null},
+        {"id":5,"code":"url.public","value":"","title":" ","mutable":true,"description":null,"type":"String","groupName":"BRANDING","subGroupName":null,"subGroupOrder":5,"help":null},
+        {"id":6,"code":"about.box.content","value":"The Store allows visitors to discover and explore business and convenience applications and enables user-configurable visualizations of available content.","title":" ","mutable":true,"description":null,"type":"String","groupName":"BRANDING","subGroupName":"About Information","subGroupOrder":1,"help":null},
+        {"id":7,"code":"about.box.image","value":"/marketplace/themes/gold.theme/images/Mp_logo_128x128.png","title":" ","mutable":true,"description":null,"type":"Image","groupName":"BRANDING","subGroupName":"About Information","subGroupOrder":2,"help":null},
+        {"id":8,"code":"access.alert.enable","value":"true","title":" ","mutable":true,"description":null,"type":"Boolean","groupName":"BRANDING","subGroupName":"Access Alert Information","subGroupOrder":1,"help":null},
+        {"id":9,"code":"access.alert.content","value":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla interdum eleifend sapien dignissim malesuada. Sed imperdiet augue vitae justo feugiat eget porta est blandit. Proin ipsum ipsum, rutrum ac gravida in, ullamcorper a augue. Sed at scelerisque augue. Morbi scelerisque gravida sapien ut feugiat. Donec dictum, nisl commodo dapibus pellentesque, enim quam consectetur quam, at dictum dui augue at risus. Ut id nunc in justo molestie semper. Curabitur magna velit, varius eu porttitor et, tempor pulvinar nulla. Nam at tellus nec felis tincidunt fringilla. Nunc nisi sem, egestas ut consequat eget, luctus et nisi. Nulla et lorem odio, vitae pretium ipsum. Integer tellus libero, molestie a feugiat a, imperdiet sit amet metus. Aenean auctor fringilla eros, sit amet suscipit felis eleifend a.","title":" ","mutable":true,"description":null,"type":"String","groupName":"BRANDING","subGroupName":"Access Alert Information","subGroupOrder":2,"help":null},
+        {"id":10,"code":"store.footer.featured.title","value":"Store","title":" ","mutable":true,"description":null,"type":"String","groupName":"BRANDING","subGroupName":"Footer Information","subGroupOrder":1,"help":null},
+        {"id":11,"code":"store.footer.featured.content","value":"The Store allows visitors to discover and explore business, mission, and convenience applications and enables user-configurable visualizations of available content.","title":" ","mutable":true,"description":null,"type":"String","groupName":"BRANDING","subGroupName":"Footer Information","subGroupOrder":2,"help":null},
+        {"id":12,"code":"store.open.search.title.message","value":"Marketplace Search","title":" ","mutable":true,"description":null,"type":"String","groupName":"BRANDING","subGroupName":"Open Search","subGroupOrder":1,"help":null},
+        {"id":13,"code":"store.open.search.description.message","value":"Marketplace Search Description","title":" ","mutable":true,"description":null,"type":"String","groupName":"BRANDING","subGroupName":"Open Search","subGroupOrder":2,"help":null},
+        {"id":14,"code":"store.open.search.fav.icon","value":"/marketplace/themes/gold.theme/images/favicon.ico","title":" ","mutable":true,"description":null,"type":"Image","groupName":"BRANDING","subGroupName":"Open Search","subGroupOrder":3,"help":null},
+        {"id":15,"code":"store.open.search.site.icon","value":"../images/themes/default/market_64x64.png","title":" ","mutable":true,"description":null,"type":"Image","groupName":"BRANDING","subGroupName":"Open Search","subGroupOrder":4,"help":null},
+        {"id":16,"code":"store.custom.header.url","value":null,"title":" ","mutable":true,"description":null,"type":"String","groupName":"BRANDING","subGroupName":"Custom Header and Footer","subGroupOrder":1,"help":null},
+        {"id":17,"code":"store.custom.header.height","value":"0","title":" ","mutable":true,"description":null,"type":"Integer","groupName":"BRANDING","subGroupName":"Custom Header and Footer","subGroupOrder":2,"help":null},
+        {"id":18,"code":"store.custom.footer.url","value":null,"title":" ","mutable":true,"description":null,"type":"String","groupName":"BRANDING","subGroupName":"Custom Header and Footer","subGroupOrder":3,"help":null},
+        {"id":19,"code":"store.custom.footer.height","value":"0","title":" ","mutable":true,"description":null,"type":"Integer","groupName":"BRANDING","subGroupName":"Custom Header and Footer","subGroupOrder":4,"help":null},
+        {"id":20,"code":"store.custom.css","value":null,"title":" ","mutable":true,"description":null,"type":"String","groupName":"BRANDING","subGroupName":"Custom Header and Footer","subGroupOrder":5,"help":null},
+        {"id":21,"code":"store.custom.js","value":null,"title":" ","mutable":true,"description":null,"type":"String","groupName":"BRANDING","subGroupName":"Custom Header and Footer","subGroupOrder":6,"help":null},
+        {"id":34,"code":"store.is.franchise","value":"true","title":" ","mutable":false,"description":null,"type":"Boolean","groupName":"HIDDEN","subGroupName":null,"subGroupOrder":1,"help":null},
+        {"id":35,"code":"store.default.theme","value":"gold","title":" ","mutable":true,"description":null,"type":"String","groupName":"HIDDEN","subGroupName":null,"subGroupOrder":2,"help":null},
+        {"id":36,"code":"store.job.disable.accounts.interval","value":"1440","title":" ","mutable":true,"description":null,"type":"Integer","groupName":"HIDDEN","subGroupName":null,"subGroupOrder":3,"help":null},
+        {"id":37,"code":"store.job.disable.accounts.start.time","value":"23:59:59","title":" ","mutable":true,"description":null,"type":"String","groupName":"HIDDEN","subGroupName":null,"subGroupOrder":4,"help":null},
+        {"id":33,"code":"store.enable.scoreCard","value":"false","title":" ","mutable":true,"description":null,"type":"Boolean","groupName":"SCORECARD","subGroupName":null,"subGroupOrder":1,"help":null},
+        {"id":38,"code":"store.session.control.enabled","value":"false","title":" ","mutable":true,"description":null,"type":"Boolean","groupName":"USER_ACCOUNT_SETTINGS","subGroupName":"Session Control","subGroupOrder":1,"help":null},
+        {"id":39,"code":"store.session.control.max.concurrent","value":"1","title":" ","mutable":true,"description":null,"type":"Integer","groupName":"USER_ACCOUNT_SETTINGS","subGroupName":"Session Control","subGroupOrder":2,"help":null},
+        {"id":40,"code":"store.disable.inactive.accounts","value":"true","title":" ","mutable":true,"description":null,"type":"Boolean","groupName":"USER_ACCOUNT_SETTINGS","subGroupName":"Inactive Accounts","subGroupOrder":1,"help":null},
+        {"id":41,"code":"store.inactivity.threshold","value":"90","title":" ","mutable":true,"description":null,"type":"Integer","groupName":"USER_ACCOUNT_SETTINGS","subGroupName":"Inactive Accounts","subGroupOrder":2,"help":null}
+    ],
+
+    "defaultState":{
+        "id":1,
+        "title":"Active",
+        "uuid":"ab14b928-fe35-4a1b-968a-2b3397dc2ff1"
+    },
+
+    "types": [
+        {"id":2,"title":"Widget","description":"A small or highly specialized application","hasLaunchUrl":true,"hasIcons":true,"uuid":"14fcc218-86c7-43c9-90bf-9b932cb11eb5","ozoneAware":true,"isPermanent":false},
+        {"id":3,"title":"Web Application","description":"A web-based tool that uses the browser as a client","hasLaunchUrl":true,"hasIcons":true,"uuid":"73b36df6-f48f-4e6f-9061-14ef6f39d4c8","ozoneAware":true,"isPermanent":false},
+        {"id":1,"title":"Dashboard","description":"A layout incorporating widgets and/or web applications","hasLaunchUrl":true,"hasIcons":true,"uuid":"092e5c7d-fdf8-48b8-95ec-fbae3f741f83","ozoneAware":true,"isPermanent":false}
+    ],
+
+    "contactTypes":[
+        {"id":1,"title":"Technical POC","required":true},
+        {"id":2,"title":"Government Sponsor","required":true},
+        {"id":3,"title":"Another Required Type","required":true},
+        {"id":4,"title":"Optional Contact Type 1","required":false},
+        {"id":5,"title":"Optional Contact Type 2","required":false},
+        {"id":6,"title":"Optional Contact Type 3","required":false}
+    ],
+
+    "categories": [
+        {"id": 1, "title": "Category A", "description": "Example Category A"},
+        {"id": 2, "title": "Category B", "description": "Example Category B"},
+        {"id": 3, "title": "Category C", "description": "Example Category C"},
+        {"id": 4, "title": "Geospatial", "description": "Analytics based on geographic data"},
+        {"id": 5, "title": "Query", "description": "Data set retrieval"},
+        {"id": 6, "title": "Reporting", "description": "Data set summarization"},
+        {"id": 7, "title": "Temporal", "description": "Amaltics based on temporal data"}
+    ],
+
+    "agencies": [
+        {"id": 1, "title": "Company 1"},
+        {"id": 2, "title": "Company 2"},
+        {"id": 3, "title": "Company 3"},
+        {"id": 4, "title": "Company 4"}
+    ],
+
+    "intentDataTypes": [
+        {"id": 1, "title": "audio"},
+        {"id": 2, "title": "image"},
+        {"id": 3, "title": "json"},
+        {"id": 4, "title": "text"},
+        {"id": 5, "title": "uri"},
+        {"id": 6, "title": "video"}
+    ],
+
+    "intentActions": [
+        {"id": 2, "title": "edit"},
+        {"id": 4, "title": "pick"},
+        {"id": 6, "title": "save"},
+        {"id": 1, "title": "share"},
+        {"id": 5, "title": "subscribe"},
+        {"id": 3, "title": "view"}
+    ],
+
+    "headerLogoTooltip": "Store",
+    "url":"http://localhost:8080/marketplace",
+    "context":"/marketplace",
+    "blankImage":"/marketplace/images/s.gif",
+    "bannerBeanNorth":"<div id=\"northBanner\" ><\u002fdiv>",
+    "bannerBeanSouth":"<div id=\"southBanner\" ><\u002fdiv>",
+    "currUser": {
+        "displayName":"Test Administrator 1",
+        "username":"testAdmin1",
+        "email":"testadmin1@nowhere.com",
+        "id":2,
+        "isAdmin":true,
+        "organization":"DEFAULT_STORE_NAME"
+    },
+
+    "buildNumber":1408635332256,
+
+    "theme":{
+        "author":"Oxygen Team",
+        "base_url":"themes/gold.theme/",
+        "contact_email":"ozone-developers@googlegroups.com",
+        "contrast":"standard",
+        "created_date":"09/01/12",
+        "css":"themes/gold.theme/css/gold.css",
+        "description":"Oxygen Theme",
+        "display_name":"Oxygen",
+        "font_size":12,
+        "modified_date":"05/12/2014",
+        "name":"oxygen",
+        "screenshots":[
+            {"description":"Search Page","url":"themes/common/theme-switcher/gold-theme-1-search.png"},
+            {"description":"Listing Modal","url":"themes/common/theme-switcher/gold-theme-2-modal.png"}
+        ],
+        "thumb":"themes/common/theme-switcher/gold-theme-1-search.png"
+    },
+
+    "sessionTimeoutConfig": {
+        "maxInactiveInterval": 7200,
+        "settingSessionDataErrorMsg": "Error setting session data",
+        "redirectUrl":"/marketplace/logout.jsp"
+    },
+
+    "affiliatedSearchSize":30,
+    "animationsEnabled":false,
+    "accessAlertConfig": {
+        "show": true,
+        "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla interdum eleifend sapien dignissim malesuada. Sed imperdiet augue vitae justo feugiat eget porta est blandit. Proin ipsum ipsum, rutrum ac gravida in, ullamcorper a augue. Sed at scelerisque augue. Morbi scelerisque gravida sapien ut feugiat. Donec dictum, nisl commodo dapibus pellentesque, enim quam consectetur quam, at dictum dui augue at risus. Ut id nunc in justo molestie semper. Curabitur magna velit, varius eu porttitor et, tempor pulvinar nulla. Nam at tellus nec felis tincidunt fringilla. Nunc nisi sem, egestas ut consequat eget, luctus et nisi. Nulla et lorem odio, vitae pretium ipsum. Integer tellus libero, molestie a feugiat a, imperdiet sit amet metus. Aenean auctor fringilla eros, sit amet suscipit felis eleifend a."
+    },
+
+    "allowImageUpload":true,
+    "importTaskContext":"/marketplace/importTask"
+}

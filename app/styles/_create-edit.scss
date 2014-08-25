@@ -26,11 +26,6 @@ h3 {
     font-weight: 400;
 }
 
-.row {
-    min-width: 768px;
-    height: auto;
-}
-
 #create-edit-tab-container {
     z-index: 1;
     position: fixed;
@@ -84,85 +79,139 @@ h3 {
 #create-edit {
     z-index: 9;
     padding-top: 160px;
+
     .row {
         background: #e8e8e8;
     }
 
     .content-section {
-        .row {
+        >.row {
             padding-bottom: 20px;
 
-            div {
-                label:first-child {
-                    margin-top: 20px;
+            >div {
+                >.create-edit-input-element:first-child {
+                    margin-top: 56px;
                 }
 
-                h2:not(:first-child) {
+                >h2:not(:first-child) {
                     margin-top: 40px;
                 }
             }
         }
 
-        label {
-            font-weight: 500;
-        }
+        .form-group {
+            p.small {
+                width: 85%;
+            }
 
-        input[type="text"] {
-            margin: 0 0 20px 0;
-            height: 25px !important;
-        }
-
-        textarea {
-            height: 100px !important;
-            margin: 0 0 20px 0;
-        }
-
-        p.small {
-            width: 80%;
-        }
-
-        .select2-container {
-            margin: 0 0 20px 0;
-        }
-
-        .react-tabs {
-            vertical-align: top;
-
-            input {
-                margin: 0;
+            &.input-optional {
+                label::after {
+                    content: " (optional)";
+                    font-size: smaller;
+                    font-weight: 500;
+                }
             }
 
             label {
-                margin: 0 0 0 5px;
-                font-weight: 400;
+                font-weight: 500;
             }
 
-            ul {
-                display: inline-block;
-                width: 40%;
-                list-style: none;
-                padding: 0 10px;
+            textarea {
+                height: 100px;
             }
 
-            .tab-selector {
-                width: 100%;
+            .validation-err-msg {
+                display: none;
+                color: red;
             }
 
-            div[role="tabpanel"] {
-                display: inline-block;
-                width: 60%;
-                float: right;
+            &.input-invalid {
+                .validation-err-msg {
+                    display: block;
+                }
 
-                h3 {
-                    margin-top: 0;
+                input, textarea {
+                    border-color: red;
                 }
             }
         }
-    }
 
-    .content-section:last-child {
-        .row:last-child {
-            padding-bottom: 100px;
+        .type-select {
+            .type-descriptor {
+                display: none;
+
+                &.active {
+                    display: inline-block;
+                }
+            }
+        }
+
+        .create-edit-input-element {
+            .contact-form:nth-child(n+2) {
+                margin-top: 20px;
+            }
+        }
+
+        .contact-form {
+            >button {
+                margin-left: 12px;
+                margin-top: 5px;
+            }
+        }
+
+        .contact-card {
+            border: 1px solid #c6c6c6;
+            padding: 10px 5px;
+            margin: 15px 5px 5px 5px;
+
+            .btn {
+                color: gray;
+                padding: 0;
+                float: right;
+                margin-right: -10px;
+                margin-top: -5px;
+            }
+            .form-group:nth-child(n+6) {
+                width: 49%;
+                display: inline-block;
+            }
+            .form-group:last-child {
+                margin-left: 5px;
+            }
+        }
+
+        .intent-form {
+            >button {
+                margin-left: 12px;
+                margin-top: 5px;
+            }
+        }
+
+        .intent-card {
+            border: 1px solid #c6c6c6;
+            padding: 10px 5px;
+            margin: 15px 5px 5px 5px;
+
+            .btn {
+                color: gray;
+                padding: 0;
+                float: right;
+                margin-right: -10px;
+                margin-top: -5px;
+            }
+
+            .form-group:nth-child(2) {
+                width: 35%;
+                display: inline-block;
+                margin-top: 10px;
+            }
+
+            .form-group:last-child {
+                width: 60%;
+                display: inline-block;
+                margin-left: 5px;
+                margin-top: 10px;
+            }
         }
     }
 }
@@ -174,12 +223,42 @@ h3 {
     visibility: hidden;
 }
 
-.select2-container {
-    width: 100%;
+.chosen-container {
+    width: 100% !important;
     height: 30px !important;
 
-    .select2-choices {
-      height: 30px !important;
-      border: 1px solid #ccc;
+    .chosen-choices {
+        width: 100%;
+        height: 30px !important;
+        border: 1px solid #ccc;
+    }
+
+    .chosen-results {
+
+        li.highlighted {
+            background-color: $blue;
+            background-image: none;
+            color: #fff;
+        }
+    }
+}
+
+.chosen-container-multi {
+    .chosen-choices {
+        li.search-choice {
+            background-color: $blue-lighter;
+            background-image: none;
+        }
+    }
+}
+
+.tag {
+    float: left;
+    padding: 2px;
+    border: 1px solid #ccc;
+    margin: 5px;
+
+    span {
+        padding: 2px;
     }
 }
