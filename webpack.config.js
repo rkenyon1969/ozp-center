@@ -22,7 +22,8 @@ module.exports = {
             bootstrap$: "bootstrap-sass-official/assets/javascripts/bootstrap",
             carouFredSel$: "carouFredSel/jquery.carouFredSel-6.2.1",
             'react-chosen$':"react-chosen/react-chosen",
-            'drmonty-chosen$':"drmonty-chosen/js/chosen.jquery"
+            'drmonty-chosen$':"drmonty-chosen/js/chosen.jquery",
+            lodash: 'lodash-amd/modern'
         },
         // Tell webpack to look for required files in bower and node
         modulesDirectories: ['bower_components', 'node_modules'],
