@@ -6,8 +6,8 @@
 var React = require('react');
 var Modal = require('../shared/Modal');
 var IconRating = require('react-icon-rating');
-var Carousel = require('../carousel');
 var Header = require('./Header');
+var OverviewTab = require('./OverviewTab');
 var ReviewsTab = require('./ReviewsTab');
 var DetailsTab = require('./DetailsTab');
 var ResourcesTab = require('./ResourcesTab');
@@ -20,6 +20,10 @@ var ResourcesTab = require('./ResourcesTab');
 **/
 var Quickview = React.createClass({
 
+    propTypes: {
+        listing: React.PropTypes.object
+    },
+
     getInitialState: function() {
         return {
             shown: false
@@ -30,7 +34,6 @@ var Quickview = React.createClass({
         var shown = this.state.shown;
         var listing = this.props.listing;
         var title = listing.title();
-        var description = listing.description() || 'No description provided!';
         var avgRate = listing.avgRate();
 
         /* jshint ignore:start */
@@ -45,15 +48,7 @@ var Quickview = React.createClass({
                         <li><a href=".quickview-resources" role="tab" data-toggle="tab">Resources</a></li>
                     </ul>
                     <div className="tab-content">
-                        <div className="tab-pane active row quickview-overview">
-                            <Carousel autoInit={ shown } className="col-md-8">
-                                <img src="http://localhost:3000/api/persistence/store/apps/drive/images/53d282f310478a5bb6066546" />
-                                <img src="http://localhost:3000/api/persistence/store/apps/drive/images/53d282f310478a5bb6066546" />
-                            </Carousel>
-                            <div className="col-md-4">
-                                <p>{ description }</p>
-                            </div>
-                        </div>
+                        <OverviewTab listing= { listing } shown={ shown } />
                         <ReviewsTab listing={ listing } />
                         <DetailsTab listing={ listing } />
                         <ResourcesTab listing={ listing } />
