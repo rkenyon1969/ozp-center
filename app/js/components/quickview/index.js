@@ -39,7 +39,7 @@ var Quickview = React.createClass({
         /* jshint ignore:start */
         return this.transferPropsTo(
             <Modal ref="modal" className="quickview" onShown={ this.onShown } >
-                <Header listing={ listing } />
+                <Header listing={ listing } onCancel={ this.close } />
                 <div className="tabs-container">
                     <ul className="nav nav-tabs" role="tablist">
                         <li className="active"><a href=".quickview-overview" role="tab" data-toggle="tab">Overview</a></li>
@@ -63,6 +63,10 @@ var Quickview = React.createClass({
         this.setState({
             shown: true
         });
+    },
+
+    close: function () {
+        this.refs.modal.close();
     }
 });
 

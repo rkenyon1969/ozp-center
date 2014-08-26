@@ -183,7 +183,7 @@ var Search = React.createClass({
             <Quickview
                 ref="quickview"
                 listing={ this.state.selectedListing }
-                onClose={ function () {
+                onHidden={ function () {
                     me.setState({ selectedListing: null })
                 }}
             />

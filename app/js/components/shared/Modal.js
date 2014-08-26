@@ -22,11 +22,14 @@ var BootstrapModal = React.createClass({
 
     close: function() {
         var me = this;
-        $(this.getDOMNode()).one('hidden.bs.modal', function () {
+
+        function onHidden () {
             if (me.props.onHidden) {
                 me.props.onHidden();
             }
-        }).modal('hide');
+        }
+
+        $(this.getDOMNode()).one('hidden.bs.modal', onHidden).modal('hide');
     },
 
     open: function() {
@@ -63,7 +66,7 @@ var BootstrapModal = React.createClass({
                         {
                             this.props.title && (
                                 <div className="modal-header">
-                                    <button type="button" className="close" onClick={this.handleCancel}>
+                                    <button type="button" className="close" onClick={this.close}>
                                         <span aria-hidden="true">&times;</span><span className="sr-only">Close</span>
                                     </button>
                                     <h4 className="modal-title">{this.props.title}</h4>
@@ -88,7 +91,7 @@ var BootstrapModal = React.createClass({
             /*jshint ignore:end */
     },
 
-    handleCancel: function() {
+    handleCancel: function () {
         if (this.props.onCancel) {
             this.props.onCancel();
         }

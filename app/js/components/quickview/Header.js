@@ -9,7 +9,8 @@ var IconRating = require('react-icon-rating');
 var QuickviewHeader = React.createClass({
 
     propTypes: {
-        listing: React.PropTypes.object
+        listing: React.PropTypes.object,
+        onCancel: React.PropTypes.func.isRequired
     },
 
     render: function () {
@@ -22,7 +23,7 @@ var QuickviewHeader = React.createClass({
         return (
             <div className="quickview-header">
                 <div className="quickview-header-info">
-                    <button type="button" className="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <button type="button" className="close" aria-hidden="true" onClick={ this.props.onCancel }>×</button>
                     <img className="listing-icon" src={ image } data-fallback="/store/images/types/3" />
                     <h3 className="listing-title" title={ title }>{ title }</h3>
                     <IconRating
