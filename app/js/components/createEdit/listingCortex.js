@@ -40,5 +40,7 @@ module.exports = function (config, data) {
         listing.screenshots.push(new Screenshot());
     }
 
+    listing.types.id = config.defaultType.id;
+
     return new Cortex(listing);
 };

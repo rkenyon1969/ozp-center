@@ -17,10 +17,6 @@ module.exports = React.createClass({
             /*jshint ignore:end */
         };
 
-        var binder = function (cortex) {
-            return dataBinder(function(){return cortex.val();}, function(val){cortex.set(val);});
-        };
-
         var actions = this.state.config.intentActions.map(optionMap);
         var dataTypes = this.state.config.intentDataTypes.map(optionMap);
 
@@ -30,10 +26,10 @@ module.exports = React.createClass({
             <div className="row intent-card">
                 <div className="col-sm-12">
                     {!this.props.locked && this.renderDeleteBtn()}
-                    <Select required label="Action" dataBinder={binder(intent.action.id)}>
+                    <Select required label="Action" dataBinder={dataBinder.idBinder(intent.action.id)}>
                         {actions}
                     </Select>
-                    <Select required label="Data Type" dataBinder={binder(intent.dataType.id)}>
+                    <Select required label="Data Type" dataBinder={dataBinder.idBinder(intent.dataType.id)}>
                         {dataTypes}
                     </Select>
                 </div>

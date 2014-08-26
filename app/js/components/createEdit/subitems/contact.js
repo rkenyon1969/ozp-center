@@ -16,10 +16,6 @@ module.exports = React.createClass({
     mixins: [DeleteBtnMixin, ConfigStoreMixin],
 
     render: function () {
-        var binder = function (cortex) {
-            return dataBinder(function(){return cortex.val();}, function(val){cortex.set(val);});
-        };
-
         var contactTypes = this.state.config.contactTypes.map(function (json) {
             /*jshint ignore:start */
             return <option value={json.id}>{json.title}</option>;
@@ -32,16 +28,16 @@ module.exports = React.createClass({
             <div className="row contact-card">
                 <div className="col-sm-12">
                     {!this.props.locked && this.renderDeleteBtn()}
-                    <Select dataBinder={binder(contact.type.id)} label="Contact Type" disabled={this.props.locked} required>
+                    <Select dataBinder={dataBinder.simpleBinder(contact.type.id)} label="Contact Type" disabled={this.props.locked} required>
                         {contactTypes}
                     </Select>
-                    <TextInput type="text" dataBinder={binder(contact.name)} label="Name" required maxLength={100} />
-                    <TextInput type="text" dataBinder={binder(contact.organization)} label="Organization" maxLength={100} />
-                    <TextInput type="email" ref="email" dataBinder={binder(contact.email)} label="Email" required maxLength={100} />
-                    <TextInput type="text" ref="securePhone" dataBinder={binder(contact.securePhone)}
+                    <TextInput type="text" dataBinder={dataBinder.simpleBinder(contact.name)} label="Name" required maxLength={100} />
+                    <TextInput type="text" dataBinder={dataBinder.simpleBinder(contact.organization)} label="Organization" maxLength={100} />
+                    <TextInput type="email" ref="email" dataBinder={dataBinder.simpleBinder(contact.email)} label="Email" required maxLength={100} />
+                    <TextInput type="text" ref="securePhone" dataBinder={dataBinder.idBinder(contact.securePhone)}
                             label="Secure Phone" error={this.state.securePhoneError} maxLength={50}
                             onFocus={this.validatePhone.bind(this, 'secure')} onBlur={this.validatePhone.bind(this, 'secure')} />
-                    <TextInput type="text" ref="unsecurePhone" dataBinder={binder(contact.unsecurePhone)}
+                    <TextInput type="text" ref="unsecurePhone" dataBinder={dataBinder.idBinder(contact.unsecurePhone)}
                             label="Unsecure Phone" error={this.state.unsecurePhoneError} maxLength={50}
                             onFocus={this.validatePhone.bind(this, 'unsecure')} onBlur={this.validatePhone.bind(this, 'unsecure')} />
                 </div>

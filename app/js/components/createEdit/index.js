@@ -26,20 +26,6 @@ var React            = require('react'),
 
 require('bootstrap');
 
-function simpleBinder (cortex) {
-    return dataBinder(function(){return cortex.val();}, function(val){cortex.set(val);});
-}
-
-function collectionBinder(cortex) {
-    var setCollection = function (values) {
-        cortex.set(values.map(function (id) {
-            return {id: id};
-        }));
-    };
-
-    return dataBinder(function(){return cortex.val();}, setCollection);
-}
-
 var CreateEditPage = React.createClass({
 
     /*jshint ignore:start */
@@ -71,7 +57,7 @@ var CreateEditPage = React.createClass({
                         <div className="col-sm-5">
                             <h2>Basic Listing Information</h2>
 
-                            <TextInput type="text" required dataBinder={simpleBinder(listing.title)}
+                            <TextInput type="text" required dataBinder={dataBinder.simpleBinder(listing.title)}
                                     label="Name" description="Title of the listing" maxLength={256} />
 
                             {this.renderTypeSelector()}
@@ -82,58 +68,52 @@ var CreateEditPage = React.createClass({
                         <div className="col-sm-5">
                             <TextArea label="Short Description" maxLength={150} required
                                     description="A brief overview describing the listing. It will appear in the mouseover listing view. It must be less than 150 characters."
-                                    dataBinder={simpleBinder(listing.descriptionShort)} />
+                                    dataBinder={dataBinder.simpleBinder(listing.descriptionShort)} />
 
                             <TextArea label="Full Description" maxLength={4000} required
                                     description="An overview describing the listing, discussing the available features and its purpose. It will appear in the detailed listing view."
-                                    dataBinder={simpleBinder(listing.description)} />
-
+                                    dataBinder={dataBinder.simpleBinder(listing.description)} />
                         </div>
                     </Section>
                     <Section id="details" title="Details">
                         <div className="col-sm-5">
                             <h2>Listing Details</h2>
-                            <TextInput type="text" dataBinder={simpleBinder(listing.versionName)} label="Version Number"
+                            <TextInput type="text" dataBinder={dataBinder.simpleBinder(listing.versionName)} label="Version Number"
                                     description="Numerical identification of what the release version is" maxLength={256} />
 
-                            <TextInput type="url" required dataBinder={simpleBinder(listing.launchUrl)}
+                            <TextInput type="url" required dataBinder={dataBinder.simpleBinder(listing.launchUrl)}
                                     label="Listing URL" description="URL where this listing can be reached by users" maxLength={2083} />
 
-                            <TextArea required dataBinder={simpleBinder(listing.requirements)} label="Usage Requirements"
+                            <TextArea required dataBinder={dataBinder.simpleBinder(listing.requirements)} label="Usage Requirements"
                                     description="Details about what system, security, or other requirements must be met in order to use this listing. If none apply, write &quot;None.&quot;"/>
 
-                            <TextInput dataBinder={simpleBinder(listing.whatIsNew)} label="What&rsquo;s New" maxLength={1000}
+                            <TextInput dataBinder={dataBinder.simpleBinder(listing.whatIsNew)} label="What&rsquo;s New" maxLength={1000}
                                     description="Provide a description of what is new or different in this version." />
 
                             <h2>Intents</h2>
 
                             <ListOfForms className="intent-form" itemForm={IntentForm} itemSchema={Intent} items={listing.owfProperties.intents}
                                     description="Intents are special instructions used for communicating between applications. If this application uses intents, list them here" />
-
-
                         </div>
                         <div className="col-sm-5">
                             <h2>Graphics</h2>
 
-                            <TextInput type="url" label="Featured Banner" dataBinder={simpleBinder(listing.imageXlargeUrl)}
+                            <TextInput type="url" label="Featured Banner" dataBinder={dataBinder.simpleBinder(listing.imageXlargeUrl)}
                                     description="Must be at least 280px tall x 454px wide." maxLength={2083} />
 
-                            <TextInput type="url" required label="Small Banner" dataBinder={simpleBinder(listing.imageLargeUrl)}
+                            <TextInput type="url" required label="Small Banner" dataBinder={dataBinder.simpleBinder(listing.imageLargeUrl)}
                                     description="Must be at least 137px tall x 220px wide." maxLength={2083} />
 
-                            <TextInput type="url" required label="Large Icon" dataBinder={simpleBinder(listing.imageMediumUrl)}
+                            <TextInput type="url" required label="Large Icon" dataBinder={dataBinder.simpleBinder(listing.imageMediumUrl)}
                                     description="Must be 30px tall x 30px wide." maxLength={2083} />
 
-                            <TextInput type="url" required label="Small Icon" dataBinder={simpleBinder(listing.imageSmallUrl)}
+                            <TextInput type="url" required label="Small Icon" dataBinder={dataBinder.simpleBinder(listing.imageSmallUrl)}
                                     description="Must be at least 16px tall x 16px wide." maxLength={2083} />
 
                             <h2>Screenshots</h2>
                             <ListOfForms className="screenshot-form" itemForm={ScreenshotForm} itemSchema={Screenshot}
                                     items={listing.screenshots} description="At least one screenshot is required"
                                     locked={[0]} />
-
-
-
                         </div>
                     </Section>
                     <Section id="resources-contacts" title="Contacts">
@@ -144,7 +124,6 @@ var CreateEditPage = React.createClass({
                             <h2>Resources</h2>
                             <ListOfForms className="resource-form" itemForm={ResourceForm} itemSchema={Resource}
                                     items={listing.docUrls} />
-
                         </div>
 
                         <div className="col-sm-5">
@@ -166,7 +145,7 @@ var CreateEditPage = React.createClass({
             typeId = this.state.listing.types.id.val();
 
         this.props.config.types.forEach(function (json) {
-            var className = json.id.toString() === typeId ? 'type-descriptor active' : 'type-descriptor';
+            var className = json.id === typeId ? 'type-descriptor active' : 'type-descriptor';
 
             /*jshint ignore:start */
             types.push(<option value={json.id}>{json.title}</option>);
@@ -184,7 +163,7 @@ var CreateEditPage = React.createClass({
         return (
             <div className="row type-select">
                 <div className="col-sm-5">
-                    <Select dataBinder={simpleBinder(this.state.listing.types.id)} label="Listing Type" required>
+                    <Select dataBinder={dataBinder.idBinder(this.state.listing.types.id)} label="Listing Type" required>
                         {types}
                     </Select>
                 </div>
@@ -207,7 +186,7 @@ var CreateEditPage = React.createClass({
         /*jshint ignore:start */
         return (
             <Select label="Category" description="The category or categories in the existing AppsMall structure where this listing fits best."
-                    dataBinder={collectionBinder(categories)} multiple required >
+                    dataBinder={dataBinder.objCollectionBinder(categories)} multiple required >
                     {options}
             </Select>
         );
@@ -220,7 +199,7 @@ var CreateEditPage = React.createClass({
         /*jshint ignore:start */
         return (
             <TagSelect label="Tags" description="Keywords that describe the listing which can be used when searching."
-                    dataBinder={simpleBinder(tags)} multiple />
+                    dataBinder={dataBinder.simpleBinder(tags)} multiple />
         );
         /*jshint ignore:end */
 
@@ -236,7 +215,7 @@ var CreateEditPage = React.createClass({
 
         /*jshint ignore:start */
         return (
-            <Select dataBinder={simpleBinder(this.state.listing.agency.id)}
+            <Select dataBinder={dataBinder.idBinder(this.state.listing.agency.id)}
                     label="Associated Organization" description="Organization overseeing this listing"
                     required>
                 {organizations}
