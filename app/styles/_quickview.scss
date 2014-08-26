@@ -29,10 +29,6 @@ $quickview-nav-tabs-height: 42px;
             margin: $panel-body-padding/4 0 $panel-body-padding/2 0;
         }
     }
-
-    section + section {
-        margin-top: $panel-body-padding;
-    }
 }
 
 .quickview-header {
@@ -167,4 +163,10 @@ $quickview-nav-tabs-height: 42px;
         }
     }
 
+}
+
+.quickview-details, .quickview-resources {
+    section + section {
+        margin-top: $panel-body-padding;
+    }
 }
