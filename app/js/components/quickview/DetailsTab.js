@@ -71,7 +71,7 @@ var DetailsTab = React.createClass({
 
         /* jshint ignore:start */
         return owners.map(function (owner) {
-            return (<span class="listing-owner"> { owner.name }</span>);
+            return (<span className="listing-owner"> { owner.name }</span>);
         });
         /* jshint ignore:end */
     },
@@ -106,7 +106,7 @@ var DetailsTab = React.createClass({
             <label>Gov Sponsor</label>,
             <div className="col-md-offset-1">
                 <p><label>Name:</label><span> Joe Montana</span></p>
-                <p><label>Secure Email:</label><span> jmontana@ugov.com</span></p>
+                <p><label>Secure Email:</label><span> jmontana@gmail.com</span></p>
                 <p><label>Name:</label><span> Joe Montana</span></p>
                 <p><label>Unsecure Phone:</label><span> (123) 456-789</span></p>
                 <p><label>Secure Phone:</label><span> (123) 456-789</span></p>

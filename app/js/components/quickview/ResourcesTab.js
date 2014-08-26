@@ -4,6 +4,8 @@
 'use strict';
 
 var React = require('react');
+var EmptyFieldValue = require('../shared/EmptyFieldValue');
+var find = require('lodash/collections/find');
 
 var ResourcesTab = React.createClass({
 
@@ -11,16 +13,16 @@ var ResourcesTab = React.createClass({
         listing: React.PropTypes.object
     },
 
+    /* jshint ignore:start */
     render: function () {
-        /* jshint ignore:start */
         return (
             <div className="tab-pane quickview-resources row">
                 <div className="col-md-6 col-left">
                     <section className="documentation">
                         <h5>Documentation</h5>
                         <hr/>
-                        <p className="text-muted">User guide unavailable</p>
-                        <p className="text-muted">API Documentation unavailable</p>
+                        { this.renderUserGuide() }
+                        { this.renderApiDoc() }
                     </section>
                     <section className="resources">
                         <h5>Other Resources</h5>
@@ -34,7 +36,7 @@ var ResourcesTab = React.createClass({
                         <hr/>
                         <div>
                             <p><label>Name:</label><span> Joe Montana</span></p>
-                            <p><label>Secure Email:</label><span> jmontana@ugov.com</span></p>
+                            <p><label>Secure Email:</label><span> jmontana@gmail.com</span></p>
                             <p><label>Name:</label><span> Joe Montana</span></p>
                             <p><label>Unsecure Phone:</label><span> (123) 456-789</span></p>
                             <p><label>Secure Phone:</label><span> (123) 456-789</span></p>
@@ -43,8 +45,24 @@ var ResourcesTab = React.createClass({
                 </div>
             </div>
         );
-        /* jshint ignore:end */
+    },
+
+    renderUserGuide: function () {
+        var userGuide = find(this.props.listing.docUrls(), { name: 'User Guide'});
+
+        return userGuide ?
+                <p><a target="_blank" href={ userGuide.url }>{ userGuide.name }</a></p> :
+                <EmptyFieldValue text="User guide unavailable" />;
+    },
+
+    renderApiDoc: function () {
+        var apiDoc = find(this.props.listing.docUrls(), { name: 'API Documentation'});
+
+        return apiDoc ?
+                <p><a target="_blank" href={ apiDoc.url }>{ apiDoc.name }</a></p> :
+                <EmptyFieldValue text="API documentation unavailable" />;
     }
+    /* jshint ignore:end */
 
 });
 

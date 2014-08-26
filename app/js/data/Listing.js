@@ -9,7 +9,7 @@ function Listing (json) {
         'totalRate5','totalVotes', 'state', 'tags', 'types','uuid',
         'versionName', 'imageLargeUrl', 'imageSmallUrl', 'imageMediumUrl',
         'launchUrl', 'company', 'whatsNew', 'owners', 'organization',
-        'categories', 'releaseDate', 'editedDate', 'intents'
+        'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls'
     ];
 
     keys.forEach(function (key) {
