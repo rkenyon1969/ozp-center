@@ -23,15 +23,6 @@ var APP = React.createClass({
     },
 
     /*jshint ignore:start */
-    renderSearchPage: function () {
-        return (
-            <div>
-                <Header />
-                <Search />
-            </div>
-          );
-    },
-
     renderDiscoveryPage: function () {
         return (
             <DiscoveryPage />
