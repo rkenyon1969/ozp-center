@@ -71,7 +71,13 @@
             "releaseDate": null,
             "requirements": null,
             "scoreCard.score": 0,
-            "screenshots": [],
+            "screenshots": [{
+                "smallImageUrl": "http://lorempixel.com/600/375/sports/5",
+                "largeImageUrl": "http://lorempixel.com/960/600/sports/5"
+            }, {
+                "smallImageUrl": "http://lorempixel.com/600/375/sports/1",
+                "largeImageUrl": "http://lorempixel.com/960/600/sports/1"
+            }],
             "state": {
                 "id": 1,
                 "title": "Active",
@@ -87,7 +93,7 @@
             "totalRate2": 0,
             "totalRate3": 0,
             "totalRate4": 0,
-            "totalRate5": 0,
+            "totalRate5": 1,
             "totalVotes": 0,
             "types": {
                 "description": "widget",

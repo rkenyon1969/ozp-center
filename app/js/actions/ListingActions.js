@@ -3,36 +3,45 @@
 var Reflux = require('reflux');
 var ListingApi = require('../data/Listing').ListingApi;
 
-var fetchNewArrivals    = Reflux.createAction(),
-    newArrivalsFetched  = Reflux.createAction(),
-    fetchMostPopular    = Reflux.createAction(),
-    mostPopularFetched  = Reflux.createAction(),
-    search              = Reflux.createAction(),
-    searchCompleted     = Reflux.createAction();
+var Actions = Reflux.createActions([
+    'fetchNewArrivals', 'newArrivalsFetched',
+    'fetchMostPopular', 'mostPopularFetched',
+    'search', 'searchCompleted',
+    'launch',
+    'bookmark', 'bookmarked'
+]);
 
-fetchNewArrivals.listen(function () {
-    ListingApi.getNewArrivals().then(function (listings) {
-        newArrivalsFetched(listings);
-    });
+
+Actions.fetchNewArrivals.listen(function () {
+    ListingApi
+        .getNewArrivals()
+        .then(function (listings) {
+            Actions.newArrivalsFetched(listings);
+        });
 });
 
-fetchMostPopular.listen(function () {
-    ListingApi.getMostPopular().then(function (listings) {
-        mostPopularFetched(listings);
-    });
+Actions.fetchMostPopular.listen(function () {
+    ListingApi
+        .getMostPopular()
+        .then(function (listings) {
+            Actions.mostPopularFetched(listings);
+        });
 });
 
-search.listen(function (options) {
-    ListingApi.search(options).then(function (listings) {
-        searchCompleted(listings);
-    });
+Actions.search.listen(function (options) {
+    ListingApi
+        .search(options)
+        .then(function (listings) {
+            Actions.searchCompleted(listings);
+        });
 });
 
-module.exports = {
-    fetchNewArrivals    : fetchNewArrivals,
-    newArrivalsFetched  : newArrivalsFetched,
-    fetchMostPopular    : fetchMostPopular,
-    mostPopularFetched  : mostPopularFetched,
-    search              : search,
-    searchCompleted     : searchCompleted
-};
+Actions.launch.listen(function (listing) {
+    window.open(listing.launchUrl());
+});
+
+Actions.bookmark.listen(function (listing) {
+    window.alert('bookmark listing...');
+});
+
+module.exports = Actions;

@@ -3,6 +3,7 @@
 
 var React = require('react');
 var IconRating = require('react-icon-rating');
+var launch = require('../../actions/ListingActions').launch;
 
 var ListingTile = React.createClass({
 
@@ -38,7 +39,7 @@ var ListingTile = React.createClass({
                         <p className="description">{ description }</p>
                         <div className="btn-group actions">
                             {/* can't nest anchor tags, using button here with onClick listener */}
-                            <button className="btn btn-default" onClick={ this.launchListing }><i className="fa fa-external-link"></i></button>
+                            <button className="btn btn-default" onClick={ this.launch }><i className="fa fa-external-link"></i></button>
                             <button type="button" className="btn btn-default"><i className="fa fa-link"></i> Connect</button>
                         </div>
                     </div>
@@ -48,8 +49,8 @@ var ListingTile = React.createClass({
         /*jshint ignore:end */
     },
 
-    launchListing: function () {
-        window.open(this.props.listing.launchUrl());
+    launch: function () {
+        launch(this.props.listing);
     }
 
 });
