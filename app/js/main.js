@@ -1,17 +1,16 @@
 /** @jsx React.DOM */
 'use strict';
 
-var APP = require('./components/app');
 var React = require('react');
 var jQuery = require('jquery');
-
 require('bootstrap');
 
 // Enable React developer tools
 window.React = React;
-
 window.jQuery = jQuery;
 window.$ = jQuery;
+
+var APP = require('./components/app');
 
 /*jshint ignore:start */
 React.renderComponent(

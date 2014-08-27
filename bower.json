@@ -20,7 +20,8 @@
     "carouFredSel": "*",
     "select2": "3.5.1",
     "ubuntu-font": "*",
-    "drmonty-chosen": "*"
+    "drmonty-chosen": "*",
+    "magnific-popup": "~0.9.9"
   },
   "devDependencies": {
     "font-awesome": "~4.1.0"

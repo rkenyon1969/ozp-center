@@ -23,7 +23,8 @@ module.exports = {
             carouFredSel$: "carouFredSel/jquery.carouFredSel-6.2.1",
             'react-chosen$':"react-chosen/react-chosen",
             'drmonty-chosen$':"drmonty-chosen/js/chosen.jquery",
-            lodash: 'lodash-amd/modern'
+            lodash: "lodash-amd/modern",
+            "magnific-popup$": "magnific-popup/dist/jquery.magnific-popup",
         },
         // Tell webpack to look for required files in bower and node
         modulesDirectories: ['bower_components', 'node_modules'],

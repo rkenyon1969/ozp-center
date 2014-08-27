@@ -3,6 +3,7 @@ $fa-font-path: "../../bower_components/font-awesome/fonts/";
 
 @import 'colors';
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
+@import "../../bower_components/magnific-popup/src/css/main.scss";
 @import "../../bower_components/font-awesome/scss/font-awesome.scss";
 @import "../../bower_components/drmonty-chosen/css/chosen.css";
 @import 'fonts';
@@ -86,4 +87,14 @@ i.fa-star, i.fa-star-half-o {
 
 label {
     font-weight: 400;
+}
+
+/*===============================
+=            z-index            =
+===============================*/
+.mfp-bg {
+    z-index: 10000;
+}
+.mfp-wrap {
+    z-index: 10001;
 }
