@@ -4,7 +4,7 @@
 'use strict';
 
 var React = require('react');
-var IconRating = require('react-icon-rating');
+var IconRating = require('../shared/IconRating');
 var ListingActions = require('../../actions/ListingActions');
 var launch = ListingActions.launch;
 var bookmark = ListingActions.bookmark;

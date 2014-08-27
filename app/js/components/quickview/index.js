@@ -5,7 +5,7 @@
 
 var React = require('react');
 var Modal = require('../shared/Modal');
-var IconRating = require('react-icon-rating');
+var IconRating = require('../shared/IconRating');
 var Header = require('./Header');
 var OverviewTab = require('./OverviewTab');
 var ReviewsTab = require('./ReviewsTab');
