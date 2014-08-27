@@ -63,7 +63,7 @@ var ListOfForms = React.createClass({
 
         return this.transferPropsTo(
             /*jshint ignore: start */
-            <div className="create-edit-input-element">
+            <div className="item-form-list create-edit-input-element">
                 {this.props.label && this.renderLabel()}
                 {this.props.description && this.renderDescription()}
                 <div className="input-form-container">
@@ -87,13 +87,15 @@ var ListOfForms = React.createClass({
         /*jshint ignore: end */
     },
 
-    handleDelete: function (key) {
+    handleDelete: function (key, event) {
+        event.preventDefault();
         if (this.props.locked.indexOf(key) === -1) {
             this.props.items.removeAt(key);
         }
     },
 
-    handleNew: function () {
+    handleNew: function (event) {
+        event.preventDefault();
         var Item = this.props.itemSchema;
         this.props.items.push(new Item({}));
         return false;

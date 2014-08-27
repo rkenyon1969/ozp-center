@@ -1,15 +1,23 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React          = require('react/addons'),
-    Reflux         = require('reflux'),
-    Header         = require('./header'),
-    DiscoveryPage  = require('./discovery'),
-    CreateEditPage = require('./createEdit'),
-    fetchConfig    = require('../actions/ConfigActions').fetchConfig;
+var React            = require('react/addons'),
+    Reflux           = require('reflux'),
+    Header           = require('./header'),
+    DiscoveryPage    = require('./discovery'),
+    CreateEditPage   = require('./createEdit'),
+    fetchConfig      = require('../actions/ConfigActions').fetchConfig,
+    ConfigStoreMixin = require('../stores/ConfigStore').mixin;
 
 var APP = React.createClass({
+    mixins: [ConfigStoreMixin],
+
     render: function () {
+        if(!this.state.config) {
+            /*jshint ignore:start */
+            return <p>Loading...</p>;
+            /*jshint ignore:end */
+        }
         // return this.renderCreateEditPage();
         return this.renderDiscoveryPage();
     },
@@ -32,7 +40,7 @@ var APP = React.createClass({
 
     renderCreateEditPage: function () {
         return (
-            <CreateEditPage config={this.props.config} />
+            <CreateEditPage config={this.state.config} />
         );
     },
     /*jshint ignore:end */

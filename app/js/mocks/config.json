@@ -55,6 +55,17 @@
         "uuid":"ab14b928-fe35-4a1b-968a-2b3397dc2ff1"
     },
 
+    "defaultType": {
+        "id":2,
+        "title":"Widget",
+        "description":"A small or highly specialized application",
+        "hasLaunchUrl":true,
+        "hasIcons":true,
+        "uuid":"14fcc218-86c7-43c9-90bf-9b932cb11eb5",
+        "ozoneAware":true,
+        "isPermanent":false
+    },
+
     "types": [
         {"id":2,"title":"Widget","description":"A small or highly specialized application","hasLaunchUrl":true,"hasIcons":true,"uuid":"14fcc218-86c7-43c9-90bf-9b932cb11eb5","ozoneAware":true,"isPermanent":false},
         {"id":3,"title":"Web Application","description":"A web-based tool that uses the browser as a client","hasLaunchUrl":true,"hasIcons":true,"uuid":"73b36df6-f48f-4e6f-9061-14ef6f39d4c8","ozoneAware":true,"isPermanent":false},
@@ -64,7 +75,6 @@
     "contactTypes":[
         {"id":1,"title":"Technical POC","required":true},
         {"id":2,"title":"Government Sponsor","required":true},
-        {"id":3,"title":"Another Required Type","required":true},
         {"id":4,"title":"Optional Contact Type 1","required":false},
         {"id":5,"title":"Optional Contact Type 2","required":false},
         {"id":6,"title":"Optional Contact Type 3","required":false}
@@ -103,6 +113,12 @@
         {"id": 1, "title": "share"},
         {"id": 5, "title": "subscribe"},
         {"id": 3, "title": "view"}
+    ],
+
+    "users": [
+        {"id": 1, "username": "user1"},
+        {"id": 2, "username": "user2"},
+        {"id": 3, "username": "user3"}
     ],
 
     "headerLogoTooltip": "Store",
