@@ -169,6 +169,7 @@ var Search = React.createClass({
         /*jshint ignore:start */
         return listings.map(function (listing) {
             return <ListingTile
+                        key = { listing.id() }
                         listing={ listing }
                         onClick={ me.openQuickview.bind(me, listing) }
                     />
