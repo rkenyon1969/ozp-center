@@ -14,7 +14,7 @@ module.exports = React.createClass({
 
         /*jshint ignore: start */
         return (
-            <div className="row screenshot-card">
+            <div className="row form-card">
                 <div className="col-sm-12">
                     {!this.props.locked && this.renderDeleteBtn()}
                     <TextInput type="url" required label="Preview Image" maxLength={2083}

@@ -1,0 +1,103 @@
+{
+    "approvalStatus": "Approved",
+    "approvedDate": "2014-05-20T14:49:18Z",
+    "avgRate": 5,
+    "categories": [],
+    "class": "center.listing",
+    "company": "",
+    "companyIcon": "http://icons.iconarchive.com/icons/icons8/android/24/Transport-airplane-landing-icon.png",
+    "contacts": [],
+    "createdBy": {
+        "id": 2,
+        "name": "Test Admin 1",
+        "username": "testAdmin1"
+    },
+    "createdDate": "2014-05-20T14:48:00Z",
+    "customFields": [],
+    "dependencies": null,
+    "description": "Make waves with Greenwave! Ha, get it? Make waves? Oh whatever; I don't care what you say it was funny! Make waves with Greenwave! Ha, get it? Make waves? Oh whatever; I don't care what you say it was funny!",
+    "docUrls": [],
+    "editedBy": {
+        "id": 2,
+        "name": "Test Admin 1",
+        "username": "testAdmin1"
+    },
+    "editedDate": "2014-05-20T14:52:03Z",
+    "id": 1,
+    "imageLargeUrl": "images/sample-listings/AirMail.png",
+    "imageMediumUrl": "images/sample-listings/Airmail64.png",
+    "imageSmallUrl": "images/sample-listings/Airmail16.png",
+    "installUrl": null,
+    "intents": [],
+    "isEnabled": true,
+    "isPublished": true,
+    "lastActivity": {
+        "activityDate": "2014-05-20T14:52:03Z"
+    },
+    "launchUrl": "images/sample-listings/AirMail.png",
+    "opensInNewBrowserTab": false,
+    "organization": "Test Admin Organization",
+    "owfProperties": {
+        "background": false,
+        "descriptorUrl": null,
+        "height": 650,
+        "id": 5,
+        "intents": [],
+        "owfWidgetType": "standard",
+        "singleton": false,
+        "stackContext": null,
+        "stackDescriptor": null,
+        "universalName": null,
+        "visibleInLaunch": true,
+        "width": 1050
+    },
+    "owners": [
+        {
+            "id": 2,
+            "name": "Test Admin 1",
+            "username": "testAdmin1"
+        }
+    ],
+    "ozoneAware": true,
+    "recommendedLayouts": [],
+    "relationships": [
+        {
+            "relatedItems": [],
+            "relationshipType": "REQUIRE"
+        }
+    ],
+    "releaseDate": null,
+    "requirements": null,
+    "scoreCard.score": 0,
+    "screenshots": [],
+    "state": {
+        "id": 1,
+        "title": "Active",
+        "uuid": "97ff1d72-c5b1-413d-bd4c-f8e40342b8af"
+    },
+    "tags": [],
+    "techPocs": [
+        "Test Admin 1"
+    ],
+    "title": "AirMail",
+    "totalComments": 0,
+    "totalRate1": 0,
+    "totalRate2": 0,
+    "totalRate3": 0,
+    "totalRate4": 0,
+    "totalRate5": 0,
+    "totalVotes": 0,
+    "types": {
+        "description": "widget",
+        "hasIcons": true,
+        "hasLaunchUrl": true,
+        "id": 2,
+        "isPermanent": true,
+        "ozoneAware": true,
+        "title": "Widget",
+        "uuid": "c40b8c2d-8a2d-4b5d-ac1d-2ba33afc0494"
+    },
+    "uuid": "4528cfa7-002f-4054-95d7-b0322190bc58",
+    "validLaunchUrl": true,
+    "versionName": "1"
+}

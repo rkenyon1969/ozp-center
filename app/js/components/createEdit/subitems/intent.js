@@ -23,7 +23,7 @@ module.exports = React.createClass({
         var intent = this.props.item;
         /*jshint ignore: start */
         return (
-            <div className="row intent-card">
+            <div className="row form-card">
                 <div className="col-sm-12">
                     {!this.props.locked && this.renderDeleteBtn()}
                     <Select required label="Action" dataBinder={dataBinder.idBinder(intent.action.id)}>

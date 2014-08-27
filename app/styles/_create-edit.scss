@@ -84,12 +84,17 @@ h3 {
         background: #e8e8e8;
     }
 
+    .select2-offscreen, .select2-offscreen:focus {
+        left: auto !important;
+        top: auto  !important;
+    }
+
     .content-section {
         >.row {
             padding-bottom: 20px;
 
             >div {
-                >.create-edit-input-element:first-child {
+                >.form-group:first-child {
                     margin-top: 56px;
                 }
 
@@ -152,14 +157,14 @@ h3 {
             }
         }
 
-        .contact-form {
+        .item-form-list {
             >button {
                 margin-left: 12px;
                 margin-top: 5px;
             }
         }
 
-        .contact-card {
+        .form-card {
             border: 1px solid #c6c6c6;
             padding: 10px 5px;
             margin: 15px 5px 5px 5px;
@@ -170,47 +175,6 @@ h3 {
                 float: right;
                 margin-right: -10px;
                 margin-top: -5px;
-            }
-            .form-group:nth-child(n+6) {
-                width: 49%;
-                display: inline-block;
-            }
-            .form-group:last-child {
-                margin-left: 5px;
-            }
-        }
-
-        .intent-form {
-            >button {
-                margin-left: 12px;
-                margin-top: 5px;
-            }
-        }
-
-        .intent-card {
-            border: 1px solid #c6c6c6;
-            padding: 10px 5px;
-            margin: 15px 5px 5px 5px;
-
-            .btn {
-                color: gray;
-                padding: 0;
-                float: right;
-                margin-right: -10px;
-                margin-top: -5px;
-            }
-
-            .form-group:nth-child(2) {
-                width: 35%;
-                display: inline-block;
-                margin-top: 10px;
-            }
-
-            .form-group:last-child {
-                width: 60%;
-                display: inline-block;
-                margin-left: 5px;
-                margin-top: 10px;
             }
         }
     }
@@ -221,44 +185,4 @@ h3 {
     display: block;
     position: relative;
     visibility: hidden;
-}
-
-.chosen-container {
-    width: 100% !important;
-    height: 30px !important;
-
-    .chosen-choices {
-        width: 100%;
-        height: 30px !important;
-        border: 1px solid #ccc;
-    }
-
-    .chosen-results {
-
-        li.highlighted {
-            background-color: $blue;
-            background-image: none;
-            color: #fff;
-        }
-    }
-}
-
-.chosen-container-multi {
-    .chosen-choices {
-        li.search-choice {
-            background-color: $blue-lighter;
-            background-image: none;
-        }
-    }
-}
-
-.tag {
-    float: left;
-    padding: 2px;
-    border: 1px solid #ccc;
-    margin: 5px;
-
-    span {
-        padding: 2px;
-    }
 }

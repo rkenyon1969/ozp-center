@@ -25,7 +25,7 @@ module.exports = React.createClass({
         var contact = this.props.item;
         /*jshint ignore:start */
         return (
-            <div className="row contact-card">
+            <div className="row form-card">
                 <div className="col-sm-12">
                     {!this.props.locked && this.renderDeleteBtn()}
                     <Select dataBinder={dataBinder.simpleBinder(contact.type.id)} label="Contact Type" disabled={this.props.locked} required>

@@ -10,6 +10,7 @@ module.exports = {
             select2 = $input.select2(this.state.select2).data('select2');
 
         $input.on('change', this.handleChange);
+        $input.on('select2-blur', this.handleBlur);
 
         this._$select2 = select2;
         this._$input = $input;
@@ -17,6 +18,7 @@ module.exports = {
 
     componentWillUnmount: function () {
         this._$input.off('change');
+        this._$input.off('select2-blur');
         this._$select2.destroy();
     },
 

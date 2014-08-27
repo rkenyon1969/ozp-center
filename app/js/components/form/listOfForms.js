@@ -63,7 +63,7 @@ var ListOfForms = React.createClass({
 
         return this.transferPropsTo(
             /*jshint ignore: start */
-            <div className="create-edit-input-element">
+            <div className="item-form-list create-edit-input-element">
                 {this.props.label && this.renderLabel()}
                 {this.props.description && this.renderDescription()}
                 <div className="input-form-container">

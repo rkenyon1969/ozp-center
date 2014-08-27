@@ -87,7 +87,7 @@ var CreateEditPage = React.createClass({
                             <TextArea required dataBinder={dataBinder.simpleBinder(listing.requirements)} label="Usage Requirements"
                                     description="Details about what system, security, or other requirements must be met in order to use this listing. If none apply, write &quot;None.&quot;"/>
 
-                            <TextInput dataBinder={dataBinder.simpleBinder(listing.whatIsNew)} label="What&rsquo;s New" maxLength={1000}
+                            <TextArea dataBinder={dataBinder.simpleBinder(listing.whatIsNew)} label="What&rsquo;s New" maxLength={1000}
                                     description="Provide a description of what is new or different in this version." />
 
                             <h2>Intents</h2>
@@ -120,6 +120,7 @@ var CreateEditPage = React.createClass({
                         <div className="col-sm-5">
                             <h2>Owner Information</h2>
                             {this.renderOrganizations()}
+                            {this.renderOwners()}
 
                             <h2>Resources</h2>
                             <ListOfForms className="resource-form" itemForm={ResourceForm} itemSchema={Resource}
@@ -205,7 +206,6 @@ var CreateEditPage = React.createClass({
 
     },
 
-
     renderOrganizations: function () {
         var organizations = this.props.config.agencies.map(function (json) {
             /*jshint ignore:start */
@@ -219,6 +219,24 @@ var CreateEditPage = React.createClass({
                     label="Associated Organization" description="Organization overseeing this listing"
                     required>
                 {organizations}
+            </Select>
+        );
+        /*jshint ignore:end */
+    },
+
+    renderOwners: function () {
+        var owners = this.state.listing.owners;
+        var options = this.props.config.users.map(function (json) {
+            /*jshint ignore:start */
+            return <option value={json.id}>{json.username}</option>;
+            /*jshint ignore:end */
+        });
+
+        /*jshint ignore:start */
+        return (
+            <Select label="Owners" description="Person(s) responsible for this listing"
+                    dataBinder={dataBinder.simpleBinder(owners)} required multiple>
+                {options}
             </Select>
         );
         /*jshint ignore:end */
@@ -248,7 +266,6 @@ var CreateEditPage = React.createClass({
 
     handleSave: function () {
         console.log(this.state.listing.val());
-        return false;
     }
 
 });

@@ -14,10 +14,10 @@ module.exports = React.createClass({
 
         /*jshint ignore: start */
         return (
-            <div className="row resource-card">
+            <div className="row form-card">
                 <div className="col-sm-12">
                     {!this.props.locked && this.renderDeleteBtn()}
-                    <TextInput type="url" requried label="Type of Resource" dataBinder={dataBinder.simpleBinder(resource.name)} maxLength={2083} required />
+                    <TextInput type="text" requried label="Type of Resource" dataBinder={dataBinder.simpleBinder(resource.name)} maxLength={2083} required />
                     <TextInput type="url" requried label="URL" dataBinder={dataBinder.simpleBinder(resource.url)} maxLength={2083} required />
                 </div>
             </div>

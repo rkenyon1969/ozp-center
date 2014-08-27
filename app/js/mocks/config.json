@@ -75,7 +75,6 @@
     "contactTypes":[
         {"id":1,"title":"Technical POC","required":true},
         {"id":2,"title":"Government Sponsor","required":true},
-        {"id":3,"title":"Another Required Type","required":true},
         {"id":4,"title":"Optional Contact Type 1","required":false},
         {"id":5,"title":"Optional Contact Type 2","required":false},
         {"id":6,"title":"Optional Contact Type 3","required":false}
@@ -114,6 +113,12 @@
         {"id": 1, "title": "share"},
         {"id": 5, "title": "subscribe"},
         {"id": 3, "title": "view"}
+    ],
+
+    "users": [
+        {"id": 1, "username": "user1"},
+        {"id": 2, "username": "user2"},
+        {"id": 3, "username": "user3"}
     ],
 
     "headerLogoTooltip": "Store",
