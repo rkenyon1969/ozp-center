@@ -62,7 +62,7 @@ module.exports = function (config, data) {
         });
 
         if (index > -1) {
-            suggestedResource.push(listing.docUrls.splice(index, 1));
+            suggestedResources.push(listing.docUrls.splice(index, 1));
         } else {
             var resource = new Resource();
             resource.name = name;
