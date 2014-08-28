@@ -55,22 +55,21 @@
         width: 965px;
         margin-bottom: 20px;
     }
+}
 
-    .listings {
-        padding: 0;
-        overflow: hidden;
+.listings {
+    padding: 0;
+    overflow: hidden;
+}
+
+.listings-search-results, .new-arrival-listings, .most-popular-listings {
+    .listing-tile:nth-child(4n+4) {
+        margin-right: 0px;
     }
+}
 
-    .listings-search-results, .carousel {
-        .listing-tile:nth-child(4n+4) {
-            margin-right: 0px;
-        }
+.carousel {
+    .listing-tile {
+        margin-bottom: 0;
     }
-
-    .carousel {
-        .listing-tile {
-            margin-bottom: 0;
-        }
-    }
-
 }

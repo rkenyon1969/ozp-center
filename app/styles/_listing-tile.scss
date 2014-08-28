@@ -1,23 +1,11 @@
-.ellipsis {
-    white-space: nowrap;
-    overflow: hidden;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-}
-
-.hardware-accelerated {
-    -webkit-transform: translateZ(0);
-   -moz-transform: translateZ(0);
-   -ms-transform: translateZ(0);
-   -o-transform: translateZ(0);
-   transform: translateZ(0);
-}
-
 .listing-tile {
+    $img-width: 220px;
+    $img-height: 137px;
+
     float: left;
     position: relative;
     overflow: hidden;
-    width: 220px;
+    width: $img-width;
     height: 192px;
     margin: 0 25px 25px 0;
     line-height: 0;
@@ -26,9 +14,13 @@
     border: 1px solid #d5d5d5;
 
     .slide-up {
+        position: absolute;
+        width: 100%;
+        top: $img-height;
         line-height: 20px;
         padding: 0 8px;
-        position: relative;
+        background: #f3f3f3;
+        transition: all .1s ease-out 0.1s;
 
         > :nth-child(2) {
             display: inline-block;
@@ -37,17 +29,16 @@
 
     a {
         display: block;
+        position: relative;
+        height: 100%;
         color: $text-color;
     }
 
     img {
-        width: 220px;
-        height: 137px;
+        width: $img-width;
+        height: $img-height;
         margin: 0 auto;
         display: block;
-        @extend .hardware-accelerated;
-        transition: all .1s ease-out 0.1s;
-        // @include transition(all .2s ease-out 0.1s);
     }
 
     i {
@@ -56,7 +47,6 @@
 
     .title {
         margin: 6px 0 1px 0;
-        @extend .ellipsis;
     }
 
     .description {
@@ -90,8 +80,8 @@
             text-decoration: none;
         }
 
-        img {
-            margin-top: -137px;
+        .slide-up {
+            top: 0px;
         }
     }
 

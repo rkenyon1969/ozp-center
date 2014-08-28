@@ -11,10 +11,11 @@ var ListingActions      = require('../../actions/ListingActions'),
     search              = ListingActions.search;
 
 // component dependencies
-var Header      = require('../header'),
-    ListingTile = require('./ListingTile'),
-    Carousel    = require('../carousel'),
-    Quickview   = require('../quickview');
+var Header              = require('../header'),
+    ListingTile         = require('./ListingTile'),
+    FeaturedListings    = require('./FeaturedListings'),
+    Carousel            = require('../carousel'),
+    Quickview           = require('../quickview');
 
 // store dependencies
 var DiscoveryPageStore = require('../../stores/DiscoveryPageStore');
@@ -104,7 +105,11 @@ var Search = React.createClass({
                         {
                             searching ?
                                 this.renderSearchResults() :
-                                [ this.renderNewArrivals(), this.renderMostPopular() ]
+                                [
+                                    this.renderFeaturedListings(),
+                                    this.renderNewArrivals(),
+                                    this.renderMostPopular()
+                                ]
                         }
                     </section>
                     <div className="clearfix"></div>
@@ -113,6 +118,20 @@ var Search = React.createClass({
                     this.state.selectedListing && this.renderQuickview()
                 }
             </div>
+        );
+        /*jshint ignore:end */
+    },
+
+    renderFeaturedListings: function () {
+        if(!this.state.newArrivals.length) {
+            return;
+        }
+
+        /*jshint ignore:start */
+        return (
+            <FeaturedListings
+                listings={ this.state.newArrivals }
+                handleClick={ this.openQuickview } />
         );
         /*jshint ignore:end */
     },
@@ -126,7 +145,7 @@ var Search = React.createClass({
         return (
             <section>
                 <h4>New Arrivals</h4>
-                <Carousel>
+                <Carousel className="new-arrival-listings">
                     { this._renderListings(this.state.newArrivals) }
                 </Carousel>
             </section>
@@ -143,7 +162,7 @@ var Search = React.createClass({
         return (
             <section>
                 <h4>Most Popular</h4>
-                <Carousel>
+                <Carousel className="most-popular-listings">
                     { this._renderListings(this.state.mostPopular) }
                 </Carousel>
             </section>

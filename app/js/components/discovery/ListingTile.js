@@ -23,7 +23,7 @@ var ListingTile = React.createClass({
             <li className="listing listing-tile">
                 <a href="#quickview/1">
                     <img src={ imageLargeUrl } />
-                    <div className="slide-up">
+                    <section className="slide-up">
                         <p className="title">{ name }</p>
                         <IconRating
                             className="icon-rating"
@@ -42,7 +42,7 @@ var ListingTile = React.createClass({
                             <button className="btn btn-default" onClick={ this.launch }><i className="fa fa-external-link"></i></button>
                             <button type="button" className="btn btn-default"><i className="fa fa-link"></i> Connect</button>
                         </div>
-                    </div>
+                    </section>
                 </a>
             </li>
         );
