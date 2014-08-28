@@ -2,6 +2,7 @@
 'use strict';
 
 var React = require('react');
+var merge = require('react/lib/merge');
 
 require('carouFredSel');
 
@@ -51,21 +52,25 @@ var Carousel = React.createClass({
 
     renderCarousel: function () {
         if (this.props.autoInit) {
-            this._$carousel = $(this.refs.list.getDOMNode()).carouFredSel({
+            var options = merge({
                 prev: $(this.refs.prev.getDOMNode()),
                 next: $(this.refs.next.getDOMNode()),
                 auto: false,
                 scroll: {
                     easing: 'quadratic'
                 }
-            }, {
+            }, this.props.options);
+
+            this._$carousel = $(this.refs.list.getDOMNode()).carouFredSel(options, {
                 wrapper: 'parent'
             });
         }
     },
 
-    componentWillUnmount: function(nextProps, nextState) {
-        this._$carousel.trigger('destroy');
+    componentWillUnmount: function() {
+        if (this._$carousel) {
+            this._$carousel.trigger('destroy');
+        }
     }
 
 });

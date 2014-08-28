@@ -9,6 +9,28 @@ var FeaturedListingTile = require('./FeaturedListingTile');
 
 module.exports = React.createClass({
 
+    propTypes: {
+        options: React.PropTypes.object
+    },
+
+    getDefaultProps: function() {
+        return {
+            options: {
+                auto: false,
+                scroll: {
+                    easing: 'quadratic',
+                    items: 1,
+                    duration: 1000
+                },
+                width: '100%',
+                items: {
+                    visible: 3,
+                    start: -1
+                }
+            }
+        };
+    },
+
     render: function () {
         var me = this;
 
@@ -23,32 +45,12 @@ module.exports = React.createClass({
         return (
             <section>
                 <h4>Featured</h4>
-                <Carousel ref="carousel" className="featured-listings-carousel" autoInit={ false }>
+                <Carousel ref="carousel" className="featured-listings-carousel" options={ this.props.options }>
                     { children }
                 </Carousel>
             </section>
         );
         /*jshint ignore:end */
-    },
-
-    componentDidMount: function () {
-        this._$carousel = $(this.refs.carousel.refs.list.getDOMNode()).carouFredSel({
-            prev: $(this.refs.carousel.refs.prev.getDOMNode()),
-            next: $(this.refs.carousel.refs.next.getDOMNode()),
-            auto: false,
-            scroll: {
-                easing: 'quadratic',
-                items: 1,
-                duration: 800
-            },
-            width: '100%',
-            items: {
-                visible: 3,
-                start: -1
-            }
-        }, {
-            wrapper: 'parent'
-        });
-    },
+    }
 
 });
