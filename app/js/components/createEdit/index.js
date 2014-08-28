@@ -99,16 +99,16 @@ var CreateEditPage = React.createClass({
                             <h2>Graphics</h2>
 
                             <TextInput type="url" label="Featured Banner" dataBinder={dataBinder.simpleBinder(listing.imageXlargeUrl)}
-                                    description="Must be at least 280px tall x 454px wide." maxLength={2083} />
+                                    description="Must be at least 600px wide x 375px tall." maxLength={2083} />
 
                             <TextInput type="url" required label="Small Banner" dataBinder={dataBinder.simpleBinder(listing.imageLargeUrl)}
-                                    description="Must be at least 137px tall x 220px wide." maxLength={2083} />
+                                    description="Must be at least 220px wide x 137px tall." maxLength={2083} />
 
                             <TextInput type="url" required label="Large Icon" dataBinder={dataBinder.simpleBinder(listing.imageMediumUrl)}
-                                    description="Must be 30px tall x 30px wide." maxLength={2083} />
+                                    description="Must be 30px wide x 30px tall." maxLength={2083} />
 
                             <TextInput type="url" required label="Small Icon" dataBinder={dataBinder.simpleBinder(listing.imageSmallUrl)}
-                                    description="Must be at least 16px tall x 16px wide." maxLength={2083} />
+                                    description="Must be at least 16px wide x 16px tall." maxLength={2083} />
 
                             <h2>Screenshots</h2>
                             <ListOfForms className="screenshot-form" itemForm={ScreenshotForm} itemSchema={Screenshot}
