@@ -28,7 +28,7 @@ module.exports = React.createClass({
             <div className="row form-card">
                 <div className="col-sm-12">
                     {!this.props.locked && this.renderDeleteBtn()}
-                    <Select dataBinder={dataBinder.simpleBinder(contact.type.id)} label="Contact Type" disabled={this.props.locked} required>
+                    <Select dataBinder={dataBinder.simpleBinder(contact.type.id)} label="Contact Type" disabled={this.props.locked} required data-placeholder="Select a Contact Type">
                         {contactTypes}
                     </Select>
                     <TextInput type="text" dataBinder={dataBinder.simpleBinder(contact.name)} label="Name" required maxLength={100} />

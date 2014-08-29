@@ -26,10 +26,10 @@ module.exports = React.createClass({
             <div className="row form-card">
                 <div className="col-sm-12">
                     {!this.props.locked && this.renderDeleteBtn()}
-                    <Select required label="Action" dataBinder={dataBinder.idBinder(intent.action.id)}>
+                    <Select required label="Action" dataBinder={dataBinder.idBinder(intent.action.id)} data-placeholder="Select an Action">
                         {actions}
                     </Select>
-                    <Select required label="Data Type" dataBinder={dataBinder.idBinder(intent.dataType.id)}>
+                    <Select required label="Data Type" dataBinder={dataBinder.idBinder(intent.dataType.id)} data-placeholder="Select a Data Type">
                         {dataTypes}
                     </Select>
                 </div>

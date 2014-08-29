@@ -16,9 +16,18 @@ module.exports = React.createClass({
         /*jshint ignore:start */
         return this.transferPropsTo(
             <select>
+                {this.renderPlaceholder()}
                 {this.props.children}
             </select>
         );
         /*jshint ignore:end */
+    },
+
+    renderPlaceholder: function () {
+        if (this.props['data-placeholder'] && !this.props.multiple) {
+            /*jshint ignore:start */
+            return <option></option>;
+            /*jshint ignore:end */
+        }
     }
 });

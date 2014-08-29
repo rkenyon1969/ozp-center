@@ -2,7 +2,6 @@
 'use strict';
 
 var React            = require('react'),
-    Reflux           = require('reflux'),
     Header           = require('../header'),
     Content          = require('./content'),
     Actions          = require('./actions'),
@@ -187,7 +186,7 @@ var CreateEditPage = React.createClass({
         /*jshint ignore:start */
         return (
             <Select label="Category" description="The category or categories in the existing AppsMall structure where this listing fits best."
-                    dataBinder={dataBinder.objCollectionBinder(categories)} multiple required >
+                    dataBinder={dataBinder.objCollectionBinder(categories)} multiple required data-placeholder="Select a Category">
                     {options}
             </Select>
         );
@@ -217,7 +216,7 @@ var CreateEditPage = React.createClass({
         return (
             <Select dataBinder={dataBinder.idBinder(this.state.listing.agency.id)}
                     label="Associated Organization" description="Organization overseeing this listing"
-                    required>
+                    required data-placeholder="Select an Organization">
                 {organizations}
             </Select>
         );
@@ -235,7 +234,7 @@ var CreateEditPage = React.createClass({
         /*jshint ignore:start */
         return (
             <Select label="Owners" description="Person(s) responsible for this listing"
-                    dataBinder={dataBinder.simpleBinder(owners)} required multiple>
+                    dataBinder={dataBinder.simpleBinder(owners)} required multiple data-placeholder="Select a Person">
                 {options}
             </Select>
         );
