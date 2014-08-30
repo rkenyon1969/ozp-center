@@ -1,0 +1,9 @@
+{
+    "data": [
+        {"id":1,"title":"Technical POC","required":true},
+        {"id":2,"title":"Government Sponsor","required":true},
+        {"id":4,"title":"Optional Contact Type 1","required":false},
+        {"id":5,"title":"Optional Contact Type 2","required":false},
+        {"id":6,"title":"Optional Contact Type 3","required":false}
+    ]
+}

@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
     configItems: [
         'types',
@@ -8,4 +10,4 @@ module.exports = {
         'organizations',
         'users'
     ]
-}
+};

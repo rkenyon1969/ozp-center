@@ -19,7 +19,7 @@ var APP = React.createClass({
             /*jshint ignore:end */
         }
 
-        return this.renderCreateEditPage();
+        //return this.renderCreateEditPage();
         return this.renderDiscoveryPage();
     },
 

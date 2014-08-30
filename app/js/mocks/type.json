@@ -1,0 +1,7 @@
+{
+    "data": [
+        {"id":2,"title":"Widget","description":"A small or highly specialized application","hasLaunchUrl":true,"hasIcons":true,"uuid":"14fcc218-86c7-43c9-90bf-9b932cb11eb5","ozoneAware":true,"isPermanent":false},
+        {"id":3,"title":"Web Application","description":"A web-based tool that uses the browser as a client","hasLaunchUrl":true,"hasIcons":true,"uuid":"73b36df6-f48f-4e6f-9061-14ef6f39d4c8","ozoneAware":true,"isPermanent":false},
+        {"id":1,"title":"Dashboard","description":"A layout incorporating widgets and/or web applications","hasLaunchUrl":true,"hasIcons":true,"uuid":"092e5c7d-fdf8-48b8-95ec-fbae3f741f83","ozoneAware":true,"isPermanent":false}
+    ]
+}
