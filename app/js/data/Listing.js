@@ -50,6 +50,20 @@ var ListingApi = {
 
             return listings;
         });
+    },
+
+    save: function (data) {
+        var url = 'http://localhost:8080/marketplace/api/serviceItem';
+        url = data.id ? url + '/' + data.id : url;
+
+        return $.ajax({
+            type: 'POST',
+            async: false,
+            url: url,
+            data: JSON.stringify(data),
+            dataType: 'json',
+            contentType: 'application/json'
+        });
     }
 
 };

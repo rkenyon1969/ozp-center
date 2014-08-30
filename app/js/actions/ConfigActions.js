@@ -1,18 +1,31 @@
 'use strict';
 
-var Reflux    = require('reflux'),
-    ConfigApi = require('../data/Config').ConfigApi;
+var Reflux      = require('reflux'),
+    ConfigApi   = require('../data/Config').ConfigApi,
+    ConfigItems = require('../constants').configItems,
+    capitalize  = require('../utils/string').capitalize;
 
-var fetchConfig   = Reflux.createAction(),
-    configFetched = Reflux.createAction();
+//There are two actions for each item - fetchItem and itemFetched.
+var Actions = Reflux.createActions(ConfigItems.map(function (item) {
+    return ['fetch' + capitalize(item), item + 'Fetched']; //create the action names
+}).reduce(function (a, b) {
+    return a.concat(b); //flatten the array
+}));
 
-fetchConfig.listen(function () {
-    ConfigApi.getConfig().then(function (config) {
-        configFetched(config);
+ConfigItems.forEach(function (item) {
+    Actions['fetch' + capitalize(item)].listen(function () {
+        ConfigApi['get' + capitalize(item)]().then(function (data) {
+            Actions[item + 'Fetched'](data);
+        });
     });
 });
 
-module.exports = {
-    fetchConfig: fetchConfig,
-    configFetched: configFetched
-};
+Actions.fetchConfig = Reflux.createAction();
+
+Actions.fetchConfig.listen(function () {
+    ConfigItems.forEach(function (item) {
+        Actions['fetch' + capitalize(item)]();
+    });
+});
+
+module.exports = Actions;

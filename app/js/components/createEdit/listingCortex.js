@@ -48,7 +48,7 @@ module.exports = function (config, data) {
      *     Set the Default Listing Type
      */
     if (!listing.types.id) {
-        listing.types.id = config.defaultType.id;
+        listing.types.id = config.types[0].id;
     }
 
     /**

@@ -30,7 +30,6 @@ module.exports = new Defaults({
     }),
     owners: arr(Simple),
     screenshots: arr(Screenshot),
-    state: Simple,
     tags: arr(str()),
     title: str(),
     types: Simple,

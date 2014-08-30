@@ -21,7 +21,8 @@ var React            = require('react'),
     TextInput        = require('../form/textInput'),
     TextArea         = require('../form/textArea'),
     Select           = require('../form/select'),
-    TagSelect        = require('../form/tagSelect');
+    TagSelect        = require('../form/tagSelect'),
+    saveListing      = require('../../actions/ListingActions').save;
 
 require('bootstrap');
 
@@ -43,13 +44,10 @@ var CreateEditPage = React.createClass({
         });
 
         return (
-            <form>
+            <form id="listing-submission-form" ref="form" onSubmit={this.handleSubmit}>
                 <Header />
                 <Actions title="Edit 'New Listing'">
-                    <button className="btn btn-default">Preview</button>
-                    <button onClick={this.handleSave} className="btn btn-default">Save Draft</button>
-                    <button className="btn btn-default">Submit</button>
-                    <button className="btn btn-default">Delete</button>
+                    <button form="listing-submission-form" type="submit" className="btn btn-default">Submit</button>
                 </Actions>
                 <Content>
                     <Section id="basic-info" title="Basic Information">
@@ -206,7 +204,7 @@ var CreateEditPage = React.createClass({
     },
 
     renderOrganizations: function () {
-        var organizations = this.props.config.agencies.map(function (json) {
+        var organizations = this.props.config.organizations.map(function (json) {
             /*jshint ignore:start */
             return <option value={json.id}>{json.title}</option>;
             /*jshint ignore:end */
@@ -263,8 +261,8 @@ var CreateEditPage = React.createClass({
         this._$scrollspy.destroy();
     },
 
-    handleSave: function () {
-        console.log(this.state.listing.val());
+    handleSubmit: function () {
+        saveListing(this.state.listing.val());
     }
 
 });

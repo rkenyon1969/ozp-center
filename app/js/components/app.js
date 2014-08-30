@@ -13,12 +13,13 @@ var APP = React.createClass({
     mixins: [ConfigStoreMixin],
 
     render: function () {
-        if(!this.state.config) {
+        if(!this.state.config.loaded) {
             /*jshint ignore:start */
             return <p>Loading...</p>;
             /*jshint ignore:end */
         }
-        // return this.renderCreateEditPage();
+
+        return this.renderCreateEditPage();
         return this.renderDiscoveryPage();
     },
 

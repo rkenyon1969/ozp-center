@@ -8,7 +8,8 @@ var Actions = Reflux.createActions([
     'fetchMostPopular', 'mostPopularFetched',
     'search', 'searchCompleted',
     'launch',
-    'bookmark', 'bookmarked'
+    'bookmark', 'bookmarked',
+    'save', 'listingSaved'
 ]);
 
 
@@ -42,6 +43,14 @@ Actions.launch.listen(function (listing) {
 
 Actions.bookmark.listen(function (listing) {
     window.alert('bookmark listing...');
+});
+
+Actions.save.listen(function (data) {
+    ListingApi
+        .save(data)
+        .then(function (listing) {
+            Actions.listingSaved(listing);
+        });
 });
 
 module.exports = Actions;

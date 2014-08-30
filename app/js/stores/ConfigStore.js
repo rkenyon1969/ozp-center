@@ -1,20 +1,34 @@
 'use strict';
 
 var Reflux        = require('reflux'),
-    configFetched = require('../actions/ConfigActions').configFetched;
+    configActions = require('../actions/ConfigActions'),
+    ConfigItems   = require('../constants').configItems;
 
-var _config = null;
+var _config = {
+    loaded: false
+};
+
+var _configLoaded = false;
 
 var ConfigStore = Reflux.createStore({
     init: function () {
-        this.listenTo(configFetched, function (config) {
-            _config = config;
-            this.trigger();
-        });
+        ConfigItems.forEach(function (item) {
+            this.listenTo(configActions[item + 'Fetched'], function (items) {
+                _config[item] = items;
+                this.updateLoaded();
+                this.trigger();
+            });
+        }, this);
     },
 
     getConfig: function () {
         return _config;
+    },
+
+    updateLoaded: function () {
+        _config.loaded = ConfigItems.every(function (item) {
+            return !!_config[item];
+        }, this);
     }
 });
 
