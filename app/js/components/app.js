@@ -7,10 +7,15 @@ var React            = require('react/addons'),
     DiscoveryPage    = require('./discovery'),
     CreateEditPage   = require('./createEdit'),
     fetchConfig      = require('../actions/ConfigActions').fetchConfig,
-    ConfigStoreMixin = require('../stores/ConfigStore').mixin;
+    ConfigStoreMixin = require('../stores/ConfigStore').mixin,
+    Router           = require('react-router'),
+    Route            = Router.Route,
+    DefaultRoute     = Router.DefaultRoute,
+    Routes           = Router.Routes;
 
-var APP = React.createClass({
-    mixins: [ConfigStoreMixin],
+var App = React.createClass({
+
+    mixins: [ ConfigStoreMixin ],
 
     render: function () {
         if(!this.state.config.loaded) {
@@ -18,28 +23,25 @@ var APP = React.createClass({
             return <p>Loading...</p>;
             /*jshint ignore:end */
         }
-
-        //return this.renderCreateEditPage();
-        return this.renderDiscoveryPage();
+        return this.props.activeRouteHandler({
+            config: this.state.config
+        });
     },
-
-    /*jshint ignore:start */
-    renderDiscoveryPage: function () {
-        return (
-            <DiscoveryPage />
-        );
-    },
-
-    renderCreateEditPage: function () {
-        return (
-            <CreateEditPage config={this.state.config} />
-        );
-    },
-    /*jshint ignore:end */
 
     componentWillMount: function () {
         fetchConfig();
     }
+
 });
 
-module.exports = APP;
+/*jshint ignore:start */
+React.renderComponent(
+    <Routes>
+        <Route handler={App}>
+            <DefaultRoute handler={DiscoveryPage}/>
+            <Route name="new" path="new" handler={CreateEditPage}/>
+        </Route>
+    </Routes>,
+    document.getElementById('main')
+);
+/*jshint ignore:end */

@@ -10,10 +10,4 @@ window.React = React;
 window.jQuery = jQuery;
 window.$ = jQuery;
 
-var APP = require('./components/app');
-
-/*jshint ignore:start */
-React.renderComponent(
-    <APP />, document.getElementById('main')
-);
-/*jshint ignore:end */
+require('./components/app');

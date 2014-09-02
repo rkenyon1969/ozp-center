@@ -249,16 +249,15 @@ var CreateEditPage = React.createClass({
             me.setState({listing: me.state.listing});
         });
 
-        var scrollspy = $('body').scrollspy({
+        this._$scrollspy = $('body').scrollspy({
             target: '#create-edit-tab-container'
         }).data('bs.scrollspy');
-
-        this._$scrollspy = scrollspy;
     },
 
     componentWillUnmount: function () {
         this.state.listing.off('update');
-        this._$scrollspy.destroy();
+        this._$scrollspy.$scrollElement.off('scroll.bs.scroll-spy.data-api');
+        this._$scrollspy.$body.removeData('bs.scrollspy');
     },
 
     handleSubmit: function () {
