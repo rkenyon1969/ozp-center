@@ -256,7 +256,7 @@ var CreateEditPage = React.createClass({
 
     componentWillUnmount: function () {
         this.state.listing.off('update');
-        this._$scrollspy.$scrollElement.off('scroll.bs.scroll-spy.data-api');
+        this._$scrollspy.$scrollElement.off('scroll.bs.scrollspy');
         this._$scrollspy.$body.removeData('bs.scrollspy');
     },
 
