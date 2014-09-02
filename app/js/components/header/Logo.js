@@ -9,7 +9,7 @@ var logo  = './images/appsmall-logo.png';
 var Logo = React.createClass({
 
     /*jshint ignore:start */
-    render: function() {
+    render: function () {
         return (
             <div id="logo-container">
                 <a id="appsmall-logo-link"><img src={logo} /></a>

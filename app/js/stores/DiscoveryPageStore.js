@@ -12,7 +12,7 @@ var _newArrivals     = [],
 
 var DiscoveryPageStore = Reflux.createStore({
 
-    init: function() {
+    init: function () {
         // update cache on new data
         this.listenTo(newArrivalsFetched, function (newArrivals) {
             _newArrivals = newArrivals;

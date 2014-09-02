@@ -12,7 +12,7 @@ var BootstrapModal = React.createClass({
         onHidden: React.PropTypes.func
     },
 
-    componentDidMount: function() {
+    componentDidMount: function () {
         $(this.getDOMNode()).modal({
             backdrop: 'static',
             keyboard: false,
@@ -20,7 +20,7 @@ var BootstrapModal = React.createClass({
         });
     },
 
-    close: function() {
+    close: function () {
         var me = this;
 
         function onHidden () {
@@ -32,14 +32,14 @@ var BootstrapModal = React.createClass({
         $(this.getDOMNode()).one('hidden.bs.modal', onHidden).modal('hide');
     },
 
-    open: function() {
+    open: function () {
         var me = this;
         $(this.getDOMNode()).one('shown.bs.modal', function () {
             me.props.onShown();
         }).modal('show');
     },
 
-    render: function() {
+    render: function () {
         var confirmButton = null;
         var cancelButton = null;
 
@@ -97,7 +97,7 @@ var BootstrapModal = React.createClass({
         }
     },
 
-    handleConfirm: function() {
+    handleConfirm: function () {
         if (this.props.onConfirm) {
             this.props.onConfirm();
         }

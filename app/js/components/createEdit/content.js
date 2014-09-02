@@ -9,7 +9,7 @@ var Content = React.createClass({
     /*jshint ignore:start */
     render: function () {
         var firstElement = true;
-        var navLinks = React.Children.map(this.props.children, function(child) {
+        var navLinks = React.Children.map(this.props.children, function (child) {
             var classes = classSet({
                 'active': firstElement
             })

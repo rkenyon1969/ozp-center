@@ -24,7 +24,7 @@ var Quickview = React.createClass({
         listing: React.PropTypes.object
     },
 
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             shown: false
         };

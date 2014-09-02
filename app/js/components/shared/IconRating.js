@@ -8,7 +8,7 @@ var _IconRating = require('react-icon-rating');
 
 var IconRating = React.createClass({
 
-    getDefaultProps: function() {
+    getDefaultProps: function () {
         return {
             className: 'icon-rating',
             toggledClassName: 'fa fa-star',
@@ -17,7 +17,7 @@ var IconRating = React.createClass({
         };
     },
 
-    render: function() {
+    render: function () {
         /* jshint ignore:start */
         return this.transferPropsTo(
             <_IconRating

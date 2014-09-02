@@ -13,7 +13,7 @@ module.exports = React.createClass({
         options: React.PropTypes.object
     },
 
-    getDefaultProps: function() {
+    getDefaultProps: function () {
         return {
             options: {
                 auto: false,

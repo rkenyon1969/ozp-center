@@ -191,7 +191,7 @@ var CreateEditPage = React.createClass({
         /*jshint ignore:end */
     },
 
-    renderTags: function() {
+    renderTags: function () {
         var tags = this.state.listing.tags;
 
         /*jshint ignore:start */

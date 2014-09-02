@@ -55,7 +55,7 @@ var Search = React.createClass({
         fetchMostPopular();
     },
 
-    componentDidMount: function() {
+    componentDidMount: function () {
         this.listenTo(DiscoveryPageStore, this._onChange);
     },
 

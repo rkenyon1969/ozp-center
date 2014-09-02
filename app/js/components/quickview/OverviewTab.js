@@ -16,13 +16,13 @@ var OverviewTab = React.createClass({
         listing: React.PropTypes.object
     },
 
-    getDefaultProps: function() {
+    getDefaultProps: function () {
         return {
             shown: false
         };
     },
 
-    render: function() {
+    render: function () {
         var description = this.props.listing.description() || 'No description provided!';
         var descriptionClasses = React.addons.classSet({
             'text-muted': !this.props.listing.description()

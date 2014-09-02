@@ -17,7 +17,7 @@ var Carousel = React.createClass({
         autoInit: React.PropTypes.bool
     },
 
-    getDefaultProps: function() {
+    getDefaultProps: function () {
         return {
             autoInit: true
         };
@@ -67,7 +67,7 @@ var Carousel = React.createClass({
         }
     },
 
-    componentWillUnmount: function() {
+    componentWillUnmount: function () {
         if (this._$carousel) {
             this._$carousel.trigger('destroy');
         }

@@ -7,8 +7,7 @@ var React = require('react');
 
 var EmptyFieldValue = React.createClass({
 
-    render: function() {
-        var tag = !this.props.inline ? 'span' : 'p';
+    render: function () {
         var text = this.props.text || 'Not provided!';
 
         /* jshint ignore:start */

@@ -44,7 +44,7 @@ var UserReview = React.createClass({
         })
     },
 
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             editing: false
         };
@@ -116,7 +116,7 @@ var ReviewsTab = React.createClass({
         console.log('save review...');
     },
 
-    render: function() {
+    render: function () {
         var currentUserRating = this.state.currentUserRating;
 
         /* jshint ignore:start */
