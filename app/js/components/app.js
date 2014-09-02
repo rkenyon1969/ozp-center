@@ -2,8 +2,6 @@
 'use strict';
 
 var React            = require('react/addons'),
-    Reflux           = require('reflux'),
-    Header           = require('./header'),
     DiscoveryPage    = require('./discovery'),
     CreateEditPage   = require('./createEdit'),
     fetchConfig      = require('../actions/ConfigActions').fetchConfig,
