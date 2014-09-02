@@ -21,7 +21,7 @@ var ListingTile = React.createClass({
         /*jshint ignore:start */
         return this.transferPropsTo(
             <li className="listing listing-tile">
-                <a href="#quickview/1">
+                <a href="javascript:;">
                     <img src={ imageLargeUrl } />
                     <section className="slide-up">
                         <p className="title">{ name }</p>
