@@ -69,6 +69,12 @@ var Search = React.createClass({
         var searching = !!this.state.query;
 
         /*jshint ignore:start */
+        var categories = this.props.config.categories.map(function(category, index) {
+                return (
+                    <li className="facet-group-item">{category.title}</li>
+                );
+        });
+
         return (
             <div>
                 <Header>
@@ -87,17 +93,7 @@ var Search = React.createClass({
                         <ul className="list-unstyled facet-group">
                             <li className=" facet-group-item">Categories</li>
                             <ul className="list-unstyled">
-                                <li className="facet-group-item">Books and Reference</li>
-                                <li className="facet-group-item">Business</li>
-                                <li className="facet-group-item">Communication</li>
-                                <li className="facet-group-item">Education</li>
-                                <li className="facet-group-item">Entertainment</li>
-                                <li className="facet-group-item">Finance</li>
-                                <li className="facet-group-item">Health and Fitness</li>
-                                <li className="facet-group-item">Media and Video</li>
-                                <li className="facet-group-item">News</li>
-                                <li className="facet-group-item">Productivity</li>
-                                <li className="facet-group-item">Tools</li>
+                                {categories}
                             </ul>
                         </ul>
                     </aside>
