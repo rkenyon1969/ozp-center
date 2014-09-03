@@ -34,10 +34,10 @@ module.exports = React.createClass({
                     <TextInput type="text" dataBinder={dataBinder.simpleBinder(contact.name)} label="Name" required maxLength={100} />
                     <TextInput type="text" dataBinder={dataBinder.simpleBinder(contact.organization)} label="Organization" maxLength={100} />
                     <TextInput type="email" ref="email" dataBinder={dataBinder.simpleBinder(contact.email)} label="Email" required maxLength={100} />
-                    <TextInput type="text" ref="securePhone" dataBinder={dataBinder.idBinder(contact.securePhone)}
+                    <TextInput type="text" ref="securePhone" dataBinder={dataBinder.simpleBinder(contact.securePhone)}
                             label="Secure Phone" error={this.state.securePhoneError} maxLength={50}
                             onFocus={this.validatePhone.bind(this, 'secure')} onBlur={this.validatePhone.bind(this, 'secure')} />
-                    <TextInput type="text" ref="unsecurePhone" dataBinder={dataBinder.idBinder(contact.unsecurePhone)}
+                    <TextInput type="text" ref="unsecurePhone" dataBinder={dataBinder.simpleBinder(contact.unsecurePhone)}
                             label="Unsecure Phone" error={this.state.unsecurePhoneError} maxLength={50}
                             onFocus={this.validatePhone.bind(this, 'unsecure')} onBlur={this.validatePhone.bind(this, 'unsecure')} />
                 </div>
