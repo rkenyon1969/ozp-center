@@ -1,28 +1,31 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React   = require('react'),
-    Reflux  = require('reflux');
+var React = require('react');
+var Reflux = require('reflux');
+var contains = require('lodash/collections/contains');
+var without = require('lodash/arrays/without');
+var forOwn = require('lodash/objects/forOwn');
+var assign = require('lodash/objects/assign');
 
 // actions
-var ListingActions      = require('../../actions/ListingActions'),
-    fetchNewArrivals    = ListingActions.fetchNewArrivals,
-    fetchMostPopular    = ListingActions.fetchMostPopular,
-    search              = ListingActions.search;
+var ListingActions = require('../../actions/ListingActions');
+var fetchNewArrivals = ListingActions.fetchNewArrivals;
+var fetchMostPopular = ListingActions.fetchMostPopular;
+var search = ListingActions.search;
 
 // component dependencies
-var Header              = require('../header'),
-    ListingTile         = require('./ListingTile'),
-    FeaturedListings    = require('./FeaturedListings'),
-    Carousel            = require('../carousel'),
-    Quickview           = require('../quickview');
+var Header = require('../header');
+var ListingTile = require('./ListingTile');
+var FeaturedListings = require('./FeaturedListings');
+var Carousel = require('../carousel');
+var Quickview = require('../quickview');
 
 // store dependencies
 var DiscoveryPageStore = require('../../stores/DiscoveryPageStore');
 
 
-// component definition
-var Search = React.createClass({
+var Discovery = React.createClass({
 
     mixins: [ Reflux.ListenerMixin ],
 
@@ -31,22 +34,9 @@ var Search = React.createClass({
             newArrivals: DiscoveryPageStore.getNewArrivals(),
             mostPopular: DiscoveryPageStore.getMostPopular(),
             searchResults: DiscoveryPageStore.getSearchResults(),
-            selectedListing: null
+            selectedListing: null,
+            selectedFilters: (this.state && this.state.selectedFilters) || {}
         };
-    },
-
-    _onChange: function () {
-        this.setState(this.getInitialState());
-    },
-
-    _onSearchInputChange: function () {
-        var query = this.refs.search.getDOMNode().value;
-
-        this.setState({ query: query });
-
-        search({
-            query: query
-        });
     },
 
     componentWillMount: function () {
@@ -56,7 +46,7 @@ var Search = React.createClass({
     },
 
     componentDidMount: function () {
-        this.listenTo(DiscoveryPageStore, this._onChange);
+        this.listenTo(DiscoveryPageStore, this.handleStoreChange);
     },
 
     componentDidUpdate: function (prevProps, prevState) {
@@ -66,13 +56,22 @@ var Search = React.createClass({
     },
 
     render: function () {
-        var searching = !!this.state.query;
+        var me = this;
+        var searching = this.isSearching();
+        var homeLinkClasses = React.addons.classSet({
+            'active': !searching,
+            'facet-group-item': true
+        });
 
         /*jshint ignore:start */
         var categories = this.props.config.categories.map(function(category, index) {
-                return (
-                    <li className="facet-group-item">{category.title}</li>
-                );
+            var classes = React.addons.classSet({
+                active: contains(me.state.selectedFilters.category, category.title),
+                'facet-group-item': true
+            })
+            return (
+                <li className={ classes } onClick={ me.handleFilterToggle.bind(null, 'category', category) }>{category.title}</li>
+            );
         });
 
         return (
@@ -81,17 +80,17 @@ var Search = React.createClass({
                     <form className="navbar-form navbar-left" role="search">
                         <div className="form-group">
                             <i className="fa fa-search"></i>
-                            <input ref="search" type="text" className="form-control" placeholder="Search..." onChange={this._onSearchInputChange} />
+                            <input ref="search" type="text" className="form-control" placeholder="Search..." onChange={this.handleSearchInputChange} />
                         </div>
                     </form>
                 </Header>
                 <div id="discovery">
                     <aside className="sidebar">
                         <ul className="list-unstyled facet-group">
-                            <li className="active facet-group-item">Home</li>
+                            <li className={ homeLinkClasses }>Home</li>
                         </ul>
                         <ul className="list-unstyled facet-group">
-                            <li className=" facet-group-item">Categories</li>
+                            <li className="facet-group-item">Categories</li>
                             <ul className="list-unstyled">
                                 {categories}
                             </ul>
@@ -116,6 +115,63 @@ var Search = React.createClass({
             </div>
         );
         /*jshint ignore:end */
+    },
+
+    isSearching: function () {
+        return (
+            !!this.state.query || this.areFiltersApplied()
+        );
+    },
+
+    areFiltersApplied: function () {
+        var areFiltersApplied = false;
+        forOwn(this.state.selectedFilters, function (value, key) {
+            areFiltersApplied = areFiltersApplied || value.length;
+        });
+        return areFiltersApplied;
+    },
+
+    handleStoreChange: function () {
+        this.setState(this.getInitialState());
+    },
+
+    handleSearchInputChange: function () {
+        var query = this.refs.search.getDOMNode().value;
+
+        this.setState({
+            query: query
+        });
+
+        this._search();
+    },
+
+    handleFilterToggle: function (type, clickedFilter, e) {
+        var values = this.state.selectedFilters[type] || (this.state.selectedFilters[type] = []);
+        var value = clickedFilter.title;
+
+        if (contains(values, value)) {
+            this.state.selectedFilters[type] = without(values, value);
+        }
+        else {
+            values.push(value);
+        }
+
+        this.setState({
+            query: this.refs.search.getDOMNode().value,
+            selectedFilters: this.state.selectedFilters
+        });
+
+        this._search();
+    },
+
+    _search: function () {
+        if (this.isSearching()) {
+            search(
+                assign({
+                    query: this.refs.search.getDOMNode().value
+                }, this.state.selectedFilters)
+            );
+        }
     },
 
     renderFeaturedListings: function () {
@@ -200,7 +256,7 @@ var Search = React.createClass({
                 ref="quickview"
                 listing={ this.state.selectedListing }
                 onHidden={ function () {
-                    me.setState({ selectedListing: null })
+                    me.setState({ selectedListing: null });
                 }}
             />
         );
@@ -208,11 +264,9 @@ var Search = React.createClass({
     },
 
     openQuickview: function (listing) {
-        this.setState({
-            selectedListing: listing
-        });
+        this.setState({ selectedListing: listing });
     }
 
 });
 
-module.exports = Search;
+module.exports = Discovery;
