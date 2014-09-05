@@ -87,10 +87,10 @@ var Discovery = React.createClass({
                 <div id="discovery">
                     <aside className="sidebar">
                         <ul className="list-unstyled facet-group">
-                            <li className={ homeLinkClasses }>Home</li>
+                            <li className={ homeLinkClasses } onClick={ this.clearFilters }>Home</li>
                         </ul>
                         <ul className="list-unstyled facet-group">
-                            <li className="facet-group-item">Categories</li>
+                            <li>Categories</li>
                             <ul className="list-unstyled">
                                 {categories}
                             </ul>
@@ -129,6 +129,23 @@ var Discovery = React.createClass({
             areFiltersApplied = areFiltersApplied || value.length;
         });
         return areFiltersApplied;
+    },
+
+    clearFilters: function () {
+        var selectedFilters = this.state.selectedFilters;
+
+        // clear selected filter array
+        forOwn(selectedFilters, function (value, key) {
+            selectedFilters[key] = selectedFilters[key].length = 0;
+        });
+
+        this.refs.search.getDOMNode().value = '';
+        this.setState({
+            query: '',
+            selectedFilters: selectedFilters
+        });
+
+        this._search();
     },
 
     handleStoreChange: function () {

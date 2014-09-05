@@ -6,6 +6,7 @@ var ListingApi = require('../data/Listing').ListingApi;
 var Actions = Reflux.createActions([
     'fetchNewArrivals', 'newArrivalsFetched',
     'fetchMostPopular', 'mostPopularFetched',
+    'fetchFeatured', 'featuredFetched',
     'search', 'searchCompleted',
     'launch',
     'bookmark', 'bookmarked',
@@ -14,27 +15,19 @@ var Actions = Reflux.createActions([
 
 
 Actions.fetchNewArrivals.listen(function () {
-    ListingApi
-        .getNewArrivals()
-        .then(function (listings) {
-            Actions.newArrivalsFetched(listings);
-        });
+    ListingApi.getNewArrivals().then(Actions.newArrivalsFetched);
 });
 
 Actions.fetchMostPopular.listen(function () {
-    ListingApi
-        .getMostPopular()
-        .then(function (listings) {
-            Actions.mostPopularFetched(listings);
-        });
+    ListingApi.getMostPopular().then(Actions.mostPopularFetched);
+});
+
+Actions.fetchFeatured.listen(function () {
+    ListingApi.getMostPopular().then(Actions.featuredFetched);
 });
 
 Actions.search.listen(function (options) {
-    ListingApi
-        .search(options)
-        .then(function (listings) {
-            Actions.searchCompleted(listings);
-        });
+    ListingApi.search(options).then(Actions.searchCompleted);
 });
 
 Actions.launch.listen(function (listing) {
@@ -46,11 +39,7 @@ Actions.bookmark.listen(function (listing) {
 });
 
 Actions.save.listen(function (data) {
-    ListingApi
-        .save(data)
-        .then(function (listing) {
-            Actions.listingSaved(listing);
-        });
+    ListingApi.save(data).then(Actions.listingSaved);
 });
 
 module.exports = Actions;

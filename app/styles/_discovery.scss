@@ -33,6 +33,10 @@
         position: relative;
         line-height: 2.5em;
 
+        &.facet-group-item {
+            cursor: pointer;
+        }
+
         &.active {
             color: $link-color;
 
