@@ -1,7 +1,7 @@
 'use strict';
 
 var Reflux = require('reflux');
-var ListingApi = require('../data/Listing').ListingApi;
+var ListingApi = require('../api/Listing').ListingApi;
 
 var Actions = Reflux.createActions([
     'fetchNewArrivals', 'newArrivalsFetched',

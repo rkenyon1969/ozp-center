@@ -1,7 +1,7 @@
 'use strict';
 
 var Reflux      = require('reflux'),
-    ConfigApi   = require('../data/Config').ConfigApi,
+    ConfigApi   = require('../api/Config').ConfigApi,
     ConfigItems = require('../constants').configItems,
     capitalize  = require('../utils/string').capitalize;
 
