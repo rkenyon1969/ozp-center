@@ -23,7 +23,7 @@ var DetailsTab = React.createClass({
             return category.title;
         }).join(', ');
         var tags = this.props.listing.tags().map(function (tag) {
-            return tag.tag.title;
+            return tag;
         }).join(', ');
 
         /* jshint ignore:start */
