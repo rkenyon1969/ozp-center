@@ -21,8 +21,8 @@ function Listing (json) {
 
 var ListingApi = {
 
-    getFeaturedListings: function () {
-        return $.getJSON('http://localhost:8080/marketplace/api/search?sort=approvedDate&order=desc&max=24').pipe(function (response) {
+    getFeatured: function () {
+        return $.getJSON('http://localhost:8080/marketplace/api/search?isFeatured=true&sort=avgRate&order=desc&max=24').pipe(function (response) {
             return response.data.map(function (json) {
                 return new Listing(json);
             });

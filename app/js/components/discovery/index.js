@@ -12,6 +12,7 @@ var assign = require('lodash/objects/assign');
 var ListingActions = require('../../actions/ListingActions');
 var fetchNewArrivals = ListingActions.fetchNewArrivals;
 var fetchMostPopular = ListingActions.fetchMostPopular;
+var fetchFeatured = ListingActions.fetchFeatured;
 var search = ListingActions.search;
 
 // component dependencies
@@ -31,6 +32,7 @@ var Discovery = React.createClass({
 
     getInitialState: function () {
         return {
+            featured: DiscoveryPageStore.getFeatured(),
             newArrivals: DiscoveryPageStore.getNewArrivals(),
             mostPopular: DiscoveryPageStore.getMostPopular(),
             searchResults: DiscoveryPageStore.getSearchResults(),
@@ -41,6 +43,7 @@ var Discovery = React.createClass({
 
     componentWillMount: function () {
         // fetch data when instantiated
+        fetchFeatured();
         fetchNewArrivals();
         fetchMostPopular();
     },
@@ -192,14 +195,14 @@ var Discovery = React.createClass({
     },
 
     renderFeaturedListings: function () {
-        if(!this.state.newArrivals.length) {
+        if(!this.state.featured.length) {
             return;
         }
 
         /*jshint ignore:start */
         return (
             <FeaturedListings
-                listings={ this.state.newArrivals }
+                listings={ this.state.featured }
                 handleClick={ this.openQuickview } />
         );
         /*jshint ignore:end */

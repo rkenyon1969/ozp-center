@@ -23,7 +23,7 @@ Actions.fetchMostPopular.listen(function () {
 });
 
 Actions.fetchFeatured.listen(function () {
-    ListingApi.getMostPopular().then(Actions.featuredFetched);
+    ListingApi.getFeatured().then(Actions.featuredFetched);
 });
 
 Actions.search.listen(function (options) {

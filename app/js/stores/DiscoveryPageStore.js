@@ -1,31 +1,38 @@
 'use strict';
 
-var Reflux              = require('reflux'),
-    ListingActions      = require('../actions/ListingActions'),
-    newArrivalsFetched  = ListingActions.newArrivalsFetched,
-    mostPopularFetched  = ListingActions.mostPopularFetched,
-    searchCompleted     = ListingActions.searchCompleted;
+var Reflux = require('reflux');
+var ListingActions = require('../actions/ListingActions');
+var newArrivalsFetched = ListingActions.newArrivalsFetched;
+var mostPopularFetched = ListingActions.mostPopularFetched;
+var featuredFetched = ListingActions.featuredFetched;
+var searchCompleted = ListingActions.searchCompleted;
 
-var _newArrivals     = [],
-    _mostPopular     = [],
-    _searchResults   = [];
+var _newArrivals = [];
+var _mostPopular = [];
+var _featured = [];
+var _searchResults = [];
 
 var DiscoveryPageStore = Reflux.createStore({
 
+    /**
+    * Update local cache when new data is fetched
+    **/
     init: function () {
-        // update cache on new data
         this.listenTo(newArrivalsFetched, function (newArrivals) {
             _newArrivals = newArrivals;
             this.trigger();
         });
 
-        // update cache on new data
         this.listenTo(mostPopularFetched, function (mostPopular) {
             _mostPopular = mostPopular;
             this.trigger();
         });
 
-        // update cache on new data
+        this.listenTo(featuredFetched, function (featured) {
+            _featured = featured;
+            this.trigger();
+        });
+
         this.listenTo(searchCompleted, function (searchResults) {
             _searchResults = searchResults;
             this.trigger();
@@ -38,6 +45,10 @@ var DiscoveryPageStore = Reflux.createStore({
 
     getMostPopular: function () {
         return _mostPopular;
+    },
+
+    getFeatured: function () {
+        return _featured;
     },
 
     getSearchResults: function () {
