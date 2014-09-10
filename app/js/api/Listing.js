@@ -1,5 +1,6 @@
 'use strict';
 
+var $ = require('jquery');
 var prop = require('../utils/prop');
 
 function Listing (json) {

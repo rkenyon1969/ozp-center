@@ -2,6 +2,7 @@
 
 var Reflux = require('reflux');
 var ListingApi = require('../api/Listing').ListingApi;
+var ProfileApi = require('../api/Profile').ProfileApi;
 
 var Actions = Reflux.createActions([
     'fetchNewArrivals', 'newArrivalsFetched',
@@ -9,7 +10,7 @@ var Actions = Reflux.createActions([
     'fetchFeatured', 'featuredFetched',
     'search', 'searchCompleted',
     'launch',
-    'bookmark', 'bookmarked',
+    'addToLibrary', 'addedToLibrary',
     'save', 'listingSaved'
 ]);
 
@@ -34,8 +35,14 @@ Actions.launch.listen(function (listing) {
     window.open(listing.launchUrl());
 });
 
-Actions.bookmark.listen(function (listing) {
-    window.alert('bookmark listing...');
+Actions.addToLibrary.listen(function (listing) {
+    ProfileApi
+        .addToLibrary({
+            serviceItem: {
+                id: 1
+            }
+        })
+        .then(Actions.addedToLibrary);
 });
 
 Actions.save.listen(function (data) {

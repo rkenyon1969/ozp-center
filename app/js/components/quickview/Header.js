@@ -7,7 +7,7 @@ var React = require('react');
 var IconRating = require('../shared/IconRating');
 var ListingActions = require('../../actions/ListingActions');
 var launch = ListingActions.launch;
-var bookmark = ListingActions.bookmark;
+var addToLibrary = ListingActions.addToLibrary;
 
 var QuickviewHeader = React.createClass({
 
@@ -40,7 +40,7 @@ var QuickviewHeader = React.createClass({
                 <div className="quickview-header-actions">
                     <div className="btn-group">
                         <button type="button" className="btn btn-primary" onClick={ this.launch }>Launch</button>
-                        <button type="button" className="btn btn-default" onClick={ this.bookmark }><i className="fa fa-bookmark"></i></button>
+                        <button type="button" className="btn btn-default" onClick={ this.addToLibrary }><i className="fa fa-bookmark"></i></button>
                     </div>
                 </div>
             </div>
@@ -52,8 +52,9 @@ var QuickviewHeader = React.createClass({
         launch(this.props.listing);
     },
 
-    bookmark: function () {
-        bookmark(this.props.listing);
+    addToLibrary: function (e) {
+        e.stopPropagation();
+        addToLibrary(this.props.listing);
     }
 
 });
