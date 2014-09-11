@@ -41,6 +41,6 @@
     "react-icon-rating": "git://github.com/nishp1/react-icon-rating",
     "reflux": "^0.1.6",
     "select2": "^3.5.1-browserify-fix",
-    "react-router": "^0.6.1"
+    "react-router": "nishp1/react-router"
   }
 }
