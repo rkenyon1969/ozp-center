@@ -39,7 +39,7 @@ Actions.addToLibrary.listen(function (listing) {
     ProfileApi
         .addToLibrary({
             serviceItem: {
-                id: 1
+                id: listing.id()
             }
         })
         .then(Actions.addedToLibrary);
