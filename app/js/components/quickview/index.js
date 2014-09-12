@@ -12,6 +12,8 @@ var ReviewsTab = require('./ReviewsTab');
 var DetailsTab = require('./DetailsTab');
 var ResourcesTab = require('./ResourcesTab');
 
+var GlobalListingStore = require('../../stores/GlobalListingStore');
+
 /**
 *
 * Quickview Component.
@@ -26,19 +28,20 @@ var Quickview = React.createClass({
 
     getInitialState: function () {
         return {
-            shown: false
+            shown: false,
+            listing: GlobalListingStore.getById(this.props.params.listingId)
         };
     },
 
     render: function () {
         var shown = this.state.shown;
-        var listing = this.props.listing;
+        var listing = this.state.listing;
         var title = listing.title();
         var avgRate = listing.avgRate();
 
         /* jshint ignore:start */
         return this.transferPropsTo(
-            <Modal ref="modal" className="quickview" onShown={ this.onShown } >
+            <Modal ref="modal" className="quickview" onShown={ this.onShown } onHidden= { this.onHidden }>
                 <Header listing={ listing } onCancel={ this.close } />
                 <div className="tabs-container">
                     <ul className="nav nav-tabs" role="tablist">
@@ -66,6 +69,10 @@ var Quickview = React.createClass({
         this.setState({
             shown: true
         });
+    },
+
+    onHidden: function () {
+        window.history.back();
     },
 
     close: function () {

@@ -1,15 +1,19 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React            = require('react/addons'),
-    DiscoveryPage    = require('./discovery'),
-    CreateEditPage   = require('./createEdit'),
-    fetchConfig      = require('../actions/ConfigActions').fetchConfig,
-    ConfigStoreMixin = require('../stores/ConfigStore').mixin,
-    Router           = require('react-router'),
-    Route            = Router.Route,
-    DefaultRoute     = Router.DefaultRoute,
-    Routes           = Router.Routes;
+var React = require('react');
+var Router = require('react-router');
+var Route = Router.Route;
+var DefaultRoute = Router.DefaultRoute;
+var Routes = Router.Routes;
+var Redirect = Router.Redirect;
+
+var DiscoveryPage = require('./discovery');
+var CreateEditPage = require('./createEdit');
+var Quickview = require('./quickview');
+
+var fetchConfig = require('../actions/ConfigActions').fetchConfig;
+var ConfigStoreMixin = require('../stores/ConfigStore').mixin;
 
 var App = React.createClass({
 
@@ -36,8 +40,11 @@ var App = React.createClass({
 React.renderComponent(
     <Routes>
         <Route handler={App}>
-            <DefaultRoute handler={DiscoveryPage}/>
-            <Route name="new" path="new" handler={CreateEditPage}/>
+            <Route name="home" path="home" handler={ DiscoveryPage }>
+                <Route name="quickview" path="quickview/:listingId" handler={ Quickview } />
+            </Route>
+            <Route name="new" path="/new" handler={ CreateEditPage } />
+            <Redirect to="home" />
         </Route>
     </Routes>,
     document.getElementById('main')

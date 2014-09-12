@@ -2,6 +2,9 @@
 'use strict';
 
 var React = require('react');
+var Router = require('react-router');
+var Link = Router.Link;
+
 var IconRating = require('react-icon-rating');
 var ListingActions = require('../../actions/ListingActions');
 var launch = ListingActions.launch;
@@ -23,7 +26,7 @@ var ListingTile = React.createClass({
         /*jshint ignore:start */
         return this.transferPropsTo(
             <li className="listing listing-tile">
-                <a href="javascript:;">
+                <Link to="quickview" params={{listingId: listing.id()}}>
                     <img src={ imageLargeUrl } />
                     <section className="slide-up">
                         <p className="title">{ name }</p>
@@ -45,7 +48,7 @@ var ListingTile = React.createClass({
                             <button type="button" className="btn btn-default" onClick={ this.addToLibrary }><i className="fa fa-link"></i> Connect</button>
                         </div>
                     </section>
-                </a>
+                </Link>
             </li>
         );
         /*jshint ignore:end */
