@@ -41,7 +41,12 @@ React.renderComponent(
     <Routes>
         <Route handler={App}>
             <Route name="home" path="home" handler={ DiscoveryPage }>
-                <Route name="quickview" path="quickview/:listingId" handler={ Quickview } />
+                <Route name="quickview" path="quickview/:listingId" handler={ Quickview }>
+                    <Route name="quickview-overview" path="overview" handler={ Quickview.OverviewTab } />
+                    <Route name="quickview-reviews" path="reviews" handler={ Quickview.ReviewsTab } />
+                    <Route name="quickview-details" path="details" handler={ Quickview.DetailsTab } />
+                    <Route name="quickview-resources" path="resources" handler={ Quickview.ResourcesTab } />
+                </Route>
             </Route>
             <Route name="new" path="/new" handler={ CreateEditPage } />
             <Redirect to="home" />

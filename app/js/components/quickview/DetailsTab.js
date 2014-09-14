@@ -28,7 +28,7 @@ var DetailsTab = React.createClass({
 
         /* jshint ignore:start */
         return (
-            <div className="tab-pane quickview-details row">
+            <div className="tab-pane active quickview-details row">
                 <div className="col-md-6 col-left">
                     <section>
                         <h5>What&lsquo;s New</h5>

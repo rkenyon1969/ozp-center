@@ -26,7 +26,7 @@ var ListingTile = React.createClass({
         /*jshint ignore:start */
         return this.transferPropsTo(
             <li className="listing listing-tile">
-                <Link to="quickview" params={{listingId: listing.id()}}>
+                <Link to="quickview-overview" params={{listingId: listing.id()}}>
                     <img src={ imageLargeUrl } />
                     <section className="slide-up">
                         <p className="title">{ name }</p>

@@ -14,7 +14,7 @@ var FeaturedListingTile = React.createClass({
         /*jshint ignore:start */
         return this.transferPropsTo(
             <li className="listing listing-tile listing-tile-featured">
-                <Link to="quickview" params={{listingId: listing.id()}}>
+                <Link to="quickview-overview" params={{listingId: listing.id()}}>
                     <img src={ imageLargeUrl } />
                 </Link>
             </li>

@@ -16,7 +16,7 @@ var ResourcesTab = React.createClass({
     /* jshint ignore:start */
     render: function () {
         return (
-            <div className="tab-pane quickview-resources row">
+            <div className="tab-pane active quickview-resources row">
                 <div className="col-md-6 col-left">
                     <section className="documentation">
                         <h5>Documentation</h5>
