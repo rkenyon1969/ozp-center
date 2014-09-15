@@ -2,40 +2,40 @@
 
 var $ = require('jquery');
 
-function getData(response) { return response.data; }
-
-var mock = true;
-
-var DATA_PATH = mock ? './mocks/' : 'http://localhost:8080/marketplace/api/';
+function getData (response) {
+    return response.data;
+}
 
 var ConfigApi = {
+
     getTypes: function () {
-        return $.getJSON(DATA_PATH + (mock ? 'type.json' : 'type')).pipe(getData);
+        return $.getJSON('http://localhost:8080/marketplace/api/type').pipe(getData);
     },
 
     getCategories: function () {
-        return $.getJSON(DATA_PATH + (mock ? 'category.json' : 'category')).pipe(getData);
+        return $.getJSON('http://localhost:8080/marketplace/api/category').pipe(getData);
     },
 
     getIntentActions: function () {
-        return $.getJSON(DATA_PATH + (mock ? 'intentAction.json' : 'intentAction')).pipe(getData);
+        return $.getJSON('http://localhost:8080/marketplace/api/intentAction').pipe(getData);
     },
 
     getIntentDataTypes: function () {
-        return $.getJSON(DATA_PATH + (mock ? 'intentDataType.json' : 'intentDataType')).pipe(getData);
+        return $.getJSON('http://localhost:8080/marketplace/api/intentDataType').pipe(getData);
     },
 
     getContactTypes: function () {
-        return $.getJSON(DATA_PATH + (mock ? 'contactType.json' : 'contactType')).pipe(getData);
+        return $.getJSON('http://localhost:8080/marketplace/api/contactType').pipe(getData);
     },
 
     getOrganizations: function () {
-        return $.getJSON(DATA_PATH + (mock ? 'agency.json' : 'agency')).pipe(getData);
+        return $.getJSON('http://localhost:8080/marketplace/api/agency').pipe(getData);
     },
 
     getUsers: function () {
-        return $.getJSON(DATA_PATH + (mock ? 'profile.json' : 'profile')).pipe(getData);
+        return $.getJSON('http://localhost:8080/marketplace/api/profile').pipe(getData);
     }
+
 };
 
 module.exports.ConfigApi = ConfigApi;
