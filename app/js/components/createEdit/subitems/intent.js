@@ -12,25 +12,23 @@ module.exports = React.createClass({
 
     render: function () {
         var optionMap = function (json) {
+            var intent = json.mediaType + json.action;
             /*jshint ignore:start */
-            return <option value={json.id}>{json.title}</option>;
+            return <option value={intent}>{intent}</option>;
             /*jshint ignore:end */
         };
 
-        var actions = this.state.config.intentActions.map(optionMap);
-        var dataTypes = this.state.config.intentDataTypes.map(optionMap);
+        var intentComponents = this.state.config.intents.map(optionMap);
 
         var intent = this.props.item;
+
         /*jshint ignore: start */
         return (
             <div className="row form-card">
                 <div className="col-sm-12">
                     {!this.props.locked && this.renderDeleteBtn()}
-                    <Select required label="Action" dataBinder={dataBinder.idBinder(intent.action.id)} data-placeholder="Select an Action">
-                        {actions}
-                    </Select>
-                    <Select required label="Data Type" dataBinder={dataBinder.idBinder(intent.dataType.id)} data-placeholder="Select a Data Type">
-                        {dataTypes}
+                    <Select required label="Data Type" dataBinder={dataBinder.simpleBinder(intent)} data-placeholder="Select an Intent">
+                        { intentComponents }
                     </Select>
                 </div>
             </div>

@@ -16,12 +16,8 @@ var ConfigApi = {
         return $.getJSON('http://localhost:8080/marketplace/api/category').pipe(getData);
     },
 
-    getIntentActions: function () {
-        return $.getJSON('http://localhost:8080/marketplace/api/intentAction').pipe(getData);
-    },
-
-    getIntentDataTypes: function () {
-        return $.getJSON('http://localhost:8080/marketplace/api/intentDataType').pipe(getData);
+    getIntents: function () {
+        return $.getJSON('http://localhost:8080/marketplace/api/intent').pipe(getData);
     },
 
     getContactTypes: function () {

@@ -5,7 +5,6 @@ var Cortex        = require('cortexjs'),
     Simple        = require('./simple'),
     Contact       = require('./contact'),
     Resource      = require('./resource'),
-    Intent        = require('./intent'),
     Screenshot    = require('./screenshot');
 
 var arr = Defaults.arr,
@@ -26,7 +25,7 @@ module.exports = new Defaults({
     imageXlargeUrl: str(),
     launchUrl: str(),
     owfProperties: obj({
-        intents: arr(Intent),
+        intents: arr(str()),
     }),
     owners: arr(Simple),
     screenshots: arr(Screenshot),
