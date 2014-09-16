@@ -25,7 +25,7 @@ gulp.task('dev', ['sass', 'copy', 'vendor', 'fonts'], function () {
     // refresh app on sass, images and html changes
     gulp.watch(['app/styles/**/*'], ['sass', reloadApp]);
 
-    gulp.watch(['app/images/**/*', 'app/js/mocks/**/*', 'app/index.html'], ['copy', reloadApp]);
+    gulp.watch(['app/images/**/*', 'app/index.html'], ['copy', reloadApp]);
 
     // refersh app manually
     function reloadApp () {

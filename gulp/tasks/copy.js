@@ -1,10 +1,6 @@
 var gulp = require('gulp');
 
-gulp.task('copy:mocks', function() {
-    return gulp.src(['app/js/mocks/*.*',]).pipe(gulp.dest('dist/mocks'));
-});
-
-gulp.task('copy', ['copy:mocks'], function() {
+gulp.task('copy', function() {
     return gulp.src([
         'app/**/*',
         '!app/js',
