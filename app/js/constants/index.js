@@ -4,8 +4,7 @@ module.exports = {
     configItems: [
         'types',
         'categories',
-        'intentActions',
-        'intentDataTypes',
+        'intents',
         'contactTypes',
         'organizations',
         'users'
