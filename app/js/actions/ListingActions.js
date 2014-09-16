@@ -1,5 +1,6 @@
 'use strict';
 
+var Router = require('react-router');
 var Reflux = require('reflux');
 var ListingApi = require('../api/Listing').ListingApi;
 var ProfileApi = require('../api/Profile').ProfileApi;
@@ -11,7 +12,7 @@ var Actions = Reflux.createActions([
     'search', 'searchCompleted',
     'launch',
     'addToLibrary', 'addedToLibrary',
-    'save', 'listingSaved'
+    'save', 'saved', 'saveFailed'
 ]);
 
 
@@ -46,7 +47,13 @@ Actions.addToLibrary.listen(function (listing) {
 });
 
 Actions.save.listen(function (data) {
-    ListingApi.save(data).then(Actions.listingSaved);
+    ListingApi
+        .save(data)
+        .then(Actions.saved)
+        .then(function () {
+            Router.transitionTo('/');
+        })
+        .fail(Actions.saveFailed);
 });
 
 module.exports = Actions;

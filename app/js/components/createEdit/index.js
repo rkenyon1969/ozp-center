@@ -22,11 +22,15 @@ var React            = require('react'),
     TextArea         = require('../form/textArea'),
     Select           = require('../form/select'),
     TagSelect        = require('../form/tagSelect'),
-    saveListing      = require('../../actions/ListingActions').save;
+    save             = require('../../actions/ListingActions').save;
 
 require('bootstrap');
 
 var CreateEditPage = React.createClass({
+
+    getInitialState: function () {
+        return {listing: new ListingCortex(this.props.config)};
+    },
 
     /*jshint ignore:start */
     render: function () {
@@ -137,6 +141,23 @@ var CreateEditPage = React.createClass({
     },
     /*jshint ignore:end */
 
+    componentDidMount: function () {
+        var me = this;
+        this.state.listing.on('update', function () {
+            me.setState({listing: me.state.listing});
+        });
+
+        this._$scrollspy = $('body').scrollspy({
+            target: '#create-edit-tab-container'
+        }).data('bs.scrollspy');
+    },
+
+    componentWillUnmount: function () {
+        this.state.listing.off('update');
+        this._$scrollspy.$scrollElement.off('scroll.bs.scrollspy');
+        this._$scrollspy.$body.removeData('bs.scrollspy');
+    },
+
     renderTypeSelector: function () {
         var types = [],
             typeDefs = [],
@@ -232,38 +253,17 @@ var CreateEditPage = React.createClass({
         /*jshint ignore:start */
         return (
             <Select label="Owners" description="Person(s) responsible for this listing"
-                    dataBinder={dataBinder.simpleBinder(owners)} required multiple data-placeholder="Select a Person">
+                    dataBinder={dataBinder.objCollectionBinder(owners)} required multiple data-placeholder="Select owner(s)">
                 {options}
             </Select>
         );
         /*jshint ignore:end */
     },
 
-    getInitialState: function () {
-        return {listing: new ListingCortex(this.props.config)};
-    },
-
-    componentDidMount: function () {
-        var me = this;
-        this.state.listing.on('update', function () {
-            me.setState({listing: me.state.listing});
-        });
-
-        this._$scrollspy = $('body').scrollspy({
-            target: '#create-edit-tab-container'
-        }).data('bs.scrollspy');
-    },
-
-    componentWillUnmount: function () {
-        this.state.listing.off('update');
-        this._$scrollspy.$scrollElement.off('scroll.bs.scrollspy');
-        this._$scrollspy.$body.removeData('bs.scrollspy');
-    },
-
-    handleSubmit: function () {
-        saveListing(this.state.listing.val());
+    handleSubmit: function (e) {
+        e.preventDefault();
+        save(this.state.listing.val());
     }
 
 });
-
 module.exports = CreateEditPage;
