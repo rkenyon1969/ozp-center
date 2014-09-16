@@ -13,6 +13,8 @@ function Listing (json) {
         'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls'
     ];
 
+    json.intents = json.intents || [];
+
     keys.forEach(function (key) {
         this[key] = prop(json[key]);
     }.bind(this));
