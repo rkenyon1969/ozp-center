@@ -17,6 +17,7 @@ var search = ListingActions.search;
 
 // component dependencies
 var Header = require('../header');
+var Sidebar = require('./Sidebar');
 var ListingTile = require('./ListingTile');
 var FeaturedListings = require('./FeaturedListings');
 var Carousel = require('../carousel');
@@ -49,7 +50,7 @@ var Discovery = React.createClass({
     },
 
     componentDidMount: function () {
-        this.listenTo(DiscoveryPageStore, this.handleStoreChange);
+        this.listenTo(DiscoveryPageStore, this.onStoreChange);
     },
 
     componentDidUpdate: function (prevProps, prevState) {
@@ -59,49 +60,32 @@ var Discovery = React.createClass({
     },
 
     render: function () {
-        var me = this;
-        var searching = this.isSearching();
-        var homeLinkClasses = React.addons.classSet({
-            'active': !searching,
-            'facet-group-item': true
-        });
+        var isSearching = this.isSearching();
+        var isBrowsing = this.isBrowsing();
 
         /*jshint ignore:start */
-        var categories = this.props.config.categories.map(function(category, index) {
-            var classes = React.addons.classSet({
-                active: contains(me.state.selectedFilters.category, category.title),
-                'facet-group-item': true
-            })
-            return (
-                <li className={ classes } onClick={ me.handleFilterToggle.bind(null, 'category', category) }>{category.title}</li>
-            );
-        });
-
         return (
             <div>
                 <Header>
                     <form className="navbar-form navbar-left" role="search">
                         <div className="form-group">
                             <i className="fa fa-search"></i>
-                            <input ref="search" type="text" className="form-control" placeholder="Search..." onChange={this.handleSearchInputChange} />
+                            <input
+                                ref="search" type="text" className="form-control" placeholder="Search..." value={ this.state.query }
+                                onChange={ this.onSearchInputChange } />
                         </div>
                     </form>
                 </Header>
                 <div id="discovery">
-                    <aside className="sidebar">
-                        <ul className="list-unstyled facet-group">
-                            <li className={ homeLinkClasses } onClick={ this.clearFilters }>Home</li>
-                        </ul>
-                        <ul className="list-unstyled facet-group">
-                            <li>Categories</li>
-                            <ul className="list-unstyled">
-                                {categories}
-                            </ul>
-                        </ul>
-                    </aside>
+                    <Sidebar
+                        ref="sidebar"
+                        isSearching= { isSearching }
+                        config={ this.props.config }
+                        onGoHome= { this.reset }
+                        onFilterChange= { this.search } />
                     <section>
                         {
-                            searching ?
+                            isBrowsing ?
                                 this.renderSearchResults() :
                                 [
                                     this.renderFeaturedListings(),
@@ -120,78 +104,40 @@ var Discovery = React.createClass({
         /*jshint ignore:end */
     },
 
-    isSearching: function () {
-        return (
-            !!this.state.query || this.areFiltersApplied()
-        );
-    },
-
-    areFiltersApplied: function () {
-        var areFiltersApplied = false;
-        forOwn(this.state.selectedFilters, function (value, key) {
-            areFiltersApplied = areFiltersApplied || value.length;
-        });
-        return areFiltersApplied;
-    },
-
-    clearFilters: function () {
-        var selectedFilters = this.state.selectedFilters;
-
-        // clear selected filter array
-        forOwn(selectedFilters, function (value, key) {
-            selectedFilters[key] = selectedFilters[key].length = 0;
-        });
-
-        this.refs.search.getDOMNode().value = '';
-        this.setState({
-            query: '',
-            selectedFilters: selectedFilters
-        });
-
-        this._search();
-    },
-
-    handleStoreChange: function () {
+    onStoreChange: function () {
         this.setState(this.getInitialState());
     },
 
-    handleSearchInputChange: function () {
-        var query = this.refs.search.getDOMNode().value;
-
+    onSearchInputChange: function () {
         this.setState({
-            query: query
+            query: this.refs.search.getDOMNode().value
         });
 
-        this._search();
+        this.search();
     },
 
-    handleFilterToggle: function (type, clickedFilter, e) {
-        var values = this.state.selectedFilters[type] || (this.state.selectedFilters[type] = []);
-        var value = clickedFilter.title;
+    isSearching: function () {
+        return !!this.state.query;
+    },
 
-        if (contains(values, value)) {
-            this.state.selectedFilters[type] = without(values, value);
-        }
-        else {
-            values.push(value);
-        }
+    isBrowsing: function () {
+        var sidebar = this.refs.sidebar;
+        return (this.isSearching() || (sidebar && sidebar.areFiltersApplied()));
+    },
 
+    reset: function () {
         this.setState({
-            query: this.refs.search.getDOMNode().value,
-            selectedFilters: this.state.selectedFilters
+            query: ''
         });
-
-        this._search();
+        this.search();
     },
 
-    _search: function () {
-        if (this.isSearching()) {
-            search(
-                assign({
-                    query: this.refs.search.getDOMNode().value
-                }, this.state.selectedFilters)
-            );
-        }
+    search: function () {
+        search(
+            assign({
+                query: this.refs.search.getDOMNode().value
+            }, this.refs.sidebar.state.selectedFilters)
+        );
     },
 
     renderFeaturedListings: function () {
