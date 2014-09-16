@@ -37,8 +37,7 @@ var Discovery = React.createClass({
             newArrivals: DiscoveryPageStore.getNewArrivals(),
             mostPopular: DiscoveryPageStore.getMostPopular(),
             searchResults: DiscoveryPageStore.getSearchResults(),
-            selectedListing: null,
-            selectedFilters: (this.state && this.state.selectedFilters) || {}
+            selectedListing: null
         };
     },
 
