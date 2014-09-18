@@ -24,14 +24,12 @@ module.exports = new Defaults({
     imageSmallUrl: str(),
     imageXlargeUrl: str(),
     launchUrl: str(),
-    owfProperties: obj({
-        intents: arr(str()),
-    }),
+    intents: arr(str()),
     owners: arr(Simple),
     screenshots: arr(Screenshot),
     tags: arr(str()),
     title: str(),
-    types: Simple,
+    type: Simple,
     versionName: str(),
     whatIsNew: str()
 });
