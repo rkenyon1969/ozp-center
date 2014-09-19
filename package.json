@@ -35,12 +35,13 @@
   "name": "center-ui",
   "version": "0.0.1",
   "dependencies": {
+    "bootstrap-sass": "git://github.com/ozone-development/bootstrap-sass",
     "cortexjs": "^0.6.0",
     "lodash-amd": "^2.4.1",
     "react": "^0.11.1",
     "react-icon-rating": "git://github.com/nishp1/react-icon-rating",
+    "react-router": "nishp1/react-router",
     "reflux": "^0.1.6",
-    "select2": "^3.5.1-browserify-fix",
-    "react-router": "nishp1/react-router"
+    "select2": "^3.5.1-browserify-fix"
   }
 }

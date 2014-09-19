@@ -19,7 +19,7 @@ module.exports = {
         alias: {
             react$: "react/addons",
             jquery$: "jquery/dist/jquery",
-            bootstrap$: "bootstrap-sass-official/assets/javascripts/bootstrap",
+            bootstrap$: "bootstrap-sass/assets/javascripts/bootstrap",
             carouFredSel$: "carouFredSel/jquery.carouFredSel-6.2.1",
             lodash: "lodash-amd/modern",
             "magnific-popup$": "magnific-popup/dist/jquery.magnific-popup",

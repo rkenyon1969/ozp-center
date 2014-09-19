@@ -1,8 +1,8 @@
-$icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+$icon-font-path: "../../node_modules/bootstrap-sass/assets/fonts/bootstrap/";
 $fa-font-path: "../../bower_components/font-awesome/fonts/";
 
 @import 'colors';
-@import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
+@import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap.scss";
 @import "../../bower_components/magnific-popup/src/css/main.scss";
 @import "../../bower_components/font-awesome/scss/font-awesome.scss";
 @import "../../node_modules/select2/select2.css";
@@ -60,10 +60,10 @@ html, body {
     }
 }
 
-.btn.btn-default:hover {
-    background-color: $btn-primary-bg;
-    color: $btn-primary-color;
-}
+// .btn.btn-default:hover {
+//     background-color: $btn-primary-bg;
+//     color: $btn-primary-color;
+// }
 
 @import 'carousel';
 @import 'header';
