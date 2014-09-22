@@ -3,7 +3,7 @@
 var $ = require('jquery');
 
 function getData (response) {
-    return response.data;
+    return response.data || response;
 }
 
 var ConfigApi = {
