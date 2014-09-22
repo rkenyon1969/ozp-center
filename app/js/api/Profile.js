@@ -6,7 +6,7 @@ var ProfileApi = {
 
     addToLibrary: function (json) {
         return $.ajax({
-            url: 'http://localhost:8080/marketplace/api/profile/self/library',
+            url: API_URL + '/api/profile/self/library',
             type: 'post',
             dataType: 'json',
             contentType: 'application/json',

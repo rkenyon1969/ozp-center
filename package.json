@@ -2,8 +2,11 @@
   "author": "",
   "description": "",
   "scripts": {
+    "install": "bower install",
     "start": "gulp dev",
-    "install": "bower install"
+    "build": "NODE_ENV=\"production\" gulp build",
+    "buildGhPages": "API_URL=\"https://www.owfgoss.org/ng/dev/mp\" gulp build",
+    "deployGhPages": "npm run buildGhPages && gulp deploy"
   },
   "devDependencies": {
     "bower": "^1.3.8",
@@ -30,7 +33,8 @@
     "script-loader": "^0.5.2",
     "url-loader": "^0.5.5",
     "webpack": "^1.3.3-beta1",
-    "webpack-dev-server": "^1.4.9"
+    "webpack-dev-server": "^1.4.9",
+    "gulp-gh-pages": "^0.3.4"
   },
   "name": "center-ui",
   "version": "0.0.1",
