@@ -23,6 +23,7 @@
     "$": true,
     "jQuery": true,
     "React": true,
-    "API_URL": true
+    "API_URL": true,
+    "LOGOUT_URL": true
   }
 }
