@@ -5,7 +5,7 @@
     "install": "bower install",
     "start": "gulp dev",
     "build": "NODE_ENV=\"production\" gulp build",
-    "buildGhPages": "API_URL=\"https://www.owfgoss.org/ng/dev/mp\" LOGOUT_URL=\"../hud-ui/login.html\" gulp build",
+    "buildGhPages": "API_URL=\"http://ec2-54-68-201-132.us-west-2.compute.amazonaws.com:8080/marketplace\" LOGOUT_URL=\"../hud-ui/login.html\" gulp build",
     "deployGhPages": "npm run buildGhPages && gulp deploy"
   },
   "devDependencies": {
