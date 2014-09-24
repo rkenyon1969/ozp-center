@@ -51,16 +51,9 @@ var ListingApi = {
     search: function (options) {
         var params = $.param(options, true);
         return $.getJSON(API_URL + '/api/search?' + params).pipe(function (response) {
-            var listings = [];
-
-            response.data.forEach(function (json) {
-                var listing = new Listing(json);
-                if (listing.title().toLowerCase().indexOf(options.query.toLowerCase()) > -1) {
-                    listings.push(listing);
-                }
+            return response.data.map(function (json) {
+                return new Listing(json);
             });
-
-            return listings;
         });
     },
 
