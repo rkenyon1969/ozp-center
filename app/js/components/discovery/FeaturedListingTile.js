@@ -7,13 +7,13 @@ var ListingTile = React.createClass({
 
     render: function () {
         var listing = this.props.listing;
-        var imageXlargeUrl = listing.imageXlargeUrl();
+        var image = listing.imageXlargeUrl();
 
         /*jshint ignore:start */
         return this.transferPropsTo(
             <li className="listing listing-tile listing-tile-featured">
                 <a href="javascript:;">
-                    <img src={ imageXlargeUrl } />
+                    <img src={ image } />
                 </a>
             </li>
         );
