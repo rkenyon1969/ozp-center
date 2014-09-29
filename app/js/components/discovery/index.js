@@ -109,14 +109,14 @@ var Discovery = React.createClass({
 
     onSearchInputChange: function () {
         this.setState({
-            query: this.refs.search.getDOMNode().value
+            queryString: this.refs.search.getDOMNode().value
         });
 
         this.search();
     },
 
     isSearching: function () {
-        return !!this.state.query;
+        return !!this.state.queryString;
     },
 
     isBrowsing: function () {
@@ -126,7 +126,7 @@ var Discovery = React.createClass({
 
     reset: function () {
         this.setState({
-            query: ''
+            queryString: ''
         });
         this.search();
     },
@@ -134,7 +134,7 @@ var Discovery = React.createClass({
     search: function () {
         search(
             assign({
-                query: this.refs.search.getDOMNode().value
+                queryString: this.refs.search.getDOMNode().value
             }, this.refs.sidebar.state.selectedFilters)
         );
     },
