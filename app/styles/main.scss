@@ -86,6 +86,10 @@ i {
 i.fa-star, i.fa-star-half-o {
     color: $star-color;
 }
+i.fa-star-o:before {
+    color: #dbdcdd;
+    content: "\f005";
+}
 
 label {
     font-weight: 400;
