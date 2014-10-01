@@ -160,7 +160,7 @@ var Discovery = React.createClass({
 
         /*jshint ignore:start */
         return (
-            <section>
+            <section className="Discovery__NewArrivals">
                 <h4>New Arrivals</h4>
                 <Carousel className="new-arrival-listings">
                     { this._renderListings(this.state.newArrivals) }
@@ -177,7 +177,7 @@ var Discovery = React.createClass({
 
         /*jshint ignore:start */
         return (
-            <section>
+            <section className="Discovery__MostPopular">
                 <h4>Most Popular</h4>
                 <Carousel className="most-popular-listings">
                     { this._renderListings(this.state.mostPopular) }
@@ -190,7 +190,7 @@ var Discovery = React.createClass({
     renderSearchResults: function () {
         /*jshint ignore:start */
         return (
-            <section>
+            <section className="Discovery__SearchResults">
                 <h4>Search Results</h4>
                 <ul className="list-unstyled listings-search-results">
                     { this._renderListings(this.state.searchResults) }
