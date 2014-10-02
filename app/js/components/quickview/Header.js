@@ -22,7 +22,7 @@ var QuickviewHeader = React.createClass({
         var listing = this.props.listing;
         var title = listing.title();
         var avgRate = listing.avgRate();
-        var image = listing.imageSmallUrl();
+        var image = listing.imageMediumUrl();
         var isListingInLibrary = ProfileStore.isListingInLibrary(listing.uuid());
 
         /* jshint ignore:start */
