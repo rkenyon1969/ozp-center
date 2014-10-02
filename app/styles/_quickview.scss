@@ -59,6 +59,10 @@ $quickview-nav-tabs-height: 42px;
         position: absolute;
         right: 60px;
         top: 23px;
+
+        .active {
+            background: #ecc44d;
+        }
     }
 
     .listing-icon {

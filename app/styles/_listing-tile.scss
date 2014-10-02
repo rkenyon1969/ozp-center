@@ -72,7 +72,12 @@
     }
 
     .actions {
-        margin-left: 40px;
+        margin-left: 64px;
+
+        > .active {
+            background: #ecc44d;
+            color: #fff;
+        }
     }
 
     &:hover, &:focus {

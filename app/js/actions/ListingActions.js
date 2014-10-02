@@ -12,6 +12,7 @@ var Actions = Reflux.createActions([
     'search', 'searchCompleted',
     'launch',
     'addToLibrary', 'addedToLibrary',
+    'removeFromLibrary', 'removedFromLibrary',
     'save', 'saved', 'saveFailed'
 ]);
 
@@ -43,7 +44,13 @@ Actions.addToLibrary.listen(function (listing) {
                 id: listing.id()
             }
         })
-        .then(Actions.addedToLibrary);
+        .then(Actions.addedToLibrary.bind(null, listing));
+});
+
+Actions.removeFromLibrary.listen(function (listing) {
+    ProfileApi
+        .removeFromLibrary(listing)
+        .then(Actions.removedFromLibrary.bind(null, listing));
 });
 
 Actions.save.listen(function (data) {
