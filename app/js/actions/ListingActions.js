@@ -2,8 +2,8 @@
 
 var Router = require('react-router');
 var Reflux = require('reflux');
-var ListingApi = require('../api/Listing').ListingApi;
-var ProfileApi = require('../api/Profile').ProfileApi;
+var ListingApi = require('../webapi/Listing').ListingApi;
+var ProfileApi = require('../webapi/Profile').ProfileApi;
 
 var Actions = Reflux.createActions([
     'fetchNewArrivals', 'newArrivalsFetched',
