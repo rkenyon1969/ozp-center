@@ -74,6 +74,7 @@ var ListingTile = React.createClass({
     },
 
     addToLibrary: function (e) {
+        e.preventDefault();
         e.stopPropagation();
         if (ProfileStore.isListingInLibrary(this.props.listing.uuid())) {
             removeFromLibrary(this.props.listing);
