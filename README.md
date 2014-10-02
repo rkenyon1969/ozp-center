@@ -20,9 +20,10 @@ npm install
 Next, run `npm start` or `gulp dev`. Go to http://localhost:8000/webpack-dev-server/dist and browser will automatically reload when any file in /app changes. Alternatively, you can also go to http://localhost:8000/dist, if auto reload is undesirable.
 
 ## Available tasks
-* `gulp` shows all available commands.
-* `gulp dev` implements an http server and a live reload server.
-* `gulp build --production` generates production build at ./dist directory with minified versions of JS and CSS. Contents of ./dist directory can then be copied to a web server.
+See `scripts` key in `package.json` for all options.
+* `npm start` implements an http server and a live reload server.
+* `npm run build` generates production build at ./dist directory with minified versions of JS and CSS. Contents of ./dist directory can then be copied to a web server.
+* `npm run deployGhPages` runs a build with demo configs and deploys ./dist to github pages.
 
 [travis-url]: https://travis-ci.org/ozone-development/center-ui
 [travis-image]: https://travis-ci.org/ozone-development/center-ui.svg

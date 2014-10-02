@@ -15,7 +15,7 @@ var DetailsTab = React.createClass({
     render: function () {
         var whatsNew = this.props.listing.whatsNew();
         var organization = this.props.listing.organization();
-        var type = this.props.listing.types().title;
+        var type = this.props.listing.type().title;
         var URL = this.props.listing.launchUrl();
         var updatedDate = this.props.listing.editedDate();
         var releaseDate = this.props.listing.releaseDate();

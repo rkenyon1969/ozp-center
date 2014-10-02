@@ -5,9 +5,11 @@
 
 var React = require('react');
 var IconRating = require('../shared/IconRating');
+var ProfileStore = require('../../stores/ProfileStore');
 var ListingActions = require('../../actions/ListingActions');
 var launch = ListingActions.launch;
 var addToLibrary = ListingActions.addToLibrary;
+var removeFromLibrary = ListingActions.removeFromLibrary;
 
 var QuickviewHeader = React.createClass({
 
@@ -20,7 +22,8 @@ var QuickviewHeader = React.createClass({
         var listing = this.props.listing;
         var title = listing.title();
         var avgRate = listing.avgRate();
-        var image = listing.imageSmallUrl();
+        var image = listing.imageMediumUrl();
+        var isListingInLibrary = ProfileStore.isListingInLibrary(listing.uuid());
 
         /* jshint ignore:start */
         return (
@@ -32,17 +35,28 @@ var QuickviewHeader = React.createClass({
                     <IconRating
                         className="icon-rating"
                         viewOnly
-                        currentRating = { avgRate }
+                        currentRating= { avgRate }
                         toggledClassName="fa fa-star"
                         untoggledClassName="fa fa-star-o"
                         halfClassName="fa fa-star-half-o" />
                 </div>
-                <div className="quickview-header-actions">
-                    <div className="btn-group">
-                        <button type="button" className="btn btn-primary" onClick={ this.launch }>Launch</button>
-                        <button type="button" className="btn btn-default" onClick={ this.addToLibrary }><i className="fa fa-bookmark"></i></button>
-                    </div>
-                </div>
+                { this.renderActions() }
+            </div>
+        );
+        /* jshint ignore:end */
+    },
+
+    renderActions: function () {
+        var bookmarkBtnStyles = React.addons.classSet({
+            'btn btn-default': true,
+            'active': ProfileStore.isListingInLibrary(this.props.listing.uuid())
+        });
+
+        /* jshint ignore:start */
+        return (
+            <div className="btn-group quickview-header-actions">
+                <button type="button" className="btn btn-default" onClick={ this.launch }><i className="fa fa-external-link"></i></button>
+                <button type="button" className={ bookmarkBtnStyles } onClick={ this.addToLibrary }><i className="fa fa-bookmark"></i></button>
             </div>
         );
         /* jshint ignore:end */
@@ -54,7 +68,12 @@ var QuickviewHeader = React.createClass({
 
     addToLibrary: function (e) {
         e.stopPropagation();
-        addToLibrary(this.props.listing);
+        if (ProfileStore.isListingInLibrary(this.props.listing.uuid())) {
+            removeFromLibrary(this.props.listing);
+        }
+        else {
+            addToLibrary(this.props.listing);
+        }
     }
 
 });

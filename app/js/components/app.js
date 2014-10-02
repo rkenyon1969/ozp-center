@@ -7,20 +7,28 @@ var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
 var Routes = Router.Routes;
 var Redirect = Router.Redirect;
-
 var DiscoveryPage = require('./discovery');
 var CreateEditPage = require('./createEdit');
-var Quickview = require('./quickview');
-
-var fetchConfig = require('../actions/ConfigActions').fetchConfig;
 var ConfigStoreMixin = require('../stores/ConfigStore').mixin;
+var ProfileStore = require('../stores/ProfileStore');
+var Quickview = require('./quickview');
+var ConfigActions = require('../actions/ConfigActions');
+var fetchConfig = ConfigActions.fetchConfig;
+var ProfileActions = require('../actions/ProfileActions');
+var fetchLibrary = ProfileActions.fetchLibrary;
 
 var App = React.createClass({
 
     mixins: [ ConfigStoreMixin ],
 
+    getInitialState: function() {
+        return {
+            libraryFetched: false 
+        };
+    },
+
     render: function () {
-        if(!this.state.config.loaded) {
+        if(!this.state.config.loaded || !this.state.libraryFetched) {
             /*jshint ignore:start */
             return <p>Loading...</p>;
             /*jshint ignore:end */
@@ -32,6 +40,18 @@ var App = React.createClass({
 
     componentWillMount: function () {
         fetchConfig();
+        fetchLibrary();
+    },
+
+    componentDidMount: function () {
+        this.listenTo(ProfileStore, this.onStoreChanged);
+    },
+
+    onStoreChanged: function () {
+        this.setState({
+            libraryFetched: true,
+            library: ProfileStore.getLibrary()
+        });
     }
 
 });

@@ -22,7 +22,7 @@ html, body {
     height: auto !important;
     width: 1260px;
 
-    background: #e8e8e8;
+    background: #eeeeef;
     -moz-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
     -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
     box-shadow: 0 0 3px rgba(0, 0, 0, .1);
@@ -85,6 +85,10 @@ i {
 
 i.fa-star, i.fa-star-half-o {
     color: $star-color;
+}
+i.fa-star-o:before {
+    color: #dbdcdd;
+    content: "\f005";
 }
 
 label {

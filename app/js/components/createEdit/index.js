@@ -92,9 +92,8 @@ var CreateEditPage = React.createClass({
                                     description="Provide a description of what is new or different in this version." />
 
                             <h2>Intents</h2>
+                            {this.renderIntents()}
 
-                            <ListOfForms className="intent-form" itemForm={IntentForm} itemSchema={Intent} items={listing.owfProperties.intents}
-                                    description="Intents are special instructions used for communicating between applications. If this application uses intents, list them here" />
                         </div>
                         <div className="col-sm-5">
                             <h2>Graphics</h2>
@@ -161,7 +160,7 @@ var CreateEditPage = React.createClass({
     renderTypeSelector: function () {
         var types = [],
             typeDefs = [],
-            typeId = this.state.listing.types.id.val();
+            typeId = this.state.listing.type.id.val();
 
         this.props.config.types.forEach(function (json) {
             var className = json.id === typeId ? 'type-descriptor active' : 'type-descriptor';
@@ -182,7 +181,7 @@ var CreateEditPage = React.createClass({
         return (
             <div className="row type-select">
                 <div className="col-sm-5">
-                    <Select dataBinder={dataBinder.idBinder(this.state.listing.types.id)} label="Listing Type" required>
+                    <Select dataBinder={dataBinder.idBinder(this.state.listing.type.id)} label="Listing Type" required>
                         {types}
                     </Select>
                 </div>
@@ -206,6 +205,25 @@ var CreateEditPage = React.createClass({
         return (
             <Select label="Category" description="The category or categories in the existing AppsMall structure where this listing fits best."
                     dataBinder={dataBinder.objCollectionBinder(categories)} multiple required data-placeholder="Select a Category">
+                    {options}
+            </Select>
+        );
+        /*jshint ignore:end */
+    },
+
+    renderIntents: function () {
+        var intents = this.state.listing.intents;
+        var options = this.props.config.intents.map(function (json) {
+            var intent = json.type + '/' + json.action;
+            /*jshint ignore:start */
+            return <option value={intent}>{intent}</option>;
+            /*jshint ignore:end */
+        });
+
+        /*jshint ignore:start */
+        return (
+            <Select description="Intents are special instructions used for communicating between applications. If this application uses intents, list them here."
+                    dataBinder={dataBinder.simpleBinder(intents)} multiple data-placeholder="Select Intents">
                     {options}
             </Select>
         );
