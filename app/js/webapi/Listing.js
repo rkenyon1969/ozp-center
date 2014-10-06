@@ -58,7 +58,7 @@ var ListingApi = {
     },
 
     save: function (data) {
-        var url = API_URL + '/api/serviceItem';
+        var url = API_URL + '/api/listing';
         url = data.id ? url + '/' + data.id : url;
 
         return $.ajax({

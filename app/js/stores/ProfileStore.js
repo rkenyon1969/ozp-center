@@ -32,7 +32,7 @@ var ProfileStore = Reflux.createStore({
     onAddedToLibrary: function (listing) {
         _library.push({
             folder: null,
-            serviceItem: {
+            listing: {
                 id: listing.id(),
                 imageLargeUrl: listing.imageLargeUrl(),
                 imageMediumUrl: listing.imageMediumUrl(),
@@ -46,7 +46,7 @@ var ProfileStore = Reflux.createStore({
 
     onRemovedFromLibrary: function (listing) {
         var toRemove = find(_library, {
-            serviceItem: {
+            listing: {
                 id: listing.id()
             }
         });
@@ -57,7 +57,7 @@ var ProfileStore = Reflux.createStore({
     isListingInLibrary: function (uuid) {
         return !!find(
             map(_library, function (libraryEntry) {
-                return libraryEntry.serviceItem;
+                return libraryEntry.listing;
             }),
             { uuid: uuid }
         );
