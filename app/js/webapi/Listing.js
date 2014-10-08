@@ -8,7 +8,7 @@ function Listing (json) {
         'id', 'title', 'description', 'screenshots', 'techPocs', 'totalComments',
         'avgRate', 'totalRate1', 'totalRate2', 'totalRate3','totalRate4',
         'totalRate5','totalVotes', 'state', 'tags', 'type','uuid',
-        'versionName', 'imageLargeUrl', 'imageSmallUrl', 'imageMediumUrl',
+        'versionName', 'imageLargeUrl', 'imageSmallUrl', 'imageMediumUrl', 'imageXlargeUrl',
         'launchUrl', 'company', 'whatsNew', 'owners', 'organization',
         'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls'
     ];
@@ -25,7 +25,7 @@ function Listing (json) {
 var ListingApi = {
 
     getFeatured: function () {
-        return $.getJSON('http://localhost:8080/marketplace/api/search?isFeatured=true&sort=avgRate&order=desc&max=24').pipe(function (response) {
+        return $.getJSON(API_URL + '/api/search?isFeatured=true&sort=avgRate&order=desc&max=24').pipe(function (response) {
             return response.data.map(function (json) {
                 return new Listing(json);
             });
@@ -33,7 +33,7 @@ var ListingApi = {
     },
 
     getNewArrivals: function () {
-        return $.getJSON('http://localhost:8080/marketplace/api/search?sort=approvedDate&order=desc&max=24').pipe(function (response) {
+        return $.getJSON(API_URL + '/api/search?sort=approvedDate&order=desc&max=24').pipe(function (response) {
             return response.data.map(function (json) {
                 return new Listing(json);
             });
@@ -41,7 +41,7 @@ var ListingApi = {
     },
 
     getMostPopular: function () {
-        return $.getJSON('http://localhost:8080/marketplace/api/search?sort=avgRate&order=asc&max=24').pipe(function (response) {
+        return $.getJSON(API_URL + '/api/search?sort=avgRate&order=asc&max=24').pipe(function (response) {
             return response.data.map(function (json) {
                 return new Listing(json);
             });
@@ -50,22 +50,15 @@ var ListingApi = {
 
     search: function (options) {
         var params = $.param(options, true);
-        return $.getJSON('http://localhost:8080/marketplace/api/search?' + params).pipe(function (response) {
-            var listings = [];
-
-            response.data.forEach(function (json) {
-                var listing = new Listing(json);
-                if (listing.title().toLowerCase().indexOf(options.query.toLowerCase()) > -1) {
-                    listings.push(listing);
-                }
+        return $.getJSON(API_URL + '/api/search?' + params).pipe(function (response) {
+            return response.data.map(function (json) {
+                return new Listing(json);
             });
-
-            return listings;
         });
     },
 
     save: function (data) {
-        var url = 'http://localhost:8080/marketplace/api/serviceItem';
+        var url = API_URL + '/api/listing';
         url = data.id ? url + '/' + data.id : url;
 
         return $.ajax({

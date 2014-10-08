@@ -2,10 +2,15 @@
 'use strict';
 
 var React = require('react');
-var IconRating = require('react-icon-rating');
+var Router = require('react-router');
+var Link = Router.Link;
+var IconRating = require('../shared/IconRating');
+var ProfileStore = require('../../stores/ProfileStore');
+
 var ListingActions = require('../../actions/ListingActions');
 var launch = ListingActions.launch;
 var addToLibrary = ListingActions.addToLibrary;
+var removeFromLibrary = ListingActions.removeFromLibrary;
 
 var ListingTile = React.createClass({
 
@@ -23,7 +28,7 @@ var ListingTile = React.createClass({
         /*jshint ignore:start */
         return this.transferPropsTo(
             <li className="listing listing-tile">
-                <a href="javascript:;">
+                <Link to="quickview-overview" params={{listingId: listing.id()}}>
                     <img src={ imageLargeUrl } />
                     <section className="slide-up">
                         <p className="title">{ name }</p>
@@ -39,16 +44,29 @@ var ListingTile = React.createClass({
                                 <span className="company">{ company }</span>
                         }
                         <p className="description">{ description }</p>
-                        <div className="btn-group actions">
-                            {/* can't nest anchor tags, using button here with onClick listener */}
-                            <button type="button" className="btn btn-default" onClick={ this.launch }><i className="fa fa-external-link"></i></button>
-                            <button type="button" className="btn btn-default" onClick={ this.addToLibrary }><i className="fa fa-link"></i> Connect</button>
-                        </div>
+                        { this.renderActions() }
                     </section>
-                </a>
+                </Link>
             </li>
         );
         /*jshint ignore:end */
+    },
+
+    renderActions: function () {
+        var bookmarkBtnStyles = React.addons.classSet({
+            'btn btn-default': true,
+            'active': ProfileStore.isListingInLibrary(this.props.listing.uuid())
+        });
+
+        /* jshint ignore:start */
+        return (
+            <div className="btn-group actions">
+                {/* can't nest anchor tags, using button here with onClick listener */}
+                <button type="button" className="btn btn-default" onClick={ this.launch }><i className="fa fa-external-link"></i></button>
+                <button type="button" className={ bookmarkBtnStyles } onClick={ this.addToLibrary }><i className="fa fa-bookmark"></i></button>
+            </div>
+        );
+        /* jshint ignore:end */
     },
 
     launch: function () {
@@ -56,8 +74,14 @@ var ListingTile = React.createClass({
     },
 
     addToLibrary: function (e) {
+        e.preventDefault();
         e.stopPropagation();
-        addToLibrary(this.props.listing);
+        if (ProfileStore.isListingInLibrary(this.props.listing.uuid())) {
+            removeFromLibrary(this.props.listing);
+        }
+        else {
+            addToLibrary(this.props.listing);
+        }
     }
 
 });

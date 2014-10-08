@@ -22,6 +22,8 @@
   "globals": {
     "$": true,
     "jQuery": true,
-    "React": true
+    "React": true,
+    "API_URL": true,
+    "LOGOUT_URL": true
   }
 }

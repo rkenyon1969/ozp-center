@@ -1,6 +1,10 @@
 var path = require("path");
 var webpack = require("webpack");
 
+var ENV = process.env.NODE_ENV || "development";
+var API_URL = process.env.API_URL || "http://localhost:8080/marketplace";
+var LOGOUT_URL = process.env.LOGOUT_URL || "#";
+
 module.exports = {
     // This is the main file that should include all other JS files
     entry: "./app/js/main.js",
@@ -41,6 +45,14 @@ module.exports = {
         noParse: /\.min\.js/
     },
     plugins: [
+        new webpack.DefinePlugin({
+            "process.env": {
+                // This has effect on the react lib size
+                "NODE_ENV": JSON.stringify(ENV),
+            },
+            "API_URL": JSON.stringify(API_URL),
+            "LOGOUT_URL": JSON.stringify(LOGOUT_URL),
+        }),
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery"
