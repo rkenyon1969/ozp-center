@@ -39,7 +39,6 @@ module.exports = React.createClass({
             return <FeaturedListingTile
                         key = { listing.id() }
                         listing={ listing }
-                        onClick={ me.props.handleClick.bind(null, listing) }
                     />
         });
         return (

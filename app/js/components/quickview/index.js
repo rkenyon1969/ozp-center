@@ -4,6 +4,8 @@
 'use strict';
 
 var React = require('react');
+var Link = require('react-router').Link;
+var map = require('lodash/collections/map');
 var Modal = require('../shared/Modal');
 var IconRating = require('../shared/IconRating');
 var Header = require('./Header');
@@ -11,6 +13,22 @@ var OverviewTab = require('./OverviewTab');
 var ReviewsTab = require('./ReviewsTab');
 var DetailsTab = require('./DetailsTab');
 var ResourcesTab = require('./ResourcesTab');
+
+var GlobalListingStore = require('../../stores/GlobalListingStore');
+
+var LINKS = [{
+    to: 'quickview-overview',
+    name: 'Overview'
+}, {
+    to: 'quickview-reviews',
+    name: 'Reviews'
+}, {
+    to: 'quickview-details',
+    name: 'Details'
+}, {
+    to: 'quickview-resources',
+    name: 'Resources'
+}];
 
 /**
 *
@@ -26,35 +44,59 @@ var Quickview = React.createClass({
 
     getInitialState: function () {
         return {
-            shown: false
+            shown: false,
+            listing: GlobalListingStore.getById(this.props.params.listingId)
         };
     },
 
     render: function () {
         var shown = this.state.shown;
-        var listing = this.props.listing;
+        var listing = this.state.listing;
         var title = listing.title();
         var avgRate = listing.avgRate();
+        var activeRoute = this.props.activeRouteHandler({
+            listing: listing,
+            shown: shown
+        });
 
         /* jshint ignore:start */
         return this.transferPropsTo(
-            <Modal ref="modal" className="quickview" onShown={ this.onShown } >
+            <Modal ref="modal" className="quickview" onShown={ this.onShown } onHidden= { this.onHidden }>
                 <Header listing={ listing } onCancel={ this.close } />
                 <div className="tabs-container">
-                    <ul className="nav nav-tabs" role="tablist">
-                        <li className="active"><a href=".quickview-overview" role="tab" data-toggle="tab">Overview</a></li>
-                        <li><a href=".quickview-reviews" role="tab" data-toggle="tab">Reviews</a></li>
-                        <li><a href=".quickview-details" role="tab" data-toggle="tab">Details</a></li>
-                        <li><a href=".quickview-resources" role="tab" data-toggle="tab">Resources</a></li>
-                    </ul>
+                    { this.renderTabs(activeRoute) }
                     <div className="tab-content">
-                        <OverviewTab listing= { listing } shown={ shown } />
-                        <ReviewsTab listing={ listing } />
-                        <DetailsTab listing={ listing } />
-                        <ResourcesTab listing={ listing } />
+                        { activeRoute }
                     </div>
                 </div>
             </Modal>
+        );
+        /* jshint ignore:end */
+    },
+
+    renderTabs: function (activeRoute) {
+        var listing = this.state.listing;
+        var params = {
+            listingId: listing.id()
+        };
+        var activeRouteName = activeRoute.props.name;
+
+        /* jshint ignore:start */
+        var linkComponents = map(LINKS, function (link) {
+            var cx = React.addons.classSet({
+                active: link.to === activeRouteName
+            });
+            return (
+                <li className={ cx }>
+                    <Link to={link.to} params={ params }>{ link.name }</Link>
+                </li>
+            );
+        })
+
+        return (
+            <ul className="nav nav-tabs" role="tablist">
+                { linkComponents }
+            </ul>
         );
         /* jshint ignore:end */
     },
@@ -68,9 +110,17 @@ var Quickview = React.createClass({
         });
     },
 
+    onHidden: function () {
+        window.history.back();
+    },
+
     close: function () {
         this.refs.modal.close();
     }
 });
 
 module.exports = Quickview;
+module.exports.OverviewTab = OverviewTab;
+module.exports.ReviewsTab = ReviewsTab;
+module.exports.DetailsTab = DetailsTab;
+module.exports.ResourcesTab = ResourcesTab;

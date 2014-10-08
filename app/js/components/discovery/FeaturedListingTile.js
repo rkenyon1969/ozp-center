@@ -2,8 +2,10 @@
 'use strict';
 
 var React = require('react');
+var Router = require('react-router');
+var Link = Router.Link;
 
-var ListingTile = React.createClass({
+var FeaturedListingTile = React.createClass({
 
     render: function () {
         var listing = this.props.listing;
@@ -12,9 +14,9 @@ var ListingTile = React.createClass({
         /*jshint ignore:start */
         return this.transferPropsTo(
             <li className="listing listing-tile listing-tile-featured">
-                <a href="javascript:;">
+                <Link to="quickview-overview" params={{listingId: listing.id()}}>
                     <img src={ image } />
-                </a>
+                </Link>
             </li>
         );
         /*jshint ignore:end */
@@ -22,4 +24,4 @@ var ListingTile = React.createClass({
 
 });
 
-module.exports = ListingTile;
+module.exports = FeaturedListingTile;

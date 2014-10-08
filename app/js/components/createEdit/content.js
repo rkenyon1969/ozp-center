@@ -10,7 +10,7 @@ function scrollToTarget (e) {
     var $el = $(e.target);
     var $target = $($el.data('target') || $el.attr('href'));
 
-    $('body').animate({
+    $('html, body').animate({
         scrollTop: $target.offset().top
     }, 'medium');
 }

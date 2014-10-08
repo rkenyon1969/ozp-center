@@ -18,6 +18,7 @@ gulp.task('sass', function() {
         .pipe(replace('../bower_components/font-awesome/fonts', 'fonts'))
         .pipe(replace('../bower_components/ubuntu-font', 'fonts'))
         .pipe(replace('select2.png', '../images/select2.png'))
+        .pipe(replace('select2x2.png', '../images/select2x2.png'))
         .pipe(replace('select2-spinner.gif', '../images/select2-spinner.gif'))
         .pipe(gulp.env.production ? minifyCSS() : gutil.noop())
         .pipe(gulp.dest('dist/assets'));

@@ -2,8 +2,8 @@
 
 var Router = require('react-router');
 var Reflux = require('reflux');
-var ListingApi = require('../api/Listing').ListingApi;
-var ProfileApi = require('../api/Profile').ProfileApi;
+var ListingApi = require('../webapi/Listing').ListingApi;
+var ProfileApi = require('../webapi/Profile').ProfileApi;
 
 var Actions = Reflux.createActions([
     'fetchNewArrivals', 'newArrivalsFetched',
@@ -12,6 +12,7 @@ var Actions = Reflux.createActions([
     'search', 'searchCompleted',
     'launch',
     'addToLibrary', 'addedToLibrary',
+    'removeFromLibrary', 'removedFromLibrary',
     'save', 'saved', 'saveFailed'
 ]);
 
@@ -39,11 +40,17 @@ Actions.launch.listen(function (listing) {
 Actions.addToLibrary.listen(function (listing) {
     ProfileApi
         .addToLibrary({
-            serviceItem: {
+            listing: {
                 id: listing.id()
             }
         })
-        .then(Actions.addedToLibrary);
+        .then(Actions.addedToLibrary.bind(null, listing));
+});
+
+Actions.removeFromLibrary.listen(function (listing) {
+    ProfileApi
+        .removeFromLibrary(listing)
+        .then(Actions.removedFromLibrary.bind(null, listing));
 });
 
 Actions.save.listen(function (data) {

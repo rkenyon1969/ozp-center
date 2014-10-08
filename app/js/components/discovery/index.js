@@ -21,7 +21,6 @@ var Sidebar = require('./Sidebar');
 var ListingTile = require('./ListingTile');
 var FeaturedListings = require('./FeaturedListings');
 var Carousel = require('../carousel');
-var Quickview = require('../quickview');
 
 // store dependencies
 var DiscoveryPageStore = require('../../stores/DiscoveryPageStore');
@@ -50,12 +49,6 @@ var Discovery = React.createClass({
 
     componentDidMount: function () {
         this.listenTo(DiscoveryPageStore, this.onStoreChange);
-    },
-
-    componentDidUpdate: function (prevProps, prevState) {
-        if (this.refs.quickview) {
-            this.refs.quickview.refs.modal.open();
-        }
     },
 
     render: function () {
@@ -95,9 +88,7 @@ var Discovery = React.createClass({
                     </section>
                     <div className="clearfix"></div>
                 </div>
-                {
-                    this.state.selectedListing && this.renderQuickview()
-                }
+                {this.props.activeRouteHandler()}
             </div>
         );
         /*jshint ignore:end */
@@ -109,14 +100,14 @@ var Discovery = React.createClass({
 
     onSearchInputChange: function () {
         this.setState({
-            query: this.refs.search.getDOMNode().value
+            queryString: this.refs.search.getDOMNode().value
         });
 
         this.search();
     },
 
     isSearching: function () {
-        return !!this.state.query;
+        return !!this.state.queryString;
     },
 
     isBrowsing: function () {
@@ -126,7 +117,7 @@ var Discovery = React.createClass({
 
     reset: function () {
         this.setState({
-            query: ''
+            queryString: ''
         });
         this.search();
     },
@@ -134,7 +125,7 @@ var Discovery = React.createClass({
     search: function () {
         search(
             assign({
-                query: this.refs.search.getDOMNode().value
+                queryString: this.refs.search.getDOMNode().value
             }, this.refs.sidebar.state.selectedFilters)
         );
     },
@@ -147,8 +138,7 @@ var Discovery = React.createClass({
         /*jshint ignore:start */
         return (
             <FeaturedListings
-                listings={ this.state.featured }
-                handleClick={ this.openQuickview } />
+                listings={ this.state.featured } />
         );
         /*jshint ignore:end */
     },
@@ -160,7 +150,7 @@ var Discovery = React.createClass({
 
         /*jshint ignore:start */
         return (
-            <section>
+            <section className="Discovery__NewArrivals">
                 <h4>New Arrivals</h4>
                 <Carousel className="new-arrival-listings">
                     { this._renderListings(this.state.newArrivals) }
@@ -177,7 +167,7 @@ var Discovery = React.createClass({
 
         /*jshint ignore:start */
         return (
-            <section>
+            <section className="Discovery__MostPopular">
                 <h4>Most Popular</h4>
                 <Carousel className="most-popular-listings">
                     { this._renderListings(this.state.mostPopular) }
@@ -190,7 +180,7 @@ var Discovery = React.createClass({
     renderSearchResults: function () {
         /*jshint ignore:start */
         return (
-            <section>
+            <section className="Discovery__SearchResults">
                 <h4>Search Results</h4>
                 <ul className="list-unstyled listings-search-results">
                     { this._renderListings(this.state.searchResults) }
@@ -207,29 +197,9 @@ var Discovery = React.createClass({
             return <ListingTile
                         key = { listing.id() }
                         listing={ listing }
-                        onClick={ me.openQuickview.bind(me, listing) }
                     />
         });
         /*jshint ignore:end */
-    },
-
-    renderQuickview: function () {
-        var me = this;
-        /*jshint ignore:start */
-        return (
-            <Quickview
-                ref="quickview"
-                listing={ this.state.selectedListing }
-                onHidden={ function () {
-                    me.setState({ selectedListing: null });
-                }}
-            />
-        );
-        /*jshint ignore:end */
-    },
-
-    openQuickview: function (listing) {
-        this.setState({ selectedListing: listing });
     }
 
 });

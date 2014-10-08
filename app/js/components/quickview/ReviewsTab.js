@@ -121,7 +121,7 @@ var ReviewsTab = React.createClass({
 
         /* jshint ignore:start */
         return (
-            <div className="tab-pane quickview-reviews row">
+            <div className="tab-pane active quickview-reviews row">
                 <section className="col-md-3 col-left">
                     { this.renderReviewFilters() }
                 </section>

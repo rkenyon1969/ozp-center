@@ -16,7 +16,7 @@ var BootstrapModal = React.createClass({
         $(this.getDOMNode()).modal({
             backdrop: 'static',
             keyboard: false,
-            show: false
+            show: true
         });
     },
 
@@ -66,7 +66,7 @@ var BootstrapModal = React.createClass({
                         {
                             this.props.title && (
                                 <div className="modal-header">
-                                    <button type="button" className="close" onClick={this.close}>
+                                    <button type="button" className="close" onClick={ this.close }>
                                         <span aria-hidden="true">&times;</span><span className="sr-only">Close</span>
                                     </button>
                                     <h4 className="modal-title">{this.props.title}</h4>
