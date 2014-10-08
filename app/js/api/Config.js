@@ -29,7 +29,9 @@ var ConfigApi = {
     },
 
     getUsers: function () {
-        return $.getJSON(API_URL + '/api/profile').pipe(getData);
+        return $.getJSON(API_URL + '/api/profile').pipe(function (response) {
+            return response._embedded.item;
+        });
     }
 
 };
