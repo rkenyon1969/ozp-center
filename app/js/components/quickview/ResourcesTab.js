@@ -6,6 +6,7 @@
 var React = require('react');
 var EmptyFieldValue = require('../shared/EmptyFieldValue');
 var find = require('lodash/collections/find');
+var compact = require('lodash/arrays/compact');
 
 var ResourcesTab = React.createClass({
 
@@ -27,20 +28,14 @@ var ResourcesTab = React.createClass({
                     <section className="resources">
                         <h5>Other Resources</h5>
                         <hr/>
-                        <p className="text-muted">API Documentation unavailable</p>
+                        { this.renderOtherResources() }
                     </section>
                 </div>
                 <div className="col-md-6 col-right">
                     <section className="tpoc">
                         <h5>Technical Support Contact Information</h5>
                         <hr/>
-                        <div>
-                            <p><label>Name:</label><span> Joe Montana</span></p>
-                            <p><label>Secure Email:</label><span> jmontana@gmail.com</span></p>
-                            <p><label>Name:</label><span> Joe Montana</span></p>
-                            <p><label>Unsecure Phone:</label><span> (123) 456-789</span></p>
-                            <p><label>Secure Phone:</label><span> (123) 456-789</span></p>
-                        </div>
+                        { this.renderTechSuppot() }
                     </section>
                 </div>
             </div>
@@ -48,7 +43,7 @@ var ResourcesTab = React.createClass({
     },
 
     renderUserGuide: function () {
-        var userGuide = find(this.props.listing.docUrls(), { name: 'User Guide'});
+        var userGuide = find(this.props.listing.docUrls(), { name: 'User Manual'});
 
         return userGuide ?
                 <p><a target="_blank" href={ userGuide.url }>{ userGuide.name }</a></p> :
@@ -61,6 +56,41 @@ var ResourcesTab = React.createClass({
         return apiDoc ?
                 <p><a target="_blank" href={ apiDoc.url }>{ apiDoc.name }</a></p> :
                 <EmptyFieldValue text="API documentation unavailable" />;
+    },
+
+    renderOtherResources: function() {
+        var resources = compact(this.props.listing.docUrls().map(function (doc) {
+            if (doc.name !== 'User Manual' && doc.name !== 'API Documentation') {
+                return <p><a target="_blank" href={ doc.url }>{ doc.name }</a></p>;
+            }
+        }));
+
+        return resources.length ? resources : <EmptyFieldValue text="None available" />;
+    },
+
+    renderTechSuppot: function () {
+        var tsc = this.props.listing.contacts().map(function (contact) {
+            return contact.type.title.indexOf("Technical Support") > -1;
+        });
+
+        if (tsc.length) {
+            return tsc.map(function (contact, i) {
+                return (
+                    <div>
+                        <p><label>Technical Support Point of Contact { i + 1 }</label></p>
+                        <div className="col-md-offset-1">
+                            <p><label>Name:</label><span> {contact.name}</span></p>
+                            <p><label>Email:</label><span> {contact.email}</span></p>
+                            <p><label>Unsecure Phone:</label><span> {contact.unsecurePhone}</span></p>
+                            <p><label>Secure Phone:</label><span> {contact.securePhone}</span></p>
+                        </div>
+                    </div>
+                );
+            }); 
+        }
+        else {
+            return <EmptyFieldValue text="None available" />;
+        }
     }
     /* jshint ignore:end */
 

@@ -13,8 +13,8 @@ var DetailsTab = React.createClass({
     },
 
     render: function () {
-        var whatsNew = this.props.listing.whatsNew();
-        var organization = this.props.listing.organization();
+        var whatsNew = this.props.listing.whatIsNew();
+        var organization = this.props.listing.agency().title;
         var type = this.props.listing.type().title;
         var URL = this.props.listing.launchUrl();
         var updatedDate = this.props.listing.editedDate();
@@ -22,7 +22,7 @@ var DetailsTab = React.createClass({
         var categories = this.props.listing.categories().map(function (category) {
             return category.title;
         }).join(', ');
-        var tags = this.props.listing.tags().map(function (tag) {
+        var tags = (this.props.listing.tags() || []).map(function (tag) {
             return tag;
         }).join(', ');
 
@@ -102,16 +102,17 @@ var DetailsTab = React.createClass({
 
     renderGovSponser: function () {
         /* jshint ignore:start */
-        return [
-            <label>Gov Sponsor</label>,
-            <div className="col-md-offset-1">
-                <p><label>Name:</label><span> Joe Montana</span></p>
-                <p><label>Secure Email:</label><span> jmontana@gmail.com</span></p>
-                <p><label>Name:</label><span> Joe Montana</span></p>
-                <p><label>Unsecure Phone:</label><span> (123) 456-789</span></p>
-                <p><label>Secure Phone:</label><span> (123) 456-789</span></p>
-            </div>
-        ];
+        return this.props.listing.contacts().map(function(contact, i){
+            if (contact.type.title.indexOf("Government Sponser") >= 0){
+                return  [<label>Government Sponser </label>,
+                        <div className="col-md-offset-1">
+                            <p><label>Name:</label><span> {contact.name}</span></p>
+                            <p><label>Email:</label><span> {contact.email}</span></p>
+                            <p><label>Unsecure Phone:</label><span> {contact.unsecurePhone}</span></p>
+                            <p><label>Secure Phone:</label><span> {contact.securePhone}</span></p>
+                        </div>];
+            }
+        });
         /* jshint ignore:end */
     }
 
