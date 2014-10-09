@@ -3,6 +3,13 @@
 
 var React = require('react');
 var jQuery = require('jquery');
+
+$.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
+    options.xhrFields = {
+        withCredentials: true
+    };
+});
+
 require('bootstrap');
 
 // Enable React developer tools
