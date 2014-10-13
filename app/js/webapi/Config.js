@@ -2,36 +2,34 @@
 
 var $ = require('jquery');
 
-function getData (response) {
-    return response.data || response;
+function parse (response) {
+    return (response._embedded && response._embedded.item) || response.data || response;
 }
 
 var ConfigApi = {
 
     getTypes: function () {
-        return $.getJSON(API_URL + '/api/type').pipe(getData);
+        return $.getJSON(API_URL + '/api/type').pipe(parse);
     },
 
     getCategories: function () {
-        return $.getJSON(API_URL + '/api/category').pipe(getData);
+        return $.getJSON(API_URL + '/api/category').pipe(parse);
     },
 
     getIntents: function () {
-        return $.getJSON(API_URL + '/api/intent').pipe(getData);
+        return $.getJSON(API_URL + '/api/intent').pipe(parse);
     },
 
     getContactTypes: function () {
-        return $.getJSON(API_URL + '/api/contactType').pipe(getData);
+        return $.getJSON(API_URL + '/api/contactType').pipe(parse);
     },
 
     getOrganizations: function () {
-        return $.getJSON(API_URL + '/api/agency').pipe(getData);
+        return $.getJSON(API_URL + '/api/agency').pipe(parse);
     },
 
     getUsers: function () {
-        return $.getJSON(API_URL + '/api/profile').pipe(function (response) {
-            return response._embedded.item;
-        });
+        return $.getJSON(API_URL + '/api/profile').pipe(parse);
     }
 
 };
