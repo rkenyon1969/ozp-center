@@ -1,18 +1,11 @@
-$page-bg: #c6c6c6;
-$content-bg: #d6d6d6;
-$header-bg: #fff;
-$header-border-bg: #d5d5d5;
-$header-text: #858585;
-$highlight-bg: #316DA5;
-$highlight-text: #FFFFFF;
-
-
 body {
     position: relative;
+    background: $gray-light;
+    color: $black;
 }
 
 h1 {
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 500;
 }
 
@@ -38,7 +31,7 @@ h3 {
         width: 1260px;
         margin: 0 auto;
         background: #fff;
-        border-bottom: 3px solid $highlight-bg;
+        border-bottom: 3px solid $blue;
         height: 43px;
     }
 
@@ -46,8 +39,8 @@ h3 {
         border-bottom: none;
 
         li {
-            border-top: 1px solid $header-border-bg;
-            border-right: 1px solid $header-border-bg;
+            border-top: 1px solid $gray-dark;
+            border-right: 1px solid $gray-dark;
             height: 40px;
             text-align: center;
             padding: 0 1px;
@@ -56,15 +49,15 @@ h3 {
                 border: 0;
                 height: 40px;
                 background: transparent;
-                color: $header-text;
+                color: $gray-dark;
             }
 
             &.active {
-                background: $highlight-bg;
-                border-bottom: none;
+                background: $blue;
+                border: none;
 
                 a {
-                    color: $highlight-text;
+                    color: $white;
                     font-weight: 400;
                 }
             }
@@ -72,7 +65,7 @@ h3 {
 
         li:first-child {
             margin-left: 30px;
-            border-left: 1px solid $header-border-bg;
+            border-left: 1px solid $page-header-border-color;
         }
     }
 }
@@ -82,7 +75,7 @@ h3 {
     padding-top: 160px;
 
     .row {
-        background: #e8e8e8;
+        background: $gray-lightest;
     }
 
     .select2-offscreen, .select2-offscreen:focus {
@@ -128,7 +121,7 @@ h3 {
 
             .validation-err-msg {
                 display: none;
-                color: red;
+                color: $red;
             }
 
             &.input-invalid {
@@ -137,7 +130,7 @@ h3 {
                 }
 
                 input, textarea {
-                    border-color: red;
+                    border-color: $red;
                 }
             }
         }
@@ -166,12 +159,12 @@ h3 {
         }
 
         .form-card {
-            border: 1px solid #c6c6c6;
+            border: 1px solid $gray-dark;
             padding: 10px 5px;
             margin: 15px 5px 5px 5px;
 
             .btn {
-                color: gray;
+                color: $gray-dark;
                 padding: 0;
                 float: right;
                 margin-right: -10px;
@@ -186,4 +179,20 @@ h3 {
     display: block;
     position: relative;
     visibility: hidden;
+}
+
+.select2-default {
+    color: $gray-dark !important;
+}
+
+.select2-results .select2-highlighted {
+    background: $blue;
+}
+
+.select2-drop-active {
+    border: 1px solid $blue;
+}
+
+.form-control.select2-container.select2-dropdown-open{
+    border-color: $blue;
 }
