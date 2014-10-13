@@ -4,7 +4,10 @@
 'use strict';
 
 var React = require('react');
-var Link = require('react-router').Link;
+var Router = require('react-router');
+var Link = Router.Link;
+var CurrentPath = Router.CurrentPath;
+var Navigation = Router.Navigation;
 var map = require('lodash/collections/map');
 var Modal = require('../shared/Modal');
 var IconRating = require('../shared/IconRating');
@@ -37,6 +40,8 @@ var LINKS = [{
 *
 **/
 var Quickview = React.createClass({
+
+    mixins: [ CurrentPath, Navigation ],
 
     propTypes: {
         listing: React.PropTypes.object
@@ -111,7 +116,11 @@ var Quickview = React.createClass({
     },
 
     onHidden: function () {
-        window.history.back();
+        var currentPath = this.getCurrentPath();
+        var parentPath = currentPath.substring(1, currentPath.indexOf('/quickview'));
+
+        // go back to the parent route
+        this.transitionTo(parentPath);
     },
 
     close: function () {
