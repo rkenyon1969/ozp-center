@@ -12,7 +12,7 @@ $fa-font-path: "../../bower_components/font-awesome/fonts/";
 $header-height: 55px;
 
 html, body {
-    background: $body-bg;
+    background: #d6d6d6;
     font-family: 'Ubuntu Regular', 'Ubuntu';
     font-weight: 300;
 }
@@ -63,11 +63,6 @@ html, body {
         transition: all .25s linear;
     }
 }
-
-// .btn.btn-default:hover {
-//     background-color: $btn-primary-bg;
-//     color: $btn-primary-color;
-// }
 
 @import 'carousel';
 @import 'header';
