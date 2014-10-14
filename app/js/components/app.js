@@ -2,6 +2,7 @@
 'use strict';
 
 var React = require('react');
+var Reflux = require('reflux');
 var Router = require('react-router');
 var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
@@ -9,7 +10,7 @@ var Routes = Router.Routes;
 var Redirect = Router.Redirect;
 var DiscoveryPage = require('./discovery');
 var CreateEditPage = require('./createEdit');
-var ConfigMixin = require('../mixins/config');
+var ConfigStore = require('../stores/ConfigStore');
 var ProfileStore = require('../stores/ProfileStore');
 var Quickview = require('./quickview');
 var ProfileActions = require('../actions/ProfileActions');
@@ -17,11 +18,12 @@ var fetchLibrary = ProfileActions.fetchLibrary;
 
 var App = React.createClass({
 
-    mixins: [ ConfigMixin ],
+    mixins: [ Reflux.ListenerMixin ],
 
     getInitialState: function() {
         return {
-            libraryFetched: false 
+            libraryFetched: false,
+            config: ConfigStore.getConfig()
         };
     },
 
@@ -42,12 +44,14 @@ var App = React.createClass({
 
     componentDidMount: function () {
         this.listenTo(ProfileStore, this.onStoreChanged);
+        this.listenTo(ConfigStore, this.onStoreChanged);
     },
 
     onStoreChanged: function () {
         this.setState({
             libraryFetched: true,
-            library: ProfileStore.getLibrary()
+            library: ProfileStore.getLibrary(),
+            config: ConfigStore.getConfig()
         });
     }
 

@@ -112,8 +112,7 @@ var CreateEditPage = React.createClass({
 
                             <h2>Screenshots</h2>
                             <ListOfForms className="screenshot-form" itemForm={ScreenshotForm} itemSchema={Screenshot}
-                                    items={listing.screenshots} description="At least one screenshot is required"
-                                    locked={[0]} />
+                                    items={listing.screenshots} description="At least one screenshot is required" locked={[0]} />
                         </div>
                     </Section>
                     <Section id="resources-contacts" title="Contacts">
@@ -129,8 +128,9 @@ var CreateEditPage = React.createClass({
 
                         <div className="col-sm-5">
                             <h2>Contacts</h2>
-                            <ListOfForms className="contact-form" itemForm={ContactForm} itemSchema={Contact} locked={lockedContacts}
-                                    items={listing.contacts} description="Point of Contact for users to seek technical support for this listing." />
+                            <ListOfForms className="contact-form" itemForm={ContactForm} itemSchema={Contact} locked={lockedContacts} 
+                                    config={{contactTypes: this.props.config.contactTypes}} items={listing.contacts} 
+                                    description="Point of Contact for users to seek technical support for this listing." />
 
                         </div>
                     </Section>

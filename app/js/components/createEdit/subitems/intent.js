@@ -8,7 +8,7 @@ var ConfigMixin = require('../../../mixins/config');
 var dataBinder = require('../../../utils/binder');
 
 module.exports = React.createClass({
-    mixins: [DeleteBtnMixin, ConfigMixin],
+    mixins: [DeleteBtnMixin],
 
     render: function () {
         var optionMap = function (json) {
@@ -18,7 +18,7 @@ module.exports = React.createClass({
             /*jshint ignore:end */
         };
 
-        var intentComponents = this.state.config.intents.map(optionMap);
+        var intentComponents = this.props.config.intents.map(optionMap);
 
         var intent = this.props.item;
 

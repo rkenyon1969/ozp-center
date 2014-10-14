@@ -37,11 +37,13 @@ var ListOfForms = React.createClass({
         /**
             Will be rendered as a <label> - the name of this component.
          */
-        label: React.PropTypes.string
+        label: React.PropTypes.string,
+
+        config: React.PropTypes.object
     },
 
     getDefaultProps: function () {
-        return {locked: []};
+        return {locked: [], config: {}};
     },
 
     render: function () {
@@ -56,7 +58,7 @@ var ListOfForms = React.createClass({
                 /*jshint ignore: start */
                 <ItemForm locked={me.props.locked.indexOf(_key) > -1}
                         removeHandler={me.handleDelete.bind(me, _key)}
-                        key={_key} item={item} />
+                        key={_key} item={item} config={me.props.config} />
                 /*jshint ignore: end */
             );
         });

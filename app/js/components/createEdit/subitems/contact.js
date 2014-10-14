@@ -13,10 +13,10 @@ var phoneRegex = /(^\+\d((([\s.-])?\d+)?)+$)|(^(\(\d{3}\)\s?|^\d{3}[\s.-]?)?\d{3
     INVALID_PHONE = 'Please enter a valid phone number (e.g. 555-5555, 555-555-5555)';
 
 module.exports = React.createClass({
-    mixins: [DeleteBtnMixin, ConfigStoreMixin],
+    mixins: [DeleteBtnMixin],
 
     render: function () {
-        var contactTypes = this.state.config.contactTypes.map(function (json) {
+        var contactTypes = this.props.config.contactTypes.map(function (json) {
             /*jshint ignore:start */
             return <option value={json.title}>{json.title}</option>;
             /*jshint ignore:end */
