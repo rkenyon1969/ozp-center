@@ -50,7 +50,7 @@ var CreateEditPage = React.createClass({
         return (
             <form id="listing-submission-form" ref="form" onSubmit={this.handleSubmit}>
                 <Header />
-                <Actions title="Edit 'New Listing'">
+                <Actions title="Create 'New Listing'">
                     <button form="listing-submission-form" type="submit" className="btn btn-default">Submit</button>
                 </Actions>
                 <Content>
