@@ -12,8 +12,8 @@ var arr = Defaults.arr,
     obj = Defaults.obj;
 
 module.exports = new Defaults({
-    categories: arr(Simple),
-    agency: Simple,
+    categories: arr(str()),
+    agency: str(),
     contacts: arr(Contact),
     descriptionShort: str(),
     requirements: str(),
@@ -25,11 +25,11 @@ module.exports = new Defaults({
     imageXlargeUrl: str(),
     launchUrl: str(),
     intents: arr(str()),
-    owners: arr(Simple),
+    owners: arr(str()),
     screenshots: arr(Screenshot),
     tags: arr(str()),
     title: str(),
-    type: Simple,
+    type: str(),
     versionName: str(),
     whatIsNew: str()
 });

@@ -3,7 +3,8 @@
 var $ = require('jquery');
 
 function parse (response) {
-    return (response._embedded && response._embedded.item) || response.data || response;
+    var data = (response._embedded && response._embedded.item) || response.data || response;
+    return [].concat(data); //normalize to an array
 }
 
 var ConfigApi = {

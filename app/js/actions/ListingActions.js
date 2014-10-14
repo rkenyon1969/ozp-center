@@ -1,6 +1,7 @@
 'use strict';
 
 var Router = require('react-router');
+var Navigation = Router.Navigation;
 var Reflux = require('reflux');
 var ListingApi = require('../webapi/Listing').ListingApi;
 var ProfileApi = require('../webapi/Profile').ProfileApi;
@@ -58,7 +59,7 @@ Actions.save.listen(function (data) {
         .save(data)
         .then(Actions.saved)
         .then(function () {
-            Router.transitionTo('/');
+            window.history.back();
         })
         .fail(Actions.saveFailed);
 });

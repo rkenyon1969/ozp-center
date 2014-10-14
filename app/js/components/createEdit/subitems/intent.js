@@ -1,14 +1,14 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React            = require('react'),
-    Select           = require('../../form/select'),
-    DeleteBtnMixin   = require('./deleteBtnMixin'),
-    ConfigStoreMixin = require('../../../stores/ConfigStore').mixin,
-    dataBinder       = require('../../../utils/binder');
+var React  = require('react');
+var Select = require('../../form/select');
+var DeleteBtnMixin = require('./deleteBtnMixin');
+var ConfigMixin = require('../../../mixins/config');
+var dataBinder = require('../../../utils/binder');
 
 module.exports = React.createClass({
-    mixins: [DeleteBtnMixin, ConfigStoreMixin],
+    mixins: [DeleteBtnMixin, ConfigMixin],
 
     render: function () {
         var optionMap = function (json) {

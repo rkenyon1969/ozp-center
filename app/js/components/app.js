@@ -9,17 +9,15 @@ var Routes = Router.Routes;
 var Redirect = Router.Redirect;
 var DiscoveryPage = require('./discovery');
 var CreateEditPage = require('./createEdit');
-var ConfigStoreMixin = require('../stores/ConfigStore').mixin;
+var ConfigMixin = require('../mixins/config');
 var ProfileStore = require('../stores/ProfileStore');
 var Quickview = require('./quickview');
-var ConfigActions = require('../actions/ConfigActions');
-var fetchConfig = ConfigActions.fetchConfig;
 var ProfileActions = require('../actions/ProfileActions');
 var fetchLibrary = ProfileActions.fetchLibrary;
 
 var App = React.createClass({
 
-    mixins: [ ConfigStoreMixin ],
+    mixins: [ ConfigMixin ],
 
     getInitialState: function() {
         return {
@@ -39,7 +37,6 @@ var App = React.createClass({
     },
 
     componentWillMount: function () {
-        fetchConfig();
         fetchLibrary();
     },
 

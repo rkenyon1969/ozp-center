@@ -1,8 +1,7 @@
 'use strict';
 
 var Cortex       = require('cortexjs'),
-    Defaults     = require('../../../utils/defaults'),
-    SimpleSchema = require('./simple');
+    Defaults     = require('../../../utils/defaults');
 
 var str = Defaults.str;
 
@@ -12,5 +11,5 @@ module.exports = new Defaults({
     unsecurePhone: str(),
     email: str(),
     organization: str(),
-    type: SimpleSchema
+    type: str()
 });

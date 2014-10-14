@@ -160,13 +160,13 @@ var CreateEditPage = React.createClass({
     renderTypeSelector: function () {
         var types = [],
             typeDefs = [],
-            typeId = this.state.listing.type.id.val();
+            type = this.state.listing.type.val();
 
         this.props.config.types.forEach(function (json) {
-            var className = json.id === typeId ? 'type-descriptor active' : 'type-descriptor';
+            var className = json.title === type ? 'type-descriptor active' : 'type-descriptor';
 
             /*jshint ignore:start */
-            types.push(<option value={json.id}>{json.title}</option>);
+            types.push(<option value={json.title}>{json.title}</option>);
 
             typeDefs.push(
                 <div className={className}>
@@ -181,7 +181,7 @@ var CreateEditPage = React.createClass({
         return (
             <div className="row type-select">
                 <div className="col-sm-5">
-                    <Select dataBinder={dataBinder.idBinder(this.state.listing.type.id)} label="Listing Type" required>
+                    <Select dataBinder={dataBinder.simpleBinder(this.state.listing.type)} label="Listing Type" required>
                         {types}
                     </Select>
                 </div>
@@ -197,14 +197,14 @@ var CreateEditPage = React.createClass({
         var categories = this.state.listing.categories;
         var options = this.props.config.categories.map(function (json) {
             /*jshint ignore:start */
-            return <option value={json.id}>{json.title}</option>;
+            return <option value={json.title}>{json.title}</option>;
             /*jshint ignore:end */
         });
 
         /*jshint ignore:start */
         return (
             <Select label="Category" description="The category or categories in the existing AppsMall structure where this listing fits best."
-                    dataBinder={dataBinder.objCollectionBinder(categories)} multiple required data-placeholder="Select a Category">
+                    dataBinder={dataBinder.simpleBinder(categories)} multiple required data-placeholder="Select a Category">
                     {options}
             </Select>
         );
@@ -245,13 +245,13 @@ var CreateEditPage = React.createClass({
     renderOrganizations: function () {
         var organizations = this.props.config.organizations.map(function (json) {
             /*jshint ignore:start */
-            return <option value={json.id}>{json.title}</option>;
+            return <option value={json.title}>{json.title}</option>;
             /*jshint ignore:end */
         });
 
         /*jshint ignore:start */
         return (
-            <Select dataBinder={dataBinder.idBinder(this.state.listing.agency.id)}
+            <Select dataBinder={dataBinder.simpleBinder(this.state.listing.agency)}
                     label="Associated Organization" description="Organization overseeing this listing"
                     required data-placeholder="Select an Organization">
                 {organizations}
@@ -264,14 +264,14 @@ var CreateEditPage = React.createClass({
         var owners = this.state.listing.owners;
         var options = this.props.config.users.map(function (json) {
             /*jshint ignore:start */
-            return <option value={json.id}>{json.username}</option>;
+            return <option value={json.username}>{json.username}</option>;
             /*jshint ignore:end */
         });
 
         /*jshint ignore:start */
         return (
             <Select label="Owners" description="Person(s) responsible for this listing"
-                    dataBinder={dataBinder.objCollectionBinder(owners)} required multiple data-placeholder="Select owner(s)">
+                    dataBinder={dataBinder.ownerCollectionBinder(owners)} required multiple data-placeholder="Select owner(s)">
                 {options}
             </Select>
         );

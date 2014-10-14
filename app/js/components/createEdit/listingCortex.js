@@ -30,7 +30,7 @@ module.exports = function (config, data) {
             requiredContacts.push(listing.contacts.splice(requiredIndex, 1));
         } else {
             var contact = new Contact();
-            contact.type.id = type.id;
+            contact.type = type;
             requiredContacts.push(contact);
         }
     });
@@ -47,8 +47,8 @@ module.exports = function (config, data) {
     /**
      *     Set the Default Listing Type
      */
-    if (!listing.type.id) {
-        listing.type.id = config.types[0].id;
+    if (!listing.type) {
+        listing.type = config.types[0].title;
     }
 
     /**

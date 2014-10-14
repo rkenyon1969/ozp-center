@@ -1,12 +1,12 @@
 /** @jsx React.DOM */
 'use strict';
 
-var React            = require('react'),
-    TextInput        = require('../../form/textInput'),
-    Select           = require('../../form/select'),
-    DeleteBtnMixin   = require('./deleteBtnMixin'),
-    ConfigStoreMixin = require('../../../stores/ConfigStore').mixin,
-    dataBinder       = require('../../../utils/binder');
+var React = require('react');
+var TextInput = require('../../form/textInput');
+var Select = require('../../form/select');
+var DeleteBtnMixin = require('./deleteBtnMixin');
+var ConfigStoreMixin = require('../../../mixins/config');
+var dataBinder = require('../../../utils/binder');
 
 var phoneRegex = /(^\+\d((([\s.-])?\d+)?)+$)|(^(\(\d{3}\)\s?|^\d{3}[\s.-]?)?\d{3}[\s.-]?\d{4}$)/,
     NEED_ONE_PHONE = 'Please provide at least one valid phone number',
@@ -18,7 +18,7 @@ module.exports = React.createClass({
     render: function () {
         var contactTypes = this.state.config.contactTypes.map(function (json) {
             /*jshint ignore:start */
-            return <option value={json.id}>{json.title}</option>;
+            return <option value={json.title}>{json.title}</option>;
             /*jshint ignore:end */
         });
 
@@ -28,7 +28,7 @@ module.exports = React.createClass({
             <div className="row form-card">
                 <div className="col-sm-12">
                     {!this.props.locked && this.renderDeleteBtn()}
-                    <Select dataBinder={dataBinder.simpleBinder(contact.type.id)} label="Contact Type" disabled={this.props.locked} required data-placeholder="Select a Contact Type">
+                    <Select dataBinder={dataBinder.simpleBinder(contact.type)} label="Contact Type" disabled={this.props.locked} required data-placeholder="Select a Contact Type">
                         {contactTypes}
                     </Select>
                     <TextInput type="text" dataBinder={dataBinder.simpleBinder(contact.name)} label="Name" required maxLength={100} />
