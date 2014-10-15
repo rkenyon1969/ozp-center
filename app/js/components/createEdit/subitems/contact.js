@@ -2,16 +2,15 @@
 'use strict';
 
 var React = require('react');
-var TextInput = require('../../form/textInput');
-var Select = require('../../form/select');
+var TextInput = require('../../form/TextInput');
+var Select = require('../../form/Select2Input');
 var DeleteBtnMixin = require('./deleteBtnMixin');
-var dataBinder = require('../../../utils/binder');
 
 var phoneRegex = /(^\+\d((([\s.-])?\d+)?)+$)|(^(\(\d{3}\)\s?|^\d{3}[\s.-]?)?\d{3}[\s.-]?\d{4}$)/,
     NEED_ONE_PHONE = 'Please provide at least one valid phone number',
     INVALID_PHONE = 'Please enter a valid phone number (e.g. 555-5555, 555-555-5555)';
 
-module.exports = React.createClass({
+module.exports.form = React.createClass({
     mixins: [DeleteBtnMixin],
 
     render: function () {
@@ -21,22 +20,30 @@ module.exports = React.createClass({
             /*jshint ignore:end */
         });
 
-        var contact = this.props.item;
+        var contact = this.props.item,
+            me = this;
+
+        function propSetter(prop, val) {
+            contact[prop] = val;
+            me.props.setter(me.props.item);
+        }
+
         /*jshint ignore:start */
         return (
             <div className="row form-card">
                 <div className="col-sm-12">
                     {!this.props.locked && this.renderDeleteBtn()}
-                    <Select dataBinder={dataBinder.simpleBinder(contact.type)} label="Contact Type" disabled={this.props.locked} required data-placeholder="Select a Contact Type">
+                    <Select setter={propSetter.bind(me, 'type')} defaultValue={contact.type} 
+                        label="Contact Type" disabled={this.props.locked} required data-placeholder="Select a Contact Type">
                         {contactTypes}
                     </Select>
-                    <TextInput type="text" dataBinder={dataBinder.simpleBinder(contact.name)} label="Name" required maxLength={100} />
-                    <TextInput type="text" dataBinder={dataBinder.simpleBinder(contact.organization)} label="Organization" maxLength={100} />
-                    <TextInput type="email" ref="email" dataBinder={dataBinder.simpleBinder(contact.email)} label="Email" required maxLength={100} />
-                    <TextInput type="text" ref="securePhone" dataBinder={dataBinder.simpleBinder(contact.securePhone)}
+                    <TextInput setter={propSetter.bind(me, 'name')} defaultValue={contact.name} label="Name" required maxLength={100} />
+                    <TextInput setter={propSetter.bind(me, 'organization')} defaultValue={contact.organization} label="Organization" maxLength={100} />
+                    <TextInput type="email" ref="email" setter={propSetter.bind(me, 'email')} defaultValue={contact.email} label="Email" required maxLength={100} />
+                    <TextInput type="text" ref="securePhone" setter={propSetter.bind(me, 'securePhone')} defaultValue={contact.securePhone}
                             label="Secure Phone" error={this.state.securePhoneError} maxLength={50}
                             onFocus={this.validatePhone.bind(this, 'secure')} onBlur={this.validatePhone.bind(this, 'secure')} />
-                    <TextInput type="text" ref="unsecurePhone" dataBinder={dataBinder.simpleBinder(contact.unsecurePhone)}
+                    <TextInput type="text" ref="unsecurePhone" setter={propSetter.bind(me, 'unsecurePhone')} defaultValue={contact.unsecurePhone}
                             label="Unsecure Phone" error={this.state.unsecurePhoneError} maxLength={50}
                             onFocus={this.validatePhone.bind(this, 'unsecure')} onBlur={this.validatePhone.bind(this, 'unsecure')} />
                 </div>
@@ -99,3 +106,7 @@ module.exports = React.createClass({
         this.validatePhone(null, {type: 'change'});
     }
 });
+
+module.exports.schema = function () {
+    return {};
+};

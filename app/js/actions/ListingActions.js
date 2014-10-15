@@ -17,7 +17,6 @@ var Actions = Reflux.createActions([
     'save', 'saved', 'saveFailed'
 ]);
 
-
 Actions.fetchNewArrivals.listen(function () {
     ListingApi.getNewArrivals().then(Actions.newArrivalsFetched);
 });

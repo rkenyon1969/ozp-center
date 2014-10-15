@@ -16,6 +16,8 @@ var Quickview = require('./quickview');
 var ProfileActions = require('../actions/ProfileActions');
 var fetchLibrary = ProfileActions.fetchLibrary;
 
+require('../stores/CreateEditStore');
+
 var App = React.createClass({
 
     mixins: [ Reflux.ListenerMixin ],

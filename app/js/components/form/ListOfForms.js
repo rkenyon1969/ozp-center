@@ -2,11 +2,12 @@
 'use strict';
 
 var React = require('react');
+var _clone = require('lodash/objects/cloneDeep');
 
 var ListOfForms = React.createClass({
     propTypes: {
          /**
-            A Cortex wrapped array - either empty or containing the existing items
+            An array of items to represent - either empty or containing the existing items
           */
          items: React.PropTypes.object.isRequired,
 
@@ -48,17 +49,25 @@ var ListOfForms = React.createClass({
 
     render: function () {
         var ItemForm = this.props.itemForm,
+            items = this.props.items,
             me = this,
             key = 0;
 
-        var items = this.props.items.map(function (item) {
+        var itemForms = items.map(function (item) {
             var _key = key;
             key += 1;
+
+            function setter(item) {
+                items[_key] = item;
+                me.setItemsOnStore(items);
+            }
+
             return (
                 /*jshint ignore: start */
                 <ItemForm locked={me.props.locked.indexOf(_key) > -1}
                         removeHandler={me.handleDelete.bind(me, _key)}
-                        key={_key} item={item} config={me.props.config} />
+                        key={_key} item={item} config={me.props.config}
+                        setter={setter} />
                 /*jshint ignore: end */
             );
         });
@@ -69,7 +78,7 @@ var ListOfForms = React.createClass({
                 {this.props.label && this.renderLabel()}
                 {this.props.description && this.renderDescription()}
                 <div className="input-form-container">
-                    {items}
+                    {itemForms}
                 </div>
                 <button className="btn btn-primary" onClick={this.handleNew}>Add</button>
             </div>
@@ -92,15 +101,19 @@ var ListOfForms = React.createClass({
     handleDelete: function (key, event) {
         event.preventDefault();
         if (this.props.locked.indexOf(key) === -1) {
-            this.props.items.removeAt(key);
+            this.props.items.splice(key, 1);
         }
+        this.setItemsOnStore(this.props.items);
+    },
+
+    setItemsOnStore: function (data) {
+        this.props.setter(data);
     },
 
     handleNew: function (event) {
         event.preventDefault();
-        var Item = this.props.itemSchema;
-        this.props.items.push(new Item({}));
-        return false;
+        this.props.items.push(this.props.itemSchema());
+        this.setItemsOnStore(this.props.items);
     }
 });
 
