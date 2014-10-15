@@ -5,7 +5,6 @@ var React = require('react');
 var TextInput = require('../../form/textInput');
 var Select = require('../../form/select');
 var DeleteBtnMixin = require('./deleteBtnMixin');
-var ConfigStoreMixin = require('../../../mixins/config');
 var dataBinder = require('../../../utils/binder');
 
 var phoneRegex = /(^\+\d((([\s.-])?\d+)?)+$)|(^(\(\d{3}\)\s?|^\d{3}[\s.-]?)?\d{3}[\s.-]?\d{4}$)/,

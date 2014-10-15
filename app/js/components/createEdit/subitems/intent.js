@@ -4,7 +4,6 @@
 var React  = require('react');
 var Select = require('../../form/select');
 var DeleteBtnMixin = require('./deleteBtnMixin');
-var ConfigMixin = require('../../../mixins/config');
 var dataBinder = require('../../../utils/binder');
 
 module.exports = React.createClass({
