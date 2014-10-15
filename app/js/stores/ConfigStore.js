@@ -3,6 +3,7 @@
 var Reflux = require('reflux');
 var capitalize = require('../utils/string').capitalize;
 var ConfigApi = require('../webapi/Config').ConfigApi;
+var $ = require('jquery');
 
 var _config = {
     loaded: false
@@ -19,27 +20,29 @@ var configItems = [
 
 var ConfigStore = Reflux.createStore({
     init: function () {
-        var me = this;
-
-        configItems.forEach(function (item) {
-            ConfigApi['get' + capitalize(item)]()
-                .then(function (data) {
-                    _config[item] = data;
-                    me.updateLoaded();
-                    me.trigger();
-                });
-        });
+        this.loadConfig();
     },
 
     getConfig: function () {
         return _config;
     },
 
-    updateLoaded: function () {
-        _config.loaded = configItems.every(function (item) {
-            return !!_config[item];
-        }, this);
+    loadConfig: function () {
+        var me = this;
+
+        var promises = configItems.map(function (item) {
+            ConfigApi['get' + capitalize(item)]().then(function (data) {
+                _config[item] = data;
+            });
+        });
+
+        $.when.apply($, promises).then(function (data) {
+            _config.loaded = true;
+            me.trigger();
+        });
     }
 });
 
-module.exports = ConfigStore;
+module.exports = { 
+    store: ConfigStore
+};

@@ -59,7 +59,7 @@ var ListingApi = {
 
     save: function (data) {
         var method = data.id ? 'PUT' : 'POST';
-        var url = 'https://localhost:8443/marketplace' + '/api/listing';
+        var url = API_URL + '/api/listing';
         url = data.id ? url + '/' + data.id : url;
 
         return $.ajax({

@@ -2,7 +2,7 @@ var path = require("path");
 var webpack = require("webpack");
 
 var ENV = process.env.NODE_ENV || "development";
-var API_URL = process.env.API_URL || "http://localhost:8080/marketplace";
+var API_URL = process.env.API_URL || "https://localhost:8443/marketplace";
 var LOGOUT_URL = process.env.LOGOUT_URL || "#";
 
 module.exports = {
