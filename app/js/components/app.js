@@ -8,13 +8,21 @@ var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
 var Routes = Router.Routes;
 var Redirect = Router.Redirect;
-var DiscoveryPage = require('./discovery');
-var CreateEditPage = require('./createEdit');
-var ConfigStore = require('../stores/ConfigStore').store;
+
+var ConfigStore = require('../stores/ConfigStore');
 var ProfileStore = require('../stores/ProfileStore');
-var Quickview = require('./quickview');
 var ProfileActions = require('../actions/ProfileActions');
 var fetchLibrary = ProfileActions.fetchLibrary;
+
+// component dependencies
+var DiscoveryPage = require('./discovery');
+var CreateEditPage = require('./createEdit');
+var UserManagement = require('./management/user');
+var MyListings = require('./management/user/MyListings');
+var RecentActivity = require('./management/user/RecentActivity');
+var AppsMallManagement = require('./management/mall');
+var Intents = require('./management/mall/Intents');
+var Quickview = require('./quickview');
 
 var App = React.createClass({
 
@@ -70,6 +78,17 @@ React.renderComponent(
                 </Route>
             </Route>
             <Route name="new" path="/new" handler={ CreateEditPage } />
+            <Route name="user-management" path="user-management" handler={ UserManagement }>
+                <Route name="my-listings" path="listings" handler={ MyListings } />
+                <Route name="recent-activity" path="recent-activity" handler={ RecentActivity } />
+            </Route>
+            <Route name="mall-management" path="mall-management" handler={ AppsMallManagement }>
+                <Route name="categories" path="categories" handler={ Intents} />
+                <Route name="tags" path="tags" handler={ Intents} />
+                <Route name="intents" path="intents" handler={ Intents} />
+                <Route name="organizations" path="organizations" handler={ Intents} />
+                <Route name="stewards" path="stewards" handler={ Intents} />
+            </Route>
             <Redirect to="home" />
         </Route>
     </Routes>,

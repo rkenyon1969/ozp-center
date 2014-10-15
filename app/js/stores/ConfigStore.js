@@ -43,6 +43,4 @@ var ConfigStore = Reflux.createStore({
     }
 });
 
-module.exports = { 
-    store: ConfigStore
-};
+module.exports = ConfigStore;

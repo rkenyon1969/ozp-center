@@ -14,7 +14,7 @@ var Header = React.createClass({
                 </a>
                 <ul className="dropdown-menu" role="menu">
                     <li><a href="#new"><i className="fa fa-plus"></i> Create Listing</a></li>
-                    <li><a href="#"><i className="fa fa-list"></i> My Listings</a></li>
+                    <li><a href="#user-management/listings"><i className="fa fa-list"></i> My Listings</a></li>
                     <li><a href={ LOGOUT_URL }><i className="fa fa-sign-out"></i> Logout</a></li>
                 </ul>
             </div>

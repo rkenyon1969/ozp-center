@@ -8,30 +8,15 @@ var Router = require('react-router');
 var Link = Router.Link;
 var CurrentPath = Router.CurrentPath;
 var Navigation = Router.Navigation;
+var Tab = require('../../mixins/TabMixin');
 var map = require('lodash/collections/map');
+
+// component dependencies
 var Modal = require('../shared/Modal');
 var IconRating = require('../shared/IconRating');
 var Header = require('./Header');
-var OverviewTab = require('./OverviewTab');
-var ReviewsTab = require('./ReviewsTab');
-var DetailsTab = require('./DetailsTab');
-var ResourcesTab = require('./ResourcesTab');
 
 var GlobalListingStore = require('../../stores/GlobalListingStore');
-
-var LINKS = [{
-    to: 'quickview-overview',
-    name: 'Overview'
-}, {
-    to: 'quickview-reviews',
-    name: 'Reviews'
-}, {
-    to: 'quickview-details',
-    name: 'Details'
-}, {
-    to: 'quickview-resources',
-    name: 'Resources'
-}];
 
 /**
 *
@@ -41,10 +26,28 @@ var LINKS = [{
 **/
 var Quickview = React.createClass({
 
-    mixins: [ CurrentPath, Navigation ],
+    mixins: [ CurrentPath, Navigation, Tab ],
 
     propTypes: {
         listing: React.PropTypes.object
+    },
+
+    getDefaultProps: function() {
+        return {
+            tabs: [{
+                to: 'quickview-overview',
+                name: 'Overview'
+            }, {
+                to: 'quickview-reviews',
+                name: 'Reviews'
+            }, {
+                to: 'quickview-details',
+                name: 'Details'
+            }, {
+                to: 'quickview-resources',
+                name: 'Resources'
+            }]
+        };
     },
 
     getInitialState: function () {
@@ -69,39 +72,12 @@ var Quickview = React.createClass({
             <Modal ref="modal" className="quickview" onShown={ this.onShown } onHidden= { this.onHidden }>
                 <Header listing={ listing } onCancel={ this.close } />
                 <div className="tabs-container">
-                    { this.renderTabs(activeRoute) }
+                    { this.renderTabs(this.props.tabs, { listingId: listing.id() }) }
                     <div className="tab-content">
                         { activeRoute }
                     </div>
                 </div>
             </Modal>
-        );
-        /* jshint ignore:end */
-    },
-
-    renderTabs: function (activeRoute) {
-        var listing = this.state.listing;
-        var params = {
-            listingId: listing.id()
-        };
-        var activeRouteName = activeRoute.props.name;
-
-        /* jshint ignore:start */
-        var linkComponents = map(LINKS, function (link) {
-            var cx = React.addons.classSet({
-                active: link.to === activeRouteName
-            });
-            return (
-                <li className={ cx }>
-                    <Link to={link.to} params={ params }>{ link.name }</Link>
-                </li>
-            );
-        })
-
-        return (
-            <ul className="nav nav-tabs" role="tablist">
-                { linkComponents }
-            </ul>
         );
         /* jshint ignore:end */
     },
@@ -129,7 +105,7 @@ var Quickview = React.createClass({
 });
 
 module.exports = Quickview;
-module.exports.OverviewTab = OverviewTab;
-module.exports.ReviewsTab = ReviewsTab;
-module.exports.DetailsTab = DetailsTab;
-module.exports.ResourcesTab = ResourcesTab;
+module.exports.OverviewTab = require('./OverviewTab');
+module.exports.ReviewsTab = require('./ReviewsTab');
+module.exports.DetailsTab = require('./DetailsTab');
+module.exports.ResourcesTab = require('./ResourcesTab');
