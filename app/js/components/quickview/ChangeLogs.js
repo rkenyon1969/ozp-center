@@ -11,7 +11,7 @@ var uuid = require('../../utils/uuid');
 var ChangeLogs = React.createClass({
 
     propTypes: {
-        changeLogs: React.PropTypes.object,
+        changeLogs: React.PropTypes.array,
         showListingName: React.PropTypes.bool
     },
 
