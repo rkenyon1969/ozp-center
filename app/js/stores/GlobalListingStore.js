@@ -9,7 +9,7 @@ var searchCompleted = ListingActions.searchCompleted;
 var changeLogsFetched = ListingActions.changeLogsFetched;
 
 var cache = {};
-var changeLogCache = [];
+var changeLogCache = {};
 
 function updateCache (listings) {
     listings.forEach(function (listing) {
@@ -27,8 +27,8 @@ var GlobalListingStore = Reflux.createStore({
         this.listenTo(mostPopularFetched, updateCache);
         this.listenTo(featuredFetched, updateCache);
         this.listenTo(searchCompleted, updateCache);
-        this.listenTo(changeLogsFetched, function(changeLogs){
-            changeLogCache = changeLogs;
+        this.listenTo(changeLogsFetched, function (id, changeLogs) {
+            changeLogCache[id] = changeLogs;
             this.trigger();
         });
     },
@@ -37,8 +37,8 @@ var GlobalListingStore = Reflux.createStore({
         return cache[id];
     },
 
-    getChangeLogs: function () {
-        return changeLogCache;
+    getChangeLogs: function (id) {
+        return changeLogCache[id] || [];
     }
 
 });

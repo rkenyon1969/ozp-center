@@ -35,8 +35,8 @@ Actions.search.listen(function (options) {
     ListingApi.search(options).then(Actions.searchCompleted);
 });
 
-Actions.fetchChangeLogs.listen(function (id) {
-    ListingApi.getChangeLogs(id).then(Actions.changeLogsFetched);
+Actions.fetchChangeLogs.listen(function (listingId) {
+    ListingApi.getChangeLogs(listingId).then(Actions.changeLogsFetched.bind(null, listingId));
 });
 
 Actions.launch.listen(function (listing) {
