@@ -11,6 +11,7 @@ var Actions = Reflux.createActions([
     'fetchMostPopular', 'mostPopularFetched',
     'fetchFeatured', 'featuredFetched',
     'search', 'searchCompleted',
+    'fetchChangeLogs', 'changeLogsFetched',
     'launch',
     'addToLibrary', 'addedToLibrary',
     'removeFromLibrary', 'removedFromLibrary',
@@ -32,6 +33,10 @@ Actions.fetchFeatured.listen(function () {
 
 Actions.search.listen(function (options) {
     ListingApi.search(options).then(Actions.searchCompleted);
+});
+
+Actions.fetchChangeLogs.listen(function (id) {
+    ListingApi.getChangeLogs(id).then(Actions.changeLogsFetched);
 });
 
 Actions.launch.listen(function (listing) {

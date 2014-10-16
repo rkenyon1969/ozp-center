@@ -5,7 +5,7 @@ var prop = require('../utils/prop');
 
 function Listing (json) {
     var keys = [
-        'id', 'title', 'description', 'screenshots', 'contacts', 'totalComments',
+        'id', 'title', 'description', 'descriptionShort', 'screenshots', 'contacts', 'totalComments',
         'avgRate', 'totalRate1', 'totalRate2', 'totalRate3','totalRate4',
         'totalRate5','totalVotes', 'state', 'tags', 'type','uuid',
         'versionName', 'imageLargeUrl', 'imageSmallUrl', 'imageMediumUrl', 'imageXlargeUrl',
@@ -68,6 +68,12 @@ var ListingApi = {
             data: JSON.stringify(data),
             dataType: 'json',
             contentType: 'application/json'
+        });
+    },
+
+    getChangeLogs: function (id){
+        return $.getJSON(API_URL + '/api/listing/' + id + '/activity').pipe(function (response) {
+            return response.data;
         });
     }
 

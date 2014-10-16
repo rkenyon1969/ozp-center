@@ -75,6 +75,7 @@ React.renderComponent(
                     <Route name="quickview-reviews" path="reviews" handler={ Quickview.ReviewsTab } />
                     <Route name="quickview-details" path="details" handler={ Quickview.DetailsTab } />
                     <Route name="quickview-resources" path="resources" handler={ Quickview.ResourcesTab } />
+                    <Route name="quickview-changelog" path="changelog" handler={ Quickview.ChangeLogTab } />
                 </Route>
             </Route>
             <Route name="new" path="/new" handler={ CreateEditPage } />

@@ -174,3 +174,19 @@ $quickview-nav-tabs-height: 42px;
         margin-top: $panel-body-padding;
     }
 }
+
+
+.ListingActivity__Changes {
+    font-size: 12px;
+    color: rgb(76, 84, 87);
+    margin-left: 10px;
+    margin-top: 5px;
+
+    li {
+        margin-bottom: 4px;
+
+        .OldValue {
+            text-decoration: line-through;
+        }
+    }
+}

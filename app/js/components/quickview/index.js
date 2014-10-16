@@ -15,6 +15,7 @@ var map = require('lodash/collections/map');
 var Modal = require('../shared/Modal');
 var IconRating = require('../shared/IconRating');
 var Header = require('./Header');
+var ChangeLogTab = require('./ChangeLogTab');
 
 var GlobalListingStore = require('../../stores/GlobalListingStore');
 
@@ -46,6 +47,9 @@ var Quickview = React.createClass({
             }, {
                 to: 'quickview-resources',
                 name: 'Resources'
+            }, {
+                to: 'quickview-changelog',
+                name: 'Change Log'
             }]
         };
     },
@@ -109,3 +113,4 @@ module.exports.OverviewTab = require('./OverviewTab');
 module.exports.ReviewsTab = require('./ReviewsTab');
 module.exports.DetailsTab = require('./DetailsTab');
 module.exports.ResourcesTab = require('./ResourcesTab');
+module.exports.ChangeLogTab = ChangeLogTab;

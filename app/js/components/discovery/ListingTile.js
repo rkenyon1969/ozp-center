@@ -18,7 +18,7 @@ var ListingTile = React.createClass({
         var listing = this.props.listing;
 
         var name = listing.title();
-        var description = listing.description() && listing.description().substr(0, 140);
+        var description = listing.descriptionShort() && listing.descriptionShort().substr(0, 140);
         var launchUrl = listing.launchUrl();
         var imageLargeUrl = listing.imageLargeUrl();
         var totalVotes = listing.totalVotes();

@@ -70,8 +70,12 @@ var ResourcesTab = React.createClass({
 
     renderTechSuppot: function () {
         var tsc = this.props.listing.contacts().map(function (contact) {
-            return contact.type.title.indexOf("Technical Support") > -1;
+            if(contact.type.title.indexOf("Technical Support") > -1){
+                return contact;
+            }
         });
+
+        compact(tsc);
 
         if (tsc.length) {
             return tsc.map(function (contact, i) {

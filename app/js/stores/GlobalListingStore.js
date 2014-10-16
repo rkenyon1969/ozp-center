@@ -6,8 +6,10 @@ var newArrivalsFetched = ListingActions.newArrivalsFetched;
 var mostPopularFetched = ListingActions.mostPopularFetched;
 var featuredFetched = ListingActions.featuredFetched;
 var searchCompleted = ListingActions.searchCompleted;
+var changeLogsFetched = ListingActions.changeLogsFetched;
 
 var cache = {};
+var changeLogCache = [];
 
 function updateCache (listings) {
     listings.forEach(function (listing) {
@@ -25,10 +27,18 @@ var GlobalListingStore = Reflux.createStore({
         this.listenTo(mostPopularFetched, updateCache);
         this.listenTo(featuredFetched, updateCache);
         this.listenTo(searchCompleted, updateCache);
+        this.listenTo(changeLogsFetched, function(changeLogs){
+            changeLogCache = changeLogs;
+            this.trigger();
+        });
     },
 
     getById: function (id) {
         return cache[id];
+    },
+
+    getChangeLogs: function () {
+        return changeLogCache;
     }
 
 });
