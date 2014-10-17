@@ -1,6 +1,3 @@
-/**
- * @jsx React.DOM
- */
 'use strict';
 
 var React = require('react');
@@ -90,7 +87,7 @@ var ResourcesTab = React.createClass({
                         </div>
                     </div>
                 );
-            }); 
+            });
         }
         else {
             return <EmptyFieldValue text="None available" />;
