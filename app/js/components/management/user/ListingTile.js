@@ -10,7 +10,7 @@ var ActionMenu = React.createClass({
         /* jshint ignore:start */
         return (
             <div className="MyListingTile__actionMenu">
-                <button class="MyListingTile__actionMenuToggle"></button
+                <button class="MyListingTile__actionMenuToggle"></button>
                 //TODO fill in hrefs
                 <ul>
                     <li><a className="feedback" href="">Read Feedback</a></li>
