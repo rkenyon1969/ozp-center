@@ -75,8 +75,11 @@ var ListingApi = {
         return $.getJSON(API_URL + '/api/listing/' + id + '/activity').pipe(function (response) {
             return response.data;
         });
-    }
+    },
 
+    getOwnedListings: function (profile) {
+        return $.getJSON(API_URL + '/api/profile/' + profile.id + '/listing');
+    }
 };
 
 module.exports.Listing = Listing;

@@ -12,6 +12,7 @@ var Actions = Reflux.createActions([
     'fetchFeatured', 'featuredFetched',
     'search', 'searchCompleted',
     'fetchChangeLogs', 'changeLogsFetched',
+    'fetchOwnedListings', 'ownedListingsFetched',
     'launch',
     'addToLibrary', 'addedToLibrary',
     'removeFromLibrary', 'removedFromLibrary',
@@ -37,6 +38,10 @@ Actions.search.listen(function (options) {
 
 Actions.fetchChangeLogs.listen(function (id) {
     ListingApi.getChangeLogs(id).then(Actions.changeLogsFetched);
+});
+
+Actions.fetchOwnedListings.listen(function (profile) {
+    ListingApi.getOwnedListings(profile).then(Actions.ownedListingsFetched);
 });
 
 Actions.launch.listen(function (listing) {
