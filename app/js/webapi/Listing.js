@@ -14,6 +14,7 @@ function Listing (json) {
     ];
 
     json.intents = json.intents || [];
+    json.screenshots = json.screenshots || json.screenShots;
 
     keys.forEach(function (key) {
         this[key] = prop(json[key]);
@@ -78,7 +79,13 @@ var ListingApi = {
     },
 
     getOwnedListings: function (profile) {
-        return $.getJSON(API_URL + '/api/profile/' + profile.id + '/listing');
+        var id = profile ? profile.id : 'self';
+
+        return $.getJSON(API_URL + '/api/profile/' + id + '/listing').pipe(function(response) {
+            return ([].concat(response._embedded.item)).map(function(json) {
+                return new Listing(json);
+            });
+        });
     }
 };
 

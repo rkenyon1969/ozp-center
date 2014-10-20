@@ -1,3 +1,97 @@
 .MyListings {
 
 }
+
+.MyListingTile {
+    display: inline-block;
+    position: relative;
+
+    margin-right: 25px;
+}
+
+.MyListingTile_img {
+    width: $listing-tile-img-width;
+    height: $listing-tile-img-height;
+    display: block;
+}
+
+.MyListingTile__actionMenu > ul {
+    //overridden when toggle is checked
+    display: none;
+
+    @extend .list-unstyled;
+
+    width: 70px;
+
+    font-size: .8em;
+
+    background-color: $white;
+
+    border: 1px solid $gray-lighter;
+
+    > li {
+        $spacing: 5px;
+
+        padding-top: $spacing;
+        padding-bottom: $spacing;
+
+        > a {
+            color: inherit;
+            border-left: 3px solid transparent;
+
+            padding-left: $spacing;
+            padding-right: $spacing;
+
+            display: block;
+        }
+
+        &:hover > a {
+            color: $blue-dark;
+            border-color: $blue-dark;
+
+            text-decoration: none;
+        }
+    }
+}
+
+.MyListingTile__actionMenuButton {
+    //style as font-awesome horizontal ellipsis
+    @extend .fa;
+    @extend .fa-ellipsis-h;
+
+    display: block;
+    text-align: center;
+
+    background-color: $white;
+    font-size: 1.3em;
+    border: 1px solid $gray-lighter;
+
+    position: relative;
+    margin-right: 0;
+    margin-left: auto;
+    width: 50px;
+}
+
+.MyListingTile__actionMenu {
+    position: absolute;
+
+    top: 1px;
+    right: 1px;
+
+    > input {
+        //the toggle checkbox is hidden
+        display: none;
+
+        //when the checkbox is checked, display the menu
+        &:checked {
+            & ~ ul {
+                display: block;
+            }
+
+            & ~ .MyListingTile__actionMenuButton {
+                border-bottom: 3px solid $blue-dark;
+                color: $blue-dark;
+            }
+        }
+    }
+}

@@ -1,11 +1,8 @@
 .listing-tile {
-    $img-width: 220px;
-    $img-height: 137px;
-
     float: left;
     position: relative;
     overflow: hidden;
-    width: $img-width;
+    width: $listing-tile-img-width;
     height: 192px;
     margin: 0 25px 25px 0;
     line-height: 0;
@@ -16,7 +13,7 @@
     .slide-up {
         position: absolute;
         width: 100%;
-        top: $img-height;
+        top: $listing-tile-img-height;
         line-height: 20px;
         padding: 0 8px;
         background: #f3f3f3;
@@ -35,8 +32,8 @@
     }
 
     img {
-        width: $img-width;
-        height: $img-height;
+        width: $listing-tile-img-width;
+        height: $listing-tile-img-height;
         margin: 0 auto;
         display: block;
     }

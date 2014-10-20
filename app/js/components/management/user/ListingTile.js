@@ -1,17 +1,18 @@
-/**
- * @jsx React.DOM
- */
 'use strict';
 
 var React = require('react');
+var Router = require('react-router');
+var Link = Router.Link;
 
 var ActionMenu = React.createClass({
     render: function() {
         /* jshint ignore:start */
+        //TODO fill in hrefs
+        //use hidden checkbox to manage menu toggle state
         return (
-            <div className="MyListingTile__actionMenu">
-                <button class="MyListingTile__actionMenuToggle"></button>
-                //TODO fill in hrefs
+            <label className="MyListingTile__actionMenu">
+                <input type="checkbox" />
+                <span className="MyListingTile__actionMenuButton" />
                 <ul>
                     <li><a className="feedback" href="">Read Feedback</a></li>
                     <li><a href="review">Review</a></li>
@@ -19,7 +20,7 @@ var ActionMenu = React.createClass({
                     <li><a href="preview">Preview</a></li>
                     <li><a href="delete">Delete</a></li>
                 </ul>
-            </div>
+            </label>
         );
         /* jshint ignore:end */
     }
@@ -47,7 +48,7 @@ var ListingStatus = React.createClass({
         }
 
         /* jshint ignore:start */
-        return this.transferPropsTo(
+        return (
             <span className={className} />
         );
         /* jshint ignore:end */
@@ -56,11 +57,13 @@ var ListingStatus = React.createClass({
 
 var InfoBar = React.createClass({
     render: function() {
+        var listing = this.props.listing;
+
         /* jshint ignore:start */
-        return this.transferPropsTo(
+        return (
             <div className="MyListingTile__infoBar">
                 <ListingStatus listing={listing} />
-                <h4>{listing.title}</h4>
+                <h4>{listing.title()}</h4>
             </div>
         );
         /* jshint ignore:end */
@@ -69,12 +72,14 @@ var InfoBar = React.createClass({
 
 module.exports = React.createClass({
     render: function() {
+        var listing = this.props.listing;
+
         /* jshint ignore:start */
-        return this.transferPropsTo(
+        return (
             <li className="MyListingTile">
                 <ActionMenu listing={listing} />
                 <Link to="quickview-overview" params={{listingId: listing.id()}}>
-                    <img src={listing.imageLargeUrl} />
+                    <img className="MyListingTile__img" src={listing.imageLargeUrl()} />
                 </Link>
                 <InfoBar listing={listing} />
             </li>

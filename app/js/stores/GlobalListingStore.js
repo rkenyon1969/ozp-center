@@ -17,15 +17,15 @@ function updateCache (listings) {
     listings.forEach(function (listing) {
         cache[listing.id()] = listing;
 
-        listing.owners.forEach(function(owner) {
-debugger;
-            var cachedListings = listingsByOwnerCache[owner.username] || [];
+        listing.owners().forEach(function(owner) {
+            //TODO use username instead of id once it is reliably present
+            var cachedListings = listingsByOwnerCache[owner.id] || [];
 
             cachedListings = cachedListings.filter(function(l) {
                 return l.id !== listing.id();
             });
 
-            listingsByOwnerCache[owner.username] = cachedListings.concat([listing]);
+            listingsByOwnerCache[owner.id] = cachedListings.concat([listing]);
         });
     });
 }
@@ -44,9 +44,7 @@ var GlobalListingStore = Reflux.createStore({
             changeLogCache[id] = changeLogs;
             this.trigger();
         });
-        this.listenTo(ownedListingsFetched, function(ownedListings) {
-            updateCache(ownedListings);
-        });
+        this.listenTo(ownedListingsFetched, updateCache);
     },
 
     getById: function (id) {
@@ -55,8 +53,11 @@ var GlobalListingStore = Reflux.createStore({
 
     getChangeLogs: function (id) {
         return changeLogCache[id] || [];
-    }
+    },
 
+    getByOwner: function(ownerId) {
+        return listingsByOwnerCache[ownerId] || [];
+    }
 });
 
 module.exports = GlobalListingStore;
