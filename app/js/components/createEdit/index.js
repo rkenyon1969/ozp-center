@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 'use strict';
 
 var React            = require('react'),
@@ -128,8 +127,8 @@ var CreateEditPage = React.createClass({
 
                         <div className="col-sm-5">
                             <h2>Contacts</h2>
-                            <ListOfForms className="contact-form" itemForm={ContactForm} itemSchema={Contact} locked={lockedContacts} 
-                                    config={{contactTypes: this.props.config.contactTypes}} items={listing.contacts} 
+                            <ListOfForms className="contact-form" itemForm={ContactForm} itemSchema={Contact} locked={lockedContacts}
+                                    config={{contactTypes: this.props.config.contactTypes}} items={listing.contacts}
                                     description="Point of Contact for users to seek technical support for this listing." />
 
                         </div>

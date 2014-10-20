@@ -10,7 +10,7 @@ var changeLogsFetched = ListingActions.changeLogsFetched;
 var ownedListingsFetched = ListingActions.ownedListingsFetched;
 
 var cache = {};
-var changeLogCache = [];
+var changeLogCache = {};
 var listingsByOwnerCache = {};
 
 function updateCache (listings) {
@@ -40,8 +40,8 @@ var GlobalListingStore = Reflux.createStore({
         this.listenTo(mostPopularFetched, updateCache);
         this.listenTo(featuredFetched, updateCache);
         this.listenTo(searchCompleted, updateCache);
-        this.listenTo(changeLogsFetched, function(changeLogs){
-            changeLogCache = changeLogs;
+        this.listenTo(changeLogsFetched, function (id, changeLogs) {
+            changeLogCache[id] = changeLogs;
             this.trigger();
         });
         this.listenTo(ownedListingsFetched, function(ownedListings) {
@@ -53,8 +53,8 @@ var GlobalListingStore = Reflux.createStore({
         return cache[id];
     },
 
-    getChangeLogs: function () {
-        return changeLogCache;
+    getChangeLogs: function (id) {
+        return changeLogCache[id] || [];
     }
 
 });
