@@ -2,7 +2,7 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var ListingTile = require('./ListingTile');
+var MyListingTile = require('./MyListingTile');
 var GlobalListingStore = require('../../../stores/GlobalListingStore');
 var ListingActions = require('../../../actions/ListingActions');
 
@@ -36,7 +36,7 @@ var MyListings = React.createClass({
         var tiles = this.state.listings.map(function(listing) {
             /* jshint ignore:start */
             return (
-                <ListingTile listing={listing} />
+                <MyListingTile listing={listing} />
             );
             /* jshint ignore:end */
         });

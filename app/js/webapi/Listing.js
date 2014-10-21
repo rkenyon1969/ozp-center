@@ -10,7 +10,7 @@ function Listing (json) {
         'totalRate5','totalVotes', 'state', 'tags', 'type','uuid',
         'versionName', 'imageLargeUrl', 'imageSmallUrl', 'imageMediumUrl', 'imageXlargeUrl',
         'launchUrl', 'company', 'whatIsNew', 'owners', 'agency',
-        'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls'
+        'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls', 'approvalStatus'
     ];
 
     json.intents = json.intents || [];

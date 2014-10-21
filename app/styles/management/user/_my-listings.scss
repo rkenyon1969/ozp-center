@@ -1,12 +1,13 @@
-.MyListings {
-
+.MyListings__listings {
+    padding-top: 40px;
 }
 
 .MyListingTile {
     display: inline-block;
     position: relative;
 
-    margin-right: 25px;
+    margin-right: 40px;
+    margin-bottom: 30px;
 }
 
 .MyListingTile_img {
@@ -70,6 +71,13 @@
     margin-right: 0;
     margin-left: auto;
     width: 50px;
+
+    cursor: pointer;
+
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 .MyListingTile__actionMenu {
@@ -77,6 +85,7 @@
 
     top: 1px;
     right: 1px;
+    z-index: 1;
 
     > input {
         //the toggle checkbox is hidden
@@ -94,4 +103,44 @@
             }
         }
     }
+}
+
+.MyListingTile__approvalStatus {
+    position: absolute;
+    left: 0;
+
+    &.draft, &.pending, &.needs-action, &.published {
+        @extend .fa;
+    }
+
+    &.draft {
+        @extend .fa-file-text-o;
+    }
+
+    &.pending {
+        @extend .fa-spinner;
+        color: $blue-dark;
+    }
+
+    &.needs-action {
+        @extend .fa-exclamation;
+        color: $red-orange-dark;
+    }
+
+    &.published {
+        @extend .fa-thumbs-o-up;
+        color: $green-dark;
+    }
+}
+
+.MyListingTile__approvalDate {
+    position: absolute;
+    right: 0;
+
+    font-size: .9em;
+}
+
+.MyListingTile__infoBar {
+    text-align: center;
+    vertical-align: baseline;
 }
