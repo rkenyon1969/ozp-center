@@ -79,7 +79,7 @@ var InfoBar = React.createClass({
         /* jshint ignore:start */
         return (
             <h5 className="MyListingTile__infoBar">
-                <span>{listing.title()}</span>
+                <span className="title">{listing.title()}</span>
                 <ListingStatus listing={listing} />
                 <ApprovalDate listing={listing} />
             </h5>

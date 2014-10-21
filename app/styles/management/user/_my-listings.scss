@@ -8,6 +8,8 @@
 
     margin-right: 40px;
     margin-bottom: 30px;
+
+    vertical-align: top;
 }
 
 .MyListingTile_img {
@@ -71,6 +73,7 @@
     margin-right: 0;
     margin-left: auto;
     width: 50px;
+    padding: 0;
 
     cursor: pointer;
 
@@ -143,4 +146,11 @@
 .MyListingTile__infoBar {
     text-align: center;
     vertical-align: baseline;
+
+    > .title {
+        display: inline-block;
+        width: 100px;
+
+        overflow-wrap: break-word;
+    }
 }
