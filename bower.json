@@ -18,7 +18,8 @@
     "carouFredSel": "*",
     "select2": "3.5.1",
     "ubuntu-font": "*",
-    "magnific-popup": "~0.9.9"
+    "magnific-popup": "~0.9.9",
+    "react-radio-group": "~0.1.2"
   },
   "devDependencies": {
     "font-awesome": "~4.1.0"

@@ -107,3 +107,30 @@ label {
 .mfp-wrap {
     z-index: 10001;
 }
+
+/*==============================
+=   Approval Status Indicators =
+==============================*/
+
+.label-draft, .label-pending, .label-needs-action, .label-published {
+    @extend .fa;
+}
+
+.label-draft {
+    @extend .fa-file-text-o;
+}
+
+.label-pending {
+    @extend .fa-spinner;
+    color: $blue-dark;
+}
+
+.label-needs-action {
+    @extend .fa-exclamation;
+    color: $red-orange-dark;
+}
+
+.label-published {
+    @extend .fa-thumbs-o-up;
+    color: $green-dark;
+}

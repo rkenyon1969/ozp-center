@@ -111,29 +111,6 @@
 .MyListingTile__approvalStatus {
     position: absolute;
     left: 0;
-
-    &.draft, &.pending, &.needs-action, &.published {
-        @extend .fa;
-    }
-
-    &.draft {
-        @extend .fa-file-text-o;
-    }
-
-    &.pending {
-        @extend .fa-spinner;
-        color: $blue-dark;
-    }
-
-    &.needs-action {
-        @extend .fa-exclamation;
-        color: $red-orange-dark;
-    }
-
-    &.published {
-        @extend .fa-thumbs-o-up;
-        color: $green-dark;
-    }
 }
 
 .MyListingTile__approvalDate {
@@ -152,5 +129,16 @@
         width: 100px;
 
         overflow-wrap: break-word;
+    }
+}
+
+.MyListings__approvalStatusFilter {
+    input[type="radio"] {
+        display: none;
+    }
+
+    label {
+        display: block;
+        cursor: pointer;
     }
 }

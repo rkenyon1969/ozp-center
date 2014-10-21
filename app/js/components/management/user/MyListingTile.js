@@ -44,10 +44,10 @@ var ListingStatus = React.createClass({
     render: function() {
         var approvalStatus = this.props.listing.approvalStatus(),
             classSet = React.addons.classSet({
-                'draft': approvalStatus === 'IN_PROGRESS',
-                'pending': approvalStatus === 'PENDING',
-                'needs-action': approvalStatus === 'REJECTED',
-                'published': approvalStatus === 'APPROVED',
+                'label-draft': approvalStatus === 'IN_PROGRESS',
+                'label-pending': approvalStatus === 'PENDING',
+                'label-needs-action': approvalStatus === 'REJECTED',
+                'label-published': approvalStatus === 'APPROVED',
                 'MyListingTile__approvalStatus': true
             });
 
