@@ -10,22 +10,25 @@ var ActionMenu = React.createClass({
         /* jshint ignore:start */
 
         //TODO fill in hrefs
-        var review = <li><a href="review">Review</a></li>,
+        var listing = this.props.listing,
+            feedbackHref = "#/user-management/listings/feedback/" + listing.id(),
+            review = <li><a href="review">Review</a></li>,
             edit = <li><a href="edit">Edit</a></li>,
             preview = <li><a href="preview">Preview</a></li>,
             del = <li><a href="delete">Delete</a></li>,
             view = <li><a href="view">View</a></li>,
             disable = <li><a href="disable">Disable</a></li>,
-            readFeedback = <li><a href="feedback">Read Feedback</a></li>,
+            readFeedback = <li><a href={feedbackHref}>Read Feedback</a></li>,
             links,
-            approvalStatus = this.props.listing.approvalStatus();
+            approvalStatus = listing.approvalStatus();
 
         switch (approvalStatus) {
             case 'REJECTED':
                 links = [edit, readFeedback, preview, del];
                 break;
             default:
-                links = [edit, view, disable, del];
+                //links = [edit, view, disable, del];
+                links = [edit, readFeedback, preview, del];
         }
 
         //use hidden checkbox to manage menu toggle state

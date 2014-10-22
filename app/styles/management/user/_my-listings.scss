@@ -200,3 +200,56 @@
         padding-left: 4px;
     }
 }
+
+.FeedbackModal {
+    font-size: .9em;
+
+    h3 {
+        margin-top: 0;
+    }
+
+    dd, dt {
+        display: inline-block;
+        line-height: 30px;
+    }
+
+    dt {
+        width: 10%;
+
+        &::after {
+            content: ':';
+        }
+    }
+
+    dd {
+        width: 85%;
+    }
+
+    .feedback {
+        display: block;
+        height: 200px;
+        width: auto;
+
+        overflow: auto;
+    }
+
+    .edit {
+        display: block;
+        width: 150px;
+        height: 2em;
+        line-height: 2em;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        text-align: center;
+
+        background-color: $blue-dark;
+        color: white;
+        font-weight: bolder;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}

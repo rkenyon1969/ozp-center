@@ -79,6 +79,7 @@ var MyListings = React.createClass({
                         onFilterChanged={this.onFilterChanged} />
                 </aside>
                 <ul className="MyListings__listings col-md-9">{tiles}</ul>
+                <this.props.activeRouteHandler />
             </div>
         );
         /* jshint ignore:end */
