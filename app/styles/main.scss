@@ -115,7 +115,10 @@ label {
 .label-draft, .label-pending, .label-needs-action, .label-published {
     @extend .fa;
 
+    font-family: 'Ubuntu Regular', 'Ubuntu';
+
     &::before {
+        font-family: 'FontAwesome';
         display: inline-block;
         width: 18px;
         text-align: center;
