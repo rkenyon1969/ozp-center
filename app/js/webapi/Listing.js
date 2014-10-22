@@ -25,24 +25,24 @@ function Listing (json) {
 var ListingApi = {
 
     getFeatured: function () {
-        return $.getJSON(API_URL + '/api/search?isFeatured=true&sort=avgRate&order=desc&max=24').pipe(function (response) {
-            return response.data.map(function (json) {
+        return $.getJSON(API_URL + '/api/listing/search?isFeatured=true&sort=avgRate&order=DESC&max=24').pipe(function (response) {
+            return ((response._embedded && [].concat(response._embedded.item)) || []).map(function (json) {
                 return new Listing(json);
             });
         });
     },
 
     getNewArrivals: function () {
-        return $.getJSON(API_URL + '/api/search?sort=approvedDate&order=desc&max=24').pipe(function (response) {
-            return response.data.map(function (json) {
+        return $.getJSON(API_URL + '/api/listing/search?sort=approvedDate&order=DESC&max=24').pipe(function (response) {
+            return ((response._embedded && [].concat(response._embedded.item)) || []).map(function (json) {
                 return new Listing(json);
             });
         });
     },
 
     getMostPopular: function () {
-        return $.getJSON(API_URL + '/api/search?sort=avgRate&order=asc&max=24').pipe(function (response) {
-            return response.data.map(function (json) {
+        return $.getJSON(API_URL + '/api/listing/search?sort=avgRate&order=ASC&max=24').pipe(function (response) {
+            return ((response._embedded && [].concat(response._embedded.item)) || []).map(function (json) {
                 return new Listing(json);
             });
         });
@@ -50,8 +50,8 @@ var ListingApi = {
 
     search: function (options) {
         var params = $.param(options, true);
-        return $.getJSON(API_URL + '/api/search?' + params).pipe(function (response) {
-            return response.data.map(function (json) {
+        return $.getJSON(API_URL + '/api/listing/search?' + params).pipe(function (response) {
+            return ((response._embedded && [].concat(response._embedded.item)) || []).map(function (json) {
                 return new Listing(json);
             });
         });

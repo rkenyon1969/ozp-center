@@ -43,7 +43,7 @@ var Sidebar = React.createClass({
                     <li>
                         <span>Categories</span>
                         <ul className="list-unstyled">
-                            { this.renderFacets(this.props.config.categories, 'category') }
+                            { this.renderFacets(this.props.config.categories, 'categories') }
                         </ul>
                     </li>
                     <li>

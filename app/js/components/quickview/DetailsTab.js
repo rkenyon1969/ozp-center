@@ -11,17 +11,13 @@ var DetailsTab = React.createClass({
 
     render: function () {
         var whatsNew = this.props.listing.whatIsNew();
-        var organization = this.props.listing.agency().title;
-        var type = this.props.listing.type().title;
+        var organization = this.props.listing.agency();
+        var type = this.props.listing.type();
         var URL = this.props.listing.launchUrl();
         var updatedDate = this.props.listing.editedDate();
         var releaseDate = this.props.listing.releaseDate();
-        var categories = this.props.listing.categories().map(function (category) {
-            return category.title;
-        }).join(', ');
-        var tags = (this.props.listing.tags() || []).map(function (tag) {
-            return tag;
-        }).join(', ');
+        var categories = this.props.listing.categories().join(', ');
+        var tags = this.props.listing.tags().join(', ');
 
         /* jshint ignore:start */
         return (
@@ -68,7 +64,7 @@ var DetailsTab = React.createClass({
 
         /* jshint ignore:start */
         return owners.map(function (owner) {
-            return (<span className="listing-owner"> { owner.name }</span>);
+            return (<span className="listing-owner"> { owner.displayName }</span>);
         });
         /* jshint ignore:end */
     },
@@ -77,11 +73,8 @@ var DetailsTab = React.createClass({
         /* jshint ignore:start */
         var intents = this.props.listing.intents();
         var intentComponents = this.props.listing.intents().map(function (intent) {
-            if (intent.receive) {
-                return (
-                    <p><label>{ intent.action.title }: </label><span> { intent.dataType.title }</span></p>
-                );
-            }
+            var parts = intent.split('/');
+            return <p><label>{ parts[2] }: </label><span> { parts[0] + '/' + parts[1] }</span></p>;
         });
 
         return (
