@@ -12,27 +12,59 @@ var MyListingsSidebar = React.createClass({
     },
 
     render: function() {
+        //object map from approvalStatus to number of listings with that
+        //status
+        var counts = this.props.listings.reduce(function(acc, i) {
+                (acc[i.approvalStatus()])++;
+                return acc;
+            }, {
+                APPROVED: 0,
+                REJECTED: 0,
+                PENDING: 0,
+                IN_PROGRESS: 0
+            }),
+            countClasses = {};
+
+        Object.keys(counts).forEach(function(k) {
+            countClasses[k] = React.addons.classSet({
+                count: true,
+                empty: counts[k] === 0
+            });
+        });
+
+
         /*jshint ignore:start */
         return (
             <form className="MyListings__approvalStatusFilter">
                 <h3>Filter By State</h3>
                 <RadioGroup name="approval-status"
-                        defaultValue={this.props.defaultValue}
+                        value={this.props.value}
                         onChange={this.handleChange}>
-                    <label className="label-all">
-                        <input type="radio" value="all"/>All
+                    <input id="my-listings-filter-all" type="radio" value="all"/>
+                    <label htmlFor="my-listings-filter-all" className="label-all">All</label>
+                    <input id="my-listings-filter-published" type="radio" value="published"/>
+                    <label htmlFor="my-listings-filter-published" className="label-published">
+                        Published
+                        <strong className={countClasses.APPROVED}>{counts.APPROVED}</strong>
                     </label>
-                    <label className="label-published">
-                        <input type="radio" value="published"/>Published
+                    <input id="my-listings-filter-needs-action" type="radio"
+                        value="needs-action"/>
+                    <label htmlFor="my-listings-filter-needs-action"
+                            className="label-needs-action">
+                        Needs action
+                        <strong className={countClasses.REJECTED}>{counts.REJECTED}</strong>
                     </label>
-                    <label className="label-needs-action">
-                        <input type="radio" value="needs-action"/>Needs action
+                    <input id="my-listings-filter-pending" type="radio" value="pending"/>
+                    <label htmlFor="my-listings-filter-pending" className="label-pending">
+                        Pending
+                        <strong className={countClasses.PENDING}>{counts.PENDING}</strong>
                     </label>
-                    <label className="label-pending">
-                        <input type="radio" value="pending"/>Pending
-                    </label>
-                    <label className="label-draft">
-                        <input type="radio" value="draft"/>Draft
+                    <input id="my-listings-filter-draft" type="radio" value="draft"/>
+                    <label htmlFor="my-listings-filter-draft" className="label-draft">
+                        Draft
+                        <strong className={countClasses.IN_PROGRESS}>
+                            {counts.IN_PROGRESS}
+                        </strong>
                     </label>
                 </RadioGroup>
             </form>

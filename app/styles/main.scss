@@ -114,6 +114,12 @@ label {
 
 .label-draft, .label-pending, .label-needs-action, .label-published {
     @extend .fa;
+
+    &::before {
+        display: inline-block;
+        width: 18px;
+        text-align: center;
+    }
 }
 
 .label-draft {

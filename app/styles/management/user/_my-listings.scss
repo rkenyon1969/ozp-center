@@ -140,5 +140,60 @@
     label {
         display: block;
         cursor: pointer;
+
+        border-left: 3px solid transparent;
+
+        vertical-align: middle;
+
+        width: 80%;
+        height: 20px;
+
+        span {
+            line-height: 20px;
+        }
+
+        strong {
+            float: right;
+
+            width: 20px;
+            height: 20px;
+
+            margin-left: 10px;
+            border-radius: 50%;
+
+            padding: 3px;
+
+            font-size: .9em;
+            color: $white;
+            text-align: center;
+
+            &.empty {
+                display: none;
+            }
+        }
+    }
+
+    input:checked + label {
+        border-left-color: $blue;
+    }
+
+    .label-pending strong {
+        background-color: $blue-dark;
+    }
+
+    .label-needs-action strong {
+        background-color: $red-orange-dark;
+    }
+
+    .label-published strong {
+        background-color: $green-dark;
+    }
+
+    .label-draft strong {
+        background-color: $black;
+    }
+
+    .label-all {
+        padding-left: 4px;
     }
 }

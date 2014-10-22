@@ -74,7 +74,8 @@ var MyListings = React.createClass({
         return this.transferPropsTo(
             <div className="MyListings">
                 <aside className="MyListings__sidebar col-md-3" >
-                    <MyListingsSidebar defaultValue={this.filter}
+                    <MyListingsSidebar value={this.state.filter}
+                        listings={this.state.listings}
                         onFilterChanged={this.onFilterChanged} />
                 </aside>
                 <ul className="MyListings__listings col-md-9">{tiles}</ul>
