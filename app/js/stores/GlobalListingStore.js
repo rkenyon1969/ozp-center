@@ -18,14 +18,13 @@ function updateCache (listings) {
         cache[listing.id()] = listing;
 
         listing.owners().forEach(function(owner) {
-            //TODO use username instead of id once it is reliably present
-            var cachedListings = listingsByOwnerCache[owner.id] || [];
+            var cachedListings = listingsByOwnerCache[owner.username] || [];
 
             cachedListings = cachedListings.filter(function(l) {
-                return l.id !== listing.id();
+                return l.id() !== listing.id();
             });
 
-            listingsByOwnerCache[owner.id] = cachedListings.concat([listing]);
+            listingsByOwnerCache[owner.username] = cachedListings.concat([listing]);
         });
     });
 }
@@ -55,8 +54,8 @@ var GlobalListingStore = Reflux.createStore({
         return changeLogCache[id] || [];
     },
 
-    getByOwner: function(ownerId) {
-        return listingsByOwnerCache[ownerId] || [];
+    getByOwner: function(profile) {
+        return listingsByOwnerCache[profile.username] || [];
     }
 });
 

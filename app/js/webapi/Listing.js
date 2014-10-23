@@ -85,7 +85,7 @@ var ListingApi = {
             var embedded = response._embedded,
                 items = embedded ? embedded.item : null;
 
-            return ([].concat(items || [])).map(function(json) {
+            return (items || []).map(function(json) {
                 return new Listing(json);
             });
         });

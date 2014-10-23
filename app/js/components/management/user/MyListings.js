@@ -6,9 +6,12 @@ var MyListingTile = require('./MyListingTile');
 var MyListingsSidebar = require('./MyListingsSidebar');
 var GlobalListingStore = require('../../../stores/GlobalListingStore');
 var ListingActions = require('../../../actions/ListingActions');
+var ProfileActions = require('../../../actions/ProfileActions');
 
 var fetchOwnedListings = ListingActions.fetchOwnedListings;
 var ownedListingsFetched = ListingActions.ownedListingsFetched;
+var fetchSelf = ProfileActions.fetchSelf;
+var selfFetched = ProfileActions.selfFetched;
 
 /**
  * @param filter one of "all", "published", "needs-action", "pending", or "draft"
@@ -32,30 +35,46 @@ var MyListings = React.createClass({
     componentWillMount: function() {
         this.listenTo(ownedListingsFetched, this.onStoreChanged);
         fetchOwnedListings();
+
+        this.listenTo(selfFetched, this.onSelfFetched);
+        fetchSelf();
     },
 
-    getListings: function() {
-        return GlobalListingStore.getByOwner();
+    getListings: function(profile) {
+        profile = profile || (this.state ? this.state.profile : null);
+
+        return profile ? GlobalListingStore.getByOwner(profile) : [];
     },
 
     getInitialState: function() {
         return {
             listings: this.getListings(),
-            filter: this.defaultValue
+            filter: this.defaultValue,
+            profile: null
         };
     },
 
     onStoreChanged: function() {
         this.setState({
             listings: this.getListings(),
-            filter: this.state.filter
+            filter: this.state.filter,
+            profile: this.state.profile
         });
     },
 
     onFilterChanged: function(filter) {
         this.setState({
             listings: this.state.listings,
-            filter: filter
+            filter: filter,
+            profile: this.state.profile
+        });
+    },
+
+    onSelfFetched: function(profile) {
+        this.setState({
+            listings: this.getListings(profile),
+            filter: this.state.filter,
+            profile: profile
         });
     },
 
