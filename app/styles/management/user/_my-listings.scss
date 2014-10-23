@@ -214,7 +214,7 @@
     }
 
     dt {
-        width: 10%;
+        width: 13%;
 
         &::after {
             content: ':';
@@ -222,7 +222,7 @@
     }
 
     dd {
-        width: 85%;
+        width: 87%;
     }
 
     .feedback {
@@ -251,5 +251,11 @@
         &:hover {
             text-decoration: none;
         }
+    }
+
+    .close {
+        position: absolute;
+        right: 8px;
+        top: 0;
     }
 }

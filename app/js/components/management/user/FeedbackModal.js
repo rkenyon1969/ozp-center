@@ -3,24 +3,32 @@
 var React = require('react');
 var GlobalListingStore = require('../../../stores/GlobalListingStore');
 var Modal = require('../../shared/Modal');
+var Router = require('react-router');
+var Navigation = Router.Navigation;
 
 module.exports = React.createClass({
-    getInitialState: function() {
-        var listing = GlobalListingStore.getById(this.props.params.listingId);
+    mixins: [Navigation],
 
-        return {
+    getInitialState: function() {
+        var listing = GlobalListingStore.getById(this.props.params.listingId),
+            rejection = listing ? listing.currentRejection() : null;
+
+        return rejection ? {
             title: listing.title(),
-            //steward: listing.currentRejection().author.username,
-            //feedback: listing.currentRejection().description
-            steward: 'jerry',
-            feedback: 'This is junk'
+            steward: rejection.author.username,
+            feedback: rejection.description
+        } : {
+            title: '',
+            steward: '',
+            feedback: ''
         };
     },
 
     render: function() {
         /* jshint ignore:start */
         return (
-            <Modal ref="modal" className="FeedbackModal">
+            <Modal ref="modal" className="FeedbackModal" size="small">
+                <button className="close" onClick={ this.close }>×</button>
                 <h3>Steward Feedback</h3>
                 <dl>
                     <dt>Listing</dt>
@@ -34,5 +42,10 @@ module.exports = React.createClass({
             </Modal>
         );
         /* jshint ignore:end */
+    },
+
+    close: function() {
+        this.refs.modal.close();
+        this.goBack();
     }
 });

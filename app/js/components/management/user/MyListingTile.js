@@ -27,8 +27,7 @@ var ActionMenu = React.createClass({
                 links = [edit, readFeedback, preview, del];
                 break;
             default:
-                //links = [edit, view, disable, del];
-                links = [edit, readFeedback, preview, del];
+                links = [edit, view, disable, del];
         }
 
         //use hidden checkbox to manage menu toggle state

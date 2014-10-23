@@ -82,7 +82,10 @@ var ListingApi = {
         var id = profile ? profile.id : 'self';
 
         return $.getJSON(API_URL + '/api/profile/' + id + '/listing').pipe(function(response) {
-            return ([].concat(response._embedded.item)).map(function(json) {
+            var embedded = response._embedded,
+                items = embedded ? embedded.item : null;
+
+            return ([].concat(items || [])).map(function(json) {
                 return new Listing(json);
             });
         });
