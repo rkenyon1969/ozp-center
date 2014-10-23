@@ -23,11 +23,18 @@ var ActionMenu = React.createClass({
             approvalStatus = listing.approvalStatus();
 
         switch (approvalStatus) {
+            case 'APPROVED':
+                links = [edit, view, disable, del];
+                break;
+            case 'PENDING':
+                links = [edit, preview, del];
+                break;
             case 'REJECTED':
                 links = [edit, readFeedback, preview, del];
                 break;
+            case 'DRAFT':
             default:
-                links = [edit, view, disable, del];
+                links = [edit, preview, del];
         }
 
         //use hidden checkbox to manage menu toggle state
