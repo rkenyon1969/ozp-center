@@ -3,13 +3,22 @@
 }
 
 .MyListingTile {
-    display: inline-block;
+    //overridden when matching filter
+    display: none;
     position: relative;
 
     margin-right: 40px;
     margin-bottom: 30px;
 
     vertical-align: top;
+}
+
+.MyListings__listings.all .MyListingTile,
+.MyListings__listings.draft .MyListingTile.draft,
+.MyListings__listings.needs-action .MyListingTile.needs-action,
+.MyListings__listings.pending .MyListingTile.pending,
+.MyListings__listings.published .MyListingTile.published {
+    display: inline-block;
 }
 
 .MyListingTile_img {
@@ -134,6 +143,23 @@
         overflow-wrap: break-word;
     }
 }
+
+.MyListingTile.pending .MyListingTile__approvalStatus {
+    @extend .label-pending;
+}
+
+.MyListingTile.published .MyListingTile__approvalStatus {
+    @extend .label-published;
+}
+
+.MyListingTile.needs-action .MyListingTile__approvalStatus {
+    @extend .label-needs-action;
+}
+
+.MyListingTile.draft .MyListingTile__approvalStatus {
+    @extend .label-draft;
+}
+
 
 .MyListings__approvalStatusFilter {
     input[type="radio"] {

@@ -6,10 +6,6 @@ var moment = require('moment');
 var Link = Router.Link;
 
 var ActionMenu = React.createClass({
-    componentDidUpdate: function() {
-        this.refs.checkbox.getDOMNode().checked = false;
-    },
-
     render: function() {
         /* jshint ignore:start */
 
@@ -44,7 +40,7 @@ var ActionMenu = React.createClass({
         //use hidden checkbox to manage menu toggle state
         return (
             <label className="MyListingTile__actionMenu">
-                <input type="checkbox" ref="checkbox"/>
+                <input type="checkbox" />
                 <span className="MyListingTile__actionMenuButton" />
                 <ul>{links}</ul>
             </label>
@@ -55,18 +51,9 @@ var ActionMenu = React.createClass({
 
 var ListingStatus = React.createClass({
     render: function() {
-        var approvalStatus = this.props.listing.approvalStatus(),
-            classSet = React.addons.classSet({
-                'label-draft': approvalStatus === 'IN_PROGRESS',
-                'label-pending': approvalStatus === 'PENDING',
-                'label-needs-action': approvalStatus === 'REJECTED',
-                'label-published': approvalStatus === 'APPROVED',
-                'MyListingTile__approvalStatus': true
-            });
-
         /* jshint ignore:start */
         return (
-            <span className={classSet} />
+            <span className="MyListingTile__approvalStatus" />
         );
         /* jshint ignore:end */
     }
@@ -103,11 +90,20 @@ var InfoBar = React.createClass({
 
 module.exports = React.createClass({
     render: function() {
-        var listing = this.props.listing;
+        var listing = this.props.listing,
+            approvalStatus = listing.approvalStatus(),
+            classSet = React.addons.classSet({
+                'draft': approvalStatus === 'IN_PROGRESS',
+                'pending': approvalStatus === 'PENDING',
+                'needs-action': approvalStatus === 'REJECTED',
+                'published': approvalStatus === 'APPROVED',
+                'MyListingTile': true
+            });
+
 
         /* jshint ignore:start */
         return (
-            <li className="MyListingTile">
+            <li className={classSet}>
                 <ActionMenu listing={listing} />
                 <Link to="quickview-overview" params={{listingId: listing.id()}}>
                     <img className="MyListingTile__img" src={listing.imageLargeUrl()} />

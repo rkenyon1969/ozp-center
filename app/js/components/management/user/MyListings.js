@@ -13,19 +13,6 @@ var ownedListingsFetched = ListingActions.ownedListingsFetched;
 var fetchSelf = ProfileActions.fetchSelf;
 var selfFetched = ProfileActions.selfFetched;
 
-/**
- * @param filter one of "all", "published", "needs-action", "pending", or "draft"
- * @param listing a listing model
- * @return whether or not the listing's approvalStatus matches the filter
- */
-function listingFilter(filter, listing) {
-    return filter === 'all' ||
-        (filter === 'published' && listing.approvalStatus() === 'APPROVED') ||
-        (filter === 'needs-action' && listing.approvalStatus() === 'REJECTED') ||
-        (filter === 'pending' && listing.approvalStatus() === 'PENDING') ||
-        (filter === 'draft' && listing.approvalStatus() === 'IN_PROGRESS');
-}
-
 var MyListings = React.createClass({
 
     defaultValue: 'all',
@@ -80,14 +67,14 @@ var MyListings = React.createClass({
 
     render: function () {
         var tiles = this.state.listings
-            .filter(listingFilter.bind(undefined, this.state.filter))
             .map(function(listing) {
                 /* jshint ignore:start */
                 return (
                     <MyListingTile listing={listing} />
                 );
                 /* jshint ignore:end */
-            });
+            }),
+            filter = this.state.filter || '';
 
         /* jshint ignore:start */
         return this.transferPropsTo(
@@ -97,7 +84,7 @@ var MyListings = React.createClass({
                         listings={this.state.listings}
                         onFilterChanged={this.onFilterChanged} />
                 </aside>
-                <ul className="MyListings__listings col-md-9">{tiles}</ul>
+                <ul className={"MyListings__listings col-md-9 " + filter}>{tiles}</ul>
                 <this.props.activeRouteHandler />
             </div>
         );
