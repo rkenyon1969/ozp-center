@@ -24,6 +24,8 @@ var Intents = require('./management/mall/Intents');
 var Quickview = require('./quickview');
 var FeedbackModal = require('./management/user/FeedbackModal');
 
+require('../stores/CreateEditStore');
+
 var App = React.createClass({
 
     mixins: [ Reflux.ListenerMixin ],

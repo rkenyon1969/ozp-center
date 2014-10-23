@@ -1,11 +1,11 @@
 'use strict';
 
-var React         = require('react'),
-    DataFormMixin = require('./dataFormMixin'),
-    SelectMixin   = require('./selectMixin');
+var React = require('react');
+var InputMixin = require('./InputMixin');
+var Select2Mixin = require('./Select2Mixin');
 
-module.exports = React.createClass({
-    mixins: [DataFormMixin, SelectMixin],
+var Select2Input = React.createClass({
+    mixins: [InputMixin, Select2Mixin],
 
     getInitialState: function () {
         return {select2: {locked: this.props.locked}};
@@ -13,8 +13,9 @@ module.exports = React.createClass({
 
     renderInput: function () {
         /*jshint ignore:start */
-        return this.transferPropsTo(
-            <select>
+        return (
+            <select data-placeholder={this.props['data-placeholder']} multiple={this.props.multiple} 
+                    required={this.props.required} defaultValue={this.props.defaultValue}>
                 {this.renderPlaceholder()}
                 {this.props.children}
             </select>
@@ -30,3 +31,5 @@ module.exports = React.createClass({
         }
     }
 });
+
+module.exports = Select2Input;

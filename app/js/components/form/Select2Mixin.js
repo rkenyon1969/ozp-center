@@ -22,7 +22,7 @@ module.exports = {
         this._$select2.destroy();
     },
 
-    getDOMValue: function (target) {
-        return $(target).select2('val');
+    getDOMValue: function () {
+        return this._$input.select2('val');
     }
 };

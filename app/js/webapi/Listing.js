@@ -58,6 +58,10 @@ var ListingApi = {
         });
     },
 
+    getById: function (id) {
+        return $.getJSON(API_URL + '/api/listing/' + id);
+    },
+
     save: function (data) {
         var method = data.id ? 'PUT' : 'POST';
         var url = API_URL + '/api/listing';

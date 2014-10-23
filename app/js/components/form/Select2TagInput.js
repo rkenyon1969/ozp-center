@@ -1,11 +1,11 @@
 'use strict';
 
-var React         = require('react'),
-    DataFormMixin = require('./dataFormMixin'),
-    SelectMixin   = require('./selectMixin');
+var React = require('react');
+var InputMixin = require('./InputMixin');
+var Select2Mixin = require('./Select2Mixin');
 
-module.exports = React.createClass({
-    mixins: [DataFormMixin, SelectMixin],
+var Select2TagInput = React.createClass({
+    mixins: [InputMixin, Select2Mixin],
 
     getInitialState: function () {
         return {select2: {locked: this.props.locked, tags: [], tokenSeparators: [',', ' ']}};
@@ -13,9 +13,11 @@ module.exports = React.createClass({
 
     renderInput: function () {
         /*jshint ignore:start */
-        return this.transferPropsTo(
+        return (
             <input type="text" />
         );
         /*jshint ignore:end */
     }
 });
+
+module.exports = Select2TagInput;
