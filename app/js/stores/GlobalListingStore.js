@@ -7,13 +7,25 @@ var mostPopularFetched = ListingActions.mostPopularFetched;
 var featuredFetched = ListingActions.featuredFetched;
 var searchCompleted = ListingActions.searchCompleted;
 var changeLogsFetched = ListingActions.changeLogsFetched;
+var ownedListingsFetched = ListingActions.ownedListingsFetched;
 
 var cache = {};
 var changeLogCache = {};
+var listingsByOwnerCache = {};
 
 function updateCache (listings) {
     listings.forEach(function (listing) {
         cache[listing.id()] = listing;
+
+        listing.owners().forEach(function(owner) {
+            var cachedListings = listingsByOwnerCache[owner.username] || [];
+
+            cachedListings = cachedListings.filter(function(l) {
+                return l.id() !== listing.id();
+            });
+
+            listingsByOwnerCache[owner.username] = cachedListings.concat([listing]);
+        });
     });
 }
 
@@ -31,6 +43,7 @@ var GlobalListingStore = Reflux.createStore({
             changeLogCache[id] = changeLogs;
             this.trigger();
         });
+        this.listenTo(ownedListingsFetched, updateCache);
     },
 
     getById: function (id) {
@@ -39,8 +52,11 @@ var GlobalListingStore = Reflux.createStore({
 
     getChangeLogs: function (id) {
         return changeLogCache[id] || [];
-    }
+    },
 
+    getByOwner: function(profile) {
+        return listingsByOwnerCache[profile.username] || [];
+    }
 });
 
 module.exports = GlobalListingStore;

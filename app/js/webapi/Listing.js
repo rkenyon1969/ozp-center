@@ -9,11 +9,12 @@ function Listing (json) {
         'avgRate', 'totalRate1', 'totalRate2', 'totalRate3','totalRate4',
         'totalRate5','totalVotes', 'state', 'tags', 'type','uuid',
         'versionName', 'imageLargeUrl', 'imageSmallUrl', 'imageMediumUrl', 'imageXlargeUrl',
-        'launchUrl', 'company', 'whatIsNew', 'owners', 'agency',
-        'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls'
+        'launchUrl', 'company', 'whatIsNew', 'owners', 'agency', 'currentRejection',
+        'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls', 'approvalStatus'
     ];
 
     json.intents = json.intents || [];
+    json.screenshots = json.screenshots || json.screenShots;
 
     keys.forEach(function (key) {
         this[key] = prop(json[key]);
@@ -75,8 +76,20 @@ var ListingApi = {
         return $.getJSON(API_URL + '/api/listing/' + id + '/activity').pipe(function (response) {
             return response.data;
         });
-    }
+    },
 
+    getOwnedListings: function (profile) {
+        var id = profile ? profile.id : 'self';
+
+        return $.getJSON(API_URL + '/api/profile/' + id + '/listing').pipe(function(response) {
+            var embedded = response._embedded,
+                items = embedded ? embedded.item : null;
+
+            return (items || []).map(function(json) {
+                return new Listing(json);
+            });
+        });
+    }
 };
 
 module.exports.Listing = Listing;

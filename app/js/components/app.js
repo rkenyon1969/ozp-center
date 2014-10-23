@@ -22,6 +22,7 @@ var RecentActivity = require('./management/user/RecentActivity');
 var AppsMallManagement = require('./management/mall');
 var Intents = require('./management/mall/Intents');
 var Quickview = require('./quickview');
+var FeedbackModal = require('./management/user/FeedbackModal');
 
 var App = React.createClass({
 
@@ -79,7 +80,10 @@ React.renderComponent(
             </Route>
             <Route name="new" path="/new" handler={ CreateEditPage } />
             <Route name="user-management" path="user-management" handler={ UserManagement }>
-                <Route name="my-listings" path="listings" handler={ MyListings } />
+                <Route name="my-listings" path="listings" handler={ MyListings }>
+                    <Route name="feedback" path="feedback/:listingId"
+                        handler={ FeedbackModal } />
+                </Route>
                 <Route name="recent-activity" path="recent-activity" handler={ RecentActivity } />
             </Route>
             <Route name="mall-management" path="mall-management" handler={ AppsMallManagement }>

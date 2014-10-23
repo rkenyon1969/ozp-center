@@ -23,8 +23,11 @@ var ProfileApi = {
 
     getLibrary: function () {
     	return $.getJSON(API_URL + '/api/profile/self/library');
-    }
+    },
 
+    getSelf: function() {
+        return $.getJSON(API_URL + '/api/profile/self');
+    }
 };
 
 module.exports.ProfileApi = ProfileApi;

@@ -1,7 +1,7 @@
 $icon-font-path: "../../node_modules/bootstrap-sass/assets/fonts/bootstrap/";
 $fa-font-path: "../../bower_components/font-awesome/fonts/";
 
-@import 'colors';
+@import 'variables';
 @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap.scss";
 @import "../../bower_components/magnific-popup/src/css/main.scss";
 @import "../../bower_components/font-awesome/scss/font-awesome.scss";
@@ -106,4 +106,40 @@ label {
 }
 .mfp-wrap {
     z-index: 10001;
+}
+
+/*==============================
+=   Approval Status Indicators =
+==============================*/
+
+.label-draft, .label-pending, .label-needs-action, .label-published {
+    @extend .fa;
+
+    font-family: 'Ubuntu Regular', 'Ubuntu';
+
+    &::before {
+        font-family: 'FontAwesome';
+        display: inline-block;
+        width: 18px;
+        text-align: center;
+    }
+}
+
+.label-draft {
+    @extend .fa-file-text-o;
+}
+
+.label-pending {
+    @extend .fa-spinner;
+    color: $blue-dark;
+}
+
+.label-needs-action {
+    @extend .fa-exclamation;
+    color: $red-orange-dark;
+}
+
+.label-published {
+    @extend .fa-thumbs-o-up;
+    color: $green-dark;
 }

@@ -59,9 +59,15 @@ var BootstrapModal = React.createClass({
             );
         }
 
+        //the size property can be set to small to avoid the modal-lg class
+        var dialogClasses = React.addons.classSet({
+            'modal-dialog': true,
+            'modal-lg': this.props.size !== 'small'
+        });
+
         return this.transferPropsTo(
             <div className="modal fade" tabIndex="-1" role="dialog" aria-hidden="true">
-                <div className="modal-dialog modal-lg">
+                <div className={dialogClasses}>
                     <div className="modal-content">
                         {
                             this.props.title && (
