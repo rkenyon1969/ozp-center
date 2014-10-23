@@ -38,7 +38,7 @@ module.exports = React.createClass({
                     <dt>Feedback</dt>
                     <dd className="feedback">{this.state.feedback}</dd>
                 </dl>
-                <a className="edit" href="edit">Edit this listing</a>
+                <a className="btn btn-primary edit" href="edit">Edit this listing</a>
             </Modal>
         );
         /* jshint ignore:end */
