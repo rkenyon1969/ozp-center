@@ -6,6 +6,10 @@ var moment = require('moment');
 var Link = Router.Link;
 
 var ActionMenu = React.createClass({
+    componentDidUpdate: function() {
+        this.refs.checkbox.getDOMNode().checked = false;
+    },
+
     render: function() {
         /* jshint ignore:start */
 
@@ -40,7 +44,7 @@ var ActionMenu = React.createClass({
         //use hidden checkbox to manage menu toggle state
         return (
             <label className="MyListingTile__actionMenu">
-                <input type="checkbox" />
+                <input type="checkbox" ref="checkbox"/>
                 <span className="MyListingTile__actionMenuButton" />
                 <ul>{links}</ul>
             </label>
