@@ -12,10 +12,11 @@ var ActionMenu = React.createClass({
         //TODO fill in hrefs
         var listing = this.props.listing,
             feedbackHref = "#/user-management/listings/feedback/" + listing.id(),
+            deleteHref = "#/user-management/listings/delete/" + listing.id(),
             review = <li><a href="review">Review</a></li>,
             edit = <li><a href="edit">Edit</a></li>,
             preview = <li><a href={listing.launchUrl()} target="_blank">Preview</a></li>,
-            del = <li><a href="delete">Delete</a></li>,
+            del = <li><a href={deleteHref}>Delete</a></li>,
             view = <li><a href={listing.launchUrl()} target="_blank">View</a></li>,
             disable = <li><a href="disable">Disable</a></li>,
             readFeedback = <li><a href={feedbackHref}>Read Feedback</a></li>,

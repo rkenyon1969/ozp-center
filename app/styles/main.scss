@@ -75,6 +75,7 @@ html, body {
 @import 'management/user/listing-management';
 @import 'management/user/my-listings';
 @import 'management/mall/mall-management';
+@import 'management/deleteConfirmation';
 
 
 .close {
@@ -142,4 +143,13 @@ label {
 .label-published {
     @extend .fa-thumbs-o-up;
     color: $green-dark;
+}
+
+/*====================
+=     Close          =
+====================*/
+.close.corner {
+    position: absolute;
+    right: 8px;
+    top: 0;
 }

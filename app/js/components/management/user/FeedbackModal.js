@@ -28,7 +28,7 @@ module.exports = React.createClass({
         /* jshint ignore:start */
         return (
             <Modal ref="modal" className="FeedbackModal" size="small">
-                <button className="close" onClick={ this.close }>×</button>
+                <button className="close corner" onClick={ this.close }>×</button>
                 <h3>Steward Feedback</h3>
                 <dl>
                     <dt>Listing</dt>

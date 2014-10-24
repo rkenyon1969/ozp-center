@@ -23,6 +23,8 @@ var AppsMallManagement = require('./management/mall');
 var Intents = require('./management/mall/Intents');
 var Quickview = require('./quickview');
 var FeedbackModal = require('./management/user/FeedbackModal');
+var ListingDeleteConfirmation =
+    require('./shared/DeleteConfirmation').ListingDeleteConfirmation;
 
 require('../stores/CreateEditStore');
 
@@ -85,6 +87,8 @@ React.renderComponent(
                 <Route name="my-listings" path="listings" handler={ MyListings }>
                     <Route name="feedback" path="feedback/:listingId"
                         handler={ FeedbackModal } />
+                    <Route name="delete" path="delete/:listingId"
+                        handler={ListingDeleteConfirmation} />
                 </Route>
                 <Route name="recent-activity" path="recent-activity" handler={ RecentActivity } />
             </Route>

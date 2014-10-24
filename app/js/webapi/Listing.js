@@ -76,6 +76,13 @@ var ListingApi = {
         });
     },
 
+    del: function (id) {
+        return $.ajax({
+            type: 'DELETE',
+            url: API_URL + '/api/listing/' + encodeURIComponent(id)
+        });
+    },
+
     getChangeLogs: function (id){
         return $.getJSON(API_URL + '/api/listing/' + id + '/activity').pipe(function (response) {
             return response.data;
