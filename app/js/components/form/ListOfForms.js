@@ -8,7 +8,7 @@ var ListOfForms = React.createClass({
          /**
             An array of items to represent - either empty or containing the existing items
           */
-         items: React.PropTypes.object.isRequired,
+         items: React.PropTypes.array.isRequired,
 
          /**
             The schema describing the items in the list

@@ -1,9 +1,9 @@
 'use strict';
 
 var React = require('react');
-var TextInput = require('../../form/TextInput');
+var Text = require('../../form/TextInput');
 var Select = require('../../form/Select2Input');
-var DeleteBtnMixin = require('./deleteBtnMixin');
+var DeleteBtnMixin = require('./DeleteBtnMixin');
 
 var phoneRegex = /(^\+\d((([\s.-])?\d+)?)+$)|(^(\(\d{3}\)\s?|^\d{3}[\s.-]?)?\d{3}[\s.-]?\d{4}$)/,
     NEED_ONE_PHONE = 'Please provide at least one valid phone number',
@@ -36,13 +36,13 @@ module.exports.form = React.createClass({
                         label="Contact Type" disabled={this.props.locked} required data-placeholder="Select a Contact Type">
                         {contactTypes}
                     </Select>
-                    <TextInput setter={propSetter.bind(me, 'name')} defaultValue={contact.name} label="Name" required maxLength={100} />
-                    <TextInput setter={propSetter.bind(me, 'organization')} defaultValue={contact.organization} label="Organization" maxLength={100} />
-                    <TextInput type="email" ref="email" setter={propSetter.bind(me, 'email')} defaultValue={contact.email} label="Email" required maxLength={100} />
-                    <TextInput type="text" ref="securePhone" setter={propSetter.bind(me, 'securePhone')} defaultValue={contact.securePhone}
+                    <Text setter={propSetter.bind(me, 'name')} defaultValue={contact.name} label="Name" required maxLength={100} />
+                    <Text setter={propSetter.bind(me, 'organization')} defaultValue={contact.organization} label="Organization" maxLength={100} />
+                    <Text type="email" ref="email" setter={propSetter.bind(me, 'email')} defaultValue={contact.email} label="Email" required maxLength={100} />
+                    <Text type="text" ref="securePhone" setter={propSetter.bind(me, 'securePhone')} defaultValue={contact.securePhone}
                             label="Secure Phone" error={this.state.securePhoneError} maxLength={50}
                             onFocus={this.validatePhone.bind(this, 'secure')} onBlur={this.validatePhone.bind(this, 'secure')} />
-                    <TextInput type="text" ref="unsecurePhone" setter={propSetter.bind(me, 'unsecurePhone')} defaultValue={contact.unsecurePhone}
+                    <Text type="text" ref="unsecurePhone" setter={propSetter.bind(me, 'unsecurePhone')} defaultValue={contact.unsecurePhone}
                             label="Unsecure Phone" error={this.state.unsecurePhoneError} maxLength={50}
                             onFocus={this.validatePhone.bind(this, 'unsecure')} onBlur={this.validatePhone.bind(this, 'unsecure')} />
                 </div>
@@ -52,8 +52,8 @@ module.exports.form = React.createClass({
     },
 
     validatePhone: function (refName, event) {
-        var secure = this.props.item.securePhone.val(),
-            unsecure = this.props.item.unsecurePhone.val(),
+        var secure = this.props.item.securePhone,
+            unsecure = this.props.item.unsecurePhone,
             secureBlank = (!secure || secure === ''),
             unsecureBlank = (!unsecure || unsecure === '');
 

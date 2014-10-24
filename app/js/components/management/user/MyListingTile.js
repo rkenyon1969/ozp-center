@@ -14,7 +14,7 @@ var ActionMenu = React.createClass({
             feedbackHref = "#/user-management/listings/feedback/" + listing.id(),
             deleteHref = "#/user-management/listings/delete/" + listing.id(),
             review = <li><a href="review">Review</a></li>,
-            edit = <li><a href="edit">Edit</a></li>,
+            edit = <li><a href={'#/edit/' + listing.id()}>Edit</a></li>,
             preview = <li><a href={listing.launchUrl()} target="_blank">Preview</a></li>,
             del = <li><a href={deleteHref}>Delete</a></li>,
             view = <li><a href={listing.launchUrl()} target="_blank">View</a></li>,

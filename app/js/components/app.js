@@ -26,8 +26,6 @@ var FeedbackModal = require('./management/user/FeedbackModal');
 var ListingDeleteConfirmation =
     require('./shared/DeleteConfirmation').ListingDeleteConfirmation;
 
-require('../stores/CreateEditStore');
-
 var App = React.createClass({
 
     mixins: [ Reflux.ListenerMixin ],
@@ -83,6 +81,7 @@ React.renderComponent(
                 </Route>
             </Route>
             <Route name="new" path="/new" handler={ CreateEditPage } />
+            <Route name="edit" path="edit/:listingId" handler={ CreateEditPage } />
             <Route name="user-management" path="user-management" handler={ UserManagement }>
                 <Route name="my-listings" path="listings" handler={ MyListings }>
                     <Route name="feedback" path="feedback/:listingId"

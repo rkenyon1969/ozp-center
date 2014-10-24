@@ -2,19 +2,26 @@
 
 var $ = require('jquery');
 var prop = require('../utils/prop');
+var _cloneDeep = require('lodash/objects/cloneDeep');
+
+var keys = [
+    'id', 'title', 'description', 'descriptionShort', 'screenshots', 'contacts', 'totalComments',
+    'avgRate', 'totalRate1', 'totalRate2', 'totalRate3','totalRate4',
+    'totalRate5','totalVotes', 'state', 'tags', 'type','uuid', 'requirements',
+    'versionName', 'imageLargeUrl', 'imageSmallUrl', 'imageMediumUrl', 'imageXlargeUrl',
+    'launchUrl', 'company', 'whatIsNew', 'owners', 'agency', 'currentRejection',
+    'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls', 'approvalStatus'
+];
 
 function Listing (json) {
-    var keys = [
-        'id', 'title', 'description', 'descriptionShort', 'screenshots', 'contacts', 'totalComments',
-        'avgRate', 'totalRate1', 'totalRate2', 'totalRate3','totalRate4',
-        'totalRate5','totalVotes', 'state', 'tags', 'type','uuid',
-        'versionName', 'imageLargeUrl', 'imageSmallUrl', 'imageMediumUrl', 'imageXlargeUrl',
-        'launchUrl', 'company', 'whatIsNew', 'owners', 'agency', 'currentRejection',
-        'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls', 'approvalStatus'
-    ];
-
+    json = json || {};
     json.intents = json.intents || [];
-    json.screenshots = json.screenshots || json.screenShots;
+    json.screenshots = json.screenshots || [];
+    json.categories = json.categories || [];
+    json.contacts = json.contacts || [];
+    json.docUrls = json.docUrls || [];
+    json.owners = json.owners || [];
+    json.tags = json.tags || [];
 
     keys.forEach(function (key) {
         this[key] = prop(json[key]);
@@ -22,6 +29,15 @@ function Listing (json) {
 
     return this;
 }
+
+Listing.prototype.toObject = function () {
+    return JSON.parse(JSON.stringify(this));
+};
+
+Listing.prototype.clone = function () {
+    var obj = _cloneDeep(this.toObject());
+    return new Listing(obj);
+};
 
 var ListingApi = {
 

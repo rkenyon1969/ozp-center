@@ -8,6 +8,8 @@ var featuredFetched = ListingActions.featuredFetched;
 var searchCompleted = ListingActions.searchCompleted;
 var changeLogsFetched = ListingActions.changeLogsFetched;
 var ownedListingsFetched = ListingActions.ownedListingsFetched;
+var listingSaved = ListingActions.saved;
+var Listing = require('../webapi/Listing').Listing;
 
 var cache = {};
 var changeLogCache = {};
@@ -44,6 +46,9 @@ var GlobalListingStore = Reflux.createStore({
             this.trigger();
         });
         this.listenTo(ownedListingsFetched, updateCache);
+        this.listenTo(listingSaved, function (data) {
+            updateCache([new Listing(data)]);
+        });
     },
 
     getById: function (id) {
