@@ -152,7 +152,8 @@ var Crud = React.createClass({
                 toolbar: true,
                 toolbarAdd: true,
                 toolbarEdit: true,
-                toolbarDelete: true
+                toolbarDelete: true,
+                toolbarSearch: false
             },
             url : this.props.url,
             onLoad: (event) => {
