@@ -16,9 +16,6 @@ var ListingManagement = React.createClass({
                 to: 'categories',
                 name: 'Categories'
             }, {
-                to: 'tags',
-                name: 'Tags'
-            }, {
                 to: 'intents',
                 name: 'Intents'
             }, {

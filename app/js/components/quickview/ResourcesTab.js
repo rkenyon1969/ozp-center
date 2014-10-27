@@ -2,8 +2,7 @@
 
 var React = require('react');
 var EmptyFieldValue = require('../shared/EmptyFieldValue');
-var find = require('lodash/collections/find');
-var compact = require('lodash/arrays/compact');
+var _ = require('../../utils/_');
 
 var ResourcesTab = React.createClass({
 
@@ -40,7 +39,7 @@ var ResourcesTab = React.createClass({
     },
 
     renderUserGuide: function () {
-        var userGuide = find(this.props.listing.docUrls(), { name: 'User Manual'});
+        var userGuide = _.find(this.props.listing.docUrls(), { name: 'User Manual'});
 
         return userGuide ?
                 <p><a target="_blank" href={ userGuide.url }>{ userGuide.name }</a></p> :
@@ -48,7 +47,7 @@ var ResourcesTab = React.createClass({
     },
 
     renderApiDoc: function () {
-        var apiDoc = find(this.props.listing.docUrls(), { name: 'API Documentation'});
+        var apiDoc = _.find(this.props.listing.docUrls(), { name: 'API Documentation'});
 
         return apiDoc ?
                 <p><a target="_blank" href={ apiDoc.url }>{ apiDoc.name }</a></p> :
@@ -56,7 +55,7 @@ var ResourcesTab = React.createClass({
     },
 
     renderOtherResources: function() {
-        var resources = compact(this.props.listing.docUrls().map(function (doc) {
+        var resources = _.compact(this.props.listing.docUrls().map(function (doc) {
             if (doc.name !== 'User Manual' && doc.name !== 'API Documentation') {
                 return <p><a target="_blank" href={ doc.url }>{ doc.name }</a></p>;
             }
@@ -72,7 +71,7 @@ var ResourcesTab = React.createClass({
             }
         });
 
-        compact(tsc);
+        _.compact(tsc);
 
         if (tsc.length) {
             return tsc.map(function (contact, i) {

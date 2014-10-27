@@ -1,14 +1,11 @@
 'use strict';
 
 var Reflux = require('reflux');
+var _ = require('../utils/_');
 var ProfileActions = require('../actions/ProfileActions');
 var libraryFetched = ProfileActions.libraryFetched;
 var addedToLibrary = require('../actions/ListingActions').addedToLibrary;
 var removedFromLibrary = require('../actions/ListingActions').removedFromLibrary;
-
-var find = require('lodash/collections/find');
-var map = require('lodash/collections/map');
-var without = require('lodash/arrays/without');
 
 var _library = [];
 
@@ -45,18 +42,18 @@ var ProfileStore = Reflux.createStore({
     },
 
     onRemovedFromLibrary: function (listing) {
-        var toRemove = find(_library, {
+        var toRemove = _.find(_library, {
             listing: {
                 id: listing.id()
             }
         });
-        _library = without(_library, toRemove);
+        _library = _.without(_library, toRemove);
         this.trigger();
     },
 
     isListingInLibrary: function (uuid) {
-        return !!find(
-            map(_library, function (libraryEntry) {
+        return !!_.find(
+            _.map(_library, function (libraryEntry) {
                 return libraryEntry.listing;
             }),
             { uuid: uuid }

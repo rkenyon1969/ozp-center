@@ -3,7 +3,7 @@ var sass = require('gulp-sass');
 var minifyCSS = require('gulp-minify-css');
 var gutil = require('gulp-util');
 var replace = require('gulp-replace');
-var concatCss = require('gulp-concat-css');
+var cssImport = require('gulp-cssimport');
 
 var sassConfig = {
     includePaths: ['app/styles'],
@@ -13,7 +13,7 @@ var sassConfig = {
 gulp.task('sass', function() {
     return gulp.src('app/styles/main.scss')
         .pipe(sass(sassConfig).on('error', gutil.log))
-        .pipe(concatCss('main.css'))
+        .pipe(cssImport('main.css'))
         .pipe(replace('../bower_components/bootstrap-sass-official/assets/fonts/bootstrap', 'fonts'))
         .pipe(replace('../bower_components/font-awesome/fonts', 'fonts'))
         .pipe(replace('../bower_components/ubuntu-font', 'fonts'))

@@ -1,7 +1,6 @@
 'use strict';
 
 var React = require('react');
-var _clone = require('lodash/objects/cloneDeep');
 
 var ListOfForms = React.createClass({
     propTypes: {

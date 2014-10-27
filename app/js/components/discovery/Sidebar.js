@@ -1,9 +1,7 @@
 'use strict';
 
 var React = require('react');
-var contains = require('lodash/collections/contains');
-var without = require('lodash/arrays/without');
-var forOwn = require('lodash/objects/forOwn');
+var _ = require('../../utils/_');
 
 var Sidebar = React.createClass({
 
@@ -69,7 +67,7 @@ var Sidebar = React.createClass({
 
         return list.map(function(facetOption, index) {
             var classes = React.addons.classSet({
-                active: contains(me.state.selectedFilters[key], facetOption.title),
+                active: _.contains(me.state.selectedFilters[key], facetOption.title),
                 'facet-group-item': true
             });
 
@@ -83,7 +81,7 @@ var Sidebar = React.createClass({
 
     areFiltersApplied: function () {
         var areFiltersApplied = false;
-        forOwn(this.state.selectedFilters, function (value, key) {
+        _.forOwn(this.state.selectedFilters, function (value, key) {
             areFiltersApplied = areFiltersApplied || value.length;
         });
         return areFiltersApplied;
@@ -93,7 +91,7 @@ var Sidebar = React.createClass({
         var selectedFilters = this.state.selectedFilters;
 
         // clear selected filter array
-        forOwn(selectedFilters, function (value, key) {
+        _.forOwn(selectedFilters, function (value, key) {
             selectedFilters[key].length = 0;
         });
 
@@ -107,8 +105,8 @@ var Sidebar = React.createClass({
         var values = this.state.selectedFilters[type] || (this.state.selectedFilters[type] = []);
         var value = clickedFilter.title;
 
-        if (contains(values, value)) {
-            this.state.selectedFilters[type] = without(values, value);
+        if (_.contains(values, value)) {
+            this.state.selectedFilters[type] = _.without(values, value);
         }
         else {
             values.push(value);

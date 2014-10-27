@@ -2,10 +2,7 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var contains = require('lodash/collections/contains');
-var without = require('lodash/arrays/without');
-var forOwn = require('lodash/objects/forOwn');
-var assign = require('lodash/objects/assign');
+var _ = require('../../utils/_');
 
 // actions
 var ListingActions = require('../../actions/ListingActions');
@@ -123,7 +120,7 @@ var Discovery = React.createClass({
 
     search: function () {
         search(
-            assign({
+            _.assign({
                 queryString: this.refs.search.getDOMNode().value
             }, this.refs.sidebar.state.selectedFilters)
         );

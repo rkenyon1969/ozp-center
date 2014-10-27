@@ -6,7 +6,6 @@ var Link = Router.Link;
 var CurrentPath = Router.CurrentPath;
 var Navigation = Router.Navigation;
 var Tab = require('../../mixins/TabMixin');
-var map = require('lodash/collections/map');
 
 // component dependencies
 var Modal = require('../shared/Modal');
