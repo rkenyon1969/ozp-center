@@ -11,9 +11,9 @@ var Header = require('../header');
 var Content = require('./content');
 var Actions = require('./actions');
 var Section = require('./section');
-var Resource = require('./subitems/Resource');
-var Screenshot = require('./subitems/Screenshot');
-var Contact = require('./subitems/Contact');
+var Resource = require('./subitems/resource');
+var Screenshot = require('./subitems/screenshot');
+var Contact = require('./subitems/contact');
 var saveListing = require('../../actions/ListingActions').save;
 
 var CreateEditForm = React.createClass({
@@ -100,12 +100,12 @@ var CreateEditForm = React.createClass({
 
                             <h2>Resources</h2>
                             <ListOfForms className="resource-form" itemForm={Resource.form} itemSchema={Resource.schema} items={listing.docUrls()} setter={setters['docUrls']} />
-                            
+
                         </div>
 
                         <div className="col-sm-5">
                             <h2>Contacts</h2>
-                            <ListOfForms className="contact-form" itemForm={Contact.form} itemSchema={Contact.schema} 
+                            <ListOfForms className="contact-form" itemForm={Contact.form} itemSchema={Contact.schema}
                                     config={{contactTypes: this.props.config.contactTypes}} items={listing.contacts()} setter={setters['contacts']}
                                     description="Point of Contact for users to seek technical support for this listing." />
 
