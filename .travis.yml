@@ -5,4 +5,4 @@ before_install:
   - npm install -g gulp@3.8.6
   - npm install
 script:
-  - gulp build --production
+  - npm run build
