@@ -11,22 +11,22 @@ var ownedListingsFetched = ListingActions.ownedListingsFetched;
 var listingSaved = ListingActions.saved;
 var Listing = require('../webapi/Listing').Listing;
 
-var cache = {};
-var changeLogCache = {};
-var listingsByOwnerCache = {};
+var _listingsCache = {};
+var _changeLogCache = {};
+var _listingsByOwnerCache = {};
 
 function updateCache (listings) {
     listings.forEach(function (listing) {
-        cache[listing.id()] = listing;
+        _listingsCache[listing.id()] = listing;
 
         listing.owners().forEach(function(owner) {
-            var cachedListings = listingsByOwnerCache[owner.username] || [];
+            var cachedListings = _listingsByOwnerCache[owner.username] || [];
 
             cachedListings = cachedListings.filter(function(l) {
                 return l.id() !== listing.id();
             });
 
-            listingsByOwnerCache[owner.username] = cachedListings.concat([listing]);
+            _listingsByOwnerCache[owner.username] = cachedListings.concat([listing]);
         });
     });
 }
@@ -34,7 +34,7 @@ function updateCache (listings) {
 var GlobalListingStore = Reflux.createStore({
 
     /**
-    * Update local cache when new data is fetched
+    * Update local listingsCache when new data is fetched
     **/
     init: function () {
         this.listenTo(newArrivalsFetched, updateCache);
@@ -42,25 +42,33 @@ var GlobalListingStore = Reflux.createStore({
         this.listenTo(featuredFetched, updateCache);
         this.listenTo(searchCompleted, updateCache);
         this.listenTo(changeLogsFetched, function (id, changeLogs) {
-            changeLogCache[id] = changeLogs;
+            _changeLogCache[id] = changeLogs;
             this.trigger();
         });
         this.listenTo(ownedListingsFetched, updateCache);
         this.listenTo(listingSaved, function (data) {
             updateCache([new Listing(data)]);
         });
+        this.listenTo(ListingActions.fetchedById, function (data) {
+            updateCache([new Listing(data)]);
+            this.trigger();
+        });
     },
 
     getById: function (id) {
-        return cache[id];
+        if (!_listingsCache[id]) {
+            ListingActions.fetchById(id);
+            return null;
+        }
+        return _listingsCache[id];
     },
 
     getChangeLogs: function (id) {
-        return changeLogCache[id] || [];
+        return _changeLogCache[id] || [];
     },
 
     getByOwner: function(profile) {
-        return listingsByOwnerCache[profile.username] || [];
+        return _listingsByOwnerCache[profile.username] || [];
     }
 });
 

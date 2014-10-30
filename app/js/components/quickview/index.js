@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var Reflux = require('reflux');
 var Router = require('react-router');
 var Link = Router.Link;
 var CurrentPath = Router.CurrentPath;
@@ -23,7 +24,7 @@ var GlobalListingStore = require('../../stores/GlobalListingStore');
 **/
 var Quickview = React.createClass({
 
-    mixins: [ CurrentPath, Navigation, Tab ],
+    mixins: [ Reflux.ListenerMixin, CurrentPath, Navigation, Tab ],
 
     propTypes: {
         listing: React.PropTypes.object
@@ -51,32 +52,40 @@ var Quickview = React.createClass({
     },
 
     getInitialState: function () {
+        this.listenTo(GlobalListingStore, this.onStoreChange);
+
         return {
             shown: false,
             listing: GlobalListingStore.getById(this.props.params.listingId)
         };
     },
 
+    onStoreChange: function () {
+        this.setState({
+            listing: GlobalListingStore.getById(this.props.params.listingId)
+        });
+    },
+
     render: function () {
         var shown = this.state.shown;
         var listing = this.state.listing;
-        var title = listing.title();
-        var avgRate = listing.avgRate();
-        var activeRoute = this.props.activeRouteHandler({
-            listing: listing,
-            shown: shown
-        });
 
         /* jshint ignore:start */
         return this.transferPropsTo(
             <Modal ref="modal" className="quickview" onShown={ this.onShown } onHidden= { this.onHidden }>
-                <Header listing={ listing } onCancel={ this.close } />
-                <div className="tabs-container">
-                    { this.renderTabs(this.props.tabs, { listingId: listing.id() }) }
-                    <div className="tab-content">
-                        { activeRoute }
-                    </div>
-                </div>
+                {
+                    !listing ?
+                        <p>Loading...</p> :
+                        [
+                            <Header listing={ listing } onCancel={ this.close }></Header>,
+                            <div className="tabs-container">
+                                { this.renderTabs(this.props.tabs, { listingId: listing.id() }) }
+                                <div className="tab-content">
+                                    <this.props.activeRouteHandler listing={ listing } shown = { shown } />
+                                </div>
+                            </div>
+                        ]
+                }
             </Modal>
         );
         /* jshint ignore:end */

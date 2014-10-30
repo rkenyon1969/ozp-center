@@ -2,10 +2,6 @@
 
 var Reflux = require('reflux');
 var ListingActions = require('../actions/ListingActions');
-var newArrivalsFetched = ListingActions.newArrivalsFetched;
-var mostPopularFetched = ListingActions.mostPopularFetched;
-var featuredFetched = ListingActions.featuredFetched;
-var searchCompleted = ListingActions.searchCompleted;
 
 var _newArrivals = [];
 var _mostPopular = [];
@@ -18,10 +14,10 @@ var DiscoveryPageStore = Reflux.createStore({
     * Update local cache when new data is fetched
     **/
     init: function () {
-        this.listenTo(newArrivalsFetched, this.onNewArrivalsFetched);
-        this.listenTo(mostPopularFetched, this.onMostPopularFetched);
-        this.listenTo(featuredFetched, this.onFeaturedFetched);
-        this.listenTo(searchCompleted, this.onSearchCompleted);
+        this.listenTo(ListingActions.newArrivalsFetched, this.onNewArrivalsFetched);
+        this.listenTo(ListingActions.mostPopularFetched, this.onMostPopularFetched);
+        this.listenTo(ListingActions.featuredFetched, this.onFeaturedFetched);
+        this.listenTo(ListingActions.searchCompleted, this.onSearchCompleted);
     },
 
     onNewArrivalsFetched: function (newArrivals) {
