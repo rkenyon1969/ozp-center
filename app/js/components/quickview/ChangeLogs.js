@@ -4,6 +4,7 @@ var React = require('react');
 var actions = require('../../constants/index').listingActions;
 var timeAgo = require('../../utils/timeAgo');
 var uuid = require('../../utils/uuid');
+var fieldName = require('../../constants/index').listingFieldName;
 
 var ChangeLogs = React.createClass({
 
@@ -55,8 +56,8 @@ var ChangeLogs = React.createClass({
     },
 
     getListingChange: function (changeLog, index) {
-        var action = changeLog.action.name.toLowerCase();
-        var listingChange = changeLog.author.name;
+        var action = changeLog.action.toLowerCase();
+        var listingChange = changeLog.author.displayName;
         var listingName = (this.props.showListingName ? changeLog.serviceItem.title : 'the listing');
 
         switch (action) {
@@ -131,19 +132,21 @@ var ChangeLogs = React.createClass({
         var details = [], extendedDetails = [];
 
         changeLog.changeDetails.forEach(function (changeDetail, i) {
+            var changedField = fieldName[changeDetail.fieldName];
+
             if (i === changeLog.changeDetails.length - 1 && i !== 0) {
-                details[i] =  'and ' + changeDetail.displayName;
+                details[i] =  'and ' + changedField;
             }
             else {
-                details[i] = changeDetail.displayName;
+                details[i] = changedField;
             }
 
-            var tempDetail = changeDetail.displayName + ' changed from ' + changeDetail.oldValue + ' to ' + changeDetail.newValue;
+            var tempDetail = changedField + ' changed from ' + changeDetail.oldValue + ' to ' + changeDetail.newValue;
 
 
             /* jshint ignore:start */
             extendedDetails[i] = (
-                <li>{ changeDetail.displayName } changed from&nbsp;
+                <li>{ changedField } changed from&nbsp;
                     <span className="OldValue">{ changeDetail.oldValue }</span>
                      &nbsp;to&nbsp;
                     <span className="NewValue">{ changeDetail.newValue }</span>
@@ -162,7 +165,7 @@ var ChangeLogs = React.createClass({
 
             /* jshint ignore:start */
             return [
-                <div>{ changeLog.author.name } modified { details }</div>,
+                <div>{ changeLog.author.displayName } modified { details }</div>,
                 <a href="javascript:;" data-toggle="collapse" data-target={ '#' + id } onClick={ this.toggleIcon }>
                     <i className="fa fa-plus"></i> Changes
                 </a>,
@@ -173,23 +176,21 @@ var ChangeLogs = React.createClass({
             /* jshint ignore:end */
         }
         else {
-            return changeLog.author.name + ' modified ' + listingName;
+            return changeLog.author.displayName + ' modified ' + listingName;
         }
     },
 
     renderRejectedLog: function (changeLog, index, listingName) {
-        var reason = 'Reason: ' + changeLog.rejectionListing.justification.description;
-        var details = 'Details: ' + changeLog.rejectionListing.description;
+        var details = 'Details: ' + changeLog.rejectionDescription;
         var id = uuid();
 
         /* jshint ignore:start */
         return [
-            <div>{ changeLog.rejectionListing.author.name } rejected { listingName }</div>,
+            <div>{ changeLog.author.displayName } rejected { listingName }</div>,
             <a href="javascript:;" data-toggle="collapse" data-target={ '#' + id } onClick={ this.toggleIcon }>
                 <i className="fa fa-plus"></i> Feedback
             </a>,
             <ul id={ id } className="collapse list-unstyled ListingActivity__Changes">
-                <li>{ reason }</li>
                 <li>{ details }</li>
             </ul>
         ];

@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var Reflux = require('reflux');
 var Router = require('react-router');
 var Link = Router.Link;
 var CurrentPath = Router.CurrentPath;
@@ -24,7 +25,7 @@ var GlobalListingStore = require('../../stores/GlobalListingStore');
 **/
 var Quickview = React.createClass({
 
-    mixins: [ CurrentPath, Navigation, Tab ],
+    mixins: [ CurrentPath, Navigation, Tab, Reflux.ListenerMixin ],
 
     propTypes: {
         listing: React.PropTypes.object
@@ -46,16 +47,15 @@ var Quickview = React.createClass({
                 name: 'Resources'
             }, {
                 to: 'quickview-changelog',
-                name: 'Change Log'
+                name: 'Administration'
             }]
         };
     },
 
     getInitialState: function () {
-        return {
-            shown: false,
-            listing: GlobalListingStore.getById(this.props.params.listingId)
-        };
+        var listingData = this.getListingData();
+        listingData.shown = false;
+        return listingData;
     },
 
     render: function () {
@@ -65,6 +65,7 @@ var Quickview = React.createClass({
         var avgRate = listing.avgRate();
         var activeRoute = this.props.activeRouteHandler({
             listing: listing,
+            changeLogs: this.state.changeLogs,
             shown: shown
         });
 
@@ -81,6 +82,10 @@ var Quickview = React.createClass({
             </Modal>
         );
         /* jshint ignore:end */
+    },
+
+    componentDidMount: function () {
+        this.listenTo(GlobalListingStore, this.onGlobalStoreChange);
     },
 
     onShown: function () {
@@ -102,6 +107,18 @@ var Quickview = React.createClass({
 
     close: function () {
         this.refs.modal.close();
+    },
+
+    getListingData: function () {
+        var listingId = this.props.params.listingId;
+        return {
+            listing: GlobalListingStore.getById(listingId),
+            changeLogs: GlobalListingStore.getChangeLogs(listingId)
+        };
+    },
+
+    onGlobalStoreChange: function () {
+        this.setState(this.getListingData());
     }
 });
 

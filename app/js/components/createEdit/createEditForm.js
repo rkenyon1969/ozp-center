@@ -230,8 +230,8 @@ var CreateEditForm = React.createClass({
 
     handleSubmit: function (e) {
         e.preventDefault();
-        console.log(this.props.listing.toJSON());
-        saveListing(this.props.listing.toJSON());
+        console.log(this.props.listing.toObject());
+        saveListing(this.props.listing.toObject());
     }
 
 });

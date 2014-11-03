@@ -14,6 +14,7 @@ module.exports = {
         SUBMITTED: 'submitted',
         CREATED: 'created',
         ENABLED: 'enabled',
+        DISABLED: 'disabled',
         TAG_CREATED: 'tag_created',
         TAG_DELETED: 'tag_deleted',
         REVIEW_EDITED: 'review_edited',
@@ -33,5 +34,38 @@ module.exports = {
         BROWSER_INCLUDED: 'browser_included',
         BROWSER_NOT_INCLUDED: 'browser_not_included',
         LOCAL_SCORECARD_QUESTION_UPDATED: 'local_scorecard_question_updated'
+    },
+
+    approvalStatus: {
+        IN_PROGRESS: 'Draft',
+        PENDING: 'Pending',
+        APPROVED: 'Published',
+        REJECTED: 'Returned to Owner'
+    },
+
+    listingFieldName: {
+        title: 'Title',
+        description: 'Description',
+        descriptionShort: 'Short Description',
+        screenshots: 'Screenshots',
+        contacts: 'Contacts',
+        height: 'Height',
+        width: 'Width',
+        tags: 'Tags',
+        requirements: 'Requirements',
+        categories: 'Categories',
+        intents: 'Intents',
+        launchUrl: 'Launch URL',
+        agency: 'Organization',
+        whatIsNew: 'What\'s New',
+        owners: 'Owners',
+        versionName: 'Version',
+        singleton: 'Singleton',
+        type: 'Type',
+        imageLargeUrl: 'Banner URL',
+        imageMediumUrl: 'Large Icon URL',
+        imageSmallUrl: 'Small Icon URL',
+        imageXlargeUrl: 'Featured Banner',
+        docUrls: 'Resources'
     }
 };

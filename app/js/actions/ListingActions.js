@@ -10,14 +10,20 @@ var Actions = Reflux.createActions([
     'fetchNewArrivals', 'newArrivalsFetched',
     'fetchMostPopular', 'mostPopularFetched',
     'fetchFeatured', 'featuredFetched',
-    'search', 'searchCompleted',
+    'search', 'searchCompleted', 'approve',
     'fetchChangeLogs', 'changeLogsFetched',
     'fetchOwnedListings', 'ownedListingsFetched',
-    'launch',
+    'launch', 'reject', 'rejected',
     'addToLibrary', 'addedToLibrary',
     'removeFromLibrary', 'removedFromLibrary',
-    'save', 'saved', 'saveFailed'
+    'save', 'saved', 'saveFailed', 'enable', 'disable'
 ]);
+
+function setEnabled(value, listing) {
+    var data = listing.clone().toObject();
+    data.isEnabled = value;
+    Actions.save(data);
+}
 
 Actions.fetchNewArrivals.listen(function () {
     ListingApi.getNewArrivals().then(Actions.newArrivalsFetched);
@@ -67,10 +73,20 @@ Actions.save.listen(function (data) {
     ListingApi
         .save(data)
         .then(Actions.saved)
-        .then(function () {
-            window.history.back();
-        })
         .fail(Actions.saveFailed);
+});
+
+Actions.reject.listen(function (listingId, description) {
+    ListingApi.rejectListing(listingId, description).then(Actions.listingRejected);
+});
+
+Actions.enable.listen(setEnabled.bind(null, true));
+Actions.disable.listen(setEnabled.bind(null, false));
+
+Actions.approve.listen(function (listing) {
+    var data = listing.clone().toObject();
+    data.approvalStatus = 'APPROVED';
+    Actions.save(data);
 });
 
 module.exports = Actions;

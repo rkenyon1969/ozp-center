@@ -6,10 +6,10 @@ var _cloneDeep = require('lodash/objects/cloneDeep');
 
 var keys = [
     'id', 'title', 'description', 'descriptionShort', 'screenshots', 'contacts', 'totalComments',
-    'avgRate', 'totalRate1', 'totalRate2', 'totalRate3','totalRate4',
-    'totalRate5','totalVotes', 'state', 'tags', 'type','uuid', 'requirements',
+    'avgRate', 'totalRate1', 'totalRate2', 'totalRate3','totalRate4', 'height', 'width',
+    'totalRate5','totalVotes', 'state', 'tags', 'type','uuid', 'requirements', 'singleton',
     'versionName', 'imageLargeUrl', 'imageSmallUrl', 'imageMediumUrl', 'imageXlargeUrl',
-    'launchUrl', 'company', 'whatIsNew', 'owners', 'agency', 'currentRejection',
+    'launchUrl', 'company', 'whatIsNew', 'owners', 'agency', 'currentRejection', 'isEnabled',
     'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls', 'approvalStatus'
 ];
 
@@ -101,7 +101,7 @@ var ListingApi = {
 
     getChangeLogs: function (id){
         return $.getJSON(API_URL + '/api/listing/' + id + '/activity').pipe(function (response) {
-            return response.data;
+            return (response._embedded && [].concat(response._embedded.item)) || [];
         });
     },
 
@@ -115,6 +115,16 @@ var ListingApi = {
             return (items || []).map(function(json) {
                 return new Listing(json);
             });
+        });
+    },
+
+    rejectListing: function (id, description) {
+        return $.ajax({
+            type: 'POST',
+            url: API_URL + '/api/listing/' + id + '/rejectionListing',
+            data: JSON.stringify({description: description}),
+            dataType: 'json',
+            contentType: 'application/json'
         });
     }
 };

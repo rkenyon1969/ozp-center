@@ -175,6 +175,23 @@ $quickview-nav-tabs-height: 42px;
     }
 }
 
+.Quickview__Changelog {
+    textarea {
+        padding: $table-cell-padding;
+        resize: none;
+        margin: 1em 0;
+        width: 100%;
+        height: 12em;
+        display: block;
+    }
+
+    section {
+        button:first-of-type {
+            margin-right: 6px;
+        }
+    }
+}
+
 
 .ListingActivity__Changes {
     font-size: 12px;

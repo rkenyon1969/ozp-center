@@ -8,7 +8,9 @@ var featuredFetched = ListingActions.featuredFetched;
 var searchCompleted = ListingActions.searchCompleted;
 var changeLogsFetched = ListingActions.changeLogsFetched;
 var ownedListingsFetched = ListingActions.ownedListingsFetched;
+var listingRejected = ListingActions.rejected;
 var listingSaved = ListingActions.saved;
+var fetchChangeLogs = ListingActions.fetchChangeLogs;
 var Listing = require('../webapi/Listing').Listing;
 
 var cache = {};
@@ -47,7 +49,15 @@ var GlobalListingStore = Reflux.createStore({
         });
         this.listenTo(ownedListingsFetched, updateCache);
         this.listenTo(listingSaved, function (data) {
-            updateCache([new Listing(data)]);
+            var listing = new Listing(data);
+            updateCache([listing]);
+            fetchChangeLogs(listing.id());
+        });
+        this.listenTo(listingRejected, function (rejection) {
+            var listing = cache[rejection.listingId];
+            listing.currentRejection(rejection);
+            listing.approvalStatus('REJECTED');
+            fetchChangeLogs(listing.id());
         });
     },
 
