@@ -7,7 +7,6 @@ var Link = Router.Link;
 var CurrentPath = Router.CurrentPath;
 var Navigation = Router.Navigation;
 var Tab = require('../../mixins/TabMixin');
-var map = require('lodash/collections/map');
 
 // component dependencies
 var Modal = require('../shared/Modal');
@@ -25,7 +24,7 @@ var GlobalListingStore = require('../../stores/GlobalListingStore');
 **/
 var Quickview = React.createClass({
 
-    mixins: [ CurrentPath, Navigation, Tab, Reflux.ListenerMixin ],
+    mixins: [ Reflux.ListenerMixin, CurrentPath, Navigation, Tab ],
 
     propTypes: {
         listing: React.PropTypes.object
@@ -72,13 +71,19 @@ var Quickview = React.createClass({
         /* jshint ignore:start */
         return this.transferPropsTo(
             <Modal ref="modal" className="quickview" onShown={ this.onShown } onHidden= { this.onHidden }>
-                <Header listing={ listing } onCancel={ this.close } />
-                <div className="tabs-container">
-                    { this.renderTabs(this.props.tabs, { listingId: listing.id() }) }
-                    <div className="tab-content">
-                        { activeRoute }
-                    </div>
-                </div>
+                {
+                    !listing ?
+                        <p>Loading...</p> :
+                        [
+                            <Header listing={ listing } onCancel={ this.close }></Header>,
+                            <div className="tabs-container">
+                                { this.renderTabs(this.props.tabs, { listingId: listing.id() }) }
+                                <div className="tab-content">
+                                    <this.props.activeRouteHandler listing={ listing } shown = { shown } />
+                                </div>
+                            </div>
+                        ]
+                }
             </Modal>
         );
         /* jshint ignore:end */

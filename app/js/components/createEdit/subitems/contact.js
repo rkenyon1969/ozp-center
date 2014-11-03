@@ -3,7 +3,7 @@
 var React = require('react');
 var Text = require('../../form/TextInput');
 var Select = require('../../form/Select2Input');
-var DeleteBtnMixin = require('./DeleteBtnMixin');
+var DeleteBtnMixin = require('./deleteBtnMixin');
 
 var phoneRegex = /(^\+\d((([\s.-])?\d+)?)+$)|(^(\(\d{3}\)\s?|^\d{3}[\s.-]?)?\d{3}[\s.-]?\d{4}$)/,
     NEED_ONE_PHONE = 'Please provide at least one valid phone number',
@@ -32,7 +32,7 @@ module.exports.form = React.createClass({
             <div className="row form-card">
                 <div className="col-sm-12">
                     {!this.props.locked && this.renderDeleteBtn()}
-                    <Select setter={propSetter.bind(me, 'type')} defaultValue={contact.type} 
+                    <Select setter={propSetter.bind(me, 'type')} defaultValue={contact.type}
                         label="Contact Type" disabled={this.props.locked} required data-placeholder="Select a Contact Type">
                         {contactTypes}
                     </Select>

@@ -2,7 +2,7 @@
 
 var $ = require('jquery');
 var prop = require('../utils/prop');
-var _cloneDeep = require('lodash/objects/cloneDeep');
+var _ = require('../utils/_');
 
 var keys = [
     'id', 'title', 'description', 'descriptionShort', 'screenshots', 'contacts', 'totalComments',
@@ -35,7 +35,7 @@ Listing.prototype.toObject = function () {
 };
 
 Listing.prototype.clone = function () {
-    var obj = _cloneDeep(this.toObject());
+    var obj = _.cloneDeep(this.toObject());
     return new Listing(obj);
 };
 

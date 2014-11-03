@@ -27,7 +27,8 @@ module.exports = {
             carouFredSel$: "carouFredSel/jquery.carouFredSel-6.2.1",
             lodash: "lodash-amd/modern",
             "magnific-popup$": "magnific-popup/dist/jquery.magnific-popup",
-            "react-radio-group$": 'react-radio-group/react-radiogroup'
+            "react-radio-group$": 'react-radio-group/react-radiogroup',
+            w2ui$: "w2ui/dist/w2ui"
         },
         // Tell webpack to look for required files in bower and node
         modulesDirectories: ['bower_components', 'node_modules']
@@ -41,7 +42,7 @@ module.exports = {
             { test: /\.gif/, loader: "url-loader?limit=10000&mimetype=image/gif" },
             { test: /\.jpg/, loader: "url-loader?limit=10000&mimetype=image/jpg" },
             { test: /\.png/, loader: "url-loader?limit=10000&mimetype=image/png" },
-            { test: /\.js$/, loader: "jsx-loader?harmony=true&insertPragma=React.DOM" }
+            { test: /\.jsx?$/, loader: "jsx-loader?harmony=true&insertPragma=React.DOM" }
         ],
         noParse: /\.min\.js/
     },

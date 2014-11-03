@@ -2,17 +2,10 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var contains = require('lodash/collections/contains');
-var without = require('lodash/arrays/without');
-var forOwn = require('lodash/objects/forOwn');
-var assign = require('lodash/objects/assign');
+var _ = require('../../utils/_');
 
 // actions
 var ListingActions = require('../../actions/ListingActions');
-var fetchNewArrivals = ListingActions.fetchNewArrivals;
-var fetchMostPopular = ListingActions.fetchMostPopular;
-var fetchFeatured = ListingActions.fetchFeatured;
-var search = ListingActions.search;
 
 // component dependencies
 var Header = require('../header');
@@ -34,20 +27,17 @@ var Discovery = React.createClass({
             featured: DiscoveryPageStore.getFeatured(),
             newArrivals: DiscoveryPageStore.getNewArrivals(),
             mostPopular: DiscoveryPageStore.getMostPopular(),
-            searchResults: DiscoveryPageStore.getSearchResults(),
-            selectedListing: null
+            searchResults: DiscoveryPageStore.getSearchResults()
         };
     },
 
     componentWillMount: function () {
-        // fetch data when instantiated
-        fetchFeatured();
-        fetchNewArrivals();
-        fetchMostPopular();
-    },
-
-    componentDidMount: function () {
         this.listenTo(DiscoveryPageStore, this.onStoreChange);
+
+        // fetch data when instantiated
+        ListingActions.fetchFeatured();
+        ListingActions.fetchNewArrivals();
+        ListingActions.fetchMostPopular();
     },
 
     render: function () {
@@ -122,8 +112,8 @@ var Discovery = React.createClass({
     },
 
     search: function () {
-        search(
-            assign({
+        ListingActions.search(
+            _.assign({
                 queryString: this.refs.search.getDOMNode().value
             }, this.refs.sidebar.state.selectedFilters)
         );

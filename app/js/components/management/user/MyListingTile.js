@@ -11,15 +11,14 @@ var ActionMenu = React.createClass({
 
         //TODO fill in hrefs
         var listing = this.props.listing,
-            feedbackHref = "#/user-management/listings/feedback/" + listing.id(),
-            deleteHref = "#/user-management/listings/delete/" + listing.id(),
+            linkParams = {listingId: listing.id()},
             review = <li><a href="review">Review</a></li>,
-            edit = <li><a href={'#/edit/' + listing.id()}>Edit</a></li>,
-            preview = <li><a href={listing.launchUrl()} target="_blank">Preview</a></li>,
-            del = <li><a href={deleteHref}>Delete</a></li>,
-            view = <li><a href={listing.launchUrl()} target="_blank">View</a></li>,
+            edit = <li><Link to="edit" params={linkParams} >Edit</Link></li>,
+            preview = <li><Link to="quickview-overview" params={linkParams}>Preview</Link></li>,
+            del = <li><Link to="delete" params={linkParams}>Delete</Link></li>,
+            view = <li><Link to="quickview-overview" params={linkParams}>View</Link></li>,
             disable = <li><a href="disable">Disable</a></li>,
-            readFeedback = <li><a href={feedbackHref}>Read Feedback</a></li>,
+            feedback = <li><Link to="feedback" params={linkParams}>Read Feedback</Link></li>,
             links,
             approvalStatus = listing.approvalStatus();
 
@@ -31,7 +30,7 @@ var ActionMenu = React.createClass({
                 links = [edit, preview, del];
                 break;
             case 'REJECTED':
-                links = [edit, readFeedback, preview, del];
+                links = [edit, feedback, preview, del];
                 break;
             case 'DRAFT':
             default:

@@ -14,8 +14,10 @@
     "gulp": "^3.7.0",
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.2.0",
+    "gulp-cssimport": "^1.2.3",
     "gulp-filter": "^1.0.0",
     "gulp-flatten": "0.0.2",
+    "gulp-gh-pages": "^0.3.4",
     "gulp-livereload": "^2.1.0",
     "gulp-load-plugins": "^0.5.3",
     "gulp-minify-css": "^0.3.6",
@@ -28,14 +30,13 @@
     "jshint": "^2.5.3",
     "jshint-loader": "^0.8.0",
     "jsx-loader": "0.11.2",
+    "script-loader": "^0.6.0",
     "url-loader": "^0.5.5",
     "webpack": "1.4.8",
-    "webpack-dev-server": "1.6.5",
-    "gulp-gh-pages": "^0.3.4",
-    "gulp-concat-css": "^0.1.4"
+    "webpack-dev-server": "1.6.5"
   },
   "name": "center-ui",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "dependencies": {
     "bootstrap-sass": "git://github.com/ozone-development/bootstrap-sass",
     "cortexjs": "^0.6.0",
@@ -46,6 +47,9 @@
     "react-icon-rating": "git://github.com/nishp1/react-icon-rating",
     "react-router": "^0.9.3",
     "reflux": "^0.1.6",
-    "select2": "^3.5.1-browserify-fix"
+    "select2": "^3.5.1-browserify-fix",
+    "tcomb": "^0.2.1",
+    "tcomb-form": "^0.1.3",
+    "w2ui": "git://github.com/vitmalina/w2ui"
   }
 }

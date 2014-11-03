@@ -2,7 +2,7 @@
 
 var React = require('react');
 var Url = require('../../form/UrlInput');
-var DeleteBtnMixin = require('./DeleteBtnMixin');
+var DeleteBtnMixin = require('./deleteBtnMixin');
 
 module.exports.form = React.createClass({
     mixins: [DeleteBtnMixin],

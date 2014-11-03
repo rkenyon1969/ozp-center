@@ -20,6 +20,11 @@ var BootstrapModal = React.createClass({
                     me.props.onShown();
                 }
             })
+            .one('hidden.bs.modal', function () {
+                if (me.props.onHidden) {
+                    me.props.onHidden();
+                }
+            })
             .modal({
                 backdrop: 'static',
                 keyboard: false,
@@ -28,15 +33,7 @@ var BootstrapModal = React.createClass({
     },
 
     close: function () {
-        var me = this;
-
-        function onHidden () {
-            if (me.props.onHidden) {
-                me.props.onHidden();
-            }
-        }
-
-        $(this.getDOMNode()).one('hidden.bs.modal', onHidden).modal('hide');
+        $(this.getDOMNode()).modal('hide');
     },
 
     render: function () {

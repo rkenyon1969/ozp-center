@@ -21,6 +21,7 @@ var MyListings = require('./management/user/MyListings');
 var RecentActivity = require('./management/user/RecentActivity');
 var AppsMallManagement = require('./management/mall');
 var Intents = require('./management/mall/Intents');
+var Categories = require('./management/mall/Categories');
 var Quickview = require('./quickview');
 var FeedbackModal = require('./management/user/FeedbackModal');
 var ListingDeleteConfirmation =
@@ -92,11 +93,10 @@ React.renderComponent(
                 <Route name="recent-activity" path="recent-activity" handler={ RecentActivity } />
             </Route>
             <Route name="mall-management" path="mall-management" handler={ AppsMallManagement }>
-                <Route name="categories" path="categories" handler={ Intents} />
-                <Route name="tags" path="tags" handler={ Intents} />
-                <Route name="intents" path="intents" handler={ Intents} />
-                <Route name="organizations" path="organizations" handler={ Intents} />
-                <Route name="stewards" path="stewards" handler={ Intents} />
+                <Route name="categories" path="categories" handler={ Categories } />
+                <Route name="intents" path="intents" handler={ Intents } />
+                <Route name="organizations" path="organizations" handler={ Intents } />
+                <Route name="stewards" path="stewards" handler={ Intents } />
             </Route>
             <Redirect to="home" />
         </Route>

@@ -9,7 +9,7 @@ var Logo = React.createClass({
     render: function () {
         return (
             <div id="logo-container">
-                <a id="appsmall-logo-link"><img src={logo} /></a>
+                <a href="#home" id="appsmall-logo-link"><img src={logo} /></a>
             </div>
         );
     }

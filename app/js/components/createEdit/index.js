@@ -6,7 +6,7 @@ var ConfigStore = require('../../stores/ConfigStore');
 var CreateEditForm = require('./createEditForm');
 var GlobalListingStore = require('../../stores/GlobalListingStore');
 var Listing = require('../../webapi/Listing').Listing;
-var _findIndex = require('lodash/arrays/findIndex');
+var _ = require('../../utils/_');
 var $ = require('jquery');
 
 require('bootstrap');
@@ -22,7 +22,7 @@ var editableProps = [
 var CreateEditPage = React.createClass({
 
     getInitialState: function () {
-        var listing = this.props.params && this.props.params.listingId ? 
+        var listing = this.props.params && this.props.params.listingId ?
             GlobalListingStore.getById(this.props.params.listingId).clone() : new Listing();
 
         this.initListing(listing);
@@ -51,7 +51,7 @@ var CreateEditPage = React.createClass({
         return <CreateEditForm setters={setters} listing={this.state.listing} config={this.state.config} />;
         /*jshint ignore:end */
     },
-    
+
 
     componentDidMount: function () {
         this._$scrollspy = $('body').scrollspy({
@@ -82,7 +82,7 @@ var CreateEditPage = React.createClass({
         });
 
         requiredContactTypes.forEach(function (type, index) {
-            var requiredIndex = _findIndex(listing.contacts(), function (contact) {
+            var requiredIndex = _.findIndex(listing.contacts(), function (contact) {
                 return contact.type === type.title;
             });
 
@@ -115,7 +115,7 @@ var CreateEditPage = React.createClass({
         var suggestedResources = [];
 
         ['User Manual', 'API Documentation'].forEach(function (name) {
-            var index = _findIndex(listing.docUrls(), function (resource) {
+            var index = _.findIndex(listing.docUrls(), function (resource) {
                 return resource.name === name;
             });
 
