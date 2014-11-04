@@ -28,9 +28,11 @@ var EnabledControl = React.createClass({
                 <h5>{enabled ? 'Enabled' : 'Disabled'}</h5>
                 <hr/>
                 <p>This listing is {enabled ? '' : 'not'} visible to users</p>
-                <label>Enabled:</label>
-                <input type="checkbox" ref="checkbox" name="listingEnableControl" checked={enabled}
-                    onChange={enabled ? disableListing.bind(null, listing) : enableListing.bind(null, listing)} />
+                <label className="switch">Enabled:
+                    <input type="checkbox" ref="checkbox" className="ios brand-success" checked={enabled}
+                        onChange={enabled ? disableListing.bind(null, listing) : enableListing.bind(null, listing)} />
+                    <div className="track"><div className="knob"></div></div>
+                </label>
             </section>
         );
         /* jshint ignore:end */
