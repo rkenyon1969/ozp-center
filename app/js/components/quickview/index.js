@@ -52,21 +52,29 @@ var Quickview = React.createClass({
     },
 
     getInitialState: function () {
+        this.listenTo(GlobalListingStore, this.onGlobalStoreChange);
+
         var listingData = this.getListingData();
         listingData.shown = false;
         return listingData;
     },
 
+    getListingData: function () {
+        var listingId = this.props.params.listingId;
+        return {
+            listing: GlobalListingStore.getById(listingId),
+            changeLogs: GlobalListingStore.getChangeLogs(listingId) || []
+        };
+    },
+
+    onGlobalStoreChange: function () {
+        this.setState(this.getListingData());
+    },
+
     render: function () {
         var shown = this.state.shown;
         var listing = this.state.listing;
-        var title = listing.title();
-        var avgRate = listing.avgRate();
-        var activeRoute = this.props.activeRouteHandler({
-            listing: listing,
-            changeLogs: this.state.changeLogs,
-            shown: shown
-        });
+        var changeLogs = this.state.changeLogs;
 
         /* jshint ignore:start */
         return this.transferPropsTo(
@@ -79,7 +87,7 @@ var Quickview = React.createClass({
                             <div className="tabs-container">
                                 { this.renderTabs(this.props.tabs, { listingId: listing.id() }) }
                                 <div className="tab-content">
-                                    <this.props.activeRouteHandler listing={ listing } shown = { shown } />
+                                    <this.props.activeRouteHandler changeLogs={ changeLogs } listing={ listing } shown = { shown } />
                                 </div>
                             </div>
                         ]
@@ -87,10 +95,6 @@ var Quickview = React.createClass({
             </Modal>
         );
         /* jshint ignore:end */
-    },
-
-    componentDidMount: function () {
-        this.listenTo(GlobalListingStore, this.onGlobalStoreChange);
     },
 
     onShown: function () {
@@ -112,18 +116,6 @@ var Quickview = React.createClass({
 
     close: function () {
         this.refs.modal.close();
-    },
-
-    getListingData: function () {
-        var listingId = this.props.params.listingId;
-        return {
-            listing: GlobalListingStore.getById(listingId),
-            changeLogs: GlobalListingStore.getChangeLogs(listingId)
-        };
-    },
-
-    onGlobalStoreChange: function () {
-        this.setState(this.getListingData());
     }
 });
 
