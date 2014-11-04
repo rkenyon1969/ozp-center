@@ -82,7 +82,7 @@ Actions.save.listen(function (data) {
 });
 
 Actions.reject.listen(function (listingId, description) {
-    ListingApi.rejectListing(listingId, description).then(Actions.listingRejected);
+    ListingApi.rejectListing(listingId, description).then(Actions.rejected);
 });
 
 Actions.enable.listen(setEnabled.bind(null, true));

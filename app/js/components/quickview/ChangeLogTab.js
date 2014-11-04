@@ -2,7 +2,6 @@
 
 var React = require('react');
 var ChangeLogs = require('./ChangeLogs');
-var GlobalListingStore = require('../../stores/GlobalListingStore');
 var ListingActions = require('../../actions/ListingActions');
 var fetchChangeLogs = ListingActions.fetchChangeLogs;
 var saveListing = ListingActions.save;
@@ -11,7 +10,6 @@ var enableListing = ListingActions.enable;
 var disableListing = ListingActions.disable;
 var approveListing = ListingActions.approve;
 var listingStatus = require('../../constants/index').approvalStatus;
-var $ = require('jquery');
 
 var EnabledControl = React.createClass({
     propTypes: {
@@ -36,10 +34,6 @@ var EnabledControl = React.createClass({
             </section>
         );
         /* jshint ignore:end */
-    },
-
-    componentDidMount: function () {
-        //TODO: How are we rendering checkboxes?
     },
 
     handleChange: function (event) {
