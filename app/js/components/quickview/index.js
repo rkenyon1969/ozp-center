@@ -7,14 +7,16 @@ var Link = Router.Link;
 var CurrentPath = Router.CurrentPath;
 var Navigation = Router.Navigation;
 var Tab = require('../../mixins/TabMixin');
+var _ = require('../../utils/_');
 
 // component dependencies
 var Modal = require('../shared/Modal');
 var IconRating = require('../shared/IconRating');
 var Header = require('./Header');
 var ChangeLogTab = require('./ChangeLogTab');
-
+var UserRole = require('../../constants').userRole;
 var GlobalListingStore = require('../../stores/GlobalListingStore');
+var ProfileStore = require('../../stores/ProfileStore');
 
 /**
 *
@@ -44,37 +46,50 @@ var Quickview = React.createClass({
             }, {
                 to: 'quickview-resources',
                 name: 'Resources'
-            }, {
-                to: 'quickview-changelog',
-                name: 'Administration'
             }]
         };
     },
 
     getInitialState: function () {
-        this.listenTo(GlobalListingStore, this.onGlobalStoreChange);
+        this.listenTo(GlobalListingStore, this.onStoreChange);
+        this.listenTo(ProfileStore, this.onStoreChange);
 
-        var listingData = this.getListingData();
-        listingData.shown = false;
-        return listingData;
+        var storeData = this.getStoreData();
+        storeData.shown = false;
+        return storeData;
     },
 
-    getListingData: function () {
+    getStoreData: function () {
         var listingId = this.props.params.listingId;
         return {
             listing: GlobalListingStore.getById(listingId),
-            changeLogs: GlobalListingStore.getChangeLogs(listingId) || []
+            changeLogs: GlobalListingStore.getChangeLogs(listingId) || [],
+            currentUser: ProfileStore.getSelf()
         };
     },
 
-    onGlobalStoreChange: function () {
-        this.setState(this.getListingData());
+    onStoreChange: function () {
+        this.setState(this.getStoreData());
     },
 
     render: function () {
         var shown = this.state.shown;
         var listing = this.state.listing;
         var changeLogs = this.state.changeLogs;
+        var tabs = _.cloneDeep(this.props.tabs);
+        var currentUser = this.state.currentUser;
+        var owners = listing.owners().map(function (owner) {
+            return owner.username;
+        });
+
+        if ((UserRole[currentUser.highestRole] >= UserRole.ADMIN) ||
+            _.contains(owners, currentUser.username)) {
+            
+            tabs.push({
+                to: 'quickview-changelog',
+                name: 'Administration'
+            });
+        }
 
         /* jshint ignore:start */
         return this.transferPropsTo(
@@ -85,9 +100,10 @@ var Quickview = React.createClass({
                         [
                             <Header listing={ listing } onCancel={ this.close }></Header>,
                             <div className="tabs-container">
-                                { this.renderTabs(this.props.tabs, { listingId: listing.id() }) }
+                                { this.renderTabs(tabs, { listingId: listing.id() }) }
                                 <div className="tab-content">
-                                    <this.props.activeRouteHandler changeLogs={ changeLogs } listing={ listing } shown = { shown } />
+                                    <this.props.activeRouteHandler currentUser={currentUser} 
+                                        changeLogs={changeLogs} listing={listing} shown ={shown} />
                                 </div>
                             </div>
                         ]

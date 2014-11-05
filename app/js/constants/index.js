@@ -43,6 +43,13 @@ module.exports = {
         REJECTED: 'Returned to Owner'
     },
 
+    userRole: {
+        USER: 1,
+        ORG_STEWARD: 2,
+        APPSMALL_STEWARD: 3,
+        ADMIN: 4
+    },
+
     listingFieldName: {
         title: 'Title',
         description: 'Description',

@@ -12,6 +12,7 @@ var ConfigStore = require('../stores/ConfigStore');
 var ProfileStore = require('../stores/ProfileStore');
 var ProfileActions = require('../actions/ProfileActions');
 var fetchLibrary = ProfileActions.fetchLibrary;
+var fetchSelf = ProfileActions.fetchSelf;
 
 // component dependencies
 var DiscoveryPage = require('./discovery');
@@ -34,12 +35,16 @@ var App = React.createClass({
     getInitialState: function() {
         return {
             libraryFetched: false,
+            selfFetched: false,
             config: ConfigStore.getConfig()
         };
     },
 
     render: function () {
-        if(!this.state.config.loaded || !this.state.libraryFetched) {
+        if(!this.state.config.loaded || 
+           !this.state.libraryFetched ||
+           !this.state.selfFetched) {
+
             /*jshint ignore:start */
             return <p>Loading...</p>;
             /*jshint ignore:end */
@@ -51,6 +56,7 @@ var App = React.createClass({
 
     componentWillMount: function () {
         fetchLibrary();
+        fetchSelf();
     },
 
     componentDidMount: function () {
@@ -61,6 +67,7 @@ var App = React.createClass({
     onStoreChanged: function () {
         this.setState({
             libraryFetched: true,
+            selfFetched: true,
             library: ProfileStore.getLibrary(),
             config: ConfigStore.getConfig()
         });

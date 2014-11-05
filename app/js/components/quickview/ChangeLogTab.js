@@ -9,7 +9,8 @@ var rejectListing = ListingActions.reject;
 var enableListing = ListingActions.enable;
 var disableListing = ListingActions.disable;
 var approveListing = ListingActions.approve;
-var listingStatus = require('../../constants/index').approvalStatus;
+var listingStatus = require('../../constants').approvalStatus;
+var UserRole = require('../../constants').userRole;
 
 var EnabledControl = React.createClass({
     propTypes: {
@@ -65,7 +66,7 @@ var ChangeLogTab = React.createClass({
                     <section>
                         <h5>Listing Changes</h5>
                         <hr/>
-                        <ChangeLogs changeLogs={this.props.changeLogs} showListingName={ false } />
+                        <ChangeLogs changeLogs={this.props.changeLogs} showListingName={false} />
                     </section>
                 </div>
             </div>
@@ -77,6 +78,7 @@ var ChangeLogTab = React.createClass({
         var listing = this.props.listing,
             status = listingStatus[listing.approvalStatus()],
             statusText = status,
+            isAdmin = UserRole[this.props.currentUser.highestRole] >= UserRole.ADMIN,
             controls, statusClass;
 
         switch (status) {
@@ -88,7 +90,7 @@ var ChangeLogTab = React.createClass({
                 break;
             case 'Pending':
                 statusText += ', ' + listing.agency();
-                controls = this.renderReviewSection();
+                controls = isAdmin ? this.renderReviewSection() : '';
                 statusClass = 'label-pending';
                 break;
             case 'Returned to Owner':

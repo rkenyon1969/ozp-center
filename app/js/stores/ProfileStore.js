@@ -6,8 +6,10 @@ var ProfileActions = require('../actions/ProfileActions');
 var libraryFetched = ProfileActions.libraryFetched;
 var addedToLibrary = require('../actions/ListingActions').addedToLibrary;
 var removedFromLibrary = require('../actions/ListingActions').removedFromLibrary;
+var selfFetched = require('../actions/ProfileActions').selfFetched;
 
 var _library = [];
+var _self = {};
 
 var ProfileStore = Reflux.createStore({
 
@@ -15,6 +17,7 @@ var ProfileStore = Reflux.createStore({
         this.listenTo(libraryFetched, this.onLibraryFetched);
         this.listenTo(addedToLibrary, this.onAddedToLibrary);
         this.listenTo(removedFromLibrary, this.onRemovedFromLibrary);
+        this.listenTo(selfFetched, this.onSelfFetched);
     },
 
     onLibraryFetched: function (library) {
@@ -24,6 +27,15 @@ var ProfileStore = Reflux.createStore({
 
     getLibrary: function () {
         return _library;
+    },
+
+    getSelf: function () {
+        return _self;
+    },
+
+    onSelfFetched: function (self) {
+        _self = self;
+        this.trigger();
     },
 
     onAddedToLibrary: function (listing) {
