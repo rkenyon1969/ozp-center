@@ -6,7 +6,7 @@ var Tab = require('../../../mixins/TabMixin');
 // component dependencies
 var Header = require('../../header');
 
-var ListingManagement = React.createClass({
+var MallManagement = React.createClass({
 
     mixins: [ Tab ],
 
@@ -15,6 +15,9 @@ var ListingManagement = React.createClass({
             tabs: [{
                 to: 'categories',
                 name: 'Categories'
+            }, {
+                to: 'contact-types',
+                name: 'Contact Types'
             }, {
                 to: 'intents',
                 name: 'Intents'
@@ -50,5 +53,9 @@ var ListingManagement = React.createClass({
 
 });
 
-module.exports = ListingManagement;
+module.exports = MallManagement;
+module.exports.Categories = require('./Categories');
+module.exports.ContactTypes = require('./ContactTypes');
+module.exports.Organizations = require('./Organizations');
 module.exports.Intents = require('./Intents');
+module.exports.Stewards = require('./Stewards');

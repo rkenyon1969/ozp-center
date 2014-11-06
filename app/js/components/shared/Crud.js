@@ -14,12 +14,56 @@ var { DeleteConfirmation } = require('../shared/DeleteConfirmation');
 var Crud = React.createClass({
 
     propTypes: {
+        /**
+        *
+        * Title of the domain that is being managed.
+        * Used to auto generate modal header title and delete warnings.
+        *
+        **/
         title: React.PropTypes.string.isRequired,
+
+        /**
+        *
+        * Should return display name usually title of the record.
+        * Used to auto generate delete warning message.
+        *
+        **/
+        getDisplayName: React.PropTypes.func.isRequired,
+
+        /**
+        *
+        * RESTful URL for domain.
+        *
+        **/
         url: React.PropTypes.string.isRequired,
+
+        /**
+        *
+        * tcomb domain schema.
+        * See: https://github.com/gcanti/tcomb#quick-examples
+        *
+        **/
         Schema: React.PropTypes.func.isRequired,
-        form: React.PropTypes.shape({
-            fields: React.PropTypes.object.isRequired,
-        }),
+
+        /**
+        *
+        * Can be either a function or object.
+        * Function is passed selectedRecord in case of edit, and is expected to teturn tcomb-form options. Useful for modifiy input attributes dynamically.
+        *
+        **/
+        form: React.PropTypes.oneOfType([
+            React.PropTypes.func,
+            React.PropTypes.shape({
+                fields: React.PropTypes.object.isRequired,
+            })
+        ]).isRequired,
+
+        /**
+        *
+        * w2ui grid options.
+        * See: http://w2ui.com/web/docs/grid
+        *
+        **/
         grid: React.PropTypes.shape({
             columns: React.PropTypes.array.isRequired
         })
@@ -52,37 +96,52 @@ var Crud = React.createClass({
 
         /* jshint ignore:start */
         return (
-            <Modal ref="modal" className={className} title={title} onHidden={this.resetState}>
+            <Modal ref="modal" confirm="Save" cancel="Cancel" size="small" className={className} title={title}
+                onHidden={this.resetState}
+                onConfirm={onSave}>
                 <form>
                     <Form ref="form"/>
                 </form>
-                <div className="modal-footer">
-                    <button role="button" className="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button role="button" className="btn btn-success" onClick={onSave}>Save</button>
-                </div>
             </Modal>
         );
         /* jshint ignore:end */
     },
 
     renderCreateForm: function () {
-        var formOptions = _.assign({}, this.props.form, {
-            auto: 'labels'
-        });
-        return this._renderCreateEditForm(`Create ${this.props.title}`, `Create${this.props.title}`, formOptions, this.onCreate);
+        var formOptions = _.assign({
+                auto: 'labels'
+            },
+            _.isFunction(this.props.form) ? this.props.form() : this.props.form
+        );
+
+        return this._renderCreateEditForm(
+            `Create ${this.props.title}`,
+            `Create${this.props.title}`,
+            formOptions,
+            this.onCreate
+        );
     },
 
     renderEditForm: function () {
-        var formOptions = _.assign({}, this.props.form, {
-            value: this.getSelectedRecord(),
-            auto: 'labels'
-        });
-        return this._renderCreateEditForm(`Edit ${this.props.title}`, `Edit${this.props.title}`, formOptions, this.onEdit);
+        var value = this.getSelectedRecord();
+        var formOptions = _.assign({
+                auto: 'labels',
+                value: value
+            },
+            _.isFunction(this.props.form) ? this.props.form(value) : this.props.form
+        );
+
+        return this._renderCreateEditForm(
+            `Edit ${this.props.title}`,
+            `Edit${this.props.title}`,
+            formOptions,
+            this.onEdit
+        );
     },
 
     renderDeleteConfirmation: function () {
         var kind = this.props.title.toLowerCase();
-        var title = this.getSelectedRecord().title;
+        var title = this.props.getDisplayName(this.getSelectedRecord());
         /* jshint ignore:start */
         return (
             <DeleteConfirmation ref="modal" kind={ kind } title={ title }
@@ -99,12 +158,16 @@ var Crud = React.createClass({
         return _.find(this.records, { id: this.getSelectedId() });
     },
 
+    getUrlWithoutParams: function () {
+        return this.props.url.replace(/\?.*/, '');
+    },
+
     onCreate: function () {
         var formData = this.refs.form.getValue();
         if (!formData) { return; }
 
         $.ajax({
-            url: this.props.url,
+            url: this.getUrlWithoutParams(),
             type: 'post',
             dataType: 'json',
             contentType: 'application/json',
@@ -118,7 +181,7 @@ var Crud = React.createClass({
         if (!formData) { return; }
 
         $.ajax({
-            url: `${this.props.url}/${id}`,
+            url: `${this.getUrlWithoutParams()}/${id}`,
             type: 'put',
             dataType: 'json',
             contentType: 'application/json',
@@ -129,7 +192,7 @@ var Crud = React.createClass({
     onDelete: function () {
         var id = this.getSelectedId();
         $.ajax({
-            url: `${this.props.url}/${id}`,
+            url: `${this.getUrlWithoutParams()}/${id}`,
             type: 'delete'
         }).then(() => this.reload());
     },
@@ -144,23 +207,26 @@ var Crud = React.createClass({
     },
 
     componentDidMount: function () {
-        var options = _.assign({}, this.props.grid, {
+        var options = _.assign({
             recid: 'id',
             name: uuid(),
             fixedBody: false,
+            multiSelect : false,
             show: {
                 toolbar: true,
                 toolbarAdd: true,
                 toolbarEdit: true,
                 toolbarDelete: true,
-                toolbarSearch: false
+                toolbarSearch: false,
+                toolbarReload: false,
+                toolbarColumns: false
             },
             url : this.props.url,
             onLoad: (event) => {
                 var data = JSON.parse(event.xhr.responseText);
-                this.records = data._embedded.item;
+                this.records = data.total > 0 ? [].concat(data._embedded.item) : [];
                 event.xhr.responseText = {
-                    total: data._embedded.item.length,
+                    total: this.records.length,
                     records: this.records
                 };
             },
@@ -176,7 +242,7 @@ var Crud = React.createClass({
                 event.preventDefault();
                 this.setState({ adding: false, editing: false, deleting: true });
             }
-        });
+        }, this.props.grid);
 
         this.grid = $(this.refs.grid.getDOMNode()).w2grid(options);
     },

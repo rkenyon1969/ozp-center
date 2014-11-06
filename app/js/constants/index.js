@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    URL_REGEX: /^(((https|http|ftp|sftp|file):\/)|(\/)){1}(.*)+$/,
+
     listingActions: {
         MODIFIED: 'modified',
         ADD_RELATED_TO_ITEM: 'addrelatedtoitem',

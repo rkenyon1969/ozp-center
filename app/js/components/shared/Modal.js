@@ -5,6 +5,9 @@ var React = require('react');
 var BootstrapModal = React.createClass({
 
     propTypes: {
+        buttons: React.PropTypes.array,
+        confirm: React.PropTypes.string,
+        cancel: React.PropTypes.string,
         onConfirm: React.PropTypes.func,
         onCancel: React.PropTypes.func,
         onShown: React.PropTypes.func,
@@ -37,23 +40,25 @@ var BootstrapModal = React.createClass({
     },
 
     render: function () {
-        var confirmButton = null;
-        var cancelButton = null;
+        var buttons = this.props.buttons;
 
         /*jshint ignore:start */
-        if (this.props.confirm) {
-            confirmButton = (
-                <a href="javascript:;" role="button" className="btn btn-primary" onClick={this.handleConfirm}>
-                    {this.props.confirm}
-                </a>
-            );
-        }
-        if (this.props.cancel) {
-            cancelButton = (
-                <a href="javascript:;" role="button" className="btn" onClick={this.handleCancel}>
-                    {this.props.cancel}
-                </a>
-            );
+        if (!buttons) {
+            if (this.props.cancel) {
+                buttons = [(
+                    <a href="javascript:;" role="button" className="btn btn-link" onClick={this.handleCancel}>
+                        {this.props.cancel}
+                    </a>
+                )];
+            }
+
+            if (this.props.confirm) {
+                buttons.push(
+                    <a href="javascript:;" role="button" className="btn btn-primary" onClick={this.handleConfirm}>
+                        {this.props.confirm}
+                    </a>
+                );
+            }
         }
 
         //the size property can be set to small to avoid the modal-lg class
@@ -69,7 +74,7 @@ var BootstrapModal = React.createClass({
                         {
                             this.props.title && (
                                 <div className="modal-header">
-                                    <button type="button" className="close" onClick={ this.close }>
+                                    <button type="button" className="close" onClick={ this.handleCancel }>
                                         <span aria-hidden="true">&times;</span><span className="sr-only">Close</span>
                                     </button>
                                     <h4 className="modal-title">{this.props.title}</h4>
@@ -80,13 +85,11 @@ var BootstrapModal = React.createClass({
                             {this.props.children}
                         </div>
                         {
-                            (cancelButton || confirmButton) &&
-                            <div className="modal-footer">
-                                {cancelButton}
-                                {confirmButton}
-                            </div>
+                            (buttons && buttons.length > 0) &&
+                                <div className="modal-footer">
+                                    {buttons}
+                                </div>
                         }
-
                     </div>
                 </div>
             </div>
@@ -98,6 +101,7 @@ var BootstrapModal = React.createClass({
         if (this.props.onCancel) {
             this.props.onCancel();
         }
+        this.close();
     },
 
     handleConfirm: function () {

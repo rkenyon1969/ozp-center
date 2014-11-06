@@ -13,5 +13,6 @@ module.exports = {
     forOwn: require('lodash/objects/forOwn'),
     map: require('lodash/collections/map'),
     partial: require('lodash/functions/partial'),
+    isFunction: require('lodash/objects/isFunction'),
     noop: function () {}
 };

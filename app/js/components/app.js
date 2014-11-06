@@ -21,8 +21,6 @@ var UserManagement = require('./management/user');
 var MyListings = require('./management/user/MyListings');
 var RecentActivity = require('./management/user/RecentActivity');
 var AppsMallManagement = require('./management/mall');
-var Intents = require('./management/mall/Intents');
-var Categories = require('./management/mall/Categories');
 var Quickview = require('./quickview');
 var FeedbackModal = require('./management/user/FeedbackModal');
 var ListingDeleteConfirmation =
@@ -41,7 +39,7 @@ var App = React.createClass({
     },
 
     render: function () {
-        if(!this.state.config.loaded || 
+        if(!this.state.config.loaded ||
            !this.state.libraryFetched ||
            !this.state.selfFetched) {
 
@@ -100,10 +98,11 @@ React.renderComponent(
                 <Route name="recent-activity" path="recent-activity" handler={ RecentActivity } />
             </Route>
             <Route name="mall-management" path="mall-management" handler={ AppsMallManagement }>
-                <Route name="categories" path="categories" handler={ Categories } />
-                <Route name="intents" path="intents" handler={ Intents } />
-                <Route name="organizations" path="organizations" handler={ Intents } />
-                <Route name="stewards" path="stewards" handler={ Intents } />
+                <Route name="categories" path="categories" handler={ AppsMallManagement.Categories } />
+                <Route name="contact-types" path="contact-types" handler={ AppsMallManagement.ContactTypes } />
+                <Route name="intents" path="intents" handler={ AppsMallManagement.Intents } />
+                <Route name="organizations" path="organizations" handler={ AppsMallManagement.Organizations } />
+                <Route name="stewards" path="stewards" handler={ AppsMallManagement.Stewards } />
             </Route>
             <Redirect to="home" />
         </Route>

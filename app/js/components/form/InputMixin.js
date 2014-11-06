@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 'use strict';
 
 var React = require('react');
@@ -119,7 +118,7 @@ module.exports = {
             this.setState({
                 error: patternErr && patternMsg ? patternMsg : err
             });
-        } 
+        }
     },
 
     handleBlur: function (event) {

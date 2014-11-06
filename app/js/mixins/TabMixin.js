@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 'use strict';
 
 var Router = require('react-router');
@@ -19,9 +15,9 @@ var TabMixin = {
         var linkComponents = LINKS.map(function (link) {
             var isActive = me.isActive(link.to);
             var className = isActive ? 'active' : '';
-            
+
             return (
-                <li className={ className }>
+                <li className={ className } key={ link.to }>
                     <Link to={ link.to } params={ params }>{ link.name }</Link>
                 </li>
             );

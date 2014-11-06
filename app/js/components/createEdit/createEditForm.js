@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 'use strict';
 
 var Text = require('../form/TextInput');

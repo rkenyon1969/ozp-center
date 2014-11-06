@@ -2,40 +2,31 @@
 
 var React = require('react');
 var t = require('tcomb-form');
-var { Str, struct, subtype, maybe } = t;
+var { Str, struct, subtype, maybe, Bool } = t;
 var Crud = require('../../shared/Crud');
 
-// Category Schema
-var Category = struct({
+// ContactType Schema
+var ContactType = struct({
     title: subtype(Str, function (s) {
         return s.length <= 50;
     }),
-    description: maybe(subtype(Str, function (s) {
-        return s.length <= 255;
-    }))
+    required: Bool
 });
 
-var Categories = React.createClass({
+var ContactTypes = React.createClass({
 
     getDefaultProps: function() {
         return {
-            title: 'Category',
-            url: API_URL + '/api/category',
-            Schema: Category,
+            title: 'Contact Type',
+            url: API_URL + '/api/contactType',
+            Schema: ContactType,
             getDisplayName: function (selectedRecord) {
                 return selectedRecord.title;
-            },
-            form: {
-                fields: {
-                    description: {
-                        type: 'textarea'
-                    }
-                }
             },
             grid: {
                 columns: [
                     { field: 'title', caption: 'Title', size: '50%' },
-                    { field: 'description', caption: 'Description', size: '50%' }
+                    { field: 'required', caption: 'Required', size: '50%' }
                 ]
             }
         };
@@ -49,4 +40,4 @@ var Categories = React.createClass({
 
 });
 
-module.exports = Categories;
+module.exports = ContactTypes;
