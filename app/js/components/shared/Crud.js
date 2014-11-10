@@ -132,7 +132,7 @@ var Crud = React.createClass({
 
     _renderCreateEditForm: function (title, formOptions, onSave) {
         var options = _.cloneDeep(formOptions);
-        var { fields } = options;
+        var fields = options.fields || (options.fields = {});
 
         if(this.state.errors) {
             Object.keys(this.state.errors).forEach((key) => {
