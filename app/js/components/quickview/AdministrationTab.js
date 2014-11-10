@@ -43,10 +43,10 @@ var EnabledControl = React.createClass({
     }
 });
 
-var ChangeLogTab = React.createClass({
+var AdministrationTab = React.createClass({
 
     propTypes: {
-        listing: React.PropTypes.object
+        listing: React.PropTypes.object.isRequired
     },
 
     componentWillMount: function () {
@@ -171,4 +171,4 @@ var ChangeLogTab = React.createClass({
 
 });
 
-module.exports = ChangeLogTab;
+module.exports = AdministrationTab;

@@ -13,7 +13,6 @@ var _ = require('../../utils/_');
 var Modal = require('../shared/Modal');
 var IconRating = require('../shared/IconRating');
 var Header = require('./Header');
-var ChangeLogTab = require('./ChangeLogTab');
 var UserRole = require('../../constants').userRole;
 var GlobalListingStore = require('../../stores/GlobalListingStore');
 var ProfileStore = require('../../stores/ProfileStore');
@@ -73,22 +72,23 @@ var Quickview = React.createClass({
     },
 
     render: function () {
-        var shown = this.state.shown;
-        var listing = this.state.listing;
-        var changeLogs = this.state.changeLogs;
-        var tabs = _.cloneDeep(this.props.tabs);
-        var currentUser = this.state.currentUser;
-        var owners = listing.owners().map(function (owner) {
-            return owner.username;
-        });
+        var { shown, listing, changeLogs, currentUser } = this.state;
+        var owners, tabs;
 
-        if ((UserRole[currentUser.highestRole] >= UserRole.ADMIN) ||
-            _.contains(owners, currentUser.username)) {
-            
-            tabs.push({
-                to: 'quickview-changelog',
-                name: 'Administration'
+        if (listing) {
+            tabs = _.cloneDeep(this.props.tabs);
+            owners = listing.owners().map(function (owner) {
+                return owner.username;
             });
+
+            if ((UserRole[currentUser.highestRole] >= UserRole.ADMIN) ||
+                _.contains(owners, currentUser.username)) {
+
+                tabs.push({
+                    to: 'quickview-administration',
+                    name: 'Administration'
+                });
+            }
         }
 
         /* jshint ignore:start */
@@ -102,7 +102,7 @@ var Quickview = React.createClass({
                             <div className="tabs-container">
                                 { this.renderTabs(tabs, { listingId: listing.id() }) }
                                 <div className="tab-content">
-                                    <this.props.activeRouteHandler currentUser={currentUser} 
+                                    <this.props.activeRouteHandler currentUser={currentUser}
                                         changeLogs={changeLogs} listing={listing} shown ={shown} />
                                 </div>
                             </div>
@@ -140,4 +140,4 @@ module.exports.OverviewTab = require('./OverviewTab');
 module.exports.ReviewsTab = require('./ReviewsTab');
 module.exports.DetailsTab = require('./DetailsTab');
 module.exports.ResourcesTab = require('./ResourcesTab');
-module.exports.ChangeLogTab = ChangeLogTab;
+module.exports.AdministrationTab = require('./AdministrationTab');
