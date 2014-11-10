@@ -14,5 +14,6 @@ module.exports = {
     map: require('lodash/collections/map'),
     partial: require('lodash/functions/partial'),
     isFunction: require('lodash/objects/isFunction'),
+    escape: require('lodash/utilities/escape'),
     noop: function () {}
 };

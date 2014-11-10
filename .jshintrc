@@ -25,6 +25,7 @@
     "React": true,
     "API_URL": true,
     "LOGOUT_URL": true,
-    "w2utils": true
+    "w2utils": true,
+    "w2obj": true
   }
 }

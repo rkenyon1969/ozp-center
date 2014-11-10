@@ -273,13 +273,17 @@ var Crud = React.createClass({
                 toolbarColumns: false
             },
             url : this.props.url,
-            onLoad: (event) => {
-                var data = JSON.parse(event.xhr.responseText);
+            parser: (responseText) => {
+                var data = JSON.parse(responseText);
                 this.records = data.total > 0 ? [].concat(data._embedded.item) : [];
-                event.xhr.responseText = {
+                return {
                     total: this.records.length,
                     records: this.records
                 };
+            },
+            getCellValue: () => {
+                var value = w2obj.grid.prototype.getCellValue.apply(this.grid, arguments);
+                return _.escape(value);
             },
             onAdd: (event) => {
                 event.preventDefault();
