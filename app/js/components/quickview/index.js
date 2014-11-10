@@ -13,7 +13,7 @@ var _ = require('../../utils/_');
 var Modal = require('../shared/Modal');
 var IconRating = require('../shared/IconRating');
 var Header = require('./Header');
-var UserRole = require('../../constants').userRole;
+var { UserRole } = require('../../constants');
 var GlobalListingStore = require('../../stores/GlobalListingStore');
 var ProfileStore = require('../../stores/ProfileStore');
 
@@ -81,9 +81,7 @@ var Quickview = React.createClass({
                 return owner.username;
             });
 
-            if ((UserRole[currentUser.highestRole] >= UserRole.ADMIN) ||
-                _.contains(owners, currentUser.username)) {
-
+            if (ProfileStore.isAdmin() || _.contains(owners, currentUser.username)) {
                 tabs.push({
                     to: 'quickview-administration',
                     name: 'Administration'

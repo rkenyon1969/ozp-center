@@ -26,23 +26,26 @@ var FeedbackModal = require('./management/user/FeedbackModal');
 var ListingDeleteConfirmation =
     require('./shared/DeleteConfirmation').ListingDeleteConfirmation;
 
+function getState () {
+    return {
+        currentUser: ProfileStore.getSelf(),
+        library: ProfileStore.getLibrary(),
+        config: ConfigStore.getConfig()
+    };
+}
+
 var App = React.createClass({
 
     mixins: [ Reflux.ListenerMixin ],
 
     getInitialState: function() {
-        return {
-            libraryFetched: false,
-            selfFetched: false,
-            config: ConfigStore.getConfig()
-        };
+        return getState();
     },
 
     render: function () {
-        if(!this.state.config.loaded ||
-           !this.state.libraryFetched ||
-           !this.state.selfFetched) {
+        var { config, library, currentUser } = this.state;
 
+        if(!config || !library || !currentUser) {
             /*jshint ignore:start */
             return <p>Loading...</p>;
             /*jshint ignore:end */
@@ -63,12 +66,7 @@ var App = React.createClass({
     },
 
     onStoreChanged: function () {
-        this.setState({
-            libraryFetched: true,
-            selfFetched: true,
-            library: ProfileStore.getLibrary(),
-            config: ConfigStore.getConfig()
-        });
+        this.setState(getState());
     }
 
 });

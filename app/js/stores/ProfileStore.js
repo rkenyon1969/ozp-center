@@ -7,9 +7,10 @@ var libraryFetched = ProfileActions.libraryFetched;
 var addedToLibrary = require('../actions/ListingActions').addedToLibrary;
 var removedFromLibrary = require('../actions/ListingActions').removedFromLibrary;
 var selfFetched = require('../actions/ProfileActions').selfFetched;
+var { UserRole } = require('../constants');
 
-var _library = [];
-var _self = {};
+var _library = null;
+var _self = null;
 
 var ProfileStore = Reflux.createStore({
 
@@ -31,6 +32,10 @@ var ProfileStore = Reflux.createStore({
 
     getSelf: function () {
         return _self;
+    },
+
+    isAdmin: function () {
+        return _self && UserRole[_self.highestRole] >= UserRole.ADMIN;
     },
 
     onSelfFetched: function (self) {

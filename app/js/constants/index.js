@@ -47,7 +47,7 @@ module.exports = {
         REJECTED: 'Returned to Owner'
     },
 
-    userRole: {
+    UserRole: {
         USER: 1,
         ORG_STEWARD: 2,
         APPSMALL_STEWARD: 3,

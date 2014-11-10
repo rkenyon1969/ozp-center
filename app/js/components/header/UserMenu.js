@@ -1,10 +1,13 @@
 'use strict';
 
-var React = require('react/addons');
+var React = require('react');
+var ProfileStore = require('../../stores/ProfileStore');
 
-var Header = React.createClass({
+var UserMenu = React.createClass({
 
     render: function () {
+        var isAdmin = ProfileStore.isAdmin();
+
         /*jshint ignore:start */
         return (
             <div id="user-menu" className="dropdown navbar-right">
@@ -14,7 +17,10 @@ var Header = React.createClass({
                 <ul className="dropdown-menu" role="menu">
                     <li><a href="#new"><i className="fa fa-plus"></i> Create Listing</a></li>
                     <li><a href="#user-management/listings"><i className="fa fa-list"></i> My Listings</a></li>
-                    <li><a href="#mall-management/categories"><i className="fa fa-wrench"></i> AppsMall Management</a></li>
+                    {
+                        isAdmin &&
+                            <li><a href="#mall-management/categories"><i className="fa fa-wrench"></i> AppsMall Management</a></li>
+                    }
                     <li><a href={ LOGOUT_URL }><i className="fa fa-sign-out"></i> Logout</a></li>
                 </ul>
             </div>
@@ -24,6 +30,4 @@ var Header = React.createClass({
 
 });
 
-
-
-module.exports = Header;
+module.exports = UserMenu;

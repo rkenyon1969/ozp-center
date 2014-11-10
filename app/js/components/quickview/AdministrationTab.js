@@ -10,7 +10,7 @@ var enableListing = ListingActions.enable;
 var disableListing = ListingActions.disable;
 var approveListing = ListingActions.approve;
 var listingStatus = require('../../constants').approvalStatus;
-var UserRole = require('../../constants').userRole;
+var { UserRole } = require('../../constants');
 
 var EnabledControl = React.createClass({
     propTypes: {

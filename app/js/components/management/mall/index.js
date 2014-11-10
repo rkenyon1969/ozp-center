@@ -1,16 +1,31 @@
 'use strict';
 
 var React = require('react');
+var Router = require('react-router');
+var Navigation = Router.Navigation;
 var Tab = require('../../../mixins/TabMixin');
+var ProfileStore = require('../../../stores/ProfileStore');
 var ConfigStore = require('../../../stores/ConfigStore');
+var ProfileActions = require('../../../actions/ProfileActions');
+
 // component dependencies
 var Header = require('../../header');
 
 var MallManagement = React.createClass({
 
-    mixins: [ Tab ],
+    mixins: [ Tab, Navigation ],
 
     statics: {
+        willTransitionTo: function(transition, component) {
+            if (!ProfileStore.getSelf()) {
+                ProfileActions.selfFetched(() => transition.retry());
+            }
+            else if (!ProfileStore.isAdmin()) {
+                transition.abort();
+                transition.redirect('/');
+            }
+        },
+
         willTransitionFrom: function(transition, component) {
             // refresh config cache when transitioning away
             ConfigStore.loadConfig();
@@ -39,7 +54,6 @@ var MallManagement = React.createClass({
     },
 
     render: function () {
-
         /* jshint ignore:start */
         return (
             <div className="MallManagement">
