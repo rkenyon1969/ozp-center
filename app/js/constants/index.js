@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+    FOCUSABLE_ELEMENTS: 'input, select, textarea',
+
     URL_REGEX: /^(((https|http|ftp|sftp|file):\/)|(\/)){1}(.*)+$/,
 
     listingActions: {

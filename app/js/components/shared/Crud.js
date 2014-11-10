@@ -10,8 +10,43 @@ var Modal = require('./Modal');
 var _ = require('../../utils/_');
 var uuid = require('../../utils/uuid');
 var { DeleteConfirmation } = require('../shared/DeleteConfirmation');
+var { FOCUSABLE_ELEMENTS } = require('../../constants');
+var AjaxMixin = require('../../mixins/AjaxMixin');
+
+var CreateEditModal = React.createClass({
+
+    propTypes: {
+        title: React.PropTypes.string.isRequired
+    },
+
+    render: function () {
+        /* jshint ignore:start */
+        return this.transferPropsTo(
+            <Modal ref="modal" confirm="Save" cancel="Cancel" size="small" title={this.props.title}
+                onShown={ this.onShown }>
+                { this.props.children }
+            </Modal>
+        );
+        /* jshint ignore:end */
+    },
+
+    onShown: function () {
+        var el = $(this.getDOMNode()).find(FOCUSABLE_ELEMENTS).not(':disabled').get(0);
+        if (el) {
+            var $el = $(el).focus();
+
+            // move cursor to end of input/textarea
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                $el.val($el.val());
+            }
+        }
+    }
+
+});
 
 var Crud = React.createClass({
+
+    mixins: [ AjaxMixin ],
 
     propTypes: {
         /**
@@ -91,39 +126,46 @@ var Crud = React.createClass({
         /* jshint ignore:end */
     },
 
-    _renderCreateEditForm: function (title, className, formOptions, onSave) {
-        var Form = t.form.createForm(this.props.Schema, formOptions);
+    _renderCreateEditForm: function (title, formOptions, onSave) {
+        var options = _.cloneDeep(formOptions);
+        var { fields } = options;
+
+        if(this.state.errors) {
+            Object.keys(this.state.errors).forEach((key) => {
+                fields[key] = _.assign((fields[key] || {}), {
+                    message: this.state.errors[key],
+                    hasError: true
+                });
+            });
+        }
+        var Form = t.form.createForm(this.props.Schema, options);
 
         /* jshint ignore:start */
         return (
-            <Modal ref="modal" confirm="Save" cancel="Cancel" size="small" className={className} title={title}
-                onHidden={this.resetState}
-                onConfirm={onSave}>
+            <CreateEditModal title={title} onHidden={this.resetState} onConfirm={onSave}>
                 <form>
                     <Form ref="form"/>
                 </form>
-            </Modal>
+            </CreateEditModal>
         );
         /* jshint ignore:end */
     },
 
     renderCreateForm: function () {
+        var title = `Create ${this.props.title}`;
         var formOptions = _.assign({
-                auto: 'labels'
+                auto: 'labels',
+                value: this.refs.form && this.refs.form.getValue()
             },
             _.isFunction(this.props.form) ? this.props.form() : this.props.form
         );
 
-        return this._renderCreateEditForm(
-            `Create ${this.props.title}`,
-            `Create${this.props.title}`,
-            formOptions,
-            this.onCreate
-        );
+        return this._renderCreateEditForm(title, formOptions, this.onCreate);
     },
 
     renderEditForm: function () {
-        var value = this.getSelectedRecord();
+        var title = `Edit ${this.props.title}`;
+        var value = (this.refs.form && this.refs.form.getValue()) || this.getSelectedRecord();
         var formOptions = _.assign({
                 auto: 'labels',
                 value: value
@@ -131,20 +173,17 @@ var Crud = React.createClass({
             _.isFunction(this.props.form) ? this.props.form(value) : this.props.form
         );
 
-        return this._renderCreateEditForm(
-            `Edit ${this.props.title}`,
-            `Edit${this.props.title}`,
-            formOptions,
-            this.onEdit
-        );
+        return this._renderCreateEditForm(title, formOptions, this.onEdit);
     },
 
     renderDeleteConfirmation: function () {
         var kind = this.props.title.toLowerCase();
         var title = this.props.getDisplayName(this.getSelectedRecord());
+
         /* jshint ignore:start */
         return (
             <DeleteConfirmation ref="modal" kind={ kind } title={ title }
+                errorMessage={this.state.errorMessage}
                 onHidden={this.resetState} onDelete={this.onDelete} />
         );
         /* jshint ignore:end */
@@ -172,7 +211,9 @@ var Crud = React.createClass({
             dataType: 'json',
             contentType: 'application/json',
             data: JSON.stringify(formData)
-        }).then(() => this.reload());
+        })
+        .done(this.reload)
+        .fail(this.handleError);
     },
 
     onEdit: function () {
@@ -186,7 +227,9 @@ var Crud = React.createClass({
             dataType: 'json',
             contentType: 'application/json',
             data: JSON.stringify(formData)
-        }).then(() => this.reload());
+        })
+        .done(this.reload)
+        .fail(this.handleError);
     },
 
     onDelete: function () {
@@ -196,7 +239,9 @@ var Crud = React.createClass({
             type: 'delete',
             dataType: 'json',
             contentType: 'application/json'
-        }).then(() => this.reload());
+        })
+        .done(this.reload)
+        .fail(this.handleError);
     },
 
     reload: function () {
