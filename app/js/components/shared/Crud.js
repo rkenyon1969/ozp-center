@@ -193,7 +193,9 @@ var Crud = React.createClass({
         var id = this.getSelectedId();
         $.ajax({
             url: `${this.getUrlWithoutParams()}/${id}`,
-            type: 'delete'
+            type: 'delete',
+            dataType: 'json',
+            contentType: 'application/json'
         }).then(() => this.reload());
     },
 
