@@ -2,13 +2,20 @@
 
 var React = require('react');
 var Tab = require('../../../mixins/TabMixin');
-
+var ConfigStore = require('../../../stores/ConfigStore');
 // component dependencies
 var Header = require('../../header');
 
 var MallManagement = React.createClass({
 
     mixins: [ Tab ],
+
+    statics: {
+        willTransitionFrom: function(transition, component) {
+            // refresh config cache when transitioning away
+            ConfigStore.loadConfig();
+        }
+    },
 
     getDefaultProps: function() {
         return {
