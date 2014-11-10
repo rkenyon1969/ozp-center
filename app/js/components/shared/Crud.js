@@ -40,6 +40,10 @@ var CreateEditModal = React.createClass({
                 $el.val($el.val());
             }
         }
+    },
+
+    close: function () {
+        this.refs.modal.close();
     }
 
 });
@@ -142,7 +146,7 @@ var Crud = React.createClass({
 
         /* jshint ignore:start */
         return (
-            <CreateEditModal title={title} onHidden={this.resetState} onConfirm={onSave}>
+            <CreateEditModal ref="modal" title={title} onHidden={this.resetState} onConfirm={onSave}>
                 <form>
                     <Form ref="form"/>
                 </form>
