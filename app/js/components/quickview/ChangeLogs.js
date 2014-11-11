@@ -97,7 +97,7 @@ var ChangeLogs = React.createClass({
                 listingChange += ' removed tag ' + changeLog.changeDetails[0].newValue + ' from ' + listingName;
                 break;
             case actions.REVIEW_EDITED:
-                listingChange += ' edited their review in ' + listingName;
+                listingChange += ' edited ' + changeLog.changeDetails[0].fieldName + ' in ' + listingName;
                 break;
             case actions.REVIEW_DELETED:
                 listingChange += ' removed ' + changeLog.changeDetails[0].newValue + '\'s review from ' + listingName;
