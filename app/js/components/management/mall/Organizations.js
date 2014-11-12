@@ -27,6 +27,9 @@ var Categories = React.createClass({
             },
             form: {
                 fields: {
+                    title: {
+                        help: 'Max. 255 characters'
+                    },
                     shortName: {
                         label: 'Acronym or Abbreviation',
                         help: 'Max. 8 characters'

@@ -23,6 +23,13 @@ var ContactTypes = React.createClass({
             getDisplayName: function (selectedRecord) {
                 return selectedRecord.title;
             },
+            form: {
+                fields: {
+                    title: {
+                        help: 'Max. 50 characters'
+                    }
+                }
+            },
             grid: {
                 columns: [
                     { field: 'title', caption: 'Title', size: '50%' },

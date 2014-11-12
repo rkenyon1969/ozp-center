@@ -27,8 +27,12 @@ var Categories = React.createClass({
             },
             form: {
                 fields: {
+                    title: {
+                        help: 'Max. 50 characters'
+                    },
                     description: {
-                        type: 'textarea'
+                        type: 'textarea',
+                        help: 'Max. 255 characters'
                     }
                 }
             },

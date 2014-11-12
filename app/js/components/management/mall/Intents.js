@@ -35,12 +35,19 @@ var Intents = React.createClass({
             form: function (selectedRecord) {
                 return {
                     fields: {
+                        label: {
+                            help: 'Max. 255 characters'
+                        },
                         action: {
+                            help: 'Max. 64 characters',
                             disabled: selectedRecord ? true : false
                         },
                         type: {
                             disabled: selectedRecord ? true : false,
-                            help: 'Media type: application/json, application/custom-type, etc.'
+                            help: 'Max. 64 characters/Max 64. characters. Ex: application/json, application/custom-type, etc.'
+                        },
+                        icon: {
+                            help: 'Max. 2083 characters'
                         }
                     }
                 };

@@ -31,8 +31,8 @@ var Stewards = React.createClass({
             },
             grid: {
                 columns: [
-                    { field: 'username', caption: 'Username', size: '34%' },
-                    { field: 'displayName', caption: 'Display Name', size: '33%' },
+                    { field: 'displayName', caption: 'Display Name', size: '34%' },
+                    { field: 'username', caption: 'Username', size: '33%' },
                     { field: 'stewardedOrganizations', caption: 'Steward Organizations', size: '33%'}
                 ],
                 show: {
