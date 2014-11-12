@@ -44,7 +44,7 @@ var Intents = React.createClass({
                         },
                         type: {
                             disabled: selectedRecord ? true : false,
-                            help: 'Max. 64 characters/Max 64. characters. Ex: application/json, application/custom-type, etc.'
+                            help: 'Max. 64 characters/Max. 64 characters. Ex: application/json, application/custom-type, etc.'
                         },
                         icon: {
                             help: 'Max. 2083 characters'
