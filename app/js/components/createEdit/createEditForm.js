@@ -1,5 +1,6 @@
 'use strict';
 
+var React = require('react');
 var Text = require('../form/TextInput');
 var TextArea = require('../form/TextAreaInput');
 var Select = require('../form/Select2Input');

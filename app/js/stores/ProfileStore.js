@@ -35,7 +35,10 @@ var ProfileStore = Reflux.createStore({
     },
 
     isAdmin: function () {
-        return _self && UserRole[_self.highestRole] >= UserRole.ADMIN;
+        if (!_self) {
+            throw new Error('User is not fetched yet. This should not happen. Check to see why route is invoked before user is fetched.');
+        }
+        return UserRole[_self.highestRole] >= UserRole.ADMIN;
     },
 
     onSelfFetched: function (self) {
