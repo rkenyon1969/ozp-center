@@ -1,8 +1,9 @@
 'use strict';
 
 var Reflux = require('reflux');
-var capitalize = require('../utils/string').capitalize;
-var ConfigApi = require('../webapi/Config').ConfigApi;
+var {capitalize} = require('../utils/string');
+var ConfigApi = require('../webapi/Config');
+var _ = require('../utils/_');
 var $ = require('jquery');
 
 var _config = {
@@ -40,6 +41,10 @@ var ConfigStore = Reflux.createStore({
             _config.loaded = true;
             me.trigger();
         });
+    },
+
+    getDefaultData: function () {
+        return {config: _.zipObject(configItems.map(k => [k, []]))};
     }
 });
 

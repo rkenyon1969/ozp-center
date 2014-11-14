@@ -47,7 +47,6 @@ var App = React.createClass({
     onStoreChanged: function () {
         this.setState(getState());
     }
-
 });
 
 module.exports = App;

@@ -11,6 +11,7 @@ var ownedListingsFetched = ListingActions.ownedListingsFetched;
 var listingRejected = ListingActions.rejected;
 var listingSaved = ListingActions.saved;
 var fetchChangeLogs = ListingActions.fetchChangeLogs;
+var {listingCreated} = require('../actions/CreateEditActions');
 var Listing = require('../webapi/Listing').Listing;
 
 var _listingsCache = {};
@@ -48,9 +49,12 @@ var GlobalListingStore = Reflux.createStore({
             this.trigger();
         });
         this.listenTo(ownedListingsFetched, updateCache);
-        this.listenTo(listingSaved, function (data) {
+        this.listenTo(listingSaved, function (data, id) {
             var listing = new Listing(data);
             updateCache([listing]);
+            if (!id) {
+                listingCreated(listing);
+            }
             fetchChangeLogs(listing.id());
         });
         this.listenTo(listingRejected, function (rejection) {

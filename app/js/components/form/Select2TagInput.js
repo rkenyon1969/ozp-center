@@ -7,16 +7,16 @@ var Select2Mixin = require('./Select2Mixin');
 var Select2TagInput = React.createClass({
     mixins: [InputMixin, Select2Mixin],
 
-    getInitialState: function () {
-        return {select2: {locked: this.props.locked, tags: [], tokenSeparators: [',', ' ']}};
-    },
-
     renderInput: function () {
         /*jshint ignore:start */
         return (
             <input type="text" />
         );
         /*jshint ignore:end */
+    },
+
+    getSelect2Options: function () {
+        return {locked: this.props.locked, tags: [], tokenSeparators: [',', ' ']};
     }
 });
 

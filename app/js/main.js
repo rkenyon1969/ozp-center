@@ -10,6 +10,10 @@ window.jQuery = jQuery;
 window.$ = jQuery;
 window.React = React;
 
+if (!Object.assign) {
+	Object.assign = require('object-assign');
+}
+
 // Enable withCredentials for all requests
 $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
     options.xhrFields = {

@@ -7,15 +7,10 @@ var Select2Mixin = require('./Select2Mixin');
 var Select2Input = React.createClass({
     mixins: [InputMixin, Select2Mixin],
 
-    getInitialState: function () {
-        return {select2: {locked: this.props.locked}};
-    },
-
     renderInput: function () {
         /*jshint ignore:start */
         return (
-            <select data-placeholder={this.props['data-placeholder']} multiple={this.props.multiple} 
-                    required={this.props.required} defaultValue={this.props.defaultValue}>
+            <select data-placeholder={this.props['data-placeholder']} multiple={this.props.multiple}>
                 {this.renderPlaceholder()}
                 {this.props.children}
             </select>
@@ -29,6 +24,10 @@ var Select2Input = React.createClass({
             return <option></option>;
             /*jshint ignore:end */
         }
+    },
+
+    getSelect2Options: function () {
+        return {locked: this.props.locked};
     }
 });
 

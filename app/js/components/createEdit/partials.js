@@ -1,6 +1,6 @@
 'use strict';
 
-var React = require('react/addons');
+var React = require('react');
 var $ = require('jquery');
 var classSet = React.addons.classSet;
 
@@ -51,4 +51,50 @@ var Content = React.createClass({
 
 });
 
-module.exports = Content;
+var Section = React.createClass({
+
+    /*jshint ignore:start */
+    render: function () {
+        return (
+            <div className="content-section">
+                <div className="row">
+                    <div className="col-sm-12">
+                        <a className="nav-anchor" id={this.props.id}></a>
+                    </div>
+                </div>
+                <div className="row">
+                    {this.props.children}
+                </div>
+            </div>
+        );
+    }
+    /*jshint ignore:end */
+
+});
+
+var ActionBar = React.createClass({
+    render: function () {
+        /*jshint ignore:start */
+        return (
+            <div id="sub-header">
+                <div className="row">
+                    <div className="col-sm-6">
+                        <h1>{this.props.title}</h1>
+                    </div>
+                    <div className="col-sm-6">
+                        <div className="btn-group">
+                            {this.props.children}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+        /*jshint ignore:end */
+    }
+});
+
+module.exports = {
+    Content: Content,
+    ActionBar: ActionBar,
+    Section: Section
+};

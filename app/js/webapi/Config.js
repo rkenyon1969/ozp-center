@@ -35,4 +35,4 @@ var ConfigApi = {
 
 };
 
-module.exports.ConfigApi = ConfigApi;
+module.exports = ConfigApi;

@@ -9,8 +9,7 @@ var TextAreaInput = React.createClass({
     renderInput: function () {
         /*jshint ignore:start */
         return (
-            <textarea pattern={this.props.pattern} defaultValue={this.props.defaultValue}
-                maxSize={this.props.maxSize} required={this.props.required} />
+            <textarea rows={this.props.rows || '3'} />
         );
         /*jshint ignore:end */
     }

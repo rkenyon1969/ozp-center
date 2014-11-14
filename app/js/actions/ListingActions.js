@@ -1,7 +1,5 @@
 'use strict';
 
-var Router = require('react-router');
-var Navigation = Router.Navigation;
 var Reflux = require('reflux');
 var ListingApi = require('../webapi/Listing').ListingApi;
 var ProfileApi = require('../webapi/Profile').ProfileApi;
@@ -75,9 +73,12 @@ Actions.removeFromLibrary.listen(function (listing) {
 });
 
 Actions.save.listen(function (data) {
+    var id = data.id; //track if listing is new
     ListingApi
         .save(data)
-        .then(Actions.saved)
+        .then(function (data) {
+            Actions.saved(data, id);
+        })
         .fail(Actions.saveFailed);
 });
 

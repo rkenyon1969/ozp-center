@@ -4,6 +4,8 @@ module.exports = {
     FOCUSABLE_ELEMENTS: 'input, select, textarea',
 
     URL_REGEX: /^(((https|http|ftp|sftp|file):\/)|(\/)){1}(.*)+$/,
+    PHONE_REGEX: /(^\+\d((([\s.-])?\d+)?)+$)|(^(\(\d{3}\)\s?|^\d{3}[\s.-]?)?\d{3}[\s.-]?\d{4}$)/,
+    EMAIL_REGEX: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
 
     listingActions: {
         MODIFIED: 'modified',

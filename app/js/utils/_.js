@@ -7,7 +7,7 @@ module.exports = {
     cloneDeep: require('lodash/objects/cloneDeep'),
     forOwn: require('lodash/objects/forOwn'),
     isFunction: require('lodash/objects/isFunction'),
-
+    pick: require('lodash/objects/pick'),
     find: require('lodash/collections/find'),
     contains: require('lodash/collections/contains'),
     map: require('lodash/collections/map'),
@@ -15,6 +15,7 @@ module.exports = {
     findIndex: require('lodash/arrays/findIndex'),
     compact: require('lodash/arrays/compact'),
     without: require('lodash/arrays/without'),
+    zipObject: require('lodash/arrays/zipObject'),
 
     partial: require('lodash/functions/partial'),
     once: require('lodash/functions/once'),
