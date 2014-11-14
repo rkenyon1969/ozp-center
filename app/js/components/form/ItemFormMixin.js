@@ -41,5 +41,3 @@ module.exports = {
         return Object.assign(this.getProps(property), formProps);
     }
 };
-
-    

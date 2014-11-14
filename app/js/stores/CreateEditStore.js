@@ -15,98 +15,98 @@ var _system = null;
 var _submitting = false;
 
 var CreateEditStore = Reflux.createStore({
-	listenables: Object.assign({}, actions, {cacheUpdated: cache, systemUpdated: system}),
+    listenables: Object.assign({}, actions, {cacheUpdated: cache, systemUpdated: system}),
 
-	onListingCreated: function (listing) {
-		_listing = listing.toObject();
-		_submitting = false;
-		this.trigger(Object.assign(this.doValidation(), {listing: _listing, validationFailed: false}));
-	},
+    onListingCreated: function (listing) {
+        _listing = listing.toObject();
+        _submitting = false;
+        this.trigger(Object.assign(this.doValidation(), {listing: _listing, validationFailed: false}));
+    },
 
-	onLoadListing: function (id) {
-		if (id) {
-			var listing = cache.getById(id);
-			_listing = listing ? listing.toObject() : new ListingSchema({id: id}).toObject();
-		} else {
-			_listing = new ListingSchema().toObject();
-		}
+    onLoadListing: function (id) {
+        if (id) {
+            var listing = cache.getById(id);
+            _listing = listing ? listing.toObject() : new ListingSchema({id: id}).toObject();
+        } else {
+            _listing = new ListingSchema().toObject();
+        }
 
-		this.trigger(Object.assign(this.doValidation(), {listing: _listing}));
-	},
+        this.trigger(Object.assign(this.doValidation(), {listing: _listing}));
+    },
 
-	onUpdateListing: function (propertyPath, value) {
-		if (propertyPath.length < 1 || !Array.isArray(propertyPath)) {
-			throw 'propertyPath needs to be an array with non zero length';
-		}
+    onUpdateListing: function (propertyPath, value) {
+        if (propertyPath.length < 1 || !Array.isArray(propertyPath)) {
+            throw 'propertyPath needs to be an array with non zero length';
+        }
 
-		function updateValue (obj, path) {
-	        if (path.length === 1) {
-	        	obj[path[0]] = value;
-	        } else {
-	        	updateValue(obj[path[0]], path.slice(1));
-	        }
-	    }
+        function updateValue (obj, path) {
+            if (path.length === 1) {
+                obj[path[0]] = value;
+            } else {
+                updateValue(obj[path[0]], path.slice(1));
+            }
+        }
 
-	    updateValue(_listing, propertyPath);
-		this.trigger(Object.assign(this.doValidation(), {listing: _listing}));
-	},
+        updateValue(_listing, propertyPath);
+        this.trigger(Object.assign(this.doValidation(), {listing: _listing}));
+    },
 
-	onCacheUpdated: function () {
-		if (_listing.id) {
-			var listing = cache.getById(_listing.id);
-			if (listing) {
-				_listing = listing.toObject();
-				_submitting = false;
-				this.trigger(Object.assign(this.doValidation(), {listing: _listing, validationFailed: false}));
-			}
-		}
-	},
+    onCacheUpdated: function () {
+        if (_listing.id) {
+            var listing = cache.getById(_listing.id);
+            if (listing) {
+                _listing = listing.toObject();
+                _submitting = false;
+                this.trigger(Object.assign(this.doValidation(), {listing: _listing, validationFailed: false}));
+            }
+        }
+    },
 
-	onSystemUpdated: function (data) {
-		_system = data.system;
-		this.trigger(Object.assign(this.doValidation(), {system: _system}));
-	},
+    onSystemUpdated: function (data) {
+        _system = data.system;
+        this.trigger(Object.assign(this.doValidation(), {system: _system}));
+    },
 
-	onSubmit: function () {
-		_submitting = true;
+    onSubmit: function () {
+        _submitting = true;
 
-		var validation = this.doValidation();
-		if(!validation.isValid) {
-			validation.validationFailed = true;
-			this.trigger(validation);
-			console.log(validation);
-		} else {
-			_listing.approvalStatus = 'PENDING';
-			save(_listing);
-		}
-	},
+        var validation = this.doValidation();
+        if(!validation.isValid) {
+            validation.validationFailed = true;
+            this.trigger(validation);
+            console.log(validation);
+        } else {
+            _listing.approvalStatus = 'PENDING';
+            save(_listing);
+        }
+    },
 
-	onSave: function () {
-		_submitting = false;
+    onSave: function () {
+        _submitting = false;
 
-		var validation = this.doValidation();
-		if(!validation.isValid) {
-			validation.validationFailed = true;
-			this.trigger(validation);
-			console.log(validation);
-		} else {
-			save(_listing);
-		}
-	},
+        var validation = this.doValidation();
+        if(!validation.isValid) {
+            validation.validationFailed = true;
+            this.trigger(validation);
+            console.log(validation);
+        } else {
+            save(_listing);
+        }
+    },
 
-	doValidation: function () {
-		var status = approvalStatus[_listing.approvalStatus],
-		    isDraft = !_submitting && (!status || status === approvalStatus.IN_PROGRESS);
+    doValidation: function () {
+        var status = approvalStatus[_listing.approvalStatus],
+            isDraft = !_submitting && (!status || status === approvalStatus.IN_PROGRESS);
 
-		var warnings = validateFull(_listing, _system).errors;
-		var {errors, isValid} = isDraft ? validateDraft(_listing, _system) : validateFull(_listing, _system);
+        var warnings = validateFull(_listing, _system).errors;
+        var {errors, isValid} = isDraft ? validateDraft(_listing, _system) : validateFull(_listing, _system);
 
-		return {errors: errors, warnings: warnings, isValid: isValid, messages: listingMessages};
-	},
+        return {errors: errors, warnings: warnings, isValid: isValid, messages: listingMessages};
+    },
 
-	getDefaultData: function () {
-		return { listing: _listing, system: _system, errors: {}, warnings: {}, messages: {}, validationFailed: false};
-	}
+    getDefaultData: function () {
+        return { listing: _listing, system: _system, errors: {}, warnings: {}, messages: {}, validationFailed: false};
+    }
 });
 
 module.exports = CreateEditStore;
