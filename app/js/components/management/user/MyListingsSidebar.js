@@ -11,7 +11,7 @@ var MyListingsSidebar = React.createClass({
         this.props.onFilterChanged(evt.target.value);
     },
 
-    render: function() {
+    render: function () {
         //object map from approvalStatus to number of listings with that
         //status
         var counts = this.props.listings.reduce(function(acc, i) {

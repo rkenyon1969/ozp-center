@@ -13,7 +13,7 @@ Actions.fetchLibrary.listen(function () {
         .then(Actions.libraryFetched);
 });
 
-Actions.fetchSelf.listen(function() {
+Actions.fetchSelf.listen(function () {
     ProfileApi.getSelf()
         .done(Actions.selfFetched)
         .fail(Actions.fetchSelfFailed);

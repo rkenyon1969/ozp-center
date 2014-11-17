@@ -1,8 +1,9 @@
 'use strict';
 
 var React = require('react');
-var Router = require('react-router');
-var Link = Router.Link;
+var { Link, Navigation, CurrentPath } = require('react-router');
+var ActiveState = require('../../mixins/ActiveStateMixin');
+var _ = require('../../utils/_');
 var IconRating = require('../shared/IconRating');
 var ProfileStore = require('../../stores/ProfileStore');
 
@@ -12,6 +13,8 @@ var addToLibrary = ListingActions.addToLibrary;
 var removeFromLibrary = ListingActions.removeFromLibrary;
 
 var ListingTile = React.createClass({
+
+    mixins: [ Navigation, CurrentPath, ActiveState ],
 
     render: function () {
         var listing = this.props.listing;
@@ -23,11 +26,16 @@ var ListingTile = React.createClass({
         var totalVotes = listing.totalVotes();
         var avgRate = listing.avgRate();
         var company = listing.company();
+        var href = this.makeHref(this.getActiveRoutePath(), null, {
+            listing: listing.id(),
+            action: 'view',
+            tab: 'overview'
+        });
 
         /*jshint ignore:start */
         return this.transferPropsTo(
             <li className="listing listing-tile">
-                <Link to="quickview-overview" params={{listingId: listing.id()}}>
+                <a href={ href }>
                     <img src={ imageLargeUrl } />
                     <section className="slide-up">
                         <p className="title">{ name }</p>
@@ -45,7 +53,7 @@ var ListingTile = React.createClass({
                         <p className="description">{ description }</p>
                         { this.renderActions() }
                     </section>
-                </Link>
+                </a>
             </li>
         );
         /*jshint ignore:end */

@@ -1,21 +1,29 @@
 'use strict';
 
 var React = require('react');
-var Router = require('react-router');
-var Link = Router.Link;
+var { Navigation } = require('react-router');
+
+var ActiveState = require('../../mixins/ActiveStateMixin');
 
 var FeaturedListingTile = React.createClass({
+
+    mixins: [ Navigation, ActiveState ],
 
     render: function () {
         var listing = this.props.listing;
         var image = listing.imageXlargeUrl();
+        var href = this.makeHref(this.getActiveRoutePath(), null, {
+            listing: listing.id(),
+            action: 'view',
+            tab: 'overview'
+        });
 
         /*jshint ignore:start */
         return this.transferPropsTo(
             <li className="listing listing-tile listing-tile-featured">
-                <Link to="quickview-overview" params={{listingId: listing.id()}}>
-                    <img src={ image } />
-                </Link>
+                <a href={href}>
+                    <img src={image} />
+                </a>
             </li>
         );
         /*jshint ignore:end */

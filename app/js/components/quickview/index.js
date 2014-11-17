@@ -2,10 +2,9 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var Router = require('react-router');
-var Link = Router.Link;
-var CurrentPath = Router.CurrentPath;
-var Navigation = Router.Navigation;
+var { Link, Navigation, CurrentPath } = require('react-router');
+
+var ActiveState = require('../../mixins/ActiveStateMixin');
 var Tab = require('../../mixins/TabMixin');
 var _ = require('../../utils/_');
 
@@ -17,6 +16,20 @@ var { UserRole } = require('../../constants');
 var GlobalListingStore = require('../../stores/GlobalListingStore');
 var ProfileStore = require('../../stores/ProfileStore');
 
+var OverviewTab = require('./OverviewTab');
+var ReviewsTab = require('./ReviewsTab');
+var DetailsTab = require('./DetailsTab');
+var ResourcesTab = require('./ResourcesTab');
+var AdministrationTab = require('./AdministrationTab');
+
+var tabs = {
+    'overview': OverviewTab,
+    'reviews': ReviewsTab,
+    'details': DetailsTab,
+    'resources': ResourcesTab,
+    'administration': AdministrationTab
+};
+
 /**
 *
 * Quickview Component.
@@ -25,25 +38,25 @@ var ProfileStore = require('../../stores/ProfileStore');
 **/
 var Quickview = React.createClass({
 
-    mixins: [ Reflux.ListenerMixin, CurrentPath, Navigation, Tab ],
+    mixins: [ Reflux.ListenerMixin, CurrentPath, Navigation, ActiveState ],
 
     propTypes: {
-        listing: React.PropTypes.object
+        listing: React.PropTypes.string.isRequired
     },
 
-    getDefaultProps: function() {
+    getDefaultProps: function () {
         return {
             tabs: [{
-                to: 'quickview-overview',
+                to: 'overview',
                 name: 'Overview'
             }, {
-                to: 'quickview-reviews',
+                to: 'reviews',
                 name: 'Reviews'
             }, {
-                to: 'quickview-details',
+                to: 'details',
                 name: 'Details'
             }, {
-                to: 'quickview-resources',
+                to: 'resources',
                 name: 'Resources'
             }]
         };
@@ -59,10 +72,14 @@ var Quickview = React.createClass({
     },
 
     getStoreData: function () {
-        var listingId = this.props.params.listingId;
+        var id = this.props.listing;
+        if (!id) {
+            throw new Error('listing param is required');
+        }
+
         return {
-            listing: GlobalListingStore.getById(listingId),
-            changeLogs: GlobalListingStore.getChangeLogs(listingId) || [],
+            listing: GlobalListingStore.getById(id),
+            changeLogs: GlobalListingStore.getChangeLogs(id) || [],
             currentUser: ProfileStore.getSelf()
         };
     },
@@ -74,6 +91,7 @@ var Quickview = React.createClass({
     render: function () {
         var { shown, listing, changeLogs, currentUser } = this.state;
         var owners, tabs;
+        var activeRouteHandler = this.getActiveRouteHandler();
 
         if (listing) {
             tabs = _.cloneDeep(this.props.tabs);
@@ -83,7 +101,7 @@ var Quickview = React.createClass({
 
             if (ProfileStore.isAdmin() || _.contains(owners, currentUser.username)) {
                 tabs.push({
-                    to: 'quickview-administration',
+                    to: 'administration',
                     name: 'Administration'
                 });
             }
@@ -91,22 +109,57 @@ var Quickview = React.createClass({
 
         /* jshint ignore:start */
         return this.transferPropsTo(
-            <Modal ref="modal" className="quickview" onShown={ this.onShown } onHidden= { this.onHidden }>
+            <Modal ref="modal" className="quickview" onShown={this.onShown} onHidden={this.onHidden}>
                 {
                     !listing ?
                         <p>Loading...</p> :
                         [
-                            <Header listing={ listing } onCancel={ this.close }></Header>,
+                            <Header listing={listing} onCancel={this.close}></Header>,
                             <div className="tabs-container">
-                                { this.renderTabs(tabs, { listingId: listing.id() }) }
+                                { this.renderTabs(tabs, listing.id()) }
                                 <div className="tab-content">
-                                    <this.props.activeRouteHandler currentUser={currentUser}
-                                        changeLogs={changeLogs} listing={listing} shown ={shown} />
+                                    <activeRouteHandler currentUser={currentUser}
+                                        listing={listing} shown ={shown} />
                                 </div>
                             </div>
                         ]
                 }
             </Modal>
+        );
+        /* jshint ignore:end */
+    },
+
+    getActiveRouteHandler: function () {
+        var tab = tabs[this.props.tab];
+        if (!tab) {
+            throw new Error('Unknown tab.');
+        }
+        return tab;
+    },
+
+    renderTabs: function (links, id) {
+        var me = this;
+
+        /* jshint ignore:start */
+        var linkComponents = links.map(function (link) {
+            var className = link.to === me.props.tab ? 'active' : '';
+            var href = me.makeHref(me.getActiveRoutePath(), null, {
+                listing: id,
+                action: 'view',
+                tab: link.to
+            });
+
+            return (
+                <li className={className} key={link.to}>
+                    <a href={href}>{link.name}</a>
+                </li>
+            );
+        });
+
+        return (
+            <ul className="nav nav-tabs" role="tablist">
+                {linkComponents}
+            </ul>
         );
         /* jshint ignore:end */
     },
@@ -121,21 +174,19 @@ var Quickview = React.createClass({
     },
 
     onHidden: function () {
-        var currentPath = this.getCurrentPath();
-        var parentPath = currentPath.substring(1, currentPath.indexOf('/quickview'));
-
         // go back to the parent route
-        this.transitionTo(parentPath);
+        this.transitionTo(this.getActiveRoutePath());
     },
 
     close: function () {
         this.refs.modal.close();
     }
+
 });
 
 module.exports = Quickview;
-module.exports.OverviewTab = require('./OverviewTab');
-module.exports.ReviewsTab = require('./ReviewsTab');
-module.exports.DetailsTab = require('./DetailsTab');
-module.exports.ResourcesTab = require('./ResourcesTab');
-module.exports.AdministrationTab = require('./AdministrationTab');
+module.exports.OverviewTab = OverviewTab;
+module.exports.ReviewsTab = ReviewsTab;
+module.exports.DetailsTab = DetailsTab;
+module.exports.ResourcesTab = ResourcesTab;
+module.exports.AdministrationTab = AdministrationTab;

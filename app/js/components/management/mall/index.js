@@ -21,7 +21,7 @@ var MallManagement = React.createClass({
         }
     },
 
-    getDefaultProps: function() {
+    getDefaultProps: function () {
         return {
             tabs: [{
                 to: 'categories',

@@ -15,7 +15,7 @@ var ContactType = struct({
 
 var ContactTypes = React.createClass({
 
-    getDefaultProps: function() {
+    getDefaultProps: function () {
         return {
             title: 'Contact Type',
             url: API_URL + '/api/contactType',

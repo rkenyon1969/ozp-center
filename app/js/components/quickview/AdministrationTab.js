@@ -35,11 +35,6 @@ var EnabledControl = React.createClass({
             </section>
         );
         /* jshint ignore:end */
-    },
-
-    handleChange: function (event) {
-        var enabled = this.refs.checkbox.getDOMNode().checked;
-        console.log(enabled);
     }
 });
 
@@ -50,7 +45,7 @@ var AdministrationTab = React.createClass({
     },
 
     componentWillMount: function () {
-        fetchChangeLogs(this.props.params.listingId);
+        fetchChangeLogs(this.props.listing.id());
     },
 
     getInitialState: function () {
@@ -155,7 +150,7 @@ var AdministrationTab = React.createClass({
     returnToOwner: function (event) {
         event.preventDefault();
         var justification = this.refs.justification.getDOMNode().value;
-        rejectListing(this.props.params.listingId, justification);
+        rejectListing(this.props.listing.id(), justification);
         this.setState({editingRejection: false});
     },
 

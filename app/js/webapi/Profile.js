@@ -25,7 +25,7 @@ var ProfileApi = {
     	return $.getJSON(API_URL + '/api/profile/self/library');
     },
 
-    getSelf: function() {
+    getSelf: function () {
         return $.getJSON(API_URL + '/api/profile/self');
     }
 };

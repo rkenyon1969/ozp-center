@@ -11,7 +11,6 @@ var UserManagement = require('./management/user');
 var MyListings = require('./management/user/MyListings');
 var RecentActivity = require('./management/user/RecentActivity');
 var AppsMallManagement = require('./management/mall');
-var Quickview = require('./quickview');
 var FeedbackModal = require('./management/user/FeedbackModal');
 var { ListingDeleteConfirmation } = require('./shared/DeleteConfirmation');
 
@@ -20,17 +19,7 @@ var { ListingDeleteConfirmation } = require('./shared/DeleteConfirmation');
 module.exports = (
     <Routes>
         <Route handler={App}>
-            <Route name="home" path="home" handler={ DiscoveryPage }>
-                <Route name="quickview" path="quickview/:listingId" handler={ Quickview }>
-                    <Route name="quickview-overview" path="overview" handler={ Quickview.OverviewTab } />
-                    <Route name="quickview-reviews" path="reviews" handler={ Quickview.ReviewsTab } />
-                    <Route name="quickview-details" path="details" handler={ Quickview.DetailsTab } />
-                    <Route name="quickview-resources" path="resources" handler={ Quickview.ResourcesTab } />
-                    <Route name="quickview-administration" path="administration" handler={ Quickview.AdministrationTab } />
-                </Route>
-            </Route>
-            <Route name="new" path="/new" handler={ CreateEditPage } />
-            <Route name="edit" path="edit/:listingId" handler={ CreateEditPage } />
+            <Route name="home" path="home" handler={ DiscoveryPage } />
             <Route name="user-management" path="user-management" handler={ UserManagement }>
                 <Route name="my-listings" path="listings" handler={ MyListings }>
                     <Route name="feedback" path="feedback/:listingId"

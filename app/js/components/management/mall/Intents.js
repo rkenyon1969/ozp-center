@@ -24,7 +24,7 @@ var Intent = struct({
 
 var Intents = React.createClass({
 
-    getDefaultProps: function() {
+    getDefaultProps: function () {
         return {
             title: 'Intent',
             url: API_URL + '/api/intent',

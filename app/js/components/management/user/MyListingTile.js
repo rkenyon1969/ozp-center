@@ -1,22 +1,35 @@
 'use strict';
 
 var React = require('react');
-var Router = require('react-router');
 var moment = require('moment');
-var Link = Router.Link;
+var { Link, Navigation, CurrentPath } = require('react-router');
+
+var ActiveState = require('../../../mixins/ActiveStateMixin');
 
 var ActionMenu = React.createClass({
-    render: function() {
+
+    mixins: [ Navigation, ActiveState ],
+
+    render: function () {
         /* jshint ignore:start */
 
         //TODO fill in hrefs
         var listing = this.props.listing,
+            overviewHref = this.makeHref(this.getActiveRoutePath(), null, {
+                listing: listing.id(),
+                action: 'view',
+                tab: 'overview'
+            }),
+            editHref = this.makeHref(this.getActiveRoutePath(), null, {
+                listing: listing.id(),
+                action: 'edit'
+            }),
             linkParams = {listingId: listing.id()},
             review = <li><a href="review">Review</a></li>,
-            edit = <li><Link to="edit" params={linkParams} >Edit</Link></li>,
-            preview = <li><Link to="quickview-overview" params={linkParams}>Preview</Link></li>,
+            edit = <li><a href={editHref}>Edit</a></li>,
+            preview = <li><a href={overviewHref}>Preview</a></li>,
             del = <li><Link to="delete" params={linkParams}>Delete</Link></li>,
-            view = <li><Link to="quickview-overview" params={linkParams}>View</Link></li>,
+            view = <li><a href={overviewHref}>View</a></li>,
             disable = <li><a href="disable">Disable</a></li>,
             feedback = <li><Link to="feedback" params={linkParams}>Read Feedback</Link></li>,
             links,
@@ -50,7 +63,7 @@ var ActionMenu = React.createClass({
 });
 
 var ListingStatus = React.createClass({
-    render: function() {
+    render: function () {
         /* jshint ignore:start */
         return (
             <span className="MyListingTile__approvalStatus" />
@@ -60,7 +73,7 @@ var ListingStatus = React.createClass({
 });
 
 var ApprovalDate = React.createClass({
-    render: function() {
+    render: function () {
         var approvalDate = this.props.listing.approvalDate,
             approvalDateString = moment(approvalDate).format('MM/DD/YY');
 
@@ -73,7 +86,7 @@ var ApprovalDate = React.createClass({
 });
 
 var InfoBar = React.createClass({
-    render: function() {
+    render: function () {
         var listing = this.props.listing;
 
         /* jshint ignore:start */
@@ -89,8 +102,16 @@ var InfoBar = React.createClass({
 });
 
 module.exports = React.createClass({
-    render: function() {
+
+    mixins: [ Navigation, ActiveState ],
+
+    render: function () {
         var listing = this.props.listing,
+            overview = this.makeHref(this.getActiveRoutePath(), null, {
+                listing: listing.id(),
+                action: 'view',
+                tab: 'overview'
+            }),
             approvalStatus = listing.approvalStatus(),
             classSet = React.addons.classSet({
                 'draft': approvalStatus === 'IN_PROGRESS',
@@ -105,9 +126,9 @@ module.exports = React.createClass({
         return (
             <li className={classSet}>
                 <ActionMenu listing={listing} />
-                <Link to="quickview-overview" params={{listingId: listing.id()}}>
+                <a href={overview}>
                     <img className="MyListingTile__img" src={listing.imageLargeUrl()} />
-                </Link>
+                </a>
                 <InfoBar listing={listing} />
             </li>
         );

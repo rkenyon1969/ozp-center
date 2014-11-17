@@ -9,7 +9,7 @@ var Navigation = Router.Navigation;
 module.exports = React.createClass({
     mixins: [Navigation],
 
-    getInitialState: function() {
+    getInitialState: function () {
         var listing = GlobalListingStore.getById(this.props.params.listingId),
             rejection = listing ? listing.currentRejection() : null;
 
@@ -24,7 +24,7 @@ module.exports = React.createClass({
         };
     },
 
-    render: function() {
+    render: function () {
         /* jshint ignore:start */
         return (
             <Modal ref="modal" className="FeedbackModal" size="small">
@@ -44,7 +44,7 @@ module.exports = React.createClass({
         /* jshint ignore:end */
     },
 
-    close: function() {
+    close: function () {
         this.refs.modal.close();
         this.goBack();
     }

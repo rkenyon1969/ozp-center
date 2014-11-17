@@ -19,7 +19,7 @@ var MyListings = React.createClass({
 
     mixins: [ Reflux.ListenerMixin ],
 
-    componentWillMount: function() {
+    componentWillMount: function () {
         this.listenTo(ownedListingsFetched, this.onStoreChanged);
         fetchOwnedListings();
 
@@ -33,7 +33,7 @@ var MyListings = React.createClass({
         return profile ? GlobalListingStore.getByOwner(profile) : [];
     },
 
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             listings: this.getListings(),
             filter: this.defaultValue,
@@ -41,7 +41,7 @@ var MyListings = React.createClass({
         };
     },
 
-    onStoreChanged: function() {
+    onStoreChanged: function () {
         this.setState({
             listings: this.getListings(),
             filter: this.state.filter,

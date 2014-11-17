@@ -20,7 +20,7 @@ function getOptionsForSystemObject (items) {
 }
 
 module.exports = React.createClass({
-    
+
     mixins: [Reflux.connect(CreateEditStore), Navigation],
 
     getInitialState: function () {
@@ -74,13 +74,13 @@ module.exports = React.createClass({
     },
 
     componentWillMount: function () {
-        loadListing(this.props.params.listingId);
+        loadListing(this.props.listingId);
     },
 
     componentWillReceiveProps: function (newProps) {
-        var oldId = this.props.params.listingId,
-            newId = newProps.params.listingId;
-        
+        var oldId = this.props.listingId,
+            newId = newProps.listingId;
+
         if (oldId && oldId !== newId) {
             this.setState(this.getInitialState());
             loadListing(newId);
@@ -236,7 +236,7 @@ var ScreenshotForm = React.createClass({
 
 var ContactForm = React.createClass({
     mixins: [ItemFormMixin],
-    
+
     render: function () {
         /*jshint ignore:start */
         return (

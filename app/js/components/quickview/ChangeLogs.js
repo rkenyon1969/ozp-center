@@ -141,9 +141,6 @@ var ChangeLogs = React.createClass({
                 details[i] = changedField;
             }
 
-            var tempDetail = changedField + ' changed from ' + changeDetail.oldValue + ' to ' + changeDetail.newValue;
-
-
             /* jshint ignore:start */
             extendedDetails[i] = (
                 <li>{ changedField } changed from&nbsp;

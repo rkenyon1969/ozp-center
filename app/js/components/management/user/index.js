@@ -10,7 +10,7 @@ var ListingManagement = React.createClass({
 
     mixins: [ Tab ],
 
-    getDefaultProps: function() {
+    getDefaultProps: function () {
         return {
             tabs: [{
                 to: 'recent-activity',

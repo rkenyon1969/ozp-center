@@ -17,7 +17,7 @@ var Organization = struct({
 
 var Categories = React.createClass({
 
-    getDefaultProps: function() {
+    getDefaultProps: function () {
         return {
             title: 'Organization',
             url: API_URL + '/api/agency',

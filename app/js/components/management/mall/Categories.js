@@ -17,7 +17,7 @@ var Category = struct({
 
 var Categories = React.createClass({
 
-    getDefaultProps: function() {
+    getDefaultProps: function () {
         return {
             title: 'Category',
             url: API_URL + '/api/category',

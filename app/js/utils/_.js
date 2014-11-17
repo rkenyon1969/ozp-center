@@ -16,6 +16,7 @@ module.exports = {
     compact: require('lodash/arrays/compact'),
     without: require('lodash/arrays/without'),
     zipObject: require('lodash/arrays/zipObject'),
+    last: require('lodash/arrays/last'),
 
     partial: require('lodash/functions/partial'),
     once: require('lodash/functions/once'),
