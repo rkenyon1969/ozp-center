@@ -38,7 +38,7 @@
     "webpack-dev-server": "1.6.5"
   },
   "dependencies": {
-    "bootstrap-sass": "git://github.com/ozone-development/bootstrap-sass",
+    "bootstrap-sass": "git://github.com/ozone-development/bootstrap-sass#d29dfe13c40aede647e95d86bbebb65b59b04efb",
     "cortexjs": "^0.6.0",
     "exports-loader": "^0.6.2",
     "lodash-amd": "^2.4.1",
