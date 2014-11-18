@@ -9,6 +9,8 @@ var ProfileActions = require('../actions/ProfileActions');
 
 var Quickview = require('../components/quickview');
 var CreateEditListing = require('./createEdit');
+var FeedbackModal = require('./management/user/FeedbackModal');
+var { ListingDeleteConfirmation } = require('./shared/DeleteConfirmation');
 
 function getState () {
     return {
@@ -49,15 +51,22 @@ var App = React.createClass({
         var { listing, tab, action } = this.props.query;
 
         /*jshint ignore:start */
-        if (listing && tab) {
-            return (
-                <Quickview listing={listing} tab={tab} />
-            );
+        if (listing) {
+            if (tab) {
+                return <Quickview listing={listing} tab={tab} />;
+            }
+            else if (action === 'edit') {
+                return <CreateEditListing listingId={listing} />;
+            }
+            else if (action === 'feedback') {
+                return <FeedbackModal listing={listing} />;
+            }
+            else if (action === 'delete') {
+                return <ListingDeleteConfirmation listing={listing} />;
+            }
         }
-        else if (['create-listing', 'edit'].indexOf(action) > -1) {
-            return (
-                <CreateEditListing listingId={listing} />
-            )
+        else if (action === 'create-listing') {
+            return <CreateEditListing listingId={listing} />;
         }
         /*jshint ignore:end */
     },

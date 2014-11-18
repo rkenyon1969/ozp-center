@@ -7,10 +7,18 @@ var Router = require('react-router');
 var Navigation = Router.Navigation;
 
 module.exports = React.createClass({
+
+    propTypes: {
+        /**
+         * Listing ID
+         */
+        listing: React.PropTypes.string.isRequired
+    },
+
     mixins: [Navigation],
 
     getInitialState: function () {
-        var listing = GlobalListingStore.getById(this.props.params.listingId),
+        var listing = GlobalListingStore.getById(this.props.listing),
             rejection = listing ? listing.currentRejection() : null;
 
         return rejection ? {
@@ -38,7 +46,7 @@ module.exports = React.createClass({
                     <dt>Feedback</dt>
                     <dd className="feedback">{this.state.feedback}</dd>
                 </dl>
-                <a className="btn btn-primary edit" href="edit">Edit this listing</a>
+                <a className="btn btn-primary edit" href="#edit">Edit this listing</a>
             </Modal>
         );
         /* jshint ignore:end */

@@ -19,22 +19,17 @@ var { ListingDeleteConfirmation } = require('./shared/DeleteConfirmation');
 module.exports = (
     <Routes>
         <Route handler={App}>
-            <Route name="home" path="home" handler={ DiscoveryPage } />
-            <Route name="user-management" path="user-management" handler={ UserManagement }>
-                <Route name="my-listings" path="listings" handler={ MyListings }>
-                    <Route name="feedback" path="feedback/:listingId"
-                        handler={ FeedbackModal } />
-                    <Route name="delete" path="delete/:listingId"
-                        handler={ListingDeleteConfirmation} />
-                </Route>
-                <Route name="recent-activity" path="recent-activity" handler={ RecentActivity } />
+            <Route path="home" name="home" handler={ DiscoveryPage } />
+            <Route path="user-management" name="user-management" handler={ UserManagement }>
+                <Route path="my-listings" name="my-listings" handler={ MyListings } />
+                <Route path="recent-activity" name="recent-activity" handler={ RecentActivity } />
             </Route>
-            <Route name="mall-management" path="mall-management" handler={ AppsMallManagement }>
-                <Route name="categories" path="categories" handler={ AppsMallManagement.Categories } />
-                <Route name="contact-types" path="contact-types" handler={ AppsMallManagement.ContactTypes } />
-                <Route name="intents" path="intents" handler={ AppsMallManagement.Intents } />
-                <Route name="organizations" path="organizations" handler={ AppsMallManagement.Organizations } />
-                <Route name="stewards" path="stewards" handler={ AppsMallManagement.Stewards } />
+            <Route path="mall-management" name="mall-management" handler={ AppsMallManagement }>
+                <Route path="categories" name="categories" handler={ AppsMallManagement.Categories } />
+                <Route path="contact-types" name="contact-types" handler={ AppsMallManagement.ContactTypes } />
+                <Route path="intents" name="intents" handler={ AppsMallManagement.Intents } />
+                <Route path="organizations" name="organizations" handler={ AppsMallManagement.Organizations } />
+                <Route path="stewards" name="stewards" handler={ AppsMallManagement.Stewards } />
             </Route>
             <Redirect to="home" />
         </Route>

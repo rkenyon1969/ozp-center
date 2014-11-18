@@ -15,23 +15,32 @@ var ActionMenu = React.createClass({
 
         //TODO fill in hrefs
         var listing = this.props.listing,
-            overviewHref = this.makeHref(this.getActiveRoutePath(), null, {
+            activeRoutePath = this.getActiveRoutePath(),
+            overviewHref = this.makeHref(activeRoutePath, null, {
                 listing: listing.id(),
                 action: 'view',
                 tab: 'overview'
             }),
-            editHref = this.makeHref(this.getActiveRoutePath(), null, {
+            editHref = this.makeHref(activeRoutePath, null, {
                 listing: listing.id(),
                 action: 'edit'
+            }),
+            deleteHref = this.makeHref(activeRoutePath, null, {
+                listing: listing.id(),
+                action: 'delete'
+            }),
+            feedbackHref = this.makeHref(activeRoutePath, null, {
+                listing: listing.id(),
+                action: 'feedback'
             }),
             linkParams = {listingId: listing.id()},
             review = <li><a href="review">Review</a></li>,
             edit = <li><a href={editHref}>Edit</a></li>,
             preview = <li><a href={overviewHref}>Preview</a></li>,
-            del = <li><Link to="delete" params={linkParams}>Delete</Link></li>,
+            del = <li><a href={deleteHref}>Delete</a></li>,
             view = <li><a href={overviewHref}>View</a></li>,
             disable = <li><a href="disable">Disable</a></li>,
-            feedback = <li><Link to="feedback" params={linkParams}>Read Feedback</Link></li>,
+            feedback = <li><a href={feedbackHref}>Read Feedback</a></li>,
             links,
             approvalStatus = listing.approvalStatus();
 

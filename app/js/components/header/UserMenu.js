@@ -23,7 +23,7 @@ var UserMenu = React.createClass({
                 </a>
                 <ul className="dropdown-menu" role="menu">
                     <li><a href={createListing}><i className="fa fa-plus"></i> Create Listing</a></li>
-                    <li><a href="#user-management/listings"><i className="fa fa-list"></i> My Listings</a></li>
+                    <li><a href="#user-management/my-listings"><i className="fa fa-list"></i> My Listings</a></li>
                     {
                         isAdmin &&
                             <li><a href="#mall-management/categories"><i className="fa fa-wrench"></i> AppsMall Management</a></li>

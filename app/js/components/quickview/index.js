@@ -73,10 +73,6 @@ var Quickview = React.createClass({
 
     getStoreData: function () {
         var id = this.props.listing;
-        if (!id) {
-            throw new Error('listing param is required');
-        }
-
         return {
             listing: GlobalListingStore.getById(id),
             changeLogs: GlobalListingStore.getChangeLogs(id) || [],

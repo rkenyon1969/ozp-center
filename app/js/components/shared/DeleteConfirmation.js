@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var Reflux = require('reflux');
 var Modal = require('./Modal');
 var Router = require('react-router');
 var Navigation = Router.Navigation;
@@ -58,11 +59,36 @@ var DeleteConfirmation = React.createClass({
 
 var ListingDeleteConfirmation = React.createClass({
 
-    mixins: [Navigation, AjaxMixin],
+    propTypes: {
+        /**
+         * Listing ID
+         */
+        listing: React.PropTypes.string.isRequired
+    },
+
+    mixins: [ Reflux.ListenerMixin, Navigation, AjaxMixin ],
+
+    getInitialState: function () {
+        this.listenTo(GlobalListingStore, this.onStoreChange);
+        return this.getState();
+    },
+
+    getState: function () {
+        return {
+            listing: GlobalListingStore.getById(this.props.listing)
+        };
+    },
+
+    onStoreChange: function () {
+        this.setState(this.getState());
+    },
 
     render: function () {
-        var listing = this.getListing(),
-            title = listing.title();
+        var listing = this.getListing();
+        if (!listing) {
+            return null;
+        }
+        var title = listing.title();
 
         /* jshint ignore:start */
         return (
@@ -74,7 +100,7 @@ var ListingDeleteConfirmation = React.createClass({
     },
 
     getListing: function () {
-        return GlobalListingStore.getById(this.props.params.listingId);
+        return this.state.listing;
     },
 
     close: function () {
