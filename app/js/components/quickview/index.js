@@ -110,7 +110,7 @@ var Quickview = React.createClass({
                     !listing ?
                         <p>Loading...</p> :
                         [
-                            <Header listing={listing} onCancel={this.close} currentUser={currentUser}></Header>,
+                            <Header listing={listing} onCancel={this.close} onEdit={this.edit} currentUser={currentUser}></Header>,
                             <div className="tabs-container">
                                 { this.renderTabs(tabs, listing.id()) }
                                 <div className="tab-content">
@@ -170,12 +170,21 @@ var Quickview = React.createClass({
     },
 
     onHidden: function () {
-        // go back to the parent route
-        this.transitionTo(this.getActiveRoutePath());
+        if(!this.state.toEdit) {
+            // go back to the parent route
+            this.transitionTo(this.getActiveRoutePath());
+        }
     },
 
     close: function () {
         this.refs.modal.close();
+    },
+
+    edit: function () {
+        var listing = this.state.listing;
+        this.setState({toEdit: true});
+        this.transitionTo('edit', {listingId: listing.id()});
+        this.close();
     }
 
 });
