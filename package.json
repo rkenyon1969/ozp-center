@@ -47,7 +47,6 @@
   },
   "dependencies": {
     "bootstrap-sass": "git://github.com/ozone-development/bootstrap-sass#ccbf6f43121bea214013d90b8bb706f9d6240127",
-    "cortexjs": "^0.6.0",
     "exports-loader": "^0.6.2",
     "lodash-amd": "^2.4.1",
     "moment": "^2.8.3",
@@ -55,7 +54,7 @@
     "react": "^0.11.1",
     "react-icon-rating": "git://github.com/nishp1/react-icon-rating",
     "react-router": "0.9.5",
-    "reflux": "^0.1.6",
+    "reflux": "^0.1.15",
     "select2": "^3.5.1-browserify-fix",
     "tcomb-form": "0.1.6",
     "w2ui": "git://github.com/vitmalina/w2ui"

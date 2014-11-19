@@ -6,16 +6,15 @@ var _ = require('../../utils/_');
 
 var ListInput = React.createClass({
     render: function () {
-        var items = this.props.valueLink.value || [],
-            error = this.props.error || {};
+        var items = this.props.value || [];
 
         var itemForms = items.map(function (item, index) {
             var formProps = _.pick(this.props,
-                ['requestChange', 'messages', 'errors', 'warnings', 'forceError', 'system']
+                ['requestChange', 'messages', 'errors', 'warnings', 'forceError']
             );
 
             var props = Object.assign(formProps, {
-                item: item,
+                value: item,
                 removeHandler: this.onDelete.bind(null, index),
                 key: index,
                 path: this.props.path.concat(index)
@@ -47,9 +46,9 @@ var ListInput = React.createClass({
 
     onDelete: function (key, event) {
         event.preventDefault();
-        var items = this.props.valueLink.value;
+        var items = this.props.value;
         items.splice(key, 1);
-        this.props.valueLink.requestChange(items);
+        this.props.setter(items);
     },
 
     getClasses: function () {
@@ -65,9 +64,9 @@ var ListInput = React.createClass({
 
     handleNew: function (event) {
         event.preventDefault();
-        var items = this.props.valueLink.value || [];
+        var items = this.props.value || [];
         items.push({});
-        this.props.valueLink.requestChange(items);
+        this.props.setter(items);
     }
 });
 

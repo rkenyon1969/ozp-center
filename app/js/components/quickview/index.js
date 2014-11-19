@@ -110,7 +110,7 @@ var Quickview = React.createClass({
                     !listing ?
                         <p>Loading...</p> :
                         [
-                            <Header listing={listing} onCancel={this.close}></Header>,
+                            <Header listing={listing} onCancel={this.close} currentUser={currentUser}></Header>,
                             <div className="tabs-container">
                                 { this.renderTabs(tabs, listing.id()) }
                                 <div className="tab-content">

@@ -3,203 +3,217 @@
 var React = require('react');
 var Reflux = require('reflux');
 var Modal = require('../shared/Modal');
-var {Content, ActionBar, Section} = require('./partials');
 var _ = require('../../utils/_');
 var {approvalStatus} = require('../../constants');
 var CreateEditStore = require('../../stores/CreateEditStore');
+var SystemStore = require('../../stores/SystemStore');
 var {loadListing, updateListing, save, submit} = require('../../actions/CreateEditActions');
 var {Navigation} = require('react-router');
-var {ItemFormMixin, ListInput, TextInput, Select2Input, Select2TagInput, TextAreaInput} = require('../form');
+var Header = require('../header');
+var {ValidatedFormMixin, ListInput, TextInput, Select2Input, Select2TagInput, TextAreaInput} = require('../form');
+var classSet = React.addons.classSet;
+var $ = require('jquery');
 
 function getOptionsForSystemObject (items) {
-    return items.map(
-        /*jshint ignore:start */
-        (item, i) => <option key={i} value={item.title}>{item.title}</option>
-        /*jshint ignore:end */
-    );
+    return items.map(item => {
+        return {id: item.title, text: item.title};
+    });
 }
 
-module.exports = React.createClass({
+var CreateEditPage = React.createClass({
 
     mixins: [Reflux.connect(CreateEditStore), Navigation],
 
     getInitialState: function () {
-        return {saved: false};
+        return {scrollToError: false, hasChanges: this.props.params.listingId ? false : true};
     },
 
     render: function () {
-        var system = this.state && this.state.system;
-        var listing = this.state && this.state.listing;
+        var listing = this.state.listing;
 
-        if (!(listing && system)) {
+        if (!listing) {
             /* jshint ignore:start */
-            return (
-                <Modal ref="modal" className="CreateEdit__modal" onHidden={this.onHidden}>
-                    <p>loading...</p>
-                </Modal>
-            );
+            return <p>Loading...</p>;
             /* jshint ignore:end */
         }
 
         var listingProps = {
-            requestChange: this.onChange,
-            item: listing,
+            requestChange: updateListing,
+            value: listing,
             errors: this.state.errors,
             warnings: this.state.warnings,
             messages: this.state.messages,
-            forceError: this.state.validationFailed,
-            system: system
+            forceError: this.state.validationFailed
+        };
+
+        var saveBtnClasses = {
+            'btn': true,
+            'btn-success': !this.state.hasChanges,
+            'btn-warning': this.state.hasChanges
         };
 
         var {IN_PROGRESS, REJECTED} = approvalStatus;
         var showSubmit = [IN_PROGRESS, REJECTED].some(s => s === approvalStatus[listing.approvalStatus]);
 
-        var savedText = this.state.saved ? 'Saved' : 'Save';
+        var saveText = this.state.hasChanges ? 'Save' : 'Saved';
 
         /* jshint ignore:start */
-        var controls = (
-            <div className="btn-group" role="group">
-                <button type="button" className="btn btn-default" onClick={this.onSave}>{savedText}</button>
-                {showSubmit && this.renderSubmit()}
-                <button type="button" className="btn btn-default" onClick={this.onClose}>Close</button>
-            </div>
-        );
-
         return (
-            <Modal ref="modal" className="CreateEdit__modal" onHidden={this.onHidden}>
-                <ListingForm {...listingProps} controls={controls} />
-            </Modal>
+            <div>
+                <Header />
+                <div className="CreateEdit__titlebar">
+                    <h1>Create New Listing</h1>
+                    <div className="btn-group" role="group">
+                        <button type="button" className={classSet(saveBtnClasses)} onClick={this.onSave}>{saveText}</button>
+                        {showSubmit && <button className="btn btn-default" onClick={this.onSubmit}>Submit</button>}
+                        <button type="button" className="btn btn-default" onClick={this.onClose}>Done</button>
+                    </div>
+                </div>
+                <ListingForm ref="form" {...listingProps} />
+            </div>
         );
         /* jshint ignore:end */
     },
 
+    renderSubmit: function () {
+        /*jshint ignore:start */
+        return <button className="btn btn-default" onClick={this.onSubmit}>Submit</button>;
+        /*jshint ignore:end */
+    },
+
     componentWillMount: function () {
-        loadListing(this.props.listingId);
+        loadListing(this.props.params.listingId);
+    },
+
+    componentDidUpdate: function () {
+        if (this.state.scrollToError && !this.state.isValid) {
+            this.scrollToError(this.state.firstError);
+        }
     },
 
     componentWillReceiveProps: function (newProps) {
-        var oldId = this.props.listingId,
-            newId = newProps.listingId;
+        var oldId = this.props.params.listingId,
+            newId = newProps.params.listingId;
 
-        if (oldId && oldId !== newId) {
+        if (oldId !== newId) {
             this.setState(this.getInitialState());
             loadListing(newId);
         }
-
-        if (newProps.validationFailed) {
-            this.setState({saved: false});
-        }
-    },
-
-    onClose: function () {
-        this.refs.modal.close();
     },
 
     onSave: function () {
         save();
-        this.setState({saved: true});
+        this.setState({scrollToError: true});
     },
 
-    onChange: function () {
-        updateListing.apply(null, arguments);
-        this.setState({saved: false});
+    onSubmit: function () {
+        submit();
+        this.setState({scrollToError: true});
     },
 
-    onHidden: function () {
-        this.goBack();
+    onClose: function () {
+        if (this.state.hasChanges) {
+            if(window.confirm('You have unsaved information, are you sure you want to leave this page?')) {
+                this.transitionTo('my-listings');
+            }
+        } else {
+            this.transitionTo('my-listings');
+        }
     },
+
+    scrollToError: function (path) {
+        var $target = $(document.getElementById('createEdit.' + path));
+        var $firstFormElement = $(this.refs.form.getDOMNode()).find(':first-child');
+        var $scrollable = $('html, body');
+
+        if ($target) {
+            var scroll = $scrollable.scrollTop() + $target.offset().top - $firstFormElement.offset().top;
+
+            $scrollable.animate({
+                scrollTop: scroll
+            }, 'medium');
+
+            this.setState({scrollToError: false});
+        }
+    }
 });
 
 var ListingForm = React.createClass({
-    mixins: [ItemFormMixin],
+    mixins: [ValidatedFormMixin, Reflux.connect(SystemStore)],
+
+    getInitialState: function () {
+        return {};
+    },
 
     render: function () {
-        var item = this.props.item;
-        var system = this.props.system;
+        var listing = this.props.value;
+        var system = this.state.system;
 
-        var owners = item.owners;
-        var ownersValueLink = {
-            value: owners && owners.map(o => o.username) || [],
-            requestChange: usernames => {
-                this.props.requestChange(['owners'], usernames.map(
-                    u => { return {username: u};})
-                );
-            }
+        if(!system) {
+            /*jshint ignore:start */
+            return <p>Loading...</p>;
+            /*jshint ignore:end */
+        }
+
+        var owners = (listing.owners || []).map(o => o.username);
+        var ownerSetter = usernames => {
+            this.props.requestChange(['owners'], usernames.map(u => {
+                return {username: u};
+            }));
         };
 
-        var p = this.getProps;
+        // var users = this.state.system.users.map(u => {
+        //     return {id: u.username, text: u.username};
+        // });
+
+        var p = this.getFormComponentProps;
         /*jshint ignore:start */
         return (
-            <div className="CreateEdit__form">
+            <form className="CreateEdit__form">
                 <h2>Basic Listing Information</h2>
-                <TextInput {...p('title')} />
-                <Select2Input {...p('type')}>
-                    {getOptionsForSystemObject(system.types)}
-                </Select2Input>
-                <Select2Input {...p('categories')} multiple>
-                    {getOptionsForSystemObject(system.categories)}
-                </Select2Input>
-                <Select2TagInput {...p('tags')} multiple optional />
-                <TextAreaInput {...p('description')} rows="6" />
-                <TextAreaInput {...p('descriptionShort')} rows="3" />
+                <TextInput {...p('title')}/>
+                <Select2Input {...p('type')} options={getOptionsForSystemObject(system.types)}/>
+                <Select2Input {...p('categories')} multiple options={getOptionsForSystemObject(system.categories)}/>
+                <Select2TagInput {...p('tags')} multiple/>
+                <TextAreaInput {...p('description')} rows="6"/>
+                <TextAreaInput {...p('descriptionShort')} rows="3"/>
 
                 <h2>Listing Details</h2>
-                <TextInput {...p('versionName')} />
-                <TextInput {...p('launchUrl')} />
-                <TextAreaInput {...p('requirements')} rows="5" />
-                <TextAreaInput {...p('whatIsNew')} rows="3" />
-                <Select2Input {...p('intents')}  multiple>
-                    {this.getIntents()}
-                </Select2Input>
-                <ListInput {...this.getSubFormProps('docUrls')} itemForm={ResourceForm} optional />
+                <TextInput {...p('versionName')}/>
+                <TextInput {...p('launchUrl')}/>
+                <TextAreaInput {...p('requirements')} rows="5"/>
+                <TextAreaInput {...p('whatIsNew')} rows="3" optional/>
+                <Select2Input {...p('intents')}  multiple options={
+                    this.state.system.intents.map(intent => {
+                        var val = intent.type + '/' + intent.action;
+                        return {id: val, text: val};
+                    })
+                }/>
+                <ListInput {...this.getSubFormProps('docUrls')} itemForm={ResourceForm} optional/>
 
                 <h2>Graphics</h2>
                 <TextInput {...p('imageXlargeUrl')} />
                 <TextInput {...p('imageLargeUrl')} />
                 <TextInput {...p('imageMediumUrl')} />
                 <TextInput {...p('imageSmallUrl')} />
-                <ListInput {...this.getSubFormProps('screenshots')} itemForm={ScreenshotForm} />
+                <ListInput {...this.getSubFormProps('screenshots')} itemForm={ScreenshotForm}/>
 
-                <h2>Owner Information</h2>
-                <Select2Input {...p('agency')}>
-                    {getOptionsForSystemObject(system.organizations)}
-                </Select2Input>
-                <Select2Input {...p('owners')} valueLink={ownersValueLink} multiple>
-                    {this.getUsers()}
-                </Select2Input>
-                <ListInput {...this.getSubFormProps('contacts')} itemForm={ContactForm} />
-                {this.props.controls}
-            </div>
+                <h2>Owner Information and Contacts</h2>
+                <Select2Input {...p('agency')} options={getOptionsForSystemObject(system.organizations)}/>
+                <Select2Input {...p('owners')} value={owners} setter={ownerSetter} multiple options={
+                    this.state.system.users.map(u => {
+                        return {id: u.username, text: u.username};
+                    })
+                }/>
+                <ListInput {...this.getSubFormProps('contacts')} itemForm={ContactForm}/>
+            </form>
         );
         /*jshint ignore:end */
-    },
-
-    renderSubmit: function () {
-        /*jshint ignore:start */
-        return <button className="btn btn-default" onClick={submit}>Submit</button>;
-        /*jshint ignore:end */
-    },
-
-    getIntents: function () {
-        return this.props.system.intents.map((o, i) => {
-            var intent = o.type + '/' + o.action;
-            /*jshint ignore:start */
-            return <option key={i} value={intent}>{intent}</option>;
-            /*jshint ignore:end */
-        });
-    },
-
-    getUsers: function () {
-        return this.props.system.users.map(
-            /*jshint ignore:start */
-            (o, i) => <option key={i} value={o.username}>{o.username}</option>
-            /*jshint ignore:end */
-        );
     }
 });
 
 var ResourceForm = React.createClass({
-    mixins: [ItemFormMixin],
+    mixins: [ValidatedFormMixin],
 
     render: function () {
         /*jshint ignore: start */
@@ -208,8 +222,8 @@ var ResourceForm = React.createClass({
                 <button type="button" className="close" onClick={this.props.removeHandler}>
                     <span aria-hidden="true">&times;</span><span className="sr-only">Close</span>
                 </button>
-                <TextInput {...this.getProps('name')} />
-                <TextInput {...this.getProps('url')} />
+                <TextInput {...this.getFormComponentProps('name')}/>
+                <TextInput {...this.getFormComponentProps('url')}/>
             </div>
         );
         /*jshint ignore: end */
@@ -217,7 +231,7 @@ var ResourceForm = React.createClass({
 });
 
 var ScreenshotForm = React.createClass({
-    mixins: [ItemFormMixin],
+    mixins: [ValidatedFormMixin],
 
     render: function () {
         /*jshint ignore: start */
@@ -226,8 +240,8 @@ var ScreenshotForm = React.createClass({
                 <button type="button" className="close" onClick={this.props.removeHandler}>
                     <span aria-hidden="true">&times;</span><span className="sr-only">Close</span>
                 </button>
-                <TextInput {...this.getProps('smallImageUrl')} />
-                <TextInput {...this.getProps('largeImageUrl')} />
+                <TextInput {...this.getFormComponentProps('smallImageUrl')}/>
+                <TextInput {...this.getFormComponentProps('largeImageUrl')}/>
             </div>
         );
         /*jshint ignore: end */
@@ -235,25 +249,35 @@ var ScreenshotForm = React.createClass({
 });
 
 var ContactForm = React.createClass({
-    mixins: [ItemFormMixin],
+    mixins: [Reflux.connect(SystemStore), ValidatedFormMixin],
 
+    getInitialState: function () {
+        return {};
+    },
+    
     render: function () {
+        if (!this.state.system) {
+            /*jshint ignore:start */
+            return <p>Loading...</p>;
+            /*jshint ignore:end */
+        }
+
         /*jshint ignore:start */
         return (
             <div className="well">
                 <button type="button" className="close" onClick={this.props.removeHandler}>
                     <span aria-hidden="true">&times;</span><span className="sr-only">Close</span>
                 </button>
-                <Select2Input {...this.getProps('type')}>
-                    {getOptionsForSystemObject(this.props.system.contactTypes)}
-                </Select2Input>
-                <TextInput {...this.getProps('name')} />
-                <TextInput {...this.getProps('organization')} optional />
-                <TextInput {...this.getProps('email')} />
-                <TextInput {...this.getProps('securePhone')} />
-                <TextInput {...this.getProps('unsecurePhone')} />
+                <Select2Input {...this.getFormComponentProps('type')} options={getOptionsForSystemObject(this.state.system.contactTypes)}/>
+                <TextInput {...this.getFormComponentProps('name')}/>
+                <TextInput {...this.getFormComponentProps('organization')} optional/>
+                <TextInput {...this.getFormComponentProps('email')}/>
+                <TextInput {...this.getFormComponentProps('securePhone')}/>
+                <TextInput {...this.getFormComponentProps('unsecurePhone')}/>
             </div>
         );
         /*jshint ignore:end */
     }
 });
+
+module.exports = CreateEditPage;

@@ -14,14 +14,14 @@ module.exports = {
             select2 = $input.select2(this.getSelect2Options()).data('select2');
 
         $input.on('change', this.onChange);
-        $input.on('select2-blur', this.onBlur);
+        $input.on('select2-blur', this._onBlur);
 
         this._$select2 = select2;
         this._$input = $input;
     },
 
     componentDidUpdate: function () {
-        this._$input.select2('val', this.props.valueLink.value);
+        this._$input.select2('val', this.props.value);
     },
 
     componentWillUnmount: function () {
@@ -32,6 +32,6 @@ module.exports = {
 
     onChange: function (event) {
         event.preventDefault();
-        this.props.valueLink.requestChange(event.val);
+        this.props.setter(event.val);
     }
 };

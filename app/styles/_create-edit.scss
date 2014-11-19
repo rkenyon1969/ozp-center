@@ -14,27 +14,9 @@
     border-color: $blue;
 }
 
-.CreateEdit__modal {
-    .modal-dialog {
-        position: absolute;
-        top: 0px;
-        bottom: 0px;
-        overflow-y: scroll;
-        left: 50%;
-        margin: 0;
-        margin-left: -450px;
-    }
-
-    .modal-content {
-        background: #eeeeef;
-    }
-
-    .modal-body {
-        padding: 20px;
-    }
-}
-
 .CreateEdit__form {
+    padding-top: 123px;
+
     label.input-optional::after {
         content: " (optional)";
         font-size: smaller;
@@ -54,11 +36,21 @@
             font-size: 2em;
         }
     }
+}
+
+.CreateEdit__titlebar {
+    position: absolute;
+    width: 1230px;
+    top: 55px;
+
+    h1 {
+        border-bottom: 4px solid $nav-tabs-active-link-hover-bg;
+        padding-bottom: 15px;
+    }
 
     .btn-group {
-        height: 50px;
-        position: fixed;
-        top: 5px;
-        right: 10px;
+        position: absolute;
+        right: 30px;
+        top: 20px;
     }
 }

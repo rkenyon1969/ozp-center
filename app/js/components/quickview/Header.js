@@ -7,8 +7,12 @@ var ListingActions = require('../../actions/ListingActions');
 var launch = ListingActions.launch;
 var addToLibrary = ListingActions.addToLibrary;
 var removeFromLibrary = ListingActions.removeFromLibrary;
+var { Navigation } = require('react-router');
+var { UserRole } = require('../../constants');
 
 var QuickviewHeader = React.createClass({
+
+    mixins: [Navigation],
 
     propTypes: {
         listing: React.PropTypes.object,
@@ -44,6 +48,10 @@ var QuickviewHeader = React.createClass({
     },
 
     renderActions: function () {
+        var currentUser = this.props.currentUser;
+        var isOwner = this.props.listing.owners().some(o => o.username === currentUser.username);
+        var isAdmin = UserRole[currentUser.highestRole] >= UserRole.ADMIN;
+
         var bookmarkBtnStyles = React.addons.classSet({
             'btn btn-default': true,
             'active': ProfileStore.isListingInLibrary(this.props.listing.uuid())
@@ -54,6 +62,7 @@ var QuickviewHeader = React.createClass({
             <div className="btn-group quickview-header-actions">
                 <button type="button" className="btn btn-default" onClick={ this.launch }><i className="fa fa-external-link"></i></button>
                 <button type="button" className={ bookmarkBtnStyles } onClick={ this.addToLibrary }><i className="fa fa-bookmark"></i></button>
+                {(isAdmin || isOwner) && <button type="button" className="btn btn-primary" onClick={ this.edit }><i className="fa fa-edit"></i></button>}
             </div>
         );
         /* jshint ignore:end */
@@ -61,6 +70,11 @@ var QuickviewHeader = React.createClass({
 
     launch: function () {
         launch(this.props.listing);
+    },
+
+    edit: function () {
+        var listing = this.props.listing;
+        this.transitionTo('edit', {listingId: listing.id()});
     },
 
     addToLibrary: function (e) {

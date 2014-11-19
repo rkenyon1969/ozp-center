@@ -35,7 +35,7 @@ var ActionMenu = React.createClass({
             }),
             linkParams = {listingId: listing.id()},
             review = <li><a href="review">Review</a></li>,
-            edit = <li><a href={editHref}>Edit</a></li>,
+            edit = <li><Link to="edit" params={linkParams}>Edit</Link></li>,
             preview = <li><a href={overviewHref}>Preview</a></li>,
             del = <li><a href={deleteHref}>Delete</a></li>,
             view = <li><a href={overviewHref}>View</a></li>,

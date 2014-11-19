@@ -10,16 +10,6 @@ module.exports = {
     },
 
     render: function () {
-        var inputProps = {
-            ref: 'input',
-            className: 'form-control',
-            id: this.props.id,
-            valueLink: this.props.valueLink,
-            onBlur: this.onBlur,
-            rows: this.props.rows
-        };
-
-        var input = clone(this.renderInput(), inputProps);
         var labelClasses = classSet({'input-optional': this.props.optional});
 
         /*jshint ignore:start */
@@ -27,7 +17,7 @@ module.exports = {
             <div className={this.getClasses()}>
                 <label htmlFor={this.props.id} className={labelClasses}>{this.props.label}</label>
                 <p className="small">{this.props.description}</p>
-                {input}
+                {clone(this.renderInput(), this.getInputProps())}
                 <p className="help-block small">{this.props.help}</p>
             </div>
         );
@@ -50,8 +40,28 @@ module.exports = {
         return this.props.error && (this.state.blurred || this.props.forceError);
     },
 
-    onBlur: function (event) {
+    _onBlur: function (event) {
         event.preventDefault();
         this.setState({blurred: true});
+    },
+
+    _onChange: function (event) {
+        event.preventDefault();
+        this.props.setter(event.target.value);
+    },
+
+    getInputProps: function () {
+        var value = this.getValue ? this.getValue(this.props.value) : this.props.value;
+        var onChange = this.onChange ? this.onChange : this._onChange;
+        var onBlur = this.onBlur ? this.onBlur : this._onBlur;
+
+        return {
+            ref: 'input',
+            className: 'form-control',
+            id: this.props.id,
+            value: value,
+            onBlur: onBlur,
+            onChange: onChange
+        };
     }
 };

@@ -18,6 +18,10 @@ var _cache = {};
 
 var SystemStore = Reflux.createStore({
     init: function () {
+        items.forEach(item => {
+            _cache[item] = [];
+        });
+
         var promises = items.map(item =>
             SystemApi['get' + capitalize(item)]().then(data => {
                 _cache[item] = data;
@@ -30,7 +34,7 @@ var SystemStore = Reflux.createStore({
     },
 
     getDefaultData: function () {
-        return {system: null};
+        return {system: _cache};
     }
 });
 

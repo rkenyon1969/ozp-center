@@ -9,25 +9,12 @@ var Select2Input = React.createClass({
 
     renderInput: function () {
         /*jshint ignore:start */
-        return (
-            <select data-placeholder={this.props['data-placeholder']} multiple={this.props.multiple}>
-                {this.renderPlaceholder()}
-                {this.props.children}
-            </select>
-        );
+        return <input/>;
         /*jshint ignore:end */
     },
 
-    renderPlaceholder: function () {
-        if (this.props['data-placeholder'] && !this.props.multiple) {
-            /*jshint ignore:start */
-            return <option></option>;
-            /*jshint ignore:end */
-        }
-    },
-
     getSelect2Options: function () {
-        return {locked: this.props.locked};
+        return {data: this.props.options || [], multiple: !!this.props.multiple};
     }
 });
 

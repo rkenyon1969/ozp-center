@@ -24,6 +24,7 @@ module.exports = (
                 <Route path="my-listings" name="my-listings" handler={ MyListings } />
                 <Route path="recent-activity" name="recent-activity" handler={ RecentActivity } />
             </Route>
+            <Route name="edit" path="edit/?:listingId?" handler={ CreateEditPage }/>
             <Route path="mall-management" name="mall-management" handler={ AppsMallManagement }>
                 <Route path="categories" name="categories" handler={ AppsMallManagement.Categories } />
                 <Route path="contact-types" name="contact-types" handler={ AppsMallManagement.ContactTypes } />

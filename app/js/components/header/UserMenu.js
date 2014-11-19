@@ -4,6 +4,7 @@ var React = require('react');
 var { Navigation, CurrentPath } = require('react-router');
 var ActiveState = require('../../mixins/ActiveStateMixin');
 var ProfileStore = require('../../stores/ProfileStore');
+var {Link} = require('react-router');
 
 var UserMenu = React.createClass({
 
@@ -11,9 +12,6 @@ var UserMenu = React.createClass({
 
     render: function () {
         var isAdmin = ProfileStore.isAdmin();
-        var createListing = this.makeHref(this.getActiveRoutePath(), null, {
-            action: 'create-listing'
-        });
 
         /*jshint ignore:start */
         return (
@@ -22,7 +20,7 @@ var UserMenu = React.createClass({
                     <i className="fa fa-bars"></i>
                 </a>
                 <ul className="dropdown-menu" role="menu">
-                    <li><a href={createListing}><i className="fa fa-plus"></i> Create Listing</a></li>
+                    <li><Link to="edit"><i className="fa fa-plus"></i> Create Listing</Link></li>
                     <li><a href="#user-management/my-listings"><i className="fa fa-list"></i> My Listings</a></li>
                     {
                         isAdmin &&

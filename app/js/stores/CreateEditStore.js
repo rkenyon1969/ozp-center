@@ -20,7 +20,7 @@ var CreateEditStore = Reflux.createStore({
     onListingCreated: function (listing) {
         _listing = listing.toObject();
         _submitting = false;
-        this.trigger(Object.assign(this.doValidation(), {listing: _listing, validationFailed: false}));
+        this.trigger(Object.assign(this.doValidation(), {listing: _listing, validationFailed: false, hasChanges: false}));
     },
 
     onLoadListing: function (id) {
@@ -48,7 +48,7 @@ var CreateEditStore = Reflux.createStore({
         }
 
         updateValue(_listing, propertyPath);
-        this.trigger(Object.assign(this.doValidation(), {listing: _listing}));
+        this.trigger(Object.assign(this.doValidation(), {listing: _listing, hasChanges: true}));
     },
 
     onCacheUpdated: function () {
@@ -57,14 +57,14 @@ var CreateEditStore = Reflux.createStore({
             if (listing) {
                 _listing = listing.toObject();
                 _submitting = false;
-                this.trigger(Object.assign(this.doValidation(), {listing: _listing, validationFailed: false}));
+                this.trigger(Object.assign(this.doValidation(), {listing: _listing, validationFailed: false, hasChanges: false}));
             }
         }
     },
 
     onSystemUpdated: function (data) {
         _system = data.system;
-        this.trigger(Object.assign(this.doValidation(), {system: _system}));
+        this.trigger(this.doValidation());
     },
 
     onSubmit: function () {
@@ -99,13 +99,13 @@ var CreateEditStore = Reflux.createStore({
             isDraft = !_submitting && (!status || status === approvalStatus.IN_PROGRESS);
 
         var warnings = validateFull(_listing, _system).errors;
-        var {errors, isValid} = isDraft ? validateDraft(_listing, _system) : validateFull(_listing, _system);
+        var {errors, isValid, firstError} = isDraft ? validateDraft(_listing, _system) : validateFull(_listing, _system);
 
-        return {errors: errors, warnings: warnings, isValid: isValid, messages: listingMessages};
+        return {errors: errors, warnings: warnings, isValid: isValid, messages: listingMessages, firstError: firstError};
     },
 
     getDefaultData: function () {
-        return { listing: _listing, system: _system, errors: {}, warnings: {}, messages: {}, validationFailed: false};
+        return { listing: _listing, errors: {}, warnings: {}, messages: {}, validationFailed: false, firstError: {}};
     }
 });
 

@@ -65,9 +65,6 @@ var App = React.createClass({
                 return <ListingDeleteConfirmation listing={listing} />;
             }
         }
-        else if (action === 'create-listing') {
-            return <CreateEditListing listingId={listing} />;
-        }
         /*jshint ignore:end */
     },
 
