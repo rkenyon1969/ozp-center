@@ -1,8 +1,9 @@
 'use strict';
 
 var Reflux = require('reflux');
-var ListingApi = require('../webapi/Listing').ListingApi;
-var ProfileApi = require('../webapi/Profile').ProfileApi;
+var { ListingApi } = require('../webapi/Listing');
+var { ProfileApi } = require('../webapi/Profile');
+var _ = require('../utils/_');
 
 var Actions = Reflux.createActions([
     'fetchNewArrivals', 'newArrivalsFetched',
@@ -19,7 +20,7 @@ var Actions = Reflux.createActions([
 ]);
 
 function setEnabled(value, listing) {
-    var data = listing.clone().toObject();
+    var data = _.cloneDeep(listing);
     data.isEnabled = value;
     Actions.save(data);
 }
@@ -53,14 +54,14 @@ Actions.fetchOwnedListings.listen(function (profile) {
 });
 
 Actions.launch.listen(function (listing) {
-    window.open(listing.launchUrl());
+    window.open(listing.launchUrl);
 });
 
 Actions.addToLibrary.listen(function (listing) {
     ProfileApi
         .addToLibrary({
             listing: {
-                id: listing.id()
+                id: listing.id
             }
         })
         .then(Actions.addedToLibrary.bind(null, listing));
@@ -90,7 +91,7 @@ Actions.enable.listen(setEnabled.bind(null, true));
 Actions.disable.listen(setEnabled.bind(null, false));
 
 Actions.approve.listen(function (listing) {
-    var data = listing.clone().toObject();
+    var data = _.cloneDeep(listing);
     data.approvalStatus = 'APPROVED';
     Actions.save(data);
 });

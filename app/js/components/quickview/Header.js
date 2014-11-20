@@ -38,7 +38,7 @@ var QuickviewHeader = React.createClass({
                         untoggledClassName="fa fa-star-o"
                         halfClassName="fa fa-star-half-o" />
                 </div>
-                { this.renderActions() }
+                { !this.props.preview && this.renderActions() }
             </div>
         );
         /* jshint ignore:end */
@@ -48,7 +48,7 @@ var QuickviewHeader = React.createClass({
         var currentUser = this.props.currentUser;
         var isOwner = this.props.listing.owners.some(o => o.username === currentUser.username);
         var isAdmin = UserRole[currentUser.highestRole] >= UserRole.ADMIN;
-        var allowEdit = !this.props.preview && (isAdmin || isOwner);
+        var allowEdit =  isAdmin || isOwner;
 
         var bookmarkBtnStyles = React.addons.classSet({
             'btn btn-default': true,

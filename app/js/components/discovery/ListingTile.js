@@ -6,11 +6,7 @@ var ActiveState = require('../../mixins/ActiveStateMixin');
 var _ = require('../../utils/_');
 var IconRating = require('../shared/IconRating');
 var ProfileStore = require('../../stores/ProfileStore');
-
-var ListingActions = require('../../actions/ListingActions');
-var launch = ListingActions.launch;
-var addToLibrary = ListingActions.addToLibrary;
-var removeFromLibrary = ListingActions.removeFromLibrary;
+var { launch, addToLibrary, removeFromLibrary } = require('../../actions/ListingActions');
 
 var ListingTile = React.createClass({
 
@@ -19,15 +15,15 @@ var ListingTile = React.createClass({
     render: function () {
         var listing = this.props.listing;
 
-        var name = listing.title();
-        var description = listing.descriptionShort() && listing.descriptionShort().substr(0, 140);
-        var launchUrl = listing.launchUrl();
-        var imageLargeUrl = listing.imageLargeUrl();
-        var totalVotes = listing.totalVotes();
-        var avgRate = listing.avgRate();
-        var company = listing.company();
+        var name = listing.title;
+        var description = listing.descriptionShort && listing.descriptionShort.substr(0, 140);
+        var launchUrl = listing.launchUrl;
+        var imageLargeUrl = listing.imageLargeUrl;
+        var totalVotes = listing.totalVotes;
+        var avgRate = listing.avgRate;
+        var company = listing.company;
         var href = this.makeHref(this.getActiveRoutePath(), null, {
-            listing: listing.id(),
+            listing: listing.id,
             action: 'view',
             tab: 'overview'
         });
@@ -62,7 +58,7 @@ var ListingTile = React.createClass({
     renderActions: function () {
         var bookmarkBtnStyles = React.addons.classSet({
             'btn btn-default': true,
-            'active': ProfileStore.isListingInLibrary(this.props.listing.uuid())
+            'active': ProfileStore.isListingInLibrary(this.props.listing.uuid)
         });
 
         /* jshint ignore:start */
@@ -83,7 +79,7 @@ var ListingTile = React.createClass({
     addToLibrary: function (e) {
         e.preventDefault();
         e.stopPropagation();
-        if (ProfileStore.isListingInLibrary(this.props.listing.uuid())) {
+        if (ProfileStore.isListingInLibrary(this.props.listing.uuid)) {
             removeFromLibrary(this.props.listing);
         }
         else {

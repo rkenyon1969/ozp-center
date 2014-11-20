@@ -34,7 +34,7 @@ module.exports = React.createClass({
         /*jshint ignore:start */
         var children = this.props.listings.map(function (listing) {
             return <FeaturedListingTile
-                        key = { listing.id() }
+                        key = { listing.id }
                         listing={ listing }
                     />
         });

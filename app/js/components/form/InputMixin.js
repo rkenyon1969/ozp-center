@@ -1,8 +1,7 @@
 'use strict';
 
 var React = require('react');
-var clone = React.addons.cloneWithProps;
-var classSet = React.addons.classSet;
+var { cloneWithProps, classSet } = React.addons;
 
 var InputMixin = {
     getInitialState: function () {
@@ -10,15 +9,15 @@ var InputMixin = {
     },
 
     render: function () {
-        var labelClasses = classSet({'input-optional': this.props.optional});
+        var labelClasses = classSet({ 'input-optional': this.props.optional });
 
         /*jshint ignore:start */
         return (
-            <div className={this.getClasses()}>
-                <label htmlFor={this.props.id} className={labelClasses}>{this.props.label}</label>
-                <p className="small">{this.props.description}</p>
-                {clone(this.renderInput(), this.getInputProps())}
-                <p className="help-block small">{this.props.help}</p>
+            <div className={ this.getClasses() }>
+                <label htmlFor={ this.props.id } className={labelClasses}>{ this.props.label }</label>
+                <p className="small">{ this.props.description }</p>
+                { cloneWithProps(this.renderInput(), this.getInputProps()) }
+                <p className="help-block small">{ this.props.help }</p>
             </div>
         );
         /*jshint ignore:end */

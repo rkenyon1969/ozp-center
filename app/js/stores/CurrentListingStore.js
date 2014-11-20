@@ -7,10 +7,11 @@ var actions = require('../actions/CreateEditActions');
 var {save} = require('../actions/ListingActions');
 var {validateDraft, validateFull} = require('../validation/listing');
 var {listingMessages} = require('../constants/messages');
-var ListingSchema = require('../webapi/Listing').Listing;
+var { Listing } = require('../webapi/Listing');
 var approvalStatus = require('../constants').approvalStatus;
+var _ = require('../utils/_');
 
-var _listing = new ListingSchema().toObject();
+var _listing = new Listing();
 var _system = null;
 var _submitting = false;
 
@@ -18,7 +19,7 @@ var CurrentListingStore = Reflux.createStore({
     listenables: Object.assign({}, actions, {cacheUpdated: cache, systemUpdated: system}),
 
     onListingCreated: function (listing) {
-        _listing = listing.toObject();
+        _listing = _.cloneDeep(listing);
         _submitting = false;
         this.trigger(Object.assign(this.doValidation(), {listing: _listing, validationFailed: false, hasChanges: false}));
     },
@@ -26,9 +27,9 @@ var CurrentListingStore = Reflux.createStore({
     onLoadListing: function (id) {
         if (id) {
             var listing = cache.getById(id);
-            _listing = listing ? listing.toObject() : new ListingSchema({id: id}).toObject();
+            _listing = listing ? _.cloneDeep(listing) : new Listing({id: id});
         } else {
-            _listing = new ListingSchema().toObject();
+            _listing = new Listing();
         }
 
         this.trigger(Object.assign(this.doValidation(), {listing: _listing}));
@@ -55,7 +56,7 @@ var CurrentListingStore = Reflux.createStore({
         if (_listing.id) {
             var listing = cache.getById(_listing.id);
             if (listing) {
-                _listing = listing.toObject();
+                _listing = (listing);
                 _submitting = false;
                 this.trigger(Object.assign(this.doValidation(), {listing: _listing, validationFailed: false, hasChanges: false}));
             }

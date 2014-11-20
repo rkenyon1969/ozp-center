@@ -19,10 +19,10 @@ module.exports = React.createClass({
 
     getInitialState: function () {
         var listing = GlobalListingStore.getById(this.props.listing),
-            rejection = listing ? listing.currentRejection() : null;
+            rejection = listing ? listing.currentRejection : null;
 
         return rejection ? {
-            title: listing.title(),
+            title: listing.title,
             steward: rejection.author.username,
             feedback: rejection.description
         } : {

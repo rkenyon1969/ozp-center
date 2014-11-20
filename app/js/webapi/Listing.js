@@ -1,7 +1,6 @@
 'use strict';
 
 var $ = require('jquery');
-var prop = require('../utils/prop');
 var _ = require('../utils/_');
 
 var keys = [
@@ -15,29 +14,21 @@ var keys = [
 
 function Listing (json) {
     json = json || {};
-    json.intents = json.intents || [];
-    json.screenshots = json.screenshots || [];
-    json.categories = json.categories || [];
-    json.contacts = json.contacts || [];
-    json.docUrls = json.docUrls || [];
-    json.owners = json.owners || [];
-    json.tags = json.tags || [];
 
-    keys.forEach(function (key) {
-        this[key] = prop(json[key]);
-    }.bind(this));
+    keys.forEach(key => {
+        this[key] = json[key];
+    });
+
+    this.intents = this.intents || [];
+    this.screenshots = this.screenshots || [];
+    this.categories = this.categories || [];
+    this.contacts = this.contacts || [];
+    this.docUrls = this.docUrls || [];
+    this.owners = this.owners || [];
+    this.tags = this.tags || [];
 
     return this;
 }
-
-Listing.prototype.toObject = function () {
-    return JSON.parse(JSON.stringify(this));
-};
-
-Listing.prototype.clone = function () {
-    var obj = _.cloneDeep(this.toObject());
-    return new Listing(obj);
-};
 
 var ListingApi = {
 

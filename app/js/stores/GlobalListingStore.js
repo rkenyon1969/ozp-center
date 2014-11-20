@@ -20,13 +20,13 @@ var _listingsByOwnerCache = {};
 
 function updateCache (listings) {
     listings.forEach(function (listing) {
-        _listingsCache[listing.id()] = listing;
+        _listingsCache[listing.id] = listing;
 
-        listing.owners().forEach(function(owner) {
+        listing.owners.forEach(function(owner) {
             var cachedListings = _listingsByOwnerCache[owner.username] || [];
 
             cachedListings = cachedListings.filter(function(l) {
-                return l.id() !== listing.id();
+                return l.id !== listing.id;
             });
 
             _listingsByOwnerCache[owner.username] = cachedListings.concat([listing]);
@@ -55,13 +55,13 @@ var GlobalListingStore = Reflux.createStore({
             if (!id) {
                 listingCreated(listing);
             }
-            fetchChangeLogs(listing.id());
+            fetchChangeLogs(listing.id);
         });
         this.listenTo(listingRejected, function (rejection) {
             var listing = _listingsCache[rejection.listingId];
-            listing.currentRejection(rejection);
-            listing.approvalStatus('REJECTED');
-            fetchChangeLogs(listing.id());
+            listing.currentRejection= rejection;
+            listing.approvalStatus = 'REJECTED';
+            fetchChangeLogs(listing.id);
         });
         this.listenTo(ListingActions.fetchedById, function (data) {
             updateCache([new Listing(data)]);

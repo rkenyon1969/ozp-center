@@ -3,7 +3,7 @@
 * All are placed here in one file to not have to retype require path in each module.
 **/
 module.exports = {
-    assign: require('lodash/objects/assign'),
+    assign: Object.assign,
     cloneDeep: require('lodash/objects/cloneDeep'),
     forOwn: require('lodash/objects/forOwn'),
     isFunction: require('lodash/objects/isFunction'),

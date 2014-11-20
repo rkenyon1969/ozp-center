@@ -11,9 +11,9 @@ var FeaturedListingTile = React.createClass({
 
     render: function () {
         var listing = this.props.listing;
-        var image = listing.imageXlargeUrl();
+        var image = listing.imageXlargeUrl;
         var href = this.makeHref(this.getActiveRoutePath(), null, {
-            listing: listing.id(),
+            listing: listing.id,
             action: 'view',
             tab: 'overview'
         });

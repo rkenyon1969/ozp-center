@@ -6,7 +6,7 @@ var ActiveState = require('../../mixins/ActiveStateMixin');
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
 var ProfileStore = require('../../stores/ProfileStore');
 var Reflux = require('reflux');
-var {Link} = require('react-router');
+var { Link } = require('react-router');
 
 var UserMenu = React.createClass({
 

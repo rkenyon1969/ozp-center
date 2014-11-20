@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react');
-var classSet = React.addons.classSet;
+var { classSet } = React.addons;
 var _ = require('../../utils/_');
 
 var ListInput = React.createClass({

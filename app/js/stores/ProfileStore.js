@@ -2,15 +2,17 @@
 
 var Reflux = require('reflux');
 var _ = require('../utils/_');
-var ProfileActions = require('../actions/ProfileActions');
+var ProfileActions = _.pick(require('../actions/ProfileActions'), 'libraryFetched', 'selfFetched');
+var ListingActions = _.pick(require('../actions/ListingActions'), 'addedToLibrary', 'removedFromLibrary');
 var { UserRole } = require('../constants');
+var { Listing } = require('../webapi/Listing');
 
 var _library = [];
 var _self = { isAdmin: false };
 
 var ProfileStore = Reflux.createStore({
 
-    listenables: _.pick(ProfileActions, ['libraryFetched', 'addedToLibrary', 'removedFromLibrary', 'selfFetched']),
+    listenables: Object.assign({}, ProfileActions, ListingActions),
 
     onLibraryFetched: function (library) {
         _library = library;
@@ -27,12 +29,12 @@ var ProfileStore = Reflux.createStore({
         _library.push({
             folder: null,
             listing: {
-                id: listing.id(),
-                imageLargeUrl: listing.imageLargeUrl(),
-                imageMediumUrl: listing.imageMediumUrl(),
-                launchUrl: listing.launchUrl(),
-                title: listing.title(),
-                uuid: listing.uuid()
+                id: listing.id,
+                imageLargeUrl: listing.imageLargeUrl,
+                imageMediumUrl: listing.imageMediumUrl,
+                launchUrl: listing.launchUrl,
+                title: listing.title,
+                uuid: listing.uuid
             }
         });
         this.trigger({library: _library});
@@ -41,7 +43,7 @@ var ProfileStore = Reflux.createStore({
     onRemovedFromLibrary: function (listing) {
         var toRemove = _.find(_library, {
             listing: {
-                id: listing.id()
+                id: listing.id
             }
         });
         _library = _.without(_library, toRemove);
@@ -49,12 +51,7 @@ var ProfileStore = Reflux.createStore({
     },
 
     isListingInLibrary: function (uuid) {
-        return !!_.find(
-            _.map(_library, function (libraryEntry) {
-                return libraryEntry.listing;
-            }),
-            { uuid: uuid }
-        );
+        return _library.map(e => e.listing).some(l => l.uuid === uuid);
     },
 
     //normally we'd get the user via state, however this is still needed

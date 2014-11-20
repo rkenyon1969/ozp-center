@@ -184,7 +184,7 @@ var Discovery = React.createClass({
         /*jshint ignore:start */
         return listings.map(function (listing) {
             return <ListingTile
-                        key = { listing.id() }
+                        key = { listing.id }
                         listing={ listing }
                     />
         });

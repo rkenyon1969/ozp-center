@@ -17,23 +17,23 @@ var ActionMenu = React.createClass({
         var listing = this.props.listing,
             activeRoutePath = this.getActiveRoutePath(),
             overviewHref = this.makeHref(activeRoutePath, null, {
-                listing: listing.id(),
+                listing: listing.id,
                 action: 'view',
                 tab: 'overview'
             }),
             editHref = this.makeHref(activeRoutePath, null, {
-                listing: listing.id(),
+                listing: listing.id,
                 action: 'edit'
             }),
             deleteHref = this.makeHref(activeRoutePath, null, {
-                listing: listing.id(),
+                listing: listing.id,
                 action: 'delete'
             }),
             feedbackHref = this.makeHref(activeRoutePath, null, {
-                listing: listing.id(),
+                listing: listing.id,
                 action: 'feedback'
             }),
-            linkParams = {listingId: listing.id()},
+            linkParams = {listingId: listing.id},
             review = <li><a href="review">Review</a></li>,
             edit = <li><Link to="edit" params={linkParams}>Edit</Link></li>,
             preview = <li><a href={overviewHref}>Preview</a></li>,
@@ -42,7 +42,7 @@ var ActionMenu = React.createClass({
             disable = <li><a href="disable">Disable</a></li>,
             feedback = <li><a href={feedbackHref}>Read Feedback</a></li>,
             links,
-            approvalStatus = listing.approvalStatus();
+            approvalStatus = listing.approvalStatus;
 
         switch (approvalStatus) {
             case 'APPROVED':
@@ -101,7 +101,7 @@ var InfoBar = React.createClass({
         /* jshint ignore:start */
         return (
             <h5 className="MyListingTile__infoBar">
-                <span className="title">{listing.title()}</span>
+                <span className="title">{listing.title}</span>
                 <ListingStatus listing={listing} />
                 <ApprovalDate listing={listing} />
             </h5>
@@ -117,11 +117,11 @@ module.exports = React.createClass({
     render: function () {
         var listing = this.props.listing,
             overview = this.makeHref(this.getActiveRoutePath(), null, {
-                listing: listing.id(),
+                listing: listing.id,
                 action: 'view',
                 tab: 'overview'
             }),
-            approvalStatus = listing.approvalStatus(),
+            approvalStatus = listing.approvalStatus,
             classSet = React.addons.classSet({
                 'draft': approvalStatus === 'IN_PROGRESS',
                 'pending': approvalStatus === 'PENDING',
@@ -136,7 +136,7 @@ module.exports = React.createClass({
             <li className={classSet}>
                 <ActionMenu listing={listing} />
                 <a href={overview}>
-                    <img className="MyListingTile__img" src={listing.imageLargeUrl()} />
+                    <img className="MyListingTile__img" src={listing.imageLargeUrl} />
                 </a>
                 <InfoBar listing={listing} />
             </li>
