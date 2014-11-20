@@ -1,5 +1,8 @@
 'use strict';
 
+if (!Object.assign) {
+    Object.assign = require('object-assign');
+}
 var React = require('react');
 var jQuery = require('jquery');
 require('bootstrap');
@@ -9,10 +12,6 @@ var ProfileActions = require('./actions/ProfileActions');
 window.jQuery = jQuery;
 window.$ = jQuery;
 window.React = React;
-
-if (!Object.assign) {
-	Object.assign = require('object-assign');
-}
 
 // Enable withCredentials for all requests
 $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {

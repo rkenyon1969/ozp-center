@@ -17,7 +17,7 @@ var MallManagement = React.createClass({
     statics: {
         willTransitionFrom: function(transition, component) {
             // refresh config cache when transitioning away
-            SystemStore.loadConfig();
+            SystemStore.loadSystem();
         }
     },
 
