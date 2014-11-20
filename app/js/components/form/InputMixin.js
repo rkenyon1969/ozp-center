@@ -44,6 +44,10 @@ var InputMixin = {
             return true;
         }
 
+        if (newProps.forceError !== this.props.forceError) {
+            return true;
+        }
+
         if (newProps.id !== this.props.id) {
             return true;
         }

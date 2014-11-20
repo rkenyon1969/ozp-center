@@ -90,7 +90,6 @@ var CurrentListingStore = createStore({
         if(!validation.isValid) {
             validation.validationFailed = true;
             this.trigger(validation);
-            console.log(validation);
         } else {
             save(_listing);
         }
