@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+var ValidatedFormMixin = {
     getFormComponentProps: function (property) {
         var messages = this.props.messages || {};
         var errPath = (this.props.path || []).concat(property).join('.');
@@ -30,3 +30,5 @@ module.exports = {
         });
     }
 };
+
+module.exports = ValidatedFormMixin;

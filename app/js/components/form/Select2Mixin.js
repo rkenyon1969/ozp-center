@@ -8,7 +8,7 @@ require('select2');
  * Components that include this mixin must implement
  * getSelect2Options()
  */
-module.exports = {
+var Select2Mixin = {
     componentDidMount: function () {
         var $input = $(this.refs.input.getDOMNode()),
             select2 = $input.select2(this.getSelect2Options()).data('select2');
@@ -35,3 +35,5 @@ module.exports = {
         this.props.setter(event.val);
     }
 };
+
+module.exports = Select2Mixin;

@@ -10,14 +10,14 @@ var DetailsTab = React.createClass({
     },
 
     render: function () {
-        var whatsNew = this.props.listing.whatIsNew();
-        var organization = this.props.listing.agency();
-        var type = this.props.listing.type();
-        var URL = this.props.listing.launchUrl();
-        var updatedDate = this.props.listing.editedDate();
-        var releaseDate = this.props.listing.releaseDate();
-        var categories = this.props.listing.categories().join(', ');
-        var tags = this.props.listing.tags().join(', ');
+        var whatsNew = this.props.listing.whatIsNew;
+        var organization = this.props.listing.agency;
+        var type = this.props.listing.type;
+        var URL = this.props.listing.launchUrl;
+        var updatedDate = this.props.listing.editedDate;
+        var releaseDate = this.props.listing.releaseDate;
+        var categories = this.props.listing.categories.join(', ');
+        var tags = this.props.listing.tags.join(', ');
 
         /* jshint ignore:start */
         return (
@@ -60,7 +60,7 @@ var DetailsTab = React.createClass({
     },
 
     renderOwners: function () {
-        var owners = this.props.listing.owners();
+        var owners = this.props.listing.owners;
 
         /* jshint ignore:start */
         return owners.map(function (owner) {
@@ -71,8 +71,8 @@ var DetailsTab = React.createClass({
 
     renderIntents: function () {
         /* jshint ignore:start */
-        var intents = this.props.listing.intents();
-        var intentComponents = this.props.listing.intents().map(function (intent) {
+        var intents = this.props.listing.intents;
+        var intentComponents = this.props.listing.intents.map(function (intent) {
             var parts = intent.split('/');
             return <p><label>{ parts[2] }: </label><span> { parts[0] + '/' + parts[1] }</span></p>;
         });
@@ -92,8 +92,8 @@ var DetailsTab = React.createClass({
 
     renderGovSponser: function () {
         /* jshint ignore:start */
-        return this.props.listing.contacts().map(function(contact, i){
-            if (contact.type.title.indexOf("Government Sponser") >= 0){
+        return this.props.listing.contacts.map(function(contact, i){
+            if (contact.type.indexOf("Government Sponser") >= 0){
                 return  [<label>Government Sponser </label>,
                         <div className="col-md-offset-1">
                             <p><label>Name:</label><span> {contact.name}</span></p>

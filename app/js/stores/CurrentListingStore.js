@@ -14,7 +14,7 @@ var _listing = new ListingSchema().toObject();
 var _system = null;
 var _submitting = false;
 
-var CreateEditStore = Reflux.createStore({
+var CurrentListingStore = Reflux.createStore({
     listenables: Object.assign({}, actions, {cacheUpdated: cache, systemUpdated: system}),
 
     onListingCreated: function (listing) {
@@ -74,7 +74,6 @@ var CreateEditStore = Reflux.createStore({
         if(!validation.isValid) {
             validation.validationFailed = true;
             this.trigger(validation);
-            console.log(validation);
         } else {
             _listing.approvalStatus = 'PENDING';
             save(_listing);
@@ -109,4 +108,4 @@ var CreateEditStore = Reflux.createStore({
     }
 });
 
-module.exports = CreateEditStore;
+module.exports = CurrentListingStore;

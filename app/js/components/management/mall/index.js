@@ -5,7 +5,7 @@ var Router = require('react-router');
 var Navigation = Router.Navigation;
 var Tab = require('../../../mixins/TabMixin');
 var AdminRoute = require('../../../mixins/AdminRouteMixin');
-var ConfigStore = require('../../../stores/ConfigStore');
+var SystemStore = require('../../../stores/SystemStore');
 
 // component dependencies
 var Header = require('../../header');
@@ -17,7 +17,7 @@ var MallManagement = React.createClass({
     statics: {
         willTransitionFrom: function(transition, component) {
             // refresh config cache when transitioning away
-            ConfigStore.loadConfig();
+            SystemStore.loadConfig();
         }
     },
 

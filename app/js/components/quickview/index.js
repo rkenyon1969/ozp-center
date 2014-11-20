@@ -13,8 +13,8 @@ var Modal = require('../shared/Modal');
 var IconRating = require('../shared/IconRating');
 var Header = require('./Header');
 var { UserRole } = require('../../constants');
-var GlobalListingStore = require('../../stores/GlobalListingStore');
-var ProfileStore = require('../../stores/ProfileStore');
+var CurrentListingStateMixin = require('../../mixins/CurrentListingStateMixin');
+var { loadListing } = require('../../actions/CreateEditActions');
 
 var OverviewTab = require('./OverviewTab');
 var ReviewsTab = require('./ReviewsTab');
@@ -38,20 +38,13 @@ var tabs = {
 **/
 var Quickview = React.createClass({
 
-    mixins: [ Reflux.ListenerMixin, CurrentPath, Navigation, ActiveState ],
-
-    propTypes: {
-        listing: React.PropTypes.string.isRequired
-    },
+    mixins: [ CurrentListingStateMixin, CurrentPath, Navigation, ActiveState ],
 
     getDefaultProps: function () {
         return {
             tabs: [{
                 to: 'overview',
                 name: 'Overview'
-            }, {
-                to: 'reviews',
-                name: 'Reviews'
             }, {
                 to: 'details',
                 name: 'Details'
@@ -63,45 +56,46 @@ var Quickview = React.createClass({
     },
 
     getInitialState: function () {
-        this.listenTo(GlobalListingStore, this.onStoreChange);
-        this.listenTo(ProfileStore, this.onStoreChange);
-
-        var storeData = this.getStoreData();
-        storeData.shown = false;
-        return storeData;
-    },
-
-    getStoreData: function () {
-        var id = this.props.listing;
-        return {
-            listing: GlobalListingStore.getById(id),
-            changeLogs: GlobalListingStore.getChangeLogs(id) || [],
-            currentUser: ProfileStore.getSelf()
-        };
-    },
-
-    onStoreChange: function () {
-        this.setState(this.getStoreData());
+        return {shown: false};
     },
 
     render: function () {
-        var { shown, listing, changeLogs, currentUser } = this.state;
+
+        var changeLogs = [];
+        var currentUser = this.props.currentUser;
+
+        var { shown, listing } = this.state;
         var owners, tabs;
         var activeRouteHandler = this.getActiveRouteHandler();
 
         if (listing) {
             tabs = _.cloneDeep(this.props.tabs);
-            owners = listing.owners().map(function (owner) {
+            owners = listing.owners.map(function (owner) {
                 return owner.username;
             });
 
-            if (ProfileStore.isAdmin() || _.contains(owners, currentUser.username)) {
-                tabs.push({
-                    to: 'administration',
-                    name: 'Administration'
+            if (!this.props.preview) {
+                tabs.splice(1, 0, {
+                    to: 'reviews',
+                    name: 'Reviews'
                 });
+
+                if (currentUser.isAdmin || _.contains(owners, currentUser.username)) {
+                    tabs.push({
+                        to: 'administration',
+                        name: 'Administration'
+                    });
+                }
             }
         }
+
+        var headerProps = {
+            listing: listing,
+            onCancel: this.close,
+            onEdit: this.edit,
+            currentUser: currentUser,
+            preview: this.props.preview
+        };
 
         /* jshint ignore:start */
         return this.transferPropsTo(
@@ -110,9 +104,9 @@ var Quickview = React.createClass({
                     !listing ?
                         <p>Loading...</p> :
                         [
-                            <Header listing={listing} onCancel={this.close} onEdit={this.edit} currentUser={currentUser}></Header>,
+                            <Header { ...headerProps }></Header>,
                             <div className="tabs-container">
-                                { this.renderTabs(tabs, listing.id()) }
+                                { this.renderTabs(tabs, listing.id) }
                                 <div className="tab-content">
                                     <activeRouteHandler currentUser={currentUser}
                                         listing={listing} shown ={shown} />
@@ -139,9 +133,9 @@ var Quickview = React.createClass({
         /* jshint ignore:start */
         var linkComponents = links.map(function (link) {
             var className = link.to === me.props.tab ? 'active' : '';
-            var href = me.makeHref(me.getActiveRoutePath(), null, {
+            var href = me.makeHref(me.getActiveRoutePath(), me.getActiveParams(), {
                 listing: id,
-                action: 'view',
+                action: me.props.preview ? 'preview' : 'view',
                 tab: link.to
             });
 
@@ -160,6 +154,12 @@ var Quickview = React.createClass({
         /* jshint ignore:end */
     },
 
+    componentWillMount: function () {
+        if (!this.props.preview) {
+            loadListing(this.props.listingId);
+        }
+    },
+
     onShown: function () {
         // dont force focus causes infinite loop with overview tab's modal carousel
         $(document).off('focusin.bs.modal');
@@ -172,7 +172,7 @@ var Quickview = React.createClass({
     onHidden: function () {
         if(!this.state.toEdit) {
             // go back to the parent route
-            this.transitionTo(this.getActiveRoutePath());
+            this.transitionTo(this.getActiveRoutePath(), this.getActiveParams());
         }
     },
 
@@ -183,7 +183,7 @@ var Quickview = React.createClass({
     edit: function () {
         var listing = this.state.listing;
         this.setState({toEdit: true});
-        this.transitionTo('edit', {listingId: listing.id()});
+        this.transitionTo('edit', {listingId: listing.id});
         this.close();
     }
 

@@ -2,7 +2,7 @@
 
 var Reflux = require('reflux');
 var {capitalize} = require('../utils/string');
-var ConfigApi = require('../webapi/Config');
+var ConfigApi = require('../webapi/System');
 var _ = require('../utils/_');
 var $ = require('jquery');
 
@@ -11,20 +11,7 @@ var _config = {
 };
 
 var configItems = [
-    'types',
-    'categories',
-    'intents',
-    'contactTypes',
-    'organizations',
-    'users'
-];
 
-var ConfigStore = Reflux.createStore({
-    init: function () {
-        this.loadConfig();
-    },
-
-    getConfig: function () {
         return _config;
     },
 

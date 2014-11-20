@@ -6,7 +6,7 @@ var AdminRouteMixin = {
 
     statics: {
         willTransitionTo: function (transition, component) {
-            if (!ProfileStore.isAdmin()) {
+            if (!ProfileStore.getCurrentUser().isAdmin) {
                 transition.abort();
                 transition.redirect('/');
             }

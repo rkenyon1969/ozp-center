@@ -4,7 +4,7 @@ var React = require('react');
 var clone = React.addons.cloneWithProps;
 var classSet = React.addons.classSet;
 
-module.exports = {
+var InputMixin = {
     getInitialState: function () {
         return {blurred: false};
     },
@@ -22,6 +22,34 @@ module.exports = {
             </div>
         );
         /*jshint ignore:end */
+    },
+
+    shouldComponentUpdate: function (newProps, newState) {
+        if (newProps.description !== this.props.description) {
+            return true;
+        }
+
+        if (newProps.value !== this.props.value) {
+            return true;
+        }
+
+        if (newProps.label !== this.props.label) {
+            return true;
+        }
+
+        if (newState.blurred !== this.state.blurred) {
+            return true;
+        }
+
+        if (newProps.error !== this.props.error) {
+            return true;
+        }
+
+        if (newProps.id !== this.props.id) {
+            return true;
+        }
+
+        return false;
     },
 
     getClasses: function () {
@@ -65,3 +93,5 @@ module.exports = {
         };
     }
 };
+
+module.exports = InputMixin;

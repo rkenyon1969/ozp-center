@@ -144,7 +144,7 @@ var ReviewsTab = React.createClass({
 
         /* jshint ignore:start */
         var starComponents = stars.map(function (star) {
-            var count = listing['totalRate' + star]();
+            var count = listing['totalRate' + star];
             var width = total === 0 ? 0 : Math.round(count * 100 / total).toFixed(2);
             var style = {
                 width: width + '%'

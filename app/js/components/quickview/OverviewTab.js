@@ -20,9 +20,9 @@ var OverviewTab = React.createClass({
     },
 
     render: function () {
-        var description = this.props.listing.description() || 'No description provided!';
+        var description = this.props.listing.description || 'No description provided!';
         var descriptionClasses = React.addons.classSet({
-            'text-muted': !this.props.listing.description()
+            'text-muted': !this.props.listing.description
         });
 
         /* jshint ignore:start */
@@ -40,7 +40,7 @@ var OverviewTab = React.createClass({
     renderScreenshots: function () {
         var me = this;
         var shown = this.props.shown;
-        var screenshots = this.props.listing.screenshots();
+        var screenshots = this.props.listing.screenshots;
 
         /* jshint ignore:start */
         if (!screenshots.length) {
@@ -60,7 +60,7 @@ var OverviewTab = React.createClass({
     },
 
     showLargeScreenshots: function (index) {
-        var largeScreenshots = this.props.listing.screenshots().map(function (screenshot) {
+        var largeScreenshots = this.props.listing.screenshots.map(function (screenshot) {
             return { src: screenshot.largeImageUrl || screenshot.smallImageUrl };
         });
 

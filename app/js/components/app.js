@@ -2,45 +2,26 @@
 
 var React = require('react');
 var Reflux = require('reflux');
+var _ = require('../utils/_');
 
-var ConfigStore = require('../stores/ConfigStore');
-var ProfileStore = require('../stores/ProfileStore');
-var ProfileActions = require('../actions/ProfileActions');
+var SystemStateMixin = require('../mixins/SystemStateMixin');
+
+var { fetchLibrary } = require('../actions/ProfileActions');
 
 var Quickview = require('../components/quickview');
 var CreateEditListing = require('./createEdit');
 var FeedbackModal = require('./management/user/FeedbackModal');
 var { ListingDeleteConfirmation } = require('./shared/DeleteConfirmation');
 
-function getState () {
-    return {
-        currentUser: ProfileStore.getSelf(),
-        library: ProfileStore.getLibrary(),
-        config: ConfigStore.getConfig()
-    };
-}
-
 var App = React.createClass({
 
-    mixins: [ Reflux.ListenerMixin ],
-
-    getInitialState: function () {
-        return getState();
-    },
+    mixins: [ SystemStateMixin ],
 
     render: function () {
-        var { config, library, currentUser } = this.state;
-
-        if(!config || !library || !currentUser) {
-            /*jshint ignore:start */
-            return <p>Loading...</p>;
-            /*jshint ignore:end */
-        }
-
         /*jshint ignore:start */
         return (
             <div id="App">
-                <this.props.activeRouteHandler config={ this.state.config } />
+                <this.props.activeRouteHandler { ..._.pick(this.state, 'system', 'currentUser') } />
                 { this.renderModal() }
             </div>
         );
@@ -53,10 +34,9 @@ var App = React.createClass({
         /*jshint ignore:start */
         if (listing) {
             if (tab) {
-                return <Quickview listing={listing} tab={tab} />;
-            }
-            else if (action === 'edit') {
-                return <CreateEditListing listingId={listing} />;
+                var preview = action === 'preview';
+
+                return <Quickview listingId={ listing } tab={tab} preview={ preview } system={this.state.system} currentUser={this.state.currentUser} />;
             }
             else if (action === 'feedback') {
                 return <FeedbackModal listing={listing} />;
@@ -69,13 +49,7 @@ var App = React.createClass({
     },
 
     componentWillMount: function () {
-        this.listenTo(ProfileStore, this.onStoreChanged);
-        this.listenTo(ConfigStore, this.onStoreChanged);
-        ProfileActions.fetchLibrary();
-    },
-
-    onStoreChanged: function () {
-        this.setState(getState());
+        fetchLibrary();
     }
 });
 

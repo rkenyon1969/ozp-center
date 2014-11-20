@@ -1,8 +1,9 @@
 'use strict';
 
 var Reflux = require('reflux');
-var {capitalize} = require('../utils/string');
-var SystemApi = require('../webapi/Config');
+var { capitalize } = require('../utils/string');
+var SystemApi = require('../webapi/System');
+var ProfileStore = require('./ProfileStore');
 var _ = require('../utils/_');
 
 var items = [
@@ -14,27 +15,38 @@ var items = [
     'users'
 ];
 
-var _cache = {};
+var _system = {};
 
 var SystemStore = Reflux.createStore({
+    listenables: { profileChange: ProfileStore },
+
     init: function () {
         items.forEach(item => {
-            _cache[item] = [];
+            _system[item] = [];
         });
 
-        var promises = items.map(item =>
-            SystemApi['get' + capitalize(item)]().then(data => {
-                _cache[item] = data;
-            })
-        );
+        this.loadSystem();
+    },
 
-        $.when.apply($, promises).then(data => {
-            this.trigger({system: _cache});
-        });
+    onProfileChange: function (data) {
+        var { currentUser } = data;
+        if (currentUser) {
+            this.trigger({ currentUser: currentUser });
+        }
     },
 
     getDefaultData: function () {
-        return {system: _cache};
+        var { currentUser } = ProfileStore.getDefaultData();
+        return { system: _system, currentUser: currentUser };
+    },
+
+    loadSystem: function () {
+        items.forEach(item => {
+            SystemApi['get' + capitalize(item)]().then(data => {
+                _system[item] = data;
+                this.trigger({ system: _system });
+            });
+        });
     }
 });
 

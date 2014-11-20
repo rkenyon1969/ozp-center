@@ -5,9 +5,10 @@ var t = require('tcomb-form');
 var { Str, struct, subtype, maybe, enums, list } = t;
 var { URL_REGEX } = require('../../../constants');
 var Crud = require('../../shared/Crud');
-var ConfigStore = require('../../../stores/ConfigStore');
 
 var Stewards = React.createClass({
+
+    mixins: [ require('../../../mixins/SystemStateMixin') ],
 
     getDefaultProps: function () {
         return {
@@ -50,7 +51,7 @@ var Stewards = React.createClass({
 
     getSchema: function () {
         // Steward Schema
-        var organizations = ConfigStore.getConfig().organizations.map(function (org) {
+        var organizations = this.state.system.organizations.map(function (org) {
             return org.title;
         });
         return struct({

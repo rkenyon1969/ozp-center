@@ -3,47 +3,24 @@
 var Reflux = require('reflux');
 var _ = require('../utils/_');
 var ProfileActions = require('../actions/ProfileActions');
-var libraryFetched = ProfileActions.libraryFetched;
-var addedToLibrary = require('../actions/ListingActions').addedToLibrary;
-var removedFromLibrary = require('../actions/ListingActions').removedFromLibrary;
-var selfFetched = require('../actions/ProfileActions').selfFetched;
 var { UserRole } = require('../constants');
 
-var _library = null;
-var _self = null;
+var _library = [];
+var _self = { isAdmin: false };
 
 var ProfileStore = Reflux.createStore({
 
-    init: function () {
-        this.listenTo(libraryFetched, this.onLibraryFetched);
-        this.listenTo(addedToLibrary, this.onAddedToLibrary);
-        this.listenTo(removedFromLibrary, this.onRemovedFromLibrary);
-        this.listenTo(selfFetched, this.onSelfFetched);
-    },
+    listenables: _.pick(ProfileActions, ['libraryFetched', 'addedToLibrary', 'removedFromLibrary', 'selfFetched']),
 
     onLibraryFetched: function (library) {
         _library = library;
-        this.trigger();
-    },
-
-    getLibrary: function () {
-        return _library;
-    },
-
-    getSelf: function () {
-        return _self;
-    },
-
-    isAdmin: function () {
-        if (!_self) {
-            throw new Error('User is not fetched yet. This should not happen. Check to see why route is invoked before user is fetched.');
-        }
-        return UserRole[_self.highestRole] >= UserRole.ADMIN;
+        this.trigger({library: _library});
     },
 
     onSelfFetched: function (self) {
         _self = self;
-        this.trigger();
+        _self.isAdmin = UserRole[_self.highestRole] >= UserRole.ADMIN;
+        this.trigger({currentUser: _self});
     },
 
     onAddedToLibrary: function (listing) {
@@ -58,7 +35,7 @@ var ProfileStore = Reflux.createStore({
                 uuid: listing.uuid()
             }
         });
-        this.trigger();
+        this.trigger({library: _library});
     },
 
     onRemovedFromLibrary: function (listing) {
@@ -68,7 +45,7 @@ var ProfileStore = Reflux.createStore({
             }
         });
         _library = _.without(_library, toRemove);
-        this.trigger();
+        this.trigger({library: _library});
     },
 
     isListingInLibrary: function (uuid) {
@@ -78,6 +55,16 @@ var ProfileStore = Reflux.createStore({
             }),
             { uuid: uuid }
         );
+    },
+
+    //normally we'd get the user via state, however this is still needed
+    //in static methods for checking access rights to certain routes.
+    getCurrentUser: function () {
+        return _self;
+    },
+
+    getDefaultData: function () {
+        return {currentUser: _self, library: _library};
     }
 
 });

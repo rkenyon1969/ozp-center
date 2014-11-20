@@ -61,7 +61,7 @@ var Discovery = React.createClass({
                     <Sidebar
                         ref="sidebar"
                         isSearching= { isSearching }
-                        config={ this.props.config }
+                        system={ this.props.system }
                         onGoHome= { this.reset }
                         onFilterChange= { this.search } />
                     <section>

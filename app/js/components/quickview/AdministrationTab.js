@@ -19,7 +19,7 @@ var EnabledControl = React.createClass({
 
     render: function () {
         var listing = this.props.listing,
-            enabled = listing.isEnabled();
+            enabled = listing.isEnabled;
 
         /* jshint ignore:start */
         return (
@@ -45,7 +45,7 @@ var AdministrationTab = React.createClass({
     },
 
     componentWillMount: function () {
-        fetchChangeLogs(this.props.listing.id());
+        fetchChangeLogs(this.props.listing.id);
     },
 
     getInitialState: function () {
@@ -71,7 +71,7 @@ var AdministrationTab = React.createClass({
 
     renderStatus: function () {
         var listing = this.props.listing,
-            status = listingStatus[listing.approvalStatus()],
+            status = listingStatus[listing.approvalStatus],
             statusText = status,
             isAdmin = UserRole[this.props.currentUser.highestRole] >= UserRole.ADMIN,
             controls, statusClass;
@@ -84,7 +84,7 @@ var AdministrationTab = React.createClass({
                 statusClass = 'label-published';
                 break;
             case 'Pending':
-                statusText += ', ' + listing.agency();
+                statusText += ', ' + listing.agency;
                 controls = isAdmin ? this.renderReviewSection() : '';
                 statusClass = 'label-pending';
                 break;
@@ -150,7 +150,7 @@ var AdministrationTab = React.createClass({
     returnToOwner: function (event) {
         event.preventDefault();
         var justification = this.refs.justification.getDOMNode().value;
-        rejectListing(this.props.listing.id(), justification);
+        rejectListing(this.props.listing.id, justification);
         this.setState({editingRejection: false});
     },
 

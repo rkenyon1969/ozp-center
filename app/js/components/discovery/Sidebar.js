@@ -41,19 +41,19 @@ var Sidebar = React.createClass({
                     <li>
                         <span>Categories</span>
                         <ul className="list-unstyled">
-                            { this.renderFacets(this.props.config.categories || [], 'categories') }
+                            { this.renderFacets(this.props.system.categories, 'categories') }
                         </ul>
                     </li>
                     <li>
                         <span>Types</span>
                         <ul className="list-unstyled">
-                            { this.renderFacets(this.props.config.types || [], 'type') }
+                            { this.renderFacets(this.props.system.types, 'type') }
                         </ul>
                     </li>
                     <li>
                         <span>Organizations</span>
                         <ul className="list-unstyled">
-                            { this.renderFacets(this.props.config.organizations || [], 'agency') }
+                            { this.renderFacets(this.props.system.organizations, 'agency') }
                         </ul>
                     </li>
                 </ul>
