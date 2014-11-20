@@ -49,6 +49,7 @@ var CreateEditPage = React.createClass({
             { system: this.props.system, value: listing, requestChange: updateListing, forceError: this.state.validationFailed }
         );
 
+        /* jshint ignore:start */
         var subHeader = (
             <div className="CreateEdit__titlebar row">
                 <h1>Create New Listing</h1>
@@ -61,7 +62,6 @@ var CreateEditPage = React.createClass({
             </div>
         );
 
-        /* jshint ignore:start */
         return (
             <div>
                 <Header subHeader={subHeader} />
@@ -232,7 +232,7 @@ var ScreenshotForm = React.createClass({
 
 var ContactForm = React.createClass({
     mixins: [ require('../../mixins/SystemStateMixin'), ValidatedFormMixin ],
-    
+
     render: function () {
         /*jshint ignore:start */
         return (
