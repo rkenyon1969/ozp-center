@@ -65,11 +65,11 @@
     "moment": "^2.8.3",
     "object-assign": "^1.0.0",
     "react": "^0.11.1",
-    "react-icon-rating": "git://github.com/nishp1/react-icon-rating",
+    "react-icon-rating": "git://github.com/dlau/react-icon-rating#6adb23b6358f448635d338e932016c02354ed8fb",
     "react-router": "0.9.5",
     "reflux": "^0.1.15",
     "select2": "^3.5.1-browserify-fix",
     "tcomb-form": "0.1.6",
-    "w2ui": "git://github.com/vitmalina/w2ui"
+    "w2ui": "git://github.com/vitmalina/w2ui#aa364dd39b4425265f40e92650fd669ddc3803fc"
   }
 }
