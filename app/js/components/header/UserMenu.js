@@ -1,16 +1,11 @@
 'use strict';
 
 var React = require('react');
-var { Navigation, CurrentPath } = require('react-router');
-var ActiveState = require('../../mixins/ActiveStateMixin');
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
-var ProfileStore = require('../../stores/ProfileStore');
-var Reflux = require('reflux');
-var { Link } = require('react-router');
 
 var UserMenu = React.createClass({
 
-    mixins: [ Navigation, CurrentPath, ActiveState, SystemStateMixin ],
+    mixins: [ SystemStateMixin ],
 
     render: function () {
         /*jshint ignore:start */

@@ -10,6 +10,7 @@ module.exports = function (config) {
         files: [
             // including es5-shim for PhantomJS
             'bower_components/es5-shim/es5-shim.js',
+            'app/js/__tests__/main.js',
             'app/js/**/*-test.js'
         ],
         preprocessors: {
