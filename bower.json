@@ -22,7 +22,7 @@
     "react-radio-group": "~0.1.2"
   },
   "devDependencies": {
-    "font-awesome": "~4.1.0"
+    "es5-shim": "~4.0.3"
   },
   "resolutions": {
     "jquery": "~2.1.1"

@@ -4,8 +4,20 @@ var React = require('react');
 
 var EmptyFieldValue = React.createClass({
 
+    propTypes: {
+        text: React.PropTypes.string,
+        inline: React.PropTypes.bool
+    },
+
+    getDefaultProps: function() {
+        return {
+            text: 'Not provided!',
+            inline: false
+        };
+    },
+
     render: function () {
-        var text = this.props.text || 'Not provided!';
+        var text = this.props.text;
 
         /* jshint ignore:start */
         return (

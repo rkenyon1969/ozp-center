@@ -94,7 +94,7 @@ var BootstrapModal = React.createClass({
                 </div>
             </div>
         );
-            /*jshint ignore:end */
+        /*jshint ignore:end */
     },
 
     handleCancel: function () {

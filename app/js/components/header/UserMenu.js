@@ -1,14 +1,9 @@
 'use strict';
 
 var React = require('react');
-var { Navigation, CurrentPath } = require('react-router');
-var ActiveState = require('../../mixins/ActiveStateMixin');
 var ProfileStore = require('../../stores/ProfileStore');
-var {Link} = require('react-router');
 
 var UserMenu = React.createClass({
-
-    mixins: [ Navigation, CurrentPath, ActiveState ],
 
     render: function () {
         var isAdmin = ProfileStore.isAdmin();
@@ -20,7 +15,7 @@ var UserMenu = React.createClass({
                     <i className="fa fa-bars"></i>
                 </a>
                 <ul className="dropdown-menu" role="menu">
-                    <li><Link to="edit"><i className="fa fa-plus"></i> Create Listing</Link></li>
+                    <li><a href="#edit"><i className="fa fa-plus"></i> Create Listing</a></li>
                     <li><a href="#user-management/my-listings"><i className="fa fa-list"></i> My Listings</a></li>
                     {
                         isAdmin &&
