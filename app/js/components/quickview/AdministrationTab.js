@@ -24,12 +24,12 @@ var EnabledControl = React.createClass({
         /* jshint ignore:start */
         return (
             <section>
-                <h5>{enabled ? 'Enabled' : 'Disabled'}</h5>
+                <h5>{ enabled ? 'Enabled' : 'Disabled' }</h5>
                 <hr/>
-                <p>This listing is {enabled ? '' : 'not'} visible to users</p>
+                <p>This listing is { enabled ? '' : 'not' } visible to users</p>
                 <label className="switch">Enabled:
-                    <input type="checkbox" ref="checkbox" className="ios brand-success" checked={enabled}
-                        onChange={enabled ? disableListing.bind(null, listing) : enableListing.bind(null, listing)} />
+                    <input type="checkbox" ref="checkbox" className="ios brand-success" checked={ enabled }
+                        onChange={ enabled ? disableListing.bind(null, listing) : enableListing.bind(null, listing) } />
                     <div className="track"><div className="knob"></div></div>
                 </label>
             </section>
@@ -44,24 +44,32 @@ var AdministrationTab = React.createClass({
         listing: React.PropTypes.object.isRequired
     },
 
-    componentWillMount: function () {
-        fetchChangeLogs(this.props.listing.id);
-    },
-
     getInitialState: function () {
         return { editingRejection: false };
+    },
+
+    componentWillReceiveProps: function (newProps) {
+        if (this.props.listing.id !== newProps.listing.id) {
+            fetchChangeLogs(newProps.listing.id);
+        }
+    },
+
+    componentWillMount: function () {
+        if (this.props.listing.id) {
+            fetchChangeLogs(this.props.listing.id);
+        }
     },
 
     render: function () {
         /* jshint ignore:start */
         return (
             <div className="tab-pane active Quickview__Changelog row">
-                {this.renderStatus()}
+                { this.renderStatus() }
                 <div className="col-md-8 col-right">
                     <section>
                         <h5>Listing Changes</h5>
                         <hr/>
-                        <ChangeLogs changeLogs={this.props.changeLogs} showListingName={false} />
+                        <ChangeLogs changeLogs={ this.props.listing.changeLogs } showListingName={ false } />
                     </section>
                 </div>
             </div>
@@ -79,7 +87,7 @@ var AdministrationTab = React.createClass({
         switch (status) {
             case 'Published':
                 /* jshint ignore:start */
-                controls = <EnabledControl listing={this.props.listing} />;
+                controls = <EnabledControl listing={ this.props.listing } />;
                 /* jshint ignore:end */
                 statusClass = 'label-published';
                 break;
@@ -104,9 +112,9 @@ var AdministrationTab = React.createClass({
                 <section>
                     <h5>Listing Status</h5>
                     <hr/>
-                    <p className={statusClass}>{statusText}</p>
+                    <p className={ statusClass }>{ statusText }</p>
                 </section>
-                {controls}
+                { controls }
             </div>
         );
         /* jshint ignore:end */
@@ -124,8 +132,8 @@ var AdministrationTab = React.createClass({
                     <hr/>
                     <p>Please provide feedback for the listing owner about what they should do to make this listing ready for publication</p>
                     <textarea ref="justification"></textarea>
-                    <button type="button" className="btn" onClick={this.cancelRejection}>Cancel</button>
-                    <button type="button" className="btn btn-warning" onClick={this.returnToOwner}>Return to Owner</button>
+                    <button type="button" className="btn" onClick={ this.cancelRejection }>Cancel</button>
+                    <button type="button" className="btn btn-warning" onClick={ this.returnToOwner }>Return to Owner</button>
                 </section>
             );
         } else {
@@ -133,8 +141,8 @@ var AdministrationTab = React.createClass({
                 <section>
                     <h5>Review Listing</h5>
                     <hr/>
-                    <button type="button" className="btn btn-success" onClick={this.approve}>Approve</button>
-                    <button type="button" className="btn btn-warning" onClick={this.editRejection}>Return to Owner</button>
+                    <button type="button" className="btn btn-success" onClick={ this.approve }>Approve</button>
+                    <button type="button" className="btn btn-warning" onClick={ this.editRejection }>Return to Owner</button>
                 </section>
             );
         }
@@ -144,19 +152,19 @@ var AdministrationTab = React.createClass({
 
     editRejection: function (event) {
         event.preventDefault();
-        this.setState({editingRejection: true});
+        this.setState({ editingRejection: true });
     },
 
     returnToOwner: function (event) {
         event.preventDefault();
         var justification = this.refs.justification.getDOMNode().value;
         rejectListing(this.props.listing.id, justification);
-        this.setState({editingRejection: false});
+        this.setState({ editingRejection: false });
     },
 
     cancelRejection: function (event) {
         event.preventDefault();
-        this.setState({editingRejection: false});
+        this.setState({ editingRejection: false });
     },
 
     approve: function (event) {

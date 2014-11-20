@@ -160,6 +160,12 @@ var Quickview = React.createClass({
         }
     },
 
+    componentWillReceiveProps: function (newProps) {
+        if (!this.props.preview && (this.props.listingId !== newProps.listingId)) {
+            loadListing(newProps.listingId);
+        }
+    },
+
     onShown: function () {
         // dont force focus causes infinite loop with overview tab's modal carousel
         $(document).off('focusin.bs.modal');

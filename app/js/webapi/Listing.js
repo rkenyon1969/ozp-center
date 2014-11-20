@@ -26,6 +26,7 @@ function Listing (json) {
     this.docUrls = this.docUrls || [];
     this.owners = this.owners || [];
     this.tags = this.tags || [];
+    this.changeLogs = [];
 
     return this;
 }

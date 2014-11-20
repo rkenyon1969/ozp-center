@@ -15,11 +15,16 @@ var {listingCreated} = require('../actions/CreateEditActions');
 var Listing = require('../webapi/Listing').Listing;
 
 var _listingsCache = {};
-var _changeLogCache = {};
 var _listingsByOwnerCache = {};
 
 function updateCache (listings) {
     listings.forEach(function (listing) {
+        var prev = _listingsCache[listing.id];
+
+        if (prev) {
+            listing.changeLogs = prev.changeLogs;
+        }
+
         _listingsCache[listing.id] = listing;
 
         listing.owners.forEach(function(owner) {
@@ -45,23 +50,25 @@ var GlobalListingStore = Reflux.createStore({
         this.listenTo(featuredFetched, updateCache);
         this.listenTo(searchCompleted, updateCache);
         this.listenTo(changeLogsFetched, function (id, changeLogs) {
-            _changeLogCache[id] = changeLogs;
+            _listingsCache[id].changeLogs = changeLogs;
             this.trigger();
         });
         this.listenTo(ownedListingsFetched, updateCache);
-        this.listenTo(listingSaved, function (data, id) {
+        this.listenTo(listingSaved, function (isNew, data) {
             var listing = new Listing(data);
             updateCache([listing]);
-            if (!id) {
+            if (isNew) {
                 listingCreated(listing);
             }
             fetchChangeLogs(listing.id);
+            this.trigger();
         });
         this.listenTo(listingRejected, function (rejection) {
             var listing = _listingsCache[rejection.listingId];
             listing.currentRejection= rejection;
             listing.approvalStatus = 'REJECTED';
             fetchChangeLogs(listing.id);
+            this.trigger();
         });
         this.listenTo(ListingActions.fetchedById, function (data) {
             updateCache([new Listing(data)]);
@@ -75,10 +82,6 @@ var GlobalListingStore = Reflux.createStore({
             return null;
         }
         return _listingsCache[id];
-    },
-
-    getChangeLogs: function (id) {
-        return _changeLogCache[id] || [];
     },
 
     getByOwner: function(profile) {

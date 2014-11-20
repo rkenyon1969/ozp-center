@@ -74,12 +74,10 @@ Actions.removeFromLibrary.listen(function (listing) {
 });
 
 Actions.save.listen(function (data) {
-    var id = data.id; //track if listing is new
+    var isNew = !data.id;
     ListingApi
         .save(data)
-        .then(function (data) {
-            Actions.saved(data, id);
-        })
+        .then(Actions.saved.bind(null, isNew))
         .fail(Actions.saveFailed);
 });
 
