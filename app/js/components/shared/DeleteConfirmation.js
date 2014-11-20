@@ -88,7 +88,7 @@ var ListingDeleteConfirmation = React.createClass({
         if (!listing) {
             return null;
         }
-        var title = listing.title();
+        var title = listing.title;
 
         /* jshint ignore:start */
         return (
@@ -114,7 +114,7 @@ var ListingDeleteConfirmation = React.createClass({
     onDelete: function () {
         var listing = this.getListing();
 
-        ListingApi.del(listing.id())
+        ListingApi.del(listing.id)
             .done(() => this.close())
             .fail(this.handleError);
     }

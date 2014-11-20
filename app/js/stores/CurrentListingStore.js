@@ -1,38 +1,40 @@
 'use strict';
 
-var Reflux = require('reflux');
-var cache = require('./GlobalListingStore');
-var system = require('./SystemStore');
+var { createStore } = require('reflux');
+var GlobalListingStore = require('./GlobalListingStore');
 var actions = require('../actions/CreateEditActions');
-var {save} = require('../actions/ListingActions');
-var {validateDraft, validateFull} = require('../validation/listing');
-var {listingMessages} = require('../constants/messages');
+var { save } = require('../actions/ListingActions');
+var { validateDraft, validateFull } = require('../validation/listing');
+var { listingMessages } = require('../constants/messages');
 var { Listing } = require('../webapi/Listing');
-var approvalStatus = require('../constants').approvalStatus;
-var _ = require('../utils/_');
+var { approvalStatus } = require('../constants');
+var { cloneDeep, assign } = require('../utils/_');
+
+actions.systemUpdated = require('./SystemStore');
+actions.cacheUpdated = GlobalListingStore;
 
 var _listing = new Listing();
 var _system = null;
 var _submitting = false;
 
-var CurrentListingStore = Reflux.createStore({
-    listenables: Object.assign({}, actions, {cacheUpdated: cache, systemUpdated: system}),
+var CurrentListingStore = createStore({
+    listenables: actions,
 
     onListingCreated: function (listing) {
-        _listing = _.cloneDeep(listing);
+        _listing = cloneDeep(listing);
         _submitting = false;
-        this.trigger(Object.assign(this.doValidation(), {listing: _listing, validationFailed: false, hasChanges: false}));
+        this.trigger(assign(this.doValidation(), {listing: _listing, validationFailed: false, hasChanges: false}));
     },
 
     onLoadListing: function (id) {
         if (id) {
-            var listing = cache.getById(id);
-            _listing = listing ? _.cloneDeep(listing) : new Listing({id: id});
+            var listing = GlobalListingStore.getById(id);
+            _listing = listing ? cloneDeep(listing) : new Listing({id: id});
         } else {
             _listing = new Listing();
         }
 
-        this.trigger(Object.assign(this.doValidation(), {listing: _listing}));
+        this.trigger(assign(this.doValidation(), {listing: _listing}));
     },
 
     onUpdateListing: function (propertyPath, value) {
@@ -49,16 +51,16 @@ var CurrentListingStore = Reflux.createStore({
         }
 
         updateValue(_listing, propertyPath);
-        this.trigger(Object.assign(this.doValidation(), {listing: _listing, hasChanges: true}));
+        this.trigger(assign(this.doValidation(), {listing: _listing, hasChanges: true}));
     },
 
     onCacheUpdated: function () {
         if (_listing.id) {
-            var listing = cache.getById(_listing.id);
+            var listing = GlobalListingStore.getById(_listing.id);
             if (listing) {
                 _listing = (listing);
                 _submitting = false;
-                this.trigger(Object.assign(this.doValidation(), {listing: _listing, validationFailed: false, hasChanges: false}));
+                this.trigger(assign(this.doValidation(), {listing: _listing, validationFailed: false, hasChanges: false}));
             }
         }
     },
