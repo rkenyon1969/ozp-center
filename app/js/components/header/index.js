@@ -19,6 +19,7 @@ var Header = React.createClass({
                 <div className="row">
                     <div className="spacer"></div>
                 </div>
+                {this.props.subHeader}
             </div>
         );
         /*jshint ignore:end */

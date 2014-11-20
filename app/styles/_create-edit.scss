@@ -15,7 +15,7 @@
 }
 
 .CreateEdit__form {
-    padding-top: 123px;
+    padding-top: 148px;
 
     label.input-optional::after {
         content: " (optional)";
@@ -39,12 +39,11 @@
 }
 
 .CreateEdit__titlebar {
-    position: absolute;
-    width: 1230px;
-    top: 55px;
+    padding: 0 15px 0 15px;
+    background: #eeeeef !important;
 
     h1 {
-        border-bottom: 4px solid $nav-tabs-active-link-hover-bg;
+        border-bottom: 4px solid $gray-lighter;
         padding-bottom: 15px;
     }
 

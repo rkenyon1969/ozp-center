@@ -49,19 +49,22 @@ var CreateEditPage = React.createClass({
             { system: this.props.system, value: listing, requestChange: updateListing, forceError: this.state.validationFailed }
         );
 
+        var subHeader = (
+            <div className="CreateEdit__titlebar row">
+                <h1>Create New Listing</h1>
+                <div className="btn-group" role="group">
+                    <button type="button" className={ classSet(saveBtnClasses) } onClick={ this.onSave }>{ saveText }</button>
+                    { showSubmit && <button className="btn btn-default" onClick={ this.onSubmit }>Submit</button> }
+                    { showPreview && <button className="btn btn-default" onClick={ this.onPreview }>Preview</button> }
+                    <button type="button" className="btn btn-default" onClick={ this.onClose }>Done</button>
+                </div>
+            </div>
+        );
+
         /* jshint ignore:start */
         return (
             <div>
-                <Header />
-                <div className="CreateEdit__titlebar">
-                    <h1>Create New Listing</h1>
-                    <div className="btn-group" role="group">
-                        <button type="button" className={ classSet(saveBtnClasses) } onClick={ this.onSave }>{ saveText }</button>
-                        { showSubmit && <button className="btn btn-default" onClick={ this.onSubmit }>Submit</button> }
-                        { showPreview && <button className="btn btn-default" onClick={ this.onPreview }>Preview</button> }
-                        <button type="button" className="btn btn-default" onClick={ this.onClose }>Done</button>
-                    </div>
-                </div>
+                <Header subHeader={subHeader} />
                 <ListingForm ref="form" { ...formProps } />
             </div>
         );
