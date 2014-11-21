@@ -2,7 +2,6 @@
 
 var expect = require('chai').expect;
 var React = require('react/addons');
-var rewire = require('rewire');
 var { TestUtils } = React.addons;
 
 describe('EmptyFieldValue', function () {

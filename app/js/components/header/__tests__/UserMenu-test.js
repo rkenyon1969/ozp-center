@@ -7,32 +7,43 @@ var { TestUtils } = React.addons;
 
 describe('UserMenu', function () {
 
-    var UserMenu = require('../UserMenu');
-
     it('renders management link for admins', function () {
+        var UserMenu = require('inject?../../mixins/SystemStateMixin!../UserMenu');
+        UserMenu = UserMenu({
+            '../../mixins/SystemStateMixin': {
+                getInitialState: function() {
+                    return {
+                        currentUser: {
+                            isAdmin: true
+                        }
+                    };
+                },
+            }
+        });
         var userMenu = TestUtils.renderIntoDocument(
             <UserMenu />
         );
-        userMenu.setState({
-            currentUser: {
-                isAdmin: true
-            }
-        });
         expect(
             $(userMenu.getDOMNode()).find('a[href="#mall-management/categories"]')[0]
         ).to.exist;
     });
 
     it('does not render management link for users', function () {
+        var UserMenu = require('inject?../../mixins/SystemStateMixin!../UserMenu');
+        UserMenu = UserMenu({
+            '../../mixins/SystemStateMixin': {
+                getInitialState: function() {
+                    return {
+                        currentUser: {
+                            isAdmin: false
+                        }
+                    };
+                },
+            }
+        });
         var userMenu = TestUtils.renderIntoDocument(
             <UserMenu />
         );
-        userMenu.setState({
-            currentUser: {
-                isAdmin: false
-            }
-        });
-
         expect(
             $(userMenu.getDOMNode()).find('a[href="#mall-management/categories"]')[0]
         ).to.not.exist;

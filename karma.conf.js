@@ -1,6 +1,5 @@
 'use strict';
 
-var RewirePlugin = require("rewire-webpack");
 var webpackOptions = require('./webpack.config.js');
 
 module.exports = function (config) {
@@ -23,9 +22,7 @@ module.exports = function (config) {
                 loaders: webpackOptions.module.loaders,
                 noParse: webpackOptions.module.noParse
             },
-            plugins: webpackOptions.plugins.concat([
-                new RewirePlugin()
-            ])
+            plugins: webpackOptions.plugins
         },
         webpackServer: {
             stats: {
