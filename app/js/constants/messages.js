@@ -64,7 +64,7 @@ var listingMessages = {
     'help.imageLargeUrl': 'The small banner is required to submit the listing. It is not required to save a draft. It must be a valid URL.',
     'help.imageXlargeUrl': 'The featured banner is required to submit the listing. It is not required to save a draft. It must be a valid URL.',
     'help.versionName': 'The version is optional. It may consist of any combination of letters, numbers and symbols. It must be between 1 and 255 characters in length.',
-    'help.contacts': 'Certain contact types are required to submit a listing. They are not required to save a draft.',
+    'help.contacts': 'Contacts are optional.',
     'help.whatIsNew': 'What\'s new is optional. It may consist of any combination of letters, numbers and symbols. It may be up to 255 characters in length.',
     'help.requirements': 'Usage requirements is required. It may consist of any combination of letters, numbers and symbols. It must be between 1 and 1000 characters in length.',
     'help.agency': 'Associated organization is required.',

@@ -28,11 +28,19 @@ var InputMixin = {
             return true;
         }
 
-        if (newProps.value !== this.props.value) {
+        if (newProps.label !== this.props.label) {
             return true;
         }
 
-        if (newProps.label !== this.props.label) {
+        if (newProps.help !== this.props.help) {
+            return true;
+        }
+
+        if (newProps.optional !== this.props.optional) {
+            return true;
+        }
+
+        if (newProps.value !== this.props.value) {
             return true;
         }
 
@@ -40,11 +48,13 @@ var InputMixin = {
             return true;
         }
 
-        if (newProps.error !== this.props.error) {
+        if (this.showWarning(newProps, newState.blurred) !== 
+                this.showWarning(this.props, this.state.blurred)) {
             return true;
         }
 
-        if (newProps.forceError !== this.props.forceError) {
+        if (this.showError(newProps, newState.blurred) !== 
+                this.showError(this.props, this.state.blurred)) {
             return true;
         }
 
@@ -58,17 +68,19 @@ var InputMixin = {
     getClasses: function () {
         return classSet({
             'form-group': true,
-            'has-error': this.showError(),
-            'has-warning': this.showWarning()
+            'has-error': this.showError(this.props, this.state.blurred),
+            'has-warning': this.showWarning(this.props, this.state.blurred)
         });
     },
 
-    showWarning: function () {
-        return !this.showError() && (this.props.warning && this.state.blurred);
+    //we pass props and state into showError/showWarning so that they
+    //can be used in shouldComponentUpdate
+    showWarning: function (props, blurred) {
+        return !this.showError(props, blurred) && (props.warning && blurred);
     },
 
-    showError: function () {
-        return this.props.error && (this.state.blurred || this.props.forceError);
+    showError: function (props, blurred) {
+        return props.error && (blurred || props.forceError);
     },
 
     _onBlur: function (event) {

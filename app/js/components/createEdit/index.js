@@ -3,7 +3,7 @@
 var React = require('react');
 var Reflux = require('reflux');
 var Modal = require('../shared/Modal');
-var _ = require('../../utils/_');
+var { pick, assign } = require('../../utils/_');
 var { approvalStatus } = require('../../constants');
 var CurrentListingStateMixin = require('../../mixins/CurrentListingStateMixin');
 var { loadListing, updateListing, save, submit } = require('../../actions/CreateEditActions');
@@ -44,8 +44,8 @@ var CreateEditPage = React.createClass({
 
         var saveText = this.state.hasChanges ? 'Save' : 'Saved';
 
-        var formProps = Object.assign({},
-            _.pick(this.state, ['errors', 'warnings', 'messages', 'validationFailed', 'firstError']),
+        var formProps = assign({},
+            pick(this.state, ['errors', 'warnings', 'messages', 'validationFailed', 'firstError']),
             { system: this.props.system, value: listing, requestChange: updateListing, forceError: this.state.validationFailed }
         );
 
@@ -98,7 +98,7 @@ var CreateEditPage = React.createClass({
 
     onPreview: function () {
         var id = this.state.listing.id;
-        this.transitionTo('edit', {listingId: id}, {listing: id, action: 'preview', tab: 'overview'});
+        this.transitionTo('edit', { listingId: id }, { listing: id, action: 'preview', tab: 'overview' });
     },
 
     onSubmit: function () {
@@ -117,13 +117,13 @@ var CreateEditPage = React.createClass({
         }
     },
 
-    scrollToError: function (path) {
-        var $target = $(document.getElementById('inputElement.' + path));
+    scrollToError: function () {
+        var $target = $('.form-group.has-error').first();
         var $firstFormElement = $(this.refs.form.getDOMNode()).find(':first-child');
         var $scrollable = $('html, body');
 
         if ($target) {
-            var scroll = $scrollable.scrollTop() + $target.offset().top - $firstFormElement.offset().top;
+            var scroll = $target.offset().top - $firstFormElement.offset().top;
 
             $scrollable.animate({
                 scrollTop: scroll
