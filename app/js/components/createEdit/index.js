@@ -25,16 +25,18 @@ var CreateEditPage = React.createClass({
     mixins: [ CurrentListingStateMixin, Navigation, ActiveState ],
 
     getInitialState: function () {
-        return {scrollToError: false, hasChanges: this.props.params.listingId ? false : true};
+        return { scrollToError: false };
     },
 
     render: function () {
         var listing = this.state.listing;
 
+        var showSave = () => this.state.hasChanges || !listing.id;
+
         var saveBtnClasses = {
             'btn': true,
-            'btn-success': !this.state.hasChanges,
-            'btn-warning': this.state.hasChanges
+            'btn-success': !showSave(),
+            'btn-warning': showSave()
         };
 
         var status = approvalStatus[listing.approvalStatus];
@@ -42,11 +44,11 @@ var CreateEditPage = React.createClass({
         var showSubmit = [IN_PROGRESS, REJECTED].some(s => s === status);
         var showPreview = !!listing.id;
 
-        var saveText = this.state.hasChanges ? 'Save' : 'Saved';
+        var saveText = showSave() ? 'Save' : 'Saved';
 
         var formProps = assign({},
-            pick(this.state, ['errors', 'warnings', 'messages', 'validationFailed', 'firstError']),
-            { system: this.props.system, value: listing, requestChange: updateListing, forceError: this.state.validationFailed }
+            pick(this.state, ['errors', 'warnings', 'messages', 'firstError']),
+            { system: this.props.system, value: listing, requestChange: updateListing, forceError: !this.state.isValid }
         );
 
         /* jshint ignore:start */
@@ -57,7 +59,7 @@ var CreateEditPage = React.createClass({
                     <button type="button" className={ classSet(saveBtnClasses) } onClick={ this.onSave }>{ saveText }</button>
                     { showSubmit && <button className="btn btn-default" onClick={ this.onSubmit }>Submit</button> }
                     { showPreview && <button className="btn btn-default" onClick={ this.onPreview }>Preview</button> }
-                    <button type="button" className="btn btn-default" onClick={ this.onClose }>Done</button>
+                    <button type="button" className="btn btn-default" onClick={ this.onClose }>Close</button>
                 </div>
             </div>
         );
@@ -118,11 +120,11 @@ var CreateEditPage = React.createClass({
     },
 
     scrollToError: function () {
-        var $target = $('.form-group.has-error').first();
+        var $target = $('div.form-group.has-error');
         var $firstFormElement = $(this.refs.form.getDOMNode()).find(':first-child');
         var $scrollable = $('html, body');
 
-        if ($target) {
+        if ($target[0]) {
             var scroll = $target.offset().top - $firstFormElement.offset().top;
 
             $scrollable.animate({

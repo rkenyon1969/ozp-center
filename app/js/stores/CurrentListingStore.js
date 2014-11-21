@@ -16,26 +16,46 @@ actions.cacheUpdated = GlobalListingStore;
 
 var _listing = new Listing();
 var _system = SystemStore.getDefaultData().system;
-var _submitting = false;
+
+function isDraft () {
+    var status = approvalStatus[_listing.approvalStatus];
+    return !status || status === approvalStatus.IN_PROGRESS;
+}
 
 var CurrentListingStore = createStore({
     listenables: actions,
 
+    refreshListing: function (listing) {
+        _listing = listing;
+        var validation = this.doValidation();
+        this.trigger({ 
+            listing: _listing,
+            isValid: true,
+            hasChanges: false,
+            errors: validation.errors,
+            warnings: validation.warnings
+        });
+    },
+
     onListingCreated: function (listing) {
-        _listing = cloneDeep(listing);
-        _submitting = false;
-        this.trigger(assign(this.doValidation(), { listing: _listing, validationFailed: false, hasChanges: false }));
+        this.refreshListing(cloneDeep(listing));
     },
 
     onLoadListing: function (id) {
-        if (id) {
-            var listing = GlobalListingStore.getById(id);
-            _listing = listing ? cloneDeep(listing) : new Listing({ id: id });
-        } else {
-            _listing = new Listing();
-        }
+        this.refreshListing(
+            id ? 
+            cloneDeep(GlobalListingStore.getById(id)) || new Listing({ id: id }) : 
+            new Listing()
+        );
+    },
 
-        this.trigger(assign(this.doValidation(), { listing: _listing }));
+    onCacheUpdated: function () {
+        if (_listing.id) {     
+            var listing = GlobalListingStore.getById(_listing.id);
+            if (listing) {
+                this.refreshListing(cloneDeep(listing));
+            }
+        }
     },
 
     onUpdateListing: function (propertyPath, value) {
@@ -52,47 +72,34 @@ var CurrentListingStore = createStore({
         }
 
         updateValue(_listing, propertyPath);
-        this.trigger(assign(this.doValidation(), { listing: _listing, hasChanges: true }));
-    },
 
-    onCacheUpdated: function () {
-        if (_listing.id) {
-            var listing = GlobalListingStore.getById(_listing.id);
-            if (listing) {
-                _listing = (listing);
-                _submitting = false;
-                this.trigger(assign(this.doValidation(), { listing: _listing, validationFailed: false, hasChanges: false }));
-            }
-        }
-    },
-
-    onSystemUpdated: function (data) {
-        if (data.system) {
-            _system = data.system;
-        }
-
-        this.trigger(assign({ messages: this.resolveMessages() }, this.doValidation()));
+        var validation = this.doValidation();
+        this.trigger({ 
+            listing: _listing,
+            hasChanges: true,
+            errors: validation.errors,
+            warnings: validation.warnings
+        });
     },
 
     onSubmit: function () {
-        _submitting = true;
+        var oldStatus = _listing.approvalStatus;
+        _listing.approvalStatus = 'PENDING';
 
         var validation = this.doValidation();
+
         if(!validation.isValid) {
-            validation.validationFailed = true;
+            _listing.approvalStatus = oldStatus;
             this.trigger(validation);
         } else {
-            _listing.approvalStatus = 'PENDING';
             save(_listing);
         }
     },
 
     onSave: function () {
-        _submitting = false;
-
         var validation = this.doValidation();
+
         if(!validation.isValid) {
-            validation.validationFailed = true;
             this.trigger(validation);
         } else {
             save(_listing);
@@ -100,13 +107,35 @@ var CurrentListingStore = createStore({
     },
 
     doValidation: function () {
-        var status = approvalStatus[_listing.approvalStatus],
-            isDraft = !_submitting && (!status || status === approvalStatus.IN_PROGRESS);
+        var status = approvalStatus[_listing.approvalStatus];
+        var isDraft = !status || status === approvalStatus.IN_PROGRESS;
+        return isDraft ? this.getDraftValidation() : this.getFullValidation();
+    },
 
-        var warnings = validateFull(_listing, _system).errors;
-        var { errors, isValid, firstError } = isDraft ? validateDraft(_listing, _system) : validateFull(_listing, _system);
+    getDraftValidation: function () {
+        var { errors, isValid } = validateDraft(_listing, _system);
+        return {
+            isValid: isValid,
+            errors: errors,
+            warnings: validateFull(_listing, _system).errors
+        };
+    },
 
-        return { errors: errors, warnings: warnings, isValid: isValid, firstError: firstError };
+    getFullValidation: function () {
+        var { errors, isValid } = validateFull(_listing, _system);
+        return {
+            errors: errors,
+            isValid: isValid,
+            warnings: {}
+        };
+    },
+
+    onSystemUpdated: function (data) {
+        if (data.system) {
+            _system = data.system;
+        }
+
+        this.trigger({ messages: this.resolveMessages() });
     },
 
     resolveMessages: function () {
@@ -123,7 +152,7 @@ var CurrentListingStore = createStore({
     },
 
     getDefaultData: function () {
-        return { listing: _listing, errors: {}, warnings: {}, messages: listingMessages, validationFailed: false, firstError: {} };
+        return { listing: _listing, errors: {}, warnings: {}, messages: listingMessages, isValid: true, firstError: {} };
     }
 });
 
