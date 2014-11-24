@@ -5,7 +5,7 @@ var GlobalListingStore = require('./GlobalListingStore');
 var SystemStore = require('./SystemStore');
 var actions = require('../actions/CreateEditActions');
 var { save } = require('../actions/ListingActions');
-var { validateDraft, validateFull } = require('../validation/listing');
+var { validateDraft, validateFull } = require('../components/createEdit/validation/listing');
 var { listingMessages } = require('../constants/messages');
 var { Listing } = require('../webapi/Listing');
 var { approvalStatus } = require('../constants');
@@ -16,17 +16,14 @@ actions.cacheUpdated = GlobalListingStore;
 
 var _listing = new Listing();
 var _system = SystemStore.getDefaultData().system;
-
-function isDraft () {
-    var status = approvalStatus[_listing.approvalStatus];
-    return !status || status === approvalStatus.IN_PROGRESS;
-}
+var _submitting = false;
 
 var CurrentListingStore = createStore({
     listenables: actions,
 
     refreshListing: function (listing) {
         _listing = listing;
+        _submitting = false;
         var validation = this.doValidation();
         this.trigger({ 
             listing: _listing,
@@ -85,7 +82,7 @@ var CurrentListingStore = createStore({
     onSubmit: function () {
         var oldStatus = _listing.approvalStatus;
         _listing.approvalStatus = 'PENDING';
-
+        _submitting = true;
         var validation = this.doValidation();
 
         if(!validation.isValid) {
@@ -97,6 +94,7 @@ var CurrentListingStore = createStore({
     },
 
     onSave: function () {
+        _submitting = false;
         var validation = this.doValidation();
 
         if(!validation.isValid) {
@@ -109,7 +107,7 @@ var CurrentListingStore = createStore({
     doValidation: function () {
         var status = approvalStatus[_listing.approvalStatus];
         var isDraft = !status || status === approvalStatus.IN_PROGRESS;
-        return isDraft ? this.getDraftValidation() : this.getFullValidation();
+        return isDraft && !_submitting ? this.getDraftValidation() : this.getFullValidation();
     },
 
     getDraftValidation: function () {

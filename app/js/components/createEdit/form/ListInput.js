@@ -2,7 +2,7 @@
 
 var React = require('react');
 var { classSet } = React.addons;
-var _ = require('../../utils/_');
+var _ = require('../../../utils/_');
 
 var ListInput = React.createClass({
     render: function () {
