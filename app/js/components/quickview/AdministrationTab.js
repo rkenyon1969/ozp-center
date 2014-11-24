@@ -11,6 +11,7 @@ var disableListing = ListingActions.disable;
 var approveListing = ListingActions.approve;
 var listingStatus = require('../../constants').approvalStatus;
 var { UserRole } = require('../../constants');
+var { form, Str, subtype, struct } = require('tcomb-form');
 
 var EnabledControl = React.createClass({
     propTypes: {
@@ -124,6 +125,14 @@ var AdministrationTab = React.createClass({
         var editing = this.state.editingRejection,
             listing = this.props.listing;
 
+        var Justification = form.createForm(
+            struct({ description: subtype(Str, s => s.length >= 1 && s.length <= 2000) }),
+            { fields: { description: { 
+                type: 'textarea',
+                message: 'A justification is required. It can be up to 2000 characters in length.'
+            }}}
+        );
+
         /* jshint ignore:start */
         if (editing) {
             return (
@@ -131,9 +140,11 @@ var AdministrationTab = React.createClass({
                     <h5>Return to Owner Feedback</h5>
                     <hr/>
                     <p>Please provide feedback for the listing owner about what they should do to make this listing ready for publication</p>
-                    <textarea ref="justification"></textarea>
-                    <button type="button" className="btn" onClick={ this.cancelRejection }>Cancel</button>
-                    <button type="button" className="btn btn-warning" onClick={ this.returnToOwner }>Return to Owner</button>
+                    <form>
+                        <Justification ref="justification" />
+                        <button type="button" className="btn" onClick={ this.cancelRejection }>Cancel</button>
+                        <button type="button" className="btn btn-warning" onClick={ this.returnToOwner }>Return to Owner</button>
+                    </form>
                 </section>
             );
         } else {
@@ -157,9 +168,11 @@ var AdministrationTab = React.createClass({
 
     returnToOwner: function (event) {
         event.preventDefault();
-        var justification = this.refs.justification.getDOMNode().value;
-        rejectListing(this.props.listing.id, justification);
-        this.setState({ editingRejection: false });
+        var justification = this.refs.justification.getValue();
+        if (justification) {
+            rejectListing(this.props.listing.id, justification.description);
+            this.setState({ editingRejection: false });
+        }
     },
 
     cancelRejection: function (event) {
