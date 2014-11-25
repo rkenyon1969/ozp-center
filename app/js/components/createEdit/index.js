@@ -48,7 +48,8 @@ var CreateEditPage = React.createClass({
 
         var formProps = assign({},
             pick(this.state, ['errors', 'warnings', 'messages', 'firstError']),
-            { system: this.props.system, value: listing, requestChange: updateListing, forceError: !this.state.isValid }
+            { system: this.props.system, value: listing, requestChange: updateListing, 
+                forceError: !this.state.isValid, currentUser: this.props.currentUser}
         );
 
         /* jshint ignore:start */
@@ -150,6 +151,10 @@ var ListingForm = React.createClass({
                 return { username: u };
             }));
         };
+
+        if (owners.length < 1 && this.props.currentUser) {
+            owners.push(this.props.currentUser.username);
+        }
 
         var p = this.getFormComponentProps;
         /*jshint ignore:start */
