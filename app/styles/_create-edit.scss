@@ -15,7 +15,7 @@
 }
 
 .CreateEdit__form {
-    padding-top: 148px;
+    padding-top: 158px;
 
     label.input-optional::after {
         content: " (optional)";
@@ -43,6 +43,10 @@
     background: #eeeeef !important;
 
     h1 {
+        margin-top: 0;
+    }
+
+    h4 {
         border-bottom: 4px solid $gray-lighter;
         padding-bottom: 15px;
     }

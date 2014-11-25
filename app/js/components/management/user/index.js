@@ -2,6 +2,7 @@
 
 var React = require('react');
 var Tab = require('../../../mixins/TabMixin');
+var { Link } = require('react-router');
 
 // component dependencies
 var Header = require('../../header');
@@ -31,6 +32,7 @@ var ListingManagement = React.createClass({
                 <Header />
                 <div className="ListingManagement__body">
                     <h1>Listing Management</h1>
+                    <Link to="edit"><button type="button" className="btn btn-primary">Add Listing</button></Link>
                     <div className="ListingManagement__TabContainer">
                         { this.renderTabs(this.props.tabs) }
                         <div className="tab-content">

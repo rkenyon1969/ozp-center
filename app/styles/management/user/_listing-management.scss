@@ -1,5 +1,12 @@
 .ListingManagement__body {
     padding-top: 55px;
+    position: relative;
+
+    .btn-primary {
+        position: absolute;
+        right: 30px;
+        top: 80px;
+    }
 }
 
 .ListingManagement__TabContainer {

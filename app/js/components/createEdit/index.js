@@ -16,7 +16,7 @@ var $ = require('jquery');
 
 function getOptionsForSystemObject (items) {
     return items.map(item => {
-        return {id: item.title, text: item.title};
+        return { id: item.title, text: item.title };
     });
 }
 
@@ -43,7 +43,7 @@ var CreateEditPage = React.createClass({
         var { IN_PROGRESS, REJECTED } = approvalStatus;
         var showSubmit = [IN_PROGRESS, REJECTED].some(s => s === status);
         var showPreview = !!listing.id;
-
+        var titleText = (this.props.params.listingId ? 'Edit ' : 'Create New ') + 'Listing';
         var saveText = showSave() ? 'Save' : 'Saved';
 
         var formProps = assign({},
@@ -54,7 +54,8 @@ var CreateEditPage = React.createClass({
         /* jshint ignore:start */
         var subHeader = (
             <div className="CreateEdit__titlebar row">
-                <h1>Create New Listing</h1>
+                <h1>{titleText}</h1>
+                <h4>All fields are required unless marked as “optional.”</h4>
                 <div className="btn-group" role="group">
                     <button type="button" className={ classSet(saveBtnClasses) } onClick={ this.onSave }>{ saveText }</button>
                     { showSubmit && <button className="btn btn-default" onClick={ this.onSubmit }>Submit</button> }

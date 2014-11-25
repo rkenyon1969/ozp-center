@@ -15,7 +15,6 @@ var UserMenu = React.createClass({
                     <i className="fa fa-bars"></i>
                 </a>
                 <ul className="dropdown-menu" role="menu">
-                    <li><a href="#edit"><i className="fa fa-plus"></i> Create Listing</a></li>
                     <li><a href="#user-management/my-listings"><i className="fa fa-list"></i> My Listings</a></li>
                     {
                         this.state.currentUser.isAdmin &&
