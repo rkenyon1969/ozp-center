@@ -17,7 +17,7 @@ var InputMixin = {
                 <label htmlFor={ this.props.id } className={labelClasses}>{ this.props.label }</label>
                 <p className="small">{ this.props.description }</p>
                 { cloneWithProps(this.renderInput(), this.getInputProps()) }
-                <p className="help-block small">{ this.props.help }</p>
+                { this.props.help && <p className="help-block small">{ this.props.help }</p>}
             </div>
         );
         /*jshint ignore:end */

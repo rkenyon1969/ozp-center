@@ -32,7 +32,7 @@ var ListingManagement = React.createClass({
                 <Header />
                 <div className="ListingManagement__body">
                     <h1>Listing Management</h1>
-                    <Link to="edit"><button type="button" className="btn btn-primary">Add Listing</button></Link>
+                    <Link to="edit"><button type="button" className="btn btn-primary">Create New Listing</button></Link>
                     <div className="ListingManagement__TabContainer">
                         { this.renderTabs(this.props.tabs) }
                         <div className="tab-content">

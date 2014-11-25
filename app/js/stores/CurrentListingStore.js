@@ -141,8 +141,7 @@ var CurrentListingStore = createStore({
         var requiredContactTypes = _system.contactTypes.filter(t => t.required).map(t => t.title);
 
         if (requiredContactTypes.length > 0) {
-            messages['help.contacts'] = 'Contacts are not required to save a draft. ' +
-                'In order to submit the listing, at least one contact of each of the ' + 
+            messages['help.contacts'] = 'At least one contact of each of the ' + 
                 'following types must be provided: ' + requiredContactTypes.join(', ') + '.';
         }
 
