@@ -96,6 +96,10 @@
                 }
             }
         }
+
+        embed {
+            border: 0;
+        }
     }
 }
 
@@ -106,5 +110,11 @@
 
     .row {
         height: 60px;
+    }
+}
+
+.HelpModal {
+    .modal-body {
+        height: 100%;
     }
 }
