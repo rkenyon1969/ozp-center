@@ -136,11 +136,15 @@ var AdministrationTab = React.createClass({
         switch (status) {
             case 'Published':
                 /* jshint ignore:start */
-                controls = [
-                    <EnabledControl key="enabled" listing={this.props.listing} />,
-                    <FeaturedControl key="featured" listing={this.props.listing} />
-                ];
+                var enabledControl =
+                        <EnabledControl key="enabled" listing={this.props.listing} />;
+
+                controls = isAdmin ? [
+                        enabledControl,
+                        <FeaturedControl key="featured" listing={this.props.listing} />
+                    ] : [enabledControl]
                 /* jshint ignore:end */
+
                 statusClass = 'label-published';
                 break;
             case 'Pending':
