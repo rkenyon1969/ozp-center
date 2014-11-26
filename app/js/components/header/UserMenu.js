@@ -5,7 +5,7 @@ var SystemStateMixin = require('../../mixins/SystemStateMixin');
 var Modal = require('../shared/Modal');
 
 // TODO: figure out where to pull in production. build time config? CDN?
-var helpPDF = 'https://dl.dropboxusercontent.com/content_link/AOd5awKZkS2NGdjs1BPbWSXYCt2dEfi39ZJBDU4rSjzztY2yEEifjMj5TIHaH2SK';
+var helpPDF = 'https://dl.dropboxusercontent.com/content_link/Vt6kcc2ZxYlZ3RWLN8rehbM2y5cfBjWeTGNFeDS7vApvMhyMR3ABXRM441rnKaH3';
 
 var UserMenu = React.createClass({
 
