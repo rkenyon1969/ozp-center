@@ -16,14 +16,16 @@ var Actions = Reflux.createActions([
     'launch', 'reject', 'rejected',
     'addToLibrary', 'addedToLibrary',
     'removeFromLibrary', 'removedFromLibrary',
-    'save', 'saved', 'saveFailed', 'enable', 'disable'
+    'save', 'saved', 'saveFailed', 'enable', 'disable', 'setFeatured'
 ]);
 
-function setEnabled(value, listing) {
+function updateListingProperty(propName, value, listing) {
     var data = _.cloneDeep(listing);
-    data.isEnabled = value;
+    data[propName] = value;
     Actions.save(data);
 }
+
+var setEnabled = updateListingProperty.bind(null, 'isEnabled');
 
 Actions.fetchNewArrivals.listen(function () {
     ListingApi.getNewArrivals().then(Actions.newArrivalsFetched);
@@ -88,10 +90,8 @@ Actions.reject.listen(function (listingId, description) {
 Actions.enable.listen(setEnabled.bind(null, true));
 Actions.disable.listen(setEnabled.bind(null, false));
 
-Actions.approve.listen(function (listing) {
-    var data = _.cloneDeep(listing);
-    data.approvalStatus = 'APPROVED';
-    Actions.save(data);
-});
+Actions.approve.listen(updateListingProperty.bind(null, 'approvalStatus', 'APPROVED'));
+
+Actions.setFeatured.listen(updateListingProperty.bind(null, 'isFeatured'));
 
 module.exports = Actions;

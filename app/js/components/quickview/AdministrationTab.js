@@ -13,27 +13,75 @@ var listingStatus = require('../../constants').approvalStatus;
 var { UserRole } = require('../../constants');
 var { form, Str, subtype, struct } = require('tcomb-form');
 
-var EnabledControl = React.createClass({
+var Toggle = React.createClass({
     propTypes: {
         listing: React.PropTypes.object
     },
 
     render: function () {
-        var listing = this.props.listing,
-            enabled = listing.isEnabled;
+        var title = this.props.title;
 
         /* jshint ignore:start */
         return (
             <section>
-                <h5>{ enabled ? 'Enabled' : 'Disabled' }</h5>
+                <h5>{title}</h5>
                 <hr/>
-                <p>This listing is { enabled ? '' : 'not' } visible to users</p>
-                <label className="switch">Enabled:
-                    <input type="checkbox" ref="checkbox" className="ios brand-success" checked={ enabled }
-                        onChange={ enabled ? disableListing.bind(null, listing) : enableListing.bind(null, listing) } />
+                <p>{this.props.description}</p>
+                <label className="switch">{this.props.label || title}:
+                    <input type="checkbox" ref="checkbox" className="ios brand-success"
+                        checked={this.props.checked} onChange={this.props.onChange} />
                     <div className="track"><div className="knob"></div></div>
                 </label>
             </section>
+        );
+        /* jshint ignore:end */
+    }
+});
+
+var EnabledControl = React.createClass({
+    shouldComponentUpdate: function(newProps) {
+        return newProps.listing.isEnabled !== this.props.isEnabled;
+    },
+
+    render: function () {
+        var listing = this.props.listing,
+            enabled = listing.isEnabled,
+            title = enabled ? 'Enabled' : 'Disabled',
+            description = 'This listing is ' + (enabled ? '' : 'not') + ' visible to users',
+            onChange = enabled ? disableListing.bind(null, listing) :
+                enableListing.bind(null, listing);
+
+        /* jshint ignore:start */
+        return (
+            <Toggle title={title} label="Enabled"
+                description={description}
+                onChange={onChange}/>
+        );
+        /* jshint ignore:end */
+    }
+});
+
+var FeaturedControl = React.createClass({
+    onChange: function(evt) {
+        ListingActions.setFeatured(evt.target.checked, this.props.listing);
+    },
+
+    shouldComponentUpdate: function(newProps) {
+        return newProps.listing.isFeatured !== this.props.isFeatured;
+    },
+
+    render: function () {
+        var listing = this.props.listing,
+            featured = listing.isFeatured,
+            title = 'Featured',
+            description = 'This listing is ' + (featured ? '' : 'not') +
+                ' featured on the Discovery Page';
+
+        /* jshint ignore:start */
+        return (
+            <Toggle title={title} label="Featured"
+                description={description}
+                onChange={this.onChange}/>
         );
         /* jshint ignore:end */
     }
@@ -88,22 +136,25 @@ var AdministrationTab = React.createClass({
         switch (status) {
             case 'Published':
                 /* jshint ignore:start */
-                controls = <EnabledControl listing={ this.props.listing } />;
+                controls = [
+                    <EnabledControl key="enabled" listing={this.props.listing} />,
+                    <FeaturedControl key="featured" listing={this.props.listing} />
+                ];
                 /* jshint ignore:end */
                 statusClass = 'label-published';
                 break;
             case 'Pending':
                 statusText += ', ' + listing.agency;
-                controls = isAdmin ? this.renderReviewSection() : '';
+                controls = isAdmin ? this.renderReviewSection() : [];
                 statusClass = 'label-pending';
                 break;
             case 'Returned to Owner':
                 statusClass = 'label-needs-action';
-                controls = '';
+                controls = [];
                 break;
             case 'Draft':
                 statusClass = 'label-draft';
-                controls = '';
+                controls = [];
                 break;
         }
 
@@ -127,7 +178,7 @@ var AdministrationTab = React.createClass({
 
         var Justification = form.createForm(
             struct({ description: subtype(Str, s => s.length >= 1 && s.length <= 2000) }),
-            { fields: { description: { 
+            { fields: { description: {
                 type: 'textarea',
                 message: 'A justification is required. It can be up to 2000 characters in length.'
             }}}
