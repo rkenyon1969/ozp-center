@@ -1,6 +1,6 @@
 {
   "name": "center-ui",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "authors": [
     "Nish Patel <nishantpatel611@gmail.com>"
   ],
@@ -20,9 +20,6 @@
     "ubuntu-font": "*",
     "magnific-popup": "~0.9.9",
     "react-radio-group": "~0.1.2"
-  },
-  "devDependencies": {
-    "es5-shim": "~4.0.3"
   },
   "resolutions": {
     "jquery": "~2.1.1"

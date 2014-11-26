@@ -1,3 +1,36 @@
+## 0.3.0 (2014-11-26)
+
+
+#### Bug Fixes
+
+* **Create Edit Listing:**
+  * is the current user as the default listing owner ([5a8d1989](https://github.com/ozone-development/center-ui.git/commit/5a8d1989157da46709faa6f6a7f37287a3a8bcf3))
+  * cleaning up help element when a help property does not exist on the input elemen ([b2adf0e2](https://github.com/ozone-development/center-ui.git/commit/b2adf0e26c5d05c041aab32f68237f7b25b2551f))
+  * Correcting help messages and descriptions for input fields ([f4b4a480](https://github.com/ozone-development/center-ui.git/commit/f4b4a48054cc9b43982afa959f1ba1b057fbb10b))
+  * fixing the console error that sometimes occurs when scrolling the page to the fi ([fcf91a44](https://github.com/ozone-development/center-ui.git/commit/fcf91a446fe738bc18aa8c66c0645a0ed1be4c6b))
+  * Fixing scrollTo behavior on form errors. Add proper help message for contact typ ([512c2ae0](https://github.com/ozone-development/center-ui.git/commit/512c2ae015e33b261ef11049509a8e8528f1582d))
+  * on validation failures the help messages is not properly highlighted on subobjec ([356e6dd4](https://github.com/ozone-development/center-ui.git/commit/356e6dd4480d7823dccc90c9d60d8e375727c90e))
+  * Correcting the position of the sub header and button group ([eacf89ad](https://github.com/ozone-development/center-ui.git/commit/eacf89ad36ce69ae056e467ef005317c08fb148e))
+  * After a submit attempt fails due to validation errors, don't hide errors on chan ([44451302](https://github.com/ozone-development/center-ui.git/commit/44451302b550a90955827aa392d4be39553b1271))
+* **Listing Deletion:** fixing delete confirmation box which was broken as part of refactoring Listing ([7d0a0336](https://github.com/ozone-development/center-ui.git/commit/7d0a0336b63c0b0a1190d1992a072a9949109d9c))
+* **Detailed Listing View:**
+  * OZF-485 - validate the rejection justification ([86af2c5d](https://github.com/ozone-development/center-ui.git/commit/86af2c5d3ba53d595c6b4ff2598f2354cf87f12d))
+  * OZF-575. Changelogs are not rendered on the admin tab ([4e03d8cc](https://github.com/ozone-development/center-ui.git/commit/4e03d8cc6217cb03e1d3978cfb9b7550b0a3621e))
+  * properly handle closing of the quick view modal ([007bccc1](https://github.com/ozone-development/center-ui.git/commit/007bccc133b6a24ef90f754e473dd55488850c82))
+* **Routing:**
+  * OZF-363 Convert delete and feedback routes to use query params ([4b91096c](https://github.com/ozone-development/center-ui.git/commit/4b91096cf4ed00b3fbd325a28c66aad86c1779ae))
+  * OZF-363 refactor routing to allow modals to be opened from anywhere in the app ([a60345da](https://github.com/ozone-development/center-ui.git/commit/a60345da913ef4c5f4b629a9392a5db6923ef2ed))
+  * OZF-479 prevent users from accessing mall management page ([3882ff37](https://github.com/ozone-development/center-ui.git/commit/3882ff374d824e4c461fa954238b436566dd3676))
+
+
+#### Features
+
+* **Help:** Implement help modal window ([987534be](https://github.com/ozone-development/center-ui.git/commit/987534befb6c7a434927ee2b2ea436b1ed492e1a))
+* **Unit Tests:**
+  * use inject loader for injecting mocked dependencies ([64f3703e](https://github.com/ozone-development/center-ui.git/commit/64f3703e690029076a1feb2cb4c0267fcc489acf))
+  * setup karma, mocha and chai based tooling ([4629ac21](https://github.com/ozone-development/center-ui.git/commit/4629ac21a4cdf3109ffad3ae3559f06e9d3afc05))
+
+
 ## 0.2.0 (2014-11-12)
 
 ### Bug Fixes
