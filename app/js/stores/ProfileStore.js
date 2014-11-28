@@ -7,9 +7,13 @@ var ListingActions = _.pick(require('../actions/ListingActions'), 'addedToLibrar
 var { selfLoaded } = require('../actions/ProfileActions');
 var { UserRole } = require('../constants');
 var { Listing } = require('../webapi/Listing');
+var { ORG_STEWARD, APPSMALL_STEWARD } = UserRole;
 
 var _library = [];
 var _self = null;
+
+var selfIsAdmin = () => UserRole[_self.highestRole] >= APPSMALL_STEWARD;
+var selfIsOwner = listing => listing.owners.some(u => u.username === _self.username);
 
 var ProfileStore = Reflux.createStore({
 
@@ -22,7 +26,7 @@ var ProfileStore = Reflux.createStore({
 
     onSelfFetched: function (self) {
         _self = self;
-        _self.isAdmin = UserRole[_self.highestRole] >= UserRole.ADMIN;
+        _self.isAdmin = selfIsAdmin();
         this.trigger({currentUser: _self});
         selfLoaded();
     },
@@ -62,6 +66,10 @@ var ProfileStore = Reflux.createStore({
 
     getDefaultData: function () {
         return {currentUser: _self, library: _library};
+    },
+
+    currentUserCanEdit: function (listing) {
+        return listing && (selfIsAdmin() || selfIsOwner(listing));
     }
 
 });

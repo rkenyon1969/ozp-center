@@ -146,8 +146,7 @@ var CurrentListingStore = createStore({
     },
 
     currentUserCanEdit: function () {
-        var currentUser = ProfileStore.getCurrentUser();
-        return _listing && (currentUser.isAdmin || _listing.owners.some(u => u.username === currentUser.username));
+        return ProfileStore.currentUserCanEdit(_listing);
     },
 
     loadListing: function (id) {
@@ -155,15 +154,18 @@ var CurrentListingStore = createStore({
             var listing = GlobalListingStore.getCache()[id];
             if (listing) {
                 this.refreshListing(cloneDeep(listing));
-                return Promise.resolve();
+                return Promise.resolve(_listing);
             } else {
-                return ListingApi.getById(id).then(l => {
-                    this.refreshListing(new Listing(l));
+                return new Promise(resolve => {
+                    ListingApi.getById(id).then(l => {
+                        this.refreshListing(new Listing(l));
+                        resolve(_listing);
+                    });
                 });
             }
         } else {
             this.refreshListing(new Listing({ owners: [ProfileStore.getCurrentUser()] }));
-            return Promise.resolve();
+            return Promise.resolve(_listing);
         }
     }
 });
