@@ -5,7 +5,7 @@ var Reflux = require('reflux');
 var Modal = require('../shared/Modal');
 var { pick, assign } = require('../../utils/_');
 var { approvalStatus } = require('../../constants');
-var CurrentListingStateMixin = require('../../mixins/CurrentListingStateMixin');
+var CurrentListingStore = require('../../stores/CurrentListingStore');
 var { loadListing, updateListing, save, submit } = require('../../actions/CreateEditActions');
 var { Navigation } = require('react-router');
 var Header = require('../header');
@@ -22,7 +22,26 @@ function getOptionsForSystemObject (items) {
 
 var CreateEditPage = React.createClass({
 
-    mixins: [ CurrentListingStateMixin, Navigation, ActiveState ],
+    mixins: [ Reflux.connect(CurrentListingStore), Navigation, ActiveState ],
+
+    statics: {
+        willTransitionTo: function (transition, params) {
+            transition.wait(CurrentListingStore.loadListing(params.listingId));
+            if (!CurrentListingStore.currentUserCanEdit()) {
+                transition.redirect('my-listings');
+            }
+        },
+
+        willTransitionFrom: function (transition, component) {
+            if (component.state.hasChanges) {
+                if(!window.confirm('You have unsaved information, are you sure you want to leave this page?')) {
+                    var path = component.props.params.listingId ? '#/edit/' + component.props.params.listingId : '#/edit';
+                    document.location.replace(path);
+                    transition.abort(); //TODO: this throws a console warning about calling setState with null
+                }
+            }
+        }
+    },
 
     getInitialState: function () {
         return { scrollToError: false };
@@ -30,6 +49,12 @@ var CreateEditPage = React.createClass({
 
     render: function () {
         var listing = this.state.listing;
+
+        if (!listing) {
+            /* jshint ignore:start */
+            return <p>loading...</p>;
+            /* jshint ignore:end */
+        }
 
         var showSave = () => this.state.hasChanges || !listing.id;
 
@@ -49,7 +74,7 @@ var CreateEditPage = React.createClass({
         var formProps = assign({},
             pick(this.state, ['errors', 'warnings', 'messages', 'firstError']),
             { system: this.props.system, value: listing, requestChange: updateListing, 
-                forceError: !this.state.isValid, currentUser: this.props.currentUser}
+                forceError: !this.state.isValid, currentUser: this.props.currentUser }
         );
 
         /* jshint ignore:start */
@@ -75,21 +100,16 @@ var CreateEditPage = React.createClass({
         /* jshint ignore:end */
     },
 
-    componentWillMount: function () {
-        loadListing(this.props.params.listingId);
-    },
-
-    componentWillReceiveProps: function (newProps) {
-        var oldId = this.props.params.listingId,
-            newId = newProps.params.listingId;
-
-        if (oldId !== newId) {
-            this.setState(this.getInitialState());
-            loadListing(newId);
+    shouldComponentUpdate: function (newProps, newState) {
+        //route parameter just changed
+        if (this.props.params.listingId !== newProps.params.listingId) {
+            return false;
         }
+
+        return true;
     },
 
-    componentDidUpdate: function () {
+    componentDidUpdate: function (prevProps, prevState) {
         if (this.state.scrollToError && !this.state.isValid) {
             this.scrollToError(this.state.firstError);
         }
@@ -100,6 +120,10 @@ var CreateEditPage = React.createClass({
         this.setState({ scrollToError: true });
     },
 
+    onClose: function () {
+        this.transitionTo('my-listings');
+    },
+
     onPreview: function () {
         var id = this.state.listing.id;
         this.transitionTo('edit', { listingId: id }, { listing: id, action: 'preview', tab: 'overview' });
@@ -108,17 +132,6 @@ var CreateEditPage = React.createClass({
     onSubmit: function () {
         submit();
         this.setState({ scrollToError: true });
-    },
-
-    onClose: function () {
-        if (this.state.hasChanges) {
-            if(window.confirm('You have unsaved information, are you sure you want to leave this page?')) {
-                loadListing(this.props.params.listingId); //discard changes in the store
-                this.transitionTo('my-listings');
-            }
-        } else {
-            this.transitionTo('my-listings');
-        }
     },
 
     scrollToError: function () {
@@ -151,10 +164,6 @@ var ListingForm = React.createClass({
                 return { username: u };
             }));
         };
-
-        if (owners.length < 1 && this.props.currentUser) {
-            owners.push(this.props.currentUser.username);
-        }
 
         var p = this.getFormComponentProps;
         /*jshint ignore:start */

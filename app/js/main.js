@@ -28,7 +28,7 @@ var mount = function () {
     React.renderComponent(Routes, document.getElementById('main'));
 };
 
-ProfileActions.selfFetched.listen(_.once(mount));
+ProfileActions.selfLoaded.listen(_.once(mount));
 ProfileActions.fetchSelfFailed.listen(_.once(function () {
     if (!isMounted) {
         alert('Something went wrong. Try again!');

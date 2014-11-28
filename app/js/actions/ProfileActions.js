@@ -4,7 +4,7 @@ var Reflux = require('reflux');
 var { ProfileApi } = require('../webapi/Profile');
 
 var Actions = Reflux.createActions([
-    'fetchLibrary', 'libraryFetched',
+    'fetchLibrary', 'libraryFetched', 'selfLoaded',
     'fetchSelf', 'selfFetched', 'fetchSelfFailed'
 ]);
 

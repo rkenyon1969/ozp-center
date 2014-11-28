@@ -4,11 +4,12 @@ var Reflux = require('reflux');
 var _ = require('../utils/_');
 var ProfileActions = _.pick(require('../actions/ProfileActions'), 'libraryFetched', 'selfFetched');
 var ListingActions = _.pick(require('../actions/ListingActions'), 'addedToLibrary', 'removedFromLibrary');
+var { selfLoaded } = require('../actions/ProfileActions');
 var { UserRole } = require('../constants');
 var { Listing } = require('../webapi/Listing');
 
 var _library = [];
-var _self = { isAdmin: false };
+var _self = null;
 
 var ProfileStore = Reflux.createStore({
 
@@ -23,6 +24,7 @@ var ProfileStore = Reflux.createStore({
         _self = self;
         _self.isAdmin = UserRole[_self.highestRole] >= UserRole.ADMIN;
         this.trigger({currentUser: _self});
+        selfLoaded();
     },
 
     onAddedToLibrary: function (listing) {
@@ -54,8 +56,6 @@ var ProfileStore = Reflux.createStore({
         return _library.map(e => e.listing).some(l => l.uuid === uuid);
     },
 
-    //normally we'd get the user via state, however this is still needed
-    //in static methods for checking access rights to certain routes.
     getCurrentUser: function () {
         return _self;
     },

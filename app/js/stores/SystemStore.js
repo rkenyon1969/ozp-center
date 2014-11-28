@@ -3,7 +3,6 @@
 var Reflux = require('reflux');
 var { capitalize } = require('../utils/string');
 var SystemApi = require('../webapi/System');
-var ProfileStore = require('./ProfileStore');
 var _ = require('../utils/_');
 
 var items = [
@@ -18,8 +17,6 @@ var items = [
 var _system = {};
 
 var SystemStore = Reflux.createStore({
-    listenables: { profileChange: ProfileStore },
-
     init: function () {
         items.forEach(item => {
             _system[item] = [];
@@ -28,24 +25,23 @@ var SystemStore = Reflux.createStore({
         this.loadSystem();
     },
 
-    onProfileChange: function (data) {
-        var { currentUser } = data;
-        if (currentUser) {
-            this.trigger({ currentUser: currentUser });
-        }
+    getSystem: function () {
+        return _system;
     },
 
     getDefaultData: function () {
-        var { currentUser } = ProfileStore.getDefaultData();
-        return { system: _system, currentUser: currentUser };
+        return { system: _system };
     },
 
     loadSystem: function () {
-        items.forEach(item => {
+        var promises = items.map(item =>
             SystemApi['get' + capitalize(item)]().then(data => {
                 _system[item] = data;
-                this.trigger({ system: _system });
-            });
+            })
+        );
+
+        $.when.apply($, promises).then(data => {
+            this.trigger({ system: _system });
         });
     }
 });

@@ -13,7 +13,7 @@ var Modal = require('../shared/Modal');
 var IconRating = require('../shared/IconRating');
 var Header = require('./Header');
 var { UserRole } = require('../../constants');
-var CurrentListingStateMixin = require('../../mixins/CurrentListingStateMixin');
+var CurrentListingStore = require('../../stores/CurrentListingStore');
 var { loadListing } = require('../../actions/CreateEditActions');
 
 var OverviewTab = require('./OverviewTab');
@@ -38,7 +38,7 @@ var tabs = {
 **/
 var Quickview = React.createClass({
 
-    mixins: [ CurrentListingStateMixin, CurrentPath, Navigation, ActiveState ],
+    mixins: [ Reflux.connect(CurrentListingStore), CurrentPath, Navigation, ActiveState ],
 
     getDefaultProps: function () {
         return {
@@ -94,7 +94,8 @@ var Quickview = React.createClass({
             onCancel: this.close,
             onEdit: this.edit,
             currentUser: currentUser,
-            preview: this.props.preview
+            preview: this.props.preview,
+            allowEdit: CurrentListingStore.currentUserCanEdit()
         };
 
         /* jshint ignore:start */
@@ -156,13 +157,13 @@ var Quickview = React.createClass({
 
     componentWillMount: function () {
         if (!this.props.preview) {
-            loadListing(this.props.listingId);
+            CurrentListingStore.loadListing(this.props.listingId);
         }
     },
 
     componentWillReceiveProps: function (newProps) {
         if (!this.props.preview && (this.props.listingId !== newProps.listingId)) {
-            loadListing(newProps.listingId);
+            CurrentListingStore.loadListing(newProps.listingId);
         }
     },
 

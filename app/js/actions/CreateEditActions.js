@@ -3,6 +3,6 @@
 var Reflux = require('reflux');
 
 module.exports = Reflux.createActions([
-	'listingCreated', 'loadListing', 'updateListing', 
+	'listingCreated', 'updateListing', 
 	'save', 'submit', 'saveSucceeded'
 ]);
