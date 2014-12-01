@@ -1,7 +1,6 @@
 'use strict';
 
 var React = require('react');
-var merge = require('react/lib/merge');
 
 require('carouFredSel');
 
@@ -23,9 +22,12 @@ var Carousel = React.createClass({
     },
 
     render: function () {
+        var { className, ...other } = this.props;
+        var classes = [className, 'carousel-wrapper'].join(' ');
+
         /*jshint ignore:start */
-        return this.transferPropsTo(
-            <div className="carousel-wrapper">
+        return (
+            <div className={classes} {...other}>
                 <div className="carousel">
                     <ul ref="list" className="list-unstyled">
                         { this.props.children }
@@ -51,7 +53,7 @@ var Carousel = React.createClass({
 
     renderCarousel: function () {
         if (this.props.autoInit) {
-            var options = merge({
+            var options = Object.assign({
                 prev: $(this.refs.prev.getDOMNode()),
                 next: $(this.refs.next.getDOMNode()),
                 auto: false,

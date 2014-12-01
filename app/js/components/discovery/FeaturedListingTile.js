@@ -3,14 +3,14 @@
 var React = require('react');
 var { Navigation } = require('react-router');
 
-var ActiveState = require('../../mixins/ActiveStateMixin');
+var State = require('../../mixins/ActiveStateMixin');
 
 var FeaturedListingTile = React.createClass({
 
-    mixins: [ Navigation, ActiveState ],
+    mixins: [ Navigation, State ],
 
     render: function () {
-        var listing = this.props.listing;
+        var { key, listing } = this.props;
         var image = listing.imageXlargeUrl;
         var href = this.makeHref(this.getActiveRoutePath(), null, {
             listing: listing.id,
@@ -19,7 +19,7 @@ var FeaturedListingTile = React.createClass({
         });
 
         /*jshint ignore:start */
-        return this.transferPropsTo(
+        return (
             <li className="listing listing-tile listing-tile-featured">
                 <a href={href}>
                     <img src={image} />

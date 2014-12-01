@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var { RouteHandler } = require('react-router');
 var Reflux = require('reflux');
 var MyListingTile = require('./MyListingTile');
 var MyListingsSidebar = require('./MyListingsSidebar');
@@ -85,7 +86,7 @@ var MyListings = React.createClass({
                         onFilterChanged={this.onFilterChanged} />
                 </aside>
                 <ul className={"MyListings__listings col-md-9 " + filter}>{tiles}</ul>
-                <this.props.activeRouteHandler />
+                <RouteHandler />
             </div>
         );
         /* jshint ignore:end */

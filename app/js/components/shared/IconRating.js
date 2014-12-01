@@ -1,9 +1,11 @@
 'use strict';
 
 var React = require('react');
-var _IconRating = require('react-icon-rating');
+var _IconRating = require('../../../../node_modules/react-icon-rating/index.jsx');
 
 var IconRating = React.createClass({
+
+    displayName: 'IconRatingExtended',
 
     getDefaultProps: function () {
         return {
@@ -18,10 +20,10 @@ var IconRating = React.createClass({
         /* jshint ignore:start */
         return this.transferPropsTo(
             <_IconRating
-                className = { this.props.className }
-                toggledClassName = { this.props.toggledClassName }
-                untoggledClassName = { this.props.untoggledClassName }
-                halfClassName = { this.props.halfClassName } />
+                className={ this.props.className }
+                toggledClassName={ this.props.toggledClassName }
+                untoggledClassName={ this.props.untoggledClassName }
+                halfClassName={ this.props.halfClassName } />
         );
         /* jshint ignore:end */
     }

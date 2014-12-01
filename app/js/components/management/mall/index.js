@@ -2,7 +2,7 @@
 
 var React = require('react');
 var Router = require('react-router');
-var Navigation = Router.Navigation;
+var { RouteHandler } = Router;
 var Tab = require('../../../mixins/TabMixin');
 var AdminRoute = require('../../../mixins/AdminRouteMixin');
 var SystemStore = require('../../../stores/SystemStore');
@@ -12,7 +12,7 @@ var Header = require('../../header');
 
 var MallManagement = React.createClass({
 
-    mixins: [ Tab, Navigation, AdminRoute ],
+    mixins: [ Tab, AdminRoute ],
 
     statics: {
         willTransitionFrom: function(transition, component) {
@@ -52,7 +52,7 @@ var MallManagement = React.createClass({
                     <div className="MallManagement__TabContainer">
                         { this.renderTabs(this.props.tabs) }
                         <div className="tab-content">
-                            <this.props.activeRouteHandler />
+                            <RouteHandler />
                         </div>
                     </div>
                 </div>

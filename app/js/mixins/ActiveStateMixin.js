@@ -4,14 +4,14 @@ var _ = require('../utils/_');
 
 var ActiveStateMixin = {
 
-    mixins: [ require('react-router').ActiveState ],
+    mixins: [ require('react-router').State ],
 
     getActiveRoute: function () {
-        return _.last(this.getActiveRoutes());
+        return _.last(this.getRoutes());
     },
 
     getActiveRoutePath: function () {
-        return _.last(this.getActiveRoutes()).props.name;
+        return _.last(this.getRoutes()).path;
     }
 
 };

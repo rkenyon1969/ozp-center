@@ -5,6 +5,7 @@ if (!Object.assign) {
 }
 var React = require('react');
 var jQuery = require('jquery');
+var Router = require('react-router');
 require('bootstrap');
 var _ = require('./utils/_');
 var ProfileActions = require('./actions/ProfileActions');
@@ -25,7 +26,11 @@ var Routes = require('./components/Routes');
 var isMounted = false;
 var mount = function () {
     isMounted = true;
-    React.renderComponent(Routes, document.getElementById('main'));
+    Router.run(Routes, function (Handler) {
+        /* jshint ignore:start */
+        React.render(<Handler />, document.getElementById('main'));
+        /* jshint ignore:end */
+    });
 };
 
 ProfileActions.selfLoaded.listen(_.once(mount));

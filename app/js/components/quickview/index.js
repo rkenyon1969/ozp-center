@@ -2,9 +2,9 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var { Link, Navigation, CurrentPath } = require('react-router');
+var { Navigation, RouteHandler } = require('react-router');
 
-var ActiveState = require('../../mixins/ActiveStateMixin');
+var State = require('../../mixins/ActiveStateMixin');
 var Tab = require('../../mixins/TabMixin');
 var _ = require('../../utils/_');
 
@@ -38,7 +38,7 @@ var tabs = {
 **/
 var Quickview = React.createClass({
 
-    mixins: [ Reflux.connect(CurrentListingStore), CurrentPath, Navigation, ActiveState ],
+    mixins: [ Reflux.connect(CurrentListingStore), Navigation, State ],
 
     getDefaultProps: function () {
         return {
@@ -65,8 +65,8 @@ var Quickview = React.createClass({
         var currentUser = this.props.currentUser;
 
         var { shown, listing } = this.state;
+        var ActiveRouteHandler = this.getActiveRouteHandler();
         var owners, tabs;
-        var activeRouteHandler = this.getActiveRouteHandler();
 
         if (listing) {
             tabs = _.cloneDeep(this.props.tabs);
@@ -109,8 +109,7 @@ var Quickview = React.createClass({
                             <div className="tabs-container">
                                 { this.renderTabs(tabs, listing.id) }
                                 <div className="tab-content">
-                                    <activeRouteHandler currentUser={currentUser}
-                                        listing={listing} shown ={shown} />
+                                    <ActiveRouteHandler currentUser={currentUser} listing={listing} shown ={shown} />
                                 </div>
                             </div>
                         ]
@@ -134,7 +133,7 @@ var Quickview = React.createClass({
         /* jshint ignore:start */
         var linkComponents = links.map(function (link) {
             var className = link.to === me.props.tab ? 'active' : '';
-            var href = me.makeHref(me.getActiveRoutePath(), me.getActiveParams(), {
+            var href = me.makeHref(me.getActiveRoutePath(), me.getParams(), {
                 listing: id,
                 action: me.props.preview ? 'preview' : 'view',
                 tab: link.to
@@ -179,7 +178,7 @@ var Quickview = React.createClass({
     onHidden: function () {
         if(!this.state.toEdit) {
             // go back to the parent route
-            this.transitionTo(this.getActiveRoutePath(), this.getActiveParams());
+            this.transitionTo(this.getActiveRoutePath(), this.getParams());
         }
     },
 

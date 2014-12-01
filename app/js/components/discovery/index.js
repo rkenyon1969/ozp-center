@@ -2,6 +2,7 @@
 
 var React = require('react');
 var Reflux = require('reflux');
+var { RouteHandler } = require('react-router');
 var _ = require('../../utils/_');
 
 // actions
@@ -77,7 +78,7 @@ var Discovery = React.createClass({
                     </section>
                     <div className="clearfix"></div>
                 </div>
-                {this.props.activeRouteHandler()}
+                <RouteHandler />
             </div>
         );
         /*jshint ignore:end */

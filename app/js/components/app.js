@@ -3,7 +3,7 @@
 var React = require('react');
 var Reflux = require('reflux');
 var _ = require('../utils/_');
-
+var { RouteHandler, State } = require('react-router');
 var SystemStateMixin = require('../mixins/SystemStateMixin');
 
 var { fetchLibrary } = require('../actions/ProfileActions');
@@ -15,13 +15,13 @@ var { ListingDeleteConfirmation } = require('./shared/DeleteConfirmation');
 
 var App = React.createClass({
 
-    mixins: [ SystemStateMixin ],
+    mixins: [ SystemStateMixin, State ],
 
     render: function () {
         /*jshint ignore:start */
         return (
             <div id="App">
-                <this.props.activeRouteHandler { ..._.pick(this.state, 'system', 'currentUser') } />
+                <RouteHandler system={this.state.system} currentUser={this.state.currentUser} />
                 { this.renderModal() }
             </div>
         );
@@ -29,13 +29,12 @@ var App = React.createClass({
     },
 
     renderModal: function () {
-        var { listing, tab, action } = this.props.query;
+        var { listing, tab, action } = this.getQuery();
 
         /*jshint ignore:start */
         if (listing) {
             if (tab) {
                 var preview = action === 'preview';
-
                 return <Quickview listingId={ listing } tab={tab} preview={ preview } system={this.state.system} currentUser={this.state.currentUser} />;
             }
             else if (action === 'feedback') {

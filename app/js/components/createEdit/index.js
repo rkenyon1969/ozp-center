@@ -12,7 +12,7 @@ var { Navigation } = require('react-router');
 var Header = require('../header');
 var { ValidatedFormMixin, ListInput, TextInput, Select2Input, Select2TagInput, TextAreaInput } = require('./form');
 var { classSet } = React.addons;
-var ActiveState = require('../../mixins/ActiveStateMixin');
+var State = require('../../mixins/ActiveStateMixin');
 var $ = require('jquery');
 
 function getOptionsForSystemObject (items) {
@@ -23,7 +23,7 @@ function getOptionsForSystemObject (items) {
 
 var CreateEditPage = React.createClass({
 
-    mixins: [ Reflux.connect(CurrentListingStore), Navigation, ActiveState ],
+    mixins: [ Reflux.connect(CurrentListingStore), Navigation, State ],
 
     statics: {
         willTransitionTo: function (transition, params) {
@@ -46,7 +46,9 @@ var CreateEditPage = React.createClass({
     },
 
     getInitialState: function () {
-        return { scrollToError: false };
+        return {
+            scrollToError: false
+        };
     },
 
     render: function () {
@@ -70,12 +72,12 @@ var CreateEditPage = React.createClass({
         var { IN_PROGRESS, REJECTED } = approvalStatus;
         var showSubmit = [IN_PROGRESS, REJECTED].some(s => s === status);
         var showPreview = !!listing.id;
-        var titleText = (this.props.params.listingId ? 'Edit ' : 'Create New ') + 'Listing';
+        var titleText = (this.getParams().listingId ? 'Edit ' : 'Create New ') + 'Listing';
         var saveText = showSave() ? 'Save' : 'Saved';
 
         var formProps = assign({},
             pick(this.state, ['errors', 'warnings', 'messages', 'firstError']),
-            { system: this.props.system, value: listing, requestChange: updateListing, 
+            { system: this.props.system, value: listing, requestChange: updateListing,
                 forceError: !this.state.isValid, currentUser: this.props.currentUser }
         );
 
@@ -100,15 +102,6 @@ var CreateEditPage = React.createClass({
             </div>
         );
         /* jshint ignore:end */
-    },
-
-    shouldComponentUpdate: function (newProps, newState) {
-        //route parameter just changed
-        if (this.props.params.listingId !== newProps.params.listingId) {
-            return false;
-        }
-
-        return true;
     },
 
     componentDidUpdate: function (prevProps, prevState) {

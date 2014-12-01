@@ -2,7 +2,7 @@
 
 var React = require('react');
 var Tab = require('../../../mixins/TabMixin');
-var { Link } = require('react-router');
+var { Link, RouteHandler } = require('react-router');
 
 // component dependencies
 var Header = require('../../header');
@@ -24,8 +24,6 @@ var ListingManagement = React.createClass({
     },
 
     render: function () {
-        var activeRoute = this.props.activeRouteHandler();
-
         /* jshint ignore:start */
         return (
             <div className="ListingManagement">
@@ -36,7 +34,7 @@ var ListingManagement = React.createClass({
                     <div className="ListingManagement__TabContainer">
                         { this.renderTabs(this.props.tabs) }
                         <div className="tab-content">
-                            { activeRoute }
+                            <RouteHandler />
                         </div>
                     </div>
                 </div>

@@ -7,11 +7,11 @@ var Sidebar = React.createClass({
 
     propTypes: {
         isSearching: React.PropTypes.bool.isRequired,
-        config: React.PropTypes.shape({
+        system: React.PropTypes.shape({
             categories: React.PropTypes.array.isRequired,
             types: React.PropTypes.array.isRequired,
             organizations: React.PropTypes.array.isRequired
-        }),
+        }).isRequired,
         onGoHome: React.PropTypes.func.isRequired,
         onFilterChange: React.PropTypes.func.isRequired
     },
@@ -32,7 +32,7 @@ var Sidebar = React.createClass({
         });
 
         /*jshint ignore:start */
-        return this.transferPropsTo(
+        return (
             <aside className="sidebar">
                 <ul className="list-unstyled facet-group">
                     <li className={ homeLinkClasses } onClick={ this.clearFilters }>Home</li>

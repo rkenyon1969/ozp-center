@@ -1,12 +1,10 @@
 'use strict';
 
-var Router = require('react-router');
-var Link = Router.Link;
-var ActiveState = Router.ActiveState;
+var { Link, State } = require('react-router');
 
 var TabMixin = {
 
-    mixins: [ ActiveState ],
+    mixins: [ State ],
 
     renderTabs: function (LINKS, params) {
         var me = this;
