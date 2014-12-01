@@ -23,5 +23,8 @@
   },
   "resolutions": {
     "jquery": "~2.1.1"
+  },
+  "devDependencies": {
+    "es5-shim": "~4.0.5"
   }
 }
