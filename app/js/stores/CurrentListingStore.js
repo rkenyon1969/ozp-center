@@ -1,5 +1,7 @@
 'use strict';
 
+var $ = require('jquery');
+
 var { createStore } = require('reflux');
 var GlobalListingStore = require('./GlobalListingStore');
 var SystemStore = require('./SystemStore');
@@ -44,7 +46,7 @@ var CurrentListingStore = createStore({
     },
 
     onCacheUpdated: function () {
-        if (_listing.id) {     
+        if (_listing.id) {
             var listing = GlobalListingStore.getById(_listing.id);
             if (listing) {
                 this.refreshListing(cloneDeep(listing));
@@ -68,7 +70,7 @@ var CurrentListingStore = createStore({
         updateValue(_listing, propertyPath);
 
         var validation = this.doValidation();
-        this.trigger({ 
+        this.trigger({
             listing: _listing,
             hasChanges: true,
             errors: validation.errors,
@@ -134,7 +136,7 @@ var CurrentListingStore = createStore({
         var requiredContactTypes = getSystem().contactTypes.filter(t => t.required).map(t => t.title);
 
         if (requiredContactTypes.length > 0) {
-            messages['help.contacts'] = 'At least one contact of each of the ' + 
+            messages['help.contacts'] = 'At least one contact of each of the ' +
                 'following types must be provided: ' + requiredContactTypes.join(', ') + '.';
         }
 
@@ -150,23 +152,26 @@ var CurrentListingStore = createStore({
     },
 
     loadListing: function (id) {
+        var deferred = $.Deferred(),
+            promise = deferred.promise();
+
         if (id) {
             var listing = GlobalListingStore.getCache()[id];
             if (listing) {
                 this.refreshListing(cloneDeep(listing));
-                return Promise.resolve(_listing);
+                deferred.resolve(_listing);
             } else {
-                return new Promise(resolve => {
-                    ListingApi.getById(id).then(l => {
-                        this.refreshListing(new Listing(l));
-                        resolve(_listing);
-                    });
+                ListingApi.getById(id).then(l => {
+                    this.refreshListing(new Listing(l));
+                    deferred.resolve(_listing);
                 });
             }
         } else {
             this.refreshListing(new Listing({ owners: [ProfileStore.getCurrentUser()] }));
-            return Promise.resolve(_listing);
+            deferred.resolve(_listing);
         }
+
+        return promise;
     }
 });
 
