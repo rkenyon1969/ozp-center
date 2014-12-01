@@ -23,7 +23,7 @@ var Toggle = React.createClass({
 
         /* jshint ignore:start */
         return (
-            <section>
+            <section className={this.props.className}>
                 <h5>{title}</h5>
                 <hr/>
                 <p>{this.props.description}</p>
@@ -53,7 +53,7 @@ var EnabledControl = React.createClass({
 
         /* jshint ignore:start */
         return (
-            <Toggle title={title} label="Enabled"
+            <Toggle title={title} label="Enabled" className="enabled-toggle"
                 description={description}
                 onChange={onChange}/>
         );
@@ -79,7 +79,7 @@ var FeaturedControl = React.createClass({
 
         /* jshint ignore:start */
         return (
-            <Toggle title={title} label="Featured"
+            <Toggle title={title} label="Featured" className="featured-toggle"
                 description={description}
                 onChange={this.onChange}/>
         );
