@@ -74,6 +74,7 @@ describe('AdministrationTab', function () {
         /* jshint ignore:start */
 
         node = adminTab.getDOMNode();
+        checkbox = node.querySelector('.featured-toggle input[type=checkbox]');
         expect(checkbox.checked).to.be.true();
         checkbox.checked = false;
         TestUtils.Simulate.change(checkbox, {target: checkbox});

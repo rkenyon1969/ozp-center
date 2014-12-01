@@ -55,6 +55,7 @@ var EnabledControl = React.createClass({
         return (
             <Toggle title={title} label="Enabled" className="enabled-toggle"
                 description={description}
+                checked={enabled}
                 onChange={onChange}/>
         );
         /* jshint ignore:end */
@@ -81,6 +82,7 @@ var FeaturedControl = React.createClass({
         return (
             <Toggle title={title} label="Featured" className="featured-toggle"
                 description={description}
+                checked={featured}
                 onChange={this.onChange}/>
         );
         /* jshint ignore:end */
