@@ -164,7 +164,7 @@ var AdministrationTab = React.createClass({
 
         /* jshint ignore:start */
         return (
-            <div className="col-md-4 col-left">
+            <div className="col-md-4 col-left ListingAdmin__Controls">
                 <section>
                     <h5>Listing Status</h5>
                     <hr/>
