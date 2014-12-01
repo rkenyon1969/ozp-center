@@ -36,7 +36,7 @@ var UserMenu = React.createClass({
                 {
                     this.state.showHelp ?
                         <Modal className="HelpModal" title="OZONE Help Zone" onHidden={this.onModalHidden}>
-                            <embed width="100%" height="100%" name="plugin" src={helpPDF} type="application/pdf"></embed>
+                            <embed width="100%" height="500px" name="plugin" src={helpPDF} type="application/pdf"></embed>
                         </Modal> : null
                 }
             </div>
