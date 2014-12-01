@@ -2,6 +2,7 @@
 
 var $ = require('jquery');
 var _ = require('../utils/_');
+var OzpAnalytics = require('../analytics/ozp-analytics');
 
 var keys = [
     'id', 'title', 'description', 'descriptionShort', 'screenshots', 'contacts', 'totalComments',
@@ -61,6 +62,13 @@ var ListingApi = {
     search: function (options) {
         var params = $.param(options, true);
         return $.getJSON(API_URL + '/api/listing/search?' + params).pipe(function (response) {
+            if (options.category && options.category.length > 0) {
+                OzpAnalytics.trackCategorization('Categorization', options.category, response.total);
+            }
+            else {
+                OzpAnalytics.trackSiteSearch('Application Search', options.queryString, response.total);
+            }
+
             return ((response._embedded && [].concat(response._embedded.item)) || []).map(function (json) {
                 return new Listing(json);
             });

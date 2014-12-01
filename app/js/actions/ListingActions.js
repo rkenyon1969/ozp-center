@@ -4,6 +4,7 @@ var Reflux = require('reflux');
 var { ListingApi } = require('../webapi/Listing');
 var { ProfileApi } = require('../webapi/Profile');
 var _ = require('../utils/_');
+var OzpAnalytics = require('../analytics/ozp-analytics');
 
 var Actions = Reflux.createActions([
     'fetchNewArrivals', 'newArrivalsFetched',
@@ -56,6 +57,7 @@ Actions.fetchOwnedListings.listen(function (profile) {
 });
 
 Actions.launch.listen(function (listing) {
+    OzpAnalytics.trackEvent('Applications', listing.title);
     window.open(listing.launchUrl);
 });
 
@@ -67,12 +69,14 @@ Actions.addToLibrary.listen(function (listing) {
             }
         })
         .then(Actions.addedToLibrary.bind(null, listing));
+    OzpAnalytics.trackEvent('Favorited Applications', listing.title);
 });
 
 Actions.removeFromLibrary.listen(function (listing) {
     ProfileApi
         .removeFromLibrary(listing)
         .then(Actions.removedFromLibrary.bind(null, listing));
+    OzpAnalytics.trackEvent('Favorited Applications', listing.title);
 });
 
 Actions.save.listen(function (data) {
