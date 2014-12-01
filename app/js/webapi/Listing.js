@@ -9,7 +9,8 @@ var keys = [
     'totalRate5','totalVotes', 'state', 'tags', 'type','uuid', 'requirements', 'singleton',
     'versionName', 'imageLargeUrl', 'imageSmallUrl', 'imageMediumUrl', 'imageXlargeUrl',
     'launchUrl', 'company', 'whatIsNew', 'owners', 'agency', 'currentRejection', 'isEnabled',
-    'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls', 'approvalStatus'
+    'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls', 'approvalStatus',
+    'isFeatured'
 ];
 
 function Listing (json) {

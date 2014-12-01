@@ -52,8 +52,7 @@ module.exports = {
     UserRole: {
         USER: 1,
         ORG_STEWARD: 2,
-        APPSMALL_STEWARD: 3,
-        ADMIN: 4
+        ADMIN: 3
     },
 
     listingFieldName: {
