@@ -80,7 +80,8 @@ var Quickview = React.createClass({
                     name: 'Reviews'
                 });
 
-                if (currentUser.isAdmin || _.contains(owners, currentUser.username)) {
+                if (currentUser.isAdmin || _.contains(owners, currentUser.username) ||
+                    _.contains(currentUser.stewardedOrganizations, listing.agency)) {
                     tabs.push({
                         to: 'administration',
                         name: 'Administration'
