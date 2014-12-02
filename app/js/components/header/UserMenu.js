@@ -4,9 +4,6 @@ var React = require('react');
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
 var Modal = require('../shared/Modal');
 
-// TODO: figure out where to pull in production. build time config? CDN?
-var helpPDF = '../hud-ui/assets/PlaceholderUserGuide.pdf';
-
 var UserMenu = React.createClass({
 
     mixins: [ SystemStateMixin ],
@@ -36,7 +33,7 @@ var UserMenu = React.createClass({
                 {
                     this.state.showHelp ?
                         <Modal className="HelpModal" title="OZONE Help Zone" onHidden={this.onModalHidden}>
-                            <embed width="100%" height="500px" name="plugin" src={helpPDF} type="application/pdf"></embed>
+                            <iframe style={{width:"100%", height:"500px", border: 'none'}} src={HELP_URL} />
                         </Modal> : null
                 }
             </div>
