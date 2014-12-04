@@ -48,6 +48,9 @@ var ActionMenu = React.createClass({
             case 'APPROVED':
                 links = [edit, view, disable, del];
                 break;
+            case 'APPROVED_ORG':
+                links = [edit, preview, del];
+                break;
             case 'PENDING':
                 links = [edit, preview, del];
                 break;
@@ -124,7 +127,7 @@ module.exports = React.createClass({
             approvalStatus = listing.approvalStatus,
             classSet = React.addons.classSet({
                 'draft': approvalStatus === 'IN_PROGRESS',
-                'pending': approvalStatus === 'PENDING',
+                'pending': approvalStatus === 'PENDING' || approvalStatus === 'APPROVED_ORG',
                 'needs-action': approvalStatus === 'REJECTED',
                 'published': approvalStatus === 'APPROVED',
                 'MyListingTile': true

@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var _ = require('../../utils/_');
 var ChangeLogs = require('./ChangeLogs');
 var ListingActions = require('../../actions/ListingActions');
 var fetchChangeLogs = ListingActions.fetchChangeLogs;
@@ -8,6 +9,7 @@ var saveListing = ListingActions.save;
 var rejectListing = ListingActions.reject;
 var enableListing = ListingActions.enable;
 var disableListing = ListingActions.disable;
+var approveListingByOrg = ListingActions.approveByOrg;
 var approveListing = ListingActions.approve;
 var listingStatus = require('../../constants').approvalStatus;
 var { UserRole } = require('../../constants');
@@ -133,6 +135,7 @@ var AdministrationTab = React.createClass({
             status = listingStatus[listing.approvalStatus],
             statusText = status,
             isAdmin = UserRole[this.props.currentUser.highestRole] >= UserRole.ADMIN,
+            isStewardOfOrg = _.contains(this.props.currentUser.stewardedOrganizations, listing.agency),
             controls, statusClass;
 
         switch (status) {
@@ -149,11 +152,25 @@ var AdministrationTab = React.createClass({
 
                 statusClass = 'label-published';
                 break;
-            case 'Pending':
-                statusText += ', ' + listing.agency;
-                controls = isAdmin ? this.renderReviewSection() : [];
-                statusClass = 'label-pending';
+            case 'Pending, Organization':
+                if (isStewardOfOrg || isAdmin) {
+                    controls = this.renderReviewSection();
+                    statusClass = 'label-needs-action';
+                } else {
+                    controls = [];
+                    statusClass = 'label-pending';
+                }
                 break;
+            case 'Pending, AppsMall':
+                if (isAdmin) {
+                    controls = this.renderReviewSection();
+                    statusClass = 'label-needs-action';
+                } else {
+                    controls = [];
+                    statusClass = 'label-pending';
+                }
+                break;
+
             case 'Returned to Owner':
                 statusClass = 'label-needs-action';
                 controls = [];
@@ -239,7 +256,11 @@ var AdministrationTab = React.createClass({
 
     approve: function (event) {
         event.preventDefault();
-        approveListing(this.props.listing);
+        if (listingStatus[this.props.listing.approvalStatus] === "Pending, Organization") {
+            approveListingByOrg(this.props.listing);
+        } else {
+            approveListing(this.props.listing);
+        }
     }
 
 });

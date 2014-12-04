@@ -113,6 +113,10 @@ var ListingApi = {
             var embedded = response._embedded,
                 items = embedded ? embedded.item : null;
 
+            if (items && !items.length) {
+                items = [items];
+            }
+
             return (items || []).map(function(json) {
                 return new Listing(json);
             });

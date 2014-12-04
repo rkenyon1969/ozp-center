@@ -83,6 +83,9 @@ var ChangeLogs = React.createClass({
             case actions.REJECTED:
                 listingChange = this.renderRejectedLog(changeLog, index, listingName);
                 break;
+            case actions.APPROVED_ORG:
+                listingChange += ' approved ' + listingName;
+                break;
             case actions.APPROVED:
             case actions.SUBMITTED:
             case actions.ENABLED:

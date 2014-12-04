@@ -10,7 +10,7 @@ var Actions = Reflux.createActions([
     'fetchNewArrivals', 'newArrivalsFetched',
     'fetchMostPopular', 'mostPopularFetched',
     'fetchFeatured', 'featuredFetched',
-    'search', 'searchCompleted', 'approve',
+    'search', 'searchCompleted', 'approveByOrg', 'approve',
     'fetchById', 'fetchedById',
     'fetchChangeLogs', 'changeLogsFetched',
     'fetchOwnedListings', 'ownedListingsFetched',
@@ -94,6 +94,7 @@ Actions.reject.listen(function (listingId, description) {
 Actions.enable.listen(setEnabled.bind(null, true));
 Actions.disable.listen(setEnabled.bind(null, false));
 
+Actions.approveByOrg.listen(updateListingProperty.bind(null, 'approvalStatus', 'APPROVED_ORG'));
 Actions.approve.listen(updateListingProperty.bind(null, 'approvalStatus', 'APPROVED'));
 
 Actions.setFeatured.listen(updateListingProperty.bind(null, 'isFeatured'));

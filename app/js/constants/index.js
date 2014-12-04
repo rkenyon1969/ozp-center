@@ -15,6 +15,7 @@ module.exports = {
         REMOVE_RELATED_ITEMS: 'removerelateditems',
         OUTSIDE: 'outside',
         INSIDE: 'inside',
+        APPROVED_ORG: 'approved_org',
         APPROVED: 'approved',
         REJECTED: 'rejected',
         SUBMITTED: 'submitted',
@@ -44,7 +45,8 @@ module.exports = {
 
     approvalStatus: {
         IN_PROGRESS: 'Draft',
-        PENDING: 'Pending',
+        PENDING: 'Pending, Organization',
+        APPROVED_ORG: 'Pending, AppsMall',
         APPROVED: 'Published',
         REJECTED: 'Returned to Owner'
     },

@@ -19,6 +19,7 @@ var MyListingsSidebar = React.createClass({
                 return acc;
             }, {
                 APPROVED: 0,
+                APPROVED_ORG: 0,
                 REJECTED: 0,
                 PENDING: 0,
                 IN_PROGRESS: 0
@@ -51,7 +52,7 @@ var MyListingsSidebar = React.createClass({
                     <input id="my-listings-filter-pending" type="radio" value="pending"/>
                     <label htmlFor="my-listings-filter-pending" className="label-pending">
                         Pending
-                        <strong className="count">{counts.PENDING}</strong>
+                        <strong className="count">{counts.PENDING + counts.APPROVED_ORG}</strong>
                     </label>
                     <input id="my-listings-filter-draft" type="radio" value="draft"/>
                     <label htmlFor="my-listings-filter-draft" className="label-draft">
