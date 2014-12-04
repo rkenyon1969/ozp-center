@@ -210,7 +210,7 @@ var AdministrationTab = React.createClass({
         /* jshint ignore:start */
         if (editing) {
             return (
-                <section>
+                <section className="return-feedback">
                     <h5>Return to Owner Feedback</h5>
                     <hr/>
                     <p>Please provide feedback for the listing owner about what they should do to make this listing ready for publication</p>
@@ -223,7 +223,7 @@ var AdministrationTab = React.createClass({
             );
         } else {
             return (
-                <section>
+                <section className="review-listing">
                     <h5>Review Listing</h5>
                     <hr/>
                     <button type="button" className="btn btn-success" onClick={ this.approve }>Approve</button>
@@ -256,7 +256,7 @@ var AdministrationTab = React.createClass({
 
     approve: function (event) {
         event.preventDefault();
-        if (listingStatus[this.props.listing.approvalStatus] === "Pending, Organization") {
+        if (listingStatus[this.props.listing.approvalStatus] === 'Pending, Organization') {
             approveListingByOrg(this.props.listing);
         } else {
             approveListing(this.props.listing);

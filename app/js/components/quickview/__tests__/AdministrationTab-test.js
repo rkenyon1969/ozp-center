@@ -82,4 +82,62 @@ describe('AdministrationTab', function () {
         expect(setFeaturedSpy.calledTwice).to.be.ok();
         expect(setFeaturedSpy.calledWith(false, listing)).to.be.true();
     });
+
+    it('renders Approve and Reject buttons if the user is an org steward of the org (or admin) and the listing is pending',
+            function() {
+        var AdministrationTab = require('../AdministrationTab');
+
+        /* jshint ignore:start */
+        var adminTab = TestUtils.renderIntoDocument(
+                <AdministrationTab listing={{approvalStatus: 'PENDING'}}
+                    currentUser={{highestRole: 'ADMIN'}} />
+        );
+        /* jshint ignore:end */
+        expect($(adminTab.getDOMNode()).find('.review-listing')[0]).to.exist();
+
+        /* jshint ignore:start */
+        adminTab = TestUtils.renderIntoDocument(
+                <AdministrationTab listing={{approvalStatus: 'PENDING', agency: 'Test Org'}}
+                    currentUser={{highestRole: 'ORG_STEWARD', stewardedOrganizations: 'Test Org'}} />
+        );
+        /* jshint ignore:end */
+        expect($(adminTab.getDOMNode()).find('.review-listing')[0]).to.exist();
+
+        /* jshint ignore:start */
+        adminTab = TestUtils.renderIntoDocument(
+                <AdministrationTab listing={{approvalStatus: 'PENDING'}}
+                    currentUser={{highestRole: 'USER'}} />
+        );
+        /* jshint ignore:end */
+        expect($(adminTab.getDOMNode()).find('.review-listing')[0]).to.not.exist();
+    });
+
+    it('renders Approve and Reject buttons if the user is an admin and the listing is approved_org',
+            function() {
+        var AdministrationTab = require('../AdministrationTab');
+
+        /* jshint ignore:start */
+        var adminTab = TestUtils.renderIntoDocument(
+                <AdministrationTab listing={{approvalStatus: 'APPROVED_ORG'}}
+                    currentUser={{highestRole: 'ADMIN'}} />
+        );
+        /* jshint ignore:end */
+        expect($(adminTab.getDOMNode()).find('.review-listing')[0]).to.exist();
+
+        /* jshint ignore:start */
+        adminTab = TestUtils.renderIntoDocument(
+                <AdministrationTab listing={{approvalStatus: 'APPROVED_ORG', agency: 'Test Org'}}
+                    currentUser={{highestRole: 'ORG_STEWARD', stewardedOrganizations: 'Test Org'}} />
+        );
+        /* jshint ignore:end */
+        expect($(adminTab.getDOMNode()).find('.review-listing')[0]).to.not.exist();
+
+        /* jshint ignore:start */
+        adminTab = TestUtils.renderIntoDocument(
+                <AdministrationTab listing={{approvalStatus: 'APPROVED_ORG'}}
+                    currentUser={{highestRole: 'USER'}} />
+        );
+        /* jshint ignore:end */
+        expect($(adminTab.getDOMNode()).find('.review-listing')[0]).to.not.exist();
+    });
 });
