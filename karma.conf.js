@@ -46,6 +46,7 @@ module.exports = function (config) {
         browsers: ['PhantomJS'],
         reporters: ['progress'],
         captureTimeout: 60000,
+        browserNoActivityTimeout: 60000,
         singleRun: true
     });
 };
