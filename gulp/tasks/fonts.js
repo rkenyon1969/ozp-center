@@ -6,7 +6,7 @@ var filter = require('gulp-filter');
 var FONT_PATHS = [
     'node_modules/bootstrap-sass/assets/fonts/bootstrap/**/*',
     'bower_components/font-awesome/fonts/**/*',
-    'bower_components/ubuntu-font/**/*'
+    'bower_components/ubuntu-fontface/fonts/**/*'
 ];
 
 gulp.task('fonts', function () {

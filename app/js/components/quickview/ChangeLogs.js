@@ -135,7 +135,7 @@ var ChangeLogs = React.createClass({
         var details = [], extendedDetails = [];
 
         changeLog.changeDetails.forEach(function (changeDetail, i) {
-            var changedField = fieldName[changeDetail.fieldName];
+            var changedField = fieldName[changeDetail.fieldName] || changeDetail.fieldName;
 
             if (i === changeLog.changeDetails.length - 1 && i !== 0) {
                 details[i] =  'and ' + changedField;

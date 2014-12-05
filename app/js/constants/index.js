@@ -80,6 +80,7 @@ module.exports = {
         imageMediumUrl: 'Large Icon URL',
         imageSmallUrl: 'Small Icon URL',
         imageXlargeUrl: 'Featured Banner',
-        docUrls: 'Resources'
+        docUrls: 'Resources',
+        isFeatured: 'Featured Flag'
     }
 };
