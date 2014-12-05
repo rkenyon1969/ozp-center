@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = function timeAgo (date) {
+    date = date.replace('+0000', 'Z');
     date = new Date(date).getTime();
     var timeDiff = (Date.now() - date) / 1000;
     var timePassed, quantity;
