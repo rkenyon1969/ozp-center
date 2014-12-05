@@ -8,7 +8,7 @@ var UserMenu = React.createClass({
 
     mixins: [ SystemStateMixin ],
 
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             showHelp: false
         };

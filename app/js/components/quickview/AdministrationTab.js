@@ -41,7 +41,7 @@ var Toggle = React.createClass({
 });
 
 var EnabledControl = React.createClass({
-    shouldComponentUpdate: function(newProps) {
+    shouldComponentUpdate: function (newProps) {
         return newProps.listing.isEnabled !== this.props.isEnabled;
     },
 
@@ -65,11 +65,11 @@ var EnabledControl = React.createClass({
 });
 
 var FeaturedControl = React.createClass({
-    onChange: function(evt) {
+    onChange: function (evt) {
         ListingActions.setFeatured(evt.target.checked, this.props.listing);
     },
 
-    shouldComponentUpdate: function(newProps) {
+    shouldComponentUpdate: function (newProps) {
         return newProps.listing.isFeatured !== this.props.isFeatured;
     },
 

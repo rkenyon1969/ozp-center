@@ -8,7 +8,7 @@ var { TestUtils } = React.addons;
 
 describe('AdministrationTab', function () {
     it('renders an isFeatured toggle iff the user is an admin and the listing is published',
-            function() {
+            function () {
         var AdministrationTab = require('../AdministrationTab');
 
         /* jshint ignore:start */
@@ -36,7 +36,7 @@ describe('AdministrationTab', function () {
         expect($(adminTab.getDOMNode()).find('.featured-toggle')[0]).to.not.exist();
     });
 
-    it('calls ListingAction.setFeatured when the Featured toggle is clicked', function() {
+    it('calls ListingAction.setFeatured when the Featured toggle is clicked', function () {
         var setFeaturedSpy = sinon.spy(),
             AdministrationTab =
                     require('inject?../../actions/ListingActions!../AdministrationTab')({
@@ -84,7 +84,7 @@ describe('AdministrationTab', function () {
     });
 
     it('renders Approve and Reject buttons if the user is an org steward of the org (or admin) and the listing is pending',
-            function() {
+            function () {
         var AdministrationTab = require('../AdministrationTab');
 
         /* jshint ignore:start */
@@ -113,7 +113,7 @@ describe('AdministrationTab', function () {
     });
 
     it('renders Approve and Reject buttons if the user is an admin and the listing is approved_org',
-            function() {
+            function () {
         var AdministrationTab = require('../AdministrationTab');
 
         /* jshint ignore:start */

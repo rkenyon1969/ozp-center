@@ -71,13 +71,13 @@
 }
 
 .listings-search-results, .new-arrival-listings, .most-popular-listings {
-    .listing-tile:nth-child(4n+4) {
+    .SearchListingTile:nth-child(4n+4) {
         margin-right: 0px;
     }
 }
 
 .carousel {
-    .listing-tile {
+    .SearchListingTile {
         margin-bottom: 0;
     }
 }

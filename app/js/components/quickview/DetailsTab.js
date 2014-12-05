@@ -92,7 +92,7 @@ var DetailsTab = React.createClass({
 
     renderGovSponser: function () {
         /* jshint ignore:start */
-        return this.props.listing.contacts.map(function(contact, i){
+        return this.props.listing.contacts.map(function (contact, i){
             if (contact.type.indexOf("Government Sponser") >= 0){
                 return  [<label>Government Sponser </label>,
                         <div className="col-md-offset-1">

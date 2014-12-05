@@ -2,22 +2,21 @@
 
 var Reflux = require('reflux');
 var { ProfileApi } = require('../webapi/Profile');
+var createActions = require('../utils/createActions');
 
-var Actions = Reflux.createActions([
-    'fetchLibrary', 'libraryFetched', 'selfLoaded',
-    'fetchSelf', 'selfFetched', 'fetchSelfFailed'
-]);
+var ProfileActions = createActions({
+    fetchLibrary: function () {
+        ProfileApi.getLibrary()
+            .then(ProfileActions.fetchLibraryCompleted);
+    },
 
-Actions.fetchLibrary.listen(function () {
-    ProfileApi.getLibrary()
-        .then(Actions.libraryFetched);
+    fetchSelf: function () {
+        ProfileApi.getSelf()
+            .done(ProfileActions.fetchSelfCompleted)
+            .fail(ProfileActions.fetchSelfFailed);
+    }
 });
 
-Actions.fetchSelf.listen(function () {
-    ProfileApi.getSelf()
-        .done(Actions.selfFetched)
-        .fail(Actions.fetchSelfFailed);
-});
+ProfileActions.selfLoaded = Reflux.createAction();
 
-
-module.exports = Actions;
+module.exports = ProfileActions;

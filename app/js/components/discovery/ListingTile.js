@@ -12,6 +12,14 @@ var ListingTile = React.createClass({
 
     mixins: [ Navigation, CurrentPath, ActiveState ],
 
+    statics: {
+        fromArray: function (array) {
+            /* jshint ignore:start  */
+            return array.map((listing) => <ListingTile listing={listing} key={listing.id}/>);
+            /* jshint ignore:end  */
+        }
+    },
+
     render: function () {
         var listing = this.props.listing;
 
@@ -30,7 +38,7 @@ var ListingTile = React.createClass({
 
         /*jshint ignore:start */
         return this.transferPropsTo(
-            <li className="listing listing-tile">
+            <li className="listing SearchListingTile" key={listing.id} >
                 <a href={ href }>
                     <img src={ imageLargeUrl } />
                     <section className="slide-up">

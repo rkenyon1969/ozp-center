@@ -66,9 +66,11 @@ html, body {
 }
 
 @import 'w2ui';
+@import 'load-more';
 @import 'carousel';
 @import 'header';
-@import 'listing-tile';
+@import 'listing/search-listing-tile';
+@import 'listing/admin-owner-listing-tile';
 @import 'featured-listings';
 @import 'discovery';
 @import 'quickview';
@@ -78,7 +80,7 @@ html, body {
 @import 'management/user/my-listings';
 @import 'management/mall/mall-management';
 @import 'management/deleteConfirmation';
-
+@import 'management/all-listings/all-listings';
 
 .close {
     font-size: 3em;
@@ -117,8 +119,8 @@ label {
 
 .label-draft, .label-pending, .label-needs-action, .label-published {
     @extend .fa;
-
-    font-family: 'Ubuntu Regular', 'Ubuntu';
+    padding-left: 0px !important;
+    font-family: 'Ubuntu';
 
     &::before {
         font-family: 'FontAwesome';

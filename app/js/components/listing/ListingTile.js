@@ -3,8 +3,7 @@
 var React = require('react');
 var moment = require('moment');
 var { Link, Navigation, CurrentPath } = require('react-router');
-
-var ActiveState = require('../../../mixins/ActiveStateMixin');
+var ActiveState = require('../../mixins/ActiveStateMixin');
 
 var ActionMenu = React.createClass({
 
@@ -21,10 +20,6 @@ var ActionMenu = React.createClass({
                 action: 'view',
                 tab: 'overview'
             }),
-            editHref = this.makeHref(activeRoutePath, null, {
-                listing: listing.id,
-                action: 'edit'
-            }),
             deleteHref = this.makeHref(activeRoutePath, null, {
                 listing: listing.id,
                 action: 'delete'
@@ -34,19 +29,17 @@ var ActionMenu = React.createClass({
                 action: 'feedback'
             }),
             linkParams = {listingId: listing.id},
-            review = <li><a href="review">Review</a></li>,
-            edit = <li><Link to="edit" params={linkParams}>Edit</Link></li>,
-            preview = <li><a href={overviewHref}>Preview</a></li>,
-            del = <li><a href={deleteHref}>Delete</a></li>,
-            view = <li><a href={overviewHref}>View</a></li>,
-            disable = <li><a href="disable">Disable</a></li>,
-            feedback = <li><a href={feedbackHref}>Read Feedback</a></li>,
+            edit = <li key="edit"><Link to="edit" params={linkParams}>Edit</Link></li>,
+            preview = <li key="preview"><a href={overviewHref}>Preview</a></li>,
+            del = <li key="del"><a href={deleteHref}>Delete</a></li>,
+            view = <li key="view"><a href={overviewHref}>View</a></li>,
+            feedback = <li key="feedback"><a href={feedbackHref}>Read Feedback</a></li>,
             links,
             approvalStatus = listing.approvalStatus;
 
         switch (approvalStatus) {
             case 'APPROVED':
-                links = [edit, view, disable, del];
+                links = [edit, view, del];
                 break;
             case 'APPROVED_ORG':
                 links = [edit, preview, del];
@@ -64,9 +57,9 @@ var ActionMenu = React.createClass({
 
         //use hidden checkbox to manage menu toggle state
         return (
-            <label className="MyListingTile__actionMenu">
+            <label className="AdminOwnerListingTile__actionMenu">
                 <input type="checkbox" />
-                <span className="MyListingTile__actionMenuButton" />
+                <span className="AdminOwnerListingTile__actionMenuButton" />
                 <ul>{links}</ul>
             </label>
         );
@@ -78,7 +71,7 @@ var ListingStatus = React.createClass({
     render: function () {
         /* jshint ignore:start */
         return (
-            <span className="MyListingTile__approvalStatus" />
+            <span className="AdminOwnerListingTile__approvalStatus" />
         );
         /* jshint ignore:end */
     }
@@ -91,7 +84,7 @@ var ApprovalDate = React.createClass({
 
         /* jshint ignore:start */
         return (
-            <span className="MyListingTile__approvalDate">{approvalDateString}</span>
+            <span className="AdminOwnerListingTile__approvalDate">{approvalDateString}</span>
         );
         /* jshint ignore:end */
     }
@@ -103,7 +96,7 @@ var InfoBar = React.createClass({
 
         /* jshint ignore:start */
         return (
-            <h5 className="MyListingTile__infoBar">
+            <h5 className="AdminOwnerListingTile__infoBar">
                 <span className="title">{listing.title}</span>
                 <ListingStatus listing={listing} />
                 <ApprovalDate listing={listing} />
@@ -113,9 +106,17 @@ var InfoBar = React.createClass({
     }
 });
 
-module.exports = React.createClass({
+var AdminOwnerListingTile = React.createClass({
 
     mixins: [ Navigation, ActiveState ],
+
+    statics: {
+        fromArray: function (array) {
+            /* jshint ignore:start */
+            return array.map((listing) => <AdminOwnerListingTile listing={listing} key={listing.id} />);
+            /* jshint ignore:end  */
+        }
+    },
 
     render: function () {
         var listing = this.props.listing,
@@ -130,7 +131,7 @@ module.exports = React.createClass({
                 'pending': approvalStatus === 'PENDING' || approvalStatus === 'APPROVED_ORG',
                 'needs-action': approvalStatus === 'REJECTED',
                 'published': approvalStatus === 'APPROVED',
-                'MyListingTile': true
+                'AdminOwnerListingTile': true
             });
 
 
@@ -139,7 +140,7 @@ module.exports = React.createClass({
             <li className={classSet}>
                 <ActionMenu listing={listing} />
                 <a href={overview}>
-                    <img className="MyListingTile__img" src={listing.imageLargeUrl} />
+                    <img className="AdminOwnerListingTile__img" src={listing.imageLargeUrl} />
                 </a>
                 <InfoBar listing={listing} />
             </li>
@@ -147,3 +148,5 @@ module.exports = React.createClass({
         /* jshint ignore:end */
     }
 });
+
+module.exports = AdminOwnerListingTile;

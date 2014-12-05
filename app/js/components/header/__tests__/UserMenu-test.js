@@ -11,7 +11,7 @@ describe('UserMenu', function () {
         var UserMenu = require('inject?../../mixins/SystemStateMixin!../UserMenu');
         UserMenu = UserMenu({
             '../../mixins/SystemStateMixin': {
-                getInitialState: function() {
+                getInitialState: function () {
                     return {
                         currentUser: {
                             isAdmin: true
@@ -32,7 +32,7 @@ describe('UserMenu', function () {
         var UserMenu = require('inject?../../mixins/SystemStateMixin!../UserMenu');
         UserMenu = UserMenu({
             '../../mixins/SystemStateMixin': {
-                getInitialState: function() {
+                getInitialState: function () {
                     return {
                         currentUser: {
                             isAdmin: false

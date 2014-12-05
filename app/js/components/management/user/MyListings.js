@@ -3,16 +3,16 @@
 var React = require('react');
 var { RouteHandler } = require('react-router');
 var Reflux = require('reflux');
-var MyListingTile = require('./MyListingTile');
+var ListingTile = require('../../listing/ListingTile');
 var MyListingsSidebar = require('./MyListingsSidebar');
 var GlobalListingStore = require('../../../stores/GlobalListingStore');
 var ListingActions = require('../../../actions/ListingActions');
 var ProfileActions = require('../../../actions/ProfileActions');
 
 var fetchOwnedListings = ListingActions.fetchOwnedListings;
-var ownedListingsFetched = ListingActions.ownedListingsFetched;
+var fetchOwnedListingsCompleted = ListingActions.fetchOwnedListingsCompleted;
 var fetchSelf = ProfileActions.fetchSelf;
-var selfFetched = ProfileActions.selfFetched;
+var fetchSelfCompleted = ProfileActions.fetchSelfCompleted;
 
 var MyListings = React.createClass({
 
@@ -21,14 +21,14 @@ var MyListings = React.createClass({
     mixins: [ Reflux.ListenerMixin ],
 
     componentWillMount: function () {
-        this.listenTo(ownedListingsFetched, this.onStoreChanged);
+        this.listenTo(fetchOwnedListingsCompleted, this.onStoreChanged);
         fetchOwnedListings();
 
-        this.listenTo(selfFetched, this.onSelfFetched);
+        this.listenTo(fetchSelfCompleted, this.onSelfFetched);
         fetchSelf();
     },
 
-    getListings: function(profile) {
+    getListings: function (profile) {
         profile = profile || (this.state ? this.state.profile : null);
 
         return profile ? GlobalListingStore.getByOwner(profile) : [];
@@ -44,48 +44,36 @@ var MyListings = React.createClass({
 
     onStoreChanged: function () {
         this.setState({
-            listings: this.getListings(),
-            filter: this.state.filter,
-            profile: this.state.profile
+            listings: this.getListings()
         });
     },
 
-    onFilterChanged: function(filter) {
+    onFilterChanged: function (filter) {
         this.setState({
-            listings: this.state.listings,
-            filter: filter,
-            profile: this.state.profile
+            filter: filter
         });
     },
 
-    onSelfFetched: function(profile) {
+    onSelfFetched: function (profile) {
         this.setState({
-            listings: this.getListings(profile),
-            filter: this.state.filter,
             profile: profile
         });
     },
 
     render: function () {
-        var tiles = this.state.listings
-            .map(function(listing) {
-                /* jshint ignore:start */
-                return (
-                    <MyListingTile listing={listing} />
-                );
-                /* jshint ignore:end */
-            }),
-            filter = this.state.filter || '';
+        var filter = this.state.filter || '';
 
         /* jshint ignore:start */
         return this.transferPropsTo(
-            <div className="MyListings">
-                <aside className="MyListings__sidebar col-md-3" >
+            <div className="MyListings row">
+                <aside className="MyListings__sidebar col-md-2" >
                     <MyListingsSidebar value={this.state.filter}
                         listings={this.state.listings}
                         onFilterChanged={this.onFilterChanged} />
                 </aside>
-                <ul className={"MyListings__listings col-md-9 " + filter}>{tiles}</ul>
+                <ul className={"MyListings__listings col-md-10 " + filter}>
+                    { ListingTile.fromArray(this.state.listings) }
+                </ul>
                 <RouteHandler />
             </div>
         );

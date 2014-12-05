@@ -3,8 +3,9 @@
 var $ = require('jquery');
 var _ = require('../utils/_');
 var OzpAnalytics = require('../analytics/ozp-analytics');
+var PaginatedResponse  =require ('./responses/PaginatedResponse');
 
-var keys = [
+var FIELDS = [
     'id', 'title', 'description', 'descriptionShort', 'screenshots', 'contacts', 'totalComments',
     'avgRate', 'totalRate1', 'totalRate2', 'totalRate3','totalRate4', 'height', 'width',
     'totalRate5','totalVotes', 'state', 'tags', 'type','uuid', 'requirements', 'singleton',
@@ -17,7 +18,7 @@ var keys = [
 function Listing (json) {
     json = json || {};
 
-    keys.forEach(key => {
+    FIELDS.forEach((key) => {
         this[key] = json[key];
     });
 
@@ -33,46 +34,40 @@ function Listing (json) {
     return this;
 }
 
+function parseList (response) {
+    return new PaginatedResponse(response, Listing).getItemAsList();
+}
+
 var ListingApi = {
 
     getFeatured: function () {
-        return $.getJSON(API_URL + '/api/listing/search?isFeatured=true&sort=avgRate&order=DESC&max=24').pipe(function (response) {
-            return ((response._embedded && [].concat(response._embedded.item)) || []).map(function (json) {
-                return new Listing(json);
-            });
-        });
+        return $.getJSON(API_URL + '/api/listing/search?isFeatured=true&sort=avgRate&order=DESC&max=24')
+            .then(parseList);
     },
 
     getNewArrivals: function () {
-        return $.getJSON(API_URL + '/api/listing/search?sort=approvedDate&order=DESC&max=24').pipe(function (response) {
-            return ((response._embedded && [].concat(response._embedded.item)) || []).map(function (json) {
-                return new Listing(json);
-            });
-        });
+        return $.getJSON(API_URL + '/api/listing/search?sort=approvedDate&order=DESC&max=24')
+            .then(parseList);
     },
 
     getMostPopular: function () {
-        return $.getJSON(API_URL + '/api/listing/search?sort=avgRate&order=ASC&max=24').pipe(function (response) {
-            return ((response._embedded && [].concat(response._embedded.item)) || []).map(function (json) {
-                return new Listing(json);
-            });
-        });
+        return $.getJSON(API_URL + '/api/listing/search?sort=avgRate&order=ASC&max=24')
+            .then(parseList);
     },
 
     search: function (options) {
         var params = $.param(options, true);
-        return $.getJSON(API_URL + '/api/listing/search?' + params).pipe(function (response) {
-            if (options.category && options.category.length > 0) {
-                OzpAnalytics.trackCategorization('Categorization', options.category, response.total);
-            }
-            else {
-                OzpAnalytics.trackSiteSearch('Application Search', options.queryString, response.total);
-            }
-
-            return ((response._embedded && [].concat(response._embedded.item)) || []).map(function (json) {
-                return new Listing(json);
-            });
-        });
+        return $.getJSON(API_URL + '/api/listing/search?' + params)
+            .then(function (response) {
+                if (options.category && options.category.length > 0) {
+                    OzpAnalytics.trackCategorization('Categorization', options.category, response.total);
+                }
+                else {
+                    OzpAnalytics.trackSiteSearch('Application Search', options.queryString, response.total);
+                }
+                return response;
+            })
+            .then(parseList);
     },
 
     getById: function (id) {
@@ -101,26 +96,15 @@ var ListingApi = {
     },
 
     getChangeLogs: function (id){
-        return $.getJSON(API_URL + '/api/listing/' + id + '/activity').pipe(function (response) {
-            return (response._embedded && [].concat(response._embedded.item)) || [];
-        });
+        return $.getJSON(API_URL + '/api/listing/' + id + '/activity')
+            .then((response) => new PaginatedResponse(response).getItemAsList());
     },
 
     getOwnedListings: function (profile) {
         var id = profile ? profile.id : 'self';
 
-        return $.getJSON(API_URL + '/api/profile/' + id + '/listing').pipe(function(response) {
-            var embedded = response._embedded,
-                items = embedded ? embedded.item : null;
-
-            if (items && !items.length) {
-                items = [items];
-            }
-
-            return (items || []).map(function(json) {
-                return new Listing(json);
-            });
-        });
+        return $.getJSON(API_URL + '/api/profile/' + id + '/listing')
+            .then(parseList);
     },
 
     rejectListing: function (id, description) {
@@ -130,6 +114,16 @@ var ListingApi = {
             data: JSON.stringify({description: description}),
             dataType: 'json',
             contentType: 'application/json'
+        });
+    },
+
+    getAllListings: function (url, options) {
+        if (!_.isString(url)) {
+            url = API_URL + '/api/listing?' + $.param(options);
+        }
+
+        return $.getJSON(url).then((response) => {
+            return new PaginatedResponse(response, Listing);
         });
     }
 };

@@ -20,7 +20,7 @@ var FeaturedListingTile = React.createClass({
 
         /*jshint ignore:start */
         return (
-            <li className="listing listing-tile listing-tile-featured">
+            <li className="listing SearchListingTile SearchListingTile--featured">
                 <a href={href}>
                     <img src={image} />
                 </a>

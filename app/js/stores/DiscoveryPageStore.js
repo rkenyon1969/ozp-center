@@ -14,9 +14,9 @@ var DiscoveryPageStore = Reflux.createStore({
     * Update local cache when new data is fetched
     **/
     init: function () {
-        this.listenTo(ListingActions.newArrivalsFetched, this.onNewArrivalsFetched);
-        this.listenTo(ListingActions.mostPopularFetched, this.onMostPopularFetched);
-        this.listenTo(ListingActions.featuredFetched, this.onFeaturedFetched);
+        this.listenTo(ListingActions.fetchNewArrivalsCompleted, this.onNewArrivalsFetched);
+        this.listenTo(ListingActions.fetchMostPopularCompleted, this.onMostPopularFetched);
+        this.listenTo(ListingActions.fetchFeaturedCompleted, this.onFeaturedFetched);
         this.listenTo(ListingActions.searchCompleted, this.onSearchCompleted);
     },
 

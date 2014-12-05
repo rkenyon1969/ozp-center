@@ -15,7 +15,7 @@ window.$ = jQuery;
 window.React = React;
 
 // Enable withCredentials for all requests
-$.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
+$.ajaxPrefilter(function ( options, originalOptions, jqXHR ) {
     options.xhrFields = {
         withCredentials: true
     };

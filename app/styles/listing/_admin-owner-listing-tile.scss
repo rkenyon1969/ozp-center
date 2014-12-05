@@ -1,0 +1,157 @@
+.AdminOwnerListingTile {
+    //overridden when matching filter
+    display: none;
+    position: relative;
+
+    margin-right: 35px;
+    margin-bottom: 30px;
+
+    vertical-align: top;
+}
+
+.MyListings__listings.all .AdminOwnerListingTile,
+.MyListings__listings.draft .AdminOwnerListingTile.draft,
+.MyListings__listings.needs-action .AdminOwnerListingTile.needs-action,
+.MyListings__listings.pending .AdminOwnerListingTile.pending,
+.MyListings__listings.published .AdminOwnerListingTile.published {
+    display: inline-block;
+}
+
+.AdminOwnerListingTile__img {
+    width: $listing-tile-img-width;
+    height: $listing-tile-img-height;
+    display: block;
+}
+
+.AdminOwnerListingTile__actionMenu > ul {
+    //overridden when toggle is checked
+    display: none;
+
+    @extend .list-unstyled;
+
+    width: 70px;
+
+    font-size: .8em;
+
+    background-color: $white;
+
+    border: 1px solid $gray-lighter;
+
+    > li {
+        $spacing: 5px;
+
+        padding-top: $spacing;
+        padding-bottom: $spacing;
+
+        > a {
+            color: inherit;
+            border-left: 3px solid transparent;
+
+            padding-left: $spacing;
+            padding-right: $spacing;
+
+            display: block;
+        }
+
+        &:hover > a {
+            color: $blue-dark;
+            border-color: $blue-dark;
+
+            text-decoration: none;
+        }
+    }
+}
+
+.AdminOwnerListingTile__actionMenuButton {
+    //style as font-awesome horizontal ellipsis
+    @extend .fa;
+    @extend .fa-ellipsis-h;
+
+    display: block;
+    text-align: center;
+
+    background-color: $white;
+    font-size: 1.3em;
+    border: 1px solid $gray-lighter;
+
+    position: relative;
+    margin-right: 0;
+    margin-left: auto;
+    width: 50px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-top: 1px;
+
+    cursor: pointer;
+
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.AdminOwnerListingTile__actionMenu {
+    position: absolute;
+
+    top: 1px;
+    right: 1px;
+    z-index: 1;
+
+    > input {
+        //the toggle checkbox is hidden
+        display: none;
+
+        //when the checkbox is checked, display the menu
+        &:checked {
+            & ~ ul {
+                display: block;
+            }
+
+            & ~ .AdminOwnerListingTile__actionMenuButton {
+                border-bottom: 3px solid $blue-dark;
+                color: $blue-dark;
+            }
+        }
+    }
+}
+
+.AdminOwnerListingTile__approvalStatus {
+    position: absolute;
+    left: 0;
+}
+
+.AdminOwnerListingTile__approvalDate {
+    position: absolute;
+    right: 0;
+
+    font-size: .9em;
+}
+
+.AdminOwnerListingTile__infoBar {
+    text-align: center;
+    vertical-align: baseline;
+
+    > .title {
+        display: inline-block;
+        width: 100px;
+
+        overflow-wrap: break-word;
+    }
+}
+
+.AdminOwnerListingTile.pending .AdminOwnerListingTile__approvalStatus {
+    @extend .label-pending;
+}
+
+.AdminOwnerListingTile.published .AdminOwnerListingTile__approvalStatus {
+    @extend .label-published;
+}
+
+.AdminOwnerListingTile.needs-action .AdminOwnerListingTile__approvalStatus {
+    @extend .label-needs-action;
+}
+
+.AdminOwnerListingTile.draft .AdminOwnerListingTile__approvalStatus {
+    @extend .label-draft;
+}

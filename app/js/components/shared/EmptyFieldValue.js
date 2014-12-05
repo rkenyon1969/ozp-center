@@ -9,7 +9,7 @@ var EmptyFieldValue = React.createClass({
         inline: React.PropTypes.bool
     },
 
-    getDefaultProps: function() {
+    getDefaultProps: function () {
         return {
             text: 'Not provided!',
             inline: false

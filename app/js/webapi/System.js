@@ -1,10 +1,10 @@
 'use strict';
 
 var $ = require('jquery');
+var Response = require('./responses/Response');
 
 function parse (response) {
-    var data = (response._embedded && response._embedded.item) || response.data || response;
-    return [].concat(data); //normalize to an array
+    return new Response(response).getItemAsList();
 }
 
 var ConfigApi = {

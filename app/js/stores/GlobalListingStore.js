@@ -2,20 +2,12 @@
 
 var Reflux = require('reflux');
 var ListingActions = require('../actions/ListingActions');
-var newArrivalsFetched = ListingActions.newArrivalsFetched;
-var mostPopularFetched = ListingActions.mostPopularFetched;
-var featuredFetched = ListingActions.featuredFetched;
-var searchCompleted = ListingActions.searchCompleted;
-var changeLogsFetched = ListingActions.changeLogsFetched;
-var ownedListingsFetched = ListingActions.ownedListingsFetched;
-var listingRejected = ListingActions.rejected;
-var listingSaved = ListingActions.saved;
-var fetchChangeLogs = ListingActions.fetchChangeLogs;
 var {listingCreated} = require('../actions/CreateEditActions');
 var Listing = require('../webapi/Listing').Listing;
 
 var _listingsCache = {};
 var _listingsByOwnerCache = {};
+var _allListings = [];
 
 function updateCache (listings) {
     listings.forEach(function (listing) {
@@ -27,10 +19,10 @@ function updateCache (listings) {
 
         _listingsCache[listing.id] = listing;
 
-        listing.owners.forEach(function(owner) {
+        listing.owners.forEach(function (owner) {
             var cachedListings = _listingsByOwnerCache[owner.username] || [];
 
-            cachedListings = cachedListings.filter(function(l) {
+            cachedListings = cachedListings.filter(function (l) {
                 return l.id !== listing.id;
             });
 
@@ -45,32 +37,39 @@ var GlobalListingStore = Reflux.createStore({
     * Update local listingsCache when new data is fetched
     **/
     init: function () {
-        this.listenTo(newArrivalsFetched, updateCache);
-        this.listenTo(mostPopularFetched, updateCache);
-        this.listenTo(featuredFetched, updateCache);
-        this.listenTo(searchCompleted, updateCache);
-        this.listenTo(changeLogsFetched, function (id, changeLogs) {
+        this.listenTo(ListingActions.fetchNewArrivalsCompleted, updateCache);
+        this.listenTo(ListingActions.fetchMostPopularCompleted, updateCache);
+        this.listenTo(ListingActions.fetchFeaturedCompleted, updateCache);
+        this.listenTo(ListingActions.searchCompleted, updateCache);
+        this.listenTo(ListingActions.fetchAllListingsCompleted, function (filter, response) {
+            var listings = response.getItemAsList();
+            updateCache(listings);
+            _allListings = (_allListings || []).concat(listings);
+            this.trigger();
+        });
+
+        this.listenTo(ListingActions.fetchChangeLogsCompleted, function (id, changeLogs) {
             _listingsCache[id].changeLogs = changeLogs;
             this.trigger();
         });
-        this.listenTo(ownedListingsFetched, updateCache);
-        this.listenTo(listingSaved, function (isNew, data) {
+        this.listenTo(ListingActions.fetchOwnedListingsCompleted, updateCache);
+        this.listenTo(ListingActions.saveCompleted, function (isNew, data) {
             var listing = new Listing(data);
             updateCache([listing]);
             if (isNew) {
                 listingCreated(listing);
             }
-            fetchChangeLogs(listing.id);
+            ListingActions.fetchChangeLogs(listing.id);
             this.trigger();
         });
-        this.listenTo(listingRejected, function (rejection) {
+        this.listenTo(ListingActions.rejectCompleted, function (rejection) {
             var listing = _listingsCache[rejection.listingId];
             listing.currentRejection= rejection;
             listing.approvalStatus = 'REJECTED';
-            fetchChangeLogs(listing.id);
+            ListingActions.fetchChangeLogs(listing.id);
             this.trigger();
         });
-        this.listenTo(ListingActions.fetchedById, function (data) {
+        this.listenTo(ListingActions.fetchByIdCompleted, function (data) {
             updateCache([new Listing(data)]);
             this.trigger();
         });
@@ -88,9 +87,14 @@ var GlobalListingStore = Reflux.createStore({
         return _listingsCache;
     },
 
-    getByOwner: function(profile) {
+    getByOwner: function (profile) {
         return _listingsByOwnerCache[profile.username] || [];
+    },
+
+    getAllListings: function () {
+        return _allListings;
     }
+
 });
 
 module.exports = GlobalListingStore;

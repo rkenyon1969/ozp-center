@@ -1,167 +1,8 @@
 .MyListings__listings {
-    padding-top: 40px;
+    padding-top: $padding-large-vertical;
 }
 
-.MyListingTile {
-    //overridden when matching filter
-    display: none;
-    position: relative;
-
-    margin-right: 40px;
-    margin-bottom: 30px;
-
-    vertical-align: top;
-}
-
-.MyListings__listings.all .MyListingTile,
-.MyListings__listings.draft .MyListingTile.draft,
-.MyListings__listings.needs-action .MyListingTile.needs-action,
-.MyListings__listings.pending .MyListingTile.pending,
-.MyListings__listings.published .MyListingTile.published {
-    display: inline-block;
-}
-
-.MyListingTile__img {
-    width: $listing-tile-img-width;
-    height: $listing-tile-img-height;
-    display: block;
-}
-
-.MyListingTile__actionMenu > ul {
-    //overridden when toggle is checked
-    display: none;
-
-    @extend .list-unstyled;
-
-    width: 70px;
-
-    font-size: .8em;
-
-    background-color: $white;
-
-    border: 1px solid $gray-lighter;
-
-    > li {
-        $spacing: 5px;
-
-        padding-top: $spacing;
-        padding-bottom: $spacing;
-
-        > a {
-            color: inherit;
-            border-left: 3px solid transparent;
-
-            padding-left: $spacing;
-            padding-right: $spacing;
-
-            display: block;
-        }
-
-        &:hover > a {
-            color: $blue-dark;
-            border-color: $blue-dark;
-
-            text-decoration: none;
-        }
-    }
-}
-
-.MyListingTile__actionMenuButton {
-    //style as font-awesome horizontal ellipsis
-    @extend .fa;
-    @extend .fa-ellipsis-h;
-
-    display: block;
-    text-align: center;
-
-    background-color: $white;
-    font-size: 1.3em;
-    border: 1px solid $gray-lighter;
-
-    position: relative;
-    margin-right: 0;
-    margin-left: auto;
-    width: 50px;
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: 0;
-    padding-top: 1px;
-
-    cursor: pointer;
-
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-}
-
-.MyListingTile__actionMenu {
-    position: absolute;
-
-    top: 1px;
-    right: 1px;
-    z-index: 1;
-
-    > input {
-        //the toggle checkbox is hidden
-        display: none;
-
-        //when the checkbox is checked, display the menu
-        &:checked {
-            & ~ ul {
-                display: block;
-            }
-
-            & ~ .MyListingTile__actionMenuButton {
-                border-bottom: 3px solid $blue-dark;
-                color: $blue-dark;
-            }
-        }
-    }
-}
-
-.MyListingTile__approvalStatus {
-    position: absolute;
-    left: 0;
-}
-
-.MyListingTile__approvalDate {
-    position: absolute;
-    right: 0;
-
-    font-size: .9em;
-}
-
-.MyListingTile__infoBar {
-    text-align: center;
-    vertical-align: baseline;
-
-    > .title {
-        display: inline-block;
-        width: 100px;
-
-        overflow-wrap: break-word;
-    }
-}
-
-.MyListingTile.pending .MyListingTile__approvalStatus {
-    @extend .label-pending;
-}
-
-.MyListingTile.published .MyListingTile__approvalStatus {
-    @extend .label-published;
-}
-
-.MyListingTile.needs-action .MyListingTile__approvalStatus {
-    @extend .label-needs-action;
-}
-
-.MyListingTile.draft .MyListingTile__approvalStatus {
-    @extend .label-draft;
-}
-
-
-.MyListings__approvalStatusFilter {
+.Listings__SidebarFilter {
     input[type="radio"] {
         display: none;
     }
@@ -171,6 +12,7 @@
         cursor: pointer;
 
         border-left: 3px solid transparent;
+        padding-left: 4px;
 
         vertical-align: middle;
 
@@ -192,13 +34,7 @@
             height: 20px;
             line-height: 15px;
 
-            border-radius: 50%;
-
             padding: 3px;
-
-            font-size: .9em;
-            color: $white;
-            text-align: center;
         }
     }
 
@@ -216,14 +52,6 @@
 
     .label-published strong {
         background-color: $green-dark;
-    }
-
-    .label-draft strong, .label-all strong {
-        background-color: $black;
-    }
-
-    .label-all {
-        padding-left: 4px;
     }
 }
 

@@ -15,7 +15,7 @@ var MallManagement = React.createClass({
     mixins: [ Tab, AdminRoute ],
 
     statics: {
-        willTransitionFrom: function(transition, component) {
+        willTransitionFrom: function (transition, component) {
             // refresh config cache when transitioning away
             SystemStore.loadSystem();
         }

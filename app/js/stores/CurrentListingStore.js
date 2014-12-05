@@ -46,7 +46,7 @@ var CurrentListingStore = createStore({
     },
 
     onCacheUpdated: function () {
-        if (_listing.id) {
+        if (_listing && _listing.id) {
             var listing = GlobalListingStore.getById(_listing.id);
             if (listing) {
                 this.refreshListing(cloneDeep(listing));

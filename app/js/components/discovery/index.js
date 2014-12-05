@@ -143,7 +143,7 @@ var Discovery = React.createClass({
             <section className="Discovery__NewArrivals">
                 <h4>New Arrivals</h4>
                 <Carousel className="new-arrival-listings">
-                    { this._renderListings(this.state.newArrivals) }
+                    { ListingTile.fromArray(this.state.newArrivals) }
                 </Carousel>
             </section>
         );
@@ -160,7 +160,7 @@ var Discovery = React.createClass({
             <section className="Discovery__MostPopular">
                 <h4>Most Popular</h4>
                 <Carousel className="most-popular-listings">
-                    { this._renderListings(this.state.mostPopular) }
+                    { ListingTile.fromArray(this.state.mostPopular) }
                 </Carousel>
             </section>
         );
@@ -173,22 +173,10 @@ var Discovery = React.createClass({
             <section className="Discovery__SearchResults">
                 <h4>Search Results</h4>
                 <ul className="list-unstyled listings-search-results">
-                    { this._renderListings(this.state.searchResults) }
+                    { ListingTile.fromArray(this.state.searchResults) }
                 </ul>
             </section>
         );
-        /*jshint ignore:end */
-    },
-
-    _renderListings: function (listings) {
-        var me = this;
-        /*jshint ignore:start */
-        return listings.map(function (listing) {
-            return <ListingTile
-                        key = { listing.id }
-                        listing={ listing }
-                    />
-        });
         /*jshint ignore:end */
     }
 

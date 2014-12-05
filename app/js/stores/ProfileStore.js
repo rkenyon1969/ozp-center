@@ -2,11 +2,11 @@
 
 var Reflux = require('reflux');
 var _ = require('../utils/_');
-var ProfileActions = _.pick(require('../actions/ProfileActions'), 'libraryFetched', 'selfFetched');
-var ListingActions = _.pick(require('../actions/ListingActions'), 'addedToLibrary', 'removedFromLibrary');
-var { selfLoaded } = require('../actions/ProfileActions');
+var ProfileActions = require('../actions/ProfileActions');
+var ListingActions = require('../actions/ListingActions');
 var { UserRole } = require('../constants');
 var { Listing } = require('../webapi/Listing');
+var { selfLoaded } = ProfileActions;
 var { ORG_STEWARD, ADMIN } = UserRole;
 
 var _library = [];
@@ -18,21 +18,24 @@ var selfIsOrgSteward = org => _self.stewardedOrganizations.some(o => o === org);
 
 var ProfileStore = Reflux.createStore({
 
-    listenables: Object.assign({}, ProfileActions, ListingActions),
+    listenables: Object.assign({},
+        _.pick(ProfileActions, 'fetchLibraryCompleted', 'fetchSelfCompleted'),
+        _.pick(ListingActions, 'addToLibraryCompleted', 'removeFromLibraryCompleted')
+    ),
 
     onLibraryFetched: function (library) {
         _library = library;
         this.trigger({library: _library});
     },
 
-    onSelfFetched: function (self) {
+    onFetchSelfCompleted: function (self) {
         _self = self;
         _self.isAdmin = selfIsAdmin();
         this.trigger({currentUser: _self});
         selfLoaded();
     },
 
-    onAddedToLibrary: function (listing) {
+    onAddToLibraryCompleted: function (listing) {
         _library.push({
             folder: null,
             listing: {
@@ -47,7 +50,7 @@ var ProfileStore = Reflux.createStore({
         this.trigger({library: _library});
     },
 
-    onRemovedFromLibrary: function (listing) {
+    onRemoveFromLibraryCompleted: function (listing) {
         var toRemove = _.find(_library, {
             listing: {
                 id: listing.id

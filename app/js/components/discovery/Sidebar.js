@@ -65,7 +65,7 @@ var Sidebar = React.createClass({
     renderFacets: function (list, key) {
         var me = this;
 
-        return list.map(function(facetOption, index) {
+        return list.map(function (facetOption, index) {
             var classes = React.addons.classSet({
                 active: _.contains(me.state.selectedFilters[key], facetOption.title),
                 'facet-group-item': true

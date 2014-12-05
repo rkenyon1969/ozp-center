@@ -6,11 +6,15 @@ module.exports = {
     assign: Object.assign,
     cloneDeep: require('lodash/objects/cloneDeep'),
     forOwn: require('lodash/objects/forOwn'),
+    isArray: require('lodash/objects/isArray'),
     isFunction: require('lodash/objects/isFunction'),
+    isString: require('lodash/objects/isString'),
     pick: require('lodash/objects/pick'),
+
     find: require('lodash/collections/find'),
     contains: require('lodash/collections/contains'),
     map: require('lodash/collections/map'),
+    reduce: require('lodash/collections/reduce'),
 
     findIndex: require('lodash/arrays/findIndex'),
     compact: require('lodash/arrays/compact'),
