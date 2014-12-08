@@ -8,6 +8,7 @@ class PaginatedList {
         this.hasMore = !!this.nextLink;
         this.isFetching = false;
         this.counts = paginatedResponse.getResponse().counts;
+        this.counts.total = paginatedResponse.getResponse().total;
     }
 
     receivePage (paginatedResponse) {
@@ -16,6 +17,7 @@ class PaginatedList {
         this.hasMore = !!this.nextLink;
         this.isFetching = false;
         this.counts = paginatedResponse.getResponse().counts;
+        this.counts.total = paginatedResponse.getResponse().total;
     }
 
     expectPage () {

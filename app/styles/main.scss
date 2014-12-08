@@ -117,7 +117,7 @@ label {
 =   Approval Status Indicators =
 ==============================*/
 
-.label-draft, .label-pending, .label-needs-action, .label-published {
+.label-draft, .label-pending, .label-needs-action, .label-published, .label-rejected {
     @extend .fa;
     padding-left: 0px !important;
     font-family: 'Ubuntu';
@@ -147,6 +147,10 @@ label {
 .label-published {
     @extend .fa-thumbs-o-up;
     color: $green-dark;
+}
+
+.label-rejected {
+    @extend .fa-thumbs-o-down;
 }
 
 /*====================

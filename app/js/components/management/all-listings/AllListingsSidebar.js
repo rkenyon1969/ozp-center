@@ -29,6 +29,7 @@ var AllListingsSidebar = React.createClass({
 
     render: function () {
         var counts = this.props.counts;
+        counts.disabled = counts.total - counts.enabled;
         var organizations = this.props.organizations
             .map(function (organization) {
                 var count = (counts && counts.organizations) ? counts.organizations[organization.id] : 0;
@@ -53,7 +54,10 @@ var AllListingsSidebar = React.createClass({
                         value={ this.props.value['approvalStatus'] || 'all' }
                         onChange={ _.partial(this.handleChange, "approvalStatus") }>
                     <input id="all-listings-filter-all" type="radio" value="all" />
-                    <label htmlFor="all-listings-filter-all" className="label-all">All</label>
+                    <label htmlFor="all-listings-filter-all" className="label-all">
+                        All
+                        <strong className="badge">{ counts.total }</strong>
+                    </label>
 
                     <input id="all-listings-filter-published" type="radio" value="APPROVED"/>
                     <label htmlFor="all-listings-filter-published" className="label-published">
@@ -61,16 +65,22 @@ var AllListingsSidebar = React.createClass({
                         <strong className="badge">{ counts.APPROVED }</strong>
                     </label>
 
-                    <input id="all-listings-filter-needs-action" type="radio" value="REJECTED"/>
+                    <input id="all-listings-filter-needs-action" type="radio" value="APPROVED_ORG"/>
                     <label htmlFor="all-listings-filter-needs-action" className="label-needs-action">
                         Needs action
-                        <strong className="badge">{ counts.REJECTED }</strong>
+                        <strong className="badge">{ counts.APPROVED_ORG }</strong>
                     </label>
 
                     <input id="all-listings-filter-pending" type="radio" value="PENDING"/>
                     <label htmlFor="all-listings-filter-pending" className="label-pending">
-                        Pending
+                        Pending, Organization
                         <strong className="badge">{ counts.PENDING }</strong>
+                    </label>
+
+                    <input id="all-listings-filter-rejected" type="radio" value="REJECTED"/>
+                    <label htmlFor="all-listings-filter-rejected" className="label-rejected">
+                        Returned to Owner
+                        <strong className="badge">{ counts.REJECTED }</strong>
                     </label>
 
                     <input id="all-listings-filter-draft" type="radio" value="IN_PROGRESS"/>
@@ -85,7 +95,12 @@ var AllListingsSidebar = React.createClass({
                         value={ this.props.value['org'] || 'all' }
                         onChange={ _.partial(this.handleChange, "org") }>
                     <input id="all-listings-filter-organization-all" type="radio" value="all"/>
-                    <label htmlFor="all-listings-filter-organization-all" className="label-all">All</label>
+
+                    <label htmlFor="all-listings-filter-organization-all" className="label-all">
+                        All
+                        <strong className="badge">{ counts.total }</strong>
+                    </label>
+
                     { organizations }
                 </RadioGroup>
 
@@ -94,7 +109,12 @@ var AllListingsSidebar = React.createClass({
                         value={ (this.props.value['enabled'] === null) ? 'null' : this.props.value['enabled'].toString() }
                         onChange={ this.handleEnabledChange }>
                     <input id="all-listings-filter-enabled-all" type="radio" value="null"/>
-                    <label htmlFor="all-listings-filter-enabled-all" className="label-all">All</label>
+
+                    <label htmlFor="all-listings-filter-enabled-all" className="label-all">
+                        All
+                        <strong className="badge">{ counts.total }</strong>
+                    </label>
+
                     <input id="all-listings-filter-enabled-enabled" type="radio" value="true"/>
                     <label htmlFor="all-listings-filter-enabled-enabled" className="label-enabled">
                         Enabled
