@@ -73,13 +73,13 @@ var AllListingsSidebar = React.createClass({
 
                     <input id="all-listings-filter-pending" type="radio" value="PENDING"/>
                     <label htmlFor="all-listings-filter-pending" className="label-pending">
-                        Pending, Organization
+                        Pending, Org.
                         <strong className="badge">{ counts.PENDING }</strong>
                     </label>
 
                     <input id="all-listings-filter-rejected" type="radio" value="REJECTED"/>
                     <label htmlFor="all-listings-filter-rejected" className="label-rejected">
-                        Returned to Owner
+                        Returned
                         <strong className="badge">{ counts.REJECTED }</strong>
                     </label>
 

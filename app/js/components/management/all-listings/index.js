@@ -85,7 +85,7 @@ var AllListings = React.createClass({
         /* jshint ignore:start */
         return this.transferPropsTo(
             <div className="AllListings row">
-                <aside className="AllListings__sidebar col-md-3">
+                <aside className="AllListings__sidebar col-md-2">
                     <AllListingsSidebar
                         value={ this.state.filter }
                         listings={ this.state.listings }
@@ -93,7 +93,7 @@ var AllListings = React.createClass({
                         onFilterChanged={ this.onFilterChanged }
                         organizations={ this.state.system.organizations || [] } />
                 </aside>
-                <LoadMore className="AllListings__listings col-md-9 all" hasMore={this.state.hasMore} onLoadMore={this.onLoadMore}>
+                <LoadMore className="AllListings__listings col-md-10 all" hasMore={this.state.hasMore} onLoadMore={this.onLoadMore}>
                     { ListingTile.fromArray(this.state.listings) }
                 </LoadMore>
             </div>
