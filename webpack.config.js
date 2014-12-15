@@ -5,7 +5,7 @@ var ENV = process.env.NODE_ENV || "development";
 var API_URL = process.env.API_URL || "https://localhost:8443/marketplace";
 var LOGOUT_URL = process.env.LOGOUT_URL || "#";
 var HELP_URL = process.env.HELP_URL || "../hud-ui/assets/PlaceholderUserGuide.pdf";
-var METRICS_URL = process.env.METRICS_URL || "https://www.owfgoss.org:10443/dev/metrics/"
+var METRICS_URL = process.env.METRICS_URL || "https://www.owfgoss.org:10443/dev/metrics/";
 
 module.exports = {
     // This is the main file that should include all other JS files
