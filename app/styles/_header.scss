@@ -12,7 +12,7 @@
         right: 69px;
         left: 280px;
         height: 54px;
-        border: 1px solid #d5d5d5;
+        border: 1px solid $gray-lighter;
         border-top: none;
         border-bottom: none;
         border-right: none;
@@ -33,14 +33,14 @@
                 z-index: 1; // to place icon on top of search input box
                 top: 17px;
                 left: 30px;
-                color: #4c5457;
+                color: $gray-dark;
             }
         }
     }
 
     .spacer {
         height: 20px;
-        background: #eeeeef;
+        background: $gray-lightest;
         width: 100%;
     }
 }
@@ -66,22 +66,22 @@
 
   .btn {
     height: 54px;
-    background: #fff;
+    background: $white;
     padding: 5px 20px 0 20px;
     font-size: 34px;
-    color: #858585;
-    border-left: 1px solid #d5d5d5;
+    color: $gray;
+    border-left: 1px solid $blue-darker;
     z-index:300;
   }
 
   [aria-expanded="true"] {
-    background:#eeeeef;
-    color:#009dd3;
+    background:$gray-lightest;
+    color:$blue;
     z-index:1000;
-    box-shadow:inset 0 5px 0 #009dd3;
+    box-shadow:inset 0 5px 0 $blue;
 
-    .i{
-      color:#009dd3;
+    i{
+      color:$blue;
 
     }
   }
@@ -90,14 +90,14 @@
     margin-top: 0;
     padding: .8em 0;
     width: 200px;
-    border-color: #d5d5d5;
-    background:#eeeeef;
+    border-color: $blue-darker;
+    background:$gray-lightest;
     padding-bottom:0;
 
     h4{
-      color:#009dd3;
+      color:$blue;
       font-weight:300;
-      font-size:12pt;
+      font-size:16px;
       padding:0 0 .1em 1.7em;
 
     }
@@ -107,11 +107,10 @@
       padding:0 0 1em 0;
 
       li{
-        list-style-type:none;
         padding-left:2em;
 
         &:hover{
-          box-shadow:inset 5px 0 0 #009dd3;
+          box-shadow:inset 5px 0 0 $blue;
         }
         a{
           color:#555;
@@ -144,27 +143,27 @@
       width:100%;
       padding:.5em;
       padding-left:1.7em;
-      background:#dbdcdd;
+      background:$gray-lighter;
       margin-bottom:0;
 
       a{
-        color:#3b4246;
+        color:$gray-darker;
         &:hover{
-          color:#0e5772;
+          color:$blue-darker;
         }
       }
       &:hover{
-        background:#dbdcdd;
+        background:$gray-lighter;
         border:none;
         box-shadow:none;
-        color:#087399;
+        color:$blue-dark;
       }
     }
     .goback{
       padding:0;
 
       &:hover{
-        color:#087399;
+        color:$blue-dark;
       }
     }
   }
