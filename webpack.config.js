@@ -5,6 +5,7 @@ var ENV = process.env.NODE_ENV || "development";
 var API_URL = process.env.API_URL || "https://localhost:8443/marketplace";
 var LOGOUT_URL = process.env.LOGOUT_URL || "#";
 var HELP_URL = process.env.HELP_URL || "../hud-ui/assets/PlaceholderUserGuide.pdf";
+var METRICS_URL = process.env.METRICS_URL || "https://www.owfgoss.org:10443/dev/metrics/"
 
 module.exports = {
     // This is the main file that should include all other JS files
@@ -55,7 +56,8 @@ module.exports = {
             },
             "API_URL": JSON.stringify(API_URL),
             "LOGOUT_URL": JSON.stringify(LOGOUT_URL),
-            "HELP_URL": JSON.stringify(HELP_URL)
+            "HELP_URL": JSON.stringify(HELP_URL),
+            "METRICS_URL": JSON.stringify(METRICS_URL)
         }),
         new webpack.ProvidePlugin({
             $: "jquery",

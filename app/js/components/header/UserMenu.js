@@ -3,6 +3,7 @@
 var React = require('react');
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
 var Modal = require('../shared/Modal');
+var { Link, Navigation, CurrentPath } = require('react-router');
 
 var UserMenu = React.createClass({
 
@@ -18,18 +19,42 @@ var UserMenu = React.createClass({
         /*jshint ignore:start */
         return (
             <div id="user-menu" className="dropdown navbar-right">
-                <a className="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i className="fa fa-bars"></i>
-                </a>
-                <ul className="dropdown-menu" role="menu">
-                    <li><a href="javascript:;" onClick={this.showHelpModal}><i className="fa fa-question" style={{width: "29px"}}></i>Help</a></li>
-                    <li><a href="#user-management/my-listings"><i className="fa fa-list"></i>My Listings</a></li>
-                    {
-                        this.state.currentUser.isAdmin &&
-                            <li><a href="#mall-management/categories"><i className="fa fa-wrench"></i>AppsMall Management</a></li>
-                    }
-                    <li><a href={ LOGOUT_URL }><i className="fa fa-sign-out"></i>Logout</a></li>
+              <a className="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                <i className="fa fa-bars"></i>
+              </a>
+              <ul className="dropdown-menu" role="menu">
+              <li>
+                <h4>Personalize</h4>
+                <ul>
+                  <li><a href="http://ozone-development.github.io/hud-ui/"><i className="icon-ribbon"></i> Bookmarks</a></li>
+                  <li><a href="#profile"><i className="icon-head"></i> Profile</a></li>
+                  <li><a href="#settings"><i className="icon-cog"></i> Settings</a></li>
                 </ul>
+              </li>
+              <li>
+              <h4>Create</h4>
+                <ul>
+                  <li><Link to="edit"><i className="icon-square-plus"></i> Submit a Listing</Link></li>
+                  <li><a href="#new"><i className="icon-box"></i> Create a Suite</a></li>
+                </ul>
+              </li>
+              <li>
+              <h4>Manage</h4>
+                <ul>
+                  <li><Link to="my-listings"><i className="icon-stack"></i> Listing Managment</Link></li>
+                  <li><Link to="mall-management"><i className="icon-shopping-settings"></i> AppsMall Management</Link></li>
+                  <li><a href={METRICS_URL}><i className="icon-bar-graph"></i> Metrics</a></li>
+                </ul>
+              </li>
+              <li>
+                <ul className="goback">
+                  <li className="backToHud">
+                    <a href="http://ozone-development.github.io/hud-ui/"><i className="icon-arrow-right"></i> Back to HUD</a>
+                  </li>
+                </ul>
+              </li>
+
+            </ul>
                 {
                     this.state.showHelp ?
                         <Modal className="HelpModal" title="OZONE Help Zone" onHidden={this.onModalHidden}>
