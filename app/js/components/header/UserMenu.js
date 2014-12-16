@@ -26,7 +26,7 @@ var UserMenu = React.createClass({
                     <li>
                         <h4>Personalize</h4>
                         <ul className="list-unstyled">
-                            <li><a href="http://ozone-development.github.io/hud-ui/"><i className="icon-ribbon"></i> Bookmarks</a></li>
+                            <li><a href={HUD_URL}><i className="icon-ribbon"></i> Bookmarks</a></li>
                             <li><a href="#profile"><i className="icon-head"></i> Profile</a></li>
                             <li><a href="#settings"><i className="icon-cog"></i> Settings</a></li>
                         </ul>
@@ -55,7 +55,7 @@ var UserMenu = React.createClass({
                     <li>
                         <ul className="goback list-unstyled">
                             <li className="backToHud">
-                                <a href="http://ozone-development.github.io/hud-ui/"><i className="icon-arrow-right"></i> Back to HUD</a>
+                                <a href={HUD_URL}><i className="icon-arrow-right"></i> Back to HUD</a>
                             </li>
                         </ul>
                     </li>
