@@ -58,7 +58,8 @@ module.exports = {
             "API_URL": JSON.stringify(API_URL),
             "LOGOUT_URL": JSON.stringify(LOGOUT_URL),
             "HELP_URL": JSON.stringify(HELP_URL),
-            "METRICS_URL": JSON.stringify(METRICS_URL)
+            "METRICS_URL": JSON.stringify(METRICS_URL),
+            "HUD_URL": JSON.stringify(HUD_URL)
         }),
         new webpack.ProvidePlugin({
             $: "jquery",
