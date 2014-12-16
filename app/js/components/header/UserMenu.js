@@ -63,9 +63,9 @@ var UserMenu = React.createClass({
                 </ul>
                 {
                     this.state.showHelp ?
-                    <Modal className="HelpModal" title="OZONE Help Zone" onHidden={this.onModalHidden}>
-                        <iframe style={{width:"100%", height:"500px", border: 'none'}} src={HELP_URL} />
-                    </Modal> : null
+                        <Modal className="HelpModal" title="OZONE Help Zone" onHidden={this.onModalHidden}>
+                            <iframe style={{width:"100%", height:"500px", border: 'none'}} src={HELP_URL} />
+                        </Modal> : null
                 }
             </div>
         );
