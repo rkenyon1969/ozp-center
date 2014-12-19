@@ -47,7 +47,7 @@ var UserMenu = React.createClass({
                             <li><Link to="my-listings"><i className="icon-stack"></i> Listing Managment</Link></li>
                             {
                                 this.state.currentUser.isAdmin &&
-                                <li><Link to="mall-management"><i className="icon-shopping-settings"></i> AppsMall Management</Link></li>
+                                <li><Link to="categories"><i className="icon-shopping-settings"></i> AppsMall Management</Link></li>
                             }
                             <li><a href={METRICS_URL}><i className="icon-bar-graph"></i> Metrics</a></li>
                         </ul>
