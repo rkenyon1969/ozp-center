@@ -3,7 +3,7 @@
 var React = require('react');
 var Reflux = require('reflux');
 var _ = require('../../../utils/_');
-var RadioGroup = require('exports?RadioGroup!react-radio-group');
+var RadioGroup = require('react-radio-group');
 
 var AllListingsSidebar = React.createClass({
 

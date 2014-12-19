@@ -28,11 +28,10 @@ module.exports = {
             carouFredSel$: "carouFredSel/jquery.carouFredSel-6.2.1",
             lodash: "lodash-amd/modern",
             "magnific-popup$": "magnific-popup/dist/jquery.magnific-popup",
-            "react-radio-group$": 'react-radio-group/react-radiogroup',
             w2ui$: "w2ui/dist/w2ui"
         },
         // Tell webpack to look for required files in bower and node
-        modulesDirectories: ['bower_components', 'node_modules']
+        modulesDirectories: ['./bower_components', './node_modules']
     },
     module: {
         preLoaders: [

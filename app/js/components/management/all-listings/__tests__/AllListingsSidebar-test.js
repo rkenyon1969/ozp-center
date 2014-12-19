@@ -1,10 +1,12 @@
 'use strict';
 
+var React = require('react');
+var expect = require('chai').expect;
+var TestUtils = React.addons.TestUtils;
+
 describe('AllListingsSidebar', function() {
     it('renders sidebar filters', function() {
-        var React = require('react');
         var AllListingsSidebar = require('../AllListingsSidebar');
-        var TestUtils = React.addons.TestUtils;
 
         var allListingsSidebar = TestUtils.renderIntoDocument(
             <AllListingsSidebar
@@ -16,7 +18,7 @@ describe('AllListingsSidebar', function() {
         );
 
         var html = TestUtils.findRenderedDOMComponentWithTag(allListingsSidebar, 'form');
-        expect(html.getDOMNode().find('radioGroup[name="approvalStatus"]')).to.exist;
+        expect($(html.getDOMNode()).find('radioGroup[name="approvalStatus"]')).to.exist();
     });
 });
 

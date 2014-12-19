@@ -9,11 +9,10 @@ module.exports = function (config) {
         files: [
             // including es5-shim for PhantomJS
             'bower_components/es5-shim/es5-shim.js',
-            'app/js/__tests__/main.js',
-            'app/js/**/*-test.js'
+            'app/js/__tests__/main.js'
         ],
         preprocessors: {
-            'app/js/**/*.js': ['webpack']
+            'app/js/__tests__/main.js': ['webpack']
         },
         webpack: {
             cache: true,
