@@ -33,8 +33,9 @@ describe('UserMenu', function () {
         var userMenu = TestUtils.renderIntoDocument(
             <UserMenu />
         );
+        
         expect(
-            $(userMenu.getDOMNode()).find('a[href="mall-management"]')[0]
+            $(userMenu.getDOMNode()).find('a[href="categories"]')[0]
         ).to.exist;
     });
 
@@ -65,7 +66,7 @@ describe('UserMenu', function () {
             <UserMenu />
         );
         expect(
-            $(userMenu.getDOMNode()).find('a[href="mall-management"]')[0]
+            $(userMenu.getDOMNode()).find('a[href="categories"]')[0]
         ).to.not.exist;
     });
 
