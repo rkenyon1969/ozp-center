@@ -49,7 +49,7 @@ var UserMenu = React.createClass({
                                 this.state.currentUser.isAdmin &&
                                 <li><Link to="categories"><i className="icon-shopping-settings"></i> AppsMall Management</Link></li>
                             }
-                            <li><a href={METRICS_URL}><i className="icon-bar-graph"></i> Metrics</a></li>
+                            <li><a href={METRICS_URL} target="_blank"><i className="icon-bar-graph"></i> Metrics</a></li>
                         </ul>
                     </li>
                     <li>
