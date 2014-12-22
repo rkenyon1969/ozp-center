@@ -1,7 +1,7 @@
 'use strict';
 
 describe('AllListings', function() {
-    it('', function() {
+    it('renders the sidebar on the all listings page', function() {
         var React = require('react');
         var AllListings = require('../index.js');
         var expect = require('chai').expect;
@@ -9,7 +9,19 @@ describe('AllListings', function() {
 
         var allListings = TestUtils.renderIntoDocument(React.createElement(AllListings));
 
-        var html = TestUtils.findRenderedDOMComponentWithTag(allListings, 'form');
-        expect(html.getDOMNode().find('radioGroup[name="approvalStatus"]')).to.exist;
+        expect($(allListings.getDOMNode()).find('.AllListings__sidebar')[0]).to.exist();
+
+    });
+
+    it('renders the grid view on the all listings page', function() {
+        var React = require('react');
+        var AllListings = require('../index.js');
+        var expect = require('chai').expect;
+        var TestUtils = React.addons.TestUtils;
+
+        var allListings = TestUtils.renderIntoDocument(React.createElement(AllListings));
+
+        expect($(allListings.getDOMNode()).find('.AllListings__listings')[0]).to.exist();
+
     });
 });
