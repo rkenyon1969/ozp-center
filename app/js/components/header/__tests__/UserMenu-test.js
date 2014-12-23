@@ -8,7 +8,14 @@ var { TestUtils } = React.addons;
 describe('UserMenu', function () {
 
     it('renders management link for admins', function () {
-        var UserMenu = require('inject?../../mixins/SystemStateMixin!../UserMenu');
+        var MockLink = React.createClass({
+            render: function() {
+                return (
+                    <a href={this.props.to}>{this.props.children}</a>
+                );
+            }
+        });
+        var UserMenu = require('inject?../../mixins/SystemStateMixin&react-router!../UserMenu');
         UserMenu = UserMenu({
             '../../mixins/SystemStateMixin': {
                 getInitialState: function () {
@@ -18,18 +25,29 @@ describe('UserMenu', function () {
                         }
                     };
                 },
+            },
+            'react-router' : {
+                Link: MockLink
             }
         });
         var userMenu = TestUtils.renderIntoDocument(
             <UserMenu />
         );
+        
         expect(
-            $(userMenu.getDOMNode()).find('a[href="#mall-management/categories"]')[0]
+            $(userMenu.getDOMNode()).find('a[href="categories"]')[0]
         ).to.exist;
     });
 
     it('does not render management link for users', function () {
-        var UserMenu = require('inject?../../mixins/SystemStateMixin!../UserMenu');
+        var MockLink = React.createClass({
+            render: function() {
+                return (
+                    <a href={this.props.to}>{this.props.children}</a>
+                );
+            }
+        });
+        var UserMenu = require('inject?../../mixins/SystemStateMixin&react-router!../UserMenu');
         UserMenu = UserMenu({
             '../../mixins/SystemStateMixin': {
                 getInitialState: function () {
@@ -39,13 +57,16 @@ describe('UserMenu', function () {
                         }
                     };
                 },
+            },
+            'react-router' : {
+                Link: MockLink
             }
         });
         var userMenu = TestUtils.renderIntoDocument(
             <UserMenu />
         );
         expect(
-            $(userMenu.getDOMNode()).find('a[href="#mall-management/categories"]')[0]
+            $(userMenu.getDOMNode()).find('a[href="categories"]')[0]
         ).to.not.exist;
     });
 

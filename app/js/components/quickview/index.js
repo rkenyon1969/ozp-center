@@ -190,8 +190,8 @@ var Quickview = React.createClass({
     edit: function () {
         var listing = this.state.listing;
         this.setState({toEdit: true});
-        this.transitionTo('edit', {listingId: listing.id});
         this.close();
+        this.transitionTo('edit', {listingId: listing.id});
     }
 
 });
