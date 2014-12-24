@@ -1,3 +1,31 @@
+### 0.4.1 (2014-12-24)
+
+
+#### Bug Fixes
+
+* **Header Styles:** OZF-650 Fixed indentation ([7458ee86](https://github.com/ozone-development/center-ui.git/commit/7458ee865c079d5d5b6899aadcfa2b0bcc1cd149))
+* **Listing Edit:** OZF-666 Fix Edit button in IE9 ([5f15e226](https://github.com/ozone-development/center-ui.git/commit/5f15e226e8c4f4a23fdf691068fa9d6d99b4aa61))
+* **METRICS_URL:** Missing semicolon ([9e970c6f](https://github.com/ozone-development/center-ui.git/commit/9e970c6fa174b15b6f26011f029fd3ff054596f1))
+* **Sass Variables:** Replaced inline colors ([46dfd10b](https://github.com/ozone-development/center-ui.git/commit/46dfd10b2a6d1b2283a72deb5a6a697f11731dd2))
+* **User Menu:**
+  * OZF-736 Metrics opens in new tab ([7d1d6581](https://github.com/ozone-development/center-ui.git/commit/7d1d65817900732b351590568bab028077c3841b))
+  * OZF-735 Fixed routing ([68cf0935](https://github.com/ozone-development/center-ui.git/commit/68cf0935fe1990d54b4539aa9ebcfaf43451b509))
+  * Added HUD_URL DefinePlugin ([08631aef](https://github.com/ozone-development/center-ui.git/commit/08631aef72cc2308ea0fa72cd817cd67f61b6e5d))
+* **User-Menu:** Change links, styling and functionality #OZF-650 ([52b5df51](https://github.com/ozone-development/center-ui.git/commit/52b5df5196ca23447ba2626aeac89abc0627ee80))
+* **User-Menu Test:** OZF-650 Updated unit test ([acd238c6](https://github.com/ozone-development/center-ui.git/commit/acd238c6bf013fce0d2769e6625693375ba85691))
+* **User-Menu.js:**
+  * OZF-650 Fixed indentation ([8f7a810b](https://github.com/ozone-development/center-ui.git/commit/8f7a810b725a0ba79e68db88e157866c4c109252))
+  * OZF-650 Fixed indentation ([e368f45a](https://github.com/ozone-development/center-ui.git/commit/e368f45a542f83e5beb99ea4d8334dc9cdd27d0b))
+  * OZF-650 Fixed indentation ([57c0b893](https://github.com/ozone-development/center-ui.git/commit/57c0b89349b66c7ed676f6c649b51ab32c2dd9c1))
+  * OZF-650 Fixed indentation ([f0e23ba1](https://github.com/ozone-development/center-ui.git/commit/f0e23ba1926246a69fd89749ba958cce98f9a0eb))
+* **list-unstyled:** Swapped for bootstrap list-unstyled ([f5d52b65](https://github.com/ozone-development/center-ui.git/commit/f5d52b65035bb085e45ac0e5c551530779ae1bee))
+
+
+#### Features
+
+* **Listing Management:** OZF-464 fixed icons and sizing so it can be four across as per convo with Sarah ([93d83bbd](https://github.com/ozone-development/center-ui.git/commit/93d83bbd25d36456092903f376cddc1c21ef4b1e))
+
+
 ## 0.4.0 (2014-12-09)
 
 
