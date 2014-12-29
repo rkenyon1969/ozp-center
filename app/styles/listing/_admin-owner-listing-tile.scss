@@ -155,3 +155,7 @@
 .AdminOwnerListingTile.draft .AdminOwnerListingTile__approvalStatus {
     @extend .label-draft;
 }
+
+.AdminOwnerListingTile.rejected .AdminOwnerListingTile__approvalStatus {
+    @extend .label-rejected;
+}
