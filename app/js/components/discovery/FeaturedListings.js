@@ -38,6 +38,11 @@ module.exports = React.createClass({
                         listing={ listing }
                     />
         });
+
+        if(this.props.listings.length <= 3){
+            this.props.options.items.visible = (this.props.listings.length <= 2)? 1 : 2;
+        }
+
         return (
             <section>
                 <h4>Featured</h4>
