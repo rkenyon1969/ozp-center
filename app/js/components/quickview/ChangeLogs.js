@@ -84,7 +84,7 @@ var ChangeLogs = React.createClass({
                 listingChange = this.renderRejectedLog(changeLog, index, listingName);
                 break;
             case actions.APPROVED_ORG:
-                listingChange += ' approved ' + listingName;
+                listingChange += ' approved ' + listingName + ' for ' + this.props.org;
                 break;
             case actions.APPROVED:
             case actions.SUBMITTED:

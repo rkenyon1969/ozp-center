@@ -122,7 +122,7 @@ var AdministrationTab = React.createClass({
                     <section>
                         <h5>Listing Changes</h5>
                         <hr/>
-                        <ChangeLogs changeLogs={ this.props.listing.changeLogs } showListingName={ false } />
+                        <ChangeLogs changeLogs={ this.props.listing.changeLogs } showListingName={ false } org={this.props.listing.agency}/>
                     </section>
                 </div>
             </div>
