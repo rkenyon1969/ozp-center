@@ -40,7 +40,7 @@ module.exports = React.createClass({
         });
 
         if(this.props.listings.length <= 3){
-            this.props.options.items.visible = (this.props.listings.length <= 2)? 1 : 2;
+            this.props.options.items.visible = 1;
         }
 
         return (
