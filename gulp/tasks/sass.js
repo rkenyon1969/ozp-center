@@ -16,6 +16,7 @@ gulp.task('sass', function() {
         .pipe(cssImport('main.css'))
         .pipe(replace('../bower_components/bootstrap-sass-official/assets/fonts/bootstrap', 'fonts'))
         .pipe(replace('../bower_components/font-awesome/fonts', 'fonts'))
+        .pipe(replace('../node_modules/bootstrap-sass/assets/fonts/bootstrap', 'fonts'))
         .pipe(replace('./fonts/ubuntu', '../fonts/ubuntu'))
         .pipe(replace('select2.png', '../images/select2.png'))
         .pipe(replace('select2x2.png', '../images/select2x2.png'))
