@@ -83,7 +83,7 @@ var AllListings = React.createClass({
 
     render: function () {
         this.state.listings.forEach(function(listing){
-            listing.view = "adminView";
+            listing.view = 'adminView';
         });
 
         /* jshint ignore:start */
