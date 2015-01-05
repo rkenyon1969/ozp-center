@@ -78,7 +78,6 @@ var Discovery = React.createClass({
                     </section>
                     <div className="clearfix"></div>
                 </div>
-                <RouteHandler />
             </div>
         );
         /*jshint ignore:end */

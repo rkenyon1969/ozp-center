@@ -74,7 +74,6 @@ var MyListings = React.createClass({
                 <ul className={"MyListings__listings col-md-10 " + filter}>
                     { ListingTile.fromArray(this.state.listings) }
                 </ul>
-                <RouteHandler />
             </div>
         );
         /* jshint ignore:end */
