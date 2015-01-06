@@ -5,6 +5,7 @@ var GlobalListingStore = require('../../../stores/GlobalListingStore');
 var Modal = require('../../shared/Modal');
 var Router = require('react-router');
 var Navigation = Router.Navigation;
+var Link = Router.Link;
 
 module.exports = React.createClass({
 
@@ -46,14 +47,20 @@ module.exports = React.createClass({
                     <dt>Feedback</dt>
                     <dd className="feedback">{this.state.feedback}</dd>
                 </dl>
-                <a className="btn btn-primary edit" href="#edit">Edit this listing</a>
+                <Link className="btn btn-primary edit" to="edit"
+                        params={{listingId: this.props.listing}}>
+                    Edit this listing
+                </Link>
             </Modal>
         );
         /* jshint ignore:end */
     },
 
     close: function () {
-        this.refs.modal.close();
         this.goBack();
+    },
+
+    componentWillUnmount: function() {
+        this.refs.modal.close();
     }
 });
