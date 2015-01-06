@@ -1,10 +1,12 @@
 'use strict';
 
 var React = require('react');
+var Reflux = require('reflux');
 var actions = require('../../constants/index').listingActions;
 var timeAgo = require('../../utils/timeAgo');
 var uuid = require('../../utils/uuid');
 var fieldName = require('../../constants/index').listingFieldName;
+var CurrentListingStore = require('../../stores/CurrentListingStore');
 
 var ChangeLogs = React.createClass({
 
@@ -13,11 +15,23 @@ var ChangeLogs = React.createClass({
         showListingName: React.PropTypes.bool
     },
 
+    mixins: [Reflux.listenTo(CurrentListingStore, 'changeLogsReceived')],
+
+    getInitialState: function () {
+        return {
+            changeLogs: []
+        };
+    },
+
     getDefaultProps: function () {
         return {
-            changeLogs: [],
             showListingName: true
         };
+    },
+
+    changeLogsReceived: function (){
+        var logs = CurrentListingStore.getChangeLogs();
+        this.setState({changeLogs: logs});
     },
 
     render: function () {
@@ -33,7 +47,7 @@ var ChangeLogs = React.createClass({
     renderChangeLogs: function () {
         var me = this;
 
-        return this.props.changeLogs.map(function (changeLog, i) {
+        return this.state.changeLogs.map(function (changeLog, i) {
             var time = timeAgo(changeLog.activityDate);
             var listingChange = me.getListingChange(changeLog, i);
 
@@ -209,7 +223,6 @@ var ChangeLogs = React.createClass({
     toggleIcon: function (e) {
         $(e.currentTarget).children('i').toggleClass('fa-minus fa-plus');
     }
-
 });
 
 module.exports = ChangeLogs;

@@ -61,7 +61,6 @@ var Quickview = React.createClass({
 
     render: function () {
 
-        var changeLogs = [];
         var currentUser = this.props.currentUser;
 
         var { shown, listing } = this.state;

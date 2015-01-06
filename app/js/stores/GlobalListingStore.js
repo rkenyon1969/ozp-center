@@ -8,6 +8,7 @@ var Listing = require('../webapi/Listing').Listing;
 var _listingsCache = {};
 var _listingsByOwnerCache = {};
 var _allListings = [];
+var _changeLogsCache = {};
 
 function updateCache (listings) {
     listings.forEach(function (listing) {
@@ -47,17 +48,9 @@ var GlobalListingStore = Reflux.createStore({
             _allListings = (_allListings || []).concat(listings);
             this.trigger();
         });
-
         this.listenTo(ListingActions.fetchChangeLogsCompleted, function (id, changeLogs) {
-            if(!_listingsCache[id]){
-                ListingActions.fetchById(id);
-                this.listenTo(ListingActions.fetchByIdCompleted, function (data){
-                    ListingActions.fetchChangeLogs(data.id);
-                })
-            } else {
-                _listingsCache[id].changeLogs = changeLogs;
-                this.trigger();
-            }
+            _changeLogsCache[id] = changeLogs;
+            this.trigger();
         });
         this.listenTo(ListingActions.fetchOwnedListingsCompleted, updateCache);
         this.listenTo(ListingActions.saveCompleted, function (isNew, data) {
@@ -100,6 +93,14 @@ var GlobalListingStore = Reflux.createStore({
 
     getAllListings: function () {
         return _allListings;
+    },
+
+    getChangeLogsForListing: function (id) {
+        if(!_changeLogsCache[id]) {
+            ListingActions.fetchChangeLogs(id);
+            return null;
+        }
+        return _changeLogsCache[id];
     }
 
 });

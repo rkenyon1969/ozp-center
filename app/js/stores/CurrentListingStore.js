@@ -151,6 +151,10 @@ var CurrentListingStore = createStore({
         return ProfileStore.currentUserCanEdit(_listing);
     },
 
+    getChangeLogs: function (){
+        return GlobalListingStore.getChangeLogsForListing(_listing.id);
+    },
+
     loadListing: function (id) {
         var deferred = $.Deferred(),
             promise = deferred.promise();
