@@ -3,7 +3,8 @@
     display: none;
     position: relative;
 
-    margin-right: 35px;
+    //one less that it should be to mitigate IE rounding error
+    margin-right: 34px;
     margin-bottom: 30px;
 
     vertical-align: top;
