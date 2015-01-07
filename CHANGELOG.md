@@ -1,3 +1,61 @@
+### 0.4.2 (2015-01-07)
+
+
+#### Bug Fixes
+
+* **Detail View:**
+  * OZF-649: rework of caching bug fix ([0e8a24d7](https://github.com/ozone-development/center-ui.git/commit/0e8a24d7f970a9fc4e0c46c2dc990a78eccf216f))
+  * OZF-649: fixed caching bug ([1f58fe8e](https://github.com/ozone-development/center-ui.git/commit/1f58fe8ecf6fac5b8594bd92e80ccfb3f3873ec1))
+  * OZF-649: fixed caching problem so if a listing's detail view is opened it adds t ([789410fd](https://github.com/ozone-development/center-ui.git/commit/789410fd674afc2a962e7c866dffbae0b4264b8e))
+* **Featured Listings:**
+  * OZF-645: featured carousel shows only one at a time ([c98e569d](https://github.com/ozone-development/center-ui.git/commit/c98e569d15c5d1ef44aa4d5ea16646db3e9974fe))
+  * OZF-645: featured carousel shows 1 listing at a time if there is less than 3, sh ([937ed7d9](https://github.com/ozone-development/center-ui.git/commit/937ed7d96b61983c072c1bb12746977557d512b9))
+* **Feedback:** OZF-711 Correct feedback edit button href ([a6e380a5](https://github.com/ozone-development/center-ui.git/commit/a6e380a5de2711220024b1712998277f4512c22e))
+* **Header:** OZF-746 Keep header padding synced with body ([c900714a](https://github.com/ozone-development/center-ui.git/commit/c900714adfd87babcff4206b6d2c6511dd9ae663))
+* **Icons:**
+  * OZF-734 A more consistent fix ([633145a7](https://github.com/ozone-development/center-ui.git/commit/633145a797322073cb6be4e7b26a475a31840ca6))
+  * OZF-734 fixed path issues for dist ([2cf171f8](https://github.com/ozone-development/center-ui.git/commit/2cf171f8e048a5061da2579a38f1f0b2392574a1))
+* **Listing Administration:** OZF-707 show proper 4 colums in IE ([a29527c2](https://github.com/ozone-development/center-ui.git/commit/a29527c2e2929ad92d2e14b39bf8d3be7b0dfac8))
+* **Listing Management:**
+  * fixed jshint errors ([9827a110](https://github.com/ozone-development/center-ui.git/commit/9827a110613b1d500d440a4f2a667fda322c40a7))
+  * OZF-708 Fixed icons for listing status on the tile view ([29689e63](https://github.com/ozone-development/center-ui.git/commit/29689e63975153ab6bc8ce446e1e25384ccc6f95))
+* **Metrics:** Remove hardcoded metrics path ([7194c7b6](https://github.com/ozone-development/center-ui.git/commit/7194c7b68a6f5fe6227757ba800eefb90c19b4e2))
+* **OZF-643:** Removing incorrect RouteHandler components ([228d349c](https://github.com/ozone-development/center-ui.git/commit/228d349cd64c1fdd8fc0463d034aef7ef7ac0726))
+* **build:**
+  * Dowgrading karma-webpack to fix build ([a35201b9](https://github.com/ozone-development/center-ui.git/commit/a35201b9635c01b3a926eb5c948263d44445ac95))
+  * Downgrade from broken version of karma-webpack ([e90754bf](https://github.com/ozone-development/center-ui.git/commit/e90754bfc4ee2fff54f28c51c5cf77a28c720812))
+* **travis:** Attempt to fix travis errors ([cfc09ffe](https://github.com/ozone-development/center-ui.git/commit/cfc09ffeb0d27921358e9e51c48696ac7e2dac5a))
+
+
+### 0.4.2 (2015-01-07)
+
+
+#### Bug Fixes
+
+* **Detail View:**
+  * OZF-649: rework of caching bug fix ([0e8a24d7](https://github.com/ozone-development/center-ui.git/commit/0e8a24d7f970a9fc4e0c46c2dc990a78eccf216f))
+  * OZF-649: fixed caching bug ([1f58fe8e](https://github.com/ozone-development/center-ui.git/commit/1f58fe8ecf6fac5b8594bd92e80ccfb3f3873ec1))
+  * OZF-649: fixed caching problem so if a listing's detail view is opened it adds t ([789410fd](https://github.com/ozone-development/center-ui.git/commit/789410fd674afc2a962e7c866dffbae0b4264b8e))
+* **Featured Listings:**
+  * OZF-645: featured carousel shows only one at a time ([c98e569d](https://github.com/ozone-development/center-ui.git/commit/c98e569d15c5d1ef44aa4d5ea16646db3e9974fe))
+  * OZF-645: featured carousel shows 1 listing at a time if there is less than 3, sh ([937ed7d9](https://github.com/ozone-development/center-ui.git/commit/937ed7d96b61983c072c1bb12746977557d512b9))
+* **Feedback:** OZF-711 Correct feedback edit button href ([a6e380a5](https://github.com/ozone-development/center-ui.git/commit/a6e380a5de2711220024b1712998277f4512c22e))
+* **Header:** OZF-746 Keep header padding synced with body ([c900714a](https://github.com/ozone-development/center-ui.git/commit/c900714adfd87babcff4206b6d2c6511dd9ae663))
+* **Icons:**
+  * OZF-734 A more consistent fix ([633145a7](https://github.com/ozone-development/center-ui.git/commit/633145a797322073cb6be4e7b26a475a31840ca6))
+  * OZF-734 fixed path issues for dist ([2cf171f8](https://github.com/ozone-development/center-ui.git/commit/2cf171f8e048a5061da2579a38f1f0b2392574a1))
+* **Listing Administration:** OZF-707 show proper 4 colums in IE ([a29527c2](https://github.com/ozone-development/center-ui.git/commit/a29527c2e2929ad92d2e14b39bf8d3be7b0dfac8))
+* **Listing Management:**
+  * fixed jshint errors ([9827a110](https://github.com/ozone-development/center-ui.git/commit/9827a110613b1d500d440a4f2a667fda322c40a7))
+  * OZF-708 Fixed icons for listing status on the tile view ([29689e63](https://github.com/ozone-development/center-ui.git/commit/29689e63975153ab6bc8ce446e1e25384ccc6f95))
+* **Metrics:** Remove hardcoded metrics path ([7194c7b6](https://github.com/ozone-development/center-ui.git/commit/7194c7b68a6f5fe6227757ba800eefb90c19b4e2))
+* **OZF-643:** Removing incorrect RouteHandler components ([228d349c](https://github.com/ozone-development/center-ui.git/commit/228d349cd64c1fdd8fc0463d034aef7ef7ac0726))
+* **build:**
+  * Dowgrading karma-webpack to fix build ([a35201b9](https://github.com/ozone-development/center-ui.git/commit/a35201b9635c01b3a926eb5c948263d44445ac95))
+  * Downgrade from broken version of karma-webpack ([e90754bf](https://github.com/ozone-development/center-ui.git/commit/e90754bfc4ee2fff54f28c51c5cf77a28c720812))
+* **travis:** Attempt to fix travis errors ([cfc09ffe](https://github.com/ozone-development/center-ui.git/commit/cfc09ffeb0d27921358e9e51c48696ac7e2dac5a))
+
+
 ### 0.4.1 (2014-12-24)
 
 
