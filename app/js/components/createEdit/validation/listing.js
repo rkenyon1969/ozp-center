@@ -2,15 +2,23 @@
 
 var t = require('tcomb-form');
 var { Arr, maybe, subtype, struct, list, union, Num } = t;
-var { StringMax, NonBlankString, Url, Phone, Email, BlankString } = require('./common');
+var {
+    StringMax,
+    NonBlankString,
+    Url,
+    Phone,
+    Email,
+    BlankString,
+    NonEmptyFile
+} = require('./common');
 
 var User = struct({
     username: NonBlankString(100)
 });
 
 var Screenshot = struct({
-    smallImageUrl: Url,
-    largeImageUrl: Url
+    smallImage: NonEmptyFile,
+    largeImage: NonEmptyFile
 });
 
 var Resource = struct({
@@ -67,10 +75,10 @@ function ListingFull (requiredContactTypes) {
         whatIsNew: whatIsNew,
         intents: intents,
         docUrls: docUrls,
-        imageXlargeUrl: Url,
-        imageLargeUrl: Url,
-        imageMediumUrl: Url,
-        imageSmallUrl: Url,
+        smallIcon: NonEmptyFile,
+        largeIcon: NonEmptyFile,
+        bannerIcon: NonEmptyFile,
+        featuredBannerIcon: NonEmptyFile,
         screenshots: subtype(screenshots, atLeastOne),
         contacts: subtype(contacts, hasRequiredContactTypes.bind(null, requiredContactTypes)),
         owners: subtype(owners, atLeastOne),

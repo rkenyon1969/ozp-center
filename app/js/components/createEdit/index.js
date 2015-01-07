@@ -10,10 +10,19 @@ var ProfileStore = require('../../stores/ProfileStore');
 var { loadListing, updateListing, save, submit } = require('../../actions/CreateEditActions');
 var { Navigation } = require('react-router');
 var Header = require('../header');
-var { ValidatedFormMixin, ListInput, TextInput, Select2Input, Select2TagInput, TextAreaInput } = require('./form');
 var { classSet } = React.addons;
 var State = require('../../mixins/ActiveStateMixin');
 var $ = require('jquery');
+
+var {
+    ValidatedFormMixin,
+    ListInput,
+    TextInput,
+    FileInput,
+    Select2Input,
+    Select2TagInput,
+    TextAreaInput
+} = require('./form');
 
 function getOptionsForSystemObject (items) {
     return items.map(item => {
@@ -186,10 +195,10 @@ var ListingForm = React.createClass({
                 <ListInput { ...this.getSubFormProps('docUrls') } itemForm={ ResourceForm } optional/>
 
                 <h2>Graphics</h2>
-                <TextInput { ...p('imageXlargeUrl') } />
-                <TextInput { ...p('imageLargeUrl') } />
-                <TextInput { ...p('imageMediumUrl') } />
-                <TextInput { ...p('imageSmallUrl') } />
+                <FileInput { ...p('smallIcon') } />
+                <FileInput { ...p('largeIcon') } />
+                <FileInput { ...p('bannerIcon') } />
+                <FileInput { ...p('featuredBannerIcon') } />
                 <ListInput { ...this.getSubFormProps('screenshots') } itemForm={ ScreenshotForm }/>
 
                 <h2>Owner Information and Contacts</h2>
@@ -234,8 +243,8 @@ var ScreenshotForm = React.createClass({
                 <button type="button" className="close" onClick={this.props.removeHandler}>
                     <span aria-hidden="true">&times;</span><span className="sr-only">Close</span>
                 </button>
-                <TextInput { ...this.getFormComponentProps('smallImageUrl') }/>
-                <TextInput { ...this.getFormComponentProps('largeImageUrl') }/>
+                <FileInput { ...this.getFormComponentProps('smallImage') }/>
+                <FileInput { ...this.getFormComponentProps('largeImage') }/>
             </div>
         );
         /*jshint ignore: end */
