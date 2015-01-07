@@ -23,7 +23,7 @@ var ProfileStore = Reflux.createStore({
         _.pick(ListingActions, 'addToLibraryCompleted', 'removeFromLibraryCompleted')
     ),
 
-    onLibraryFetched: function (library) {
+    onFetchLibraryCompleted: function (library) {
         _library = library;
         this.trigger({library: _library});
     },

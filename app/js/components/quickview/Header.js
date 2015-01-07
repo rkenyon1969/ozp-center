@@ -2,12 +2,11 @@
 
 var React = require('react');
 var IconRating = require('../shared/IconRating');
-var ProfileStore = require('../../stores/ProfileStore');
 var ListingActions = require('../../actions/ListingActions');
 var launch = ListingActions.launch;
-var addToLibrary = ListingActions.addToLibrary;
-var removeFromLibrary = ListingActions.removeFromLibrary;
 var { UserRole } = require('../../constants');
+
+var BookmarkButton = require('../BookmarkButton');
 
 var QuickviewHeader = React.createClass({
 
@@ -21,7 +20,6 @@ var QuickviewHeader = React.createClass({
         var title = listing.title;
         var avgRate = listing.avgRate;
         var image = listing.imageMediumUrl;
-        var isListingInLibrary = ProfileStore.isListingInLibrary(listing.uuid);
 
         /* jshint ignore:start */
         return (
@@ -49,16 +47,11 @@ var QuickviewHeader = React.createClass({
         var isOwner = this.props.listing.owners.some(o => o.username === currentUser.username);
         var isAdmin = UserRole[currentUser.highestRole] >= UserRole.ADMIN;
 
-        var bookmarkBtnStyles = React.addons.classSet({
-            'btn btn-default': true,
-            'active': ProfileStore.isListingInLibrary(this.props.listing.uuid)
-        });
-
         /* jshint ignore:start */
         return (
             <div className="btn-group quickview-header-actions">
                 <button type="button" className="btn btn-default" onClick={ this.launch }><i className="fa fa-external-link"></i></button>
-                <button type="button" className={ bookmarkBtnStyles } onClick={ this.addToLibrary }><i className="fa fa-bookmark"></i></button>
+                <BookmarkButton listing={this.props.listing} />
                 {this.props.allowEdit && <button type="button" className="btn btn-primary" onClick={ this.props.onEdit }><i className="fa fa-edit"></i></button>}
             </div>
         );
@@ -67,19 +60,7 @@ var QuickviewHeader = React.createClass({
 
     launch: function () {
         launch(this.props.listing);
-    },
-
-    addToLibrary: function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        if (ProfileStore.isListingInLibrary(this.props.listing.uuid)) {
-            removeFromLibrary(this.props.listing);
-        }
-        else {
-            addToLibrary(this.props.listing);
-        }
     }
-
 });
 
 module.exports = QuickviewHeader;

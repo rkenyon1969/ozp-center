@@ -161,3 +161,17 @@ label {
     right: 8px;
     top: 0;
 }
+
+/* Bookmark button */
+.btn-bookmark {
+    color: $gray-darker;
+    background-color: $white;
+
+    &:active, &:focus, &:hover, &.bookmarked {
+        background-color: $blue-dark;
+    }
+
+    &.bookmarked {
+        color: $yellow;
+    }
+}

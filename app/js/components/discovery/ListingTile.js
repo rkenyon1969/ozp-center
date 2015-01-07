@@ -5,12 +5,13 @@ var { Link, Navigation, CurrentPath } = require('react-router');
 var ActiveState = require('../../mixins/ActiveStateMixin');
 var _ = require('../../utils/_');
 var IconRating = require('../shared/IconRating');
-var ProfileStore = require('../../stores/ProfileStore');
-var { launch, addToLibrary, removeFromLibrary } = require('../../actions/ListingActions');
+var launch = require('../../actions/ListingActions').launch;
+
+var BookmarkButton = require('../BookmarkButton');
 
 var ListingTile = React.createClass({
 
-    mixins: [ Navigation, CurrentPath, ActiveState ],
+    mixins: [Navigation, CurrentPath, ActiveState],
 
     statics: {
         fromArray: function (array) {
@@ -64,17 +65,12 @@ var ListingTile = React.createClass({
     },
 
     renderActions: function () {
-        var bookmarkBtnStyles = React.addons.classSet({
-            'btn btn-default': true,
-            'active': ProfileStore.isListingInLibrary(this.props.listing.uuid)
-        });
-
         /* jshint ignore:start */
         return (
             <div className="btn-group actions">
                 {/* can't nest anchor tags, using button here with onClick listener */}
                 <button type="button" className="btn btn-default" onClick={ this.launch }><i className="fa fa-external-link"></i></button>
-                <button type="button" className={ bookmarkBtnStyles } onClick={ this.addToLibrary }><i className="fa fa-bookmark"></i></button>
+                <BookmarkButton listing={this.props.listing} />
             </div>
         );
         /* jshint ignore:end */
@@ -82,19 +78,7 @@ var ListingTile = React.createClass({
 
     launch: function () {
         launch(this.props.listing);
-    },
-
-    addToLibrary: function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        if (ProfileStore.isListingInLibrary(this.props.listing.uuid)) {
-            removeFromLibrary(this.props.listing);
-        }
-        else {
-            addToLibrary(this.props.listing);
-        }
     }
-
 });
 
 module.exports = ListingTile;
