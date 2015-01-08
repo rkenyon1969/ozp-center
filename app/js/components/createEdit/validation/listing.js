@@ -17,8 +17,8 @@ var User = struct({
 });
 
 var Screenshot = struct({
-    smallImage: NonEmptyFile,
-    largeImage: NonEmptyFile
+    //smallImage: NonEmptyFile,
+    //largeImage: NonEmptyFile
 });
 
 var Resource = struct({
@@ -75,10 +75,10 @@ function ListingFull (requiredContactTypes) {
         whatIsNew: whatIsNew,
         intents: intents,
         docUrls: docUrls,
-        smallIcon: NonEmptyFile,
-        largeIcon: NonEmptyFile,
-        bannerIcon: NonEmptyFile,
-        featuredBannerIcon: NonEmptyFile,
+        //smallIcon: NonEmptyFile,
+        //largeIcon: NonEmptyFile,
+        //bannerIcon: NonEmptyFile,
+        //featuredBannerIcon: NonEmptyFile,
         screenshots: subtype(screenshots, atLeastOne),
         contacts: subtype(contacts, hasRequiredContactTypes.bind(null, requiredContactTypes)),
         owners: subtype(owners, atLeastOne),
