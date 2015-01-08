@@ -1,6 +1,7 @@
 'use strict';
 
 var $ = require('jquery');
+var _ = require('../utils/_');
 
 var { createStore } = require('reflux');
 var GlobalListingStore = require('./GlobalListingStore');
@@ -14,12 +15,93 @@ var { Listing } = require('../webapi/Listing');
 var { approvalStatus } = require('../constants');
 var { cloneDeep, assign } = require('../utils/_');
 var { ListingApi } = require('../webapi/Listing');
+var { ImageApi } = require('../webapi/Image');
 
 actions.systemUpdated = SystemStore;
 actions.cacheUpdated = GlobalListingStore;
 
 var _listing = null;
 var _submitting = false;
+
+var listingRawImages = {
+    smallIcon: null,
+    largeIcon: null,
+    bannerIcon: null,
+    featuredBannerIcon: null,
+    screenshots: []
+};
+
+//list of property names that can be passed into onUpdateListing which are images
+//and which must therefore be treated specially
+var imagePropertyPaths = [
+    ['smallIcon'],
+    ['largeIcon'],
+    ['bannerIcon'],
+    ['featuredBannerIcon'],
+    ['screenshots', 'smallImage'],
+    ['screenshots', 'largeImage'],
+];
+
+function updateValue(obj, path, value) {
+    if (path.length === 1) {
+        obj[path[0]] = value;
+    } else {
+        updateValue(obj[path[0]], path.slice(1), value);
+    }
+}
+
+/**
+ * saves all of the images in the listingRawImages object and updates the corresponding ids
+ * in the _listing object.  Returns a promise that resolves when everything is complete
+ */
+function saveImages() {
+
+    var optionalPromise = image => image ? ImageApi.save(image) : null,
+
+        {smallIcon, largeIcon, bannerIcon, featuredBannerIcon, screenshots} = listingRawImages,
+        smallIconPromise = optionalPromise(smallIcon),
+        largeIconPromise = optionalPromise(largeIcon),
+        bannerIconPromise = optionalPromise(bannerIcon),
+        featuredBannerIconPromise = optionalPromise(featuredBannerIcon),
+        screenshotPromises = _.flatten(screenshots.map(
+            s => [optionalPromise(s.smallImage), optionalPromise(s.largeImage)]
+        )),
+        promises =
+            [smallIconPromise, largeIconPromise, bannerIconPromise, featuredBannerIconPromise]
+                .concat(screenshotPromises);
+
+    //TODO when we get a less buggy ES6 parser we can use the spread operator to make the
+    //invocation of `when` cleaner
+    return $.when.apply($, promises).then(function(
+            smallIconResponse,
+            largeIconResponse,
+            bannerIconResponse,
+            featuredBannerIconResponse,
+            ...screeshotResponseFlatList) {
+
+            //screenshot responses grouped into twos
+        var screenshotResponsePairs =
+                _.values(_.groupBy(screeshotResponseFlatList, (x, i) => Math.floor(i/2))),
+
+            //screenshot responses as a list of objects
+            screenshotResponses = screenshotResponsePairs.map(function(acc, tuple) {
+                    return { smallImageResponse: tuple[0], largeImageResponse: tuple[1] };
+                });
+
+        _listing.smallIconId = smallIconResponse ? smallIconResponse.id : null;
+        _listing.largeIconId = largeIconResponse ? largeIconResponse.id : null;
+        _listing.bannerIconId = bannerIconResponse ? bannerIconResponse.id : null;
+        _listing.featuredBannerIconId =
+            featuredBannerIconResponse ? featuredBannerIconResponse.id : null;
+
+        _listing.screenshots = screenshotResponses.map(function(responseObj) {
+            return {
+                smallImageId: responseObj.smallImageresponse.id,
+                largeImageId: responseObj.largeImageresponse.id
+            };
+        });
+    });
+}
 
 function getSystem () {
     return SystemStore.getSystem();
@@ -59,17 +141,37 @@ var CurrentListingStore = createStore({
             throw 'propertyPath needs to be an array with non zero length';
         }
 
-        function updateValue (obj, path) {
-            if (path.length === 1) {
-                obj[path[0]] = value;
-            } else {
-                updateValue(obj[path[0]], path.slice(1));
-            }
+        //if property path matches one of the imagePropertyPaths element-for-element
+        var isImage = !!_.find(imagePropertyPaths,
+            p => _.every(_.zip(p, propertyPath), (tuple) => tuple[0] === tuple[1])
+        );
+
+        if (isImage){
+            this.updateImage(propertyPath, value);
+        }
+        else {
+            updateValue(_listing, propertyPath, value);
+
+            var validation = this.doValidation();
+            this.trigger({
+                listing: _listing,
+                hasChanges: true,
+                errors: validation.errors,
+                warnings: validation.warnings
+            });
+        }
+    },
+
+    updateImage: function(propertyPath, value) {
+        var validation;
+
+        if (!(value instanceof Blob)) {
+            throw new Error('Image must be updated with File or Blob value');
         }
 
-        updateValue(_listing, propertyPath);
+        updateValue(listingRawImages, propertyPath, value);
 
-        var validation = this.doValidation();
+        validation = this.doValidation();
         this.trigger({
             listing: _listing,
             hasChanges: true,
@@ -88,6 +190,8 @@ var CurrentListingStore = createStore({
         _submitting = true;
         var validation = this.doValidation();
 
+        saveImages();
+
         if(!validation.isValid) {
             _listing.approvalStatus = oldStatus;
             this.trigger(validation);
@@ -97,14 +201,19 @@ var CurrentListingStore = createStore({
     },
 
     onSave: function () {
-        _submitting = false;
-        var validation = this.doValidation();
+        var me = this;
 
-        if(!validation.isValid) {
-            this.trigger(validation);
-        } else {
-            save(_listing);
-        }
+        _submitting = false;
+
+        saveImages().then(function() {
+            var validation = me.doValidation();
+
+            if(!validation.isValid) {
+                me.trigger(validation);
+            } else {
+                save(_listing);
+            }
+        });
     },
 
     doValidation: function () {
