@@ -23,6 +23,8 @@ actions.cacheUpdated = GlobalListingStore;
 var _listing = null;
 var _submitting = false;
 
+//Each item in this object should be either a Blob/File, or if those are not supported, a
+//file input element
 var listingRawImages = {
     smallIcon: null,
     largeIcon: null,
@@ -164,10 +166,6 @@ var CurrentListingStore = createStore({
 
     updateImage: function(propertyPath, value) {
         var validation;
-
-        if (!(value instanceof Blob)) {
-            throw new Error('Image must be updated with File or Blob value');
-        }
 
         updateValue(listingRawImages, propertyPath, value);
 

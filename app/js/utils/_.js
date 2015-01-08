@@ -10,6 +10,7 @@ module.exports = {
     isFunction: require('lodash/objects/isFunction'),
     isString: require('lodash/objects/isString'),
     pick: require('lodash/objects/pick'),
+    omit: require('lodash/objects/omit'),
     values: require('lodash/objects/values'),
 
     find: require('lodash/collections/find'),
