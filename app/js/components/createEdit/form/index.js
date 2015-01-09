@@ -6,6 +6,6 @@ module.exports = {
     Select2TagInput: require('./Select2TagInput'),
     TextAreaInput: require('./TextAreaInput'),
     TextInput: require('./TextInput'),
-    FileInput: require('./FileInput'),
+    ImageInput: require('./ImageInput'),
     ValidatedFormMixin: require('./ValidatedFormMixin')
 };

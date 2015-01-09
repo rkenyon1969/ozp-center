@@ -18,7 +18,7 @@ var {
     ValidatedFormMixin,
     ListInput,
     TextInput,
-    FileInput,
+    ImageInput,
     Select2Input,
     Select2TagInput,
     TextAreaInput
@@ -195,10 +195,12 @@ var ListingForm = React.createClass({
                 <ListInput { ...this.getSubFormProps('docUrls') } itemForm={ ResourceForm } optional/>
 
                 <h2>Graphics</h2>
-                <FileInput { ...p('smallIcon') } />
-                <FileInput { ...p('largeIcon') } />
-                <FileInput { ...p('bannerIcon') } />
-                <FileInput { ...p('featuredBannerIcon') } />
+                <ImageInput { ...p('smallIcon') } imageUri={this.props.value.imageSmallUrl} />
+                <ImageInput { ...p('largeIcon') } imageUri={this.props.value.imageMediumUrl} />
+                <ImageInput { ...p('bannerIcon') } imageUri={this.props.value.imageLargeUrl} />
+                <ImageInput { ...p('featuredBannerIcon') }
+                    imageUri={this.props.value.imageXlargeUrl} />
+
                 <ListInput { ...this.getSubFormProps('screenshots') } itemForm={ ScreenshotForm }/>
 
                 <h2>Owner Information and Contacts</h2>
@@ -243,8 +245,10 @@ var ScreenshotForm = React.createClass({
                 <button type="button" className="close" onClick={this.props.removeHandler}>
                     <span aria-hidden="true">&times;</span><span className="sr-only">Close</span>
                 </button>
-                <FileInput { ...this.getFormComponentProps('smallImage') }/>
-                <FileInput { ...this.getFormComponentProps('largeImage') }/>
+                <ImageInput { ...this.getFormComponentProps('smallImage') }
+                    imageUri={this.props.value.smallImageUrl} />
+                <ImageInput { ...this.getFormComponentProps('largeImage') }
+                    imageUri={this.props.value.largeImageUrl} />
             </div>
         );
         /*jshint ignore: end */

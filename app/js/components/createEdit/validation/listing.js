@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('../../../utils/_');
 var t = require('tcomb-form');
 var { Arr, maybe, subtype, struct, list, union, Num } = t;
 var {
@@ -8,8 +9,7 @@ var {
     Url,
     Phone,
     Email,
-    BlankString,
-    NonEmptyFile
+    BlankString
 } = require('./common');
 
 var User = struct({
@@ -17,8 +17,8 @@ var User = struct({
 });
 
 var Screenshot = struct({
-    //smallImage: NonEmptyFile,
-    //largeImage: NonEmptyFile
+    smallImageId: NonBlankString(36),
+    largeImageId: NonBlankString(36)
 });
 
 var Resource = struct({
@@ -75,10 +75,10 @@ function ListingFull (requiredContactTypes) {
         whatIsNew: whatIsNew,
         intents: intents,
         docUrls: docUrls,
-        //smallIcon: NonEmptyFile,
-        //largeIcon: NonEmptyFile,
-        //bannerIcon: NonEmptyFile,
-        //featuredBannerIcon: NonEmptyFile,
+        smallIconId: NonBlankString(36),
+        largeIconId: NonBlankString(36),
+        bannerIconId: NonBlankString(36),
+        featuredBannerIconId: NonBlankString(36),
         screenshots: subtype(screenshots, atLeastOne),
         contacts: subtype(contacts, hasRequiredContactTypes.bind(null, requiredContactTypes)),
         owners: subtype(owners, atLeastOne),
@@ -101,10 +101,6 @@ var ListingDraft = struct({
     whatIsNew: whatIsNew,
     intents: intents,
     docUrls: docUrls,
-    imageXlargeUrl: maybe(union([Url, BlankString])),
-    imageLargeUrl: maybe(union([Url, BlankString])),
-    imageMediumUrl: maybe(union([Url, BlankString])),
-    imageSmallUrl: maybe(union([Url, BlankString])),
     screenshots: screenshots,
     contacts: contacts,
     owners: owners,
@@ -156,6 +152,21 @@ function validateFull (instance, options) {
     });
 
     validation.errors.contacts = !hasRequiredContactTypes(requiredContactTypes, instance.contacts);
+
+    //attach validation errors from image ids to image fields
+    var screenshotKeys = Object.keys(validation.errors).filter(
+            k => k.indexOf('screenshots.') === 0
+        ),
+        screenshotErrors = _.zipObject(screenshotKeys.map(
+            k => [k.replace(/Id$/,''), validation.errors[k]]
+        ));
+
+    Object.assign(validation.errors, {
+        smallIcon: validation.errors.smallIconId,
+        largeIcon: validation.errors.largeIconId,
+        bannerIcon: validation.errors.bannerIconId,
+        featuredBannerIcon: validation.errors.featuredBannerIconId
+    }, screenshotErrors);
 
     return validation;
 }

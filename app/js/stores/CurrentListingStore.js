@@ -23,26 +23,56 @@ actions.cacheUpdated = GlobalListingStore;
 var _listing = null;
 var _submitting = false;
 
-//Each item in this object should be either a Blob/File, or if those are not supported, a
-//file input element
-var listingRawImages = {
-    smallIcon: null,
-    largeIcon: null,
-    bannerIcon: null,
-    featuredBannerIcon: null,
-    screenshots: []
-};
-
 //list of property names that can be passed into onUpdateListing which are images
-//and which must therefore be treated specially
+//and which must therefore be treated specially.  The 'value' for these properties
+//must be either a Blob, or if Blobs are not supported, an HTMLInputElement
 var imagePropertyPaths = [
-    ['smallIcon'],
-    ['largeIcon'],
-    ['bannerIcon'],
-    ['featuredBannerIcon'],
-    ['screenshots', 'smallImage'],
-    ['screenshots', 'largeImage'],
+    'smallIcon',
+    'largeIcon',
+    'bannerIcon',
+    'featuredBannerIcon',
+    'smallImage',
+    'largeImage'
 ];
+
+//maps stating which url properties go with which
+//icon properties
+var listingIconPropertyUrlMap = {
+    smallIcon: 'imageSmallUrl',
+    largeIcon: 'imageMediumUrl',
+    bannerIcon: 'imageLargeUrl',
+    featuredBannerIcon: 'imageXlargeUrl'
+};
+var screenshotPropertyUrlMap = {
+    smallImage: 'smallImageUrl',
+    largeImage: 'largeImageUrl'
+};
+var imagePropertyUrlMap =
+    Object.assign({}, listingIconPropertyUrlMap, screenshotPropertyUrlMap);
+
+/**
+ * Check to see if url is an object url and if so revoke it
+ */
+function revokeObjectURL(url) {
+    if (url && window.URL && new URL(url).protocol === 'blob:') {
+        URL.revokeObjectURL(url);
+    }
+}
+
+function updateImageUri(obj, path, imageUri) {
+    var prop = path[0];
+
+    if (path.length === 1) {
+        var urlProp = imagePropertyUrlMap[prop],
+            oldUri = obj[urlProp];
+
+        //if the existing URL is already a temp object URL, revoke it
+        revokeObjectURL(oldUri);
+        obj[urlProp] = imageUri;
+    } else {
+        updateImageUri(obj[prop], path.slice(1), imageUri);
+    }
+}
 
 function updateValue(obj, path, value) {
     if (path.length === 1) {
@@ -53,14 +83,14 @@ function updateValue(obj, path, value) {
 }
 
 /**
- * saves all of the images in the listingRawImages object and updates the corresponding ids
+ * saves all of the images in the _listing object and updates the corresponding ids
  * in the _listing object.  Returns a promise that resolves when everything is complete
  */
 function saveImages() {
 
     var optionalPromise = image => image ? ImageApi.save(image) : null,
 
-        {smallIcon, largeIcon, bannerIcon, featuredBannerIcon, screenshots} = listingRawImages,
+        {smallIcon, largeIcon, bannerIcon, featuredBannerIcon, screenshots} = _listing,
         smallIconPromise = optionalPromise(smallIcon),
         largeIconPromise = optionalPromise(largeIcon),
         bannerIconPromise = optionalPromise(bannerIcon),
@@ -79,29 +109,64 @@ function saveImages() {
             largeIconResponse,
             bannerIconResponse,
             featuredBannerIconResponse,
-            ...screeshotResponseFlatList) {
+            ...screenshotResponseFlatList) {
 
             //screenshot responses grouped into twos
         var screenshotResponsePairs =
-                _.values(_.groupBy(screeshotResponseFlatList, (x, i) => Math.floor(i/2))),
+                _.values(_.groupBy(screenshotResponseFlatList, (x, i) => Math.floor(i/2))),
 
             //screenshot responses as a list of objects
-            screenshotResponses = screenshotResponsePairs.map(function(acc, tuple) {
+            screenshotResponses = screenshotResponsePairs.map(function(tuple) {
                     return { smallImageResponse: tuple[0], largeImageResponse: tuple[1] };
                 });
 
-        _listing.smallIconId = smallIconResponse ? smallIconResponse.id : null;
-        _listing.largeIconId = largeIconResponse ? largeIconResponse.id : null;
-        _listing.bannerIconId = bannerIconResponse ? bannerIconResponse.id : null;
-        _listing.featuredBannerIconId =
-            featuredBannerIconResponse ? featuredBannerIconResponse.id : null;
+        if (smallIconResponse) {
+            _listing.smallIconId = smallIconResponse.id;
+            _listing.smallIcon = undefined;
+            _listing[listingIconPropertyUrlMap.smallIcon] = smallIconResponse._links.self.href;
+        }
+        if (largeIconResponse) {
+            _listing.largeIconId = largeIconResponse.id;
+            _listing.largeIcon = undefined;
+            _listing[listingIconPropertyUrlMap.largeIcon] = largeIconResponse._links.self.href;
+        }
+        if (bannerIconResponse) {
+            _listing.bannerIconId = bannerIconResponse.id;
+            _listing.bannerIcon = undefined;
+            _listing[listingIconPropertyUrlMap.bannerIcon] =
+                bannerIconResponse._links.self.href;
+        }
+        if (featuredBannerIconResponse) {
+            _listing.featuredBannerIconId = featuredBannerIconResponse.id;
+            _listing.featuredBannerIcon = undefined;
+            _listing[listingIconPropertyUrlMap.featuredBannerIcon] =
+                featuredBannerIconResponse._links.self.href;
+        }
 
-        _listing.screenshots = screenshotResponses.map(function(responseObj) {
-            return {
-                smallImageId: responseObj.smallImageresponse.id,
-                largeImageId: responseObj.largeImageresponse.id
-            };
-        });
+        _listing.screenshots =
+            _.zip(_listing.screenshots, screenshotResponses).map(function(screenshot) {
+                var existing = screenshot[0],
+                    responses = screenshot[1],
+                    smallResp = responses ? responses.smallImageResponse : null,
+                    largeResp = responses ? responses.largeImageResponse : null,
+                    newScreenshot = Object.assign({}, existing);
+
+                if (smallResp) {
+                    newScreenshot.smallImageId = smallResp.id;
+                    newScreenshot.smallImage = undefined;
+                    newScreenshot[screenshotPropertyUrlMap.smallImage] =
+                        smallResp._links.self.href;
+                }
+
+                if (largeResp) {
+                    newScreenshot.largeImageId = largeResp.id;
+                    newScreenshot.largeImage = undefined;
+                    newScreenshot[screenshotPropertyUrlMap.largeImage] =
+                        largeResp._links.self.href;
+                }
+
+                return newScreenshot;
+            });
     });
 }
 
@@ -109,10 +174,29 @@ function getSystem () {
     return SystemStore.getSystem();
 }
 
+/**
+ * Clean up any generated object URLs that have been added to the listing.  Note that this
+ * doesn't actually remove the URLs, just makes them invalid and allows the browser to clean
+ * up the associated memory
+ */
+function revokeAllObjectURLs() {
+    if (_listing) {
+        var listingProps = Object.keys(listingIconPropertyUrlMap)
+                .map(k => listingIconPropertyUrlMap[k]),
+            screenshotProps = Object.keys(screenshotPropertyUrlMap)
+                .map(k => screenshotPropertyUrlMap[k]);
+
+        listingProps.forEach(p => revokeObjectURL(_listing[p]));
+        _listing.screenshots.forEach(s => screenshotProps.forEach(p => revokeObjectURL(s[p])));
+    }
+}
+
 var CurrentListingStore = createStore({
     listenables: actions,
 
     refreshListing: function (listing) {
+        revokeAllObjectURLs();
+
         _listing = listing;
         _submitting = false;
         var validation = this.doValidation();
@@ -143,33 +227,13 @@ var CurrentListingStore = createStore({
             throw 'propertyPath needs to be an array with non zero length';
         }
 
-        //if property path matches one of the imagePropertyPaths element-for-element
-        var isImage = !!_.find(imagePropertyPaths,
-            p => _.every(_.zip(p, propertyPath), (tuple) => tuple[0] === tuple[1])
-        );
+        updateValue(_listing, propertyPath, value);
 
-        if (isImage){
+        if (imagePropertyPaths.indexOf(_.last(propertyPath)) !== -1){
             this.updateImage(propertyPath, value);
         }
-        else {
-            updateValue(_listing, propertyPath, value);
 
-            var validation = this.doValidation();
-            this.trigger({
-                listing: _listing,
-                hasChanges: true,
-                errors: validation.errors,
-                warnings: validation.warnings
-            });
-        }
-    },
-
-    updateImage: function(propertyPath, value) {
-        var validation;
-
-        updateValue(listingRawImages, propertyPath, value);
-
-        validation = this.doValidation();
+        var validation = this.doValidation();
         this.trigger({
             listing: _listing,
             hasChanges: true,
@@ -178,24 +242,36 @@ var CurrentListingStore = createStore({
         });
     },
 
-    onSystemUpdated: function (data) {
+    updateImage: function(propertyPath, value) {
+        //on modern browsers, create a URL to reference the local image data. On old browsers
+        //this will be skipped and uri will be null
+        var uri = window.URL && window.Blob && value instanceof Blob ?
+            URL.createObjectURL(value) : null;
+
+        updateImageUri(_listing, propertyPath, uri);
+    },
+
+    onSystemUpdated: function () {
         this.trigger(this.resolveMessages());
     },
 
     onSubmit: function () {
-        var oldStatus = _listing.approvalStatus;
+        var me = this,
+            oldStatus = _listing.approvalStatus;
+
         _listing.approvalStatus = 'PENDING';
         _submitting = true;
-        var validation = this.doValidation();
 
-        saveImages();
+        saveImages().then(function() {
+            var validation = me.doValidation();
 
-        if(!validation.isValid) {
-            _listing.approvalStatus = oldStatus;
-            this.trigger(validation);
-        } else {
-            save(_listing);
-        }
+            if(!validation.isValid) {
+                _listing.approvalStatus = oldStatus;
+                me.trigger(validation);
+            } else {
+                save(_listing);
+            }
+        });
     },
 
     onSave: function () {

@@ -7,8 +7,7 @@ var testPhone = s => PHONE_REGEX.test(s),
     testUrl = s => URL_REGEX.test(s),
     testEmail = s => EMAIL_REGEX.test(s),
     strBlank = s => s.length === 0,
-    strNotBlank = s => !!s,
-    fileSelected = f => f !== '';
+    strNotBlank = s => !!s;
 
 var StringMax = max => subtype(Str, s => s.length <= max);
 
@@ -22,14 +21,11 @@ var Phone = subtype(StringMax(50), testPhone);
 
 var Email = subtype(StringMax(100), testEmail);
 
-var NonEmptyFile = subtype(Str, fileSelected);
-
 module.exports = {
     StringMax: StringMax,
     NonBlankString: NonBlankString,
     BlankString: BlankString,
     Url: Url,
     Phone: Phone,
-    Email: Email,
-    NonEmptyFile: NonEmptyFile
+    Email: Email
 };
