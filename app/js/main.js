@@ -7,6 +7,7 @@ var React = require('react');
 var jQuery = require('jquery');
 var Router = require('react-router');
 require('bootstrap');
+require('classification');
 var _ = require('./utils/_');
 var ProfileActions = require('./actions/ProfileActions');
 
@@ -64,3 +65,10 @@ ProfileActions.fetchSelf();
 
     window._paq = _paq;
 })();
+
+// Classification
+$(function(){
+    $(document).classification({
+        level: 'U'
+    });
+});
