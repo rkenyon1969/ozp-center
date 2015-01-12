@@ -48,13 +48,13 @@ var InputMixin = {
             return true;
         }
 
-        if (this.showWarning(newProps, newState.blurred) !== 
-                this.showWarning(this.props, this.state.blurred)) {
+        if (this.showWarning(newProps, newState) !==
+                this.showWarning(this.props, this.state)) {
             return true;
         }
 
-        if (this.showError(newProps, newState.blurred) !== 
-                this.showError(this.props, this.state.blurred)) {
+        if (this.showError(newProps, newState) !==
+                this.showError(this.props, this.state)) {
             return true;
         }
 
@@ -68,19 +68,19 @@ var InputMixin = {
     getClasses: function () {
         return classSet({
             'form-group': true,
-            'has-error': this.showError(this.props, this.state.blurred),
-            'has-warning': this.showWarning(this.props, this.state.blurred)
+            'has-error': this.showError(this.props, this.state),
+            'has-warning': this.showWarning(this.props, this.state)
         });
     },
 
     //we pass props and state into showError/showWarning so that they
     //can be used in shouldComponentUpdate
-    showWarning: function (props, blurred) {
-        return !this.showError(props, blurred) && (props.warning && blurred);
+    showWarning: function (props, state) {
+        return !this.showError(props, state.blurred) && (props.warning && state.blurred);
     },
 
-    showError: function (props, blurred) {
-        return props.error && (blurred || props.forceError);
+    showError: function (props, state) {
+        return props.error && (state || props.forceError);
     },
 
     _onBlur: function (event) {

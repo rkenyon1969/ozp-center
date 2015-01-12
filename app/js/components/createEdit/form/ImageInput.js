@@ -7,12 +7,14 @@ var _ = require('../../../utils/_');
 var InputMixin = require('./InputMixin');
 
 var ImageInput = React.createClass({
-    mixins: [_.omit(InputMixin, 'render', 'shouldComponentUpdate', 'showError')],
+    mixins: [_.omit(InputMixin,
+        'render', 'shouldComponentUpdate', 'showError', 'showWarning', 'getInitialState')],
 
     getInitialState: function() {
         //if the input has received a new value since the last props update, we should not show
         //the error style
-        return {changedSinceUpdate: false};
+        return Object.assign({changedSinceUpdate: false},
+                InputMixin.getInitialState.apply(this, arguments));
     },
 
     /**
@@ -62,8 +64,12 @@ var ImageInput = React.createClass({
         if (!this.props.value) {
             this.refs.input.getDOMNode().value = '';
         }
+    },
 
-        this.setState({changedSinceUpdate: false});
+    componentWillReceiveProps: function(newProps) {
+        if (!newProps.value) {
+            this.setState({changedSinceUpdate: false});
+        }
     },
 
     /**
@@ -74,8 +80,12 @@ var ImageInput = React.createClass({
             newProps.imageUri !== this.props.imageUri;
     },
 
-    showError: function(props, blurred) {
-        return !this.state.changedSinceUpdate && InputMixin.showError.apply(this, arguments);
+    showError: function(props, state) {
+        return !state.changedSinceUpdate && InputMixin.showError.apply(this, arguments);
+    },
+
+    showWarning: function(props, state) {
+        return !state.changedSinceUpdate && InputMixin.showWarning.apply(this, arguments);
     }
 });
 

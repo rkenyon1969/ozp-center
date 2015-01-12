@@ -109,6 +109,32 @@ var ListingDraft = struct({
     width: maybe(Num)
 });
 
+/**
+ * Images are a special case - the field to validate (the id) isn't actually the field in
+ * the form, but rather is derived from it (the field in the form contains the file itself,
+ * which can't really be validated).  Therefore what we need to do is let tcomb validate the
+ * id, and then copy the validation errors from the id fields to the file fields so that
+ * they display in the form.
+ * @param validation The validation object.  This object will be modified so that it's image
+ * file fields are brought into sync with it's image id fields
+ */
+function copyImageValidations(validation) {
+    //attach validation errors from image ids to image fields
+    var screenshotKeys = Object.keys(validation.errors).filter(
+            k => k.indexOf('screenshots.') === 0
+        ),
+        screenshotErrors = _.zipObject(screenshotKeys.map(
+            k => [k.replace(/Id$/,''), validation.errors[k]]
+        ));
+
+    Object.assign(validation.errors, {
+        smallIcon: validation.errors.smallIconId,
+        largeIcon: validation.errors.largeIconId,
+        bannerIcon: validation.errors.bannerIconId,
+        featuredBannerIcon: validation.errors.featuredBannerIconId
+    }, screenshotErrors);
+}
+
 function validate (instance, options, type) {
     var validation = t.validate(instance, type),
         errors = {};
@@ -136,6 +162,8 @@ function validateDraft (instance, options) {
         validation.errors['contacts.' + index + '.unsecurePhone'] = !oneValidPhone(contact);
     });
 
+    copyImageValidations(validation);
+
     return validation;
 }
 
@@ -153,20 +181,7 @@ function validateFull (instance, options) {
 
     validation.errors.contacts = !hasRequiredContactTypes(requiredContactTypes, instance.contacts);
 
-    //attach validation errors from image ids to image fields
-    var screenshotKeys = Object.keys(validation.errors).filter(
-            k => k.indexOf('screenshots.') === 0
-        ),
-        screenshotErrors = _.zipObject(screenshotKeys.map(
-            k => [k.replace(/Id$/,''), validation.errors[k]]
-        ));
-
-    Object.assign(validation.errors, {
-        smallIcon: validation.errors.smallIconId,
-        largeIcon: validation.errors.largeIconId,
-        bannerIcon: validation.errors.bannerIconId,
-        featuredBannerIcon: validation.errors.featuredBannerIconId
-    }, screenshotErrors);
+    copyImageValidations(validation);
 
     return validation;
 }
