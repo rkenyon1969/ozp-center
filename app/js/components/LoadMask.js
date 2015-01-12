@@ -11,7 +11,7 @@ var LoadMask = React.createClass({
         return (
             <div className="load-mask-container">
                 <div className="load-mask-content">
-                    <p ref="spinner" className="load-mask-icon" />
+                    <p ref="spinner" tabIndex="0" className="load-mask-icon" />
                     <p className="load-mask-message">{this.props.message}</p>
                 </div>
             </div>
@@ -25,6 +25,8 @@ var LoadMask = React.createClass({
         this.spinner = new Spinner({color: '#fff'});
 
         this.spinner.spin(spinnerEl);
+
+        spinnerEl.focus();
     },
 
     componentWillUnmount: function() {

@@ -29,6 +29,10 @@
 .load-mask-icon {
     height: 100px;
     position: relative;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 .load-mask-message {
