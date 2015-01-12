@@ -67,12 +67,6 @@ var ImageInput = React.createClass({
         if (img.getAttribute('src') === '') {
             img.removeAttribute('src');
         }
-
-        //assign value imperatively.  It is necessary that we not touch value except when
-        //we need to clear it, and render lacks the means to describe that behavior
-        if (!this.props.value) {
-            this.refs.input.getDOMNode().value = '';
-        }
     },
 
     componentWillReceiveProps: function(newProps) {

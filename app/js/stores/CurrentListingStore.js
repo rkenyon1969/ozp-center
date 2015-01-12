@@ -122,23 +122,19 @@ function saveImages() {
 
         if (smallIconResponse) {
             _listing.smallIconId = smallIconResponse.id;
-            _listing.smallIcon = undefined;
             _listing[listingIconPropertyUrlMap.smallIcon] = smallIconResponse._links.self.href;
         }
         if (largeIconResponse) {
             _listing.largeIconId = largeIconResponse.id;
-            _listing.largeIcon = undefined;
             _listing[listingIconPropertyUrlMap.largeIcon] = largeIconResponse._links.self.href;
         }
         if (bannerIconResponse) {
             _listing.bannerIconId = bannerIconResponse.id;
-            _listing.bannerIcon = undefined;
             _listing[listingIconPropertyUrlMap.bannerIcon] =
                 bannerIconResponse._links.self.href;
         }
         if (featuredBannerIconResponse) {
             _listing.featuredBannerIconId = featuredBannerIconResponse.id;
-            _listing.featuredBannerIcon = undefined;
             _listing[listingIconPropertyUrlMap.featuredBannerIcon] =
                 featuredBannerIconResponse._links.self.href;
         }
@@ -153,14 +149,12 @@ function saveImages() {
 
                 if (smallResp) {
                     newScreenshot.smallImageId = smallResp.id;
-                    newScreenshot.smallImage = undefined;
                     newScreenshot[screenshotPropertyUrlMap.smallImage] =
                         smallResp._links.self.href;
                 }
 
                 if (largeResp) {
                     newScreenshot.largeImageId = largeResp.id;
-                    newScreenshot.largeImage = undefined;
                     newScreenshot[screenshotPropertyUrlMap.largeImage] =
                         largeResp._links.self.href;
                 }
@@ -244,7 +238,7 @@ var CurrentListingStore = createStore({
 
     updateImage: function(propertyPath, value) {
         //on modern browsers, create a URL to reference the local image data. On old browsers
-        //this will be skipped and uri will be null
+        //this will be skipped and uri will be undefined
         var uri = window.URL && window.Blob && value instanceof Blob ?
             URL.createObjectURL(value) : undefined;
 
@@ -269,7 +263,7 @@ var CurrentListingStore = createStore({
                 _listing.approvalStatus = oldStatus;
                 me.trigger(validation);
             } else {
-                save(_listing);
+                me._save();
             }
         });
     },
@@ -285,9 +279,25 @@ var CurrentListingStore = createStore({
             if(!validation.isValid) {
                 me.trigger(validation);
             } else {
-                save(_listing);
+                me._save();
             }
         });
+    },
+
+    /**
+     * Save the listing.  Cleans up the _listing data to create the proper json to save
+     */
+    _save: function() {
+        var screenshots = _listing.screenshots.map(
+                s => _.omit(s, 'smallImage', 'largeImage', 'smallImageUrl', 'largeImageUrl')
+            ),
+            strippedListing = _.omit(_listing,
+                'imageSmallUrl', 'imageMediumUrl', 'imageLargeUrl', 'imageXlargeUrl',
+                'smallIcon', 'largeIcon', 'bannerIcon', 'featuredBannerIcon', 'screenshots'),
+            listing = Object.assign(strippedListing, {screenshots: screenshots});
+
+
+        save(listing);
     },
 
     doValidation: function () {
