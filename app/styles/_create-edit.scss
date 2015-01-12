@@ -59,10 +59,11 @@
 }
 
 .image-preview {
-    display: block;
+    display: none;
+    margin-bottom: 10px;
 
     &[src] {
-        margin-bottom: 10px;
+        display: block;
     }
 
     max-width: 300px;

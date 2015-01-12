@@ -30,7 +30,8 @@ var ImageInput = React.createClass({
             <div className={ this.getClasses() }>
                 <label htmlFor={ this.props.id } className={labelClasses}>{ this.props.label }</label>
                 <p className="small">{ this.props.description }</p>
-                <img className="image-preview" src={this.props.imageUri} />
+                <img ref="image" className="image-preview"
+                    src={this.props.imageUri || undefined} />
                 { cloneWithProps(this.renderInput(), props) }
                 { this.props.help && <p className="help-block small">{ this.props.help }</p>}
             </div>
@@ -59,6 +60,14 @@ var ImageInput = React.createClass({
     },
 
     componentDidUpdate: function() {
+        var img = this.refs.image.getDOMNode();
+
+        //if we set the src to undefined in vdom after it's already had a value,
+        //it'll show up as "", whereas we actually want it gone entirely
+        if (img.getAttribute('src') === '') {
+            img.removeAttribute('src');
+        }
+
         //assign value imperatively.  It is necessary that we not touch value except when
         //we need to clear it, and render lacks the means to describe that behavior
         if (!this.props.value) {

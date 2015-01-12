@@ -246,7 +246,7 @@ var CurrentListingStore = createStore({
         //on modern browsers, create a URL to reference the local image data. On old browsers
         //this will be skipped and uri will be null
         var uri = window.URL && window.Blob && value instanceof Blob ?
-            URL.createObjectURL(value) : null;
+            URL.createObjectURL(value) : undefined;
 
         updateImageUri(_listing, propertyPath, uri);
     },
