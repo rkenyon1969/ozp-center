@@ -51,6 +51,23 @@ var imagePropertyUrlMap =
     Object.assign({}, listingIconPropertyUrlMap, screenshotPropertyUrlMap);
 
 /**
+ * From _listing create the json to be sent to the server to save the listing
+ */
+function makeJsonForSave() {
+    var screenshots = _listing.screenshots.map(
+            s => _.omit(s, 'smallImage', 'largeImage', 'smallImageUrl', 'largeImageUrl')
+        ),
+        strippedListing = _.omit(_listing,
+            'imageSmallUrl', 'imageMediumUrl', 'imageLargeUrl', 'imageXlargeUrl',
+            'smallIcon', 'largeIcon', 'bannerIcon', 'featuredBannerIcon',
+            'screenshots'),
+        json = Object.assign(strippedListing, {screenshots: screenshots});
+
+    return json;
+}
+
+
+/**
  * Check to see if url is an object url and if so revoke it
  */
 function revokeObjectURL(url) {
@@ -198,6 +215,7 @@ var CurrentListingStore = createStore({
             listing: _listing,
             isValid: true,
             hasChanges: false,
+            saveStatus: null,
             errors: validation.errors,
             warnings: validation.warnings
         });
@@ -250,54 +268,40 @@ var CurrentListingStore = createStore({
     },
 
     onSubmit: function () {
-        var me = this,
-            oldStatus = _listing.approvalStatus;
+        var oldStatus = _listing.approvalStatus;
 
         _listing.approvalStatus = 'PENDING';
         _submitting = true;
 
-        saveImages().then(function() {
-            var validation = me.doValidation();
-
-            if(!validation.isValid) {
-                _listing.approvalStatus = oldStatus;
-                me.trigger(validation);
-            } else {
-                me._save();
-            }
-        });
+        this._save({approvalStatus: oldStatus});
     },
 
     onSave: function () {
-        var me = this;
-
         _submitting = false;
-
-        saveImages().then(function() {
-            var validation = me.doValidation();
-
-            if(!validation.isValid) {
-                me.trigger(validation);
-            } else {
-                me._save();
-            }
-        });
+        this._save();
     },
 
     /**
-     * Save the listing.  Cleans up the _listing data to create the proper json to save
+     * Save the listing.
+     * @param oldListingData The data to set back on _listing if there is a validation
+     * failure
      */
-    _save: function() {
-        var screenshots = _listing.screenshots.map(
-                s => _.omit(s, 'smallImage', 'largeImage', 'smallImageUrl', 'largeImageUrl')
-            ),
-            strippedListing = _.omit(_listing,
-                'imageSmallUrl', 'imageMediumUrl', 'imageLargeUrl', 'imageXlargeUrl',
-                'smallIcon', 'largeIcon', 'bannerIcon', 'featuredBannerIcon', 'screenshots'),
-            listing = Object.assign(strippedListing, {screenshots: screenshots});
+    _save: function(oldListingData) {
+        var me = this;
 
+        this.trigger({saveStatus: 'images'});
 
-        save(listing);
+        saveImages().then(function() {
+            me.trigger({saveStatus: 'listing'});
+            var validation = me.doValidation();
+
+            if(!validation.isValid) {
+                Object.assign(_listing, oldListingData);
+                me.trigger(Object.assign({saveStatus: null}, validation));
+            } else {
+                save(makeJsonForSave());
+            }
+        });
     },
 
     doValidation: function () {

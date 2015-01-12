@@ -3,6 +3,7 @@
 var React = require('react');
 var Reflux = require('reflux');
 var Modal = require('../shared/Modal');
+var LoadMask = require('../LoadMask');
 var { pick, assign } = require('../../utils/_');
 var { approvalStatus } = require('../../constants');
 var CurrentListingStore = require('../../stores/CurrentListingStore');
@@ -23,6 +24,11 @@ var {
     Select2TagInput,
     TextAreaInput
 } = require('./form');
+
+var savingMessages = {
+    images: 'Uploading Images...',
+    listing: 'Saving Listing...'
+};
 
 function getOptionsForSystemObject (items) {
     return items.map(item => {
@@ -83,6 +89,7 @@ var CreateEditPage = React.createClass({
         var showPreview = !!listing.id;
         var titleText = (this.getParams().listingId ? 'Edit ' : 'Create New ') + 'Listing';
         var saveText = showSave() ? 'Save' : 'Saved';
+        var savingText = savingMessages[this.state.saveStatus];
 
         var formProps = assign({},
             pick(this.state, ['errors', 'warnings', 'messages', 'firstError']),
@@ -108,6 +115,7 @@ var CreateEditPage = React.createClass({
             <div>
                 <Header subHeader={subHeader} />
                 <ListingForm ref="form" { ...formProps } />
+                { savingText && <LoadMask message={savingText} /> }
             </div>
         );
         /* jshint ignore:end */

@@ -1,0 +1,39 @@
+.load-mask-container {
+    position: fixed;
+
+    width: 100%;
+    height: 100%;
+
+    top: 0;
+    left: 0;
+
+    background-color: rgba($black, 0.75);
+
+    z-index: 10;
+}
+
+.load-mask-content {
+    margin-top: 300px;
+    margin-left: auto;
+    margin-right: auto;
+
+    padding: 5px;
+
+    width: 200px;
+
+    position: relative;
+
+    background-color: $black;
+}
+
+.load-mask-icon {
+    height: 100px;
+    position: relative;
+}
+
+.load-mask-message {
+    color: $white;
+    font-weight: bold;
+
+    text-align: center
+}
