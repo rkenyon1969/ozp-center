@@ -16,11 +16,11 @@ module.exports = {
     cache: true,
     output: {
         path: path.join(__dirname, "dist/assets"),
-        publicPath: "dist/assets",
+        publicPath: "assets/",
         // If you want to generate a filename with a hash of the content (for cache-busting)
         // filename: "main-[hash].js",
         filename: "main.js",
-        chunkFilename: "[chunkhash].js"
+        chunkFilename: "webpack.[hash].js"
     },
     resolve: {
         alias: {
@@ -30,9 +30,10 @@ module.exports = {
             carouFredSel$: "carouFredSel/jquery.carouFredSel-6.2.1",
             lodash: "lodash-amd/modern",
             "magnific-popup$": "magnific-popup/dist/jquery.magnific-popup",
-            w2ui$: "w2ui/dist/w2ui"
+            w2ui$: "w2ui/dist/w2ui",
+            classification$: "ozp-classification/jquery.classification.js"
         },
-        // Tell webpack to look for required files in bower and node
+        // Configure webpack to look for required files in bower and node
         modulesDirectories: ['./bower_components', './node_modules']
     },
     module: {
@@ -40,7 +41,6 @@ module.exports = {
             { test: /\.js$/, loader: "jshint-loader", exclude: /node_modules|bower_components|gulp|dist/ }
         ],
         loaders: [
-            { test: /\.css/, loader: "style-loader!css-loader" },
             { test: /\.gif/, loader: "url-loader?limit=10000&mimetype=image/gif" },
             { test: /\.jpg/, loader: "url-loader?limit=10000&mimetype=image/jpg" },
             { test: /\.png/, loader: "url-loader?limit=10000&mimetype=image/png" },

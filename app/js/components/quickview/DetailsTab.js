@@ -8,21 +8,22 @@ var DetailsTab = React.createClass({
     propTypes: {
         listing: React.PropTypes.object
     },
-
     render: function () {
         var whatsNew = this.props.listing.whatIsNew;
         var organization = this.props.listing.agency;
         var type = this.props.listing.type;
         var URL = this.props.listing.launchUrl;
         var updatedDate = this.props.listing.editedDate;
-        var releaseDate = this.props.listing.releaseDate;
+        var versionNumber = this.props.listing.versionName;
         var categories = this.props.listing.categories.join(', ');
         var tags = this.props.listing.tags.join(', ');
+        var requirements = this.props.listing.requirements;
+
 
         /* jshint ignore:start */
         return (
             <div className="tab-pane active quickview-details row">
-                <div className="col-md-6 col-left">
+                <div className="col-md-4 col-left">
                     <section>
                         <h5>What&lsquo;s New</h5>
                         <hr/>
@@ -33,6 +34,28 @@ var DetailsTab = React.createClass({
                         }
                     </section>
                     <section>
+                        <h5>Usage Requirements</h5>
+                        <hr/>
+                        <p>{ requirements }</p>
+                    </section>
+                </div>
+                <div className="col-md-4">
+                    <section>
+                        <h5>Marketplace Properties</h5>
+                        <hr/>
+                        <p>
+                            <label>Type:</label><span> { type }</span><br />
+                            <label>URL:</label><span> { URL }</span><br />
+                            <label>Categories:</label><span> { categories ? categories : <EmptyFieldValue inline /> }</span><br />
+                            <label>Tags:</label><span> { tags ? tags : <EmptyFieldValue inline /> }</span><br />
+                            <label>Last Updated:</label><span> { updatedDate }</span><br />
+                            <label>Version Number:</label><span> { versionNumber } </span>
+                        </p>
+                    </section>
+                    { this.renderIntents() }
+                </div>
+                <div className="col-md-4 col-right">
+                    <section>
                         <h5>Ownership Information</h5>
                         <hr/>
                         <label>Owner(s):</label>{ this.renderOwners() }<br />
@@ -40,19 +63,7 @@ var DetailsTab = React.createClass({
                         <p className="col-md-offset-1">{ organization }</p>
                         { this.renderGovSponser() }
                     </section>
-                </div>
-                <div className="col-md-6 col-right">
-                    <section>
-                        <h5>Listing Details</h5>
-                        <hr/>
-                        <p><label>Type:</label><span> { type }</span></p>
-                        <p><label>URL:</label><span> { URL }</span></p>
-                        <p><label>Categories:</label><span> { categories ? categories : <EmptyFieldValue inline /> }</span></p>
-                        <p><label>Tags:</label><span> { tags ? tags : <EmptyFieldValue inline /> }</span></p>
-                        <p><label>Last Updated:</label><span> { updatedDate }</span></p>
-                        <p><label>Original Release Date:</label><span> { releaseDate ? releaseDate : <EmptyFieldValue inline /> }</span></p>
-                    </section>
-                    { this.renderIntents() }
+
                 </div>
             </div>
         );
@@ -72,6 +83,7 @@ var DetailsTab = React.createClass({
     renderIntents: function () {
         /* jshint ignore:start */
         var intents = this.props.listing.intents;
+        var singleton = (this.props.listing.singleton) ? "Yes" : "No";
         var intentComponents = this.props.listing.intents.map(function (intent) {
             var parts = intent.split('/');
             return <p><label>{ parts[2] }: </label><span> { parts[0] + '/' + parts[1] }</span></p>;
@@ -81,6 +93,7 @@ var DetailsTab = React.createClass({
             <section>
                 <h5>Ozone Properties</h5>
                 <hr/>
+                <label>Singleton:</label><span> { singleton }</span><br />
                 <label>Intents:</label>
                 <div className="col-md-offset-1">
                     { intents.length ? intentComponents : <EmptyFieldValue /> }

@@ -1,5 +1,8 @@
 'use strict';
 
+// using raw-loader instead of css-loader as csso, module used by css-loader to
+// inline imports has issues parsing css file
+require('style-loader!raw-loader!../../../../node_modules/w2ui/dist/w2ui.min.css');
 require('script!w2ui');
 w2utils.settings.dataType = 'RESTFULL';
 
