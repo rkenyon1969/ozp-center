@@ -16,11 +16,11 @@ module.exports = {
     cache: true,
     output: {
         path: path.join(__dirname, "dist/assets"),
-        publicPath: "dist/assets",
+        publicPath: "assets/",
         // If you want to generate a filename with a hash of the content (for cache-busting)
         // filename: "main-[hash].js",
         filename: "main.js",
-        chunkFilename: "[chunkhash].js"
+        chunkFilename: "webpack.[hash].js"
     },
     resolve: {
         alias: {
