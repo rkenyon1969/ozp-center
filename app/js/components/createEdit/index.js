@@ -62,7 +62,8 @@ var CreateEditPage = React.createClass({
 
     getInitialState: function () {
         return {
-            scrollToError: false
+            scrollToError: false,
+            imageErrors: {}
         };
     },
 
@@ -94,7 +95,9 @@ var CreateEditPage = React.createClass({
         var formProps = assign({},
             pick(this.state, ['errors', 'warnings', 'messages', 'firstError']),
             { system: this.props.system, value: listing, requestChange: updateListing,
-                forceError: !this.state.isValid, currentUser: this.props.currentUser }
+                forceError: !this.state.isValid, currentUser: this.props.currentUser,
+                imageErrors: this.state.imageErrors
+            }
         );
 
         /* jshint ignore:start */
@@ -203,11 +206,18 @@ var ListingForm = React.createClass({
                 <ListInput { ...this.getSubFormProps('docUrls') } itemForm={ ResourceForm } optional/>
 
                 <h2>Graphics</h2>
-                <ImageInput { ...p('smallIcon') } imageUri={this.props.value.imageSmallUrl} />
-                <ImageInput { ...p('largeIcon') } imageUri={this.props.value.imageMediumUrl} />
-                <ImageInput { ...p('bannerIcon') } imageUri={this.props.value.imageLargeUrl} />
+                <ImageInput { ...p('smallIcon') }
+                    imageUri={this.props.value.imageSmallUrl}
+                    serverError={this.props.imageErrors.smallIcon} />
+                <ImageInput { ...p('largeIcon') }
+                    imageUri={this.props.value.imageMediumUrl}
+                    serverError={this.props.imageErrors.largeIcon} />
+                <ImageInput { ...p('bannerIcon') }
+                    imageUri={this.props.value.imageLargeUrl}
+                    serverError={this.props.imageErrors.bannerIcon} />
                 <ImageInput { ...p('featuredBannerIcon') }
-                    imageUri={this.props.value.imageXlargeUrl} />
+                    imageUri={this.props.value.imageXlargeUrl}
+                    serverError={this.props.imageErrors.featuredBannerIcon} />
 
                 <ListInput { ...this.getSubFormProps('screenshots') } itemForm={ ScreenshotForm }/>
 
@@ -254,9 +264,11 @@ var ScreenshotForm = React.createClass({
                     <span aria-hidden="true">&times;</span><span className="sr-only">Close</span>
                 </button>
                 <ImageInput { ...this.getFormComponentProps('smallImage') }
-                    imageUri={this.props.value.smallImageUrl} />
+                    imageUri={this.props.value.smallImageUrl}
+                    serverError={this.props.imageErrors.smallImage} />
                 <ImageInput { ...this.getFormComponentProps('largeImage') }
-                    imageUri={this.props.value.largeImageUrl} />
+                    imageUri={this.props.value.largeImageUrl}
+                    serverError={this.props.imageErrors.largeImage} />
             </div>
         );
         /*jshint ignore: end */

@@ -32,6 +32,11 @@ var ImageInput = React.createClass({
                 <p className="small">{ this.props.description }</p>
                 <img ref="image" className="image-preview"
                     src={this.props.imageUri || undefined} />
+                { this.props.serverError &&
+                    <div className="has-error">
+                        <p className="help-block small">{this.props.serverError}</p>
+                    </div>
+                }
                 { cloneWithProps(this.renderInput(), props) }
                 { this.props.help && <p className="help-block small">{ this.props.help }</p>}
             </div>
@@ -80,7 +85,8 @@ var ImageInput = React.createClass({
      */
     shouldComponentUpdate: function(newProps) {
         return InputMixin.shouldComponentUpdate.apply(this, arguments) ||
-            newProps.imageUri !== this.props.imageUri;
+            newProps.imageUri !== this.props.imageUri ||
+            newProps.serverError !== this.props.serverError;
     },
 
     showError: function(props, state) {

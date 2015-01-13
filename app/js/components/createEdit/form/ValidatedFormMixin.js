@@ -23,6 +23,7 @@ var ValidatedFormMixin = {
     getSubFormProps: function (property) {
         return Object.assign(this.getFormComponentProps(property), {
             errors: this.props.errors,
+            imageErrors: this.props.imageErrors,
             messages: this.props.messages,
             warnings: this.props.warnings,
             requestChange: this.props.requestChange,
