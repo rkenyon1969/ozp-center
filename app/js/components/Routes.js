@@ -4,8 +4,8 @@ var DiscoveryPage = require('./discovery');
 var UserManagement = require('./management/user');
 var CreateEditPage = require('./createEdit');
 var AppsMallManagement = require('./management/mall');
-var AllListings = require('./management/all-listings');
-var OrgListings = require('./management/org-listings');
+var AllListings = require('./management/AllListings');
+var OrgListings = require('./management/OrgListings');
 var ProfileStore = require('../stores/ProfileStore');
 var _ = require('../utils/_');
 /*jshint ignore:start */
@@ -27,7 +27,7 @@ module.exports = function () {
             stewardedOrganizationsRoutes.push(<Route name= {name} path= {name} handler= { OrgListings } />);
         })
     }
-    
+
     return (
         <Route handler={App}>
             <Route path="home" name="home" handler={ DiscoveryPage } />

@@ -2,22 +2,21 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var _ = require('../../../utils/_');
+var _ = require('../../utils/_');
 
-var AdminRoute = require('../../../mixins/AdminRouteMixin');
-var SystemStateMixin = require('../../../mixins/SystemStateMixin');
-var ProfileStore = require('../../../stores/ProfileStore');
+var AdminRoute = require('../../mixins/AdminRouteMixin');
+var SystemStateMixin = require('../../mixins/SystemStateMixin');
 
-var OrgListingsSidebar = require('./OrgListingsSidebar');
-var ListingTile = require('../../listing/ListingTile');
-var LoadMore = require('../../shared/LoadMore');
+var Sidebar = require('./shared/Sidebar');
+var ListingTile = require('../listing/ListingTile');
+var LoadMore = require('../shared/LoadMore');
 
-var PaginatedListingsStore = require('../../../stores/PaginatedListingsStore');
+var PaginatedListingsStore = require('../../stores/PaginatedListingsStore');
 
-var ListingActions = require('../../../actions/ListingActions');
+var ListingActions = require('../../actions/ListingActions');
 
 
-var OrgListings = React.createClass({
+var AllListings = React.createClass({
 
     mixins: [ AdminRoute, SystemStateMixin ],
 
@@ -28,7 +27,7 @@ var OrgListings = React.createClass({
             hasMore: false,
             filter: {
                 approvalStatus: null,
-                org: this.props.org.to,
+                org: null,
                 enabled: null
             }
         };
@@ -76,12 +75,6 @@ var OrgListings = React.createClass({
         ListingActions.fetchAllListings(this.state.filter);
     },
 
-    componentWillReceiveProps: function(nextProps) {
-        if (this.props.org !== nextProps.org) {
-            this.onFilterChanged('org', nextProps.org.to);
-        }
-    },
-
     componentDidMount: function () {
         this.fetchAllListingsIfEmpty();
         this.listenTo(PaginatedListingsStore, this.onStoreChanged);
@@ -90,27 +83,29 @@ var OrgListings = React.createClass({
 
     render: function () {
         this.state.listings.forEach(function(listing){
-            listing.view = 'orgView';
+            listing.view = 'adminView';
         });
+
         /* jshint ignore:start */
         return this.transferPropsTo(
             <div className="AllListings row">
                 <aside className="AllListings__sidebar col-md-2">
-                <OrgListingsSidebar
-                    value={ this.state.filter }
-                    listings={ this.state.listings }
-                    counts={ this.state.counts }
-                    onFilterChanged={ this.onFilterChanged }
-                    organizations={ this.state.system.organizations || [] } />
+                    <Sidebar
+                        value={ this.state.filter }
+                        listings={ this.state.listings }
+                        counts={ this.state.counts }
+                        onFilterChanged={ this.onFilterChanged }
+                        organizations={ this.state.system.organizations || [] }
+                        view='adminView' />
                 </aside>
                 <LoadMore className="AllListings__listings col-md-10 all" hasMore={this.state.hasMore} onLoadMore={this.onLoadMore}>
                     { ListingTile.fromArray(this.state.listings) }
                 </LoadMore>
             </div>
-    );
-    /* jshint ignore:end */
-}
+        );
+        /* jshint ignore:end */
+    }
 
 });
 
-module.exports = OrgListings;
+module.exports = AllListings;
