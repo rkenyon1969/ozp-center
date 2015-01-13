@@ -19,7 +19,6 @@ var DetailsTab = React.createClass({
         var tags = this.props.listing.tags.join(', ');
         var requirements = this.props.listing.requirements;
 
-        console.log(this.props.listing);
 
         /* jshint ignore:start */
         return (
