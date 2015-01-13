@@ -33,7 +33,7 @@ var ListingManagement = React.createClass({
         var me = this;
         return _.find(tabs, function(tab) {
             return me.isActive(tab.to);
-        })
+        });
     },
 
     render: function () {

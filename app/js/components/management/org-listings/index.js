@@ -22,15 +22,13 @@ var OrgListings = React.createClass({
     mixins: [ AdminRoute, SystemStateMixin ],
 
     getInitialState: function () {
-        var userOrg = this.props.org;
-        console.log(userOrg.to)
         return {
             counts: {},
             listings: [],
             hasMore: false,
             filter: {
                 approvalStatus: null,
-                org: userOrg.to,
+                org: this.props.org.to,
                 enabled: null
             }
         };
@@ -76,6 +74,12 @@ var OrgListings = React.createClass({
 
     onListingChangeCompleted: function () {
         ListingActions.fetchAllListings(this.state.filter);
+    },
+
+    componentWillReceiveProps: function(nextProps) {
+        if (this.props.org !== nextProps.org) {
+            this.onFilterChanged('org', nextProps.org.to);
+        }
     },
 
     componentDidMount: function () {
