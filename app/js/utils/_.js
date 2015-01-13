@@ -15,6 +15,7 @@ module.exports = {
     contains: require('lodash/collections/contains'),
     map: require('lodash/collections/map'),
     reduce: require('lodash/collections/reduce'),
+    forEach: require('lodash/collections/forEach'),
 
     findIndex: require('lodash/arrays/findIndex'),
     compact: require('lodash/arrays/compact'),

@@ -136,6 +136,15 @@ var AdminOwnerListingTile = React.createClass({
                 'rejected': approvalStatus === 'REJECTED',
                 'AdminOwnerListingTile': true
             };
+        } else if(listing.view === 'orgView'){
+            approvalStatusClasses = {
+                'draft': approvalStatus === 'IN_PROGRESS',
+                'pending': approvalStatus === 'APPROVED_ORG',
+                'needs-action': approvalStatus === 'PENDING',
+                'published': approvalStatus === 'APPROVED',
+                'rejected': approvalStatus === 'REJECTED',
+                'AdminOwnerListingTile': true
+            };
         } else {
             approvalStatusClasses = {
               'draft': approvalStatus === 'IN_PROGRESS',
