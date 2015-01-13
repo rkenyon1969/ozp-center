@@ -423,7 +423,8 @@ var CurrentListingStore = createStore({
     handleImageSaveFailure: function(property, response, err, statusText) {
         var json = response.responseJSON,
             jsonMessage = json ? json.message : null,
-            errorMessage = jsonMessage || statusText;
+            errorMessage = jsonMessage || statusText ||
+                'Unknown error saving image';
 
         if (!_.isArray(property)) {
             property = [property];
