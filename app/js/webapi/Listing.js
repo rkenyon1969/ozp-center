@@ -100,6 +100,11 @@ var ListingApi = {
             .then((response) => new PaginatedResponse(response).getItemAsList());
     },
 
+    getItemComments: function (id) {
+        return $.getJSON(API_URL + '/api/listing/' + id + '/itemComment')
+            .then((response) => new PaginatedResponse(response).getItemAsList());
+    },
+
     getOwnedListings: function (profile) {
         var id = profile ? profile.id : 'self';
 

@@ -71,6 +71,10 @@ ListingActions = createActions({
         ListingApi.getChangeLogs(listingId).then(ListingActions.fetchChangeLogsCompleted.bind(null, listingId));
     },
 
+    fetchItemComments: function (listingId) {
+        ListingApi.getItemComments(listingId).then(ListingActions.fetchItemCommentsCompleted.bind(null, listingId));
+    },
+
     fetchOwnedListings: function (profile) {
         ListingApi.getOwnedListings(profile).then(ListingActions.fetchOwnedListingsCompleted);
     },
