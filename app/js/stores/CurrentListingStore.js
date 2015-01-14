@@ -88,6 +88,9 @@ function updateImageUri(obj, path, imageUri) {
         //if the existing URL is already a temp object URL, revoke it
         revokeObjectURL(oldUri);
         obj[urlProp] = imageUri;
+
+        //unset the server-assigned id
+        obj[prop + 'Id'] = null;
     } else {
         updateImageUri(obj[prop], path.slice(1), imageUri);
     }

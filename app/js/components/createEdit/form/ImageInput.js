@@ -23,15 +23,24 @@ var ImageInput = React.createClass({
     render: function () {
         var labelClasses = classSet({ 'input-optional': this.props.optional }),
             tempProps = this.getInputProps(),
-            props = _.omit(this.getInputProps(), 'value');
+            props = _.omit(this.getInputProps(), 'value'),
+            imageContainerClasses = classSet({
+                'image-container': true,
+                'image-present': !!this.props.imageUri
+            });
 
         /*jshint ignore:start */
         return (
             <div className={ this.getClasses() }>
-                <label htmlFor={ this.props.id } className={labelClasses}>{ this.props.label }</label>
+                <label htmlFor={ this.props.id } className={labelClasses}>
+                    { this.props.label }
+                </label>
                 <p className="small">{ this.props.description }</p>
-                <img ref="image" className="image-preview"
-                    src={this.props.imageUri || undefined} />
+                <span className={imageContainerClasses}>
+                    <button onClick={this.removeImage} className="btn image-remove"/>
+                    <img ref="image" className="image-preview"
+                        src={this.props.imageUri || undefined} />
+                </span>
                 { this.props.serverError &&
                     <div className="has-error">
                         <p className="help-block small">{this.props.serverError}</p>
@@ -64,13 +73,24 @@ var ImageInput = React.createClass({
         this.setState({changedSinceUpdate: true});
     },
 
-    componentDidUpdate: function() {
+    removeImage: function(evt) {
+        evt.preventDefault();
+
+        this.props.setter(null);
+        this.setState({changedSinceUpdate: true});
+    },
+
+    componentDidUpdate: function(oldProps) {
         var img = this.refs.image.getDOMNode();
 
         //if we set the src to undefined in vdom after it's already had a value,
         //it'll show up as "", whereas we actually want it gone entirely
         if (img.getAttribute('src') === '') {
             img.removeAttribute('src');
+        }
+
+        if (oldProps.value && !this.props.value) {
+            this.refs.input.getDOMNode().value = '';
         }
     },
 

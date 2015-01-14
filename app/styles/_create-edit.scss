@@ -58,14 +58,40 @@
     }
 }
 
-.image-preview {
+.image-container {
     display: none;
+
+    position: relative;
+    box-sizing: content-box;
+
+    width: 300px;
+    height: 188px;
+    line-height: 188px;
+
     margin-bottom: 10px;
 
-    &[src] {
-        display: block;
-    }
+    border: 1px solid $gray-lighter;
 
-    max-width: 300px;
-    max-height: 188px;
+    text-align: center;
+    vertical-align: middle;
+
+    &.image-present {
+        display: inline-block;
+    }
+}
+
+.image-preview {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.image-remove {
+    @extend .corner-button;
+
+    @extend .fa;
+    @extend .fa-trash-o;
+
+    position: absolute;
+    top: 0;
+    right: 0;
 }

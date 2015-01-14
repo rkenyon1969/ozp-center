@@ -64,18 +64,12 @@
 }
 
 .AdminOwnerListingTile__actionMenuButton {
+    @extend .corner-button;
+
     //style as font-awesome horizontal ellipsis
     @extend .fa;
     @extend .fa-ellipsis-h;
 
-    display: block;
-    text-align: center;
-
-    background-color: $white;
-    font-size: 1.3em;
-    border: 1px solid $gray-lighter;
-
-    position: relative;
     margin-right: 0;
     margin-left: auto;
     width: 50px;
@@ -83,13 +77,6 @@
     padding-right: 0;
     padding-bottom: 0;
     padding-top: 1px;
-
-    cursor: pointer;
-
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
 }
 
 .AdminOwnerListingTile__actionMenu {
