@@ -16,7 +16,7 @@ module.exports = {
     cache: true,
     output: {
         path: path.join(__dirname, "dist/assets"),
-        publicPath: "dist/assets/",
+        publicPath: "assets/",
         // If you want to generate a filename with a hash of the content (for cache-busting)
         // filename: "main-[hash].js",
         filename: "main.js",
@@ -63,6 +63,12 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery"
+        }),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.AggressiveMergingPlugin({
+            minSizeReduce: 1.5,
+            moveToParents: true
         })
     ]
 };
