@@ -113,6 +113,10 @@ var ReviewsTab = React.createClass({
         console.log('save review...');
     },
 
+    onCancel: function() {
+        console.log('cancel review...');
+    },
+
     render: function () {
         var currentUserRating = this.state.currentUserRating;
 
@@ -126,11 +130,12 @@ var ReviewsTab = React.createClass({
                     { this.renderUserReviews() }
                 </section>
                 <section className="col-md-3 col-right">
-                    <p>Review this listing:</p>
-                    <p className="text-danger">Warning: Data entered must NOT be above System High!</p>
+                    <h4>Review this Listing</h4>
                     <IconRating currentRating = { currentUserRating } onChange={ this.onRatingChange } />
+                    <p className="text-danger">Warning: Data entered must NOT be above System High!</p>
                     <textarea placeholder="Warning: Data entered must NOT be above System High!"></textarea>
-                    <button className="btn btn-block btn-primary" onClick={ this.onSubmit }>Submit Review</button>
+                    <button className="btn btn-success btn-small pull-right" onClick={ this.onSubmit }>Submit Review</button>
+                    <button className="btn btn-default btn-small pull-right" onClick={ this.onCancel }>Reset</button>
                 </section>
             </div>
         );
@@ -156,14 +161,19 @@ var ReviewsTab = React.createClass({
                     <div className="progress">
                         <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={style} ></div>
                     </div>
-                    <span className="count">({ count })</span>
+                    <span className="count">({ count || 0 })</span>
                 </div>
             );
         });
 
         return (
-            <div className="review-filters">
-                { starComponents }
+            <div>
+                <h4>Average Rating</h4>
+                <IconRating currentRating = { listing.avgRate || 0 } viewOnly />
+                <p> From { listing.totalVotes || 0 } ratings </p>
+                <div className="review-filters">
+                    { starComponents }
+                </div>
             </div>
         );
         /* jshint ignore:end */
