@@ -27,7 +27,8 @@ var ImageInput = React.createClass({
             imageContainerClasses = classSet({
                 'image-container': true,
                 'image-present': !!this.props.imageUri
-            });
+            }),
+            helpOrErrorText = this.props.serverError || this.props.help;
 
         /*jshint ignore:start */
         return (
@@ -41,13 +42,10 @@ var ImageInput = React.createClass({
                     <img ref="image" className="image-preview"
                         src={this.props.imageUri || undefined} />
                 </span>
-                { this.props.serverError &&
-                    <div className="has-error">
-                        <p className="help-block small">{this.props.serverError}</p>
-                    </div>
+                { helpOrErrorText &&
+                    <p className="help-block small">{helpOrErrorText}</p>
                 }
                 { cloneWithProps(this.renderInput(), props) }
-                { this.props.help && <p className="help-block small">{ this.props.help }</p>}
             </div>
         );
         /*jshint ignore:end */
@@ -95,7 +93,7 @@ var ImageInput = React.createClass({
     },
 
     componentWillReceiveProps: function(newProps) {
-        if (!newProps.value) {
+        if (!newProps.value || newProps.serverError) {
             this.setState({changedSinceUpdate: false});
         }
     },
@@ -110,7 +108,8 @@ var ImageInput = React.createClass({
     },
 
     showError: function(props, state) {
-        return !state.changedSinceUpdate && InputMixin.showError.apply(this, arguments);
+        return !state.changedSinceUpdate && (props.serverError ||
+                InputMixin.showError.apply(this, arguments));
     },
 
     showWarning: function(props, state) {

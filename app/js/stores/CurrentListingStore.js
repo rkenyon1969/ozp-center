@@ -186,6 +186,7 @@ var CurrentListingStore = createStore({
             URL.createObjectURL(value) : undefined;
 
         updateImageUri(_listing, propertyPath, uri);
+        updateValue(imageErrors, propertyPath, null);
     },
 
     onSystemUpdated: function () {
