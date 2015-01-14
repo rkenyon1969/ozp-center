@@ -9,7 +9,7 @@ var ApprovalStatusFilter = require('./ApprovalStatusFilter');
 var EnabledFilter = require('./EnabledFilter');
 var OrgFilter = require('./OrgFilter');
 
-var AllListingsSidebar = React.createClass({
+var Sidebar = React.createClass({
 
     propTypes: {
         counts: React.PropTypes.object.isRequired
@@ -46,4 +46,4 @@ var AllListingsSidebar = React.createClass({
     }
 });
 
-module.exports = AllListingsSidebar;
+module.exports = Sidebar;

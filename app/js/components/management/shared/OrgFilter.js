@@ -26,7 +26,7 @@ var OrgFilter = React.createClass({
                         <input id={ "all-listings-filter-organization-" + organization.shortName.toLowerCase() } type="radio" value={ organization.title }/>
                         <label htmlFor={ "all-listings-filter-organization-" + organization.shortName.toLowerCase() } className="label-organization">
                             { organization.shortName }
-                        <strong className="badge">{ count || 0 }</strong>
+                            <strong className="badge">{ count || 0 }</strong>
                         </label>
                     </div>
                 );
@@ -42,8 +42,8 @@ var OrgFilter = React.createClass({
                     onChange={ _.partial(this.handleChange, "org") }>
                     <input id="all-listings-filter-organization-all" type="radio" value="all"/>
                     <label htmlFor="all-listings-filter-organization-all" className="label-all">
-                    All
-                    <strong className="badge">{ counts.total }</strong>
+                        All
+                        <strong className="badge">{ counts.total }</strong>
                     </label>
                     { organizations }
                 </RadioGroup>

@@ -4,7 +4,6 @@ var React = require('react');
 var Tab = require('../../../mixins/TabMixin');
 var { Link, RouteHandler } = require('react-router');
 var SystemStateMixin = require('../../../mixins/SystemStateMixin');
-var ActiveStateMixin = require('../../../mixins/ActiveStateMixin');
 var _ = require('../../../utils/_');
 
 // component dependencies
