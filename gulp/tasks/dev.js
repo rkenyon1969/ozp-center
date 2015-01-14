@@ -11,7 +11,7 @@ gulp.task('dev', ['sass', 'copy', 'fonts', 'images'], function () {
 
     // Start a webpack-dev-server
     var server = new WebpackDevServer(webpack(devConfig), {
-        publicPath: "/" + devConfig.output.publicPath,
+        publicPath: "/dist/assets",
         stats: {
             colors: true
         }
