@@ -97,10 +97,16 @@ function updateImageUri(obj, path, imageUri) {
 }
 
 function updateValue(obj, path, value) {
+
     if (path.length === 1) {
         obj[path[0]] = value;
     } else {
-        updateValue(obj[path[0]], path.slice(1), value);
+        var nextLevel = obj[path[0]];
+        if (nextLevel === undefined) {
+            obj[path[0]] = nextLevel = {};
+        }
+
+        updateValue(nextLevel, path.slice(1), value);
     }
 }
 
