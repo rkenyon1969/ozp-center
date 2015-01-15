@@ -13,8 +13,6 @@ var _ = require('../utils/_');
 
 
 module.exports = function (childRoutes) {
-    childRoutes = [].concat(childRoutes);
-
     var stewardedOrganizationsRoutes = [
         <Route path="my-listings" name="my-listings" handler={ UserManagement.MyListings } />,
         <Route path="recent-activity" name="recent-activity" handler={ UserManagement.RecentActivity } />,
@@ -44,8 +42,9 @@ module.exports = function (childRoutes) {
             <Route path="stewards" name="stewards" handler={ AppsMallManagement.Stewards } />
         </Route>
     ];
-
-    routes = routes.concat(childRoutes);
+    if (childRoutes) {
+        routes = routes.concat(childRoutes);
+    }
     routes.push(<Redirect to="home" />);
 
     return (
