@@ -28,7 +28,7 @@ var ListingManagement = React.createClass({
         };
     },
 
-    getActiveTab: function(tabs){
+    getActiveTab: function(tabs) {
         var me = this;
         return _.find(tabs, function(tab) {
             return me.isActive(tab.to);
@@ -39,12 +39,12 @@ var ListingManagement = React.createClass({
         var me = this;
 
         var tabs = _.cloneDeep(this.props.tabs);
-        if(!this.state.currentUser.isAdmin){
+        if(!this.state.currentUser.isAdmin) {
             tabs.splice(1, 1);
         }
 
-        if(this.state.currentUser.stewardedOrganizations.length > 0){
-            _.forEach(this.state.currentUser.stewardedOrganizations, function(orgName){
+        if(this.state.currentUser.stewardedOrganizations.length > 0) {
+            _.forEach(this.state.currentUser.stewardedOrganizations, function(orgName) {
                 var org = _.find(me.state.system.organizations, function(orgObj) {
                     return orgObj.title === orgName;
                 });

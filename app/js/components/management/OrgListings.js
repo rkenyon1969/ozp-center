@@ -89,7 +89,7 @@ var OrgListings = React.createClass({
     },
 
     render: function () {
-        this.state.listings.forEach(function(listing){
+        this.state.listings.forEach(function(listing) {
             listing.view = 'orgView';
         });
         /* jshint ignore:start */

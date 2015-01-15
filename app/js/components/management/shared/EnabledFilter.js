@@ -6,7 +6,7 @@ var RadioGroup = require('react-radio-group');
 
 var EnabledFilter = React.createClass({
 
-    handleEnabledChange: function (evt){
+    handleEnabledChange: function (evt) {
         var {value} = evt.target;
         if(value === 'null') { value = null; }
         if(value === 'true') { value = true; }

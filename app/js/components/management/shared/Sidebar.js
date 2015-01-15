@@ -25,13 +25,13 @@ var Sidebar = React.createClass({
             <ApprovalStatusFilter { ...this.props }/>
         ];
 
-        if(this.props.view === 'adminView'){
+        if(this.props.view === 'adminView') {
             filters.push(
                 <OrgFilter { ...this.props } />
             );
         }
 
-        if(this.props.view === 'adminView' || this.props.view === 'orgView'){
+        if(this.props.view === 'adminView' || this.props.view === 'orgView') {
             filters.push(
                 <EnabledFilter { ...this.props } />
             );

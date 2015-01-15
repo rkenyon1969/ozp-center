@@ -12,7 +12,9 @@ var _ = require('../utils/_');
 
 
 
-module.exports = function () {
+module.exports = function (childRoutes) {
+    childRoutes = [].concat(childRoutes);
+
     var stewardedOrganizationsRoutes = [
         <Route path="my-listings" name="my-listings" handler={ UserManagement.MyListings } />,
         <Route path="recent-activity" name="recent-activity" handler={ UserManagement.RecentActivity } />,
@@ -25,26 +27,31 @@ module.exports = function () {
         _.forEach(orgs, function(org) {
             var name = org;
             stewardedOrganizationsRoutes.push(<Route name= {name} path= {name} handler= { OrgListings } />);
-        })
+        });
     }
+
+    var routes = [
+        <Route path="home" name="home" handler={ DiscoveryPage } />,
+        <Route path="user-management" name="user-management" handler={ UserManagement }>
+            {stewardedOrganizationsRoutes}
+        </Route>,
+        <Route path="edit/?:listingId?" name="edit"  handler={ CreateEditPage } />,
+        <Route path="mall-management" name="mall-management" handler={ AppsMallManagement }>
+            <Route path="categories" name="categories" handler={ AppsMallManagement.Categories } />
+            <Route path="contact-types" name="contact-types" handler={ AppsMallManagement.ContactTypes } />
+            <Route path="intents" name="intents" handler={ AppsMallManagement.Intents } />
+            <Route path="organizations" name="organizations" handler={ AppsMallManagement.Organizations } />
+            <Route path="stewards" name="stewards" handler={ AppsMallManagement.Stewards } />
+        </Route>
+    ];
+
+    routes = routes.concat(childRoutes);
+    routes.push(<Redirect to="home" />);
 
     return (
         <Route handler={App}>
-            <Route path="home" name="home" handler={ DiscoveryPage } />
-            <Route path="user-management" name="user-management" handler={ UserManagement }>
-                {stewardedOrganizationsRoutes}
-            </Route>
-            <Route path="edit/?:listingId?" name="edit"  handler={ CreateEditPage } />
-            <Route path="mall-management" name="mall-management" handler={ AppsMallManagement }>
-                <Route path="categories" name="categories" handler={ AppsMallManagement.Categories } />
-                <Route path="contact-types" name="contact-types" handler={ AppsMallManagement.ContactTypes } />
-                <Route path="intents" name="intents" handler={ AppsMallManagement.Intents } />
-                <Route path="organizations" name="organizations" handler={ AppsMallManagement.Organizations } />
-                <Route path="stewards" name="stewards" handler={ AppsMallManagement.Stewards } />
-            </Route>
-            <Redirect to="home" />
+            { routes }
         </Route>
     );
-
 }
 /*jshint ignore:end */

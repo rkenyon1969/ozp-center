@@ -67,7 +67,7 @@ ProfileActions.fetchSelf();
 })();
 
 // Classification
-$(function(){
+$(function() {
     $(document).classification({
         level: 'U'
     });

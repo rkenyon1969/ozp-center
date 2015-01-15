@@ -95,7 +95,7 @@ var ListingApi = {
         });
     },
 
-    getChangeLogs: function (id){
+    getChangeLogs: function (id) {
         return $.getJSON(API_URL + '/api/listing/' + id + '/activity')
             .then((response) => new PaginatedResponse(response).getItemAsList());
     },

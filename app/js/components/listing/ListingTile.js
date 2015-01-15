@@ -127,7 +127,7 @@ var AdminOwnerListingTile = React.createClass({
             }),
             approvalStatus = listing.approvalStatus,
             approvalStatusClasses = {};
-        if(listing.view === 'adminView'){
+        if(listing.view === 'adminView') {
             approvalStatusClasses = {
                 'draft': approvalStatus === 'IN_PROGRESS',
                 'pending': approvalStatus === 'PENDING',
@@ -136,7 +136,7 @@ var AdminOwnerListingTile = React.createClass({
                 'rejected': approvalStatus === 'REJECTED',
                 'AdminOwnerListingTile': true
             };
-        } else if(listing.view === 'orgView'){
+        } else if(listing.view === 'orgView') {
             approvalStatusClasses = {
                 'draft': approvalStatus === 'IN_PROGRESS',
                 'pending': approvalStatus === 'APPROVED_ORG',
