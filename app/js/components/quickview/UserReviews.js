@@ -56,7 +56,7 @@ var UserReviews = React.createClass({
             /* jshint ignore:start */
             return (
                 <li className="user-review">
-                    <IconRating currentRating = { itemComment.rate } viewOnly />
+                    <IconRating currentRating = { itemComment.rate } viewOnly /> <b>{ itemComment._embedded.author.displayName } </b>
                     <p>{ itemComment.text }</p>
                 </li>
             );
