@@ -12,7 +12,7 @@ var FIELDS = [
     'versionName', 'imageLargeUrl', 'imageSmallUrl', 'imageMediumUrl', 'imageXlargeUrl',
     'launchUrl', 'company', 'whatIsNew', 'owners', 'agency', 'currentRejection', 'isEnabled',
     'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls', 'approvalStatus',
-    'isFeatured'
+    'isFeatured', 'smallIconId', 'largeIconId', 'bannerIconId', 'featuredBannerIconId'
 ];
 
 function Listing (json) {
