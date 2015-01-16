@@ -73,8 +73,11 @@ function makeJsonForSave() {
  * Check to see if url is an object url and if so revoke it
  */
 function revokeObjectURL(url) {
-    if (url && window.URL && new URL(url).protocol === 'blob:') {
-        URL.revokeObjectURL(url);
+    if (url && window.URL) {
+        //if (new URL(url).protocol === 'blob:') { //IE doesn't support the protocol property
+        if (url.indexOf('blob:') === 0) {
+            URL.revokeObjectURL(url);
+        }
     }
 }
 
@@ -97,10 +100,16 @@ function updateImageUri(obj, path, imageUri) {
 }
 
 function updateValue(obj, path, value) {
+
     if (path.length === 1) {
         obj[path[0]] = value;
     } else {
-        updateValue(obj[path[0]], path.slice(1), value);
+        var nextLevel = obj[path[0]];
+        if (nextLevel === undefined) {
+            obj[path[0]] = nextLevel = {};
+        }
+
+        updateValue(nextLevel, path.slice(1), value);
     }
 }
 
