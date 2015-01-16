@@ -88,7 +88,7 @@ var ImageApi = {
                 type: 'POST',
                 data: file,
                 processData: false,
-                contentType: false,
+                contentType: file.type,
                 accepts: {
                     json: 'application/json'
                 }

@@ -73,8 +73,11 @@ function makeJsonForSave() {
  * Check to see if url is an object url and if so revoke it
  */
 function revokeObjectURL(url) {
-    if (url && window.URL && new URL(url).protocol === 'blob:') {
-        URL.revokeObjectURL(url);
+    if (url && window.URL) {
+        //if (new URL(url).protocol === 'blob:') { //IE doesn't support the protocol property
+        if (url.indexOf('blob:') === 0) {
+            URL.revokeObjectURL(url);
+        }
     }
 }
 
