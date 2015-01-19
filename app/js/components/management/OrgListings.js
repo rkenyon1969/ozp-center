@@ -19,7 +19,7 @@ var ListingActions = require('../../actions/ListingActions');
 
 var OrgListings = React.createClass({
 
-    mixins: [ AdminRoute, SystemStateMixin ],
+    mixins: [ SystemStateMixin ],
 
     getInitialState: function () {
         return {
@@ -28,7 +28,7 @@ var OrgListings = React.createClass({
             hasMore: false,
             filter: {
                 approvalStatus: null,
-                org: this.props.org.to,
+                org: this.props.org.params.org,
                 enabled: null
             }
         };
@@ -78,7 +78,7 @@ var OrgListings = React.createClass({
 
     componentWillReceiveProps: function(nextProps) {
         if (this.props.org !== nextProps.org) {
-            this.onFilterChanged('org', nextProps.org.to);
+            this.onFilterChanged('org', nextProps.org.params.org);
         }
     },
 

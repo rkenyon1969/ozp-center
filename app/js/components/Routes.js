@@ -10,28 +10,15 @@ var ProfileStore = require('../stores/ProfileStore');
 var _ = require('../utils/_');
 /*jshint ignore:start */
 
-
-
 module.exports = function (childRoutes) {
-    var stewardedOrganizationsRoutes = [
-        <Route path="my-listings" name="my-listings" handler={ UserManagement.MyListings } />,
-        <Route path="recent-activity" name="recent-activity" handler={ UserManagement.RecentActivity } />,
-        <Route name="all-listings" path="all-listings" handler={ AllListings } />
-    ];
-
-
-    var orgs = ProfileStore.getCurrentUser().stewardedOrganizations;
-    if(orgs.length > 0) {
-        _.forEach(orgs, function(org) {
-            var name = org;
-            stewardedOrganizationsRoutes.push(<Route name= {name} path= {name} handler= { OrgListings } />);
-        });
-    }
 
     var routes = [
         <Route path="home" name="home" handler={ DiscoveryPage } />,
         <Route path="user-management" name="user-management" handler={ UserManagement }>
-            {stewardedOrganizationsRoutes}
+            <Route path="my-listings" name="my-listings" handler={ UserManagement.MyListings } />
+            <Route path="recent-activity" name="recent-activity" handler={ UserManagement.RecentActivity } />
+            <Route path="all-listings" name="all-listings" handler={ AllListings } />
+            <Route path="org-listings/:org" name="org-listings" handler={ OrgListings } />
         </Route>,
         <Route path="edit/?:listingId?" name="edit"  handler={ CreateEditPage } />,
         <Route path="mall-management" name="mall-management" handler={ AppsMallManagement }>

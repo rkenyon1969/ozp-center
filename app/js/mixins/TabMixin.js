@@ -16,7 +16,7 @@ var TabMixin = {
 
             return (
                 <li className={ className } key={ link.to }>
-                    <Link to={ link.to } params={ params }>{ link.name }</Link>
+                    <Link to={ link.to } params={ link.params || params }>{ link.name }</Link>
                 </li>
             );
         });

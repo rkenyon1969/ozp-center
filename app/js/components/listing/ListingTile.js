@@ -15,16 +15,16 @@ var ActionMenu = React.createClass({
         //TODO fill in hrefs
         var listing = this.props.listing,
             activeRoutePath = this.getActiveRoutePath(),
-            overviewHref = this.makeHref(activeRoutePath, null, {
+            overviewHref = this.makeHref(activeRoutePath, this.getParams(), {
                 listing: listing.id,
                 action: 'view',
                 tab: 'overview'
             }),
-            deleteHref = this.makeHref(activeRoutePath, null, {
+            deleteHref = this.makeHref(activeRoutePath, this.getParams(), {
                 listing: listing.id,
                 action: 'delete'
             }),
-            feedbackHref = this.makeHref(activeRoutePath, null, {
+            feedbackHref = this.makeHref(activeRoutePath, this.getParams(), {
                 listing: listing.id,
                 action: 'feedback'
             }),
@@ -120,7 +120,7 @@ var AdminOwnerListingTile = React.createClass({
 
     render: function () {
         var listing = this.props.listing,
-            overview = this.makeHref(this.getActiveRoutePath(), null, {
+            overview = this.makeHref(this.getActiveRoutePath(), this.getParams(), {
                 listing: listing.id,
                 action: 'view',
                 tab: 'overview'
