@@ -92,4 +92,7 @@ var listingMessages = {
     'help.docUrls.url': 'Must be a valid URL.'
 };
 
-module.exports = { listingMessages: listingMessages };
+module.exports = {
+    listingMessages: listingMessages,
+    systemHigh: 'Warning: Data entered must NOT be above System High!'
+};

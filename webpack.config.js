@@ -44,7 +44,7 @@ module.exports = {
             { test: /\.gif/, loader: "url-loader?limit=10000&mimetype=image/gif" },
             { test: /\.jpg/, loader: "url-loader?limit=10000&mimetype=image/jpg" },
             { test: /\.png/, loader: "url-loader?limit=10000&mimetype=image/png" },
-            { test: /\.jsx?$/, loader: "jsx-loader?harmony=true&insertPragma=React.DOM" }
+            { test: /\.jsx?$/, loader: "jsx-loader?harmony=true&insertPragma=React.DOM", exclude: /node_modules|bower_components|gulp|dist/ }
         ],
         noParse: /\.min\.js/
     },

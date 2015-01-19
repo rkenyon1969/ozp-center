@@ -1,46 +1,49 @@
 'use strict';
 
 var React = require('react');
-var IconRating = require('../shared/IconRating');
-var UserReviews = require('./UserReviews');
-var ListingActions = require('../../actions/ListingActions');
-var fetchItemComments = ListingActions.fetchItemComments;
+var Reflux = require('reflux');
+var _ = require('../../../utils/_');
 
+var IconRating = require('../../shared/IconRating');
+var UserReviews = require('./UserReviews');
+var CurrentUserReview = require('./ReviewListing');
+
+var CurrentListingStore = require('../../../stores/CurrentListingStore');
+var ListingActions = require('../../../actions/ListingActions');
 
 var ReviewsTab = React.createClass({
 
+    mixins: [Reflux.listenTo(ListingActions.fetchReviewsCompleted, 'onFetchItemCommentsCompleted')],
+
+    propTypes: {
+        listing: React.PropTypes.object.isRequired
+    },
+
     getInitialState: function () {
         return {
-            currentUserRating: 0
+            reviews: [],
+            userReview: {
+                rate: 0,
+                text: ''
+            }
         };
-    },
-
-    onRatingChange: function (val) {
-        this.setState({ currentUserRating: val });
-    },
-
-    onSubmit: function () {
-        console.log('save review...');
-    },
-
-    onCancel: function() {
-        console.log('cancel review...');
     },
 
     componentWillReceiveProps: function (newProps) {
         if (this.props.listing.id !== newProps.listing.id) {
-            fetchItemComments(newProps.listing.id);
+            ListingActions.fetchReviews(newProps.listing.id);
         }
     },
 
     componentWillMount: function () {
         if (this.props.listing.id) {
-            fetchItemComments(this.props.listing.id);
+            ListingActions.fetchReviews(this.props.listing.id);
         }
     },
 
     render: function () {
-        var currentUserRating = this.state.currentUserRating;
+        var { listing } = this.props;
+        var { reviews, userReview } = this.state;
 
         /* jshint ignore:start */
         return (
@@ -48,29 +51,35 @@ var ReviewsTab = React.createClass({
                 <section className="col-md-3 col-left">
                     { this.renderReviewFilters() }
                 </section>
-                <section className="col-md-6">
-                    <UserReviews />
+                <section className={ userReview.id ? "col-md-9" : "col-md-5" }>
+                    <UserReviews reviews={ reviews } />
                 </section>
-                <section className="col-md-3 col-right">
-                    <h4>Review this Listing</h4>
-                    <IconRating currentRating = { currentUserRating } onChange={ this.onRatingChange } />
-                    <p className="text-danger">Warning: Data entered must NOT be above System High!</p>
-                    <textarea placeholder="Warning: Data entered must NOT be above System High!"></textarea>
-                    <button className="btn btn-success btn-small pull-right" onClick={ this.onSubmit }>Submit Review</button>
-                    <button className="btn btn-default btn-small pull-right" onClick={ this.onCancel }>Reset</button>
-                </section>
+                {
+                    !userReview.id &&
+                        <section className="col-md-4 col-right">
+                            <CurrentUserReview listing={ listing } review={ userReview } />
+                    </section>
+                }
             </div>
         );
         /* jshint ignore:end */
     },
 
+    onFetchItemCommentsCompleted: function () {
+        var reviews = CurrentListingStore.getReviews();
+        var userReview = _.find(reviews, { author: { username: 'testAdmin1'}});
+        this.setState({
+            reviews: reviews,
+            userReview: userReview || this.state.userReview
+        });
+    },
+
     renderReviewFilters: function () {
         var listing = this.props.listing;
-        var total = listing.totalRate;
-        var stars = [5, 4, 3, 2, 1];
+        var total = listing.totalVotes;
 
         /* jshint ignore:start */
-        var starComponents = stars.map(function (star) {
+        var starComponents = [5, 4, 3, 2, 1].map(function (star) {
             var count = listing['totalRate' + star];
             var width = total === 0 ? 0 : Math.round(count * 100 / total).toFixed(2);
             var style = {
@@ -90,7 +99,7 @@ var ReviewsTab = React.createClass({
 
         return (
             <div>
-                <h4>Average Rating</h4>
+                <h5>Average Rating</h5>
                 <IconRating currentRating = { listing.avgRate || 0 } viewOnly />
                 <p> From { listing.totalVotes || 0 } ratings </p>
                 <div className="review-filters">

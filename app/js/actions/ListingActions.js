@@ -71,12 +71,21 @@ ListingActions = createActions({
         ListingApi.getChangeLogs(listingId).then(ListingActions.fetchChangeLogsCompleted.bind(null, listingId));
     },
 
-    fetchItemComments: function (listingId) {
-        ListingApi.getItemComments(listingId).then(ListingActions.fetchItemCommentsCompleted.bind(null, listingId));
-    },
-
     fetchOwnedListings: function (profile) {
         ListingApi.getOwnedListings(profile).then(ListingActions.fetchOwnedListingsCompleted);
+    },
+
+    fetchReviews: function (listingId) {
+        ListingApi.getItemComments(listingId).then(ListingActions.fetchReviewsCompleted.bind(null, listingId));
+    },
+    saveReview: function (listingId, review) {
+        ListingApi.saveReview(listingId, review)
+            .then(function (response) {
+                ListingActions.fetchById(listingId);
+                ListingActions.fetchReviews(listingId);
+                ListingActions.saveReviewCompleted(listingId, response);
+            })
+            .fail(ListingActions.saveItemCommentFailed);
     },
 
     launch: function (listing) {

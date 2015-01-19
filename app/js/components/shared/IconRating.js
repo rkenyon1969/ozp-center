@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react');
-var _IconRating = require('../../../../node_modules/react-icon-rating/index.jsx');
+var _IconRating = require('react-icon-rating');
 
 var IconRating = React.createClass({
 
@@ -18,8 +18,10 @@ var IconRating = React.createClass({
 
     render: function () {
         /* jshint ignore:start */
+        // key is explicitly used here to destroy IconRating component for Reset
         return this.transferPropsTo(
             <_IconRating
+                key={ this.props.currentRating }
                 className={ this.props.className }
                 toggledClassName={ this.props.toggledClassName }
                 untoggledClassName={ this.props.untoggledClassName }

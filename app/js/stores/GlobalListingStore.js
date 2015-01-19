@@ -9,7 +9,7 @@ var _listingsCache = {};
 var _listingsByOwnerCache = {};
 var _allListings = [];
 var _changeLogsCache = {};
-var _itemCommentsCache = {};
+var _reviewsCache = {};
 
 function updateCache (listings) {
     listings.forEach(function (listing) {
@@ -53,8 +53,8 @@ var GlobalListingStore = Reflux.createStore({
             _changeLogsCache[id] = changeLogs;
             this.trigger();
         });
-        this.listenTo(ListingActions.fetchItemCommentsCompleted, function (id, itemComments) {
-            _itemCommentsCache[id] = itemComments;
+        this.listenTo(ListingActions.fetchReviewsCompleted, function (id, reviews) {
+            _reviewsCache[id] = reviews;
             this.trigger();
         });
         this.listenTo(ListingActions.fetchOwnedListingsCompleted, updateCache);
@@ -108,12 +108,12 @@ var GlobalListingStore = Reflux.createStore({
         return _changeLogsCache[id];
     },
 
-    getItemCommentsForListing: function (id) {
-        if(!_itemCommentsCache[id]) {
-            ListingActions.fetchItemComments(id);
+    getReviewsForListing: function (id) {
+        if(!_reviewsCache[id]) {
+            ListingActions.fetchReviews(id);
             return null;
         }
-        return _itemCommentsCache[id];
+        return _reviewsCache[id];
     }
 
 });

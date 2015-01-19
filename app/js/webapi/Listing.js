@@ -105,6 +105,23 @@ var ListingApi = {
             .then((response) => new PaginatedResponse(response).getItemAsList());
     },
 
+    saveReview: function (listingId, review) {
+        var url = `${API_URL}/api/listing/${listingId}/itemComment`,
+            method = 'POST';
+        if (review.id) {
+            method = 'PUT';
+            url += `/${review.id}`;
+        }
+
+        return $.ajax({
+            type: method,
+            url: url,
+            data: JSON.stringify(review),
+            dataType: 'json',
+            contentType: 'application/json'
+        });
+    },
+
     getOwnedListings: function (profile) {
         var id = profile ? profile.id : 'self';
 

@@ -51,7 +51,6 @@ $quickview-nav-tabs-height: 42px;
 
         i {
             font-size: $font-size-small;
-            margin-right: 3px;
         }
     }
 
@@ -104,21 +103,23 @@ $quickview-nav-tabs-height: 42px;
 }
 
 .quickview-reviews {
-    .col-right {
-        position: fixed;
-        right: 0;
+    p, span {
+        font-size: $font-size-small;
+    }
+    position: relative;
 
+    .col-md-5 {
+        padding: 0;
+    }
+
+    .col-right {
         textarea {
             padding: $table-cell-padding;
             resize: none;
-            margin: 1em 0;
+            margin: 0 0 10px 0;
             width: 100%;
             height: 12em;
             display: block;
-        }
-
-        P {
-            font-size: $font-size-small;
         }
     }
 
@@ -145,21 +146,6 @@ $quickview-nav-tabs-height: 42px;
         }
         .date {
             margin-left: 6px;
-        }
-        .review {
-            border-bottom: 1px solid transparent;
-            &:hover {
-                // border-bottom: 1px solid $gray-lighter;
-            }
-        }
-
-        .user-review-editing {
-            margin-bottom: $panel-body-padding;
-
-            > textarea {
-                width: 100%;
-                resize: none;
-            }
         }
     }
 
@@ -213,4 +199,21 @@ $quickview-nav-tabs-height: 42px;
     > section {
         margin-bottom: 20px;
     }
+}
+
+.Review {
+
+    &__text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-top: 0.5em;
+    }
+
+    &__author {
+        margin-left: 0.5em;
+    }
+}
+
+.CurrentUserReview__Rating {
+    margin-bottom: 10px;
 }

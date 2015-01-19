@@ -4,6 +4,7 @@
 **/
 module.exports = {
     assign: Object.assign,
+    clone: require('lodash/objects/clone'),
     cloneDeep: require('lodash/objects/cloneDeep'),
     forOwn: require('lodash/objects/forOwn'),
     isArray: require('lodash/objects/isArray'),

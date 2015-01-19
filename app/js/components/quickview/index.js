@@ -17,7 +17,7 @@ var CurrentListingStore = require('../../stores/CurrentListingStore');
 var { loadListing } = require('../../actions/CreateEditActions');
 
 var OverviewTab = require('./OverviewTab');
-var ReviewsTab = require('./ReviewsTab');
+var ReviewsTab = require('./reviews');
 var DetailsTab = require('./DetailsTab');
 var ResourcesTab = require('./ResourcesTab');
 var AdministrationTab = require('./AdministrationTab');
