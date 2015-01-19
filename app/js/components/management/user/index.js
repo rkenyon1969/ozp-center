@@ -31,7 +31,7 @@ var ListingManagement = React.createClass({
     getActiveTab: function(tabs) {
         var me = this;
         return _.find(tabs, function(tab) {
-            return me.isActive(tab.to);
+            return me.isActive(tab.to, tab.params);
         });
     },
 

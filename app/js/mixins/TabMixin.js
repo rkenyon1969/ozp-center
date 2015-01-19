@@ -11,11 +11,11 @@ var TabMixin = {
 
         /* jshint ignore:start */
         var linkComponents = LINKS.map(function (link) {
-            var isActive = me.isActive(link.to);
+            var isActive = me.isActive(link.to, link.params);
             var className = isActive ? 'active' : '';
 
             return (
-                <li className={ className } key={ link.to }>
+                <li className={ className } >
                     <Link to={ link.to } params={ link.params || params }>{ link.name }</Link>
                 </li>
             );
