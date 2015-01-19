@@ -17,6 +17,7 @@ var { cloneDeep, assign } = require('../utils/_');
 var { ListingApi } = require('../webapi/Listing');
 var { ImageApi } = require('../webapi/Image');
 
+
 actions.systemUpdated = SystemStore;
 actions.cacheUpdated = GlobalListingStore;
 
@@ -424,8 +425,6 @@ var CurrentListingStore = createStore({
 
                 return newScreenshot;
             });
-
-        this.trigger({listing: _listing});
     },
 
     /**
