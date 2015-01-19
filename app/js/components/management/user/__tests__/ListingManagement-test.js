@@ -1,54 +1,54 @@
 'use strict';
 
-describe('ListingManagement', function() {
+var expect = require('chai').expect;
+var React = require('react');
+var Router = require('react-router');
+var $ = require('jquery');
+var { TestUtils } = React.addons;
+var Routes = require('../../../../components/Routes');
+var TestLocation = require('react-router/modules/locations/TestLocation');
+var ProfileMock = require('../../../../__tests__/mocks/ProfileMock');
+var createRoutes = require('../../../../__tests__/createRoutes');
 
-    // it('renders default tabs for user', function () {
-    //     var React = require('react');
-    //     var expect = require('chai').expect;
-    //     var TestUtils = React.addons.TestUtils;
-    //
-    //     var ListingManagement = require('inject?../../../mixins/SystemStateMixin&../../../mixins/TabMixin!../index.js');
-    //     debugger;
-    //     ListingManagement = ListingManagement({
-    //         '../../../mixins/SystemStateMixin': {
-    //             getInitialState: function () {
-    //                 return {
-    //                     currentUser: {
-    //                         isAdmin: false,
-    //                         stewardedOrganizations: []
-    //                     }
-    //                 };
-    //             }
-    //         },
-    //         '../../../mixins/TabMixin': {
-    //             renderTabs: function(links) {
-    //                 var me = this;
-    //
-    //                 /* jshint ignore:start */
-    //                 var linkComponents = links.map(function (link) {
-    //                     return (
-    //                         <li>
-    //                         </li>
-    //                     );
-    //                 });
-    //
-    //                 return (
-    //                     <ul className="nav nav-tabs" role="tablist">
-    //                         { linkComponents }
-    //                     </ul>
-    //                 );
-    //                 /* jshint ignore:end */
-    //             }, isActive: function(string) {
-    //                 return true;
-    //             }
-    //         }
+describe('ListingManagement', function () {
+    var ListingManagement = require('../index.js');
+    var routes, userMenu, router;
+
+    beforeEach(function () {
+        routes = createRoutes(ListingManagement);
+        TestLocation.history = ['/test'];
+    });
+
+    it('renders all apps mall tab for admins', function () {
+        ProfileMock.mockAdmin();
+        var listingManagement;
+        var router = Router.run(routes, TestLocation, function (Handler) {
+            listingManagement = TestUtils.renderIntoDocument(<Handler />);
+        });
+        expect($(listingManagement.getDOMNode()).find('a[href="/user-management/all-listings"]')[0]).to.exist;
+        router.teardown();
+    });
+
+    it('does not render all apps mall tab for users', function () {
+        ProfileMock.mockUser();
+        var listingManagement;
+        var router = Router.run(routes, TestLocation, function (Handler) {
+            listingManagement = TestUtils.renderIntoDocument(<Handler />);
+        });
+        expect(
+            $(listingManagement.getDOMNode()).find('a[href="/user-management/all-listings"]')[0]
+        ).to.not.exist;
+        router.teardown();
+    });
+
+    // it('renders a tabs for org stewards', function () {
+    //     ProfileMock.mockOrgSteward();
+    //     var listingManagement;
+    //     var router = Router.run(routes, TestLocation, function (Handler) {
+    //         listingManagement = TestUtils.renderIntoDocument(<Handler />);
     //     });
-    //     var listingManagement = TestUtils.renderIntoDocument(
-    //         <ListingManagement />
-    //     );
-    //     expect(
-    //         $(listingManagement.getDOMNode()).find('ul[className="nav-tabs"]').find('li')
-    //     ).to.be.empty;
+    //     expect($(listingManagement.getDOMNode()).find('a[href="/user-management/org-listings"]')[0]).to.exist;
+    //
     // });
 
 });

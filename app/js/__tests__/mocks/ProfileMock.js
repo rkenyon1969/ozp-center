@@ -34,6 +34,7 @@ var profile = {
     mockOrgSteward: function () {
         profile.highestRole = 'ORG_STEWARD';
         profile.isAdmin = false;
+        profile.stewardedOrganizations = ['Test Org'];
     },
     mockUser: function () {
         profile.highestRole = 'USER';
