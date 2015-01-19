@@ -28,11 +28,7 @@ var ReviewListing = React.createClass({
 
     getInitialState: function () {
         return {
-            review: {
-                id: null,
-                rate: 0,
-                text: ''
-            }
+            review: _.pick(this.props.review, 'id', 'rate', 'text')
         };
     },
 
@@ -68,12 +64,12 @@ var ReviewListing = React.createClass({
         var { rate, text } = this.state.review;
         /* jshint ignore:start */
         return (
-            <div className="CurrentUserReview">
+            <div className="SubmitReview">
                 <h5>Review this Listing</h5>
                 <SystemHighMessage />
-                <div className="CurrentUserReview__Rating">
+                <div className="SubmitReview__Rating">
                     <div>Star Rating</div>
-                    <IconRating key={ rate } currentRating={ rate } onChange={ this.onRatingChange } />
+                    <IconRating currentRating={ rate } onChange={ this.onRatingChange } />
                 </div>
                 <div>
                     <div>Description</div>

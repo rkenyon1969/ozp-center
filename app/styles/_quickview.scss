@@ -212,8 +212,13 @@ $quickview-nav-tabs-height: 42px;
     &__author {
         margin-left: 0.5em;
     }
+
+    .fa-edit {
+        margin-top: 3px;
+        cursor: pointer;
+    }
 }
 
-.CurrentUserReview__Rating {
+.SubmitReview__Rating {
     margin-bottom: 10px;
 }
