@@ -9,16 +9,17 @@ var ListInput = React.createClass({
         var items = this.props.value || [];
 
         var itemForms = items.map(function (item, index) {
-            var formProps = _.pick(this.props,
-                ['requestChange', 'messages', 'errors', 'warnings', 'forceError', 'imageErrors']
-            );
-
-            var props = Object.assign(formProps, {
-                value: item,
-                removeHandler: this.onDelete.bind(null, index),
-                key: index,
-                path: this.props.path.concat(index)
-            });
+            var formProps = _.pick(this.props, ['requestChange', 'messages', 'errors',
+                        'warnings', 'forceError', 'imageErrors']),
+                imageErrors = (this.props.imageErrors ? this.props.imageErrors[index] : null) ||
+                    {},
+                props = Object.assign(formProps, {
+                    value: item,
+                    imageErrors: imageErrors,
+                    removeHandler: this.onDelete.bind(null, index),
+                    key: index,
+                    path: this.props.path.concat(index)
+                });
 
             /*jshint ignore: start */
             return <this.props.itemForm {...props} />
