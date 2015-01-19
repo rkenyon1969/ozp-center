@@ -3,6 +3,7 @@
 var React = require('react');
 var Reflux = require('reflux');
 var Modal = require('../shared/Modal');
+var LoadMask = require('../LoadMask');
 var { pick, assign } = require('../../utils/_');
 var { approvalStatus } = require('../../constants');
 var CurrentListingStore = require('../../stores/CurrentListingStore');
@@ -10,10 +11,24 @@ var ProfileStore = require('../../stores/ProfileStore');
 var { loadListing, updateListing, save, submit } = require('../../actions/CreateEditActions');
 var { Navigation } = require('react-router');
 var Header = require('../header');
-var { ValidatedFormMixin, ListInput, TextInput, Select2Input, Select2TagInput, TextAreaInput } = require('./form');
 var { classSet } = React.addons;
 var State = require('../../mixins/ActiveStateMixin');
 var $ = require('jquery');
+
+var {
+    ValidatedFormMixin,
+    ListInput,
+    TextInput,
+    ImageInput,
+    Select2Input,
+    Select2TagInput,
+    TextAreaInput
+} = require('./form');
+
+var savingMessages = {
+    images: 'Uploading Images...',
+    listing: 'Saving Listing...'
+};
 
 function getOptionsForSystemObject (items) {
     return items.map(item => {
@@ -47,7 +62,8 @@ var CreateEditPage = React.createClass({
 
     getInitialState: function () {
         return {
-            scrollToError: false
+            scrollToError: false,
+            imageErrors: {}
         };
     },
 
@@ -74,11 +90,14 @@ var CreateEditPage = React.createClass({
         var showPreview = !!listing.id;
         var titleText = (this.getParams().listingId ? 'Edit ' : 'Create New ') + 'Listing';
         var saveText = showSave() ? 'Save' : 'Saved';
+        var savingText = savingMessages[this.state.saveStatus];
 
         var formProps = assign({},
             pick(this.state, ['errors', 'warnings', 'messages', 'firstError']),
             { system: this.props.system, value: listing, requestChange: updateListing,
-                forceError: !this.state.isValid, currentUser: this.props.currentUser }
+                forceError: !this.state.isValid, currentUser: this.props.currentUser,
+                imageErrors: this.state.imageErrors
+            }
         );
 
         /* jshint ignore:start */
@@ -99,6 +118,7 @@ var CreateEditPage = React.createClass({
             <div>
                 <Header subHeader={subHeader} />
                 <ListingForm ref="form" { ...formProps } />
+                { savingText && <LoadMask message={savingText} /> }
             </div>
         );
         /* jshint ignore:end */
@@ -186,10 +206,19 @@ var ListingForm = React.createClass({
                 <ListInput { ...this.getSubFormProps('docUrls') } itemForm={ ResourceForm } optional/>
 
                 <h2>Graphics</h2>
-                <TextInput { ...p('imageXlargeUrl') } />
-                <TextInput { ...p('imageLargeUrl') } />
-                <TextInput { ...p('imageMediumUrl') } />
-                <TextInput { ...p('imageSmallUrl') } />
+                <ImageInput { ...p('smallIcon') }
+                    imageUri={this.props.value.imageSmallUrl}
+                    serverError={this.props.imageErrors.smallIcon} />
+                <ImageInput { ...p('largeIcon') }
+                    imageUri={this.props.value.imageMediumUrl}
+                    serverError={this.props.imageErrors.largeIcon} />
+                <ImageInput { ...p('bannerIcon') }
+                    imageUri={this.props.value.imageLargeUrl}
+                    serverError={this.props.imageErrors.bannerIcon} />
+                <ImageInput { ...p('featuredBannerIcon') }
+                    imageUri={this.props.value.imageXlargeUrl}
+                    serverError={this.props.imageErrors.featuredBannerIcon} />
+
                 <ListInput { ...this.getSubFormProps('screenshots') } itemForm={ ScreenshotForm }/>
 
                 <h2>Owner Information and Contacts</h2>
@@ -234,8 +263,12 @@ var ScreenshotForm = React.createClass({
                 <button type="button" className="close" onClick={this.props.removeHandler}>
                     <span aria-hidden="true">&times;</span><span className="sr-only">Close</span>
                 </button>
-                <TextInput { ...this.getFormComponentProps('smallImageUrl') }/>
-                <TextInput { ...this.getFormComponentProps('largeImageUrl') }/>
+                <ImageInput { ...this.getFormComponentProps('smallImage') }
+                    imageUri={this.props.value.smallImageUrl}
+                    serverError={this.props.imageErrors.smallImage} />
+                <ImageInput { ...this.getFormComponentProps('largeImage') }
+                    imageUri={this.props.value.largeImageUrl}
+                    serverError={this.props.imageErrors.largeImage} />
             </div>
         );
         /*jshint ignore: end */

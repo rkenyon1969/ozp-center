@@ -1,16 +1,24 @@
 'use strict';
 
+var _ = require('../../../utils/_');
 var t = require('tcomb-form');
 var { Arr, maybe, subtype, struct, list, union, Num } = t;
-var { StringMax, NonBlankString, Url, Phone, Email, BlankString } = require('./common');
+var {
+    StringMax,
+    NonBlankString,
+    Url,
+    Phone,
+    Email,
+    BlankString
+} = require('./common');
 
 var User = struct({
     username: NonBlankString(100)
 });
 
 var Screenshot = struct({
-    smallImageUrl: Url,
-    largeImageUrl: Url
+    smallImageId: NonBlankString(36),
+    largeImageId: NonBlankString(36)
 });
 
 var Resource = struct({
@@ -67,10 +75,10 @@ function ListingFull (requiredContactTypes) {
         whatIsNew: whatIsNew,
         intents: intents,
         docUrls: docUrls,
-        imageXlargeUrl: Url,
-        imageLargeUrl: Url,
-        imageMediumUrl: Url,
-        imageSmallUrl: Url,
+        smallIconId: NonBlankString(36),
+        largeIconId: NonBlankString(36),
+        bannerIconId: NonBlankString(36),
+        featuredBannerIconId: NonBlankString(36),
         screenshots: subtype(screenshots, atLeastOne),
         contacts: subtype(contacts, hasRequiredContactTypes.bind(null, requiredContactTypes)),
         owners: subtype(owners, atLeastOne),
@@ -93,10 +101,6 @@ var ListingDraft = struct({
     whatIsNew: whatIsNew,
     intents: intents,
     docUrls: docUrls,
-    imageXlargeUrl: maybe(union([Url, BlankString])),
-    imageLargeUrl: maybe(union([Url, BlankString])),
-    imageMediumUrl: maybe(union([Url, BlankString])),
-    imageSmallUrl: maybe(union([Url, BlankString])),
     screenshots: screenshots,
     contacts: contacts,
     owners: owners,
@@ -104,6 +108,32 @@ var ListingDraft = struct({
     height: maybe(Num),
     width: maybe(Num)
 });
+
+/**
+ * Images are a special case - the field to validate (the id) isn't actually the field in
+ * the form, but rather is derived from it (the field in the form contains the file itself,
+ * which can't really be validated).  Therefore what we need to do is let tcomb validate the
+ * id, and then copy the validation errors from the id fields to the file fields so that
+ * they display in the form.
+ * @param validation The validation object.  This object will be modified so that it's image
+ * file fields are brought into sync with it's image id fields
+ */
+function copyImageValidations(validation) {
+    //attach validation errors from image ids to image fields
+    var screenshotKeys = Object.keys(validation.errors).filter(
+            k => k.indexOf('screenshots.') === 0
+        ),
+        screenshotErrors = _.zipObject(screenshotKeys.map(
+            k => [k.replace(/Id$/,''), validation.errors[k]]
+        ));
+
+    Object.assign(validation.errors, {
+        smallIcon: validation.errors.smallIconId,
+        largeIcon: validation.errors.largeIconId,
+        bannerIcon: validation.errors.bannerIconId,
+        featuredBannerIcon: validation.errors.featuredBannerIconId
+    }, screenshotErrors);
+}
 
 function validate (instance, options, type) {
     var validation = t.validate(instance, type),
@@ -132,6 +162,8 @@ function validateDraft (instance, options) {
         validation.errors['contacts.' + index + '.unsecurePhone'] = !oneValidPhone(contact);
     });
 
+    copyImageValidations(validation);
+
     return validation;
 }
 
@@ -148,6 +180,8 @@ function validateFull (instance, options) {
     });
 
     validation.errors.contacts = !hasRequiredContactTypes(requiredContactTypes, instance.contacts);
+
+    copyImageValidations(validation);
 
     return validation;
 }

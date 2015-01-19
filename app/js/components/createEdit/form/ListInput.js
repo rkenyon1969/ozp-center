@@ -10,7 +10,7 @@ var ListInput = React.createClass({
 
         var itemForms = items.map(function (item, index) {
             var formProps = _.pick(this.props,
-                ['requestChange', 'messages', 'errors', 'warnings', 'forceError']
+                ['requestChange', 'messages', 'errors', 'warnings', 'forceError', 'imageErrors']
             );
 
             var props = Object.assign(formProps, {
