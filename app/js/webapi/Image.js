@@ -25,7 +25,7 @@ function readIframeResponse(deferred, timeoutId, evt) {
 
         if (responseJson.error) {
             var errorMessage = responseJson.message || UNKN0WN_ERROR_MESSAGE;
-            deferred.reject({message: errorMessage}, "error", errorMessage);
+            deferred.reject({message: errorMessage}, 'error', errorMessage);
         }
         else {
             deferred.resolve(responseJson);
