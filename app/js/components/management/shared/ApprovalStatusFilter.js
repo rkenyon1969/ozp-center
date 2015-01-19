@@ -73,12 +73,12 @@ var ApprovalStatusFilter = React.createClass({
                     <input id="all-listings-filter-needs-action" type="radio" value="PENDING"/>
                     <label htmlFor="all-listings-filter-needs-action" className="label-needs-action">
                         Needs action
-                        <strong className="badge">{ counts.APPROVED_ORG }</strong>
+                        <strong className="badge">{ counts.PENDING }</strong>
                     </label>
                     <input id="all-listings-filter-pending" type="radio" value="APPROVED_ORG"/>
                     <label htmlFor="all-listings-filter-pending" className="label-pending">
                         Org approved
-                        <strong className="badge">{ counts.PENDING }</strong>
+                        <strong className="badge">{ counts.APPROVED_ORG }</strong>
                     </label>
                     <input id="all-listings-filter-rejected" type="radio" value="REJECTED"/>
                     <label htmlFor="all-listings-filter-rejected" className="label-rejected">
