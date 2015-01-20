@@ -3,6 +3,7 @@
 var React = require('react');
 var IconRating = require('../../shared/IconRating');
 var _ = require('../../../utils/_');
+var TimeAgo = require('../../shared/TimeAgo');
 
 var UserReviews = React.createClass({
 
@@ -29,10 +30,13 @@ var UserReviews = React.createClass({
         var { onEdit, user } = this.props;
         /* jshint ignore:start */
         return (this.props.reviews || []).map(function (review, i) {
+            var time = review.editedDate || review.createdDate;
+
             return (
                 <li className="Review">
                     <IconRating currentRating = { review.rate } viewOnly={true} />
                     <span className="Review__author">{ review.author.displayName }</span>
+                    <TimeAgo className="Review__time" time={ time } />
                     {
                         /* editable by an admin or a review owner */
                         (user.isAdmin || review.author.username === user.username) &&

@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var Reflux = require('reflux');
 var SystemHighMessage = require('../../shared/SystemHighMessage');
 var _ = require('../../../utils/_');
 var IconRating = require('../../shared/IconRating');
@@ -9,9 +10,14 @@ var ListingActions = require('../../../actions/ListingActions');
 
 var ReviewListing = React.createClass({
 
+    mixins: [
+        Reflux.listenTo(ListingActions.saveReviewCompleted, 'onSaveReviewCompleted')
+    ],
+
     propTypes: {
         listing: React.PropTypes.object.isRequired,
         review: React.PropTypes.object.isRequired,
+        onSave: React.PropTypes.func.isRequired,
         onCancel: React.PropTypes.func.isRequired,
         onDelete: React.PropTypes.func.isRequired,
         user: React.PropTypes.object.isRequired
@@ -29,14 +35,14 @@ var ReviewListing = React.createClass({
 
     getInitialState: function () {
         return {
-            review: _.pick(this.props.review, 'id', 'rate', 'text')
+            review: _.pick(this.props.review, 'id', 'rate', 'text', 'author')
         };
     },
 
     componentWillReceiveProps: function (nextProps) {
         if (nextProps.review) {
             this.setState({
-                review: _.pick(nextProps.review, 'id', 'rate', 'text')
+                review: _.pick(nextProps.review, 'id', 'rate', 'text', 'author')
             });
         }
     },
@@ -53,6 +59,10 @@ var ReviewListing = React.createClass({
 
     onSave: function () {
         ListingActions.saveReview(this.props.listing.id, this.state.review);
+    },
+
+    onSaveReviewCompleted: function () {
+        this.props.onSave();
     },
 
     render: function () {

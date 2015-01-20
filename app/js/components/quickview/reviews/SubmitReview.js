@@ -11,55 +11,43 @@ var ReviewListing = React.createClass({
 
     propTypes: {
         listing: React.PropTypes.object.isRequired,
-        review: React.PropTypes.object.isRequired
+        text: React.PropTypes.string.isRequired,
+        rate: React.PropTypes.number.isRequired,
     },
 
     getDefaultProps: function () {
         return {
-            review: {
-                id: null,
-                rate: 0,
-                text: ''
-            }
+            rate: 0,
+            text: ''
         };
     },
 
     getInitialState: function () {
-        return {
-            review: _.pick(this.props.review, 'id', 'rate', 'text')
-        };
-    },
-
-    componentWillReceiveProps: function (nextProps) {
-        if (nextProps.review) {
-            this.setState({
-                review: _.pick(nextProps.review, 'id', 'rate', 'text')
-            });
-        }
+        return _.clone(this.props, 'rate', 'text');
     },
 
     onRatingChange: function (val) {
-        this.state.review.rate = val;
+        this.state.rate = val;
         this.forceUpdate();
     },
 
     onTextChange: function (val) {
-        this.state.review.text = this.refs.text.getDOMNode().value.substring(0, 4000);
+        this.state.text = this.refs.text.getDOMNode().value.substring(0, 4000);
         this.forceUpdate();
     },
 
     onSave: function () {
-        ListingActions.saveReview(this.props.listing.id, this.state.review);
+        ListingActions.saveReview(this.props.listing.id, this.state);
     },
 
     onReset: function () {
-        this.state.review.rate = this.props.review.rate;
-        this.state.review.text = this.props.review.text;
+        this.state.rate = this.props.rate;
+        this.state.text = this.props.text;
         this.forceUpdate();
     },
 
     render: function () {
-        var { rate, text } = this.state.review;
+        var { rate, text } = this.state;
         /* jshint ignore:start */
         return (
             <div className="SubmitReview">

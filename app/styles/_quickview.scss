@@ -209,6 +209,11 @@ $quickview-nav-tabs-height: 42px;
         margin-top: 0.5em;
     }
 
+    &__time {
+        margin-left: 0.5em;
+        font-size: $font-size-small - 2px !important;
+    }
+
     &__author {
         margin-left: 0.5em;
     }

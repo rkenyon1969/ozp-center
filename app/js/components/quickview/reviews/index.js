@@ -12,6 +12,7 @@ var EditReview = require('./EditReview');
 var CurrentListingStore = require('../../../stores/CurrentListingStore');
 var SystemStateMixin = require('../../../mixins/SystemStateMixin');
 var ListingActions = require('../../../actions/ListingActions');
+var ProfileStore = require('../../../stores/ProfileStore');
 
 var ReviewsTab = React.createClass({
 
@@ -25,14 +26,29 @@ var ReviewsTab = React.createClass({
     },
 
     getInitialState: function () {
-        return {
-            reviews: CurrentListingStore.getReviews(),
-            reviewBeingEdited: null,
-            currentUserReview: {
-                rate: 0,
-                text: ''
-            }
+        return this.getState();
+    },
+
+    getState: function () {
+        var currentUser = ProfileStore.getCurrentUser();
+        var reviews = CurrentListingStore.getReviews();
+
+        if (!reviews) {
+            return {
+                reviews: CurrentListingStore.getReviews(),
+                reviewBeingEdited: null,
+                currentUserReview: null
+            };
+        }
+        var updates = {
+            reviews: reviews,
+            currentUserReview: _.find(reviews, { author: { username: currentUser.username }})
         };
+        // update reviewBeingEdited prop if editing
+        if (this.state && this.state.reviewBeingEdited) {
+            updates.reviewBeingEdited = _.find(reviews, { id: this.state.reviewBeingEdited.id });
+        }
+        return updates;
     },
 
     componentWillReceiveProps: function (newProps) {
@@ -58,25 +74,24 @@ var ReviewsTab = React.createClass({
                 <section className="col-md-3 col-left">
                     { this.renderReviewFilters() }
                 </section>
-                <section className={ (currentUserReview.id && !reviewBeingEdited) ? "col-md-9" : "col-md-5" }>
+                <section className="col-md-5">
                     <UserReviews reviews={ reviews } onEdit={ this.onEdit }  user={ currentUser }/>
                 </section>
-                {
-                    !currentUserReview.id &&
-                        <section className="col-md-4 col-right">
-                            <SubmitReview listing={ listing } review={ currentUserReview } />
-                        </section>
-                }
-                {
-                    reviewBeingEdited &&
-                        <section className="col-md-4 col-right">
+                <section className="col-md-4 col-right">
+                    {
+                        !currentUserReview &&
+                            <SubmitReview listing={ listing } />
+                    }
+                    {
+                        reviewBeingEdited &&
                             <EditReview
                                 user={ currentUser }
                                 listing={ listing }
                                 review={ reviewBeingEdited }
-                                onCancel={ this.onEditCancel } />
-                        </section>
-                }
+                                onCancel={ this.onEditCancel }
+                                onSave={ this.onEditCancel } />
+                    }
+                </section>
             </div>
         );
         /* jshint ignore:end */
@@ -91,17 +106,7 @@ var ReviewsTab = React.createClass({
     },
 
     onFetchItemCommentsCompleted: function () {
-        var reviews = CurrentListingStore.getReviews();
-        var currentUserReview = _.find(reviews, { author: { username: this.state.currentUser.username }});
-        var updates = {
-            reviews: reviews,
-            currentUserReview: currentUserReview || this.state.currentUserReview
-        };
-        // update reviewBeingEdited prop if editing
-        if (this.state.reviewBeingEdited) {
-            updates.reviewBeingEdited = _.find(reviews, { id: this.state.reviewBeingEdited.id });
-        }
-        this.setState(updates);
+        this.setState(this.getState());
     },
 
     renderReviewFilters: function () {
