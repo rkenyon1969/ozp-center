@@ -6,6 +6,55 @@ var { Str, struct, subtype, maybe } = t;
 var { URL_REGEX } = require('../../../constants');
 var Crud = require('../../shared/Crud');
 
+var ImageApi = require('../../../webapi/Image').ImageApi;
+var ImageInput = require('../../createEdit/form/ImageInput');
+
+function iconFileInputFactory(initialImageUri, type, opts) {
+    var label = opts.label;
+
+    return React.createClass({
+        getInitialState: function() {
+            return {
+                imageUri: initialImageUri,
+                value: null
+            };
+        },
+
+        onChange: function(value) {
+            var existingImageUri = this.state.imageUri,
+                newImageUri = window.URL && window.Blob && value instanceof Blob ?
+                    URL.createObjectURL(value) : null;
+
+            if (existingImageUri && window.URL && existingImageUri.indexOf('blob:') === 0) {
+                URL.revokeObjectURL(existingImageUri);
+            }
+
+            this.setState({imageUri: newImageUri, value: value});
+        },
+
+        getValue: function() {
+            //create simple ValidationResult object without checking any validation.
+            //No validation can be done since tcomb has no support for File objects.
+            return this.state.value;
+        },
+
+        render: function() {
+            /* jshint ignore:start */
+            return (
+                <div className="form-group">
+                    <label>
+                        {label}
+                    </label>
+                    <ImageInput
+                        imageUri={this.state.imageUri} value={this.state.imageUri}
+                        setter={this.onChange} error={this.props.errors} />
+                </div>
+            );
+            /* jshint ignore:end */
+        }
+    });
+}
+
 // Intent Schema
 var Intent = struct({
     label: maybe(subtype(Str, function (s) {
@@ -17,9 +66,9 @@ var Intent = struct({
     type: subtype(Str, function (s) {
         return s.length <= 129;
     }),
-    icon: maybe(subtype(Str, function (s) {
-        return s.length <= 2083 && URL_REGEX.test(s);
-    }))
+    iconInput: window.Blob ?
+        t.irriducible('Blob', x => x instanceof Blob) :
+        t.irriducible('HTMLInputElement', x => x instanceof HTMLInputElement)
 });
 
 var Intents = React.createClass({
@@ -46,8 +95,10 @@ var Intents = React.createClass({
                             disabled: selectedRecord ? true : false,
                             help: 'Max. 64 characters/Max. 64 characters. Ex: application/json, application/custom-type, etc.'
                         },
-                        icon: {
-                            help: 'Max. 2083 characters'
+                        iconInput: {
+                            //partially apply to get proper factory function
+                            input: iconFileInputFactory.bind(null,
+                                selectedRecord ? selectedRecord.icon : undefined)
                         }
                     }
                 };
@@ -59,7 +110,9 @@ var Intents = React.createClass({
                     { field: 'type', caption: 'Type', size: '45%' },
                     { field: 'icon', caption: 'Icon', size: '50px',
                         render: function (record) {
-                            return record.icon ? `<img style="width:24px;height:24px;" src=${record.icon} >` : '';
+                            return record.icon ?
+                                `<img style="width:24px;height:24px;" src=${record.icon} >` :
+                                '';
                         }
                     }
                 ]
@@ -67,9 +120,32 @@ var Intents = React.createClass({
         };
     },
 
+    save: function(data, intentSaveFunction) {
+        this.saveIcon(data.iconInput).then(function(iconId) {
+            intentSaveFunction(Object.assign({}, data, {
+                iconId: iconId,
+                icon: undefined,
+                iconInput: undefined
+            }));
+        });
+    },
+
+    saveIcon: function(icon) {
+        return ImageApi.save(icon).then(json => json.id);
+    },
+
+    onCreate: function(data, crud) {
+        this.save(data, crud._onCreate);
+    },
+
+    onEdit: function(data, crud) {
+        this.save(data, crud._onEdit);
+    },
+
     render: function () {
         /* jshint ignore:start */
-        return this.transferPropsTo(<Crud />);
+        return this.transferPropsTo(<Crud onCreate={this.onCreate}
+                onEdit={this.onEdit}/>);
         /* jshint ignore:end */
     }
 

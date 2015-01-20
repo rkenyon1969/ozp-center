@@ -111,6 +111,10 @@ var Crud = React.createClass({
         })
     },
 
+    getDefaultProps: function() {
+        return {onCreate: this._onCreate, onEdit: this._onEdit};
+    },
+
     getInitialState: function () {
         return {
             adding: false,
@@ -208,32 +212,42 @@ var Crud = React.createClass({
         return this.props.url.replace(/\?.*/, '');
     },
 
+    //Retrieve form data process a create, using a potentially custom function
     onCreate: function () {
         var formData = this.refs.form.getValue();
-        if (!formData) { return; }
+        return this.props.onCreate(formData, this);
+    },
 
-        $.ajax({
+    //The default implementation of this.props.onCreate.  This function may also be called
+    //by custom onCreate implementations
+    _onCreate: function(data) {
+        return $.ajax({
             url: this.getUrlWithoutParams(),
             type: 'post',
             dataType: 'json',
             contentType: 'application/json',
-            data: JSON.stringify(formData)
+            data: JSON.stringify(data)
         })
         .done(this.reload)
         .fail(this.handleError);
     },
 
     onEdit: function () {
-        var id = this.getSelectedId();
         var formData = this.refs.form.getValue();
-        if (!formData) { return; }
+        return this.props.onEdit(formData, this);
+    },
 
-        $.ajax({
+    //The default implementation of this.props.onEdit.  This function may also be called
+    //by custom onEdit implementations
+    _onEdit: function(data) {
+        var id = this.getSelectedId();
+
+        return $.ajax({
             url: `${this.getUrlWithoutParams()}/${id}`,
             type: 'put',
             dataType: 'json',
             contentType: 'application/json',
-            data: JSON.stringify(formData)
+            data: JSON.stringify(data)
         })
         .done(this.reload)
         .fail(this.handleError);
