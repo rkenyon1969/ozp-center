@@ -6,6 +6,7 @@ var iframeCounter = 1;
 var IMAGE_URL = API_URL + '/api/image/';
 
 var TIMEOUT = 10000; //10 seconds
+var UNKN0WN_ERROR_MESSAGE = 'Unknown error saving image';
 
 /**
  * Read the response from the hidden iframe.  This function gets called in response
@@ -22,7 +23,13 @@ function readIframeResponse(deferred, timeoutId, evt) {
         responseText = iframe.contentWindow.document.body.innerText;
         responseJson = JSON.parse(responseText);
 
-        deferred.resolve(responseJson);
+        if (responseJson.error) {
+            var errorMessage = responseJson.message || UNKN0WN_ERROR_MESSAGE;
+            deferred.reject({message: errorMessage}, 'error', errorMessage);
+        }
+        else {
+            deferred.resolve(responseJson);
+        }
     }
     catch (e) {
         var msg = 'Error reading image upload response';
@@ -37,7 +44,7 @@ function readIframeResponse(deferred, timeoutId, evt) {
  */
 function readIframeError(deferred, timeoutId) {
     clearTimeout(timeoutId);
-    deferred.reject('Unknown error saving image');
+    deferred.reject(UNKN0WN_ERROR_MESSAGE);
 }
 
 /**
@@ -88,7 +95,7 @@ var ImageApi = {
                 type: 'POST',
                 data: file,
                 processData: false,
-                contentType: false,
+                contentType: file.type,
                 accepts: {
                     json: 'application/json'
                 }
