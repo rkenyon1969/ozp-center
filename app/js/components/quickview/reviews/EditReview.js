@@ -2,16 +2,19 @@
 
 var React = require('react');
 var Reflux = require('reflux');
+var $ = require('jquery');
 var SystemHighMessage = require('../../shared/SystemHighMessage');
 var _ = require('../../../utils/_');
 var IconRating = require('../../shared/IconRating');
+var PopoverConfirmationButton = require('./../../shared/PopoverConfirmationButton');
 
 var ListingActions = require('../../../actions/ListingActions');
 
-var ReviewListing = React.createClass({
+var EditReview = React.createClass({
 
     mixins: [
-        Reflux.listenTo(ListingActions.saveReviewCompleted, 'onSaveReviewCompleted')
+        Reflux.listenTo(ListingActions.saveReviewCompleted, 'onSaveReviewCompleted'),
+        Reflux.listenTo(ListingActions.deleteReview, 'onDeleteReviewCompleted')
     ],
 
     propTypes: {
@@ -61,8 +64,20 @@ var ReviewListing = React.createClass({
         ListingActions.saveReview(this.props.listing.id, this.state.review);
     },
 
-    onSaveReviewCompleted: function () {
-        this.props.onSave();
+    onSaveReviewCompleted: function (listingId, review) {
+        if (this.state.review.id === review.id) {
+            this.props.onSave();
+        }
+    },
+
+    onDeleteConfirm: function (hidePopover) {
+        ListingActions.deleteReview(this.props.listing.id, this.state.review.id);
+    },
+
+    onDeleteReviewCompleted: function (listingId, reviewId) {
+        if (this.state.review.id === reviewId) {
+            this.refs.deletePopover.hidePopover();
+        }
     },
 
     render: function () {
@@ -83,11 +98,15 @@ var ReviewListing = React.createClass({
                 </div>
                 {
                     user.isAdmin &&
-                        <button className="btn btn-default btn-small" onClick={ this.onReset }>Delete</button>
+                        <PopoverConfirmationButton
+                            ref="deletePopover"
+                            title={ "Delete Review" }
+                            content={ "Are you sure you want to delete this review?" }
+                            onConfirm={ this.onDeleteConfirm } />
                 }
                 <div className="pull-right">
-                    <button className="btn btn-default btn-small" onClick={ this.props.onCancel }>Cancel</button>
-                    <button className="btn btn-success btn-small" onClick={ this.onSave }>Submit</button>
+                    <button className="btn btn-default btn-sm" onClick={ this.props.onCancel }>Cancel</button>
+                    <button className="btn btn-success btn-sm" onClick={ this.onSave }>Submit</button>
                 </div>
             </div>
         );
@@ -96,4 +115,4 @@ var ReviewListing = React.createClass({
 
 });
 
-module.exports = ReviewListing;
+module.exports = EditReview;

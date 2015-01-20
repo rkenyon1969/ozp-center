@@ -122,6 +122,15 @@ var ListingApi = {
         });
     },
 
+    deleteReview: function (listingId, reviewId) {
+        return $.ajax({
+            type: 'DELETE',
+            url: `${API_URL}/api/listing/${listingId}/itemComment/${reviewId}`,
+            dataType: 'json',
+            contentType: 'application/json'
+        });
+    },
+
     getOwnedListings: function (profile) {
         var id = profile ? profile.id : 'self';
 

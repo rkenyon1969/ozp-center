@@ -85,7 +85,16 @@ ListingActions = createActions({
                 ListingActions.fetchReviews(listingId);
                 ListingActions.saveReviewCompleted(listingId, response);
             })
-            .fail(ListingActions.saveItemCommentFailed);
+            .fail(ListingActions.saveReviewFailed);
+    },
+    deleteReview: function (listingId, reviewId) {
+        ListingApi.deleteReview(listingId, reviewId)
+            .then(function () {
+                ListingActions.fetchById(listingId);
+                ListingActions.fetchReviews(listingId);
+                ListingActions.deleteReviewCompleted(listingId, reviewId);
+            })
+            .fail(ListingActions.deleteReviewFailed);
     },
 
     launch: function (listing) {
