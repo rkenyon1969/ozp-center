@@ -22,7 +22,6 @@ var ImageInput = React.createClass({
      */
     render: function () {
         var labelClasses = classSet({ 'input-optional': this.props.optional }),
-            tempProps = this.getInputProps(),
             props = _.omit(this.getInputProps(), 'value'),
             imageContainerClasses = classSet({
                 'image-container': true,
@@ -93,6 +92,9 @@ var ImageInput = React.createClass({
     },
 
     componentWillReceiveProps: function(newProps) {
+        //these two conditionals together cover cases where the
+        //change could be due to a server response.  value will be unset on a successful
+        //save, but not on a failure, so check serverError too
         if (!newProps.value || newProps.serverError) {
             this.setState({changedSinceUpdate: false});
         }

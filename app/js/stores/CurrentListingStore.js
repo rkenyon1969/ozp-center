@@ -17,13 +17,14 @@ var { cloneDeep, assign } = require('../utils/_');
 var { ListingApi } = require('../webapi/Listing');
 var { ImageApi } = require('../webapi/Image');
 
+
 actions.systemUpdated = SystemStore;
 actions.cacheUpdated = GlobalListingStore;
 
 var _listing = null;
 var _submitting = false;
 
-var imageErrors = {};
+var imageErrors = {screenshots: []};
 
 //list of property names that can be passed into onUpdateListing which are images
 //and which must therefore be treated specially.  The 'value' for these properties
@@ -329,7 +330,7 @@ var CurrentListingStore = createStore({
         }
 
         //reset image errors object
-        imageErrors = {};
+        imageErrors = {screenshots: []};
 
         var me = this,
             {smallIcon, largeIcon, bannerIcon, featuredBannerIcon, screenshots} = _listing,
@@ -424,8 +425,6 @@ var CurrentListingStore = createStore({
 
                 return newScreenshot;
             });
-
-        this.trigger({listing: _listing});
     },
 
     /**

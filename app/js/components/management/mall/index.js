@@ -64,8 +64,8 @@ var MallManagement = React.createClass({
 });
 
 module.exports = MallManagement;
-module.exports.Categories = require('react-proxy!./Categories');
-module.exports.ContactTypes = require('react-proxy!./ContactTypes');
-module.exports.Organizations = require('react-proxy!./Organizations');
-module.exports.Intents = require('react-proxy!./Intents');
-module.exports.Stewards = require('react-proxy!./Stewards');
+module.exports.Categories = require('./Categories');
+module.exports.ContactTypes = require('./ContactTypes');
+module.exports.Organizations = require('./Organizations');
+module.exports.Intents = require('./Intents');
+module.exports.Stewards = require('./Stewards');
