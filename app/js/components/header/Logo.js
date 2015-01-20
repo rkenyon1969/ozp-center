@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react');
-var logo  = './images/appsmall-logo.png';
+var logo  = './images/marketplace-logo.png';
 
 var Logo = React.createClass({
 
