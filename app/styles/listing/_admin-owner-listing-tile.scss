@@ -66,17 +66,22 @@
 .AdminOwnerListingTile__actionMenuButton {
     @extend .corner-button;
 
-    //style as font-awesome horizontal ellipsis
+    //style as font-awesome angle-down
     @extend .fa;
-    @extend .fa-ellipsis-h;
+    @extend .fa-angle-down;
 
     margin-right: 0;
     margin-left: auto;
-    width: 50px;
+    width: 25px;
     padding-left: 0;
     padding-right: 0;
     padding-bottom: 0;
-    padding-top: 1px;
+    padding-top: 3px;
+    
+    &:hover{
+      border-top: 3px solid $blue-dark;
+      padding-top: 1px;
+    }
 }
 
 .AdminOwnerListingTile__actionMenu {
@@ -85,6 +90,7 @@
     top: 1px;
     right: 1px;
     z-index: 1;
+    border: 1px solid $gray-lighter;
 
     > input {
         //the toggle checkbox is hidden
@@ -97,7 +103,10 @@
             }
 
             & ~ .AdminOwnerListingTile__actionMenuButton {
-                border-bottom: 3px solid $blue-dark;
+                border-top: 3px solid $blue-dark;
+                padding-top: 1px;
+                border-bottom: transparent;
+                padding-bottom: 1px;
                 color: $blue-dark;
             }
         }
