@@ -9,8 +9,6 @@ var ListingActions = require('../../../actions/ListingActions');
 
 var ReviewListing = React.createClass({
 
-    mixins: [React.addons.LinkedStateMixin],
-
     propTypes: {
         listing: React.PropTypes.object.isRequired,
         review: React.PropTypes.object.isRequired

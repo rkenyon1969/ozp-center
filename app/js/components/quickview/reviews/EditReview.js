@@ -46,7 +46,7 @@ var ReviewListing = React.createClass({
         this.forceUpdate();
     },
 
-    onTextChange: function (val) {
+    onTextChange: function () {
         this.state.review.text = this.refs.text.getDOMNode().value.substring(0, 4000);
         this.forceUpdate();
     },

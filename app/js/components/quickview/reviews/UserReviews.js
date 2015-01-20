@@ -28,7 +28,7 @@ var UserReviews = React.createClass({
     renderReviews: function () {
         var { onEdit, user } = this.props;
         /* jshint ignore:start */
-        return this.props.reviews.map(function (review, i) {
+        return (this.props.reviews || []).map(function (review, i) {
             return (
                 <li className="Review">
                     <IconRating currentRating = { review.rate } viewOnly={true} />

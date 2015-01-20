@@ -26,7 +26,7 @@ var ReviewsTab = React.createClass({
 
     getInitialState: function () {
         return {
-            reviews: [],
+            reviews: CurrentListingStore.getReviews(),
             reviewBeingEdited: null,
             currentUserReview: {
                 rate: 0,
@@ -42,7 +42,8 @@ var ReviewsTab = React.createClass({
     },
 
     componentWillMount: function () {
-        if (this.props.listing.id) {
+        // only fetch reviews if not found in store
+        if (this.props.listing.id && !this.state.reviews) {
             ListingActions.fetchReviews(this.props.listing.id);
         }
     },
