@@ -87,10 +87,10 @@
 .AdminOwnerListingTile__actionMenu {
     position: absolute;
 
-    top: 1px;
-    right: 1px;
+    top: 0px;
+    right: 0px;
     z-index: 1;
-    border: 1px solid $gray-lighter;
+    border: 0px solid $gray-lighter;
 
     > input {
         //the toggle checkbox is hidden
@@ -139,10 +139,12 @@
 
 .AdminOwnerListingTile.pending .AdminOwnerListingTile__approvalStatus {
     @extend .label-pending;
+    color: $blue-dark;
 }
 
 .AdminOwnerListingTile.published .AdminOwnerListingTile__approvalStatus {
     @extend .label-published;
+    color: $green-dark;
 }
 
 .AdminOwnerListingTile.needs-action .AdminOwnerListingTile__approvalStatus {
@@ -155,4 +157,5 @@
 
 .AdminOwnerListingTile.rejected .AdminOwnerListingTile__approvalStatus {
     @extend .label-rejected;
+    color: $blue-dark;
 }

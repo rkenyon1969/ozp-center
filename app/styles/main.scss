@@ -27,7 +27,7 @@ html, body {
     min-height: 100%;
     height: auto !important;
     width: 1260px;
-    background: #eeeeef;
+    background: $white;
     -moz-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
     -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
     box-shadow: 0 0 3px rgba(0, 0, 0, .1);
@@ -209,4 +209,15 @@ body > div.classBanner:last-of-type {
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+}
+
+.sidebar {
+  padding: 20px 30px;
+  margin-top:-15px;
+  background: $gray-lightest;
+}
+
+
+.content {
+  background: $white;
 }
