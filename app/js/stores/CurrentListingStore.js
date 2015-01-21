@@ -287,7 +287,7 @@ var CurrentListingStore = createStore({
         return ProfileStore.currentUserCanEdit(_listing);
     },
 
-    getChangeLogs: function (){
+    getChangeLogs: function () {
         return GlobalListingStore.getChangeLogsForListing(_listing.id);
     },
 

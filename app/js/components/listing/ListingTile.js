@@ -15,16 +15,16 @@ var ActionMenu = React.createClass({
         //TODO fill in hrefs
         var listing = this.props.listing,
             activeRoutePath = this.getActiveRoutePath(),
-            overviewHref = this.makeHref(activeRoutePath, null, {
+            overviewHref = this.makeHref(activeRoutePath, this.getParams(), {
                 listing: listing.id,
                 action: 'view',
                 tab: 'overview'
             }),
-            deleteHref = this.makeHref(activeRoutePath, null, {
+            deleteHref = this.makeHref(activeRoutePath, this.getParams(), {
                 listing: listing.id,
                 action: 'delete'
             }),
-            feedbackHref = this.makeHref(activeRoutePath, null, {
+            feedbackHref = this.makeHref(activeRoutePath, this.getParams(), {
                 listing: listing.id,
                 action: 'feedback'
             }),
@@ -120,18 +120,27 @@ var AdminOwnerListingTile = React.createClass({
 
     render: function () {
         var listing = this.props.listing,
-            overview = this.makeHref(this.getActiveRoutePath(), null, {
+            overview = this.makeHref(this.getActiveRoutePath(), this.getParams(), {
                 listing: listing.id,
                 action: 'view',
                 tab: 'overview'
             }),
             approvalStatus = listing.approvalStatus,
             approvalStatusClasses = {};
-        if(listing.view === 'adminView'){
+        if(listing.view === 'adminView') {
             approvalStatusClasses = {
                 'draft': approvalStatus === 'IN_PROGRESS',
                 'pending': approvalStatus === 'PENDING',
                 'needs-action': approvalStatus === 'APPROVED_ORG',
+                'published': approvalStatus === 'APPROVED',
+                'rejected': approvalStatus === 'REJECTED',
+                'AdminOwnerListingTile': true
+            };
+        } else if(listing.view === 'orgView') {
+            approvalStatusClasses = {
+                'draft': approvalStatus === 'IN_PROGRESS',
+                'pending': approvalStatus === 'APPROVED_ORG',
+                'needs-action': approvalStatus === 'PENDING',
                 'published': approvalStatus === 'APPROVED',
                 'rejected': approvalStatus === 'REJECTED',
                 'AdminOwnerListingTile': true

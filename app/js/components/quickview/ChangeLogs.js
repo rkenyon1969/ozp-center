@@ -29,7 +29,7 @@ var ChangeLogs = React.createClass({
         };
     },
 
-    changeLogsReceived: function (){
+    changeLogsReceived: function () {
         var logs = CurrentListingStore.getChangeLogs();
         this.setState({changeLogs: logs});
     },

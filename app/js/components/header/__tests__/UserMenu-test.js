@@ -2,72 +2,43 @@
 
 var expect = require('chai').expect;
 var React = require('react');
+var Router = require('react-router');
 var $ = require('jquery');
 var { TestUtils } = React.addons;
+var Routes = require('../../../components/Routes');
+var TestLocation = require('react-router/modules/locations/TestLocation');
+var ProfileMock = require('../../../__tests__/mocks/ProfileMock');
+var createRoutes = require('../../../__tests__/createRoutes');
 
 describe('UserMenu', function () {
+    var UserMenu = require('../UserMenu');
+    var routes, userMenu, router;
+
+    beforeEach(function () {
+        routes = createRoutes(UserMenu);
+        TestLocation.history = ['/test'];
+    });
 
     it('renders management link for admins', function () {
-        var MockLink = React.createClass({
-            render: function() {
-                return (
-                    <a href={this.props.to}>{this.props.children}</a>
-                );
-            }
+        ProfileMock.mockAdmin();
+        var userMenu;
+        var router = Router.run(routes, TestLocation, function (Handler) {
+            userMenu = TestUtils.renderIntoDocument(<Handler />);
         });
-        var UserMenu = require('inject?../../mixins/SystemStateMixin&react-router!../UserMenu');
-        UserMenu = UserMenu({
-            '../../mixins/SystemStateMixin': {
-                getInitialState: function () {
-                    return {
-                        currentUser: {
-                            isAdmin: true
-                        }
-                    };
-                },
-            },
-            'react-router' : {
-                Link: MockLink
-            }
-        });
-        var userMenu = TestUtils.renderIntoDocument(
-            <UserMenu />
-        );
-        
-        expect(
-            $(userMenu.getDOMNode()).find('a[href="categories"]')[0]
-        ).to.exist;
+        expect($(userMenu.getDOMNode()).find('a[href="/mall-management/categories"]')[0]).to.exist;
+        router.teardown();
     });
 
     it('does not render management link for users', function () {
-        var MockLink = React.createClass({
-            render: function() {
-                return (
-                    <a href={this.props.to}>{this.props.children}</a>
-                );
-            }
+        ProfileMock.mockUser();
+        var userMenu;
+        var router = Router.run(routes, TestLocation, function (Handler) {
+            userMenu = TestUtils.renderIntoDocument(<Handler />);
         });
-        var UserMenu = require('inject?../../mixins/SystemStateMixin&react-router!../UserMenu');
-        UserMenu = UserMenu({
-            '../../mixins/SystemStateMixin': {
-                getInitialState: function () {
-                    return {
-                        currentUser: {
-                            isAdmin: false
-                        }
-                    };
-                },
-            },
-            'react-router' : {
-                Link: MockLink
-            }
-        });
-        var userMenu = TestUtils.renderIntoDocument(
-            <UserMenu />
-        );
         expect(
-            $(userMenu.getDOMNode()).find('a[href="categories"]')[0]
+            $(userMenu.getDOMNode()).find('a[href="/mall-management/categories"]')[0]
         ).to.not.exist;
+        router.teardown();
     });
 
 });

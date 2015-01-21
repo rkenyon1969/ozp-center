@@ -39,7 +39,7 @@ module.exports = React.createClass({
                     />
         });
 
-        if(this.props.listings.length <= 3){
+        if(this.props.listings.length <= 3) {
             this.props.options.items.visible = 1;
         }
 
