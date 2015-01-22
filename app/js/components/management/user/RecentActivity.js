@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var Sidebar = require('./RecentActivitySidebar');
 
 var RecentActivity = React.createClass({
 
@@ -8,7 +9,7 @@ var RecentActivity = React.createClass({
         /* jshint ignore:start */
         return (
             <div className="RecentActivity">
-                <div className="RecentActivity__sidebar col-md-3">Sidebar</div>
+                <div className="RecentActivity__Sidebar col-md-3"><Sidebar /></div>
                 <div className="RecentActivity__activities col-md-9">Activities</div>
             </div>
         );
