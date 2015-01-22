@@ -7,6 +7,9 @@ var LOGOUT_URL = process.env.LOGOUT_URL || "#";
 var HELP_URL = process.env.HELP_URL || "../hud-ui/assets/PlaceholderUserGuide.pdf";
 var METRICS_URL = process.env.METRICS_URL || "https://www.owfgoss.org:10443/dev/metrics/";
 var HUD_URL = process.env.HUD_URL || "http://localhost:8088/dist";
+var CENTER_URL = (process.env.CENTER_URL || "http://localhost:8000/dist") + '/#';
+var WEBTOP_URL = process.env.WEBTOP_URL || "http://localhost:9000/#/grid/sticky-0/0";
+var DEVELOPER_RESOURCES_URL = process.env.DEVELOPER_RESOURCES_URL || "#";
 
 module.exports = {
     // This is the main file that should include all other JS files
@@ -58,7 +61,10 @@ module.exports = {
             "LOGOUT_URL": JSON.stringify(LOGOUT_URL),
             "HELP_URL": JSON.stringify(HELP_URL),
             "METRICS_URL": JSON.stringify(METRICS_URL),
-            "HUD_URL": JSON.stringify(HUD_URL)
+            "HUD_URL": JSON.stringify(HUD_URL),
+            "CENTER_URL": JSON.stringify(CENTER_URL),
+            "WEBTOP_URL": JSON.stringify(WEBTOP_URL),
+            "DEVELOPER_RESOURCES_URL": JSON.stringify(DEVELOPER_RESOURCES_URL)
         }),
         new webpack.ProvidePlugin({
             $: "jquery",
