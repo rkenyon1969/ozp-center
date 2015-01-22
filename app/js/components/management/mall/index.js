@@ -8,6 +8,7 @@ var AdminRoute = require('../../../mixins/AdminRouteMixin');
 var SystemStore = require('../../../stores/SystemStore');
 
 // component dependencies
+var NavBar = require('../../NavBar');
 var Header = require('../../header');
 
 var MallManagement = React.createClass({
@@ -46,6 +47,7 @@ var MallManagement = React.createClass({
         /* jshint ignore:start */
         return (
             <div className="MallManagement">
+                <NavBar />
                 <Header />
                 <div className="MallManagement__body">
                     <h1>AppsMall Management</h1>

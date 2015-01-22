@@ -23,12 +23,12 @@ var NavBar = React.createClass({
     render: function () {
         /*jshint ignore:start */
         return (
-            <nav className="navbar navbar-default">
-                <div className="container-fluid">
+            <nav className="navbar navbar-default navbar-fixed-top" id="globalNav">
+                <div className="container-fluid container" id="centered">
                     <div className="navbar-left">
                         <ul className="nav navbar-nav">
                             <li><a className="lrg" href="#"><i className="icon-home"></i></a></li>
-                            <li className="active"><a className="lrg" href={CENTER_URL}><i className="icon-shopping"></i></a></li>
+                            <li className="active"><a className="lrg" href={CENTER_URL}><i className="icon-shopping" id="active"></i></a></li>
                             <li><a className="lrg" href={WEBTOP_URL}><i className="icon-layout"></i></a></li>
                         </ul>
                     </div>

@@ -7,6 +7,7 @@ var SystemStateMixin = require('../../../mixins/SystemStateMixin');
 var _ = require('../../../utils/_');
 
 // component dependencies
+var NavBar = require('../../NavBar');
 var Header = require('../../header');
 
 var ListingManagement = React.createClass({
@@ -63,11 +64,11 @@ var ListingManagement = React.createClass({
         /* jshint ignore:start */
         return (
             <div className="ListingManagement">
+                <NavBar />
                 <Header />
                 <div className="ListingManagement__body">
                     <h1>Listing Management</h1>
-                    <Link to="edit"><button type="button" className="btn btn-primary ListingManagement__CreateListingButton">Create New Listing</button></Link>
-                    <div className="ListingManagement__TabContainer">
+                      <div className="ListingManagement__TabContainer">
                         { this.renderTabs(tabs) }
                         <div className="tab-content">
                             <RouteHandler org={this.getActiveTab(tabs)}/>

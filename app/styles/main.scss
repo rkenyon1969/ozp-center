@@ -17,6 +17,7 @@ html, body {
     font-family: 'Ubuntu';
     font-weight: 300;
     height: 100%;
+    background: $gray-dark;
 }
 
 .navbar-right {
@@ -86,6 +87,20 @@ html, body {
 .close {
     font-size: 3em;
     font-weight: lighter;
+    top: 0;
+    margin-top: -10px;
+    
+}
+
+button.notifications {
+  color: $gray-lighter;
+  &:hover, &:focus {
+    color: $white;
+  }
+}
+
+.dropdown-menu .divider {
+  background: $gray-darkest !important;
 }
 
 i {
