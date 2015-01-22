@@ -42,6 +42,9 @@ module.exports = function timeAgo (date) {
     timePassed = Math.round(timePassed);
 
     if(timePassed === 1) {
+        if(quantity === 'hour') {
+            return 'an ' + quantity + ' ago';
+        }
         return 'a ' + quantity + ' ago';
     }
 

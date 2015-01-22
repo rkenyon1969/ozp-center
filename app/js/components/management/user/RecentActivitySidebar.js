@@ -72,7 +72,7 @@ var RecentActivitySidebar = React.createClass({
     mixins: [ Navigation ],
 
     handleChange: function(evt) {
-        var details = evt.target.value.split(":");
+        var details = evt.target.value.split(':');
         this.transitionTo(details[0], details[1]);
     },
 

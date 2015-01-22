@@ -125,6 +125,11 @@ var ListingApi = {
         return $.getJSON(url).then((response) => {
             return new PaginatedResponse(response, Listing);
         });
+    },
+
+    getAllChangeLogs: function () {
+        return $.getJSON(API_URL + '/api/listing/activity')
+                .then((response) => new PaginatedResponse(response));
     }
 };
 

@@ -8,6 +8,7 @@ var Listing = require('../webapi/Listing').Listing;
 var _listingsCache = {};
 var _listingsByOwnerCache = {};
 var _allListings = [];
+var _changelogs = [];
 var _changeLogsCache = {};
 
 function updateCache (listings) {
@@ -46,6 +47,11 @@ var GlobalListingStore = Reflux.createStore({
             var listings = response.getItemAsList();
             updateCache(listings);
             _allListings = (_allListings || []).concat(listings);
+            this.trigger();
+        });
+        this.listenTo(ListingActions.fetchAllChangeLogsCompleted, function(response) {
+            var changelogs = response.getItemAsList();
+            _changelogs = (_changelogs || []).concat(changelogs);
             this.trigger();
         });
         this.listenTo(ListingActions.fetchChangeLogsCompleted, function (id, changeLogs) {
@@ -101,6 +107,10 @@ var GlobalListingStore = Reflux.createStore({
             return null;
         }
         return _changeLogsCache[id];
+    },
+
+    getAllChangeLogs: function() {
+        return _changelogs;
     }
 
 });

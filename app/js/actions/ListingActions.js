@@ -49,6 +49,9 @@ ListingActions = createActions({
             .getAllListings(nextLink, opts)
             .then(_.partial(ListingActions.fetchAllListingsCompleted, filter));
     },
+    fetchAllChangeLogs: function () {
+        ListingApi.getAllChangeLogs().then(ListingActions.fetchAllChangeLogsCompleted);
+    },
     fetchNewArrivals: function () {
         ListingApi.getNewArrivals().then(ListingActions.fetchNewArrivalsCompleted);
     },
