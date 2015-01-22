@@ -6,13 +6,13 @@ var Reflux = require('reflux');
 var Alerts = require('../alerts');
 var HelpModal = require('./helpmodal');
 
-var ProfileStore = require('../../stores/ProfileStore');
+var SystemStateMixin = require('../../mixins/SystemStateMixin');
 
 var Role = require('../../constants').UserRole;
 
 var NavBar = React.createClass({
-
-    mixins: [Reflux.connect(ProfileStore, 'profile')],
+  
+    mixins: [ SystemStateMixin ],
 
     getInitialState: function() {
         return {
@@ -27,7 +27,7 @@ var NavBar = React.createClass({
                 <div className="container-fluid container" id="centered">
                     <div className="navbar-left">
                         <ul className="nav navbar-nav">
-                            <li><a className="lrg" href="#"><i className="icon-home"></i></a></li>
+                            <li><a className="lrg" href={HUD_URL}><i className="icon-home"></i></a></li>
                             <li className="active"><a className="lrg" href={CENTER_URL}><i className="icon-shopping" id="active"></i></a></li>
                             <li><a className="lrg" href={WEBTOP_URL}><i className="icon-layout"></i></a></li>
                         </ul>
@@ -46,7 +46,7 @@ var NavBar = React.createClass({
                                 <a href="#" className="lrg" data-toggle="dropdown"><i className="icon-menu"></i></a>
                                 <ul className="dropdown-menu">
                                     <li className="dropdown-header">Personalize</li>
-                                    <li><a href="#"><i className="icon-ribbon"></i>Bookmarks</a></li>
+                                    <li><a href={HUD_URL}><i className="icon-ribbon"></i>Bookmarks</a></li>
                                     <li><a href="#"><i className="icon-head"></i>Profile</a></li>
                                     <li><a href="#"><i className="icon-cog"></i>Settings</a></li>
                                     <li className="divider"></li>
@@ -75,9 +75,7 @@ var NavBar = React.createClass({
     },
 
     isAdmin: function() {
-        var profile = this.state.profile;
-
-        return this.state.profile && (Role[profile.highestRole] >= Role.APPSMALL_STEWARD);
+        return this.state.currentUser.isAdmin;
     },
 
     showHelpModal: function () {

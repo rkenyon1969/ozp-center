@@ -59,6 +59,11 @@ html, body {
     }
 }
 
+.alert-small {
+    width: 33%;
+    padding: 5px 10px 5px 10px;
+}
+
 @media (max-width: 1023px) and (min-width: 800px) {
     #main {
         width: 800px !important;

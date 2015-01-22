@@ -10,6 +10,8 @@ var CurrentListingStore = require('../../stores/CurrentListingStore');
 var ProfileStore = require('../../stores/ProfileStore');
 var { loadListing, updateListing, save, submit } = require('../../actions/CreateEditActions');
 var { Navigation } = require('react-router');
+
+var NavBar = require('../NavBar')
 var Header = require('../header');
 var { classSet } = React.addons;
 var State = require('../../mixins/ActiveStateMixin');
@@ -104,7 +106,7 @@ var CreateEditPage = React.createClass({
         var subHeader = (
             <div className="CreateEdit__titlebar row">
                 <h1>{titleText}</h1>
-                <h4>All fields are required unless marked as “optional.”</h4>
+                <div className="alert alert-info alert-small" role="alert">All fields are required unless marked as “optional.”</div>
                 <div className="btn-group" role="group">
                     <button type="button" className={ classSet(saveBtnClasses) } onClick={ this.onSave }>{ saveText }</button>
                     { showSubmit && <button className="btn btn-default" onClick={ this.onSubmit }>Submit</button> }
@@ -116,6 +118,7 @@ var CreateEditPage = React.createClass({
 
         return (
             <div>
+                <NavBar />
                 <Header subHeader={subHeader} />
                 <ListingForm ref="form" { ...formProps } />
                 { savingText && <LoadMask message={savingText} /> }
