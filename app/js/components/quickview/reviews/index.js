@@ -127,7 +127,7 @@ var ReviewsTab = React.createClass({
 
             return (
                 <div className="star-rating">
-                    <a href="javascript:;">{ star } stars</a>
+                    <span>{ star } stars</span>
                     <div className="progress">
                         <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={style} ></div>
                     </div>

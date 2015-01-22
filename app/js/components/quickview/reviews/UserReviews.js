@@ -60,20 +60,25 @@ var UserReviews = React.createClass({
     },
 
     render: function () {
+        /* jshint ignore:start */
         return (
-            /* jshint ignore:start */
-            <ul className="list-unstyled list-reviews">
-                { this.renderReviews() }
-            </ul>
-            /* jshint ignore:end */
+            (this.props.reviews && this.props.reviews.length > 0) ?
+                <ul className="list-unstyled list-reviews">
+                    { this.renderReviews() }
+                </ul> :
+                <div>
+                    <h4>There are no user reviews yet.</h4>
+                    <p>Please add a review to share your thoughts and experiences with others.</p>
+                </div>
         );
+        /* jshint ignore:end */
     },
 
     renderReviews: function () {
         var { onEdit, user, listing } = this.props;
 
         /* jshint ignore:start */
-        return (this.props.reviews || []).map(function (review, i) {
+        return this.props.reviews.map(function (review, i) {
             var time = review.editedDate || review.createdDate;
             return <UserReview
                         key={ review.id }
