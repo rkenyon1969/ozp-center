@@ -112,6 +112,10 @@ var ListingApi = {
             method = 'PUT';
             url += `/${review.id}`;
         }
+        // default rate to 1 if not specified
+        if (!review.rate) {
+            review.rate = 1;
+        }
 
         return $.ajax({
             type: method,

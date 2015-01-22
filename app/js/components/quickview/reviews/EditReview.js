@@ -22,7 +22,6 @@ var EditReview = React.createClass({
         review: React.PropTypes.object.isRequired,
         onSave: React.PropTypes.func.isRequired,
         onCancel: React.PropTypes.func.isRequired,
-        onDelete: React.PropTypes.func.isRequired,
         user: React.PropTypes.object.isRequired
     },
 
@@ -80,9 +79,15 @@ var EditReview = React.createClass({
         }
     },
 
+    isEditingRateAllowed: function () {
+        return this.state.review.author.username === this.props.user.username;
+    },
+
     render: function () {
         var { user } = this.props;
         var { rate, text } = this.state.review;
+        var isEditingRateAllowed = this.isEditingRateAllowed();
+
         /* jshint ignore:start */
         return (
             <div className="EditReview">
@@ -90,7 +95,14 @@ var EditReview = React.createClass({
                 <SystemHighMessage />
                 <div className="EditReview__Rating">
                     <div>Star Rating</div>
-                    <IconRating currentRating={ rate } onChange={ this.onRatingChange } />
+                    <IconRating
+                        currentRating={ rate }
+                        onChange={ this.onRatingChange }
+                        viewOnly={ !isEditingRateAllowed }/>
+                    {
+                        !isEditingRateAllowed &&
+                            <i className="fa fa-lock"></i>
+                    }
                 </div>
                 <div>
                     <div>Description</div>

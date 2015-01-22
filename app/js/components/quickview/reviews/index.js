@@ -75,11 +75,15 @@ var ReviewsTab = React.createClass({
                     { this.renderReviewFilters() }
                 </section>
                 <section className="col-md-5">
-                    <UserReviews reviews={ reviews } onEdit={ this.onEdit }  user={ currentUser }/>
+                    <UserReviews
+                        listing={ listing }
+                        user={ currentUser }
+                        reviews={ reviews }
+                        onEdit={ this.onEdit } />
                 </section>
                 <section className="col-md-4 col-right">
                     {
-                        !currentUserReview &&
+                        !currentUserReview && !reviewBeingEdited &&
                             <SubmitReview listing={ listing } />
                     }
                     {

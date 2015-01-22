@@ -5,11 +5,54 @@ var IconRating = require('../../shared/IconRating');
 var _ = require('../../../utils/_');
 var TimeAgo = require('../../shared/TimeAgo');
 
+var UserReview = React.createClass({
+
+    mixins: [React.addons.PureRenderMixin],
+
+    propTypes: {
+        listing: React.PropTypes.object.isRequired,
+        review: React.PropTypes.object.isRequired,
+        user: React.PropTypes.object.isRequired,
+        onEdit: React.PropTypes.func.isRequired
+    },
+
+    isEditAllowed: function () {
+        var { review, user, listing } = this.props;
+        return (
+            user.isAdmin ||
+            review.author.username === user.username ||
+            user.stewardedOrganizations.indexOf(listing.agency) > -1
+        );
+    },
+
+    render: function () {
+        var { review, onEdit } = this.props;
+        var time = review.editedDate || review.createdDate;
+        /* jshint ignore:start */
+        return (
+            <li className="Review">
+                <IconRating currentRating = { review.rate } viewOnly={true} />
+                <span className="Review__author">{ review.author.displayName }</span>
+                <TimeAgo className="Review__time" time={ time } />
+                {
+                    this.isEditAllowed() &&
+                        <i className="fa fa-edit pull-right" onClick={ _.partial(onEdit, review) }></i>
+                }
+                <p className="Review__text">{ review.text }</p>
+            </li>
+        );
+        /* jshint ignore:end */
+    }
+
+});
+
 var UserReviews = React.createClass({
 
     propTypes: {
-        onEdit: React.PropTypes.func.isRequired,
-        user: React.PropTypes.object.isRequired
+        listing: React.PropTypes.object.isRequired,
+        user: React.PropTypes.object.isRequired,
+        reviews: React.PropTypes.array,
+        onEdit: React.PropTypes.func.isRequired
     },
 
     getDefaultProps: function () {
@@ -27,24 +70,17 @@ var UserReviews = React.createClass({
     },
 
     renderReviews: function () {
-        var { onEdit, user } = this.props;
+        var { onEdit, user, listing } = this.props;
+
         /* jshint ignore:start */
         return (this.props.reviews || []).map(function (review, i) {
             var time = review.editedDate || review.createdDate;
-
-            return (
-                <li className="Review">
-                    <IconRating currentRating = { review.rate } viewOnly={true} />
-                    <span className="Review__author">{ review.author.displayName }</span>
-                    <TimeAgo className="Review__time" time={ time } />
-                    {
-                        /* editable by an admin or a review owner */
-                        (user.isAdmin || review.author.username === user.username) &&
-                            <i className="fa fa-edit pull-right" onClick={ _.partial(onEdit, review) }></i>
-                    }
-                    <p className="Review__text">{ review.text }</p>
-                </li>
-            );
+            return <UserReview
+                        key={ review.id }
+                        user={ user }
+                        listing={ listing }
+                        review={ review }
+                        onEdit={ onEdit } />;
         });
         /* jshint ignore:end */
     }

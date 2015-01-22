@@ -227,3 +227,10 @@ $quickview-nav-tabs-height: 42px;
 .SubmitReview__Rating {
     margin-bottom: 10px;
 }
+
+.EditReview {
+    .fa-lock {
+        margin-left: 6px;
+        color: $link-color;
+    }
+}
