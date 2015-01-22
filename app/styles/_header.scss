@@ -4,9 +4,7 @@
   border-bottom: $gray-base;
 }
 
-.active {
-  color: $blue;
-}
+
 #active {
   color: $blue;
 }
@@ -22,6 +20,10 @@
 }
 
 .dropdown-header {
+  color: $blue;
+}
+
+.activeIcon {
   color: $blue;
 }
 

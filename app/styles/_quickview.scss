@@ -20,10 +20,12 @@ $quickview-nav-tabs-height: 42px;
         overflow: auto;
         height: 416px;
         padding: $panel-body-padding;
+        color: $gray-dark;
     }
 
     section > h5 {
         margin: 0;
+        color: $gray-dark;
 
         + hr {
             margin: $panel-body-padding/4 0 $panel-body-padding/2 0;

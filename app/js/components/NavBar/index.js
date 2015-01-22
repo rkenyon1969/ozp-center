@@ -36,7 +36,7 @@ var NavBar = React.createClass({
                     <div className="navbar-right">
                         <ul className="nav navbar-nav">
                             <li className="dropdown">
-                                <a href="#" data-toggle="dropdown"><i className="icon-bell-filled active"></i></a>
+                                <a href="#" data-toggle="dropdown"><i className="icon-bell-filled activeIcon"></i></a>
                                 <Alerts />
                             </li>
                             <li>
