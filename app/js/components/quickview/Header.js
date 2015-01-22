@@ -52,7 +52,7 @@ var QuickviewHeader = React.createClass({
             <div className="btn-group quickview-header-actions">
                 <button type="button" className="btn btn-default" onClick={ this.launch }><i className="fa fa-external-link"></i></button>
                 <BookmarkButton listing={this.props.listing} />
-                {this.props.allowEdit && <button type="button" className="btn btn-primary" onClick={ this.props.onEdit }><i className="fa fa-edit"></i></button>}
+              {this.props.allowEdit && <button type="button" className="btn btn-default" onClick={ this.props.onEdit }><i className="fa fa-edit"></i></button>}
             </div>
         );
         /* jshint ignore:end */
