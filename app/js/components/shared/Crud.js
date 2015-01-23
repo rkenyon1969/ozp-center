@@ -111,10 +111,6 @@ var Crud = React.createClass({
         })
     },
 
-    getDefaultProps: function() {
-        return {onCreate: this._onCreate, onEdit: this._onEdit};
-    },
-
     getInitialState: function () {
         return {
             adding: false,
@@ -227,10 +223,11 @@ var Crud = React.createClass({
     //Retrieve form data process a create, using a potentially custom function
     onCreate: function () {
         //use the form data that we already have in state, if available
-        var formData = this.state.formState || this.refs.form.getValue();
+        var formData = this.state.formState || this.refs.form.getValue(),
+            createFn = this.props.onCreate || this._onCreate;
 
         if (formData) {
-            return this.props.onCreate(formData);
+            return createFn(formData);
         }
     },
 
@@ -249,10 +246,11 @@ var Crud = React.createClass({
     },
 
     onEdit: function () {
-        var formData = this.state.formState || this.refs.form.getValue();
+        var formData = this.state.formState || this.refs.form.getValue(),
+            editFn = this.props.onEdit || this._onEdit;
 
         if (formData) {
-            return this.props.onEdit(formData);
+            return editFn(formData);
         }
     },
 
