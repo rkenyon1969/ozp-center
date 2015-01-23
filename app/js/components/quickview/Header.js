@@ -20,6 +20,7 @@ var QuickviewHeader = React.createClass({
         var title = listing.title;
         var avgRate = listing.avgRate;
         var image = listing.imageMediumUrl;
+        var agencyShort = listing.agencyShort;
 
         /* jshint ignore:start */
         return (
@@ -27,7 +28,12 @@ var QuickviewHeader = React.createClass({
                 <div className="quickview-header-info">
                     <button type="button" className="close" aria-hidden="true" onClick={ this.props.onCancel }>×</button>
                     <img className="listing-icon" src={ image } data-fallback="/store/images/types/3" />
-                    <h3 className="listing-title" title={ title }>{ title }</h3>
+                    <h3 className="listing-title" title={ title }>{ title }
+                    {
+                        agencyShort &&
+                        <span className="company">{ agencyShort }</span>
+                    }
+                    </h3>
                     <IconRating
                         className="icon-rating"
                         viewOnly
