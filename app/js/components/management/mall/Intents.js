@@ -16,8 +16,6 @@ var $ = require('jquery');
  * Custom tcomb input factory for image file inputs
  */
 function iconFileInputFactory(initialImageUri, imageError, existingImageId, type, opts) {
-    var label = opts.label;
-
     return React.createClass({
         getInitialState: function() {
             return {
@@ -62,7 +60,7 @@ function iconFileInputFactory(initialImageUri, imageError, existingImageId, type
             return (
                 <div className="form-group">
                     <label>
-                        {label}
+                        <span>Icon<small className="text-muted"> (optional)</small></span>
                     </label>
                     <ImageInput
                         imageUri={this.state.imageUri} value={this.state.value}
