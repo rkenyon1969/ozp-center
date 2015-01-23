@@ -37,14 +37,14 @@ $quickview-nav-tabs-height: 42px;
     position: relative;
     padding: 20px 25px;
     .company {
-        background: #e8e8e8;
+        background: $gray-lightest;
         padding: 2px 10px;
         border-radius: 10px;
         display: inline-block;
         position: absolute;
         font-size: 12px;
-        right: -80px;
-        top: 8px;
+        left: 100px;
+        bottom: -30px;
     }
 
     .quickview-header-info {
@@ -86,6 +86,7 @@ $quickview-nav-tabs-height: 42px;
         padding: 0 0 0 20px;
         margin: 0;
         display: inline-block;
+        width-max:50px;
     }
 }
 

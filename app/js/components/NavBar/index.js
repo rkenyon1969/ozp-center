@@ -28,7 +28,7 @@ var NavBar = React.createClass({
                     <div className="navbar-left">
                         <ul className="nav navbar-nav">
                             <li><a className="lrg" href={HUD_URL}><i className="icon-home"></i></a></li>
-                            <li className="active"><a className="lrg" href={CENTER_URL}><i className="icon-shopping" id="active"></i></a></li>
+                            <li className="active"><a className="lrg" href={CENTER_URL}><i className="icon-shopping activeIcon"></i></a></li>
                             <li><a className="lrg" href={WEBTOP_URL}><i className="icon-layout"></i></a></li>
                         </ul>
                     </div>

@@ -69,7 +69,7 @@ var ListingTile = React.createClass({
         return (
             <div className="btn-group actions">
                 {/* can't nest anchor tags, using button here with onClick listener */}
-                <button type="button" className="btn btn-default" onClick={ this.launch }><i className="fa fa-external-link"></i></button>
+                <button type="button" className="btn btn-default" onClick={ this.launch }><i className="icon-open"></i></button>
                 <BookmarkButton listing={this.props.listing} />
             </div>
         );

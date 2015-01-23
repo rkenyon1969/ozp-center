@@ -83,7 +83,7 @@ var CreateEditPage = React.createClass({
         var saveBtnClasses = {
             'btn': true,
             'btn-success': !showSave(),
-            'btn-warning': showSave()
+            'btn-danger': showSave()
         };
 
         var status = approvalStatus[listing.approvalStatus];
@@ -91,7 +91,7 @@ var CreateEditPage = React.createClass({
         var showSubmit = [IN_PROGRESS, REJECTED].some(s => s === status);
         var showPreview = !!listing.id;
         var titleText = (this.getParams().listingId ? 'Edit ' : 'Create New ') + 'Listing';
-        var saveText = showSave() ? 'Save' : 'Saved';
+        var saveText = showSave() ? 'fa fa-save' : 'icon-check';
         var savingText = savingMessages[this.state.saveStatus];
 
         var formProps = assign({},
@@ -108,10 +108,9 @@ var CreateEditPage = React.createClass({
                 <h1>{titleText}</h1>
                 <div className="alert alert-info alert-small" role="alert">All fields are required unless marked as “optional.”</div>
                 <div className="btn-group" role="group">
-                    <button type="button" className={ classSet(saveBtnClasses) } onClick={ this.onSave }>{ saveText }</button>
-                    { showSubmit && <button className="btn btn-default" onClick={ this.onSubmit }>Submit</button> }
-                    { showPreview && <button className="btn btn-default" onClick={ this.onPreview }>Preview</button> }
-                    <button type="button" className="btn btn-default" onClick={ this.onClose }>Close</button>
+                    <button type="button" className={ classSet(saveBtnClasses) } onClick={ this.onSave }><i className={saveText}></i></button>
+                  { showSubmit && <button className="btn btn-default" onClick={ this.onSubmit }><i className="icon-cloud-upload"> </i></button> }
+                    { showPreview && <button className="btn btn-default" onClick={ this.onPreview }><i className="icon-eye"> </i></button> }
                 </div>
             </div>
         );
