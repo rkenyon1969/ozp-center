@@ -83,6 +83,7 @@ html, body {
 @import 'quickview';
 @import 'create-edit';
 @import 'switches';
+@import 'toolbar';
 @import 'management/user/listing-management';
 @import 'management/user/my-listings';
 @import 'management/mall/mall-management';
@@ -195,6 +196,10 @@ label {
     &.bookmarked {
         color: $yellow;
     }
+}
+
+div.modal-header > button.close {
+  margin:-22px -13px 0 0;
 }
 
 /*=======================
