@@ -14,7 +14,7 @@ var _self = null;
 
 var selfIsAdmin = () => UserRole[_self.highestRole] >= ADMIN;
 var selfIsOwner = (listing) => listing.owners.some(u => u.username === _self.username);
-var selfIsOrgSteward = (org) => _self.stewardedOrganizations.some(o => o === org);
+var selfIsOrgSteward = (org) => UserRole[_self.highestRole] >= ORG_STEWARD && _self.stewardedOrganizations.some(o => o === org);
 
 var ProfileStore = Reflux.createStore({
 
@@ -31,6 +31,7 @@ var ProfileStore = Reflux.createStore({
     onFetchSelfCompleted: function (self) {
         _self = self;
         _self.isAdmin = selfIsAdmin();
+        _self.isOrgSteward = selfIsOrgSteward;
         this.trigger({currentUser: _self});
         selfLoaded();
     },

@@ -21,7 +21,7 @@ var UserReview = React.createClass({
         return (
             user.isAdmin ||
             review.author.username === user.username ||
-            user.stewardedOrganizations.indexOf(listing.agency) > -1
+            user.isOrgSteward(listing.agency)
         );
     },
 
@@ -92,3 +92,4 @@ var UserReviews = React.createClass({
 });
 
 module.exports = UserReviews;
+module.exports.UserReview = UserReview;

@@ -2,8 +2,8 @@
 
 var React = require('react');
 var Reflux = require('reflux');
+var TimeAgo = require('../../components/shared/TimeAgo');
 var actions = require('../../constants/index').listingActions;
-var timeAgo = require('../../utils/timeAgo');
 var uuid = require('../../utils/uuid');
 var fieldName = require('../../constants/index').listingFieldName;
 var CurrentListingStore = require('../../stores/CurrentListingStore');
@@ -48,7 +48,6 @@ var ChangeLogs = React.createClass({
         var me = this;
 
         return this.state.changeLogs.map(function (changeLog, i) {
-            var time = timeAgo(changeLog.activityDate);
             var listingChange = me.getListingChange(changeLog, i);
 
             /* jshint ignore:start */
@@ -56,7 +55,7 @@ var ChangeLogs = React.createClass({
                 <li>
                     <div className="row">
                         <div className="col-md-3">
-                            <em>{ time }</em>
+                            <TimeAgo time={changeLog.activityDate} />
                         </div>
                         <div className="col-md-9">
                             { listingChange }

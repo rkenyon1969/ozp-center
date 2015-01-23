@@ -108,14 +108,12 @@ var EditReview = React.createClass({
                     <div>Description</div>
                     <textarea ref="text" value={ text } onChange={ this.onTextChange }></textarea>
                 </div>
-                {
-                    user.isAdmin &&
-                        <PopoverConfirmationButton
-                            ref="deletePopover"
-                            title={ "Delete Review" }
-                            content={ "Are you sure you want to delete this review?" }
-                            onConfirm={ this.onDeleteConfirm } />
-                }
+                <PopoverConfirmationButton
+                    ref="deletePopover"
+                    title="Delete Review"
+                    content="Are you sure you want to delete this review?"
+                    confirmButtonClassName="btn-danger"
+                    onConfirm={ this.onDeleteConfirm } />
                 <div className="pull-right">
                     <button className="btn btn-default btn-sm" onClick={ this.props.onCancel }>Cancel</button>
                     <button className="btn btn-success btn-sm" onClick={ this.onSave }>Submit</button>

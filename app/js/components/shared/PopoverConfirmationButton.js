@@ -3,23 +3,29 @@
 var React = require('react');
 var $ = require('jquery');
 var _ = require('../../utils/_');
+var { classSet } = React.addons;
 
 var Confirmation = React.createClass({
     propTypes: {
         message: React.PropTypes.string.isRequired,
         onCancel: React.PropTypes.func.isRequired,
+        confirmButtonClassName: React.PropTypes.string,
         onConfirm: React.PropTypes.func.isRequired
     },
     render: function () {
         var { onCancel, onConfirm, message } = this.props;
+        var confirmButtonClassName = {
+            'btn btn-sm': true
+        };
+        confirmButtonClassName[this.props.confirmButtonClassName] = true;
 
         /* jshint ignore:start */
         return (
             <div>
                 <p>{message}</p>
-                <div className="pull-right">
-                    <button className="btn btn-default btn-sm" onClick={ this.props.onCancel }>Cancel</button>
-                    <button className="btn btn-danger btn-sm" onClick={ this.props.onConfirm }>Delete</button>
+                <div className="text-right">
+                    <button className="btn btn-sm btn-default" onClick={ this.props.onCancel }>Cancel</button>
+                    <button className={classSet(confirmButtonClassName)} onClick={ this.props.onConfirm }>Delete</button>
                 </div>
             </div>
         );
@@ -38,6 +44,7 @@ var PopoverConfirmationButton = React.createClass({
         trigger: React.PropTypes.string, // click | hover | focus | manual. You may pass multiple triggers; separate them with a space.
         viewport: React.PropTypes.string,
         onCancel: React.PropTypes.func,
+        confirmButtonClassName: React.PropTypes.string,
         onConfirm: React.PropTypes.func.isRequired
     },
 
@@ -49,6 +56,7 @@ var PopoverConfirmationButton = React.createClass({
             trigger: 'click',
             viewport: 'body',
             onCancel: _.noop,
+            confirmButtonClassName: 'btn-default',
             onConfirm: _.noop
         };
     },
@@ -67,7 +75,7 @@ var PopoverConfirmationButton = React.createClass({
     },
 
     componentDidMount: function () {
-        var { content } = this.props;
+        var { content, confirmButtonClassName } = this.props;
         var { onCancel, onConfirm } = this;
 
         $(this.getDOMNode())
@@ -75,7 +83,11 @@ var PopoverConfirmationButton = React.createClass({
             .on('shown.bs.popover', function () {
                 /* jshint ignore:start */
                 React.render(
-                    <Confirmation message={ content } onCancel={ onCancel } onConfirm={ onConfirm } />,
+                    <Confirmation
+                        message={ content }
+                        onCancel={ onCancel }
+                        confirmButtonClassName={ confirmButtonClassName }
+                        onConfirm={ onConfirm } />,
                     $(this).data()['bs.popover'].$tip.find('.popover-content')[0]
                 );
                 /* jshint ignore:end */

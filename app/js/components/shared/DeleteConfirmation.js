@@ -46,7 +46,7 @@ var DeleteConfirmation = React.createClass({
                     Are you sure that you would like to delete the {kind} &quot;{title}&quot;?
                 </strong>
                 <button className="btn btn-default cancel" data-dismiss="modal">Cancel</button>
-                <button className="btn btn-warning delete" onClick={onDelete}>Delete</button>
+                <button className="btn btn-danger delete" onClick={onDelete}>Delete</button>
             </Modal>
         );
         /* jshint ignore:end */

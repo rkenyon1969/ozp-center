@@ -10,34 +10,53 @@ var TimeAgo = React.createClass({
 
     propTypes: {
         className: React.PropTypes.string,
-        time: React.PropTypes.string.isRequired
+        time: React.PropTypes.string.isRequired,
+        autoUpdate: React.PropTypes.bool
     },
 
-    getInitialState: function() {
+    getDefaultProps: function () {
+        return {
+            autoUpdate: false
+        };
+    },
+
+    getInitialState: function () {
         return {
             time: timeAgo(this.props.time)
         };
     },
 
     componentDidMount: function() {
-        this.interval = setInterval(function () {
-            this.setState({ time: timeAgo(this.props.time) });
-        }.bind(this), 1000);
+        if (this.props.autoUpdate === true) {
+            this.setAutoUpdateInterval();
+        }
     },
 
     componentWillUnmount: function () {
-        clearInterval(this.interval);
+        this.clearAutoUpdatInterval();
     },
 
     render: function () {
         var className = this.props.className || '';
         /* jshint ignore:start */
         return (
-            <span className={ className + " TimeAgo" }>
+            <em className={ className + " TimeAgo" }>
                 { timeAgo(this.props.time) }
-            </span>
+            </em>
         );
         /* jshint ignore:end */
+    },
+
+    setAutoUpdateInterval: function () {
+        this.interval = setInterval(function () {
+            this.setState({ time: timeAgo(this.props.time) });
+        }.bind(this), 1000);
+    },
+
+    clearAutoUpdatInterval: function () {
+        if (this.interval) {
+            clearInterval(this.interval);
+        }
     }
 
 });
