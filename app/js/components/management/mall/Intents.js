@@ -9,14 +9,21 @@ var Crud = require('../../shared/Crud');
 var ImageApi = require('../../../webapi/Image').ImageApi;
 var ImageInput = require('../../createEdit/form/ImageInput');
 
-function iconFileInputFactory(initialImageUri, type, opts) {
+var $ = require('jquery');
+
+
+/**
+ * Custom tcomb input factory for image file inputs
+ */
+function iconFileInputFactory(initialImageUri, imageError, existingImageId, type, opts) {
     var label = opts.label;
 
     return React.createClass({
         getInitialState: function() {
             return {
                 imageUri: initialImageUri,
-                value: null
+                value: existingImageId,
+                imageError: imageError
             };
         },
 
@@ -29,13 +36,25 @@ function iconFileInputFactory(initialImageUri, type, opts) {
                 URL.revokeObjectURL(existingImageUri);
             }
 
-            this.setState({imageUri: newImageUri, value: value});
+            this.setState({imageUri: newImageUri, value: value, imageError: null});
         },
 
         getValue: function() {
-            //create simple ValidationResult object without checking any validation.
-            //No validation can be done since tcomb has no support for File objects.
             return this.state.value;
+        },
+
+        getImageUri: function() {
+            return this.state.imageUri;
+        },
+
+        componentDidUpdate: function() {
+            if (opts.onChange) {
+                opts.onChange(this);
+            }
+        },
+
+        shouldComponentUpdate: function(newProps, newState) {
+            return this.state.imageUri !== newState.imageUri;
         },
 
         render: function() {
@@ -46,14 +65,18 @@ function iconFileInputFactory(initialImageUri, type, opts) {
                         {label}
                     </label>
                     <ImageInput
-                        imageUri={this.state.imageUri} value={this.state.imageUri}
-                        setter={this.onChange} error={this.props.errors} />
+                        imageUri={this.state.imageUri} value={this.state.value}
+                        setter={this.onChange} serverError={this.state.imageError} />
                 </div>
             );
             /* jshint ignore:end */
         }
     });
 }
+
+var iconInputFileType = window.Blob ?
+    t.irriducible('Blob', x => x instanceof Blob) :
+    t.irriducible('HTMLInputElement', x => x instanceof HTMLInputElement);
 
 // Intent Schema
 var Intent = struct({
@@ -66,9 +89,7 @@ var Intent = struct({
     type: subtype(Str, function (s) {
         return s.length <= 129;
     }),
-    iconInput: window.Blob ?
-        t.irriducible('Blob', x => x instanceof Blob) :
-        t.irriducible('HTMLInputElement', x => x instanceof HTMLInputElement)
+    iconInput: maybe(t.union([Str, iconInputFileType]))
 });
 
 var Intents = React.createClass({
@@ -80,28 +101,6 @@ var Intents = React.createClass({
             Schema: Intent,
             getDisplayName: function (selectedRecord) {
                 return `${selectedRecord.action}/${selectedRecord.type}`;
-            },
-            form: function (selectedRecord) {
-                return {
-                    fields: {
-                        label: {
-                            help: 'Max. 255 characters'
-                        },
-                        action: {
-                            help: 'Max. 64 characters',
-                            disabled: selectedRecord ? true : false
-                        },
-                        type: {
-                            disabled: selectedRecord ? true : false,
-                            help: 'Max. 64 characters/Max. 64 characters. Ex: application/json, application/custom-type, etc.'
-                        },
-                        iconInput: {
-                            //partially apply to get proper factory function
-                            input: iconFileInputFactory.bind(null,
-                                selectedRecord ? selectedRecord.icon : undefined)
-                        }
-                    }
-                };
             },
             grid: {
                 columns: [
@@ -120,32 +119,99 @@ var Intents = React.createClass({
         };
     },
 
+    getInitialState: function() {
+        return {imageError: null, imageUri: undefined};
+    },
+
+    getForm: function (selectedRecord) {
+        var me = this;
+
+        return {
+            fields: {
+                label: {
+                    help: 'Max. 255 characters'
+                },
+                action: {
+                    help: 'Max. 64 characters',
+                    disabled: selectedRecord ? true : false
+                },
+                type: {
+                    disabled: selectedRecord ? true : false,
+                    help: 'Max. 64 characters/Max. 64 characters. Ex: application/json, application/custom-type, etc.'
+                },
+                iconInput: {
+                    input: function(type, opts) {
+                        var imageUri = me.state.imageUri ||
+                                (selectedRecord ? selectedRecord.icon : undefined),
+                            existingImageId =
+                                (selectedRecord ? selectedRecord.iconId : undefined),
+                            imageError = me.state.imageError,
+                            oldChangeHandler = opts.onChange;
+
+                        //listen for change a remember imageUri
+                        opts.onChange = function(input) {
+                            me.state.imageUri = input.getImageUri();
+
+                            oldChangeHandler.apply(null, arguments);
+                        };
+
+                        return iconFileInputFactory(imageUri, imageError, existingImageId,
+                                type, opts);
+                    }
+                }
+            }
+        };
+    },
+
     save: function(data, intentSaveFunction) {
-        this.saveIcon(data.iconInput).then(function(iconId) {
+        var me = this,
+            inputVal = data.iconInput,
+
+            //inputVal could be a string (the existing image id) or a File/Input to save,
+            //or null (if the image was removed)
+            iconSave = (inputVal && typeof inputVal !== 'string') ?
+                this.saveIcon(data.iconInput) :
+                $.Deferred().resolve(inputVal).promise();
+
+        iconSave.then(function(iconId) {
+            me.setState({imageError: null});
+
             intentSaveFunction(Object.assign({}, data, {
                 iconId: iconId,
-                icon: undefined,
                 iconInput: undefined
             }));
         });
     },
 
     saveIcon: function(icon) {
-        return ImageApi.save(icon).then(json => json.id);
+        return ImageApi.save(icon).then((json => json.id), this.handleImageSaveFailure);
     },
 
-    onCreate: function(data, crud) {
-        this.save(data, crud._onCreate);
+    handleImageSaveFailure: function(response, err, statusText) {
+        var json = response.responseJSON,
+            jsonMessage = json ? json.message : null,
+            errorMessage = jsonMessage || statusText ||
+                'Unknown error saving image';
+
+        this.setState({imageError: errorMessage});
     },
 
-    onEdit: function(data, crud) {
-        this.save(data, crud._onEdit);
+    onCreate: function(data) {
+        this.save(data, this.refs.crud._onCreate);
+    },
+
+    onEdit: function(data) {
+        this.save(data, this.refs.crud._onEdit);
+    },
+
+    resetState: function() {
+        this.setState(this.getInitialState());
     },
 
     render: function () {
         /* jshint ignore:start */
-        return this.transferPropsTo(<Crud onCreate={this.onCreate}
-                onEdit={this.onEdit}/>);
+        return this.transferPropsTo(<Crud ref="crud" onCreate={this.onCreate}
+                onEdit={this.onEdit} onResetState={this.resetState} form={this.getForm} />);
         /* jshint ignore:end */
     }
 
