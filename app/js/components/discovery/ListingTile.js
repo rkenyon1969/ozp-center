@@ -30,7 +30,7 @@ var ListingTile = React.createClass({
         var imageLargeUrl = listing.imageLargeUrl;
         var totalVotes = listing.totalVotes;
         var avgRate = listing.avgRate;
-        var company = listing.company;
+        var agencyShort = listing.agencyShort;
         var href = this.makeHref(this.getActiveRoutePath(), null, {
             listing: listing.id,
             action: 'view',
@@ -52,8 +52,8 @@ var ListingTile = React.createClass({
                             untoggledClassName="fa fa-star-o"
                             halfClassName="fa fa-star-half-o" />
                         {
-                            company &&
-                                <span className="company">{ company }</span>
+                            agencyShort &&
+                                <span className="company">{ agencyShort }</span>
                         }
                         <p className="description">{ description }</p>
                         { this.renderActions() }
