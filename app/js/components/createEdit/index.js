@@ -63,7 +63,7 @@ var CreateEditPage = React.createClass({
     getInitialState: function () {
         return {
             scrollToError: false,
-            imageErrors: {}
+            imageErrors: {screenshots: []}
         };
     },
 

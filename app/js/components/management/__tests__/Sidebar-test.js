@@ -1,9 +1,9 @@
 'use strict';
 
 describe('AllListings', function() {
-    it('renders the sidebar on the all listings page', function() {
+    it('renders the sidebar on the listing management page', function() {
         var React = require('react');
-        var AllListings = require('../index.js');
+        var AllListings = require('../AllListings');
         var expect = require('chai').expect;
         var TestUtils = React.addons.TestUtils;
 
@@ -15,7 +15,7 @@ describe('AllListings', function() {
 
     it('renders the grid view on the all listings page', function() {
         var React = require('react');
-        var AllListings = require('../index.js');
+        var AllListings = require('../AllListings');
         var expect = require('chai').expect;
         var TestUtils = React.addons.TestUtils;
 

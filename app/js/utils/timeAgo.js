@@ -34,14 +34,14 @@ module.exports = function timeAgo (date) {
     if(timeDiff < 11.5 && !timePassed) {
         quantity = 'month';
         timePassed = timeDiff;
-    } else if (!timePassed){
+    } else if (!timePassed) {
         quantity = 'year';
         timePassed = timeDiff / 12;
     }
 
     timePassed = Math.round(timePassed);
 
-    if(timePassed === 1){
+    if(timePassed === 1) {
         return 'a ' + quantity + ' ago';
     }
 

@@ -28,11 +28,38 @@ var ListingManagement = React.createClass({
         };
     },
 
+    getActiveTab: function(tabs) {
+        var me = this;
+        return _.find(tabs, function(tab) {
+            return me.isActive(tab.to, tab.params);
+        });
+    },
+
     render: function () {
+        var me = this;
+
         var tabs = _.cloneDeep(this.props.tabs);
-        if(!this.state.currentUser.isAdmin){
+        if(!this.state.currentUser.isAdmin) {
             tabs.splice(1, 1);
         }
+
+        if(this.state.currentUser.stewardedOrganizations.length > 0) {
+            _.forEach(this.state.currentUser.stewardedOrganizations, function(orgName) {
+                var org = _.find(me.state.system.organizations, function(orgObj) {
+                    return orgObj.title === orgName;
+                });
+
+                tabs.splice(1, 0,
+                {
+                    to: 'org-listings',
+                    name: 'All ' + org.shortName + ' Listings',
+                    params: {
+                        org: org.title
+                    }
+                });
+            });
+        }
+
         /* jshint ignore:start */
         return (
             <div className="ListingManagement">
@@ -43,7 +70,7 @@ var ListingManagement = React.createClass({
                     <div className="ListingManagement__TabContainer">
                         { this.renderTabs(tabs) }
                         <div className="tab-content">
-                            <RouteHandler />
+                            <RouteHandler org={this.getActiveTab(tabs)}/>
                         </div>
                     </div>
                 </div>

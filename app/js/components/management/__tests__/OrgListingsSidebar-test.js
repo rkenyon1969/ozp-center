@@ -4,26 +4,26 @@ var React = require('react');
 var expect = require('chai').expect;
 var TestUtils = React.addons.TestUtils;
 
-describe('AllListingsSidebar', function() {
-    it('renders sidebar filters', function() {
-        var AllListingsSidebar = require('../AllListingsSidebar');
-        var allListingsSidebar = TestUtils.renderIntoDocument(
-            <AllListingsSidebar
+describe('OrgListingsSidebar', function() {
+    it('renders status filter', function() {
+        var Sidebar = require('../shared/Sidebar');
+        var sidebar = TestUtils.renderIntoDocument(
+            <Sidebar
                 counts = { {} }
                 listings = { [] }
                 value = { {approvalStatus: null, org: null, enabled: null} }
                 organizations = { [] }
+                view = 'adminView'
             />
         );
 
-        var html = TestUtils.findRenderedDOMComponentWithTag(allListingsSidebar, 'form');
-        expect($(html.getDOMNode()).find('radioGroup[name="approvalStatus"]')).to.exist();
+        expect($(sidebar.getDOMNode()).find('radioGroup[name="approvalStatus"]')).to.exist();
     });
 
-    it('renders filters for each organization', function() {
-        var AllListingsSidebar = require('../AllListingsSidebar');
-        var allListingsSidebar = TestUtils.renderIntoDocument(
-            <AllListingsSidebar
+    it('does not render organization filters', function() {
+        var Sidebar = require('../shared/Sidebar');
+        var sidebar = TestUtils.renderIntoDocument(
+            <Sidebar
                 counts = { {
                     'APPROVLED': 1,
                     'organizations': {
@@ -35,23 +35,22 @@ describe('AllListingsSidebar', function() {
                 listings = { [] }
                 value = { {approvalStatus: null, org: null, enabled: null} }
                 organizations = { [
-                    {
+                {
                     'id' : 1,
                     'shortName' : 'TO1',
                     'title' : 'Test Organization'
-                    }
+                }
                 ] }
+                view = 'orgView'
             />
         );
-
-        var html = TestUtils.findRenderedDOMComponentWithTag(allListingsSidebar, 'form');
-        expect($(html.getDOMNode()).find('input[id="all-listings-filter-organization-to1"]')).to.exist();
+        expect($(sidebar.getDOMNode()).find('div[name="organization"]')[0]).to.be.empty;
     });
 
-    it('renders counts for each filter', function() {
-        var AllListingsSidebar = require('../AllListingsSidebar');
-        var allListingsSidebar = TestUtils.renderIntoDocument(
-            <AllListingsSidebar
+    it('renders enabled filter', function() {
+        var Sidebar = require('../shared/Sidebar');
+        var sidebar = TestUtils.renderIntoDocument(
+            <Sidebar
                 counts = { {
                     'APPROVLED': 1,
                     'organizations': {
@@ -63,16 +62,20 @@ describe('AllListingsSidebar', function() {
                 listings = { [] }
                 value = { {approvalStatus: null, org: null, enabled: null} }
                 organizations = { [
-                    {
+                {
                     'id' : 1,
                     'shortName' : 'TO1',
                     'title' : 'Test Organization'
-                    }
+                }
                 ] }
+                view = 'orgView'
             />
         );
-        var html = $(allListingsSidebar.getDOMNode()).find('label[class="label-enabled"]')[0];
-        expect($(html).find('strong[class="badge"]').text()).to.equal('1');
+        expect(
+            $(sidebar.getDOMNode())
+                .find('label[class="label-enabled"]')
+                .find('strong[class="badge"]').text()
+        ).to.equal('1');
     });
-    
+
 });

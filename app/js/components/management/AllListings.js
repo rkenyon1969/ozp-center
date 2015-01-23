@@ -2,18 +2,18 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var _ = require('../../../utils/_');
+var _ = require('../../utils/_');
 
-var AdminRoute = require('../../../mixins/AdminRouteMixin');
-var SystemStateMixin = require('../../../mixins/SystemStateMixin');
+var AdminRoute = require('../../mixins/AdminRouteMixin');
+var SystemStateMixin = require('../../mixins/SystemStateMixin');
 
-var AllListingsSidebar = require('./AllListingsSidebar');
-var ListingTile = require('../../listing/ListingTile');
-var LoadMore = require('../../shared/LoadMore');
+var Sidebar = require('./shared/Sidebar');
+var ListingTile = require('../listing/ListingTile');
+var LoadMore = require('../shared/LoadMore');
 
-var PaginatedListingsStore = require('../../../stores/PaginatedListingsStore');
+var PaginatedListingsStore = require('../../stores/PaginatedListingsStore');
 
-var ListingActions = require('../../../actions/ListingActions');
+var ListingActions = require('../../actions/ListingActions');
 
 
 var AllListings = React.createClass({
@@ -82,7 +82,7 @@ var AllListings = React.createClass({
     },
 
     render: function () {
-        this.state.listings.forEach(function(listing){
+        this.state.listings.forEach(function(listing) {
             listing.view = 'adminView';
         });
 
@@ -90,12 +90,13 @@ var AllListings = React.createClass({
         return this.transferPropsTo(
             <div className="AllListings row">
                 <aside className="AllListings__sidebar col-md-2">
-                    <AllListingsSidebar
+                    <Sidebar
                         value={ this.state.filter }
                         listings={ this.state.listings }
                         counts={ this.state.counts }
                         onFilterChanged={ this.onFilterChanged }
-                        organizations={ this.state.system.organizations || [] } />
+                        organizations={ this.state.system.organizations || [] }
+                        view='adminView' />
                 </aside>
                 <LoadMore className="AllListings__listings col-md-10 all" hasMore={this.state.hasMore} onLoadMore={this.onLoadMore}>
                     { ListingTile.fromArray(this.state.listings) }

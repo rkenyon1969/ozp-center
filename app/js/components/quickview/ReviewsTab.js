@@ -126,9 +126,9 @@ var ReviewsTab = React.createClass({
                     { this.renderUserReviews() }
                 </section>
                 <section className="col-md-3 col-right">
-                    <p>Review this listing:</p>
-                    <p className="text-danger">Warning: Data entered must NOT be above System High!</p>
+                    <p>Review this Listing</p>
                     <IconRating currentRating = { currentUserRating } onChange={ this.onRatingChange } />
+                    <p className="text-danger">Warning: Data entered must NOT be above System High!</p>
                     <textarea placeholder="Warning: Data entered must NOT be above System High!"></textarea>
                     <button className="btn btn-block btn-primary" onClick={ this.onSubmit }>Submit Review</button>
                 </section>

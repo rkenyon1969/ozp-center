@@ -13,8 +13,8 @@ var _library = [];
 var _self = null;
 
 var selfIsAdmin = () => UserRole[_self.highestRole] >= ADMIN;
-var selfIsOwner = listing => listing.owners.some(u => u.username === _self.username);
-var selfIsOrgSteward = org => _self.stewardedOrganizations.some(o => o === org);
+var selfIsOwner = (listing) => listing.owners.some(u => u.username === _self.username);
+var selfIsOrgSteward = (org) => _self.stewardedOrganizations.some(o => o === org);
 
 var ProfileStore = Reflux.createStore({
 
