@@ -9,7 +9,7 @@ describe('AllListings', function() {
 
         var allListings = TestUtils.renderIntoDocument(React.createElement(AllListings));
 
-        expect($(allListings.getDOMNode()).find('.AllListings__sidebar')[0]).to.exist();
+        expect($(allListings.getDOMNode()).find('.Listings__Sidebar')[0]).to.exist();
 
     });
 

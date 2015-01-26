@@ -25,7 +25,7 @@ describe('MyListings', function () {
         var router = Router.run(routes, TestLocation, function (Handler) {
             listingManagement = TestUtils.renderIntoDocument(<Handler />);
         });
-        expect($(listingManagement.getDOMNode()).find('.MyListings__sidebar')[0]).to.exist;
+        expect($(listingManagement.getDOMNode()).find('.Listings__Sidebar')[0]).to.exist;
         router.teardown();
     });
 

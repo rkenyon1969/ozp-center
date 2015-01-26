@@ -95,7 +95,7 @@ var OrgListings = React.createClass({
         /* jshint ignore:start */
         return this.transferPropsTo(
             <div className="AllListings row">
-                <aside className="AllListings__sidebar col-md-2">
+                <aside className="Listings__Sidebar col-md-2">
                 <Sidebar
                     value={ this.state.filter }
                     listings={ this.state.listings }
