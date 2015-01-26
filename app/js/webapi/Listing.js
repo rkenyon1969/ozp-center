@@ -10,9 +10,10 @@ var FIELDS = [
     'avgRate', 'totalRate1', 'totalRate2', 'totalRate3','totalRate4', 'height', 'width',
     'totalRate5','totalVotes', 'state', 'tags', 'type','uuid', 'requirements', 'singleton',
     'versionName', 'imageLargeUrl', 'imageSmallUrl', 'imageMediumUrl', 'imageXlargeUrl',
-    'launchUrl', 'company', 'whatIsNew', 'owners', 'agency', 'currentRejection', 'isEnabled',
-    'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls', 'approvalStatus',
-    'isFeatured', 'smallIconId', 'largeIconId', 'bannerIconId', 'featuredBannerIconId'
+    'launchUrl', 'company', 'whatIsNew', 'owners', 'agency', 'agencyShort', 'currentRejection',
+     'isEnabled', 'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls',
+     'approvalStatus', 'isFeatured', 'smallIconId', 'largeIconId', 'bannerIconId',
+     'featuredBannerIconId'
 ];
 
 function Listing (json) {

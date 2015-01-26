@@ -65,7 +65,7 @@ var Discovery = React.createClass({
                         system={ this.props.system }
                         onGoHome= { this.reset }
                         onFilterChange= { this.search } />
-                    <section>
+                    <section className="content">
                         {
                             isBrowsing ?
                                 this.renderSearchResults() :

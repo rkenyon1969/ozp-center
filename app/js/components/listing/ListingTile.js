@@ -77,14 +77,14 @@ var ListingStatus = React.createClass({
     }
 });
 
-var ApprovalDate = React.createClass({
+var EditedDate = React.createClass({
     render: function () {
-        var approvalDate = this.props.listing.approvalDate,
-            approvalDateString = moment(approvalDate).format('MM/DD/YY');
+        var editedDate = this.props.listing.editedDate,
+            editedDateString = moment(editedDate).format('MM/DD/YY');
 
         /* jshint ignore:start */
         return (
-            <span className="AdminOwnerListingTile__approvalDate">{approvalDateString}</span>
+            <span className="AdminOwnerListingTile__editedDate">{editedDateString}</span>
         );
         /* jshint ignore:end */
     }
@@ -99,7 +99,7 @@ var InfoBar = React.createClass({
             <h5 className="AdminOwnerListingTile__infoBar">
                 <span className="title">{listing.title}</span>
                 <ListingStatus listing={listing} />
-                <ApprovalDate listing={listing} />
+                <EditedDate listing={listing} />
             </h5>
         );
         /* jshint ignore:end */

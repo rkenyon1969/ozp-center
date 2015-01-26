@@ -3,6 +3,9 @@
 }
 
 .Listings__SidebarFilter {
+  padding: $padding-small-vertical $padding-small-horizontal;
+  background: $gray-lightest;
+  
     input[type="radio"] {
         display: none;
     }
@@ -21,7 +24,7 @@
 
         vertical-align: middle;
 
-        width: 80%;
+        width: 85%;
         height: 20px;
 
         span {

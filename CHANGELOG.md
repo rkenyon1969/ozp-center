@@ -1,3 +1,45 @@
+## 0.5.0 (2015-01-22)
+
+
+#### Bug Fixes
+
+* **Bookmarks:** OZF-747 Fix bookmark implementation ([b41f8ab3](https://github.com/ozone-development/center-ui.git/commit/b41f8ab311f031dfc020bfa7377e52fa3fa75f29))
+* **CSS:** lazy require css for IE9's 4096 selector limit bug ([d9fabf1c](https://github.com/ozone-development/center-ui.git/commit/d9fabf1cdc9a7b5311fdf131790132a53821bc45))
+* **Org Listings:**
+  * OZF-333: fixed the org steward tabs ([d918376a](https://github.com/ozone-development/center-ui.git/commit/d918376ad0dd9f8c2dc0cf6ca69ad6fd311332ce))
+  * OZF-333: fixed the count for org steward status filter ([2de23a16](https://github.com/ozone-development/center-ui.git/commit/2de23a16050d5a7a6106fcafe5004616079c7df0))
+  * OZF-333:Fixing the router to work for org stewards that aren't admins ([18264366](https://github.com/ozone-development/center-ui.git/commit/18264366f253f2c22d1b75a0c79ee682e5aff8a9))
+
+
+#### Features
+
+* **Classification:** OZF-805 Banners Added ([1a8a5519](https://github.com/ozone-development/center-ui.git/commit/1a8a5519d790e3986ccb28682dd5789dbeaca859))
+* **Create Edit Page:** Move warning text above inputs per UX request ([754e4a2e](https://github.com/ozone-development/center-ui.git/commit/754e4a2e9282989a79f2391a6cec3adde33f6537))
+* **Image Server:**
+  * OZF-837 IE9 error response handling ([518bf2c1](https://github.com/ozone-development/center-ui.git/commit/518bf2c155082754c6e1520005524ca15255eef7))
+  * OZF-836 Validation Errors for screenshots ([4445c766](https://github.com/ozone-development/center-ui.git/commit/4445c766ac2f0267015bb687a307c5ed799b557a))
+  * Change Create/Edit form to upload images ([f0195520](https://github.com/ozone-development/center-ui.git/commit/f01955205af75d6eafb52f0c356c6a52f22c2149))
+  * Fix IE10 and 11 issues ([6bf8c408](https://github.com/ozone-development/center-ui.git/commit/6bf8c408b3102573d0739c576ac4201ec6b2c74f))
+  * Fixing removal of screenshot images ([05e09ee8](https://github.com/ozone-development/center-ui.git/commit/05e09ee8406a9c871046d4a7755587dc68b15303))
+  * OZF-815 Image removal button ([e01670eb](https://github.com/ozone-development/center-ui.git/commit/e01670ebabded892f5acf23abfa563c419472586))
+  * Handle unknown errors during image save ([09e7f095](https://github.com/ozone-development/center-ui.git/commit/09e7f09571c541b1aef9d66d380019725c052bf5))
+  * OZF-817 Handle server-side image errors ([8472c092](https://github.com/ozone-development/center-ui.git/commit/8472c092bab388414686372f7ec199687579f8ef))
+  * OZF-814 Tweaking focus behavior ([dcc7b79b](https://github.com/ozone-development/center-ui.git/commit/dcc7b79b5818840e8a8014c8fa0130c4ff05602e))
+  * OZF-814 Loading spinner ([d3e5ba7b](https://github.com/ozone-development/center-ui.git/commit/d3e5ba7b2bb1986671993a84197ec01b45da9bb3))
+  * OZF-447 Clean up Listing json for save ([45cfb844](https://github.com/ozone-development/center-ui.git/commit/45cfb84466616cd195ac050342364bf991a89077))
+  * OZF-447 IE9 fixes ([57d21022](https://github.com/ozone-development/center-ui.git/commit/57d2102297cfddcef7eec4ecfff59c5b72fae4fb))
+  * OZF-447 Image Validation fix ([67965e83](https://github.com/ozone-development/center-ui.git/commit/67965e838d558da9767a3534c8bfb691e48f6a86))
+  * OZF-782 Previews, validation, and screenshot handling fixes ([012a0053](https://github.com/ozone-development/center-ui.git/commit/012a00533a8d7974ac49e577ed988af7a790e692))
+  * OZF-782 Legacy hidden-iframe file upload ([7dbfd8c4](https://github.com/ozone-development/center-ui.git/commit/7dbfd8c4e0cf3ed663e56ce42d6f8f05a39434d1))
+  * HTML 5 file upload ([88a950cf](https://github.com/ozone-development/center-ui.git/commit/88a950cff47a73ee8fbcd2865e747ad9279dd9c6))
+  * Disabling file upload validation for now ([2ae068d1](https://github.com/ozone-development/center-ui.git/commit/2ae068d1727db58227e17d7b592980ea52255641))
+  * Updating UI messages ([f3a6c496](https://github.com/ozone-development/center-ui.git/commit/f3a6c4961b7403657e72601d7a81d69f9c7c4034))
+  * OZF-780 Covert URL inputs to File inputs ([16eccfcd](https://github.com/ozone-development/center-ui.git/commit/16eccfcd2d7d77e21ded7dee28ab46535f386eef))
+* **Org Stewards:**
+  * OZF-333: refresh data on tab change ([4d53fd6f](https://github.com/ozone-development/center-ui.git/commit/4d53fd6ffe1f084a06c56c72cd8c462ad33c53eb))
+  * OZF-333: initial work for org steward listings ([5eddb674](https://github.com/ozone-development/center-ui.git/commit/5eddb6746d1a67499c8dce666e6660d845f1b784))
+
+
 ### 0.4.2 (2015-01-07)
 
 

@@ -1,13 +1,14 @@
 #discovery {
     position: relative;
-    padding-top: $header-height + 20px;
+    padding-top: $header-height + 10px;
 
     > aside {
         float: left;
         margin-left: -15px;
         width: 265px;
         height: 55px;
-        padding: 10px 30px;
+        padding: 20px 30px;
+        margin-top:-10px;
         height: auto;
     }
 
