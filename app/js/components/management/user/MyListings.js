@@ -66,7 +66,7 @@ var MyListings = React.createClass({
         /* jshint ignore:start */
         return this.transferPropsTo(
             <div className="MyListings row">
-                <aside className="MyListings__sidebar col-md-2" >
+                <aside className="Listings__Sidebar col-md-2" >
                     <MyListingsSidebar value={this.state.filter}
                         listings={this.state.listings}
                         onFilterChanged={this.onFilterChanged} />
