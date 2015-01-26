@@ -42,7 +42,7 @@ describe('ListingManagement', function () {
     });
 
     // it('renders a tabs for org stewards', function () {
-    //     ProfileMock.mockOrgSteward();
+    //     ProfileMock.mockOrgSteward(['Test Org 1']);
     //     var listingManagement;
     //     var router = Router.run(routes, TestLocation, function (Handler) {
     //         listingManagement = TestUtils.renderIntoDocument(<Handler />);

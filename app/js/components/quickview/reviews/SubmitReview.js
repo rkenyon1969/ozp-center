@@ -12,7 +12,7 @@ var ReviewListing = React.createClass({
     propTypes: {
         listing: React.PropTypes.object.isRequired,
         text: React.PropTypes.string.isRequired,
-        rate: React.PropTypes.number.isRequired,
+        rate: React.PropTypes.number.isRequired
     },
 
     getDefaultProps: function () {
@@ -32,7 +32,7 @@ var ReviewListing = React.createClass({
     },
 
     onTextChange: function (val) {
-        this.state.text = this.refs.text.getDOMNode().value.substring(0, 4000);
+        this.state.text = val.target.value.substring(0, 4000);
         this.forceUpdate();
     },
 

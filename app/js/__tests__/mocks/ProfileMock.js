@@ -27,18 +27,26 @@ var profile = {
             'href': 'https://www.owfgoss.org/ng/dev/mp/api/profile/2'
         }
     },
-    mockAdmin: function () {
+    mockAdmin: function (stewardedOrganizations) {
+        profile.username = 'testAdmin1';
         profile.highestRole = 'ADMIN';
         profile.isAdmin = true;
+        profile.stewardedOrganizations = stewardedOrganizations || [];
+        return profile;
     },
-    mockOrgSteward: function () {
+    mockOrgSteward: function (stewardedOrganizations) {
+        profile.username = 'testOrgSteward1';
         profile.highestRole = 'ORG_STEWARD';
         profile.isAdmin = false;
-        profile.stewardedOrganizations = ['Test Org'];
+        profile.stewardedOrganizations = stewardedOrganizations || [];
+        return profile;
     },
-    mockUser: function () {
+    mockUser: function (stewardedOrganizations) {
+        profile.username = 'testUser1';
         profile.highestRole = 'USER';
         profile.isAdmin = false;
+        profile.stewardedOrganizations = stewardedOrganizations || [];
+        return profile;
     }
 
 };

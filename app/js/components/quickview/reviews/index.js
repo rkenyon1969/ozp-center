@@ -14,6 +14,33 @@ var SystemStateMixin = require('../../../mixins/SystemStateMixin');
 var ListingActions = require('../../../actions/ListingActions');
 var ProfileStore = require('../../../stores/ProfileStore');
 
+var RatingProgressBar = React.createClass({
+    mixins: [React.addons.PureRenderMixin],
+    getDefaultProps: function () {
+        return {
+            count: 0,
+            value: 0
+        };
+    },
+    render: function () {
+        var { count, value } = this.props;
+        var style = {
+            width: `${value}%`
+        };
+        /* jshint ignore:start */
+        return (
+            <div className="star-rating">
+                <span>{ count } stars</span>
+                <div className="progress">
+                    <div className="progress-bar" role="progressbar" aria-valuenow={value} aria-valuemin="0" aria-valuemax="100" style={style} ></div>
+                </div>
+                <span className="count">({ count })</span>
+            </div>
+        );
+        /* jshint ignore:end */
+    }
+});
+
 var ReviewsTab = React.createClass({
 
     mixins: [
@@ -35,7 +62,7 @@ var ReviewsTab = React.createClass({
 
         if (!reviews) {
             return {
-                reviews: CurrentListingStore.getReviews(),
+                reviews: reviews,
                 reviewBeingEdited: null,
                 currentUserReview: null
             };
@@ -119,21 +146,10 @@ var ReviewsTab = React.createClass({
 
         /* jshint ignore:start */
         var starComponents = [5, 4, 3, 2, 1].map(function (star) {
-            var count = listing['totalRate' + star];
+            var count = listing[`totalRate${star}`];
             var width = total === 0 ? 0 : Math.round(count * 100 / total).toFixed(2);
-            var style = {
-                width: width + '%'
-            };
 
-            return (
-                <div className="star-rating">
-                    <span>{ star } stars</span>
-                    <div className="progress">
-                        <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={style} ></div>
-                    </div>
-                    <span className="count">({ count || 0 })</span>
-                </div>
-            );
+            return <RatingProgressBar count={count} value={width} key={star} />;
         });
 
         return (
