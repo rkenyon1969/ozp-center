@@ -31,6 +31,12 @@ window.OzoneConfig = {
     "HUD_URL": '/* @echo HUD_URL */',
     // @endif
     // @ifndef HUD_URL
-    "HUD_URL": "http://localhost:8088/dist"
+    "HUD_URL": "http://localhost:8088/dist",
+    // @endif
+    // @ifdef DEVELOPER_RESOURCES_URL
+    "DEVELOPER_RESOURCES_URL": '/* @echo DEVELOPER_RESOURCES_URL */',
+    // @endif
+    // @ifndef DEVELOPER_RESOURCES_URL
+    "DEVELOPER_RESOURCES_URL": "#",
     // @endif
 };
