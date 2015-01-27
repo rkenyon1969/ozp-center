@@ -291,6 +291,10 @@ var CurrentListingStore = createStore({
         return GlobalListingStore.getChangeLogsForListing(_listing.id);
     },
 
+    getReviews: function () {
+        return GlobalListingStore.getReviewsForListing(_listing.id);
+    },
+
     loadListing: function (id) {
         var deferred = $.Deferred(),
             promise = deferred.promise();

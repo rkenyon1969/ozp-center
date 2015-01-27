@@ -99,6 +99,28 @@ ListingActions = createActions({
         ListingApi.getOwnedListings(profile).then(ListingActions.fetchOwnedListingsCompleted);
     },
 
+    fetchReviews: function (listingId) {
+        ListingApi.getItemComments(listingId).then(ListingActions.fetchReviewsCompleted.bind(null, listingId));
+    },
+    saveReview: function (listingId, review) {
+        ListingApi.saveReview(listingId, review)
+            .then(function (response) {
+                ListingActions.fetchById(listingId);
+                ListingActions.fetchReviews(listingId);
+                ListingActions.saveReviewCompleted(listingId, response);
+            })
+            .fail(ListingActions.saveReviewFailed);
+    },
+    deleteReview: function (listingId, reviewId) {
+        ListingApi.deleteReview(listingId, reviewId)
+            .then(function () {
+                ListingActions.fetchById(listingId);
+                ListingActions.fetchReviews(listingId);
+                ListingActions.deleteReviewCompleted(listingId, reviewId);
+            })
+            .fail(ListingActions.deleteReviewFailed);
+    },
+
     launch: function (listing) {
         OzpAnalytics.trackEvent('Applications', listing.title);
         window.open(listing.launchUrl);

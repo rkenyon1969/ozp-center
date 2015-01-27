@@ -2,6 +2,8 @@
 
 var $ = require('jquery');
 
+var { API_URL } = require('../OzoneConfig');
+
 var ProfileApi = {
 
     addToLibrary: function (json) {

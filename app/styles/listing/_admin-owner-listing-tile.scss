@@ -77,7 +77,7 @@
     padding-right: 0;
     padding-bottom: 0;
     padding-top: 3px;
-    
+
     &:hover{
       border-top: 3px solid $blue-dark;
       padding-top: 1px;
@@ -87,10 +87,10 @@
 .AdminOwnerListingTile__actionMenu {
     position: absolute;
 
-    top: 1px;
-    right: 1px;
+    top: 0px;
+    right: 0px;
     z-index: 1;
-    border: 1px solid $gray-lighter;
+    border: 0px solid $gray-lighter;
 
     > input {
         //the toggle checkbox is hidden
@@ -118,7 +118,7 @@
     left: 0;
 }
 
-.AdminOwnerListingTile__approvalDate {
+.AdminOwnerListingTile__editedDate {
     position: absolute;
     right: 0;
 
@@ -139,10 +139,12 @@
 
 .AdminOwnerListingTile.pending .AdminOwnerListingTile__approvalStatus {
     @extend .label-pending;
+    color: $blue-dark;
 }
 
 .AdminOwnerListingTile.published .AdminOwnerListingTile__approvalStatus {
     @extend .label-published;
+    color: $green-dark;
 }
 
 .AdminOwnerListingTile.needs-action .AdminOwnerListingTile__approvalStatus {
@@ -155,4 +157,5 @@
 
 .AdminOwnerListingTile.rejected .AdminOwnerListingTile__approvalStatus {
     @extend .label-rejected;
+    color: $blue-dark;
 }

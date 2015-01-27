@@ -116,7 +116,8 @@ var Crud = React.createClass({
             adding: false,
             editing: false,
             deleting: false,
-            records: []
+            records: [],
+            formState: null
         };
     },
 
@@ -133,9 +134,14 @@ var Crud = React.createClass({
         /* jshint ignore:end */
     },
 
+    onFormChange: function() {
+        this.state.formState = this.refs.form.getValue();
+    },
+
     _renderCreateEditForm: function (title, formOptions, onSave) {
-        var options = _.cloneDeep(formOptions);
-        var fields = options.fields || (options.fields = {});
+        var me = this,
+            options = _.cloneDeep(formOptions),
+            fields = options.fields || (options.fields = {});
 
         if(this.state.errors) {
             Object.keys(this.state.errors).forEach((key) => {
@@ -145,6 +151,12 @@ var Crud = React.createClass({
                 });
             });
         }
+
+        Object.keys(fields).forEach(function(key) {
+            var value = fields[key];
+            value.onChange = me.onFormChange;
+        });
+
         var Form = t.form.createForm(this.props.Schema, options);
 
         /* jshint ignore:start */
@@ -162,7 +174,7 @@ var Crud = React.createClass({
         var title = `Create ${this.props.title}`;
         var formOptions = _.assign({
                 auto: 'labels',
-                value: this.refs.form && this.refs.form.getValue()
+                value: this.state.formState
             },
             _.isFunction(this.props.form) ? this.props.form() : this.props.form
         );
@@ -172,7 +184,7 @@ var Crud = React.createClass({
 
     renderEditForm: function () {
         var title = `Edit ${this.props.title}`;
-        var value = (this.refs.form && this.refs.form.getValue()) || this.getSelectedRecord();
+        var value = this.state.formState || this.getSelectedRecord();
         var formOptions = _.assign({
                 auto: 'labels',
                 value: value
@@ -208,32 +220,51 @@ var Crud = React.createClass({
         return this.props.url.replace(/\?.*/, '');
     },
 
+    //Retrieve form data process a create, using a potentially custom function
     onCreate: function () {
-        var formData = this.refs.form.getValue();
-        if (!formData) { return; }
+        //use the form data that we already have in state, if available
+        var formData = this.state.formState || this.refs.form.getValue(),
+            createFn = this.props.onCreate || this._onCreate;
 
-        $.ajax({
+        if (formData) {
+            return createFn(formData);
+        }
+    },
+
+    //The default implementation of this.props.onCreate.  This function may also be called
+    //by custom onCreate implementations
+    _onCreate: function(data) {
+        return $.ajax({
             url: this.getUrlWithoutParams(),
             type: 'post',
             dataType: 'json',
             contentType: 'application/json',
-            data: JSON.stringify(formData)
+            data: JSON.stringify(data)
         })
         .done(this.reload)
         .fail(this.handleError);
     },
 
     onEdit: function () {
-        var id = this.getSelectedId();
-        var formData = this.refs.form.getValue();
-        if (!formData) { return; }
+        var formData = this.state.formState || this.refs.form.getValue(),
+            editFn = this.props.onEdit || this._onEdit;
 
-        $.ajax({
+        if (formData) {
+            return editFn(formData);
+        }
+    },
+
+    //The default implementation of this.props.onEdit.  This function may also be called
+    //by custom onEdit implementations
+    _onEdit: function(data) {
+        var id = this.getSelectedId();
+
+        return $.ajax({
             url: `${this.getUrlWithoutParams()}/${id}`,
             type: 'put',
             dataType: 'json',
             contentType: 'application/json',
-            data: JSON.stringify(formData)
+            data: JSON.stringify(data)
         })
         .done(this.reload)
         .fail(this.handleError);
@@ -258,6 +289,10 @@ var Crud = React.createClass({
 
     resetState: function () {
         this.setState(this.getInitialState());
+
+        if (this.props.onResetState) {
+            this.props.onResetState();
+        }
     },
 
     componentDidMount: function () {

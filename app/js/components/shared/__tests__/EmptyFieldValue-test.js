@@ -1,7 +1,7 @@
 'use strict';
 
 var expect = require('chai').expect;
-var React = require('react/addons');
+var React = require('react');
 var { TestUtils } = React.addons;
 
 describe('EmptyFieldValue', function () {
