@@ -19,8 +19,21 @@ var IconRating = React.createClass({
     },
 
     getInitialState: function () {
-        var { currentRating } = this.props,
-            floor = Math.floor(currentRating),
+        return {
+            rating: this.roundRating(this.props.currentRating)
+        };
+    },
+
+    componentWillReceiveProps: function (nextProps) {
+        if (this.props.currentRating !== nextProps.currentRating) {
+            this.setState({
+                rating: this.roundRating(nextProps.currentRating)
+            });
+        }
+    },
+
+    roundRating: function (currentRating) {
+        var floor = Math.floor(currentRating),
             difference = currentRating - floor,
             rating = floor;
 
@@ -31,9 +44,7 @@ var IconRating = React.createClass({
             rating += 1;
         }
 
-        return {
-            rating: rating
-        };
+        return rating;
     },
 
     render: function () {
