@@ -127,9 +127,13 @@ var ListingApi = {
         });
     },
 
-    getAllChangeLogs: function () {
-        return $.getJSON(API_URL + '/api/listing/activity')
-                .then((response) => new PaginatedResponse(response));
+    getAllChangeLogs: function (url, options) {
+        if(!_.isString(url)) {
+            url = API_URL + '/api/listing/activity?' + $.param(options);
+        }
+        return $.getJSON(url).then((response) => {
+            return new PaginatedResponse(response);
+        });
     }
 };
 
