@@ -2,13 +2,10 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-<<<<<<< HEAD
-=======
 var TimeAgo = require('../../components/shared/TimeAgo');
 var actions = require('../../constants/index').listingActions;
 var uuid = require('../../utils/uuid');
 var fieldName = require('../../constants/index').listingFieldName;
->>>>>>> master
 var CurrentListingStore = require('../../stores/CurrentListingStore');
 var ChangeLog = require('../shared/ChangeLog');
 
