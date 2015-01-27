@@ -8,10 +8,8 @@ var HelpModal = require('./helpmodal');
 
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
 
-var Role = require('../../constants').UserRole;
-
 var NavBar = React.createClass({
-  
+
     mixins: [ SystemStateMixin ],
 
     getInitialState: function() {
@@ -40,7 +38,7 @@ var NavBar = React.createClass({
                                 <Alerts />
                             </li>
                             <li>
-                                <a href="#" onClick={this.showHelpModal}><i className="icon-question"></i></a>
+                                <a href="javascript:;" onClick={this.showHelpModal}><i className="icon-question"></i></a>
                             </li>
                             <li className="dropdown">
                                 <a href="#" className="lrg" data-toggle="dropdown"><i className="icon-menu"></i></a>
@@ -51,14 +49,14 @@ var NavBar = React.createClass({
                                     <li><a href="#"><i className="icon-cog"></i>Settings</a></li>
                                     <li className="divider"></li>
                                     <li className="dropdown-header">Create</li>
-                                    <li><a href={CENTER_URL + '/edit'}><i className="icon-square-plus"></i>Submit a Listing</a></li>
+                                    <li><a href={'#/edit'}><i className="icon-square-plus"></i>Submit a Listing</a></li>
                                     <li><a href={DEVELOPER_RESOURCES_URL}><i className="icon-cloud"></i>Developer Resources</a></li>
                                     <li className="divider"></li>
                                     <li className="dropdown-header">Manage</li>
-                                    <li><a href={CENTER_URL + '/user-management/my-listings'}><i className="icon-layers"></i>Listing Management</a></li>
+                                    <li><a href={'#/user-management/my-listings'}><i className="icon-layers"></i>Listing Management</a></li>
                                     {
                                         this.isAdmin() &&
-                                        <li><a href={CENTER_URL + '/mall-management/categories'}><i className="icon-shopping-settings"></i>Marketplace Settings</a></li>
+                                        <li><a href={'#/mall-management/categories'}><i className="icon-shopping-settings"></i>Marketplace Settings</a></li>
                                     }
                                     <li><a href={METRICS_URL}><i className="icon-bar-graph-2"></i>Metrics</a></li>
                                 </ul>
