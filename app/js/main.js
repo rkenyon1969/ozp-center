@@ -10,6 +10,7 @@ require('bootstrap');
 require('classification');
 var _ = require('./utils/_');
 var ProfileActions = require('./actions/ProfileActions');
+var { METRICS_URL } = require('./OzoneConfig');
 
 window.jQuery = jQuery;
 window.$ = jQuery;

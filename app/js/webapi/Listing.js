@@ -5,6 +5,8 @@ var _ = require('../utils/_');
 var OzpAnalytics = require('../analytics/ozp-analytics');
 var PaginatedResponse  =require ('./responses/PaginatedResponse');
 
+var { API_URL } = require('../OzoneConfig');
+
 var FIELDS = [
     'id', 'title', 'description', 'descriptionShort', 'screenshots', 'contacts', 'totalComments',
     'avgRate', 'totalRate1', 'totalRate2', 'totalRate3','totalRate4', 'height', 'width',

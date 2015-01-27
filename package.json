@@ -14,7 +14,7 @@
     "start": "gulp dev",
     "test": "./node_modules/karma/bin/karma start",
     "build": "NODE_ENV=\"production\" gulp build",
-    "buildGhPages": "API_URL=\"https://www.owfgoss.org/ng/dev/mp\" LOGOUT_URL=\"../hud-ui/logout.html\" gulp build",
+    "buildGhPages": "API_URL=\"https://www.owfgoss.org/ng/dev/mp\" HUD_URL=\"http://ozone-development.github.io/hud-ui/\" gulp build",
     "deployGhPages": "npm run buildGhPages && gulp deploy",
     "changelog": "gulp changelog"
   },
@@ -62,6 +62,7 @@
   "dependencies": {
     "bootstrap-sass": "git://github.com/ozone-development/bootstrap-sass#beb870458db66e1e549bda9c61d39d6ba4b35d4f",
     "exports-loader": "0.6.2",
+    "gulp-preprocess": "1.2.0",
     "lodash-amd": "2.4.1",
     "moment": "2.9.0",
     "object-assign": "1.0.0",
