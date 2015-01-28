@@ -33,6 +33,12 @@ window.OzoneConfig = {
     // @ifndef HUD_URL
     "HUD_URL": "http://localhost:8088/dist",
     // @endif
+    // @ifdef WEBTOP_URL
+    "WEBTOP_URL": '/* @echo WEBTOP_URL */',
+    // @endif
+    // @ifndef WEBTOP_URL
+    "WEBTOP_URL": "http://localhost:9000/#/grid/sticky-0/0",
+    // @endif
     // @ifdef DEVELOPER_RESOURCES_URL
     "DEVELOPER_RESOURCES_URL": '/* @echo DEVELOPER_RESOURCES_URL */',
     // @endif
