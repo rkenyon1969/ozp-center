@@ -49,6 +49,30 @@ ListingActions = createActions({
             .getAllListings(nextLink, opts)
             .then(_.partial(ListingActions.fetchAllListingsCompleted, filter));
     },
+    fetchAllChangeLogs: function (filter) {
+
+        var PaginatedChangeLogStore = require('../stores/PaginatedChangeLogStore');
+
+        var paginatedList = PaginatedChangeLogStore.getChangeLogs(),
+            opts = {},
+            nextLink;
+
+        if (paginatedList) {
+            paginatedList.expectPage();
+            nextLink = paginatedList.nextLink;
+        } else {
+            _.assign(opts, {
+                offset: 0,
+                max: PAGINATION_MAX
+            });
+        }
+
+        ListingApi
+            .getAllChangeLogs(nextLink, opts)
+            .then(function (response) {
+                ListingActions.fetchAllChangeLogsCompleted(filter, response);
+            });
+    },
     fetchNewArrivals: function () {
         ListingApi.getNewArrivals().then(ListingActions.fetchNewArrivalsCompleted);
     },

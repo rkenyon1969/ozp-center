@@ -163,6 +163,15 @@ var ListingApi = {
         return $.getJSON(url).then((response) => {
             return new PaginatedResponse(response, Listing);
         });
+    },
+
+    getAllChangeLogs: function (url, options) {
+        if(!_.isString(url)) {
+            url = API_URL + '/api/listing/activity?' + $.param(options);
+        }
+        return $.getJSON(url).then((response) => {
+            return new PaginatedResponse(response);
+        });
     }
 };
 

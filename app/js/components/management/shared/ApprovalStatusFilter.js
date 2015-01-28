@@ -93,34 +93,43 @@ var ApprovalStatusFilter = React.createClass({
                 </RadioGroup >;
                 /*jshint ignore:end */
         } else {
+            counts = this.props.listings.reduce(function (acc, i) {
+                    (acc[i.approvalStatus])++;
+                    return acc;
+                }, {
+                    APPROVED: 0,
+                    APPROVED_ORG: 0,
+                    REJECTED: 0,
+                    PENDING: 0,
+                    IN_PROGRESS: 0
+                });
             /*jshint ignore:start */
             var view =
                 <RadioGroup name="approval-status"
-                value={this.props.value}
-                onChange={this.handleChange}>
+                value={this.props.value['approvalStatus'] || 'all' }
+                onChange={ _.partial(this.handleChange, "approvalStatus") }>
                     <input id="my-listings-filter-all" type="radio" value="all"/>
                     <label htmlFor="my-listings-filter-all" className="label-all">
                         All
                         <strong className="badge">{this.props.listings.length}</strong>
                     </label>
-                    <input id="my-listings-filter-published" type="radio" value="published"/>
+                    <input id="my-listings-filter-published" type="radio" value="APPROVED"/>
                     <label htmlFor="my-listings-filter-published" className="label-published">
                         Published
                         <strong className="badge">{counts.APPROVED}</strong>
                     </label>
-                    <input id="my-listings-filter-needs-action" type="radio"
-                    value="needs-action"/>
+                    <input id="my-listings-filter-needs-action" type="radio" value="REJECTED"/>
                     <label htmlFor="my-listings-filter-needs-action"
                     className="label-needs-action">
                         Needs action
                         <strong className="badge">{counts.REJECTED}</strong>
                     </label>
-                    <input id="my-listings-filter-pending" type="radio" value="pending"/>
+                    <input id="my-listings-filter-pending" type="radio" value="PENDING"/>
                     <label htmlFor="my-listings-filter-pending" className="label-pending">
                         Pending
                         <strong className="badge">{ counts.PENDING + counts.APPROVED_ORG }</strong>
                     </label>
-                    <input id="my-listings-filter-draft" type="radio" value="draft"/>
+                    <input id="my-listings-filter-draft" type="radio" value="IN_PROGRESS"/>
                     <label htmlFor="my-listings-filter-draft" className="label-draft">
                         Draft
                         <strong className="badge">{counts.IN_PROGRESS}</strong>

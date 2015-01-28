@@ -22,7 +22,7 @@ var EnabledFilter = React.createClass({
             <div>
             <h4 style={{marginTop: 30}}>Enabled</h4>
             <RadioGroup name="enabled"
-                value={ (this.props.value['enabled'] === null) ? 'null' : this.props.value['enabled'].toString() }
+                value={ (this.props.value.enabled === undefined) ? 'null' : this.props.value.enabled.toString() }
                 onChange={ this.handleEnabledChange }>
                 <input id="all-listings-filter-enabled-all" type="radio" value="null"/>
                 <label htmlFor="all-listings-filter-enabled-all" className="label-all">

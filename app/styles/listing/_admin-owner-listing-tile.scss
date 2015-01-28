@@ -11,10 +11,10 @@
 }
 
 .MyListings__listings.all .AdminOwnerListingTile,
-.MyListings__listings.draft .AdminOwnerListingTile.draft,
-.MyListings__listings.needs-action .AdminOwnerListingTile.needs-action,
-.MyListings__listings.pending .AdminOwnerListingTile.pending,
-.MyListings__listings.published .AdminOwnerListingTile.published {
+.MyListings__listings.IN_PROGRESS .AdminOwnerListingTile.draft,
+.MyListings__listings.REJECTED .AdminOwnerListingTile.needs-action,
+.MyListings__listings.PENDING .AdminOwnerListingTile.pending,
+.MyListings__listings.APPROVED .AdminOwnerListingTile.published {
     display: inline-block;
 }
 

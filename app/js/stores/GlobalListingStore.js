@@ -8,6 +8,7 @@ var Listing = require('../webapi/Listing').Listing;
 var _listingsCache = {};
 var _listingsByOwnerCache = {};
 var _allListings = [];
+// var _changelogs = [];
 var _changeLogsCache = {};
 var _reviewsCache = {};
 
@@ -49,6 +50,11 @@ var GlobalListingStore = Reflux.createStore({
             _allListings = (_allListings || []).concat(listings);
             this.trigger();
         });
+        // this.listenTo(ListingActions.fetchAllChangeLogsCompleted, function(filter, response) {
+        //     // var changelogs = response.getItemAsList();
+        //     // _changelogs = (_changelogs || []).concat(changelogs);
+        //     // this.trigger();
+        // });
         this.listenTo(ListingActions.fetchChangeLogsCompleted, function (id, changeLogs) {
             _changeLogsCache[id] = changeLogs;
             this.trigger();
@@ -115,6 +121,10 @@ var GlobalListingStore = Reflux.createStore({
         }
         return _reviewsCache[id];
     }
+    //
+    // getAllChangeLogs: function() {
+    //     return _changelogs;
+    // }
 
 });
 

@@ -1,10 +1,11 @@
 'use strict';
 
 var React = require('react');
+var Router = require('react-router');
 var { RouteHandler } = require('react-router');
 var Reflux = require('reflux');
 var ListingTile = require('../../listing/ListingTile');
-var MyListingsSidebar = require('./MyListingsSidebar');
+var Sidebar = require('../shared/Sidebar');
 var GlobalListingStore = require('../../../stores/GlobalListingStore');
 var ListingActions = require('../../../actions/ListingActions');
 var SelfActions = require('../../../actions/SelfActions');
@@ -16,9 +17,8 @@ var fetchSelfCompleted = SelfActions.fetchSelfCompleted;
 
 var MyListings = React.createClass({
 
-    defaultValue: 'all',
 
-    mixins: [ Reflux.ListenerMixin ],
+    mixins: [ Reflux.ListenerMixin, Router.State ],
 
     componentWillMount: function () {
         this.listenTo(fetchOwnedListingsCompleted, this.onStoreChanged);
@@ -35,9 +35,11 @@ var MyListings = React.createClass({
     },
 
     getInitialState: function () {
+        var filter = this.getQuery().approvalStatus || 'all';
+
         return {
             listings: this.getListings(),
-            filter: this.defaultValue,
+            filter: filter,
             profile: null
         };
     },
@@ -48,7 +50,10 @@ var MyListings = React.createClass({
         });
     },
 
-    onFilterChanged: function (filter) {
+    onFilterChanged: function (key, filter) {
+        if (filter === null) {
+            filter = 'all';
+        }
         this.setState({
             filter: filter
         });
@@ -67,9 +72,13 @@ var MyListings = React.createClass({
         return this.transferPropsTo(
             <div className="MyListings row">
                 <aside className="MyListings__sidebar col-md-2" >
-                    <MyListingsSidebar value={this.state.filter}
-                        listings={this.state.listings}
-                        onFilterChanged={this.onFilterChanged} />
+                <Sidebar
+                    value={ {approvalStatus: this.state.filter} }
+                    listings={ this.state.listings }
+                    counts={ {} }
+                    onFilterChanged={ this.onFilterChanged }
+                    organizations={ [] }
+                    view="userView" />
                 </aside>
                 <ul className={"MyListings__listings col-md-10 " + filter}>
                     { ListingTile.fromArray(this.state.listings) }

@@ -116,7 +116,7 @@ var AdministrationTab = React.createClass({
     render: function () {
         /* jshint ignore:start */
         return (
-            <div className="tab-pane active Quickview__Changelog row">
+            <div className="tab-pane active Quickview__ChangeLog row">
                 { this.renderStatus() }
                 <div className="col-md-8 col-right">
                     <section>
