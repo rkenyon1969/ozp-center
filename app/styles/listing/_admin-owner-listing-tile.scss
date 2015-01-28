@@ -77,7 +77,7 @@
     padding-right: 0;
     padding-bottom: 0;
     padding-top: 3px;
-    
+
     &:hover{
       border-top: 3px solid $blue-dark;
       padding-top: 1px;
@@ -113,49 +113,49 @@
     }
 }
 
-.AdminOwnerListingTile__approvalStatus {
-    position: absolute;
-    left: 0;
-}
-
-.AdminOwnerListingTile__approvalDate {
-    position: absolute;
-    right: 0;
-
-    font-size: .9em;
-}
-
 .AdminOwnerListingTile__infoBar {
+    position: relative;
+    overflow: hidden;
     text-align: center;
-    vertical-align: baseline;
+
+    > .approvalStatus {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    > .approvalDate {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
 
     > .title {
-        display: inline-block;
         width: 100px;
-
-        overflow-wrap: break-word;
+        display: inline-block;
+        text-align: center;
+        @include text-overflow();
     }
 }
 
-.AdminOwnerListingTile.pending .AdminOwnerListingTile__approvalStatus {
+.AdminOwnerListingTile.pending .approvalStatus {
     @extend .label-pending;
     color: $blue-dark;
 }
 
-.AdminOwnerListingTile.published .AdminOwnerListingTile__approvalStatus {
+.AdminOwnerListingTile.published .approvalStatus {
     @extend .label-published;
     color: $green-dark;
 }
 
-.AdminOwnerListingTile.needs-action .AdminOwnerListingTile__approvalStatus {
+.AdminOwnerListingTile.needs-action .approvalStatus {
     @extend .label-needs-action;
 }
 
-.AdminOwnerListingTile.draft .AdminOwnerListingTile__approvalStatus {
+.AdminOwnerListingTile.draft .approvalStatus {
     @extend .label-draft;
 }
 
-.AdminOwnerListingTile.rejected .AdminOwnerListingTile__approvalStatus {
+.AdminOwnerListingTile.rejected .approvalStatus {
     @extend .label-rejected;
     color: $blue-dark;
 }

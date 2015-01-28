@@ -44,6 +44,8 @@
 
     .title {
         margin: 6px 0 1px 0;
+        width: 150px;
+        @include text-overflow();
     }
 
     .description {
