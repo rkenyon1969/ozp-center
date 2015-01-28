@@ -7,78 +7,10 @@ var fieldName = require('../../constants/index').listingFieldName;
 var { Link, Navigation, CurrentPath } = require('react-router');
 var ActiveState = require('../../mixins/ActiveStateMixin');
 
-var SeeListingSubmission = React.createClass({
-    render: function() {
-        var href = this.makeHref(this.getActiveRoutePath(), this.getParams(), {
-            listing: this.props.changeLog.listing.id,
-            action: 'view',
-            tab: 'overview'
-        });
-        return (
-            /* jshint ignore:start */
-            <a href={href}>See {this.props.changeLog.listing.title} Submission <i className="fa fa-angle-right"></i></a>
-            /* jshint ignore:end */
-        );
-    }
-});
-
 var ActionChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
         var listingChange = changeLog.author.displayName + ' ' + changeLog.action.toLowerCase() + ' ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
-        return (
-            /* jshint ignore:start */
-            <div>{ listingChange }</div>
-            /* jshint ignore:end */
-        );
-    }
-});
-
-var RelatedToItemChangeLog = React.createClass({
-    getRelatedItemsAsString: function (changeLog) {
-        if(changeLog.relatedItems === undefined) {
-            return;
-        }
-
-        return changeLog.relatedItems.map(function (item, i) {
-            if (i === changeLog.relatedItems.length - 1 && i !== 0) {
-                return 'and ' + item.title;
-            }
-            return item.title;
-        }).join(', ');
-    },
-
-    render: function() {
-        var changeLog = this.props.changeLog;
-        var action = (changeLog.action === 'REMOVE_RELATED_ITEMS')? ' removed ' : ' added ';
-        var listingChange = changeLog.author.displayName + ' ' + action + (this.props.showListingName ? changeLog.listing.title : 'the listing') + ' as a requirement to ' + this.getRelatedItemsAsString(changeLog);
-        return (
-            /* jshint ignore:start */
-            <div>{ listingChange }</div>
-            /* jshint ignore:end */
-        );
-    }
-});
-
-var RelatedItemChangeLog = React.createClass({
-
-    getRelatedItemsAsString: function (changeLog) {
-        if(changeLog.relatedItems === undefined) {
-            return;
-        }
-
-        return changeLog.relatedItems.map(function (item, i) {
-            if (i === changeLog.relatedItems.length - 1 && i !== 0) {
-                return 'and ' + item.title;
-            }
-            return item.title;
-        }).join(', ');
-    },
-
-    render: function() {
-        var changeLog = this.props.changeLog;
-        var action = (changeLog.action === 'REMOVE_RELATED_TO_ITEM')? ' removed ' : ' added ';
-        var listingChange = changeLog.author.displayName + ' ' + action + this.getRelatedItemsAsString(changeLog) + ' as a requirement to ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
         return (
             /* jshint ignore:start */
             <div>{ listingChange }</div>
@@ -109,15 +41,17 @@ var RejectedChangeLog = React.createClass({
         var id = uuid();
 
         /* jshint ignore:start */
-        return [
-            <div>{ changeLog.author.displayName } rejected { (this.props.showListingName ? changeLog.listing.title : 'the listing') }</div>,
-            <a href="javascript:;" data-toggle="collapse" data-target={ '#' + id } onClick={ this.toggleIcon }>
-                <i className="fa fa-plus"></i> Feedback
-            </a>,
-            <ul id={ id } className="collapse list-unstyled ListingActivity__Changes">
-                <li>{ details }</li>
-            </ul>
-        ];
+        return (
+            <div>
+                <div>{ changeLog.author.displayName } rejected { (this.props.showListingName ? changeLog.listing.title : 'the listing') }</div>
+                <a href="javascript:;" data-toggle="collapse" data-target={ '#' + id } onClick={ this.toggleIcon }>
+                    <i className="fa fa-plus"></i> Feedback
+                </a>
+                <ul id={ id } className="collapse list-unstyled ListingActivity__Changes">
+                    <li>{ details }</li>
+                </ul>
+            </div>
+        );
         /* jshint ignore:end */
     }
 });
@@ -190,24 +124,10 @@ var ModifiedChangeLog = React.createClass({
     }
 });
 
-var TagChangeLog = React.createClass({
-    render: function() {
-        var changeLog = this.props.changeLog;
-        var action = (changeLog.action === 'TAG_DELETED')? 'removed' : ' added ';
-        var location = (changeLog.action === 'TAG_DELETED')? 'from' : ' to ';
-        var listingChange = changeLog.author.displayName + ' ' + action + 'tag ' + (changeLog.changeDetails[0] === undefined) ? ' ' : changeLog.changeDetails[0].newValue + location + (this.props.showListingName ? changeLog.listing.title : 'the listing');
-        return (
-            /* jshint ignore:start */
-            <div>{ listingChange }</div>
-            /* jshint ignore:end */
-        );
-    }
-});
-
 var ReviewEditedChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
-        var listingChange = changeLog.author.displayName + ' edited ' + (changeLog.changeDetails[0] === undefined) ? ' ' : changeLog.changeDetails[0].fieldName + ' in ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
+        var listingChange = changeLog.author.displayName + ' edited ' + ((changeLog.changeDetails[0] === undefined) ? ' ' : changeLog.changeDetails[0].fieldName) + ' in ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
         return (
             /* jshint ignore:start */
             <div>{ listingChange }</div>
@@ -240,31 +160,6 @@ var ScorecardUpdateChangeLog = React.createClass({
     }
 });
 
-var NotIncludedScorecardChangeLog = React.createClass({
-    render: function() {
-        var changeLog = this.props.changeLog;
-        var listingChange = changeLog.author.displayName + ' did not include ' + changeLog.action.description.split(' Not Included')[0] + ' in ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
-        return (
-            /* jshint ignore:start */
-            <div>{ listingChange }</div>
-            /* jshint ignore:end */
-        );
-    }
-});
-
-var IncludedScorecardChangeLog = React.createClass({
-    render: function() {
-        var changeLog = this.props.changeLog;
-        var listingChange = changeLog.author.displayName + ' included ' + changeLog.action.description.split(' Included')[0] + ' in ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
-        return (
-            /* jshint ignore:start */
-            <div>{ listingChange }</div>
-            /* jshint ignore:end */
-        );
-    }
-});
-
-
 
 var ChangeLog = React.createClass({
 
@@ -275,36 +170,13 @@ var ChangeLog = React.createClass({
         'ENABLED' : ActionChangeLog,
         'DISABLED' : ActionChangeLog,
         'CREATED' : ActionChangeLog,
-        'ADD_RELATED_TO_ITEM' : RelatedToItemChangeLog,
-        'REMOVE_RELATED_TO_ITEM' : RelatedToItemChangeLog,
-        'ADD_RELATED_ITEMS' : RelatedItemChangeLog,
-        'REMOVE_RELATED_ITEMS' : RelatedItemChangeLog,
         'OUTSIDE' : SetToChangeLog,
         'INSIDE' : SetToChangeLog,
         'REJECTED' : RejectedChangeLog,
         'APPROVED_ORG' : OrgApprovalChangeLog,
-        'TAG_CREATED' : TagChangeLog,
-        'TAG_DELETED' : TagChangeLog,
         'REVIEW_EDITED' : ReviewEditedChangeLog,
         'REVIEW_DELETED' : ReviewDeletedChangeLog,
-        'LOCAL_SCORECARD_QUESTION_UPDATED' : ScorecardUpdateChangeLog,
-        'EMS_INCLUDED' : IncludedScorecardChangeLog,
-        'CLOUD_HOST_INCLUDED' : IncludedScorecardChangeLog,
-        'SECURITY_SERVICES_INCLUDED' : IncludedScorecardChangeLog,
-        'SCALE_INCLUDED' : IncludedScorecardChangeLog,
-        'LICENSE_FREE_INCLUDED' : IncludedScorecardChangeLog,
-        'CLOUD_STORAGE_INCLUDED' : IncludedScorecardChangeLog,
-        'BROWSER_INCLUDED' : IncludedScorecardChangeLog,
-        'EMS_NOT_INCLUDED' : NotIncludedScorecardChangeLog,
-        'CLOUD_HOST_NOT_INCLUDED' : NotIncludedScorecardChangeLog,
-        'SECURITY_SERVICES_NOT_INCLUDED' : NotIncludedScorecardChangeLog,
-        'SCALE_NOT_INCLUDED' : NotIncludedScorecardChangeLog,
-        'LICENSE_FREE_NOT_INCLUDED' : NotIncludedScorecardChangeLog,
-        'CLOUD_STORAGE_NOT_INCLUDED' : NotIncludedScorecardChangeLog,
-        'BROWSER_NOT_INCLUDED' : NotIncludedScorecardChangeLog
     },
-
-    mixins: [ Navigation, ActiveState ],
 
     render: function() {
 
@@ -322,6 +194,7 @@ var ChangeLog = React.createClass({
                     </div>
                     <div className="col-md-9">
                         < Handler changeLog={ this.props.changeLog } showListingName={ this.props.showListingName } />
+                        { this.props.children }
                     </div>
                 </div>
             </li>
