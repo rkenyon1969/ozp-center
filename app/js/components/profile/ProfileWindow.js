@@ -27,7 +27,7 @@ var ListingRow = React.createClass({
 
         /* jshint ignore:start */
         return (
-            <li key={listing.id}>
+            <li key={listing.id} className="listing">
                 <Link to={this.getActiveRoute().name} params={this.getParams()}
                         query={queryParams}>
                     <img src={listing.imageMediumUrl} />
@@ -90,9 +90,9 @@ var ProfileWindow = React.createClass({
     render: function() {
         /* jshint ignore:start */
         return (
-            <Modal ref="modal" className="profile-window">
+            <Modal ref="modal" className="profile-window" size="small">
                 <header>
-                    Profile
+                    <h3>Profile</h3>
                     <button className="close" onClick={this.close}>×</button>
                 </header>
                 <ProfileInfo profileId={this.props.profileId} />

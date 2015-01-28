@@ -1,0 +1,84 @@
+$profile-window-height: 400px;
+$profile-header-height: 42px;
+
+.profile-window {
+    .modal-body {
+        background-color: $modal-body-bg;
+        color: $gray-darkest;
+
+        box-sizing: content-box;
+
+        padding: 4px;
+        height: $profile-window-height;
+
+        position: relative;
+
+        > header {
+            padding: 0 15px;
+
+            > h3 {
+                display: inline-block;
+                margin: 0;
+            }
+
+            > .close {
+                color: $gray-darkest;
+            }
+
+            > * {
+                line-height: $profile-header-height;
+            }
+        }
+    }
+
+    .modal-content {
+        border: 0;
+    }
+}
+
+.profile-info {
+    background-color: $modal-content-bg;
+    color: $gray-dark;
+
+    height: $profile-window-height - $profile-header-height;
+    padding: 10px;
+
+    overflow-y: auto;
+
+    a {
+        color: $blue-dark;
+    }
+
+    dd, dt {
+        display: inline;
+    }
+
+    dt::after {
+        content: ": ";
+    }
+
+    dd::after {
+        //\A is an escape sequence for newline
+        content: "\A";
+        white-space: pre-line;
+    }
+
+    > dl {
+        margin-bottom: 40px;
+    }
+}
+
+.owned-listings {
+    > ul {
+        @extend .list-unstyled;
+        margin-top: 20px;
+    }
+
+    .listing {
+        margin: 10px 0;
+
+        img {
+            margin-right: 10px;
+        }
+    }
+}

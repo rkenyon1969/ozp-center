@@ -46,7 +46,7 @@ var App = React.createClass({
             }
         }
         else if (profile) {
-            return <ProfileWindow profileId={profile} />
+            return <ProfileWindow profileId={parseInt(profile, 10)} />
         }
         /*jshint ignore:end */
     },
