@@ -65,7 +65,7 @@ var listingMessages = {
     'description.docUrls.name': 'Type of information available (e.g. Troubleshooting Tips) or the common name of the resource (e.g. User Manual, FAQs, or Wikipedia).',
     'description.docUrls.url': ' URL where the resource can be accessed by listing users.',
 
-    'help.title': 'May contain letters, numbers or symbols and must be 255 characters long or less.',
+    'help.title': 'May contain letters, numbers or symbols and must be 60 characters long or less.',
     'help.description': 'May contain letters, numbers or symbols and must be 4000 characters long or less.',
     'help.descriptionShort': 'May contain letters, numbers or symbols and must be 150 characters long or less.',
     'help.smallIcon': 'Image is required.',

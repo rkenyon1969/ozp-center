@@ -41,7 +41,7 @@ var Agency = struct({
     title: NonBlankString(255)
 });
 
-var title = NonBlankString(255),
+var title = NonBlankString(60),
     type = NonBlankString(50),
     whatIsNew = maybe(StringMax(250)),
     categories = list(NonBlankString(50)),

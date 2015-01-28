@@ -27,7 +27,6 @@ var Header = React.createClass({
                 <div className="row">
                     <Logo />
                     { this.props.children }
-                    <UserMenu />
                 </div>
                 <div className="row">
                     <div className="spacer"></div>

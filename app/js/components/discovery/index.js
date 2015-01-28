@@ -9,6 +9,7 @@ var _ = require('../../utils/_');
 var ListingActions = require('../../actions/ListingActions');
 
 // component dependencies
+var NavBar = require('../NavBar');
 var Header = require('../header');
 var Sidebar = require('./Sidebar');
 var ListingTile = require('./ListingTile');
@@ -48,12 +49,13 @@ var Discovery = React.createClass({
         /*jshint ignore:start */
         return (
             <div>
+                <NavBar />
                 <Header>
                     <form className="navbar-form navbar-left" role="search">
                         <div className="form-group">
                             <i className="fa fa-search"></i>
                             <input
-                                ref="search" type="text" className="form-control" placeholder="Search..." value={ this.state.query }
+                                ref="search" type="text" className="form-control" placeholder="Enter search term" value={ this.state.query }
                                 onChange={ this.onSearchInputChange } />
                         </div>
                     </form>

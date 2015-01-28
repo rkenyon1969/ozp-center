@@ -17,6 +17,7 @@ html, body {
     font-family: 'Ubuntu';
     font-weight: 300;
     height: 100%;
+    background: $gray-dark;
 }
 
 .navbar-right {
@@ -58,6 +59,11 @@ html, body {
     }
 }
 
+.alert-small {
+    width: 33%;
+    padding: 5px 10px 5px 10px;
+}
+
 @media (max-width: 1023px) and (min-width: 800px) {
     #main {
         width: 800px !important;
@@ -77,6 +83,7 @@ html, body {
 @import 'quickview';
 @import 'create-edit';
 @import 'switches';
+@import 'toolbar';
 @import 'management/user/listing-management';
 @import 'management/user/my-listings';
 @import 'management/user/recent-activity';
@@ -87,6 +94,19 @@ html, body {
 .close {
     font-size: 3em;
     font-weight: lighter;
+    top: 0;
+    margin-top: -10px;
+}
+
+button.notifications {
+  color: $gray-lighter;
+  &:hover, &:focus {
+    color: $white;
+  }
+}
+
+.dropdown-menu .divider {
+  background: $gray-darkest !important;
 }
 
 i {
@@ -176,6 +196,10 @@ label {
     &.bookmarked {
         color: $yellow;
     }
+}
+
+div.modal-header > button.close {
+  margin:-22px -13px 0 0;
 }
 
 /*=======================
