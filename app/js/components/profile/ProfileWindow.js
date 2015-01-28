@@ -17,6 +17,13 @@ var ListingRow = React.createClass({
         listing: React.PropTypes.object.isRequired
     },
 
+    getInitialState: function() {
+        return {
+            activeRoute: this.getActiveRoute(),
+            routeParams: this.getParams()
+        };
+    },
+
     render: function() {
         var listing = this.props.listing,
             queryParams = {
@@ -28,7 +35,7 @@ var ListingRow = React.createClass({
         /* jshint ignore:start */
         return (
             <li key={listing.id} className="listing">
-                <Link to={this.getActiveRoute().name} params={this.getParams()}
+                <Link to={this.state.activeRoute.name} params={this.state.routeParams}
                         query={queryParams}>
                     <img src={listing.imageMediumUrl} />
                     {listing.title}
