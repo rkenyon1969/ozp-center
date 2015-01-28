@@ -10,21 +10,26 @@ var MyListingsSidebarFilter = React.createClass({
         /* jshint ignore:start */
         return (
             <RadioGroup name="recent-activity-my-listings" onChange={this.props.handleChange}>
-                <input id="recent-activity-returned" type="radio" value="my-listings:needs-action" />
-                <label htmlFor="recent-activity-returned" className="label-needs-action">
-                    Returned to Owner
-                    <i className="fa fa-angle-right fa-2x"></i>
-                </label>
-                <input id="recent-activity-pending" type="radio" value="my-listings:pending" />
-                <label htmlFor="recent-activity-pending" className="label-pending">
-                    Pending Review
-                    <i className="fa fa-angle-right fa-2x"></i>
-                </label>
-                <input id="recent-activity-published" type="radio" value="my-listings:published" />
-                <label htmlFor="recent-activity-published" className="label-published">
-                    Published
-                    <i className="fa fa-angle-right fa-2x"></i>
-                </label>
+                <Link id="recent-activity-returned" to="my-listings" query={{approvalStatus: "REJECTED"}}>
+                    <label htmlFor="recent-activity-returned" className="label-needs-action">
+                        Returned to Owner
+                        <i className="fa fa-angle-right fa-2x"></i>
+                    </label>
+                </Link>
+
+                <Link id="recent-activity-returned" to="my-listings" query={{approvalStatus: "PENDING"}}>
+                    <label htmlFor="recent-activity-pending" className="label-pending">
+                        Pending Review
+                        <i className="fa fa-angle-right fa-2x"></i>
+                    </label>
+                </Link>
+
+                <Link id="recent-activity-returned" to="my-listings" query={{approvalStatus: "APPROVED"}}>
+                    <label htmlFor="recent-activity-published" className="label-published">
+                        Published
+                        <i className="fa fa-angle-right fa-2x"></i>
+                    </label>
+                </Link>
             </RadioGroup>
         );
         /* jshint ignore:end */
@@ -38,26 +43,33 @@ var AllListingsSidebarFilter = React.createClass({
         /* jshint ignore:start */
         return (
             <RadioGroup name="recent-activity-all-listings" onChange={this.props.handleChange}>
-                <input id="recent-activity-all-returned" type="radio" value="all-listings:needs-action" />
-                <label htmlFor="recent-activity-all-returned" className="label-needs-action">
-                    Pending AppsMall Review
-                    <i className="fa fa-angle-right fa-2x"></i>
-                </label>
-                <input id="recent-activity-all-pending" type="radio" value="all-listings:pending"/>
-                <label htmlFor="recent-activity-all-pending" className="label-pending">
-                    Pending Organization Review
-                    <i className="fa fa-angle-right fa-2x"></i>
-                </label>
-                <input id="recent-activity-all-published" type="radio" value="all-listings:published"/>
-                <label htmlFor="recent-activity-all-published" className="label-published">
-                    Published
-                    <i className="fa fa-angle-right fa-2x"></i>
-                </label>
-                <input id="recent-activity-all-returned" type="radio" value="all-listings:rejected"/>
-                <label htmlFor="recent-activity-all-returned" className="label-rejected">
-                    Returned to Owner
-                    <i className="fa fa-angle-right fa-2x"></i>
-                </label>
+                <Link id="recent-activity-returned" to="all-listings" query={{approvalStatus: "APPROVED_ORG"}}>
+                    <label htmlFor="recent-activity-all-returned" className="label-needs-action">
+                        Pending AppsMall Review
+                        <i className="fa fa-angle-right fa-2x"></i>
+                    </label>
+                </Link>
+
+                <Link id="recent-activity-returned" to="all-listings" query={{approvalStatus: "PENDING"}}>
+                    <label htmlFor="recent-activity-all-pending" className="label-pending">
+                        Pending Organization Review
+                        <i className="fa fa-angle-right fa-2x"></i>
+                    </label>
+                </Link>
+
+                <Link id="recent-activity-returned" to="all-listings" query={{approvalStatus: "APPROVED"}}>
+                    <label htmlFor="recent-activity-all-published" className="label-published">
+                        Published
+                        <i className="fa fa-angle-right fa-2x"></i>
+                    </label>
+                </Link>
+
+                <Link id="recent-activity-returned" to="all-listings" query={{approvalStatus: "REJECTED"}}>
+                    <label htmlFor="recent-activity-all-returned" className="label-rejected">
+                        Returned to Owner
+                        <i className="fa fa-angle-right fa-2x"></i>
+                    </label>
+                </Link>
             </RadioGroup>
         );
         /* jshint ignore:end */
@@ -70,11 +82,6 @@ var AllListingsSidebarFilter = React.createClass({
 var RecentActivitySidebar = React.createClass({
 
     mixins: [ Navigation ],
-
-    handleChange: function(evt) {
-        var details = evt.target.value.split(':');
-        this.transitionTo(details[0], details[1]);
-    },
 
     render: function () {
         /* jshint ignore:start */

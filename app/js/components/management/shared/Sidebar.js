@@ -16,10 +16,6 @@ var Sidebar = React.createClass({
     },
 
     render: function () {
-        var counts = this.props.counts || {};
-        counts.disabled = counts.total - counts.enabled;
-        this.props.counts = counts;
-
         /*jshint ignore:start */
         var filters = [
             <ApprovalStatusFilter { ...this.props }/>
@@ -32,6 +28,11 @@ var Sidebar = React.createClass({
         }
 
         if(this.props.view === 'adminView' || this.props.view === 'orgView') {
+
+            var counts = this.props.counts || {};
+            counts.disabled = counts.total - counts.enabled;
+            this.props.counts = counts;
+
             filters.push(
                 <EnabledFilter { ...this.props } />
             );

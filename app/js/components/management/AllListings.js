@@ -3,9 +3,11 @@
 var React = require('react');
 var Reflux = require('reflux');
 var _ = require('../../utils/_');
+var Router = require('react-router');
 
 var AdminRoute = require('../../mixins/AdminRouteMixin');
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
+var ActiveState = require('../../mixins/ActiveStateMixin');
 
 var Sidebar = require('./shared/Sidebar');
 var ListingTile = require('../listing/ListingTile');
@@ -18,18 +20,14 @@ var ListingActions = require('../../actions/ListingActions');
 
 var AllListings = React.createClass({
 
-    mixins: [ AdminRoute, SystemStateMixin ],
+    mixins: [ AdminRoute, SystemStateMixin, Router.State ],
 
     getInitialState: function () {
         return {
             counts: {},
             listings: [],
             hasMore: false,
-            filter: {
-                approvalStatus: null,
-                org: null,
-                enabled: null
-            }
+            filter: this.getQuery()
         };
     },
 
