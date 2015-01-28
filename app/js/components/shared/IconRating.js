@@ -1,9 +1,11 @@
 'use strict';
 
 var React = require('react');
-var _IconRating = require('../../../../node_modules/react-icon-rating/index.jsx');
+var _IconRating = require('react-icon-rating');
 
 var IconRating = React.createClass({
+
+    mixins: [React.addons.PureRenderMixin],
 
     displayName: 'IconRatingExtended',
 
@@ -16,10 +18,42 @@ var IconRating = React.createClass({
         };
     },
 
+    getInitialState: function () {
+        return {
+            rating: this.roundRating(this.props.currentRating)
+        };
+    },
+
+    componentWillReceiveProps: function (nextProps) {
+        if (this.props.currentRating !== nextProps.currentRating) {
+            this.setState({
+                rating: this.roundRating(nextProps.currentRating)
+            });
+        }
+    },
+
+    roundRating: function (currentRating) {
+        var floor = Math.floor(currentRating),
+            difference = currentRating - floor,
+            rating = floor;
+
+        if (difference >= 0.25 && difference < 0.75) {
+            rating += 0.5;
+        }
+        else if (difference >= 0.75) {
+            rating += 1;
+        }
+
+        return rating;
+    },
+
     render: function () {
         /* jshint ignore:start */
+        // key is explicitly used here to destroy IconRating component for Reset
         return this.transferPropsTo(
             <_IconRating
+                key={ this.props.currentRating }
+                currentRating={ this.state.rating }
                 className={ this.props.className }
                 toggledClassName={ this.props.toggledClassName }
                 untoggledClassName={ this.props.untoggledClassName }

@@ -5,14 +5,17 @@ var _ = require('../utils/_');
 var OzpAnalytics = require('../analytics/ozp-analytics');
 var PaginatedResponse  =require ('./responses/PaginatedResponse');
 
+var { API_URL } = require('../OzoneConfig');
+
 var FIELDS = [
     'id', 'title', 'description', 'descriptionShort', 'screenshots', 'contacts', 'totalComments',
     'avgRate', 'totalRate1', 'totalRate2', 'totalRate3','totalRate4', 'height', 'width',
     'totalRate5','totalVotes', 'state', 'tags', 'type','uuid', 'requirements', 'singleton',
     'versionName', 'imageLargeUrl', 'imageSmallUrl', 'imageMediumUrl', 'imageXlargeUrl',
     'launchUrl', 'company', 'whatIsNew', 'owners', 'agency', 'agencyShort', 'currentRejection',
-     'isEnabled', 'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls', 'approvalStatus',
-    'isFeatured', 'smallIconId', 'largeIconId', 'bannerIconId', 'featuredBannerIconId'
+     'isEnabled', 'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls',
+     'approvalStatus', 'isFeatured', 'smallIconId', 'largeIconId', 'bannerIconId',
+     'featuredBannerIconId'
 ];
 
 function Listing (json) {
@@ -51,7 +54,7 @@ var ListingApi = {
     },
 
     getMostPopular: function () {
-        return $.getJSON(API_URL + '/api/listing/search?sort=avgRate&order=ASC&max=24')
+        return $.getJSON(API_URL + '/api/listing/search?sort=avgRate&order=DESC&max=24')
             .then(parseList);
     },
 
@@ -98,6 +101,41 @@ var ListingApi = {
     getChangeLogs: function (id) {
         return $.getJSON(API_URL + '/api/listing/' + id + '/activity')
             .then((response) => new PaginatedResponse(response).getItemAsList());
+    },
+
+    getItemComments: function (id) {
+        return $.getJSON(API_URL + '/api/listing/' + id + '/itemComment')
+            .then((response) => new PaginatedResponse(response).getItemAsList());
+    },
+
+    saveReview: function (listingId, review) {
+        var url = `${API_URL}/api/listing/${listingId}/itemComment`,
+            method = 'POST';
+        if (review.id) {
+            method = 'PUT';
+            url += `/${review.id}`;
+        }
+        // default rate to 1 if not specified
+        if (!review.rate) {
+            review.rate = 1;
+        }
+
+        return $.ajax({
+            type: method,
+            url: url,
+            data: JSON.stringify(review),
+            dataType: 'json',
+            contentType: 'application/json'
+        });
+    },
+
+    deleteReview: function (listingId, reviewId) {
+        return $.ajax({
+            type: 'DELETE',
+            url: `${API_URL}/api/listing/${listingId}/itemComment/${reviewId}`,
+            dataType: 'json',
+            contentType: 'application/json'
+        });
     },
 
     getOwnedListings: function (profile) {

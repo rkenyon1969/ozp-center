@@ -9,6 +9,7 @@ var _listingsCache = {};
 var _listingsByOwnerCache = {};
 var _allListings = [];
 var _changeLogsCache = {};
+var _reviewsCache = {};
 
 function updateCache (listings) {
     listings.forEach(function (listing) {
@@ -50,6 +51,10 @@ var GlobalListingStore = Reflux.createStore({
         });
         this.listenTo(ListingActions.fetchChangeLogsCompleted, function (id, changeLogs) {
             _changeLogsCache[id] = changeLogs;
+            this.trigger();
+        });
+        this.listenTo(ListingActions.fetchReviewsCompleted, function (id, reviews) {
+            _reviewsCache[id] = reviews;
             this.trigger();
         });
         this.listenTo(ListingActions.fetchOwnedListingsCompleted, updateCache);
@@ -101,6 +106,14 @@ var GlobalListingStore = Reflux.createStore({
             return null;
         }
         return _changeLogsCache[id];
+    },
+
+    getReviewsForListing: function (id) {
+        if(!_reviewsCache[id]) {
+            ListingActions.fetchReviews(id);
+            return null;
+        }
+        return _reviewsCache[id];
     }
 
 });

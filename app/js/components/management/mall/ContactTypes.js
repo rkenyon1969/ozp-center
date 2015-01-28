@@ -5,6 +5,8 @@ var t = require('tcomb-form');
 var { Str, struct, subtype, maybe, Bool } = t;
 var Crud = require('../../shared/Crud');
 
+var { API_URL } = require('../../../OzoneConfig');
+
 // ContactType Schema
 var ContactType = struct({
     title: subtype(Str, function (s) {
