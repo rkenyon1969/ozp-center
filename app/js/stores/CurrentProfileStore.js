@@ -4,7 +4,7 @@ var Reflux = require('reflux');
 var _ = require('../utils/_');
 
 var ProfileActions = require('../actions/ProfileActions');
-var ProfileApi = require('../actions/ProfileApi');
+var ProfileApi = require('../webapi/Profile');
 
 /**
  * A store for information about the profile that is currently
@@ -17,21 +17,27 @@ var CurrentProfileStore = Reflux.createStore({
 
     listenables: ProfileActions,
 
+    getDefaultData: function() {
+        return _.pick(this, 'profile', 'ownedListings');
+    },
+
     doTrigger: function() {
-        this.trigger(_.pick(this, 'profile', 'ownedListings'));
+        this.trigger(this.getDefaultData());
     },
 
     onFetchOwnedListings: function(profileId) {
+        var me = this;
         ProfileApi.getOwnedListings(profileId).then(function(listings) {
-            this.ownedListings = listings;
-            this.doTrigger();
+            me.ownedListings = listings;
+            me.doTrigger();
         });
     },
 
     onFetchProfile: function(profileId) {
+        var me = this;
         ProfileApi.getProfile(profileId).then(function(profile) {
-            this.profile = profile;
-            this.doTrigger();
+            me.profile = profile;
+            me.doTrigger();
         });
     }
 });

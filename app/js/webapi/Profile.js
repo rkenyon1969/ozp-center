@@ -6,7 +6,8 @@ var { API_URL } = require('../OzoneConfig');
 
 var ProfileApi = {
     getOwnedListings: function (profileId) {
-    	return $.getJSON(`${API_URL}/api/profile/${encodeURIComponent(profileId)}/library`);
+    	return $.getJSON(`${API_URL}/api/profile/${encodeURIComponent(profileId)}/listing`)
+            .then(resp => resp._embedded.item);
     },
 
     getProfile: function (profileId) {
@@ -14,4 +15,4 @@ var ProfileApi = {
     }
 };
 
-module.exports.ProfileApi = ProfileApi;
+module.exports = ProfileApi;
