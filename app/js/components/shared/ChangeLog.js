@@ -22,13 +22,45 @@ var SeeListingSubmission = React.createClass({
     }
 });
 
+var AuthorLink = React.createClass({
+    mixins: [ActiveState],
+
+    propTypes: {
+        author: React.PropTypes.object.isRequired
+    },
+
+    getInitialState: function() {
+        return {
+            activeRoute: this.getActiveRoute(),
+            routeParams: this.getParams()
+        };
+    },
+
+    render: function() {
+        var author = this.props.author,
+            queryParams = {profile: author.id};
+
+        /* jshint ignore:start */
+        return (
+            <Link to={this.state.activeRoute.name} params={this.state.routeParams}
+                    query={queryParams}>
+                {author.displayName}
+            </Link>
+        );
+        /* jshint ignore:end */
+    }
+});
+
 var ActionChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
-        var listingChange = changeLog.author.displayName + ' ' + changeLog.action.toLowerCase() + ' ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
+        var listingChange = ' ' + changeLog.action.toLowerCase() + ' ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
         return (
             /* jshint ignore:start */
-            <div>{ listingChange }</div>
+            <div>
+                <AuthorLink author={changeLog.author} />
+                { listingChange }
+            </div>
             /* jshint ignore:end */
         );
     }
@@ -51,10 +83,13 @@ var RelatedToItemChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
         var action = (changeLog.action === 'REMOVE_RELATED_ITEMS')? ' removed ' : ' added ';
-        var listingChange = changeLog.author.displayName + ' ' + action + (this.props.showListingName ? changeLog.listing.title : 'the listing') + ' as a requirement to ' + this.getRelatedItemsAsString(changeLog);
+        var listingChange = ' ' + action + (this.props.showListingName ? changeLog.listing.title : 'the listing') + ' as a requirement to ' + this.getRelatedItemsAsString(changeLog);
         return (
             /* jshint ignore:start */
-            <div>{ listingChange }</div>
+            <div>
+                <AuthorLink author={changeLog.author} />
+                { listingChange }
+            </div>
             /* jshint ignore:end */
         );
     }
@@ -78,10 +113,13 @@ var RelatedItemChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
         var action = (changeLog.action === 'REMOVE_RELATED_TO_ITEM')? ' removed ' : ' added ';
-        var listingChange = changeLog.author.displayName + ' ' + action + this.getRelatedItemsAsString(changeLog) + ' as a requirement to ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
+        var listingChange = ' ' + action + this.getRelatedItemsAsString(changeLog) + ' as a requirement to ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
         return (
             /* jshint ignore:start */
-            <div>{ listingChange }</div>
+            <div>
+                <AuthorLink author={changeLog.author} />
+                { listingChange }
+            </div>
             /* jshint ignore:end */
         );
     }
@@ -90,10 +128,13 @@ var RelatedItemChangeLog = React.createClass({
 var SetToChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
-        var listingChange = changeLog.author.displayName +' set ' + (this.props.showListingName ? changeLog.listing.title : 'the listing') + ' to ' + changeLog.action.toLowerCase();
+        var listingChange = ' set ' + (this.props.showListingName ? changeLog.listing.title : 'the listing') + ' to ' + changeLog.action.toLowerCase();
         return (
             /* jshint ignore:start */
-            <div>{ listingChange }</div>
+            <div>
+                <AuthorLink author={changeLog.author} />
+                { listingChange }
+            </div>
             /* jshint ignore:end */
         );
     }
@@ -109,15 +150,21 @@ var RejectedChangeLog = React.createClass({
         var id = uuid();
 
         /* jshint ignore:start */
-        return [
-            <div>{ changeLog.author.displayName } rejected { (this.props.showListingName ? changeLog.listing.title : 'the listing') }</div>,
-            <a href="javascript:;" data-toggle="collapse" data-target={ '#' + id } onClick={ this.toggleIcon }>
-                <i className="fa fa-plus"></i> Feedback
-            </a>,
-            <ul id={ id } className="collapse list-unstyled ListingActivity__Changes">
-                <li>{ details }</li>
-            </ul>
-        ];
+        return (
+            <div>
+                <div>
+                    <AuthorLink author={changeLog.author} />
+                    <span> rejected </span>
+                    { (this.props.showListingName ? changeLog.listing.title : 'the listing') }
+                </div>,
+                <a href="javascript:;" data-toggle="collapse" data-target={ '#' + id } onClick={ this.toggleIcon }>
+                    <i className="fa fa-plus"></i> Feedback
+                </a>,
+                <ul id={ id } className="collapse list-unstyled ListingActivity__Changes">
+                    <li>{ details }</li>
+                </ul>
+            </div>
+        );
         /* jshint ignore:end */
     }
 });
@@ -125,10 +172,13 @@ var RejectedChangeLog = React.createClass({
 var OrgApprovalChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
-        var listingChange = changeLog.author.displayName + ' approved ' + (this.props.showListingName ? changeLog.listing.title : 'the listing') + ' for ' + changeLog.listing.agency;
+        var listingChange = ' approved ' + (this.props.showListingName ? changeLog.listing.title : 'the listing') + ' for ' + changeLog.listing.agency;
         return (
             /* jshint ignore:start */
-            <div>{ listingChange }</div>
+            <div>
+                <AuthorLink author={changeLog.author} />
+                { listingChange }
+            </div>
             /* jshint ignore:end */
         );
     }
@@ -170,7 +220,9 @@ var ModifiedChangeLog = React.createClass({
            /* jshint ignore:start */
             return (
                 <div>
-                    <div>{ changeLog.author.displayName } modified { details }</div>
+                    <div>
+                        <AuthorLink author={changeLog.author} /> modified { details }
+                    </div>
                     <a href="javascript:;" data-toggle="collapse" data-target={ '#' + id } onClick={ this.toggleIcon }>
                         <i className="fa fa-plus"></i> See {this.props.showListingName ? changeLog.listing.title : 'the listing'} changes
                     </a>
@@ -183,7 +235,11 @@ var ModifiedChangeLog = React.createClass({
         } else {
             /* jshint ignore:start */
             return (
-                <div> { changeLog.author.displayName } modified { this.props.showListingName ? changeLog.listing.title : 'the listing' } </div>
+                <div>
+                    <AuthorLink author={changeLog.author} />
+                    <span> modified </span>
+                    { this.props.showListingName ? changeLog.listing.title : 'the listing' }
+                </div>
             );
             /* jshint ignore:end */
         }
@@ -195,10 +251,13 @@ var TagChangeLog = React.createClass({
         var changeLog = this.props.changeLog;
         var action = (changeLog.action === 'TAG_DELETED')? 'removed' : ' added ';
         var location = (changeLog.action === 'TAG_DELETED')? 'from' : ' to ';
-        var listingChange = changeLog.author.displayName + ' ' + action + 'tag ' + (changeLog.changeDetails[0] === undefined) ? ' ' : changeLog.changeDetails[0].newValue + location + (this.props.showListingName ? changeLog.listing.title : 'the listing');
+        var listingChange = ' ' + action + 'tag ' + (changeLog.changeDetails[0] === undefined) ? ' ' : changeLog.changeDetails[0].newValue + location + (this.props.showListingName ? changeLog.listing.title : 'the listing');
         return (
             /* jshint ignore:start */
-            <div>{ listingChange }</div>
+            <div>
+                <AuthorLink author={changeLog.author} />
+                { listingChange }
+            </div>
             /* jshint ignore:end */
         );
     }
@@ -207,10 +266,13 @@ var TagChangeLog = React.createClass({
 var ReviewEditedChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
-        var listingChange = changeLog.author.displayName + ' edited ' + (changeLog.changeDetails[0] === undefined) ? ' ' : changeLog.changeDetails[0].fieldName + ' in ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
+        var listingChange = ' edited ' + (changeLog.changeDetails[0] === undefined) ? ' ' : changeLog.changeDetails[0].fieldName + ' in ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
         return (
             /* jshint ignore:start */
-            <div>{ listingChange }</div>
+            <div>
+                <AuthorLink author={changeLog.author} />
+                { listingChange }
+            </div>
             /* jshint ignore:end */
         );
     }
@@ -219,10 +281,13 @@ var ReviewEditedChangeLog = React.createClass({
 var ReviewDeletedChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
-        var listingChange = changeLog.author.displayName + ' removed ' + changeLog.changeDetails[0].newValue + '\'s review from ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
+        var listingChange = ' removed ' + changeLog.changeDetails[0].newValue + '\'s review from ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
         return (
             /* jshint ignore:start */
-            <div>{ listingChange }</div>
+            <div>
+                <AuthorLink author={changeLog.author} />
+                { listingChange }
+            </div>
             /* jshint ignore:end */
         );
     }
@@ -231,10 +296,13 @@ var ReviewDeletedChangeLog = React.createClass({
 var ScorecardUpdateChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
-        var listingChange = changeLog.author.displayName + ' updated local scorecard question in ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
+        var listingChange = ' updated local scorecard question in ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
         return (
             /* jshint ignore:start */
-            <div>{ listingChange }</div>
+            <div>
+                <AuthorLink author={changeLog.author} />
+                { listingChange }
+            </div>
             /* jshint ignore:end */
         );
     }
@@ -243,10 +311,13 @@ var ScorecardUpdateChangeLog = React.createClass({
 var NotIncludedScorecardChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
-        var listingChange = changeLog.author.displayName + ' did not include ' + changeLog.action.description.split(' Not Included')[0] + ' in ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
+        var listingChange = ' did not include ' + changeLog.action.description.split(' Not Included')[0] + ' in ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
         return (
             /* jshint ignore:start */
-            <div>{ listingChange }</div>
+            <div>
+                <AuthorLink author={changeLog.author} />
+                { listingChange }
+            </div>
             /* jshint ignore:end */
         );
     }
@@ -255,10 +326,13 @@ var NotIncludedScorecardChangeLog = React.createClass({
 var IncludedScorecardChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
-        var listingChange = changeLog.author.displayName + ' included ' + changeLog.action.description.split(' Included')[0] + ' in ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
+        var listingChange = ' included ' + changeLog.action.description.split(' Included')[0] + ' in ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
         return (
             /* jshint ignore:start */
-            <div>{ listingChange }</div>
+            <div>
+                <AuthorLink author={changeLog.author} />
+                { listingChange }
+            </div>
             /* jshint ignore:end */
         );
     }
