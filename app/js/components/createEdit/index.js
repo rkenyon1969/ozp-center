@@ -7,7 +7,7 @@ var LoadMask = require('../LoadMask');
 var { pick, assign } = require('../../utils/_');
 var { approvalStatus } = require('../../constants');
 var CurrentListingStore = require('../../stores/CurrentListingStore');
-var ProfileStore = require('../../stores/ProfileStore');
+var SelfStore = require('../../stores/SelfStore');
 var { loadListing, updateListing, save, submit } = require('../../actions/CreateEditActions');
 var { Navigation } = require('react-router');
 var Header = require('../header');
@@ -43,7 +43,7 @@ var CreateEditPage = React.createClass({
     statics: {
         willTransitionTo: function (transition, params) {
             transition.wait(CurrentListingStore.loadListing(params.listingId).then(listing => {
-                if (!ProfileStore.currentUserCanEdit(listing)) {
+                if (!SelfStore.currentUserCanEdit(listing)) {
                     transition.redirect('my-listings');
                 }
             }));

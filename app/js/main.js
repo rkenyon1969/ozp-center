@@ -9,7 +9,7 @@ var Router = require('react-router');
 require('bootstrap');
 require('classification');
 var _ = require('./utils/_');
-var ProfileActions = require('./actions/ProfileActions');
+var SelfActions = require('./actions/SelfActions');
 var { METRICS_URL } = require('./OzoneConfig');
 
 window.jQuery = jQuery;
@@ -35,13 +35,13 @@ var mount = function () {
     });
 };
 
-ProfileActions.selfLoaded.listen(_.once(mount));
-ProfileActions.fetchSelfFailed.listen(_.once(function () {
+SelfActions.selfLoaded.listen(_.once(mount));
+SelfActions.fetchSelfFailed.listen(_.once(function () {
     if (!isMounted) {
         alert('Something went wrong. Try again!');
     }
 }));
-ProfileActions.fetchSelf();
+SelfActions.fetchSelf();
 
 (function initPiwik() {
     var _paq = window._paq || [];

@@ -7,12 +7,12 @@ var ListingTile = require('../../listing/ListingTile');
 var MyListingsSidebar = require('./MyListingsSidebar');
 var GlobalListingStore = require('../../../stores/GlobalListingStore');
 var ListingActions = require('../../../actions/ListingActions');
-var ProfileActions = require('../../../actions/ProfileActions');
+var SelfActions = require('../../../actions/SelfActions');
 
 var fetchOwnedListings = ListingActions.fetchOwnedListings;
 var fetchOwnedListingsCompleted = ListingActions.fetchOwnedListingsCompleted;
-var fetchSelf = ProfileActions.fetchSelf;
-var fetchSelfCompleted = ProfileActions.fetchSelfCompleted;
+var fetchSelf = SelfActions.fetchSelf;
+var fetchSelfCompleted = SelfActions.fetchSelfCompleted;
 
 var MyListings = React.createClass({
 

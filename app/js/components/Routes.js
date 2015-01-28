@@ -6,7 +6,7 @@ var CreateEditPage = require('./createEdit');
 var AppsMallManagement = require('./management/mall');
 var AllListings = require('./management/AllListings');
 var OrgListings = require('./management/OrgListings');
-var ProfileStore = require('../stores/ProfileStore');
+var SelfStore = require('../stores/SelfStore');
 var _ = require('../utils/_');
 /*jshint ignore:start */
 

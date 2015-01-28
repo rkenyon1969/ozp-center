@@ -6,9 +6,10 @@ var _ = require('../utils/_');
 var { RouteHandler, State } = require('react-router');
 var SystemStateMixin = require('../mixins/SystemStateMixin');
 
-var { fetchLibrary } = require('../actions/ProfileActions');
+var { fetchLibrary } = require('../actions/SelfActions');
 
 var Quickview = require('../components/quickview');
+var ProfileWindow = require('./profile/ProfileWindow');
 var CreateEditListing = require('./createEdit');
 var FeedbackModal = require('./management/user/FeedbackModal');
 var { ListingDeleteConfirmation } = require('./shared/DeleteConfirmation');
@@ -29,7 +30,7 @@ var App = React.createClass({
     },
 
     renderModal: function () {
-        var { listing, tab, action } = this.getQuery();
+        var { listing, profile, tab, action } = this.getQuery();
 
         /*jshint ignore:start */
         if (listing) {
@@ -43,6 +44,9 @@ var App = React.createClass({
             else if (action === 'delete') {
                 return <ListingDeleteConfirmation listing={listing} />;
             }
+        }
+        else if (profile) {
+            return <ProfileWindow profileId={profile} />
         }
         /*jshint ignore:end */
     },
