@@ -25,7 +25,7 @@ window.OzoneConfig = {
     "METRICS_URL": '/* @echo METRICS_URL */',
     // @endif
     // @ifndef METRICS_URL
-    "METRICS_URL": "https://www.owfgoss.org:10443/dev/metrics/",
+    "METRICS_URL": "https://www.owfgoss.org:10443/dev/metrics",
     // @endif
     // @ifdef CENTER_URL
     "CENTER_URL": '/* @echo CENTER_URL */',
