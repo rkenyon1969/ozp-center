@@ -75,7 +75,7 @@ var ListingApi = {
                 else {
                     delaySearch(function(){
                         OzpAnalytics.trackSiteSearch('Application Search', options.queryString, response.total);
-                    }, 500);
+                    }, 800);
                 }
                 return response;
             })
