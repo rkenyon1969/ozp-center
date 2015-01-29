@@ -75,8 +75,9 @@ ListingActions = createActions({
         ListingApi.getOwnedListings(profile).then(ListingActions.fetchOwnedListingsCompleted);
     },
 
-    fetchReviews: function (listingId) {
-        ListingApi.fetchReviews(listingId).then(ListingActions.fetchReviewsCompleted.bind(null, listingId));
+    fetchReviews: function (listing) {
+        ListingApi.fetchReviews(listing.id).then(ListingActions.fetchReviewsCompleted.bind(null, listing.id));
+        if(typeof(listing.title) !== 'undefined') { OzpAnalytics.trackListingReview(listing.title);}
     },
     saveReview: function (listing, review) {
         OzpAnalytics.trackListingReview(listing.title);
@@ -116,10 +117,12 @@ ListingActions = createActions({
         ProfileApi
             .removeFromLibrary(listing)
             .then(ListingActions.removeFromLibraryCompleted.bind(null, listing));
-        OzpAnalytics.trackEvent('Favorited Applications', listing.title);
     },
     save: function (data) {
         var isNew = !data.id;
+
+        if (isNew) { OzpAnalytics.trackListingCreation(data.title); }
+
         ListingApi
             .save(data)
             .then(ListingActions.saveCompleted.bind(null, isNew))

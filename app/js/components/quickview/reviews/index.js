@@ -8,7 +8,7 @@ var IconRating = require('../../shared/IconRating');
 var UserReviews = require('./UserReviews');
 var SubmitReview = require('./SubmitReview');
 var EditReview = require('./EditReview');
-var OzpAnalytics = require('../../../analytics/ozp-analytics');
+
 var CurrentListingStore = require('../../../stores/CurrentListingStore');
 var SystemStateMixin = require('../../../mixins/SystemStateMixin');
 var ListingActions = require('../../../actions/ListingActions');
@@ -87,8 +87,7 @@ var ReviewsTab = React.createClass({
     componentWillMount: function () {
         // only fetch reviews if not found in store
         if (this.props.listing.id && !this.state.reviews) {
-            ListingActions.fetchReviews(this.props.listing.id);
-            OzpAnalytics.trackListingReviewView(this.props.listing.title);
+            ListingActions.fetchReviews(this.props.listing);
         }
     },
 
