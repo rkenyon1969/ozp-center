@@ -17,6 +17,8 @@
 .CreateEdit__form {
     padding-top: 200px;
 
+    margin-bottom: 20px;
+
     label.input-optional::after {
         content: " (optional)";
         font-size: smaller;
