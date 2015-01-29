@@ -10,10 +10,9 @@ var ActiveState = require('../../mixins/ActiveStateMixin');
 var ActionChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
-        var listingChange = changeLog.author.displayName + ' ' + changeLog.action.toLowerCase() + ' ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
         return (
             /* jshint ignore:start */
-            <div>{ listingChange }</div>
+            <div>{ changeLog.author.displayName } { changeLog.action.toLowerCase() } { this.props.listingName }</div>
             /* jshint ignore:end */
         );
     }
@@ -22,10 +21,9 @@ var ActionChangeLog = React.createClass({
 var SetToChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
-        var listingChange = changeLog.author.displayName +' set ' + (this.props.showListingName ? changeLog.listing.title : 'the listing') + ' to ' + changeLog.action.toLowerCase();
         return (
             /* jshint ignore:start */
-            <div>{ listingChange }</div>
+            <div>{ changeLog.author.displayName } set { this.props.listingName } to {changeLog.action.toLowerCase()}</div>
             /* jshint ignore:end */
         );
     }
@@ -43,7 +41,7 @@ var RejectedChangeLog = React.createClass({
         /* jshint ignore:start */
         return (
             <div>
-                <div>{ changeLog.author.displayName } rejected { (this.props.showListingName ? changeLog.listing.title : 'the listing') }</div>
+                <div>{ changeLog.author.displayName } rejected { this.props.listingName }</div>
                 <a href="javascript:;" data-toggle="collapse" data-target={ '#' + id } onClick={ this.toggleIcon }>
                     <i className="fa fa-plus"></i> Feedback
                 </a>
@@ -59,10 +57,9 @@ var RejectedChangeLog = React.createClass({
 var OrgApprovalChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
-        var listingChange = changeLog.author.displayName + ' approved ' + (this.props.showListingName ? changeLog.listing.title : 'the listing') + ' for ' + changeLog.listing.agency;
         return (
             /* jshint ignore:start */
-            <div>{ listingChange }</div>
+            <div>{ changeLog.author.displayName } approved { this.props.listingName } for { changeLog.listing.agency }</div>
             /* jshint ignore:end */
         );
     }
@@ -127,10 +124,9 @@ var ModifiedChangeLog = React.createClass({
 var ReviewEditedChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
-        var listingChange = changeLog.author.displayName + ' edited ' + ((changeLog.changeDetails[0] === undefined) ? ' ' : changeLog.changeDetails[0].fieldName) + ' in ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
         return (
             /* jshint ignore:start */
-            <div>{ listingChange }</div>
+            <div>{ changeLog.author.displayName } edited { (changeLog.changeDetails[0] === undefined) ? ' ' : changeLog.changeDetails[0].fieldName } in { this.props.listingName }</div>
             /* jshint ignore:end */
         );
     }
@@ -139,22 +135,9 @@ var ReviewEditedChangeLog = React.createClass({
 var ReviewDeletedChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
-        var listingChange = changeLog.author.displayName + ' removed ' + changeLog.changeDetails[0].newValue + '\'s review from ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
         return (
             /* jshint ignore:start */
-            <div>{ listingChange }</div>
-            /* jshint ignore:end */
-        );
-    }
-});
-
-var ScorecardUpdateChangeLog = React.createClass({
-    render: function() {
-        var changeLog = this.props.changeLog;
-        var listingChange = changeLog.author.displayName + ' updated local scorecard question in ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
-        return (
-            /* jshint ignore:start */
-            <div>{ listingChange }</div>
+            <div>{ changeLog.author.displayName } removed { changeLog.changeDetails[0].newValue } review from { this.props.listingName }</div>
             /* jshint ignore:end */
         );
     }
@@ -162,6 +145,9 @@ var ScorecardUpdateChangeLog = React.createClass({
 
 
 var ChangeLog = React.createClass({
+
+
+    mixins: [ Navigation, ActiveState],
 
     actionMapAdmin: {
         'MODIFIED' : ModifiedChangeLog,
@@ -178,7 +164,30 @@ var ChangeLog = React.createClass({
         'REVIEW_DELETED' : ReviewDeletedChangeLog,
     },
 
+    getListingName: function() {
+        var href = this.makeHref(this.getActiveRoutePath(), this.getParams(), {
+            listing: this.props.changeLog.listing.id,
+            action: 'view',
+            tab: 'overview'
+        });
+
+        if(this.props.showListingName) {
+            return (
+                /* jshint ignore:start */
+                <a href={ href }>{ this.props.changeLog.listing.title }</a>
+                /* jshint ignore:end */
+            );
+        } else {
+            return 'the listing';
+        }
+    },
+
     render: function() {
+
+        if(this.props.children.length > 0) {
+            var icon = this.props.children[0];
+            var link = this.props.children[1];
+        }
 
         var time = timeAgo(this.props.changeLog.activityDate);
         var Handler = this.actionMapAdmin[this.props.changeLog.action];
@@ -193,8 +202,9 @@ var ChangeLog = React.createClass({
                         <em>{ time }</em>
                     </div>
                     <div className="col-md-9">
-                        < Handler changeLog={ this.props.changeLog } showListingName={ this.props.showListingName } />
-                        { this.props.children }
+                        { icon }
+                        < Handler changeLog={ this.props.changeLog } listingName={ this.getListingName() } />
+                        { link }
                     </div>
                 </div>
             </li>
