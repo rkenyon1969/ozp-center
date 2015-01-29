@@ -3,7 +3,7 @@ $profile-header-height: 42px;
 
 .profile-window {
     .modal-body {
-        background-color: $modal-body-bg;
+        background-color: $modal-content-bg;
         color: $gray-darkest;
 
         box-sizing: content-box;
@@ -38,7 +38,7 @@ $profile-header-height: 42px;
 }
 
 .profile-info {
-    background-color: $modal-content-bg;
+    background-color: $modal-body-bg;
     color: $gray-dark;
 
     height: $profile-window-height - $profile-header-height;
