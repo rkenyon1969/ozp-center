@@ -72,7 +72,10 @@ var ProfileInfo = React.createClass({
                         <dt>Email</dt><dd>{profile.email || 'none available'}</dd>
                     </dl>
                     <section className="owned-listings">
-                        <h4>Listings</h4>
+                        <header>
+                            <h4>{profile.displayName}'s Listings</h4>
+                            <small>A list of the Marketplace listings that this user owns</small>
+                        </header>
                         <ul>{listings}</ul>
                     </section>
                 </section>
