@@ -97,6 +97,14 @@ html, body {
     margin-top: -10px;
 }
 
+.fa2 {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+}
+
 button.notifications {
   color: $gray-lighter;
   &:hover, &:focus {
@@ -139,7 +147,7 @@ label {
 ==============================*/
 
 .label-draft, .label-pending, .label-needs-action, .label-published, .label-rejected {
-    @extend .fa;
+    @extend .fa2;
     padding-left: 0px !important;
     font-family: 'Ubuntu';
 
