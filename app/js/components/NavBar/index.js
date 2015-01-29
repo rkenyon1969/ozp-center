@@ -22,7 +22,7 @@ var NavBar = React.createClass({
     render: function () {
         /*jshint ignore:start */
         return (
-            <nav className="navbar navbar-default navbar-fixed-top" id="globalNav">
+            <nav className="navbar navbar-inverse navbar-fixed-top" id="globalNav">
                 <div className="container-fluid container" id="centered">
                     <div className="navbar-left">
                         <ul className="nav navbar-nav">
