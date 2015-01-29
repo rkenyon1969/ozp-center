@@ -23,6 +23,7 @@ $profile-header-height: 42px;
 
             > .close {
                 color: $gray-darkest;
+                margin-top: 0; //override default -10 margin
             }
 
             > * {

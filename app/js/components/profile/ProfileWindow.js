@@ -66,7 +66,7 @@ var ProfileInfo = React.createClass({
         if (profile) {
             return (
                 <section className="profile-info">
-                    <dl className="attributes">
+                    <dl>
                         <dt>Name</dt><dd>{profile.displayName}</dd>
                         <dt>Username</dt><dd>{profile.username}</dd>
                         <dt>Email</dt><dd>{profile.email || 'none available'}</dd>
