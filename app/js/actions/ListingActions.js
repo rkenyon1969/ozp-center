@@ -119,9 +119,6 @@ ListingActions = createActions({
     },
     save: function (data) {
         var isNew = !data.id;
-
-        if (isNew) { OzpAnalytics.trackListingCreation(data.title); }
-
         ListingApi
             .save(data)
             .then(ListingActions.saveCompleted.bind(null, isNew))
