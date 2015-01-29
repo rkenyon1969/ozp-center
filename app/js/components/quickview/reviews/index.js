@@ -80,7 +80,7 @@ var ReviewsTab = React.createClass({
 
     componentWillReceiveProps: function (newProps) {
         if (this.props.listing.id !== newProps.listing.id) {
-            ListingActions.fetchReviews(newProps.listing.id);
+            ListingActions.fetchReviews(newProps.listing);
         }
     },
 
@@ -88,7 +88,6 @@ var ReviewsTab = React.createClass({
         // only fetch reviews if not found in store
         if (this.props.listing.id && !this.state.reviews) {
             ListingActions.fetchReviews(this.props.listing.id);
-
             OzpAnalytics.trackListingReviewView(this.props.listing.title);
         }
     },

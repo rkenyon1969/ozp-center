@@ -76,14 +76,15 @@ ListingActions = createActions({
     },
 
     fetchReviews: function (listingId) {
-        ListingApi.getItemComments(listingId).then(ListingActions.fetchReviewsCompleted.bind(null, listingId));
+        ListingApi.fetchReviews(listingId).then(ListingActions.fetchReviewsCompleted.bind(null, listingId));
     },
-    saveReview: function (listingId, review) {
-        ListingApi.saveReview(listingId, review)
+    saveReview: function (listing, review) {
+        OzpAnalytics.trackListingReview(listing.title);
+        ListingApi.saveReview(listing.id, review)
             .then(function (response) {
-                ListingActions.fetchById(listingId);
-                ListingActions.fetchReviews(listingId);
-                ListingActions.saveReviewCompleted(listingId, response);
+                ListingActions.fetchById(listing.id);
+                ListingActions.fetchReviews(listing.id);
+                ListingActions.saveReviewCompleted(listing.id, response);
             })
             .fail(ListingActions.saveReviewFailed);
     },
@@ -132,8 +133,14 @@ ListingActions = createActions({
     },
     enable: setEnabled.bind(null, true),
     disable: setEnabled.bind(null, false),
-    approve: updateListingProperty.bind(null, 'approvalStatus', 'APPROVED'),
-    approveByOrg: updateListingProperty.bind(null, 'approvalStatus', 'APPROVED_ORG'),
+    approve: function (listing) {
+        OzpAnalytics.trackListingApproval(listing.title);
+        updateListingProperty('approvalStatus', 'APPROVED', listing);
+    },
+    approveByOrg: function (listing) {
+        OzpAnalytics.trackListingOrgApproval(listing.title);
+        updateListingProperty('approvalStatus', 'APPROVED_ORG', listing);
+    },
     setFeatured: updateListingProperty.bind(null, 'isFeatured')
 });
 

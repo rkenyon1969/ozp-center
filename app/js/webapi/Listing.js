@@ -112,7 +112,7 @@ var ListingApi = {
             .then((response) => new PaginatedResponse(response).getItemAsList());
     },
 
-    getItemComments: function (id) {
+    fetchReviews: function (id) {
         return $.getJSON(API_URL + '/api/listing/' + id + '/itemComment')
             .then((response) => new PaginatedResponse(response).getItemAsList());
     },
