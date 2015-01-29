@@ -184,7 +184,7 @@ var ChangeLog = React.createClass({
 
     render: function() {
 
-        if(this.props.children.length > 0) {
+        if(this.props.children != undefined) {
             var icon = this.props.children[0];
             var link = this.props.children[1];
         }
