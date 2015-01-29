@@ -17,6 +17,8 @@
 .CreateEdit__form {
     padding-top: 200px;
 
+    margin-bottom: 20px;
+
     label.input-optional::after {
         content: " (optional)";
         font-size: smaller;
@@ -88,7 +90,7 @@
 .image-remove {
     @extend .corner-button;
 
-    @extend .fa;
+    @extend .fa2;
     @extend .fa-trash-o;
 
     position: absolute;
