@@ -82,6 +82,7 @@ var CreateEditPage = React.createClass({
 
         var saveBtnClasses = {
             'btn': true,
+            'tool': true,
             'btn-success': !showSave(),
             'btn-danger': showSave()
         };
@@ -107,10 +108,15 @@ var CreateEditPage = React.createClass({
             <div className="CreateEdit__titlebar row">
                 <h1>{titleText}</h1>
                 <div className="alert alert-info alert-small" role="alert">All fields are required unless marked as “optional.”</div>
-                <div className="btn-group" role="group">
-                    <button type="button" className={ classSet(saveBtnClasses) } onClick={ this.onSave }><i className={saveText}></i></button>
-                  { showSubmit && <button className="btn btn-default" onClick={ this.onSubmit }><i className="icon-cloud-upload"> </i></button> }
-                    { showPreview && <button className="btn btn-default" onClick={ this.onPreview }><i className="icon-eye"> </i></button> }
+                <div className="btn-toolbar" role="group">
+                    <div className="btn-group" role="group">
+                      <button type="button" className={ classSet(saveBtnClasses) } onClick={ this.onSave }><i className={saveText}></i></button>
+                      { showPreview && <button className="btn btn-default tool" onClick={ this.onPreview }><i className="icon-eye"> </i></button> }
+                      { showSubmit && <button className="btn btn-default tool" onClick={ this.onSubmit }><i className="icon-cloud-upload"> </i></button> }
+                        </div>
+                    <div className="btn-group" role="group">
+                    <button type="button" className="btn btn-default" onClick={this.onClose}><i className="icon-layers"> </i> </button>
+                    </div>
                 </div>
             </div>
         );
