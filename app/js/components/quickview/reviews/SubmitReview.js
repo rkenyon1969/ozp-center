@@ -4,7 +4,7 @@ var React = require('react');
 var SystemHighMessage = require('../../shared/SystemHighMessage');
 var _ = require('../../../utils/_');
 var IconRating = require('../../shared/IconRating');
-
+var OzpAnalytics = require('../../../analytics/ozp-analytics');
 var ListingActions = require('../../../actions/ListingActions');
 
 var ReviewListing = React.createClass({
@@ -38,6 +38,8 @@ var ReviewListing = React.createClass({
 
     onSave: function () {
         ListingActions.saveReview(this.props.listing.id, this.state);
+
+        OzpAnalytics.trackListingReview(this.props.listing.title);
     },
 
     onReset: function () {

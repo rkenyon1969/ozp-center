@@ -11,6 +11,7 @@ var enableListing = ListingActions.enable;
 var disableListing = ListingActions.disable;
 var approveListingByOrg = ListingActions.approveByOrg;
 var approveListing = ListingActions.approve;
+var OzpAnalytics = require('../../analytics/ozp-analytics');
 var listingStatus = require('../../constants').approvalStatus;
 var { UserRole } = require('../../constants');
 var { form, Str, subtype, struct } = require('tcomb-form');
@@ -258,8 +259,12 @@ var AdministrationTab = React.createClass({
         event.preventDefault();
         if (listingStatus[this.props.listing.approvalStatus] === 'Pending, Organization') {
             approveListingByOrg(this.props.listing);
+
+            OzpAnalytics.trackListingOrgApproval(this.props.listing.title);
         } else {
             approveListing(this.props.listing);
+
+            OzpAnalytics.trackListingApproval(this.props.listing.title);
         }
     }
 
