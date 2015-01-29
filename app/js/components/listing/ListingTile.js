@@ -71,7 +71,7 @@ var ListingStatus = React.createClass({
     render: function () {
         /* jshint ignore:start */
         return (
-            <span className="AdminOwnerListingTile__approvalStatus" />
+            <div className="approvalStatus"></div>
         );
         /* jshint ignore:end */
     }
@@ -84,7 +84,7 @@ var EditedDate = React.createClass({
 
         /* jshint ignore:start */
         return (
-            <span className="AdminOwnerListingTile__editedDate">{editedDateString}</span>
+            <div className="editedDate">{editedDateString}</div>
         );
         /* jshint ignore:end */
     }
@@ -97,8 +97,8 @@ var InfoBar = React.createClass({
         /* jshint ignore:start */
         return (
             <h5 className="AdminOwnerListingTile__infoBar">
-                <span className="title">{listing.title}</span>
                 <ListingStatus listing={listing} />
+                <p className="title">{listing.title}</p>
                 <EditedDate listing={listing} />
             </h5>
         );

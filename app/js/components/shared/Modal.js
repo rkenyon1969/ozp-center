@@ -54,7 +54,7 @@ var BootstrapModal = React.createClass({
 
             if (this.props.confirm) {
                 buttons.push(
-                    <a href="javascript:;" role="button" className="btn btn-primary" onClick={this.handleConfirm}>
+                    <a href="javascript:;" role="button" className="btn btn-info" onClick={this.handleConfirm}>
                         {this.props.confirm}
                     </a>
                 );
