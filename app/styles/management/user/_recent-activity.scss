@@ -1,8 +1,9 @@
 .RecentActivity__SidebarFilter {
+    background: $gray-lightest;
 
     .filter-group {
-        background: $gray-lightest;
-        padding-top: 5px;
+        padding-top: 10px;
+        padding-bottom: 15px;
     }
 
     input[type="radio"] {

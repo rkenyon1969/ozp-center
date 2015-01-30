@@ -165,13 +165,13 @@ var ChangeLog = React.createClass({
     },
 
     getListingName: function() {
-        var href = this.makeHref(this.getActiveRoutePath(), this.getParams(), {
-            listing: this.props.changeLog.listing.id,
-            action: 'view',
-            tab: 'overview'
-        });
 
         if(this.props.showListingName) {
+            var href = this.makeHref(this.getActiveRoutePath(), this.getParams(), {
+                listing: this.props.changeLog.listing.id,
+                action: 'view',
+                tab: 'overview'
+            });
             return (
                 /* jshint ignore:start */
                 <a href={ href }>{ this.props.changeLog.listing.title }</a>
@@ -198,10 +198,10 @@ var ChangeLog = React.createClass({
         return (
             <li>
                 <div className="row">
-                    <div className="col-md-3">
+                    <div className={this.props.showListingName? "col-md-2" : "col-md-3"}>
                         <em>{ time }</em>
                     </div>
-                    <div className="col-md-9">
+                    <div className={this.props.showListingName ? "col-md-10" : "col-md-9"}>
                         { icon }
                         < Handler changeLog={ this.props.changeLog } listingName={ this.getListingName() } />
                         { link }
