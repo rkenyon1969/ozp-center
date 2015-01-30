@@ -5,7 +5,7 @@ var EmptyFieldValue = require('../shared/EmptyFieldValue');
 
 var Link = require('react-router').Link;
 
-var ActiveStateMixin = require('ozp-react-commons/mixins/ActiveStateMixin');
+var ActiveStateMixin = require('../../mixins/ActiveStateMixin');
 
 var DetailsTab = React.createClass({
     mixins: [ActiveStateMixin],

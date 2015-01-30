@@ -3,7 +3,7 @@
 var React = require('react');
 var moment = require('moment');
 var { Link, Navigation, CurrentPath } = require('react-router');
-var ActiveState = require('ozp-react-commons/mixins/ActiveStateMixin');
+var ActiveState = require('../../mixins/ActiveStateMixin');
 
 var ActionMenu = React.createClass({
 

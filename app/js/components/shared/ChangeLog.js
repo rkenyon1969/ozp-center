@@ -5,7 +5,7 @@ var uuid = require('../../utils/uuid');
 var timeAgo = require('../../utils/timeAgo');
 var fieldName = require('../../constants/index').listingFieldName;
 var { Link, Navigation, CurrentPath } = require('react-router');
-var ActiveState = require('ozp-react-commons/mixins/ActiveStateMixin');
+var ActiveState = require('../../mixins/ActiveStateMixin');
 
 var AuthorLink = React.createClass({
     mixins: [ActiveState],

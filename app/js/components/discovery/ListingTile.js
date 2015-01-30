@@ -2,7 +2,7 @@
 
 var React = require('react');
 var { Link, Navigation, CurrentPath } = require('react-router');
-var ActiveState = require('ozp-react-commons/mixins/ActiveStateMixin');
+var ActiveState = require('../../mixins/ActiveStateMixin');
 var _ = require('../../utils/_');
 var IconRating = require('../shared/IconRating');
 var launch = require('../../actions/ListingActions').launch;

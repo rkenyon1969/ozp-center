@@ -4,7 +4,7 @@ var React = require('react');
 var Reflux = require('reflux');
 var { Navigation, RouteHandler } = require('react-router');
 
-var State = require('ozp-react-commons/mixins/ActiveStateMixin');
+var State = require('../../mixins/ActiveStateMixin');
 var Tab = require('../../mixins/TabMixin');
 var _ = require('../../utils/_');
 

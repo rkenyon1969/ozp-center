@@ -37,7 +37,8 @@ module.exports = {
     },
     module: {
         preLoaders: [
-            { test: /\.js$/, loader: "jshint-loader", exclude: /node_modules|bower_components|gulp|dist/ }
+            { test: /\.js$/, loader: "jshint-loader", exclude: /node_modules|bower_components|gulp|dist/ },
+            { test: /\.js$/, loader: "jshint-loader", include: /node_modules\/ozp-react-commons/ }
         ],
         loaders: [
             { test: /\.gif/, loader: "url-loader?limit=10000&mimetype=image/gif" },

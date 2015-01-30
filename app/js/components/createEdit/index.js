@@ -14,7 +14,7 @@ var { Navigation } = require('react-router');
 var NavBar = require('../NavBar');
 var Header = require('../header');
 var { classSet } = React.addons;
-var State = require('ozp-react-commons/mixins/ActiveStateMixin');
+var State = require('../../mixins/ActiveStateMixin');
 var $ = require('jquery');
 
 var {

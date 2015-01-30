@@ -10,7 +10,7 @@ var GlobalListingStore = require('../../../stores/GlobalListingStore');
 var ChangeLog = require('../../shared/ChangeLog');
 var LoadMore = require('../../shared/LoadMore');
 var PaginatedChangeLogStore = require('../../../stores/PaginatedChangeLogStore');
-var ActiveState = require('ozp-react-commons/mixins/ActiveStateMixin');
+var ActiveState = require('../../../mixins/ActiveStateMixin');
 
 
 var RecentActivity = React.createClass({

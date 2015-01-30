@@ -3,7 +3,7 @@
 var React = require('react');
 var { Navigation } = require('react-router');
 
-var State = require('ozp-react-commons/mixins/ActiveStateMixin');
+var State = require('../../mixins/ActiveStateMixin');
 
 var FeaturedListingTile = React.createClass({
 

@@ -9,7 +9,7 @@ var SystemStateMixin = require('../mixins/SystemStateMixin');
 var { fetchLibrary } = require('../actions/SelfActions');
 
 var Quickview = require('../components/quickview');
-var ProfileWindow = require('ozp-react-commons/components/profile/ProfileWindow');
+var CenterProfileWindow = require('./profile/CenterProfileWindow');
 var CreateEditListing = require('./createEdit');
 var FeedbackModal = require('./management/user/FeedbackModal');
 var { ListingDeleteConfirmation } = require('./shared/DeleteConfirmation');
@@ -46,7 +46,7 @@ var App = React.createClass({
             }
         }
         else if (profile) {
-            return <ProfileWindow profileId={parseInt(profile, 10)} />
+            return <CenterProfileWindow profileId={parseInt(profile, 10)} />
         }
         /*jshint ignore:end */
     },
