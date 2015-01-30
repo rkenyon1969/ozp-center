@@ -161,7 +161,7 @@ var AdministrationTab = React.createClass({
                     statusClass = 'label-pending';
                 }
                 break;
-            case 'Pending, AppsMall':
+            case 'Pending, Marketplace':
                 if (isAdmin) {
                     controls = this.renderReviewSection();
                     statusClass = 'label-needs-action';
