@@ -9,7 +9,7 @@ var SystemStateMixin = require('../mixins/SystemStateMixin');
 var { fetchLibrary } = require('../actions/SelfActions');
 
 var Quickview = require('../components/quickview');
-var ProfileWindow = require('./profile/ProfileWindow');
+var ProfileWindow = require('ozp-react-commons/components/profile/ProfileWindow');
 var CreateEditListing = require('./createEdit');
 var FeedbackModal = require('./management/user/FeedbackModal');
 var { ListingDeleteConfirmation } = require('./shared/DeleteConfirmation');

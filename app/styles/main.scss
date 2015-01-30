@@ -9,6 +9,7 @@ $fa-font-path: "../../bower_components/font-awesome/fonts/";
 @import "../../bower_components/font-awesome/scss/font-awesome.scss";
 @import "../../node_modules/select2/select2.css";
 @import "../../node_modules/select2/select2-bootstrap.css";
+@import "../../node_modules/ozp-react-commons/app/styles/commons.scss";
 
 $header-height: 55px;
 $black: #191F25;
@@ -90,7 +91,6 @@ html, body {
 @import 'management/mall/mall-management';
 @import 'management/deleteConfirmation';
 @import 'management/all-listings/all-listings';
-@import 'profile-window';
 
 .close {
     font-size: 3em;

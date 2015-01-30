@@ -29,7 +29,8 @@ module.exports = {
             lodash: "lodash-amd/modern",
             "magnific-popup$": "magnific-popup/dist/jquery.magnific-popup",
             w2ui$: "w2ui/dist/w2ui",
-            classification$: "ozp-classification/jquery.classification.js"
+            classification$: "ozp-classification/jquery.classification.js",
+            'ozp-react-commons': 'ozp-react-commons/app/js'
         },
         // Configure webpack to look for required files in bower and node
         modulesDirectories: ['./bower_components', './node_modules']
@@ -42,7 +43,8 @@ module.exports = {
             { test: /\.gif/, loader: "url-loader?limit=10000&mimetype=image/gif" },
             { test: /\.jpg/, loader: "url-loader?limit=10000&mimetype=image/jpg" },
             { test: /\.png/, loader: "url-loader?limit=10000&mimetype=image/png" },
-            { test: /\.jsx?$/, loader: "jsx-loader?harmony=true&insertPragma=React.DOM", exclude: /node_modules|bower_components|gulp|dist/ }
+            { test: /\.jsx?$/, loader: "jsx-loader?harmony=true&insertPragma=React.DOM", exclude: /node_modules|bower_components|gulp|dist/ },
+            { test: /\.jsx?$/, loader: "jsx-loader?harmony=true&insertPragma=React.DOM", include: /node_modules\/ozp-react-commons/ }
         ],
         noParse: /\.min\.js/
     },
