@@ -5,7 +5,7 @@ var t = require('tcomb-form');
 var { Str, struct, subtype } = t;
 var Crud = require('../../shared/Crud');
 
-var { API_URL } = require('../../../OzoneConfig');
+var { API_URL } = require('OzoneConfig');
 
 // Organization Schema
 var Organization = struct({

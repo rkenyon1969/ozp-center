@@ -4,7 +4,7 @@ var React = require('react');
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
 var Modal = require('../shared/Modal');
 var { Link, Navigation, CurrentPath } = require('react-router');
-var { HUD_URL, METRICS_URL, HELP_URL } = require('../../OzoneConfig');
+var { HUD_URL, METRICS_URL, HELP_URL } = require('OzoneConfig');
 
 var UserMenu = React.createClass({
 

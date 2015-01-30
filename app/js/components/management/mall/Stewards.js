@@ -6,7 +6,7 @@ var { Str, struct, subtype, maybe, enums, list } = t;
 var { URL_REGEX } = require('../../../constants');
 var Crud = require('../../shared/Crud');
 
-var { API_URL } = require('../../../OzoneConfig');
+var { API_URL } = require('OzoneConfig');
 
 var Stewards = React.createClass({
 

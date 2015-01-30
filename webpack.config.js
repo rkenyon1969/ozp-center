@@ -64,5 +64,8 @@ module.exports = {
             minSizeReduce: 1.5,
             moveToParents: true
         })
-    ]
+    ],
+    externals: {
+        'OzoneConfig': 'OzoneConfig'
+    }
 };

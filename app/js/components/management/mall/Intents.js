@@ -9,7 +9,7 @@ var Crud = require('../../shared/Crud');
 var ImageApi = require('../../../webapi/Image').ImageApi;
 var ImageInput = require('../../createEdit/form/ImageInput');
 
-var { API_URL } = require('../../../OzoneConfig');
+var { API_URL } = require('OzoneConfig');
 
 var $ = require('jquery');
 
