@@ -5,7 +5,7 @@ var _ = require('../utils/_');
 var OzpAnalytics = require('../analytics/ozp-analytics');
 var PaginatedResponse  =require ('./responses/PaginatedResponse');
 
-var { API_URL } = require('../OzoneConfig');
+var { API_URL } = require('ozp-react-commons/OzoneConfig');
 
 var FIELDS = [
     'id', 'title', 'description', 'descriptionShort', 'screenshots', 'contacts', 'totalComments',

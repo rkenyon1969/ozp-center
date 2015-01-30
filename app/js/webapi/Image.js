@@ -1,7 +1,7 @@
 'use strict';
 
 var $ = require('jquery');
-var { API_URL } = require('../OzoneConfig');
+var { API_URL } = require('ozp-react-commons/OzoneConfig');
 
 var iframeCounter = 1;
 var IMAGE_URL = API_URL + '/api/image/';

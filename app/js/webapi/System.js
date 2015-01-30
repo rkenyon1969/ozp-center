@@ -3,7 +3,7 @@
 var $ = require('jquery');
 var Response = require('./responses/Response');
 
-var { API_URL } = require('../OzoneConfig');
+var { API_URL } = require('ozp-react-commons/OzoneConfig');
 
 function parse (response) {
     return new Response(response).getItemAsList();

@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react');
-var { HELP_URL } = require('../../OzoneConfig');
+var { HELP_URL } = require('ozp-react-commons/OzoneConfig');
 
 var HelpModal = React.createClass({
 
