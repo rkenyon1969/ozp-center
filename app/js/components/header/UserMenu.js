@@ -2,7 +2,7 @@
 
 var React = require('react');
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
-var Modal = require('../shared/Modal');
+var Modal = require('ozp-react-commons/components/Modal');
 var { Link, Navigation, CurrentPath } = require('react-router');
 var { HUD_URL, METRICS_URL, HELP_URL } = require('ozp-react-commons/OzoneConfig');
 

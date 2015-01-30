@@ -2,7 +2,7 @@
 
 var React = require('react');
 var GlobalListingStore = require('../../../stores/GlobalListingStore');
-var Modal = require('../../shared/Modal');
+var Modal = require('ozp-react-commons/components/Modal');
 var Router = require('react-router');
 var Navigation = Router.Navigation;
 var Link = Router.Link;

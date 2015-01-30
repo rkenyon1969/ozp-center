@@ -2,7 +2,7 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var Modal = require('../shared/Modal');
+var Modal = require('ozp-react-commons/components/Modal');
 var LoadMask = require('../LoadMask');
 var { pick, assign } = require('../../utils/_');
 var { approvalStatus } = require('../../constants');
@@ -14,7 +14,7 @@ var { Navigation } = require('react-router');
 var NavBar = require('../NavBar');
 var Header = require('../header');
 var { classSet } = React.addons;
-var State = require('../../mixins/ActiveStateMixin');
+var State = require('ozp-react-commons/mixins/ActiveStateMixin');
 var $ = require('jquery');
 
 var {

@@ -7,7 +7,7 @@ var Router = require('react-router');
 
 var AdminRoute = require('../../mixins/AdminRouteMixin');
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
-var ActiveState = require('../../mixins/ActiveStateMixin');
+var ActiveState = require('ozp-react-commons/mixins/ActiveStateMixin');
 
 var Sidebar = require('./shared/Sidebar');
 var ListingTile = require('../listing/ListingTile');

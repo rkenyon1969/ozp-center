@@ -4,12 +4,12 @@ var React = require('react');
 var Reflux = require('reflux');
 var { Navigation, RouteHandler } = require('react-router');
 
-var State = require('../../mixins/ActiveStateMixin');
+var State = require('ozp-react-commons/mixins/ActiveStateMixin');
 var Tab = require('../../mixins/TabMixin');
 var _ = require('../../utils/_');
 
 // component dependencies
-var Modal = require('../shared/Modal');
+var Modal = require('ozp-react-commons/components/Modal');
 var IconRating = require('../shared/IconRating');
 var Header = require('./Header');
 var { UserRole } = require('../../constants');
