@@ -75,15 +75,17 @@ ListingActions = createActions({
         ListingApi.getOwnedListings(profile).then(ListingActions.fetchOwnedListingsCompleted);
     },
 
-    fetchReviews: function (listingId) {
-        ListingApi.getItemComments(listingId).then(ListingActions.fetchReviewsCompleted.bind(null, listingId));
+    fetchReviews: function (listing) {
+        ListingApi.fetchReviews(listing.id).then(ListingActions.fetchReviewsCompleted.bind(null, listing.id));
+        if(typeof(listing.title) !== 'undefined') { OzpAnalytics.trackListingReview(listing.title);}
     },
-    saveReview: function (listingId, review) {
-        ListingApi.saveReview(listingId, review)
+    saveReview: function (listing, review) {
+        OzpAnalytics.trackListingReview(listing.title);
+        ListingApi.saveReview(listing.id, review)
             .then(function (response) {
-                ListingActions.fetchById(listingId);
-                ListingActions.fetchReviews(listingId);
-                ListingActions.saveReviewCompleted(listingId, response);
+                ListingActions.fetchById(listing.id);
+                ListingActions.fetchReviews(listing.id);
+                ListingActions.saveReviewCompleted(listing.id, response);
             })
             .fail(ListingActions.saveReviewFailed);
     },
@@ -115,10 +117,12 @@ ListingActions = createActions({
         ProfileApi
             .removeFromLibrary(listing)
             .then(ListingActions.removeFromLibraryCompleted.bind(null, listing));
-        OzpAnalytics.trackEvent('Favorited Applications', listing.title);
     },
     save: function (data) {
         var isNew = !data.id;
+
+        if (isNew) { OzpAnalytics.trackListingCreation(data.title); }
+
         ListingApi
             .save(data)
             .then(ListingActions.saveCompleted.bind(null, isNew))
@@ -132,8 +136,14 @@ ListingActions = createActions({
     },
     enable: setEnabled.bind(null, true),
     disable: setEnabled.bind(null, false),
-    approve: updateListingProperty.bind(null, 'approvalStatus', 'APPROVED'),
-    approveByOrg: updateListingProperty.bind(null, 'approvalStatus', 'APPROVED_ORG'),
+    approve: function (listing) {
+        OzpAnalytics.trackListingApproval(listing.title);
+        updateListingProperty('approvalStatus', 'APPROVED', listing);
+    },
+    approveByOrg: function (listing) {
+        OzpAnalytics.trackListingOrgApproval(listing.title);
+        updateListingProperty('approvalStatus', 'APPROVED_ORG', listing);
+    },
     setFeatured: updateListingProperty.bind(null, 'isFeatured')
 });
 

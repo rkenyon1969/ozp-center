@@ -22,7 +22,7 @@ describe('SubmitReview', function () {
         TestUtils.Simulate.click($(submitReview.getDOMNode()).find('.btn-success')[0]);
 
         expect(spy.calledOnce).to.be.ok;
-        expect(spy.calledWithMatch(1, {rate: 1, text: text})).to.be.ok;
+        expect(spy.calledWithMatch({id: 1}, {rate: 1, text: text})).to.be.ok;
 
         spy.restore();
     });
@@ -43,7 +43,7 @@ describe('SubmitReview', function () {
         TestUtils.Simulate.click($(submitReview.getDOMNode()).find('.btn-success')[0]);
 
         expect(spy.calledOnce).to.be.ok;
-        expect(spy.calledWithMatch(1, {rate: 0, text: ''})).to.be.ok;
+        expect(spy.calledWithMatch({id: 1}, {rate: 0, text: ''})).to.be.ok;
         spy.restore();
     });
 
