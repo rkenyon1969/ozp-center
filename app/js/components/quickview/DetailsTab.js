@@ -3,22 +3,12 @@
 var React = require('react');
 var EmptyFieldValue = require('../shared/EmptyFieldValue');
 
-var Link = require('react-router').Link;
-
-var ActiveStateMixin = require('../../mixins/ActiveStateMixin');
+var ProfileLink = require('../profile/ProfileLink');
 
 var DetailsTab = React.createClass({
-    mixins: [ActiveStateMixin],
 
     propTypes: {
         listing: React.PropTypes.object
-    },
-
-    getInitialState: function() {
-        return {
-            activeRoute: this.getActiveRoute(),
-            routeParams: this.getParams()
-        };
     },
 
     render: function () {
@@ -94,10 +84,9 @@ var DetailsTab = React.createClass({
             return (
                 <span className="listing-owner">
                     <span> </span>
-                    <Link to={state.activeRoute.name} params={state.routeParams}
-                            query={queryParams}>
+                    <ProfileLink profileId={owner.id}>
                         {owner.displayName}
-                    </Link>
+                    </ProfileLink>
                 </span>
             );
             /* jshint ignore:end */

@@ -4,21 +4,15 @@ var actions = require('../../constants/index').listingActions;
 var uuid = require('../../utils/uuid');
 var timeAgo = require('../../utils/timeAgo');
 var fieldName = require('../../constants/index').listingFieldName;
-var { Link, Navigation, CurrentPath } = require('react-router');
+
+var { Navigation, CurrentPath } = require('react-router');
+var ProfileLink = require('../profile/ProfileLink');
+
 var ActiveState = require('../../mixins/ActiveStateMixin');
 
 var AuthorLink = React.createClass({
-    mixins: [ActiveState],
-
     propTypes: {
         author: React.PropTypes.object.isRequired
-    },
-
-    getInitialState: function() {
-        return {
-            activeRoute: this.getActiveRoute(),
-            routeParams: this.getParams()
-        };
     },
 
     render: function() {
@@ -27,10 +21,9 @@ var AuthorLink = React.createClass({
 
         /* jshint ignore:start */
         return (
-            <Link to={this.state.activeRoute.name} params={this.state.routeParams}
-                    query={queryParams}>
+            <ProfileLink profileId={author.id}>
                 {author.displayName}
-            </Link>
+            </ProfileLink>
         );
         /* jshint ignore:end */
     }
