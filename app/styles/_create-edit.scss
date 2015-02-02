@@ -53,10 +53,14 @@
         padding-bottom: 15px;
     }
 
-    .btn-group {
+    .btn-toolbar {
         position: absolute;
         right: 30px;
         top: 20px;
+    }
+    
+    button.tool{
+      width: 75px;
     }
 }
 

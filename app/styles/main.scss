@@ -197,13 +197,16 @@ label {
 .btn-bookmark {
     color: $gray-darker;
     background-color: $white;
+    padding-bottom: 6px;
 
     &:active, &:focus, &:hover, &.bookmarked {
         background-color: $blue-dark;
+        
     }
 
     &.bookmarked {
         color: $yellow;
+        border: $blue-darker 1px solid;
     }
 }
 

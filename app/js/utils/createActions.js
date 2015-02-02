@@ -5,10 +5,10 @@ var _ = require('./_');
 
 function createAsyncActions(definitions) {
     return _.reduce(definitions, function (actions, callback, name) {
-        actions[name] = createAction();
+        actions[name] = createAction({ sync: true });
         actions[name].listen(callback);
-        actions[name + 'Completed'] = createAction();
-        actions[name + 'Failed'] = createAction();
+        actions[name + 'Completed'] = createAction({ sync: true });
+        actions[name + 'Failed'] = createAction({ sync: true });
 
         return actions;
     }, {});

@@ -60,7 +60,7 @@ var EditReview = React.createClass({
     },
 
     onSave: function () {
-        ListingActions.saveReview(this.props.listing.id, this.state.review);
+        ListingActions.saveReview(this.props.listing, this.state.review);
     },
 
     onSaveReviewCompleted: function (listingId, review) {

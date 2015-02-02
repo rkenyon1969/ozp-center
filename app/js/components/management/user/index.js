@@ -21,7 +21,7 @@ var ListingManagement = React.createClass({
                 name: 'Recent Activity'
             }, {
                 to: 'all-listings',
-                name: 'All AML Listings'
+                name: 'All Marketplace Listings'
             }, {
                 to: 'my-listings',
                 name: 'My Listings'
@@ -50,10 +50,10 @@ var ListingManagement = React.createClass({
                     return orgObj.title === orgName;
                 });
 
-                tabs.splice(1, 0,
+                tabs.splice(2, 0,
                 {
                     to: 'org-listings',
-                    name: 'All ' + org.shortName + ' Listings',
+                    name: org.shortName + ' Listings',
                     params: {
                         org: org.title
                     }
