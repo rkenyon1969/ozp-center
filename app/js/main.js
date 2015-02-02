@@ -10,7 +10,7 @@ require('bootstrap');
 require('classification');
 var _ = require('./utils/_');
 var SelfActions = require('./actions/SelfActions');
-var { METRICS_URL } = require('./OzoneConfig');
+var { METRICS_URL } = require('ozp-react-commons/OzoneConfig');
 
 window.jQuery = jQuery;
 window.$ = jQuery;
