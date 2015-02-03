@@ -61,12 +61,12 @@
   },
   "dependencies": {
     "bootstrap-sass": "git://github.com/ozone-development/bootstrap-sass#314905a9aa6cf0efb98806d6998a31b8f9532a97",
-    "ozp-react-commons": "git://github.com/ozone-development/ozp-react-commons#13e8f54c4b1de68c6ceeef71757a6167d74c06f5",
     "exports-loader": "0.6.2",
     "gulp-preprocess": "1.2.0",
     "lodash-amd": "2.4.1",
     "moment": "2.9.0",
     "object-assign": "1.0.0",
+    "ozp-react-commons": "git://github.com/ozone-development/ozp-react-commons#13e8f54c4b1de68c6ceeef71757a6167d74c06f5",
     "react": "0.12.2",
     "react-icon-rating": "0.2.0",
     "react-radio-group": "1.0.0",
