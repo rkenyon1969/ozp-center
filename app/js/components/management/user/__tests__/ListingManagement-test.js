@@ -27,6 +27,8 @@ describe('ListingManagement', function () {
         });
         expect($(listingManagement.getDOMNode()).find('a[href="/user-management/all-listings"]')[0]).to.exist;
         router.teardown();
+
+        ProfileMock.restore();
     });
 
     it('does not render all apps mall tab for users', function () {
@@ -39,6 +41,8 @@ describe('ListingManagement', function () {
             $(listingManagement.getDOMNode()).find('a[href="/user-management/all-listings"]')[0]
         ).to.not.exist;
         router.teardown();
+
+        ProfileMock.restore();
     });
 
     // it('renders a tabs for org stewards', function () {

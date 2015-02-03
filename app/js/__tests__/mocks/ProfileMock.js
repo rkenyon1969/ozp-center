@@ -47,6 +47,9 @@ var profile = {
         profile.isAdmin = false;
         profile.stewardedOrganizations = stewardedOrganizations || [];
         return profile;
+    },
+    restore: function () {
+        this.mockAdmin();
     }
 
 };

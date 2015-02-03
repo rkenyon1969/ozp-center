@@ -42,6 +42,8 @@ describe('EditReview', function () {
         expect(iconRating.props.currentRating).to.equal(4);
 
         expect(editReview.refs.text.getDOMNode().value).to.equal(userReview.text);
+
+        ProfileMock.restore();
     });
 
     it('shows lock icon for non review owners', function () {
@@ -56,6 +58,8 @@ describe('EditReview', function () {
         editReview = render({id: 1}, userReview, ProfileMock.mockAdmin());
         $el = $(editReview.getDOMNode());
         expect($el.find('.fa-lock').length).to.equal(1);
+
+        ProfileMock.restore();
     });
 
     it('executes onSave prop when review is saved', function (done) {
@@ -68,6 +72,8 @@ describe('EditReview', function () {
             expect(spy.calledOnce).to.be.ok;
             done();
         }, 20);
+
+        ProfileMock.restore();
     });
 
 });

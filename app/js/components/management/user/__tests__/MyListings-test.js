@@ -27,6 +27,8 @@ describe('MyListings', function () {
         });
         expect($(listingManagement.getDOMNode()).find('.MyListings__sidebar')[0]).to.exist;
         router.teardown();
+
+        ProfileMock.restore();
     });
 
 });

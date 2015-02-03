@@ -21,7 +21,7 @@ var App = React.createClass({
         /*jshint ignore:start */
         return (
             <div id="App">
-                <RouteHandler system={this.state.system} currentUser={this.state.currentUser} />
+                <RouteHandler system={this.state.system} currentUser={this.state.currentUser} {...this.props} />
                 { this.renderModal() }
             </div>
         );

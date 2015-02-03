@@ -11,7 +11,7 @@ describe('OrgListingsSidebar', function() {
             <Sidebar
                 counts = { {} }
                 listings = { [] }
-                value = { {approvalStatus: null, org: null, enabled: null} }
+                value = { {approvalStatus: null, org: null, enabled: undefined} }
                 organizations = { [] }
                 view = 'adminView'
             />
@@ -33,7 +33,7 @@ describe('OrgListingsSidebar', function() {
                     'enabled': 1
                 } }
                 listings = { [] }
-                value = { {approvalStatus: null, org: null, enabled: null} }
+                value = { {approvalStatus: null, org: null, enabled: undefined} }
                 organizations = { [
                 {
                     'id' : 1,
@@ -60,7 +60,7 @@ describe('OrgListingsSidebar', function() {
                     'enabled': 1
                 } }
                 listings = { [] }
-                value = { {approvalStatus: null, org: null, enabled: null} }
+                value = { {approvalStatus: null, org: null, enabled: undefined} }
                 organizations = { [
                 {
                     'id' : 1,
