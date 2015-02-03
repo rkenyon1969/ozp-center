@@ -50,9 +50,10 @@ var ChangeLogs = React.createClass({
 
         return this.state.changeLogs.map(function (changeLog, i) {
             /* jshint ignore:start */
-            return (
-                <ChangeLog showListingName={me.props.showListingName} changeLog={changeLog} />
-            );
+            return [
+                <ChangeLog showListingName={me.props.showListingName} changeLog={changeLog} />,
+                <br />
+            ];
             /* jshint ignore:end */
         });
     }

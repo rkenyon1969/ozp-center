@@ -4,14 +4,14 @@ var React = require('react');
 var expect = require('chai').expect;
 var TestUtils = React.addons.TestUtils;
 
-describe('Sidebar', function() {
+describe('AllListingsSidebar', function() {
     it('renders status filter', function() {
         var Sidebar = require('../shared/Sidebar');
         var Sidebar = TestUtils.renderIntoDocument(
             <Sidebar
                 counts = { {} }
                 listings = { [] }
-                value = { {approvalStatus: null, org: null, enabled: null} }
+                value = { {approvalStatus: null, org: null, enabled: undefined} }
                 organizations = { [] }
                 view = 'adminView'
             />
@@ -26,7 +26,7 @@ describe('Sidebar', function() {
         var Sidebar = TestUtils.renderIntoDocument(
             <Sidebar
                 counts = { {
-                    'APPROVLED': 1,
+                    'APPROVED': 1,
                     'organizations': {
                         '1': 1
                     },
@@ -34,7 +34,7 @@ describe('Sidebar', function() {
                     'enabled': 1
                 } }
                 listings = { [] }
-                value = { {approvalStatus: null, org: null, enabled: null} }
+                value = { {approvalStatus: null, org: null, enabled: undefined} }
                 organizations = { [
                     {
                     'id' : 1,
@@ -55,7 +55,7 @@ describe('Sidebar', function() {
         var Sidebar = TestUtils.renderIntoDocument(
             <Sidebar
                 counts = { {
-                    'APPROVLED': 1,
+                    'APPROVED': 1,
                     'organizations': {
                         '1': 1
                     },
@@ -63,7 +63,7 @@ describe('Sidebar', function() {
                     'enabled': 1
                 } }
                 listings = { [] }
-                value = { {approvalStatus: null, org: null, enabled: null} }
+                value = { {approvalStatus: null, org: null, enabled: undefined} }
                 organizations = { [
                     {
                     'id' : 1,
@@ -84,7 +84,7 @@ describe('Sidebar', function() {
         var Sidebar = TestUtils.renderIntoDocument(
             <Sidebar
             counts = { {
-                'APPROVLED': 1,
+                'APPROVED': 1,
                 'organizations': {
                     '1': 1
                 },
@@ -92,7 +92,7 @@ describe('Sidebar', function() {
                 'enabled': 1
             } }
             listings = { [] }
-            value = { {approvalStatus: null, org: null, enabled: null} }
+            value = { {approvalStatus: null, org: null, enabled: undefined} }
             organizations = { [
             {
                 'id' : 1,

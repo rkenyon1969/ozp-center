@@ -36,6 +36,7 @@ describe('Reviews Tab', function () {
         expect(TestUtils.findRenderedComponentWithType.bind(TestUtils, reviewsTab, EditReview)).to.throw(Error);
 
         spy.restore();
+        ProfileMock.restore();
     });
 
     it('does not display EditReview by default if user has a review for the listing', function () {
@@ -52,6 +53,7 @@ describe('Reviews Tab', function () {
         expect(TestUtils.findRenderedComponentWithType.bind(TestUtils, reviewsTab, EditReview)).to.throw(Error);
 
         spy.restore();
+        ProfileMock.restore();
     });
 
     it('displays EditReview when edit icon is clicked', function () {
@@ -68,6 +70,7 @@ describe('Reviews Tab', function () {
         expect(TestUtils.findRenderedComponentWithType(reviewsTab, EditReview)).be.ok;
 
         spy.restore();
+        ProfileMock.restore();
     });
 
 });

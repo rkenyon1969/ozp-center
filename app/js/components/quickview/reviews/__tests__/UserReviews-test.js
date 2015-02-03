@@ -47,6 +47,8 @@ describe('UserReviews', function () {
             <UserReviews reviews={reviews} user={ProfileMock} listing={{agency:'Test Organization'}} onEdit={$.noop} />
         );
         expect($(userReviews.getDOMNode()).find('.fa-pencil').length).to.equal(3);
+        ProfileMock.restore();
+
     });
 
     it('users can only edit their own review', function () {
@@ -65,6 +67,8 @@ describe('UserReviews', function () {
             <UserReviews.UserReview review={adminReview} user={ProfileMock} listing={{}} onEdit={$.noop} />
         );
         expect($(review.getDOMNode()).find('.fa-pencil').length).to.equal(0);
+        ProfileMock.restore();
+
     });
 
 });

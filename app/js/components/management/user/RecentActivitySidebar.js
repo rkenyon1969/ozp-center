@@ -88,7 +88,7 @@ var RecentActivitySidebar = React.createClass({
         return (
             <form className="RecentActivity__SidebarFilter">
             <div className="filter-group">
-                <h4>AppsMall Overview</h4>
+                <h4>Marketplace Overview</h4>
                 <AllListingsSidebarFilter handleChange={this.handleChange} />
             </div>
             <div className="filter-group">

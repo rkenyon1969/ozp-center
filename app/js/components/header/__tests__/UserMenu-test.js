@@ -27,6 +27,7 @@ describe('UserMenu', function () {
         });
         expect($(userMenu.getDOMNode()).find('a[href="/mall-management/categories"]')[0]).to.exist;
         router.teardown();
+        ProfileMock.restore();
     });
 
     it('does not render management link for users', function () {
@@ -39,6 +40,7 @@ describe('UserMenu', function () {
             $(userMenu.getDOMNode()).find('a[href="/mall-management/categories"]')[0]
         ).to.not.exist;
         router.teardown();
+        ProfileMock.restore();
     });
 
 });

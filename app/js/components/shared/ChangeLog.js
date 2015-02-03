@@ -32,12 +32,11 @@ var AuthorLink = React.createClass({
 var ActionChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
-        var listingChange = ' ' + changeLog.action.toLowerCase() + ' ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
         return (
             /* jshint ignore:start */
             <div>
                 <AuthorLink author={changeLog.author} />
-                { listingChange }
+                { changeLog.action.toLowerCase() } { this.props.listingName }
             </div>
             /* jshint ignore:end */
         );
@@ -47,12 +46,11 @@ var ActionChangeLog = React.createClass({
 var SetToChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
-        var listingChange = ' set ' + (this.props.showListingName ? changeLog.listing.title : 'the listing') + ' to ' + changeLog.action.toLowerCase();
         return (
             /* jshint ignore:start */
             <div>
                 <AuthorLink author={changeLog.author} />
-                { listingChange }
+                set { this.props.listingName } to {changeLog.action.toLowerCase()}
             </div>
             /* jshint ignore:end */
         );
@@ -73,9 +71,8 @@ var RejectedChangeLog = React.createClass({
             <div>
                 <div>
                     <AuthorLink author={changeLog.author} />
-                    <span> rejected </span>
-                    { (this.props.showListingName ? changeLog.listing.title : 'the listing') }
-                </div>,
+                    rejected { this.props.listingName }
+                </div>
                 <a href="javascript:;" data-toggle="collapse" data-target={ '#' + id } onClick={ this.toggleIcon }>
                     <i className="fa fa-plus"></i> Feedback
                 </a>,
@@ -91,12 +88,11 @@ var RejectedChangeLog = React.createClass({
 var OrgApprovalChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
-        var listingChange = ' approved ' + (this.props.showListingName ? changeLog.listing.title : 'the listing') + ' for ' + changeLog.listing.agency;
         return (
             /* jshint ignore:start */
             <div>
                 <AuthorLink author={changeLog.author} />
-                { listingChange }
+                approved { this.props.listingName } for { changeLog.listing.agency }
             </div>
             /* jshint ignore:end */
         );
@@ -168,12 +164,11 @@ var ModifiedChangeLog = React.createClass({
 var ReviewEditedChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
-        var listingChange = ' edited ' + (changeLog.changeDetails[0] === undefined) ? ' ' : changeLog.changeDetails[0].fieldName + ' in ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
         return (
             /* jshint ignore:start */
             <div>
                 <AuthorLink author={changeLog.author} />
-                { listingChange }
+                edited { (changeLog.changeDetails[0] === undefined) ? ' ' : changeLog.changeDetails[0].fieldName } in { this.props.listingName }
             </div>
             /* jshint ignore:end */
         );
@@ -183,27 +178,11 @@ var ReviewEditedChangeLog = React.createClass({
 var ReviewDeletedChangeLog = React.createClass({
     render: function() {
         var changeLog = this.props.changeLog;
-        var listingChange = ' removed ' + changeLog.changeDetails[0].newValue + '\'s review from ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
         return (
             /* jshint ignore:start */
             <div>
                 <AuthorLink author={changeLog.author} />
-                { listingChange }
-            </div>
-            /* jshint ignore:end */
-        );
-    }
-});
-
-var ScorecardUpdateChangeLog = React.createClass({
-    render: function() {
-        var changeLog = this.props.changeLog;
-        var listingChange = ' updated local scorecard question in ' + (this.props.showListingName ? changeLog.listing.title : 'the listing');
-        return (
-            /* jshint ignore:start */
-            <div>
-                <AuthorLink author={changeLog.author} />
-                { listingChange }
+                removed { changeLog.changeDetails[0].newValue } review from { this.props.listingName }
             </div>
             /* jshint ignore:end */
         );
@@ -212,6 +191,9 @@ var ScorecardUpdateChangeLog = React.createClass({
 
 
 var ChangeLog = React.createClass({
+
+
+    mixins: [ Navigation, ActiveState],
 
     actionMapAdmin: {
         'MODIFIED' : ModifiedChangeLog,
@@ -228,7 +210,30 @@ var ChangeLog = React.createClass({
         'REVIEW_DELETED' : ReviewDeletedChangeLog,
     },
 
+    getListingName: function() {
+
+        if(this.props.showListingName) {
+            var href = this.makeHref(this.getActiveRoutePath(), this.getParams(), {
+                listing: this.props.changeLog.listing.id,
+                action: 'view',
+                tab: 'overview'
+            });
+            return (
+                /* jshint ignore:start */
+                <a href={ href }>{ this.props.changeLog.listing.title }</a>
+                /* jshint ignore:end */
+            );
+        } else {
+            return 'the listing';
+        }
+    },
+
     render: function() {
+
+        if(this.props.children !== undefined) {
+            var icon = this.props.children[0];
+            var link = this.props.children[1];
+        }
 
         var time = timeAgo(this.props.changeLog.activityDate);
         var Handler = this.actionMapAdmin[this.props.changeLog.action];
@@ -239,12 +244,13 @@ var ChangeLog = React.createClass({
         return (
             <li>
                 <div className="row">
-                    <div className="col-md-3">
+                    <div className={this.props.showListingName? "col-md-2" : "col-md-3"}>
                         <em>{ time }</em>
                     </div>
-                    <div className="col-md-9">
-                        < Handler changeLog={ this.props.changeLog } showListingName={ this.props.showListingName } />
-                        { this.props.children }
+                    <div className={this.props.showListingName ? "col-md-10" : "col-md-9"}>
+                        { icon }
+                        < Handler changeLog={ this.props.changeLog } listingName={ this.getListingName() } />
+                        { link }
                     </div>
                 </div>
             </li>
