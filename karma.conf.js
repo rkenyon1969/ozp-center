@@ -22,7 +22,10 @@ module.exports = function (config) {
                 loaders: webpackOptions.module.loaders,
                 noParse: webpackOptions.module.noParse
             },
-            plugins: webpackOptions.plugins
+            plugins: webpackOptions.plugins,
+            externals: {
+                'OzoneConfig': 'OzoneConfig'
+            }
         },
         webpackServer: {
             stats: {

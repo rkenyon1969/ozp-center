@@ -5,7 +5,7 @@
 .Listings__SidebarFilter {
   padding: $padding-small-vertical $padding-small-horizontal;
   background: $gray-lightest;
-  
+
     input[type="radio"] {
         display: none;
     }
@@ -29,6 +29,7 @@
 
         span {
             line-height: 20px;
+            color: $gray-dark;
         }
 
         &::before {
@@ -50,16 +51,13 @@
         border-left-color: $blue;
     }
 
-    .label-pending strong {
-        background-color: $blue-dark;
-    }
-
-    .label-needs-action strong {
-        background-color: $red-orange-dark;
-    }
-
-    .label-published strong {
-        background-color: $green-dark;
+    .label-needs-action {
+        > span {
+            color: $red-orange-dark;
+        }
+        > strong {
+            background-color: $red-orange-dark;
+        }
     }
 }
 

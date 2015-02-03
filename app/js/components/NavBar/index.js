@@ -5,7 +5,7 @@ var React = require('react');
 var Reflux = require('reflux');
 var Alerts = require('../alerts');
 var HelpModal = require('./helpmodal');
-var { HUD_URL, METRICS_URL, HELP_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL } = require('../../OzoneConfig');
+var { HUD_URL, METRICS_URL, HELP_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL } = require('OzoneConfig');
 
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
 
@@ -22,7 +22,7 @@ var NavBar = React.createClass({
     render: function () {
         /*jshint ignore:start */
         return (
-            <nav className="navbar navbar-default navbar-fixed-top" id="globalNav">
+            <nav className="navbar navbar-inverse navbar-fixed-top" id="globalNav">
                 <div className="container-fluid container" id="centered">
                     <div className="navbar-left">
                         <ul className="nav navbar-nav">

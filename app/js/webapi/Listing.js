@@ -5,7 +5,7 @@ var _ = require('../utils/_');
 var OzpAnalytics = require('../analytics/ozp-analytics');
 var PaginatedResponse  =require ('./responses/PaginatedResponse');
 
-var { API_URL } = require('../OzoneConfig');
+var { API_URL } = require('OzoneConfig');
 
 var FIELDS = [
     'id', 'title', 'description', 'descriptionShort', 'screenshots', 'contacts', 'totalComments',
@@ -41,6 +41,14 @@ function parseList (response) {
     return new PaginatedResponse(response, Listing).getItemAsList();
 }
 
+var delaySearch = (function(){
+    var timer = 0;
+    return function(callback, ms){
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+    };
+})();
+
 var ListingApi = {
 
     getFeatured: function () {
@@ -57,7 +65,6 @@ var ListingApi = {
         return $.getJSON(API_URL + '/api/listing/search?sort=avgRate&order=DESC&max=24')
             .then(parseList);
     },
-
     search: function (options) {
         var params = $.param(options, true);
         return $.getJSON(API_URL + '/api/listing/search?' + params)
@@ -66,7 +73,9 @@ var ListingApi = {
                     OzpAnalytics.trackCategorization('Categorization', options.category, response.total);
                 }
                 else {
-                    OzpAnalytics.trackSiteSearch('Application Search', options.queryString, response.total);
+                    delaySearch(function(){
+                        OzpAnalytics.trackSiteSearch('Application Search', options.queryString, response.total);
+                    }, 800);
                 }
                 return response;
             })
@@ -103,7 +112,7 @@ var ListingApi = {
             .then((response) => new PaginatedResponse(response).getItemAsList());
     },
 
-    getItemComments: function (id) {
+    fetchReviews: function (id) {
         return $.getJSON(API_URL + '/api/listing/' + id + '/itemComment')
             .then((response) => new PaginatedResponse(response).getItemAsList());
     },

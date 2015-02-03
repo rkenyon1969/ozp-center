@@ -17,6 +17,8 @@
 .CreateEdit__form {
     padding-top: 200px;
 
+    margin-bottom: 20px;
+
     label.input-optional::after {
         content: " (optional)";
         font-size: smaller;
@@ -51,10 +53,14 @@
         padding-bottom: 15px;
     }
 
-    .btn-group {
+    .btn-toolbar {
         position: absolute;
         right: 30px;
         top: 20px;
+    }
+    
+    button.tool{
+      width: 75px;
     }
 }
 
@@ -88,7 +94,7 @@
 .image-remove {
     @extend .corner-button;
 
-    @extend .fa;
+    @extend .fa2;
     @extend .fa-trash-o;
 
     position: absolute;

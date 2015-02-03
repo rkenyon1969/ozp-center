@@ -4,7 +4,6 @@ var React = require('react');
 var SystemHighMessage = require('../../shared/SystemHighMessage');
 var _ = require('../../../utils/_');
 var IconRating = require('../../shared/IconRating');
-
 var ListingActions = require('../../../actions/ListingActions');
 
 var ReviewListing = React.createClass({
@@ -37,7 +36,7 @@ var ReviewListing = React.createClass({
     },
 
     onSave: function () {
-        ListingActions.saveReview(this.props.listing.id, this.state);
+        ListingActions.saveReview(this.props.listing, this.state);
     },
 
     onReset: function () {

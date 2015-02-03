@@ -1,7 +1,5 @@
 #globalNav {
 	top: 20px !important;
-	background: $gray-darkest;
-	border-bottom: $gray-base;
 }
 
 #active {
@@ -9,11 +7,8 @@
 	border-top-color: $blue !important;
 }
 
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-	border-top: 4px solid $blue !important;
-}
 
-.navbar-default .navbar-nav
+.navbar-inverse .navbar-nav
 {
 	& li:hover, & li:hover, & ul.dropdown-menu > li > a:hover{
 		border-left-color: $blue !important;
@@ -23,19 +18,6 @@
 		border-top-color: $blue !important;
 	}
 	
-		& > .open > a {
-			
-			background-color: $gray-darker !important;
-			border-top: 4px solid $blue !important;
-			color: $blue !important;
-			
-			&:hover, &:focus {
-				background-color: $gray-darker !important;
-				border-top: 4px solid $blue !important;
-				color: $blue !important;
-			}
-			
-		}
 }
 
 .navbar-left {
@@ -50,7 +32,7 @@
 	color: $blue;
 }
 
-.navbar-default .navbar-nav {
+.navbar-inverse .navbar-nav {
 	
 	& li > a {
 		
@@ -75,18 +57,14 @@
 			
 			&:hover, &:focus{
 				border-left: $blue;
-				background-color: $gray-darker;
 			}
 			
 			& > a {
 				color: $white;
-				font-weight: 300 !important;
 				
 				
 				&:hover, &:focus{
 					color: $white;
-					background-color: $gray-darker;
-					font-weight: 300 !important;
 				}
 				
 				& > i:hover, & > i:focus{

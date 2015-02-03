@@ -4,7 +4,7 @@ var React = require('react');
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
 var Modal = require('../shared/Modal');
 var { Link, Navigation, CurrentPath } = require('react-router');
-var { HUD_URL, METRICS_URL, HELP_URL } = require('../../OzoneConfig');
+var { HUD_URL, METRICS_URL, HELP_URL } = require('OzoneConfig');
 
 var UserMenu = React.createClass({
 
@@ -48,7 +48,7 @@ var UserMenu = React.createClass({
                             <li><Link to="my-listings"><i className="icon-stack"></i> Listing Managment</Link></li>
                             {
                                 this.state.currentUser.isAdmin &&
-                                <li><Link to="categories"><i className="icon-shopping-settings"></i> AppsMall Management</Link></li>
+                                <li><Link to="categories"><i className="icon-shopping-settings"></i> Marketplace Settings</Link></li>
                             }
                             <li><a href={METRICS_URL} target="_blank"><i className="icon-bar-graph"></i> Metrics</a></li>
                         </ul>
