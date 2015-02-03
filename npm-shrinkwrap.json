@@ -7340,8 +7340,8 @@
     },
     "ozp-react-commons": {
       "version": "0.0.1",
-      "from": "git://github.com/ozone-development/ozp-react-commons#13e8f54c4b1de68c6ceeef71757a6167d74c06f5",
-      "resolved": "git://github.com/ozone-development/ozp-react-commons#13e8f54c4b1de68c6ceeef71757a6167d74c06f5",
+      "from": "git://github.com/ozone-development/ozp-react-commons#v0.1.0",
+      "resolved": "git://github.com/ozone-development/ozp-react-commons#v0.1.0",
       "dependencies": {
         "bootstrap-sass": {
           "version": "3.3.1",
