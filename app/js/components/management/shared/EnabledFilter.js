@@ -14,32 +14,33 @@ var EnabledFilter = React.createClass({
         this.props.onFilterChanged('enabled', value);
     },
 
-    render: function() {
-        var counts = this.props.counts;
+    render: function () {
+        var {counts, value} = this.props;
 
         return (
             /*jshint ignore:start */
             <div>
-            <h4 style={{marginTop: 30}}>Enabled</h4>
-            <RadioGroup name="enabled"
-                value={ (this.props.value.enabled === undefined) ? 'null' : this.props.value.enabled.toString() }
-                onChange={ this.handleEnabledChange }>
-                <input id="all-listings-filter-enabled-all" type="radio" value="null"/>
-                <label htmlFor="all-listings-filter-enabled-all" className="label-all">
-                    All
-                    <strong className="badge">{ counts.total }</strong>
-                </label>
-                <input id="all-listings-filter-enabled-enabled" type="radio" value="true"/>
-                <label htmlFor="all-listings-filter-enabled-enabled" className="label-enabled">
-                    Enabled
-                    <strong className="badge">{ counts.enabled }</strong>
-                </label>
-                <input id="all-listings-filter-enabled-disabled" type="radio" value="false"/>
-                <label htmlFor="all-listings-filter-enabled-disabled" className="label-disabled">
-                    Disabled
-                    <strong className="badge">{ counts.disabled || 0 }</strong>
-                </label>
-            </RadioGroup>
+                <h4 style={{marginTop: 30}}>Enabled</h4>
+                <RadioGroup
+                    name="enabled"
+                    value={ (!this.props.value.enabled) ? 'null' : this.props.value.enabled.toString() }
+                    onChange={ this.handleEnabledChange }>
+                    <input id="all-listings-filter-enabled-all" type="radio" value="null"/>
+                    <label htmlFor="all-listings-filter-enabled-all" className="label-all">
+                        All
+                        <strong className="badge">{ counts.total }</strong>
+                    </label>
+                    <input id="all-listings-filter-enabled-enabled" type="radio" value="true"/>
+                    <label htmlFor="all-listings-filter-enabled-enabled" className="label-enabled">
+                        Enabled
+                        <strong className="badge">{ counts.enabled }</strong>
+                    </label>
+                    <input id="all-listings-filter-enabled-disabled" type="radio" value="false"/>
+                    <label htmlFor="all-listings-filter-enabled-disabled" className="label-disabled">
+                        Disabled
+                        <strong className="badge">{ counts.disabled || 0 }</strong>
+                    </label>
+                </RadioGroup>
             </div>
             /*jshint ignore:end */
         );

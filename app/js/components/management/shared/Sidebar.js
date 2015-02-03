@@ -28,7 +28,6 @@ var Sidebar = React.createClass({
         }
 
         if(this.props.view === 'adminView' || this.props.view === 'orgView') {
-
             var counts = this.props.counts || {};
             counts.disabled = counts.total - counts.enabled;
             this.props.counts = counts;
