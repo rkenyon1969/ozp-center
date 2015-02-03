@@ -36,7 +36,8 @@ var ActionChangeLog = React.createClass({
             /* jshint ignore:start */
             <div>
                 <AuthorLink author={changeLog.author} />
-                { changeLog.action.toLowerCase() } { this.props.listingName }
+                <span> { changeLog.action.toLowerCase() } </span>
+                { this.props.listingName }
             </div>
             /* jshint ignore:end */
         );
@@ -50,7 +51,8 @@ var SetToChangeLog = React.createClass({
             /* jshint ignore:start */
             <div>
                 <AuthorLink author={changeLog.author} />
-                set { this.props.listingName } to {changeLog.action.toLowerCase()}
+                <span> set </span>
+                { this.props.listingName } to {changeLog.action.toLowerCase()}
             </div>
             /* jshint ignore:end */
         );
@@ -71,7 +73,8 @@ var RejectedChangeLog = React.createClass({
             <div>
                 <div>
                     <AuthorLink author={changeLog.author} />
-                    rejected { this.props.listingName }
+                    <span> rejected </span>
+                    { this.props.listingName }
                 </div>
                 <a href="javascript:;" data-toggle="collapse" data-target={ '#' + id } onClick={ this.toggleIcon }>
                     <i className="fa fa-plus"></i> Feedback
@@ -92,7 +95,8 @@ var OrgApprovalChangeLog = React.createClass({
             /* jshint ignore:start */
             <div>
                 <AuthorLink author={changeLog.author} />
-                approved { this.props.listingName } for { changeLog.listing.agency }
+                <span> approved </span>
+                { this.props.listingName } for { changeLog.listing.agency }
             </div>
             /* jshint ignore:end */
         );
@@ -121,7 +125,7 @@ var ModifiedChangeLog = React.createClass({
             extendedDetails[i] = (
                 <li>{ changedField } changed from&nbsp;
                     <span className="OldValue">{ changeDetail.oldValue }</span>
-                    &nbsp;to&nbsp;
+                    <span> to </span>
                     <span className="NewValue">{ changeDetail.newValue }</span>
                 </li>
             );
@@ -168,7 +172,8 @@ var ReviewEditedChangeLog = React.createClass({
             /* jshint ignore:start */
             <div>
                 <AuthorLink author={changeLog.author} />
-                edited { (changeLog.changeDetails[0] === undefined) ? ' ' : changeLog.changeDetails[0].fieldName } in { this.props.listingName }
+                <span> edited </span>
+                { (changeLog.changeDetails[0] === undefined) ? ' ' : changeLog.changeDetails[0].fieldName } in { this.props.listingName }
             </div>
             /* jshint ignore:end */
         );
@@ -182,7 +187,8 @@ var ReviewDeletedChangeLog = React.createClass({
             /* jshint ignore:start */
             <div>
                 <AuthorLink author={changeLog.author} />
-                removed { changeLog.changeDetails[0].newValue } review from { this.props.listingName }
+                <span> removed </span>
+                { changeLog.changeDetails[0].newValue } review from { this.props.listingName }
             </div>
             /* jshint ignore:end */
         );
