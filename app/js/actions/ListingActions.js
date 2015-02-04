@@ -49,7 +49,7 @@ ListingActions = createActions({
             .getAllListings(nextLink, opts)
             .then(_.partial(ListingActions.fetchAllListingsCompleted, filter));
     },
-    fetchAllChangeLogs: function (filter) {
+    fetchAllChangeLogs: function (profile, filter) {
 
         var PaginatedChangeLogStore = require('../stores/PaginatedChangeLogStore');
 
@@ -68,7 +68,7 @@ ListingActions = createActions({
         }
 
         ListingApi
-            .getAllChangeLogs(nextLink, opts)
+            .getAllChangeLogs(profile, nextLink, opts)
             .then(function (response) {
                 ListingActions.fetchAllChangeLogsCompleted(filter, response);
             });

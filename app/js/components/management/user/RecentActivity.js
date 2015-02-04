@@ -5,12 +5,12 @@ var Reflux = require('reflux');
 var { Link, Navigation, CurrentPath } = require('react-router');
 var Sidebar = require('./RecentActivitySidebar');
 var ListingActions = require('../../../actions/ListingActions');
-var fetchAllChangeLogs = ListingActions.fetchAllChangeLogs;
 var GlobalListingStore = require('../../../stores/GlobalListingStore');
 var ChangeLog = require('../../shared/ChangeLog');
 var LoadMore = require('../../shared/LoadMore');
 var PaginatedChangeLogStore = require('../../../stores/PaginatedChangeLogStore');
 var ActiveState = require('../../../mixins/ActiveStateMixin');
+var ProfileStore = require('../../../stores/ProfileStore');
 
 
 var RecentActivity = React.createClass({
@@ -24,7 +24,7 @@ var RecentActivity = React.createClass({
     },
 
     onLoadMore: function() {
-        ListingActions.fetchAllChangeLogs();
+        ListingActions.fetchAllChangeLogs(ProfileStore.getCurrentUser());
     },
 
     onChangeLogsReceived: function() {
@@ -80,7 +80,7 @@ var RecentActivity = React.createClass({
     },
 
     componentDidMount: function () {
-        fetchAllChangeLogs();
+        ListingActions.fetchAllChangeLogs(ProfileStore.getCurrentUser());
     },
 
     getPaginatedList: function () {

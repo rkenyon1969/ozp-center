@@ -13,7 +13,6 @@ var PaginatedChangeLogStore = Reflux.createStore({
     **/
     init: function () {
         this.listenTo(ListingActions.fetchAllChangeLogsCompleted, this.onFetchAllChangeLogsCompleted);
-        // this.listenTo(ListingActions.listingChangeCompleted, this.onListingChangeCompleted);
     },
 
     onFetchAllChangeLogsCompleted: function (filter, response) {

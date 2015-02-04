@@ -3,6 +3,7 @@
 var React = require('react');
 var { Link, Navigation } = require('react-router');
 var RadioGroup = require('react-radio-group');
+var ProfileStore = require('../../../stores/ProfileStore');
 
 var MyListingsSidebarFilter = React.createClass({
 
@@ -84,18 +85,31 @@ var RecentActivitySidebar = React.createClass({
     mixins: [ Navigation ],
 
     render: function () {
-        /* jshint ignore:start */
-        return (
-            <form className="RecentActivity__SidebarFilter">
-            <div className="filter-group">
-                <h4>Marketplace Overview</h4>
-                <AllListingsSidebarFilter handleChange={this.handleChange} />
-            </div>
+        var user = ProfileStore.getCurrentUser();
+        var children = [];
+        if (user.isAdmin) {
+            children.push(
+                /* jshint ignore:start */
+                <div className="filter-group">
+                    <h4>Marketplace Overview</h4>
+                    <AllListingsSidebarFilter handleChange={this.handleChange} />
+                </div>
+                /* jshint ignore:end */
+            );
+        }
+        children.push(
+            /* jshint ignore:start */
             <div className="filter-group">
                 <h4>My Listings Overview</h4>
                 <MyListingsSidebarFilter handleChange={this.handleChange} />
             </div>
+            /* jshint ignore:end */
+        );
 
+        /* jshint ignore:start */
+        return (
+            <form className="RecentActivity__SidebarFilter">
+                { children }
             </form>
         );
         /* jshint ignore:end */

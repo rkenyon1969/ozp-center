@@ -38,7 +38,6 @@ describe('ChangeLog', function () {
         expect($(changeLog.getDOMNode()).find('div.col-md-9 > div > span:first-child').text()).to.equal('Test Admin 1');
         expect($(changeLog.getDOMNode()).find('div.col-md-9 > div > span:nth-child(3)').text()).to.equal('approved');
         expect($(changeLog.getDOMNode()).find('div.col-md-9 > div > span:last-child').text()).to.equal('the listing');
-
     });
 
     it('renders a change log with a listing name', function() {
@@ -71,9 +70,5 @@ describe('ChangeLog', function () {
 
         expect($(changeLog.getDOMNode()).find('a').text()).to.equal('FrameIt');
         router.teardown();
-
-});
-
-
-
+    });
 });
