@@ -37,21 +37,20 @@ var ListingManagement = React.createClass({
     },
 
     render: function () {
-        var me = this;
-
+        var { currentUser, system } = this.state;
         var tabs = _.cloneDeep(this.props.tabs);
-        if(!this.state.currentUser.isAdmin) {
+
+        if(!currentUser.isAdmin) {
             tabs.splice(1, 1);
         }
 
-        if(this.state.currentUser.stewardedOrganizations.length > 0) {
-            _.forEach(this.state.currentUser.stewardedOrganizations, function(orgName) {
-                var org = _.find(me.state.system.organizations, function(orgObj) {
+        if(currentUser.stewardedOrganizations.length > 0 && system.organizations.length > 0) {
+            _.forEach(currentUser.stewardedOrganizations, function(orgName) {
+                var org = _.find(system.organizations, function(orgObj) {
                     return orgObj.title === orgName;
                 });
 
-                tabs.splice(2, 0,
-                {
+                tabs.splice(2, 0, {
                     to: 'org-listings',
                     name: org.shortName + ' Listings',
                     params: {

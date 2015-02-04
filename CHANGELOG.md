@@ -1,3 +1,70 @@
+## 0.6.0 (2015-02-04)
+
+
+#### Bug Fixes
+
+* **CSS:** update listing state filter text styles ([e447b105](https://github.com/ozone-development/center-ui.git/commit/e447b1059c2d956596c9de9d5cb4988ee66a9296))
+* **Discovery Page:** OZF-883 Fix sort direction for Most Popular Listings ([4547e15f](https://github.com/ozone-development/center-ui.git/commit/4547e15f14677fced1fcb68c235cd0fc6929199b))
+* **Global Navbar:**
+  * fix help modal ([d9effd55](https://github.com/ozone-development/center-ui.git/commit/d9effd55a031a68424e46fabd5b91fb2102475fe))
+  * fix usermenu routes ([483657cb](https://github.com/ozone-development/center-ui.git/commit/483657cbbd6538b48779432a16ba500c0749ce71))
+  * search input box now takes up full width ([1c10108c](https://github.com/ozone-development/center-ui.git/commit/1c10108c12728fdbf6e803328ba95c7121d41873))
+* **Listing Management:** OZF-869 make tiles show correct editedDate ([499472b7](https://github.com/ozone-development/center-ui.git/commit/499472b71c41b76a21724922e09e630c23c32878))
+* **Listing Tile:**
+  * OZF-891 The Listing Name extends behind the short org name on the quick view ([abe95c8d](https://github.com/ozone-development/center-ui.git/commit/abe95c8d95797d2af12f3bc83c396441cb77520d))
+  * show ellipsis when title overflows ([7008dc00](https://github.com/ozone-development/center-ui.git/commit/7008dc00cbbcba8bbfe8822d0893a664af964801))
+* **Org Listings:** fix uncaught reference error ([dab50737](https://github.com/ozone-development/center-ui.git/commit/dab507372ce31f56ed9af5b79d38b89a6ed5d099))
+* **Styling:**
+  * OZF-908 Detailed View header icon ([a593488f](https://github.com/ozone-development/center-ui.git/commit/a593488f8acc22b7dc90a8ef0b4ca8f479f03be7))
+  * OZF-902 Create/edit form hiding behind lower classification banner ([e5fae77e](https://github.com/ozone-development/center-ui.git/commit/e5fae77e764238400e4ba854c69c04f8570f5660))
+  * OZF-901 classification banner z-index problem ([44e2d91c](https://github.com/ozone-development/center-ui.git/commit/44e2d91c80a17cbae0a5581996ae5f03d034913b))
+  * OZF-898 Fix unecessary scrollbar on discovery page ([a0d37001](https://github.com/ozone-development/center-ui.git/commit/a0d37001dc33f4ec8b1ac6cd2cee61b50b65de5f))
+* **branding:** OZF-806 Switching AML to MP ([de79d90f](https://github.com/ozone-development/center-ui.git/commit/de79d90f771b93ffc6fc334879212835c423b9d8))
+* **styling:** Moved MP listing hover buttons down ([8dc81882](https://github.com/ozone-development/center-ui.git/commit/8dc81882825b94581becd332cd68273ec6d06237))
+
+
+#### Features
+
+* **Image Server:**
+  * OZF-879 intent icon upload UX review fixes ([5518d3f4](https://github.com/ozone-development/center-ui.git/commit/5518d3f478c3cac26de7600e09ecd0032fd1cb5a))
+  * OZF-819 Intent image upload ([c584ea87](https://github.com/ozone-development/center-ui.git/commit/c584ea8753f5672dcd18b3740db2a794db34f9fc))
+  * Fixing admin tab issues ([ce72b4e8](https://github.com/ozone-development/center-ui.git/commit/ce72b4e8121c98de3d54cd8081bc1e402f855c60))
+  * OZF-875 Intent image upload edge cases ([b771fc68](https://github.com/ozone-development/center-ui.git/commit/b771fc685bdbda76d6a31d74573619e5f379ab11))
+  * Intent image upload basic functioning ([62c36fb7](https://github.com/ozone-development/center-ui.git/commit/62c36fb7fcb4272e53dfdc24789fb118eef2fdfb))
+* **Metrics:**
+  * Removed un-bookmark hook ([f1238da7](https://github.com/ozone-development/center-ui.git/commit/f1238da7b2031c21fff03061409a664628c0c55f))
+  * Added more tracking hooks ([db462ad1](https://github.com/ozone-development/center-ui.git/commit/db462ad11003b8296a0f8120c133d9fc0ce44c58))
+* **Recent Activities:**
+  * OZF-547: fixed links for admin tab ([8f4ed124](https://github.com/ozone-development/center-ui.git/commit/8f4ed12401949657887819d92494783cf825a36a))
+  * OZF-547: fixed links for admin tab ([4edcf94f](https://github.com/ozone-development/center-ui.git/commit/4edcf94ff9066b98d8ad6612d25367b4472cb540))
+  * OZF-547: added icons, links in listing titles, and styling ([8d8e4657](https://github.com/ozone-development/center-ui.git/commit/8d8e46574d00e2d1acc78e51a99a1c373a657da2))
+* **Recent Activity:**
+  * OZF-574: fixed styling ([d7dfa5c8](https://github.com/ozone-development/center-ui.git/commit/d7dfa5c8e4f9a230d904c162e5c64eea7780a44c))
+  * OZF-574: fixed change logs in admin tab styling ([d13d0772](https://github.com/ozone-development/center-ui.git/commit/d13d077295a2fbbd1613d898bd41bd9f225a708d))
+  * OZF-910: updated styles ([316f5e49](https://github.com/ozone-development/center-ui.git/commit/316f5e4907aae580dfdb8403cd9c384ca4e666b1))
+  * OZF-574: added links to recent activity ([7730886f](https://github.com/ozone-development/center-ui.git/commit/7730886f8b2597ecc366cf8ed5be360196e17d04))
+  * OZF-574: working link filters ([44b2af48](https://github.com/ozone-development/center-ui.git/commit/44b2af4852c596a966feb24c76508aef77e67533))
+  * OZF-574: updated change log and paginated list ([5a895a7e](https://github.com/ozone-development/center-ui.git/commit/5a895a7e50767c31168a988491fb8bdaa6bc748b))
+  * OZF-574: first round of recent activity changes ([91952369](https://github.com/ozone-development/center-ui.git/commit/91952369c014cfe2a81c0da7b6a15eddccb4cb91))
+  * OZF-574: added sidebar and links ([d9e2d98d](https://github.com/ozone-development/center-ui.git/commit/d9e2d98dc58885d728b37eb904704c4ef64185c0))
+* **Review Tab:**
+  * OZF-483: existing user reviews in list ([f7f9ae8b](https://github.com/ozone-development/center-ui.git/commit/f7f9ae8b2a46346592f1d4f08edf6a128482d8be))
+  * OZF-483: getting appropriate information in the review tab, plus styling ([51fea357](https://github.com/ozone-development/center-ui.git/commit/51fea357e0dc520ca59ef89959a9a3051f2df774))
+* **Reviews Tab:**
+  * OZF-882 The stars being shown for reviews are not matching the avgRate ([e3fdc9a7](https://github.com/ozone-development/center-ui.git/commit/e3fdc9a710cb925c099ef49183afed22f9e7d872))
+  * OZF-882 The stars being shown for reviews are not matching the avgRate ([3bea1136](https://github.com/ozone-development/center-ui.git/commit/3bea11363e505d040594644b022b5e400a8b9b8b))
+  * OZF-483 add tests ([68f11a8e](https://github.com/ozone-development/center-ui.git/commit/68f11a8e0aff604708c4bdb236b991e5c16fb1ab))
+  * OZF-483 bug fixes ([25b9e91b](https://github.com/ozone-development/center-ui.git/commit/25b9e91bb7af7cd4ba6a65d4c78a67840dd7147c))
+  * OZF-483 add text when there are no reviews ([0218f36f](https://github.com/ozone-development/center-ui.git/commit/0218f36fffbe01c12af146dd4c31a6eb87a33dd0))
+  * OZF-483 implement edit functionality ([69ed4a1e](https://github.com/ozone-development/center-ui.git/commit/69ed4a1ed93b70eeb6a7cbaa4ec87b2b0c8455af))
+  * OZF-483 implement delete functionality with confirmation ([706998ba](https://github.com/ozone-development/center-ui.git/commit/706998ba8744dbfa380e0db2d8ac6ec4b4fb0cfe))
+  * OZF-483 update time ago every second, hide edit section after save ([2e356a55](https://github.com/ozone-development/center-ui.git/commit/2e356a55ea47bee07e0ae264d0b815320604cefd))
+  * OZF-483 fetch reviews only once for a listing ([8c782175](https://github.com/ozone-development/center-ui.git/commit/8c782175155d0a33570c80c79b17598acaaa09cd))
+  * OZF-483 Implement edit review functionality ([7525c746](https://github.com/ozone-development/center-ui.git/commit/7525c746b9e55cdfbc44f64f568c629f925ec125))
+  * OZF-483 Allow user to submit a review for a listing ([02ce3451](https://github.com/ozone-development/center-ui.git/commit/02ce3451586b22ade1677e888e71b1ae522ed7dc))
+  * OZF-483: include username with review ([39fa580c](https://github.com/ozone-development/center-ui.git/commit/39fa580c4d64c768c47bea1c01c86f24785703ff))
+
+
 ## 0.5.0 (2015-01-22)
 
 
