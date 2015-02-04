@@ -34,7 +34,7 @@ var CenterProfileWindow = React.createClass({
     getInitialState: function() {
         return {
             backRoute: (History.length > 1) ?
-                this.goBack.bind(this) :
+                this.goBack :
                 this.getActiveRoutePath()
         };
     },
