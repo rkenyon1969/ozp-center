@@ -38,14 +38,24 @@ module.exports = {
     module: {
         preLoaders: [
             { test: /\.js$/, loader: "jshint-loader", exclude: /node_modules|bower_components|gulp|dist/ },
-            { test: /\.js$/, loader: "jshint-loader", include: /node_modules\/ozp-react-commons/ }
+            {
+                test: /\.js$/,
+                loader: "jshint-loader",
+                include: /node_modules\/ozp-react-commons/,
+                exclude: /node_modules\/ozp-react-commons\/node_modules/
+            }
         ],
         loaders: [
             { test: /\.gif/, loader: "url-loader?limit=10000&mimetype=image/gif" },
             { test: /\.jpg/, loader: "url-loader?limit=10000&mimetype=image/jpg" },
             { test: /\.png/, loader: "url-loader?limit=10000&mimetype=image/png" },
             { test: /\.jsx?$/, loader: "jsx-loader?harmony=true&insertPragma=React.DOM", exclude: /node_modules|bower_components|gulp|dist/ },
-            { test: /\.jsx?$/, loader: "jsx-loader?harmony=true&insertPragma=React.DOM", include: /node_modules\/ozp-react-commons/ }
+            {
+                test: /\.jsx?$/,
+                loader: "jsx-loader?harmony=true&insertPragma=React.DOM",
+                include: /node_modules\/ozp-react-commons/,
+                exclude: /node_modules\/ozp-react-commons\/node_modules/
+            }
         ],
         noParse: /\.min\.js/
     },
