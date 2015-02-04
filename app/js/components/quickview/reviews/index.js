@@ -12,7 +12,7 @@ var EditReview = require('./EditReview');
 var CurrentListingStore = require('../../../stores/CurrentListingStore');
 var SystemStateMixin = require('../../../mixins/SystemStateMixin');
 var ListingActions = require('../../../actions/ListingActions');
-var ProfileStore = require('../../../stores/ProfileStore');
+var SelfStore = require('../../../stores/SelfStore');
 
 var RatingProgressBar = React.createClass({
     mixins: [React.addons.PureRenderMixin],
@@ -57,7 +57,7 @@ var ReviewsTab = React.createClass({
     },
 
     getState: function () {
-        var currentUser = ProfileStore.getCurrentUser();
+        var currentUser = SelfStore.getCurrentUser();
         var reviews = CurrentListingStore.getReviews();
 
         if (!reviews) {

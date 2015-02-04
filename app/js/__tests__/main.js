@@ -11,9 +11,9 @@ window.jQuery = jQuery;
 window.$ = jQuery;
 window.React = React;
 
-var ProfileStore = require('../stores/ProfileStore');
+var SelfStore = require('../stores/SelfStore');
 var ProfileMock = require('./mocks/ProfileMock');
-ProfileStore.onFetchSelfCompleted(ProfileMock);
+SelfStore.onFetchSelfCompleted(ProfileMock);
 
 //require all tests
 //This snippet was pulled from the karma-webpack README

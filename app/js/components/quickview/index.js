@@ -9,7 +9,7 @@ var Tab = require('../../mixins/TabMixin');
 var _ = require('../../utils/_');
 
 // component dependencies
-var Modal = require('../shared/Modal');
+var Modal = require('ozp-react-commons/components/Modal');
 var IconRating = require('../shared/IconRating');
 var Header = require('./Header');
 var { UserRole } = require('../../constants');

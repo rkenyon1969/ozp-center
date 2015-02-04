@@ -5,7 +5,8 @@ var React = require('react');
 var Reflux = require('reflux');
 var Alerts = require('../alerts');
 var HelpModal = require('./helpmodal');
-var { HUD_URL, METRICS_URL, HELP_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL } = require('OzoneConfig');
+var ProfileLink = require('../profile/ProfileLink');
+var { HUD_URL, METRICS_URL, HELP_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL } = require('ozp-react-commons/OzoneConfig');
 
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
 
@@ -46,7 +47,11 @@ var NavBar = React.createClass({
                                 <ul className="dropdown-menu">
                                     <li className="dropdown-header">Personalize</li>
                                     <li><a href={HUD_URL}><i className="icon-ribbon"></i>Bookmarks</a></li>
-                                    <li><a href="#"><i className="icon-head"></i>Profile</a></li>
+                                    <li>
+                                        <ProfileLink profileId="self">
+                                            <i className="icon-head"/>Profile
+                                        </ProfileLink>
+                                    </li>
                                     <li><a href="#"><i className="icon-cog"></i>Settings</a></li>
                                     <li className="divider"></li>
                                     <li className="dropdown-header">Create</li>

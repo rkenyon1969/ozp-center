@@ -2,9 +2,9 @@
 
 var $ = require('jquery');
 
-var { API_URL } = require('OzoneConfig');
+var { API_URL } = require('ozp-react-commons/OzoneConfig');
 
-var ProfileApi = {
+var SelfApi = {
 
     addToLibrary: function (json) {
         return $.ajax({
@@ -32,4 +32,4 @@ var ProfileApi = {
     }
 };
 
-module.exports.ProfileApi = ProfileApi;
+module.exports.SelfApi = SelfApi;

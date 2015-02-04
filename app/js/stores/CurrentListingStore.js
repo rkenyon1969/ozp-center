@@ -6,7 +6,7 @@ var _ = require('../utils/_');
 var { createStore } = require('reflux');
 var GlobalListingStore = require('./GlobalListingStore');
 var SystemStore = require('./SystemStore');
-var ProfileStore = require('./ProfileStore');
+var SelfStore = require('./SelfStore');
 var actions = require('../actions/CreateEditActions');
 var { save } = require('../actions/ListingActions');
 var { validateDraft, validateFull } = require('../components/createEdit/validation/listing');
@@ -284,7 +284,7 @@ var CurrentListingStore = createStore({
     },
 
     currentUserCanEdit: function () {
-        return ProfileStore.currentUserCanEdit(_listing);
+        return SelfStore.currentUserCanEdit(_listing);
     },
 
     getChangeLogs: function () {
@@ -311,7 +311,7 @@ var CurrentListingStore = createStore({
                 });
             }
         } else {
-            this.refreshListing(new Listing({ owners: [ProfileStore.getCurrentUser()] }));
+            this.refreshListing(new Listing({ owners: [SelfStore.getCurrentUser()] }));
             deferred.resolve(_listing);
         }
 

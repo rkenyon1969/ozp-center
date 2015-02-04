@@ -1,12 +1,12 @@
 'use strict';
 
-var ProfileStore = require('../stores/ProfileStore');
+var SelfStore = require('../stores/SelfStore');
 
 var AdminRouteMixin = {
 
     statics: {
         willTransitionTo: function (transition, component) {
-            if (!ProfileStore.getCurrentUser().isAdmin) {
+            if (!SelfStore.getCurrentUser().isAdmin) {
                 transition.abort();
                 transition.redirect('/');
             }

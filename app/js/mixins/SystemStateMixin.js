@@ -2,12 +2,12 @@
 
 var Reflux = require('reflux');
 var SystemStore = require('../stores/SystemStore');
-var ProfileStore = require('../stores/ProfileStore');
+var SelfStore = require('../stores/SelfStore');
 
 module.exports = {
-    mixins: [Reflux.connect(SystemStore), Reflux.connect(ProfileStore)],
+    mixins: [Reflux.connect(SystemStore), Reflux.connect(SelfStore)],
 
     getInitialState: function () {
-        return Object.assign({}, SystemStore.getDefaultData(), ProfileStore.getDefaultData());
+        return Object.assign({}, SystemStore.getDefaultData(), SelfStore.getDefaultData());
     }
 };

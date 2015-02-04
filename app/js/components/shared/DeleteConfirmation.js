@@ -2,7 +2,7 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var Modal = require('./Modal');
+var Modal = require('ozp-react-commons/components/Modal');
 var Router = require('react-router');
 var Navigation = Router.Navigation;
 var AjaxMixin = require('../../mixins/AjaxMixin');

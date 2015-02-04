@@ -2,11 +2,11 @@
 
 var Reflux = require('reflux');
 var _ = require('../utils/_');
-var ProfileActions = require('../actions/ProfileActions');
+var SelfActions = require('../actions/SelfActions');
 var ListingActions = require('../actions/ListingActions');
 var { UserRole } = require('../constants');
 var { Listing } = require('../webapi/Listing');
-var { selfLoaded } = ProfileActions;
+var { selfLoaded } = SelfActions;
 var { ORG_STEWARD, ADMIN } = UserRole;
 
 var _library = [];
@@ -19,7 +19,7 @@ var selfIsOrgSteward = (org) => UserRole[_self.highestRole] >= ORG_STEWARD && _s
 var ProfileStore = Reflux.createStore({
 
     listenables: Object.assign({},
-        _.pick(ProfileActions, 'fetchLibraryCompleted', 'fetchSelfCompleted'),
+        _.pick(SelfActions, 'fetchLibraryCompleted', 'fetchSelfCompleted'),
         _.pick(ListingActions, 'addToLibraryCompleted', 'removeFromLibraryCompleted')
     ),
 

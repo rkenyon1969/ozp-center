@@ -5,11 +5,11 @@ var Reflux = require('reflux');
 
 var _ = require('../utils/_');
 
-var ProfileStore = require('../stores/ProfileStore');
+var SelfStore = require('../stores/SelfStore');
 var { addToLibrary, removeFromLibrary } = require('../actions/ListingActions');
 
 var BookmarkButton = React.createClass({
-    mixins: [Reflux.connect(ProfileStore)],
+    mixins: [Reflux.connect(SelfStore)],
 
     propTypes: {
         listing: React.PropTypes.object.isRequired

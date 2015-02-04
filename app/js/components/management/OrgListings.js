@@ -6,7 +6,7 @@ var _ = require('../../utils/_');
 
 var AdminRoute = require('../../mixins/AdminRouteMixin');
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
-var ProfileStore = require('../../stores/ProfileStore');
+var SelfStore = require('../../stores/SelfStore');
 
 var Sidebar = require('./shared/Sidebar');
 var ListingTile = require('../listing/ListingTile');

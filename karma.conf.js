@@ -9,7 +9,7 @@ module.exports = function (config) {
         files: [
             // including es5-shim for PhantomJS
             'bower_components/es5-shim/es5-shim.js',
-            'app/OzoneConfig.js', //default configs
+            'node_modules/ozp-react-commons/app/OzoneConfig.js', //default configs
             'app/js/__tests__/main.js'
         ],
         preprocessors: {
@@ -22,10 +22,7 @@ module.exports = function (config) {
                 loaders: webpackOptions.module.loaders,
                 noParse: webpackOptions.module.noParse
             },
-            plugins: webpackOptions.plugins,
-            externals: {
-                'OzoneConfig': 'OzoneConfig'
-            }
+            plugins: webpackOptions.plugins
         },
         webpackServer: {
             stats: {
