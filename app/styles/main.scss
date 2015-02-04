@@ -17,7 +17,8 @@ html, body {
     font-family: 'Ubuntu';
     font-weight: 300;
     height: 100%;
-    background: $gray-dark;
+    background: url('../images/bg_fractal_gray.png') $gray-dark no-repeat fixed;
+    background-size: cover;
 }
 
 .navbar-right {
@@ -42,7 +43,7 @@ html, body {
     left: 0;
 
     > .row {
-        background: #fff;
+        background: $white;
         margin: 0 auto;
         width: 1260px;
     }
