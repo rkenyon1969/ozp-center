@@ -60,7 +60,7 @@
     "webpack-dev-server": "1.7.0"
   },
   "dependencies": {
-    "bootstrap-sass": "git://github.com/ozone-development/bootstrap-sass#72e5334b01d74f789e8fb89ce0aa73c2575342eb",
+    "bootstrap-sass": "git://github.com/ozone-development/bootstrap-sass#f7af9424caf977e0880273c837cc40bf979b9101",
     "exports-loader": "0.6.2",
     "gulp-preprocess": "1.2.0",
     "lodash-amd": "2.4.1",
