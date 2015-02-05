@@ -30,7 +30,6 @@
     "DEVELOPER_RESOURCES_URL": true,
     "WEBTOP_URL": true,
     "METRICS_URL": true,
-    "LOGOUT_URL": true,
     "w2utils": true,
     "w2obj": true
   }
