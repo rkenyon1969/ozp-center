@@ -127,7 +127,7 @@ i.fa-star, i.fa-star-half-o {
     color: $star-color;
 }
 i.fa-star-o:before {
-    color: #dbdcdd;
+    color: $gray-light;
     content: "\f005";
 }
 
@@ -192,6 +192,12 @@ label {
     position: absolute;
     right: 8px;
     top: 0;
+}
+
+.modal-header .close {
+  margin-top: -10px !important;
+  margin-right: -8px !important;
+  font-size: 200%;
 }
 
 /* Bookmark button */

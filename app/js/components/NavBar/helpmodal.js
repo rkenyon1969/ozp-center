@@ -36,8 +36,8 @@ var HelpModal = React.createClass({
                 <div className="modal-dialog  modal-lg">
                     <div className="modal-content">
                         <div className="modal-header">
-                                <button type="button" className="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span className="sr-only">Close</span></button>
-                                <h4 className="modal-title">OZONE Help Zone</h4>
+                        <button type="button" className="close" data-dismiss="modal"><span aria-hidden="true"><i className="icon-cross"></i></span><span className="sr-only">Close</span></button>
+                        <h4 className="modal-title">OZONE Help Zone</h4>
                         </div>
                         <div className="modal-body">
                             <iframe style={{width:"100%", height:"500px", border: 'none'}} src={HELP_URL} />
