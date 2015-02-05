@@ -109,14 +109,14 @@ html, body {
 }
 
 button.notifications {
-  color: $gray-lighter;
-  &:hover, &:focus {
-    color: $white;
-  }
+    color: $gray-lighter;
+    &:hover, &:focus {
+        color: $white;
+    }
 }
 
 .dropdown-menu .divider {
-  background: $gray-darkest !important;
+    background: $gray-darkest !important;
 }
 
 i {
@@ -195,9 +195,9 @@ label {
 }
 
 .modal-header .close {
-  margin-top: -10px !important;
-  margin-right: -8px !important;
-  font-size: 200%;
+    margin-top: -10px !important;
+    margin-right: -8px !important;
+    font-size: 200%;
 }
 
 /* Bookmark button */
@@ -208,7 +208,7 @@ label {
 
     &:active, &:focus, &:hover, &.bookmarked {
         background-color: $blue-dark;
-        
+
     }
 
     &.bookmarked {
@@ -218,7 +218,7 @@ label {
 }
 
 div.modal-header > button.close {
-  margin:-22px -13px 0 0;
+    margin:-22px -13px 0 0;
 }
 
 /*=======================
@@ -257,12 +257,12 @@ body > div.classBanner:last-of-type {
 }
 
 .sidebar {
-  padding: 20px 30px;
-  margin-top:-15px;
-  background: $gray-lightest;
+    padding: 20px 30px;
+    margin-top:-15px;
+    background: $gray-lightest;
 }
 
 
 .content {
-  background: $white;
+    background: $white;
 }
