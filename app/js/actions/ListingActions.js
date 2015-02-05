@@ -89,7 +89,19 @@ ListingActions = createActions({
     },
 
     search: function (options) {
-        ListingApi.search(options).then(ListingActions.searchCompleted);
+        var queryString = options.queryString;
+
+        // append '*'
+        if (!/\*$/.test(queryString)) {
+            queryString += '*';
+        }
+
+        ListingApi
+            .search(
+                Object.assign({}, options, {
+                    queryString: queryString
+                })
+            ).then(ListingActions.searchCompleted);
     },
 
     fetchChangeLogs: function (listingId) {
