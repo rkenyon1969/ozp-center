@@ -10,17 +10,24 @@ var ChangeLog = require('../../shared/ChangeLog');
 var LoadMore = require('../../shared/LoadMore');
 var PaginatedChangeLogStore = require('../../../stores/PaginatedChangeLogStore');
 var ActiveState = require('../../../mixins/ActiveStateMixin');
+var SystemStateMixin = require('../../../mixins/SystemStateMixin');
+
 var ProfileStore = require('../../../stores/ProfileStore');
 
 
 var RecentActivity = React.createClass({
 
-    mixins: [Reflux.listenTo(PaginatedChangeLogStore, 'onChangeLogsReceived'), Navigation, ActiveState],
+    mixins: [Navigation, ActiveState, SystemStateMixin],
 
     getInitialState: function () {
         return {
             changeLogs: []
         };
+    },
+
+    componentDidMount: function () {
+        this.fetchAllChangeLogsIfEmpty();
+        this.listenTo(PaginatedChangeLogStore, this.onChangeLogsReceived);
     },
 
     onLoadMore: function() {
@@ -54,7 +61,7 @@ var RecentActivity = React.createClass({
         if (noActions.indexOf(action) > -1) {
             return;
         } else {
-            var adminLinkMap = {
+            var linkMap = {
                 'APPROVED' : 'View',
                 'SUBMITTED' : 'View Submission',
                 'ENABLED' : 'View',
@@ -62,29 +69,43 @@ var RecentActivity = React.createClass({
                 'CREATED' : 'View Draft',
                 'APPROVED_ORG' : 'Review Listing',
                 'REVIEW_EDITED' : 'View',
-                'REVIEW_DELETED' : 'View',
+                'REVIEW_DELETED' : 'View'
             };
 
+            var adminLinkMap = linkMap;
+            var userLinkMap = linkMap;
+            userLinkMap.APPROVED_ORG = 'View';
 
             var href = this.makeHref(this.getActiveRoutePath(), this.getParams(), {
                 listing: changeLog.listing.id,
                 action: 'view',
                 tab: 'overview'
             });
+
+            var links = userLinkMap;
+
+            if (ProfileStore.getCurrentUser().isAdmin) {
+                links = adminLinkMap;
+            }
+
             return (
                 /* jshint ignore:start */
-                <a href={href}>{ adminLinkMap[action] } <i className="fa fa-angle-right"></i></a>
+                <a href={href}>{ links[action] } <i className="fa fa-angle-right"></i></a>
                 /* jshint ignore:end */
             );
         }
     },
 
-    componentDidMount: function () {
-        ListingActions.fetchAllChangeLogs(ProfileStore.getCurrentUser());
-    },
-
     getPaginatedList: function () {
         return PaginatedChangeLogStore.getChangeLogs();
+    },
+
+    fetchAllChangeLogsIfEmpty: function () {
+        var changeLogs = this.getPaginatedList();
+        if (!changeLogs) {
+            ListingActions.fetchAllChangeLogs(ProfileStore.getCurrentUser());
+        }
+        this.onChangeLogsReceived();
     },
 
     renderChangeLogs: function () {

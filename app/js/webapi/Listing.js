@@ -179,7 +179,7 @@ var ListingApi = {
             if (profile.isAdmin){
                 url = API_URL + '/api/listing/activity?' + $.param(options);
             } else {
-                url = API_URL + '/api/profile/' + profile.id + '/activity?' + $.param(options);
+                url = API_URL + '/api/profile/' + profile.id + '/listing/activity?' + $.param(options);
             }
         }
         return $.getJSON(url).then((response) => {
