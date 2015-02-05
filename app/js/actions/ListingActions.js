@@ -60,7 +60,8 @@ ListingActions = createActions({
         if (paginatedList) {
             paginatedList.expectPage();
             nextLink = paginatedList.nextLink;
-        } else {
+        }
+        else {
             _.assign(opts, {
                 offset: 0,
                 max: PAGINATION_MAX

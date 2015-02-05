@@ -4,6 +4,8 @@ var React = require('react');
 var moment = require('moment');
 var { Link, Navigation, CurrentPath } = require('react-router');
 var ActiveState = require('../../mixins/ActiveStateMixin');
+var { UserRole } = require('../../constants');
+var _ = require('../../utils/_');
 
 var ActionMenu = React.createClass({
 
@@ -108,26 +110,29 @@ var InfoBar = React.createClass({
 
 var AdminOwnerListingTile = React.createClass({
 
+    propTypes: {
+        role: React.PropTypes.oneOf([UserRole.ADMIN, UserRole.ORG_STEWARD, null]),
+        listing: React.PropTypes.object
+    },
+
     mixins: [ Navigation, ActiveState ],
 
     statics: {
-        fromArray: function (array) {
+        fromArray: function (array, role) {
             /* jshint ignore:start */
-            return array.map((listing) => <AdminOwnerListingTile listing={listing} key={listing.id} />);
+            return array.map((listing) =>
+                <AdminOwnerListingTile listing={listing} key={listing.id} role={role} />
+            );
             /* jshint ignore:end  */
         }
     },
 
-    render: function () {
-        var listing = this.props.listing,
-            overview = this.makeHref(this.getActiveRoutePath(), this.getParams(), {
-                listing: listing.id,
-                action: 'view',
-                tab: 'overview'
-            }),
-            approvalStatus = listing.approvalStatus,
-            approvalStatusClasses = {};
-        if(listing.view === 'adminView') {
+    _getApprovalStatusClass: function () {
+        var {listing, role} = this.props;
+        var approvalStatus = listing.approvalStatus;
+        var approvalStatusClasses;
+
+        if (role === UserRole.ADMIN) {
             approvalStatusClasses = {
                 'draft': approvalStatus === 'IN_PROGRESS',
                 'pending': approvalStatus === 'PENDING',
@@ -136,7 +141,8 @@ var AdminOwnerListingTile = React.createClass({
                 'rejected': approvalStatus === 'REJECTED',
                 'AdminOwnerListingTile': true
             };
-        } else if(listing.view === 'orgView') {
+        }
+        else if (role === UserRole.ORG_STEWARD) {
             approvalStatusClasses = {
                 'draft': approvalStatus === 'IN_PROGRESS',
                 'pending': approvalStatus === 'APPROVED_ORG',
@@ -145,16 +151,27 @@ var AdminOwnerListingTile = React.createClass({
                 'rejected': approvalStatus === 'REJECTED',
                 'AdminOwnerListingTile': true
             };
-        } else {
+        }
+        else {
             approvalStatusClasses = {
-              'draft': approvalStatus === 'IN_PROGRESS',
-              'pending': approvalStatus === 'PENDING' || approvalStatus === 'APPROVED_ORG',
-              'needs-action': approvalStatus === 'REJECTED',
-              'published': approvalStatus === 'APPROVED',
-              'AdminOwnerListingTile': true
+                'draft': approvalStatus === 'IN_PROGRESS',
+                'pending': approvalStatus === 'PENDING' || approvalStatus === 'APPROVED_ORG',
+                'needs-action': approvalStatus === 'REJECTED',
+                'published': approvalStatus === 'APPROVED',
+                'AdminOwnerListingTile': true
             };
         }
-        var classSet = React.addons.classSet(approvalStatusClasses);
+        return approvalStatusClasses;
+    },
+
+    render: function () {
+        var { listing } = this.props;
+        var overview = this.makeHref(this.getActiveRoutePath(), this.getParams(), {
+            listing: listing.id,
+            action: 'view',
+            tab: 'overview'
+        });
+        var classSet = React.addons.classSet(this._getApprovalStatusClass());
 
 
         /* jshint ignore:start */

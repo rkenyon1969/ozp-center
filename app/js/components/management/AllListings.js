@@ -7,20 +7,29 @@ var Router = require('react-router');
 
 var AdminRoute = require('../../mixins/AdminRouteMixin');
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
-var ActiveState = require('../../mixins/ActiveStateMixin');
 
 var Sidebar = require('./shared/Sidebar');
+var ApprovalStatusFilter = require('./shared/ApprovalStatusFilter');
+var EnabledFilter = require('./shared/EnabledFilter');
+var OrgFilter = require('./shared/OrgFilter');
+
 var ListingTile = require('../listing/ListingTile');
 var LoadMore = require('../shared/LoadMore');
 
 var PaginatedListingsStore = require('../../stores/PaginatedListingsStore');
 
 var ListingActions = require('../../actions/ListingActions');
-
+var { UserRole } = require('../../constants');
 
 var AllListings = React.createClass({
 
-    mixins: [ AdminRoute, SystemStateMixin, Router.State ],
+    mixins: [
+        AdminRoute,
+        SystemStateMixin,
+        Router.State,
+        Reflux.listenTo(PaginatedListingsStore, 'onStoreChanged'),
+        Reflux.listenTo(ListingActions.listingChangeCompleted, 'onListingChangeCompleted')
+    ],
 
     getInitialState: function () {
         return {
@@ -75,29 +84,28 @@ var AllListings = React.createClass({
 
     componentDidMount: function () {
         this.fetchAllListingsIfEmpty();
-        this.listenTo(PaginatedListingsStore, this.onStoreChanged);
-        this.listenTo(ListingActions.listingChangeCompleted, this.onListingChangeCompleted);
     },
 
     render: function () {
-        this.state.listings.forEach(function(listing) {
-            listing.view = 'adminView';
-        });
+        var sidebarFilterOptions = {
+            value: this.state.filter,
+            counts: this.state.counts,
+            onFilterChanged: this.onFilterChanged,
+            organizations: this.state.system.organizations || []
+        };
 
         /* jshint ignore:start */
         return this.transferPropsTo(
             <div className="AllListings row">
                 <aside className="AllListings__sidebar col-md-2">
-                    <Sidebar
-                        value={ this.state.filter }
-                        listings={ this.state.listings }
-                        counts={ this.state.counts }
-                        onFilterChanged={ this.onFilterChanged }
-                        organizations={ this.state.system.organizations || [] }
-                        view='adminView' />
+                    <Sidebar>
+                        <ApprovalStatusFilter role={ UserRole.ADMIN } { ...sidebarFilterOptions } />
+                        <OrgFilter { ...sidebarFilterOptions } />
+                        <EnabledFilter { ...sidebarFilterOptions } />
+                    </Sidebar>
                 </aside>
                 <LoadMore className="AllListings__listings col-md-10 all" hasMore={this.state.hasMore} onLoadMore={this.onLoadMore}>
-                    { ListingTile.fromArray(this.state.listings) }
+                    { ListingTile.fromArray(this.state.listings, UserRole.ADMIN) }
                 </LoadMore>
             </div>
         );

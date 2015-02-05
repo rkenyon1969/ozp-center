@@ -3,151 +3,89 @@ var React = require('react');
 var Reflux = require('reflux');
 var _ = require('../../../utils/_');
 var RadioGroup = require('react-radio-group');
+var { UserRole } = require('../../../constants');
+
+function filterOption (currentValue, label, value, count, htmlFor, className) {
+    /*jshint ignore:start */
+    var badge;
+    if (currentValue === 'all') {
+        badge = <strong className="badge">{ count || 0 }</strong>;
+    }
+    else if (value === currentValue) {
+        badge = <strong className="badge">{ count || 0 }</strong>;
+    }
+
+    return [
+        <input id={htmlFor} type="radio" value={value} />,
+        <label htmlFor={htmlFor} className={className}>
+            { label }
+            { badge }
+        </label>,
+    ];
+    /*jshint ignore:end */
+}
 
 var ApprovalStatusFilter = React.createClass({
-    handleChange: function (key, evt) {
+
+    propTypes: {
+        value: React.PropTypes.object.isRequired,
+        counts: React.PropTypes.object.isRequired,
+        onFilterChanged: React.PropTypes.func.isRequired,
+        organizations: React.PropTypes.array
+    },
+
+    handleChange: function (evt) {
         var { value } = evt.target;
         if (value === 'all') {
             value = null;
         }
-        this.props.onFilterChanged(key, value);
+        this.props.onFilterChanged('approvalStatus', value);
+    },
+
+    _renderRadioGroupOptions: function () {
+        var counts = this.props.counts;
+        var value = this.props.value.approvalStatus || 'all';
+
+        var components = [
+            filterOption(value, 'All', 'all', counts.total, 'all-listings-filter-all', 'label-all'),
+            filterOption(value, 'Published', 'APPROVED', counts.APPROVED, 'all-listings-filter-published', 'label-published')
+        ];
+
+        if (this.props.role === UserRole.ADMIN) {
+            components.push(
+                filterOption(value, 'Needs action', 'APPROVED_ORG', counts.APPROVED_ORG, 'all-listings-filter-needs-action', 'label-needs-action'),
+                filterOption(value, 'Pending, Org.', 'PENDING', counts.PENDING, 'all-listings-filter-pending', 'label-pending')
+            );
+        }
+        else if (this.props.role === UserRole.ORG_STEWARD) {
+            components.push(
+                filterOption(value, 'Needs action', 'PENDING', counts.PENDING, 'all-listings-filter-needs-action', 'label-needs-action'),
+                filterOption(value, 'Org approved', 'APPROVED_ORG', counts.APPROVED_ORG, 'all-listings-filter-pending', 'label-pending')
+            );
+        }
+        components.push(
+            filterOption(value, 'Returned', 'REJECTED', counts.REJECTED, 'all-listings-filter-rejected', 'label-rejected'),
+            filterOption(value, 'Draft', 'IN_PROGRESS', counts.IN_PROGRESS, 'all-listings-filter-draft', 'label-draft')
+        );
+        return components;
     },
 
     render: function() {
-        var counts = this.props.counts;
-
-        if(this.props.view === 'adminView') {
-            /*jshint ignore:start */
-            var view =
-                <RadioGroup name="approval-status"
-                value={ this.props.value['approvalStatus'] || 'all' }
-                onChange={ _.partial(this.handleChange, "approvalStatus") }>
-                    <input id="all-listings-filter-all" type="radio" value="all" />
-                    <label htmlFor="all-listings-filter-all" className="label-all">
-                        All
-                        <strong className="badge">{ counts.total }</strong>
-                    </label>
-                    <input id="all-listings-filter-published" type="radio" value="APPROVED"/>
-                    <label htmlFor="all-listings-filter-published" className="label-published">
-                        Published
-                        <strong className="badge">{ counts.APPROVED }</strong>
-                    </label>
-                    <input id="all-listings-filter-needs-action" type="radio" value="APPROVED_ORG"/>
-                    <label htmlFor="all-listings-filter-needs-action" className="label-needs-action">
-                        Needs action
-                        <strong className="badge">{ counts.APPROVED_ORG }</strong>
-                    </label>
-                    <input id="all-listings-filter-pending" type="radio" value="PENDING"/>
-                    <label htmlFor="all-listings-filter-pending" className="label-pending">
-                        Pending, Org.
-                        <strong className="badge">{ counts.PENDING }</strong>
-                    </label>
-                    <input id="all-listings-filter-rejected" type="radio" value="REJECTED"/>
-                    <label htmlFor="all-listings-filter-rejected" className="label-rejected">
-                        Returned
-                        <strong className="badge">{ counts.REJECTED }</strong>
-                    </label>
-                    <input id="all-listings-filter-draft" type="radio" value="IN_PROGRESS"/>
-                    <label htmlFor="all-listings-filter-draft" className="label-draft">
-                        Draft
-                        <strong className="badge">{ counts.IN_PROGRESS }</strong>
-                    </label>
-                </RadioGroup >;
-                /*jshint ignore:end */
-        } else if(this.props.view === 'orgView') {
-            /*jshint ignore:start */
-            var view =
-                <RadioGroup name="approval-status"
-                value={ this.props.value['approvalStatus'] || 'all' }
-                onChange={ _.partial(this.handleChange, "approvalStatus") }>
-                    <input id="all-listings-filter-all" type="radio" value="all" />
-                    <label htmlFor="all-listings-filter-all" className="label-all">
-                        All
-                        <strong className="badge">{ counts.total }</strong>
-                    </label>
-                    <input id="all-listings-filter-published" type="radio" value="APPROVED"/>
-                    <label htmlFor="all-listings-filter-published" className="label-published">
-                        Published
-                        <strong className="badge">{ counts.APPROVED }</strong>
-                    </label>
-                    <input id="all-listings-filter-needs-action" type="radio" value="PENDING"/>
-                    <label htmlFor="all-listings-filter-needs-action" className="label-needs-action">
-                        Needs action
-                        <strong className="badge">{ counts.PENDING }</strong>
-                    </label>
-                    <input id="all-listings-filter-pending" type="radio" value="APPROVED_ORG"/>
-                    <label htmlFor="all-listings-filter-pending" className="label-pending">
-                        Org approved
-                        <strong className="badge">{ counts.APPROVED_ORG }</strong>
-                    </label>
-                    <input id="all-listings-filter-rejected" type="radio" value="REJECTED"/>
-                    <label htmlFor="all-listings-filter-rejected" className="label-rejected">
-                        Returned
-                        <strong className="badge">{ counts.REJECTED }</strong>
-                    </label>
-                    <input id="all-listings-filter-draft" type="radio" value="IN_PROGRESS"/>
-                    <label htmlFor="all-listings-filter-draft" className="label-draft">
-                        Draft
-                        <strong className="badge">{ counts.IN_PROGRESS }</strong>
-                    </label>
-                </RadioGroup >;
-                /*jshint ignore:end */
-        } else {
-            counts = this.props.listings.reduce(function (acc, i) {
-                    (acc[i.approvalStatus])++;
-                    return acc;
-                }, {
-                    APPROVED: 0,
-                    APPROVED_ORG: 0,
-                    REJECTED: 0,
-                    PENDING: 0,
-                    IN_PROGRESS: 0
-                });
-            /*jshint ignore:start */
-            var view =
-                <RadioGroup name="approval-status"
-                value={this.props.value['approvalStatus'] || 'all' }
-                onChange={ _.partial(this.handleChange, "approvalStatus") }>
-                    <input id="my-listings-filter-all" type="radio" value="all"/>
-                    <label htmlFor="my-listings-filter-all" className="label-all">
-                        All
-                        <strong className="badge">{this.props.listings.length}</strong>
-                    </label>
-                    <input id="my-listings-filter-published" type="radio" value="APPROVED"/>
-                    <label htmlFor="my-listings-filter-published" className="label-published">
-                        Published
-                        <strong className="badge">{counts.APPROVED}</strong>
-                    </label>
-                    <input id="my-listings-filter-needs-action" type="radio" value="REJECTED"/>
-                    <label htmlFor="my-listings-filter-needs-action"
-                    className="label-needs-action">
-                        Needs action
-                        <strong className="badge">{counts.REJECTED}</strong>
-                    </label>
-                    <input id="my-listings-filter-pending" type="radio" value="PENDING"/>
-                    <label htmlFor="my-listings-filter-pending" className="label-pending">
-                        Pending
-                        <strong className="badge">{ counts.PENDING + counts.APPROVED_ORG }</strong>
-                    </label>
-                    <input id="my-listings-filter-draft" type="radio" value="IN_PROGRESS"/>
-                    <label htmlFor="my-listings-filter-draft" className="label-draft">
-                        Draft
-                        <strong className="badge">{counts.IN_PROGRESS}</strong>
-                    </label>
-                </RadioGroup>
-                /*jshint ignore:end */
-        }
+        var value = this.props.value.approvalStatus || 'all';
 
         return (
             /*jshint ignore:start */
             <div>
                 <h4>State</h4>
-                { view }
+                <RadioGroup
+                    name="approval-status"
+                    value={ value }
+                    onChange={ this.handleChange }>
+                    { _.flatten(this._renderRadioGroupOptions()) }
+                </RadioGroup>
             </div>
             /*jshint ignore:end */
         );
-
-
     }
 
 });

@@ -4,22 +4,27 @@ var React = require('react');
 var Reflux = require('reflux');
 var _ = require('../../utils/_');
 
-var AdminRoute = require('../../mixins/AdminRouteMixin');
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
-var SelfStore = require('../../stores/SelfStore');
 
 var Sidebar = require('./shared/Sidebar');
+var ApprovalStatusFilter = require('./shared/ApprovalStatusFilter');
+var EnabledFilter = require('./shared/EnabledFilter');
 var ListingTile = require('../listing/ListingTile');
 var LoadMore = require('../shared/LoadMore');
 
 var PaginatedListingsStore = require('../../stores/PaginatedListingsStore');
 
 var ListingActions = require('../../actions/ListingActions');
+var { UserRole } = require('../../constants');
 
 
 var OrgListings = React.createClass({
 
-    mixins: [ SystemStateMixin ],
+    mixins: [
+        SystemStateMixin,
+        Reflux.listenTo(PaginatedListingsStore, 'onStoreChanged'),
+        Reflux.listenTo(ListingActions.listingChangeCompleted, 'onListingChangeCompleted')
+    ],
 
     getInitialState: function () {
         return {
@@ -39,11 +44,13 @@ var OrgListings = React.createClass({
     },
 
     fetchAllListingsIfEmpty: function () {
-        var listings = PaginatedListingsStore.getListingsByFilter(this.state.filter);
+        var listings = this.getPaginatedList();
         if (!listings) {
             ListingActions.fetchAllListings(this.state.filter);
         }
-        this.onStoreChanged();
+        else {
+            this.onStoreChanged();
+        }
     },
 
     onLoadMore: function () {
@@ -53,9 +60,8 @@ var OrgListings = React.createClass({
     onFilterChanged: function (key, value) {
         this.state.filter[key] = value;
         this.fetchAllListingsIfEmpty();
-        this.setState({
-            filter: this.state.filter
-        });
+        this.forceUpdate();
+        this.onStoreChanged();
     },
 
     onStoreChanged: function () {
@@ -77,35 +83,33 @@ var OrgListings = React.createClass({
     },
 
     componentWillReceiveProps: function(nextProps) {
-        if (this.props.org !== nextProps.org) {
+        if (this.props.org.name !== nextProps.org.name) {
             this.onFilterChanged('org', nextProps.org.params.org);
         }
     },
 
     componentDidMount: function () {
         this.fetchAllListingsIfEmpty();
-        this.listenTo(PaginatedListingsStore, this.onStoreChanged);
-        this.listenTo(ListingActions.listingChangeCompleted, this.onListingChangeCompleted);
     },
 
     render: function () {
-        this.state.listings.forEach(function(listing) {
-            listing.view = 'orgView';
-        });
+        var sidebarFilterOptions = {
+            value: this.state.filter,
+            counts: this.state.counts,
+            onFilterChanged: this.onFilterChanged,
+            organizations: this.state.system.organizations || []
+        };
         /* jshint ignore:start */
         return this.transferPropsTo(
             <div className="AllListings row">
                 <aside className="AllListings__sidebar col-md-2">
-                <Sidebar
-                    value={ this.state.filter }
-                    listings={ this.state.listings }
-                    counts={ this.state.counts }
-                    onFilterChanged={ this.onFilterChanged }
-                    organizations={ this.state.system.organizations || [] }
-                    view={'orgView'} />
+                    <Sidebar>
+                        <ApprovalStatusFilter role={ UserRole.ORG_STEWARD } { ...sidebarFilterOptions } />
+                        <EnabledFilter { ...sidebarFilterOptions } />
+                    </Sidebar>
                 </aside>
                 <LoadMore className="AllListings__listings col-md-10 all" hasMore={this.state.hasMore} onLoadMore={this.onLoadMore}>
-                    { ListingTile.fromArray(this.state.listings) }
+                    { ListingTile.fromArray(this.state.listings, UserRole.ORG_STEWARD) }
                 </LoadMore>
             </div>
     );
