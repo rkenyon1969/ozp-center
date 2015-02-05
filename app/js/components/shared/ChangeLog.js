@@ -101,7 +101,7 @@ var ModifiedChangeLog = React.createClass({
            /* jshint ignore:start */
             return (
                 <div>
-                    <div>{ changeLog.author.displayName } modified { changeLog.listing.title }</div>
+                    <div>{ changeLog.author.displayName } modified { this.props.listingName }</div>
                     <a href="javascript:;" data-toggle="collapse" data-target={ '#' + id } onClick={ this.toggleIcon }>
                         <i className="fa fa-plus"></i> See changes
                     </a>
