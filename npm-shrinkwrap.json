@@ -7517,8 +7517,8 @@
     },
     "ozp-react-commons": {
       "version": "0.1.1",
-      "from": "../../../../tmp/npm-20817-6cf2e359/git-cache-97ebdfd009cb/8287a76f98b4ae0ffeff00dd7e2abb04ea962ca0",
-      "resolved": "git://github.com/ozone-development/ozp-react-commons#8287a76f98b4ae0ffeff00dd7e2abb04ea962ca0",
+      "from": "ozp-react-commons@git://github.com/ozone-development/ozp-react-commons#master",
+      "resolved": "git://github.com/ozone-development/ozp-react-commons#master",
       "dependencies": {
         "es5-shim": {
           "version": "4.0.6",
