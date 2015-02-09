@@ -1,0 +1,60 @@
+'use strict';
+
+var React = require('react');
+var Reflux = require('reflux');
+
+var WebtopLaunchLink = require('ozp-react-commons/components/WebtopLaunchLink');
+
+var SelfStore = require('../stores/SelfStore');
+
+var ListingActions = require('../actions/ListingActions');
+
+/**
+ * A link for launching applications.  Depending on the user's preference,
+ * this will either launch into webtop (in a new tab) or just in a new tab
+ */
+var LaunchLink = React.createClass({
+    mixins: [Reflux.connect(SelfStore)],
+
+    propTypes: {
+        listing: React.PropTypes.object.isRequired
+    },
+
+    getInitialState: function() {
+        return {
+            launchInWebtop: false
+        };
+    },
+
+    render: function() {
+        /* jshint ignore:start */
+
+        //TODO placeholder code - may need updating once launch preference is implemented
+        var launchInWebtop = this.state.launchInWebtop,
+            linkChildren = <span className="icon-open"></span>,
+
+            //this function isn't expected to actually launch the listing, but just
+            //to record that it was launched
+            listingLaunchFn = ListingActions.launch.bind(null, this.props.listing),
+            className = this.props.className + ' btn';
+
+        return (
+            launchInWebtop ?
+                <WebtopLaunchLink className={className}
+                        listing={this.props.listing}
+                        onClick={listingLaunchFn}
+                        newTab={true} >
+                    {linkChildren}
+                </WebtopLaunchLink>
+                :
+                <a className={className} onClick={listingLaunchFn}
+                        href={this.props.listing.launchUrl}
+                        target="_blank">
+                    {linkChildren}
+                </a>
+        );
+        /* jshint ignore:end */
+    }
+});
+
+module.exports = LaunchLink;

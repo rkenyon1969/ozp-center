@@ -3,10 +3,10 @@
 var React = require('react');
 var IconRating = require('../shared/IconRating');
 var ListingActions = require('../../actions/ListingActions');
-var launch = ListingActions.launch;
 var { UserRole } = require('../../constants');
 
 var BookmarkButton = require('../BookmarkButton');
+var LaunchLink = require('../LaunchLink');
 
 var QuickviewHeader = React.createClass({
 
@@ -56,16 +56,12 @@ var QuickviewHeader = React.createClass({
         /* jshint ignore:start */
         return (
             <div className="btn-group quickview-header-actions">
-                <button type="button" className="btn btn-default" onClick={ this.launch }><i className="icon-open"></i></button>
+                <LaunchLink listing={this.props.listing} className="btn btn-default"/>
                 <BookmarkButton listing={this.props.listing} />
               {this.props.allowEdit && <button type="button" className="btn btn-default" onClick={ this.props.onEdit }><i className="fa fa-pencil"></i></button>}
             </div>
         );
         /* jshint ignore:end */
-    },
-
-    launch: function () {
-        launch(this.props.listing);
     }
 });
 
