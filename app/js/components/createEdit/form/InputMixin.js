@@ -5,7 +5,10 @@ var { cloneWithProps, classSet } = React.addons;
 
 var InputMixin = {
     getInitialState: function () {
-        return {blurred: false};
+        return {
+            value: this.props.value,
+            blurred: false
+        };
     },
 
     render: function () {
@@ -23,42 +26,42 @@ var InputMixin = {
         /*jshint ignore:end */
     },
 
-    shouldComponentUpdate: function (newProps, newState) {
-        if (newProps.description !== this.props.description) {
+    shouldComponentUpdate: function (nextProps, nextState) {
+        if (nextProps.id !== this.props.id) {
             return true;
         }
 
-        if (newProps.label !== this.props.label) {
+        if (nextProps.value !== nextState.value) {
             return true;
         }
 
-        if (newProps.help !== this.props.help) {
+        if (nextProps.description !== this.props.description) {
             return true;
         }
 
-        if (newProps.optional !== this.props.optional) {
+        if (nextProps.label !== this.props.label) {
             return true;
         }
 
-        if (newProps.value !== this.props.value) {
+        if (nextProps.help !== this.props.help) {
             return true;
         }
 
-        if (newState.blurred !== this.state.blurred) {
+        if (nextProps.optional !== this.props.optional) {
             return true;
         }
 
-        if (this.showWarning(newProps, newState) !==
+        if (nextState.blurred !== this.state.blurred) {
+            return true;
+        }
+
+        if (this.showWarning(nextProps, nextState) !==
                 this.showWarning(this.props, this.state)) {
             return true;
         }
 
-        if (this.showError(newProps, newState) !==
+        if (this.showError(nextProps, nextState) !==
                 this.showError(this.props, this.state)) {
-            return true;
-        }
-
-        if (newProps.id !== this.props.id) {
             return true;
         }
 
@@ -90,11 +93,13 @@ var InputMixin = {
 
     _onChange: function (event) {
         event.preventDefault();
-        this.props.setter(event.target.value);
+        var { value } = event.target;
+        this.setState({ value: value });
+        this.props.setter(value);
     },
 
     getInputProps: function () {
-        var value = this.getValue ? this.getValue(this.props.value) : this.props.value;
+        var value = this.getValue ? this.getValue(this.props.value) : (this.state.value || this.props.value);
         var onChange = this.onChange ? this.onChange : this._onChange;
         var onBlur = this.onBlur ? this.onBlur : this._onBlur;
 
