@@ -1,11 +1,11 @@
 module.exports = {
-    InputMixin: require('./InputMixin'),
-    ListInput: require('./ListInput'),
-    Select2Input: require('./Select2Input'),
+    InputMixin: require('./InputMixin.jsx'),
+    ListInput: require('./ListInput.jsx'),
+    Select2Input: require('./Select2Input.jsx'),
     Select2Mixin: require('./Select2Mixin'),
-    Select2TagInput: require('./Select2TagInput'),
-    TextAreaInput: require('./TextAreaInput'),
-    TextInput: require('./TextInput'),
-    ImageInput: require('./ImageInput'),
+    Select2TagInput: require('./Select2TagInput.jsx'),
+    TextAreaInput: require('./TextAreaInput.jsx'),
+    TextInput: require('./TextInput.jsx'),
+    ImageInput: require('./ImageInput.jsx'),
     ValidatedFormMixin: require('./ValidatedFormMixin')
 };

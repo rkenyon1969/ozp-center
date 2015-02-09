@@ -292,7 +292,7 @@ var CurrentListingStore = createStore({
     },
 
     getReviews: function () {
-        return GlobalListingStore.getReviewsForListing(_listing.id);
+        return GlobalListingStore.getReviewsForListing(_listing);
     },
 
     loadListing: function (id) {
