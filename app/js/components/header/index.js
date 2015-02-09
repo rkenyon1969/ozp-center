@@ -4,7 +4,6 @@ var React = require('react/addons');
 var Reflux = require('reflux');
 
 var Logo = require('./Logo');
-var UserMenu = require('./UserMenu');
 
 var BodyPaddingStore = require('../../stores/BodyPaddingStore');
 

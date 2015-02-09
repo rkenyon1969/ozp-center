@@ -22,6 +22,9 @@ var NavBar = React.createClass({
 
     render: function () {
         /*jshint ignore:start */
+        var Metrics = (this.isAdmin() || this.isOrgSteward()) ?
+            <li><a href={METRICS_URL}><i className="icon-bar-graph-2"></i>Metrics</a></li> : '';
+
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top" id="globalNav">
                 <div className="container-fluid container" id="centered">
@@ -64,7 +67,7 @@ var NavBar = React.createClass({
                                         this.isAdmin() &&
                                         <li><a href={'#/mall-management/categories'}><i className="icon-shopping-settings"></i>Marketplace Settings</a></li>
                                     }
-                                    <li><a href={METRICS_URL}><i className="icon-bar-graph-2"></i>Metrics</a></li>
+                                    { Metrics }
                                 </ul>
                             </li>
                         </ul>
@@ -76,6 +79,10 @@ var NavBar = React.createClass({
             </nav>
         );
         /*jshint ignore:end */
+    },
+    
+    isOrgSteward: function(){
+        return this.state.currentUser.isOrgSteward();
     },
 
     isAdmin: function() {
