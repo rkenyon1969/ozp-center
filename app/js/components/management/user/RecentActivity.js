@@ -116,7 +116,7 @@ var RecentActivity = React.createClass({
             /* jshint ignore:start */
             return [
                 <ChangeLog showListingName={true} changeLog={changeLog}>
-                    <img className="recent-activity-icon" src={ changeLog.listing.iconUrl } />
+                    { changeLog.listing.iconUrl ? <img className="recent-activity-icon" src={ changeLog.listing.iconUrl } /> : <div></div> }
                     { me.createLink(changeLog) }
                 </ChangeLog>,
                 <br/>

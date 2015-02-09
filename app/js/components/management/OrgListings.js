@@ -3,6 +3,8 @@
 var React = require('react');
 var Reflux = require('reflux');
 var _ = require('../../utils/_');
+var Router = require('react-router');
+
 
 var AdminRoute = require('../../mixins/AdminRouteMixin');
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
@@ -19,18 +21,15 @@ var ListingActions = require('../../actions/ListingActions');
 
 var OrgListings = React.createClass({
 
-    mixins: [ SystemStateMixin ],
+    mixins: [ SystemStateMixin, Router.State ],
 
     getInitialState: function () {
         return {
             counts: {},
             listings: [],
             hasMore: false,
-            filter: {
-                approvalStatus: null,
-                org: this.props.org.params.org,
-                enabled: null
-            }
+            filter: _.assign(this.getQuery(),
+            { org: this.props.org.params.org })
         };
     },
 
