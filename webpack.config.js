@@ -36,15 +36,11 @@ module.exports = {
         modulesDirectories: ['./bower_components', './node_modules']
     },
     module: {
-        preLoaders: [
-            { test: /\.js$/, loader: "jshint-loader", exclude: /node_modules|bower_components|gulp|dist/ },
-            {
-                test: /\.js$/,
-                loader: "jshint-loader",
-                include: /node_modules\/ozp-react-commons/,
-                exclude: /node_modules\/ozp-react-commons\/node_modules/
-            }
-        ],
+        preLoaders: [{
+            test: /\.jsx?$/,
+            loader: "jsxhint-loader",
+            exclude: /node_modules|bower_components|gulp|dist/
+        }],
         loaders: [
             { test: /\.gif/, loader: "url-loader?limit=10000&mimetype=image/gif" },
             { test: /\.jpg/, loader: "url-loader?limit=10000&mimetype=image/jpg" },

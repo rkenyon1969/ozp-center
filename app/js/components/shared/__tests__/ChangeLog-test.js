@@ -9,12 +9,10 @@ var expect = require('chai').expect;
 
 describe('ChangeLog', function () {
 
-    var ChangeLog = require('inject?../profile/ProfileLink!../ChangeLog')({
-        '../profile/ProfileLink': React.createClass({
+    var ChangeLog = require('inject?../profile/ProfileLink.jsx!../ChangeLog.jsx')({
+        '../profile/ProfileLink.jsx': React.createClass({
             render: function() {
-                /* jshint ignore:start */
                 return <a href="profile">{this.props.children}</a>;
-                /* jshint ignore:end */
             }
         })
     });

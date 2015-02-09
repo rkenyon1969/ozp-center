@@ -8,7 +8,7 @@ var createRoutes = require('../../../../__tests__/createRoutes');
 describe('RecentActivity', function() {
     it('renders the recent activity sidebar', function() {
         var React = require('react');
-        var RecentActivity = require('../RecentActivity');
+        var RecentActivity = require('../RecentActivity.jsx');
         var expect = require('chai').expect;
         var TestUtils = React.addons.TestUtils;
         var recentActivity;
@@ -26,7 +26,7 @@ describe('RecentActivity', function() {
 
     it('renders the recent activity list', function() {
         var React = require('react');
-        var RecentActivity = require('../RecentActivity');
+        var RecentActivity = require('../RecentActivity.jsx');
         var expect = require('chai').expect;
         var TestUtils = React.addons.TestUtils;
         var recentActivity;

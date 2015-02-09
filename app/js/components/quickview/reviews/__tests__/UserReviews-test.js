@@ -6,7 +6,7 @@ var $ = require('jquery');
 var { TestUtils } = React.addons;
 
 describe('UserReviews', function () {
-    var UserReviews = require('../UserReviews');
+    var UserReviews = require('../UserReviews.jsx');
     var {
         userReview,
         orgStewardReview,
