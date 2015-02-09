@@ -63,14 +63,14 @@ var EditReview = React.createClass({
         ListingActions.saveReview(this.props.listing, this.state.review);
     },
 
-    onSaveReviewCompleted: function (listingId, review) {
+    onSaveReviewCompleted: function (listing, review) {
         if (this.state.review.id === review.id) {
             this.props.onSave();
         }
     },
 
     onDeleteConfirm: function (hidePopover) {
-        ListingActions.deleteReview(this.props.listing.id, this.state.review.id);
+        ListingActions.deleteReview(this.props.listing, this.state.review);
     },
 
     onDeleteReviewCompleted: function (listingId, reviewId) {

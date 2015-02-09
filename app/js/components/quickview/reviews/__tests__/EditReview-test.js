@@ -66,7 +66,7 @@ describe('EditReview', function () {
         var spy = sinon.spy();
         var editReview = render({id: 1}, userReview, ProfileMock.mockUser(), spy);
 
-        ListingActions.saveReviewCompleted(1, userReview);
+        ListingActions.saveReviewCompleted({id: 1}, userReview);
 
         setTimeout(function () {
             expect(spy.calledOnce).to.be.ok;

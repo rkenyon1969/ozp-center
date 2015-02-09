@@ -113,7 +113,8 @@ ListingActions = createActions({
     },
 
     fetchReviews: function (listing) {
-        ListingApi.fetchReviews(listing.id).then(ListingActions.fetchReviewsCompleted.bind(null, listing.id));
+        ListingApi.fetchReviews(listing.id)
+            .then(ListingActions.fetchReviewsCompleted.bind(null, listing.id));
         if(typeof(listing.title) !== 'undefined') { OzpAnalytics.trackListingReview(listing.title);}
     },
     saveReview: function (listing, review) {
@@ -121,19 +122,19 @@ ListingActions = createActions({
         ListingApi.saveReview(listing.id, review)
             .then(function (response) {
                 ListingActions.fetchById(listing.id);
-                ListingActions.fetchReviews(listing.id);
-                ListingActions.saveReviewCompleted(listing.id, response);
+                ListingActions.fetchReviews(listing);
+                ListingActions.saveReviewCompleted(listing, response);
             })
             .fail(ListingActions.saveReviewFailed);
     },
-    deleteReview: function (listingId, reviewId) {
-        ListingApi.deleteReview(listingId, reviewId)
+    deleteReview: function (listing, review) {
+        ListingApi.deleteReview(listing.id, review.id)
             .then(function () {
-                ListingActions.fetchById(listingId);
-                ListingActions.fetchReviews(listingId);
-                ListingActions.deleteReviewCompleted(listingId, reviewId);
+                ListingActions.fetchById(listing.id);
+                ListingActions.fetchReviews(listing);
+                ListingActions.deleteReviewCompleted(listing, review);
             })
-            .fail(ListingActions.deleteReviewFailed);
+            .fail(_.partial(ListingActions.deleteReviewFailed, listing, review));
     },
 
     launch: function (listing) {
