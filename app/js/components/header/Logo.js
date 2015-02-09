@@ -6,11 +6,11 @@ var logo  = './images/marketplace-logo.png';
 var Logo = React.createClass({
 
     /*jshint ignore:start */
-    render: function () {
+    render() {
         return (
-            <div id="logo-container">
-                <a href="#home" id="appsmall-logo-link"><img src={logo} /></a>
-            </div>
+            <a href="#home" id="appsmall-logo">
+                <img src={logo} />
+            </a>
         );
     }
     /*jshint ignore:end */
