@@ -18,7 +18,23 @@ var ListingTile = React.createClass({
             /* jshint ignore:start  */
             return array.map((listing) => <ListingTile listing={listing} key={listing.id}/>);
             /* jshint ignore:end  */
-        }
+        },
+        renderLimitedTiles: function(display, max, mostPopular) {
+            var ammount = 0;
+            return(
+                mostPopular.filter(function(tile){
+                    if(ammount < display){
+                        ammount++;
+                        return tile;
+                    }
+                }).map(function(tile){
+                    var tileArray = [];
+                    tileArray.push(tile);
+
+                    return ListingTile.fromArray(tileArray);
+                })
+            );
+        },
     },
 
     render: function () {
