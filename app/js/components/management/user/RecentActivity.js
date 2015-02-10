@@ -72,25 +72,23 @@ var RecentActivity = React.createClass({
                 'REVIEW_DELETED' : 'View'
             };
 
-            var adminLinkMap = linkMap;
-            var userLinkMap = linkMap;
-            userLinkMap.APPROVED_ORG = 'View';
-
             var href = this.makeHref(this.getActiveRoutePath(), this.getParams(), {
                 listing: changeLog.listing.id,
                 action: 'view',
                 tab: 'overview'
             });
 
-            var links = userLinkMap;
+            if (!ProfileStore.getCurrentUser().isAdmin) {
+                linkMap.APPROVED_ORG = 'View';
+            }
 
-            if (ProfileStore.getCurrentUser().isAdmin) {
-                links = adminLinkMap;
+            if (ProfileStore.getCurrentUser().highestRole === 'ORG_STEWARD') {
+                linkMap.SUBMITTED = 'Review Listing';
             }
 
             return (
                 /* jshint ignore:start */
-                <a href={href}>{ links[action] } <i className="fa fa-angle-right"></i></a>
+                <a href={href}>{ linkMap[action] } <i className="fa fa-angle-right"></i></a>
                 /* jshint ignore:end */
             );
         }
