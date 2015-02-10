@@ -3,7 +3,7 @@
 var React = require('react');
 var IconRating = require('../shared/IconRating.jsx');
 var ListingActions = require('../../actions/ListingActions');
-var { UserRole } = require('../../constants');
+var { UserRole } = require('ozp-react-commons/constants');
 
 var BookmarkButton = require('../BookmarkButton.jsx');
 var LaunchLink = require('../LaunchLink.jsx');

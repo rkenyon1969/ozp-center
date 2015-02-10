@@ -3,9 +3,9 @@
 var React = require('react');
 var Reflux = require('reflux');
 var TimeAgo = require('../../components/shared/TimeAgo.jsx');
-var actions = require('../../constants/index').listingActions;
+var actions = require('ozp-react-commons/constants/index').listingActions;
 var uuid = require('../../utils/uuid');
-var fieldName = require('../../constants/index').listingFieldName;
+var fieldName = require('ozp-react-commons/constants/index').listingFieldName;
 var CurrentListingStore = require('../../stores/CurrentListingStore');
 var ChangeLog = require('../shared/ChangeLog.jsx');
 

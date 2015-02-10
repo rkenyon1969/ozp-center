@@ -5,9 +5,9 @@ var Reflux = require('reflux');
 var Modal = require('ozp-react-commons/components/Modal.jsx');
 var LoadMask = require('../LoadMask.jsx');
 var { pick, assign } = require('../../utils/_');
-var { approvalStatus } = require('../../constants');
+var { approvalStatus } = require('ozp-react-commons/constants');
 var CurrentListingStore = require('../../stores/CurrentListingStore');
-var SelfStore = require('../../stores/SelfStore');
+var SelfStore = require('ozp-react-commons/stores/SelfStore');
 var { loadListing, updateListing, save, submit } = require('../../actions/CreateEditActions');
 var { Navigation } = require('react-router');
 
@@ -168,7 +168,7 @@ var CreateEditPage = React.createClass({
     statics: {
         willTransitionTo: function (transition, params) {
             transition.wait(CurrentListingStore.loadListing(params.listingId).then(listing => {
-                if (!SelfStore.currentUserCanEdit(listing)) {
+                if (!CurrentListingStore.currentUserCanEdit(listing)) {
                     transition.redirect('my-listings');
                 }
             }));

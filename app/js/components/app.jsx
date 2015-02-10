@@ -6,7 +6,7 @@ var _ = require('../utils/_');
 var { RouteHandler, State } = require('react-router');
 var SystemStateMixin = require('../mixins/SystemStateMixin');
 
-var { fetchLibrary } = require('../actions/SelfActions');
+var { fetchLibrary } = require('ozp-react-commons/actions/ProfileActions');
 
 var Quickview = require('../components/quickview/index.jsx');
 var CenterProfileWindow = require('./profile/CenterProfileWindow.jsx');

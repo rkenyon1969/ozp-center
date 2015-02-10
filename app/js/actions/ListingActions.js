@@ -2,9 +2,9 @@
 
 var Reflux = require('reflux');
 var { ListingApi } = require('../webapi/Listing');
-var { SelfApi } = require('../webapi/Self');
+var ProfileApi = require('ozp-react-commons/api/Profile');
 var _ = require('../utils/_');
-var { PAGINATION_MAX } = require('../constants');
+var { PAGINATION_MAX } = require('ozp-react-commons/constants');
 var OzpAnalytics = require('../analytics/ozp-analytics');
 var createActions = require('../utils/createActions');
 var ListingActions;
@@ -142,7 +142,7 @@ ListingActions = createActions({
         window.open(listing.launchUrl);
     },
     addToLibrary: function (listing) {
-        SelfApi
+        ProfileApi
             .addToLibrary({
                 listing: {
                     id: listing.id
@@ -152,7 +152,7 @@ ListingActions = createActions({
         OzpAnalytics.trackEvent('Favorited Applications', listing.title);
     },
     removeFromLibrary: function (listing) {
-        SelfApi
+        ProfileApi
             .removeFromLibrary(listing)
             .then(ListingActions.removeFromLibraryCompleted.bind(null, listing));
     },

@@ -5,7 +5,7 @@ var Reflux = require('reflux');
 
 var _ = require('../utils/_');
 
-var SelfStore = require('../stores/SelfStore');
+var SelfStore = require('ozp-react-commons/stores/SelfStore');
 var { addToLibrary, removeFromLibrary } = require('../actions/ListingActions');
 
 var BookmarkButton = React.createClass({

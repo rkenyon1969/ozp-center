@@ -11,8 +11,8 @@ var enableListing = ListingActions.enable;
 var disableListing = ListingActions.disable;
 var approveListingByOrg = ListingActions.approveByOrg;
 var approveListing = ListingActions.approve;
-var listingStatus = require('../../constants').approvalStatus;
-var { UserRole } = require('../../constants');
+var listingStatus = require('ozp-react-commons/constants').approvalStatus;
+var { UserRole } = require('ozp-react-commons/constants');
 var { form, Str, subtype, struct } = require('tcomb-form');
 
 var Toggle = React.createClass({

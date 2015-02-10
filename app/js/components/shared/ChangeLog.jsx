@@ -1,9 +1,9 @@
 'use strict';
 var React = require('react');
-var actions = require('../../constants/index').listingActions;
+var actions = require('ozp-react-commons/constants/index').listingActions;
 var uuid = require('../../utils/uuid');
 var timeAgo = require('../../utils/timeAgo');
-var fieldName = require('../../constants/index').listingFieldName;
+var fieldName = require('ozp-react-commons/constants/index').listingFieldName;
 
 var { Navigation, CurrentPath } = require('react-router');
 var ProfileLink = require('../profile/ProfileLink.jsx');

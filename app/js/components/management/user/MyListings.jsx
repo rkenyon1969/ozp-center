@@ -10,9 +10,8 @@ var ListingTile = require('../../listing/ListingTile.jsx');
 var RadioGroup = require('react-radio-group');
 
 var GlobalListingStore = require('../../../stores/GlobalListingStore');
-var SelfStore = require('../../../stores/SelfStore');
+var SelfStore = require('ozp-react-commons/stores/SelfStore');
 var ListingActions = require('../../../actions/ListingActions');
-var SelfActions = require('../../../actions/SelfActions');
 var _ = require('../../../utils/_');
 
 var MyListingsStatusFilter = React.createClass({
@@ -92,7 +91,7 @@ var MyListings = React.createClass({
     ],
 
     getListings: function () {
-        var profile = SelfStore.getCurrentUser();
+        var profile = SelfStore.getDefaultData().currentUser;
         return GlobalListingStore.getByOwner(profile);
     },
 

@@ -3,9 +3,9 @@
 var React = require('react');
 var Reflux = require('reflux');
 
-var WebtopLaunchLink = require('ozp-react-commons/components/WebtopLaunchLink');
+var WebtopLaunchLink = require('ozp-react-commons/components/WebtopLaunchLink.jsx');
 
-var SelfStore = require('../stores/SelfStore');
+var SelfStore = require('ozp-react-commons/stores/SelfStore');
 
 var ListingActions = require('../actions/ListingActions');
 
@@ -27,8 +27,6 @@ var LaunchLink = React.createClass({
     },
 
     render: function() {
-        /* jshint ignore:start */
-
         //TODO placeholder code - may need updating once launch preference is implemented
         var launchInWebtop = this.state.launchInWebtop,
             linkChildren = <span className="icon-open"></span>,
@@ -53,7 +51,6 @@ var LaunchLink = React.createClass({
                     {linkChildren}
                 </a>
         );
-        /* jshint ignore:end */
     }
 });
 

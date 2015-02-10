@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react');
-var { systemHigh } = require('../../constants/messages');
+var { systemHigh } = require('ozp-react-commons/constants/messages');
 
 var SystemHighMessage = React.createClass({
 

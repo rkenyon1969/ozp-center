@@ -3,7 +3,7 @@ var React = require('react');
 var Reflux = require('reflux');
 var _ = require('../../../utils/_');
 var RadioGroup = require('react-radio-group');
-var { UserRole } = require('../../../constants');
+var { UserRole } = require('ozp-react-commons/constants');
 
 function filterOption (currentValue, label, value, count, htmlFor, className) {
     var badge;

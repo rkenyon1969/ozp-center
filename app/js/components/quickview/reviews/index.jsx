@@ -12,7 +12,7 @@ var EditReview = require('./EditReview.jsx');
 var CurrentListingStore = require('../../../stores/CurrentListingStore');
 var SystemStateMixin = require('../../../mixins/SystemStateMixin');
 var ListingActions = require('../../../actions/ListingActions');
-var SelfStore = require('../../../stores/SelfStore');
+var SelfStore = require('ozp-react-commons/stores/SelfStore');
 
 var RatingProgressBar = React.createClass({
     mixins: [React.addons.PureRenderMixin],

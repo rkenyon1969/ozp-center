@@ -12,7 +12,7 @@ var _ = require('../../utils/_');
 var Modal = require('ozp-react-commons/components/Modal.jsx');
 var IconRating = require('../shared/IconRating.jsx');
 var Header = require('./Header.jsx');
-var { UserRole } = require('../../constants');
+var { UserRole } = require('ozp-react-commons/constants');
 var CurrentListingStore = require('../../stores/CurrentListingStore');
 var { loadListing } = require('../../actions/CreateEditActions');
 

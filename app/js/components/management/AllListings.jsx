@@ -19,7 +19,7 @@ var LoadMore = require('../shared/LoadMore.jsx');
 var PaginatedListingsStore = require('../../stores/PaginatedListingsStore');
 
 var ListingActions = require('../../actions/ListingActions');
-var { UserRole } = require('../../constants');
+var { UserRole } = require('ozp-react-commons/constants');
 
 var AllListings = React.createClass({
 
