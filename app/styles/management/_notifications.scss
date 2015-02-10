@@ -1,0 +1,16 @@
+.ActiveNotification, .PastNotification {
+    margin-bottom: 20px;
+}
+
+.ActiveNotification__Header, .PastNotification__Header {
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.ActiveNotification__Header {
+    > .fa-ban {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+}

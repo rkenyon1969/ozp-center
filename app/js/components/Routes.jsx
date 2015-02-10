@@ -27,6 +27,7 @@ module.exports = function (childRoutes) {
             <Route path="intents" name="intents" handler={ AppsMallManagement.Intents } />
             <Route path="organizations" name="organizations" handler={ AppsMallManagement.Organizations } />
             <Route path="stewards" name="stewards" handler={ AppsMallManagement.Stewards } />
+            <Route path="notifications" name="notifications" handler={ AppsMallManagement.Notifications } />
         </Route>
     ];
     if (childRoutes) {

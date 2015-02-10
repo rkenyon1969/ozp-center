@@ -39,6 +39,9 @@ var MallManagement = React.createClass({
             }, {
                 to: 'stewards',
                 name: 'Stewards'
+            }, {
+                to: 'notifications',
+                name: 'Notifications'
             }]
         };
     },
@@ -69,3 +72,4 @@ module.exports.ContactTypes = require('./ContactTypes.jsx');
 module.exports.Organizations = require('./Organizations.jsx');
 module.exports.Intents = require('./Intents.jsx');
 module.exports.Stewards = require('./Stewards.jsx');
+module.exports.Notifications = require('./notifications/index.jsx');
