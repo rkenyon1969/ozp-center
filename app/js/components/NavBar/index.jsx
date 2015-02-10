@@ -6,6 +6,7 @@ var Reflux = require('reflux');
 var Alerts = require('../alerts/index.jsx');
 var HelpModal = require('./helpmodal.jsx');
 var ProfileLink = require('../profile/ProfileLink.jsx');
+var ModalLink = require('../ModalLink.jsx');
 var { HUD_URL, METRICS_URL, HELP_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL } = require('ozp-react-commons/OzoneConfig');
 
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
@@ -54,7 +55,11 @@ var NavBar = React.createClass({
                                             <i className="icon-head"/>Profile
                                         </ProfileLink>
                                     </li>
-                                    <li><a href="#"><i className="icon-cog"></i>Settings</a></li>
+                                    <li>
+                                        <ModalLink queryParams={{settings: true}}>
+                                            <i className="icon-cog"></i>Settings
+                                        </ModalLink>
+                                    </li>
                                     <li className="divider"></li>
                                     <li className="dropdown-header">Create</li>
                                     <li><a href={'#/edit'}><i className="icon-square-plus"></i>Submit a Listing</a></li>
