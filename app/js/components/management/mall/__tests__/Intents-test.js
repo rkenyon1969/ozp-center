@@ -7,6 +7,7 @@ var TestUtils = React.addons.TestUtils;
 
 var $ = require('jquery');
 
+/* global describe, it, beforeEach */
 describe('Intents', function() {
     var Intents,
         ImageInput,
@@ -18,8 +19,8 @@ describe('Intents', function() {
 
     beforeEach(function() {
         var IntentsLoader = require(
-            'inject?../../createEdit/form/ImageInput&../../shared/Crud&../../../webapi/Image' +
-            '!../Intents');
+            'inject?../../createEdit/form/ImageInput.jsx&../../shared/Crud.jsx&../../../webapi/Image' +
+            '!../Intents.jsx');
 
         onCreateSpy = sinon.spy();
         onEditSpy = sinon.spy();
@@ -44,19 +45,17 @@ describe('Intents', function() {
         };
 
         Intents = IntentsLoader({
-            '../../createEdit/form/ImageInput': ImageInput,
-            '../../shared/Crud': Crud,
+            '../../createEdit/form/ImageInput.jsx': ImageInput,
+            '../../shared/Crud.jsx': Crud,
             '../../../webapi/Image': ImageApi
         });
     });
 
     it('has a form descriptor that contains label, action, type, and iconInput', function() {
 
-        /*jshint ignore:start */
         var intentsCmp = TestUtils.renderIntoDocument(
             <Intents />
         );
-        /*jshint ignore:end */
 
         var form = intentsCmp.getForm();
 
@@ -76,11 +75,9 @@ describe('Intents', function() {
     });
 
     it('passes the imageUri from its state or the selected record', function() {
-        /*jshint ignore:start */
         var intentsCmp = TestUtils.renderIntoDocument(
             <Intents />
         );
-        /*jshint ignore:end */
 
         var uri = 'https://localhost/asdf';
 
@@ -94,11 +91,9 @@ describe('Intents', function() {
 
         expect(imageInput.props.imageUri).to.equal(uri);
 
-        /*jshint ignore:start */
         intentsCmp = TestUtils.renderIntoDocument(
             <Intents />
         );
-        /*jshint ignore:end */
 
         form = intentsCmp.getForm({icon: uri});
 
@@ -110,11 +105,9 @@ describe('Intents', function() {
     });
 
     it('passes the image id value from the selected record', function() {
-        /*jshint ignore:start */
         var intentsCmp = TestUtils.renderIntoDocument(
             <Intents />
         );
-        /*jshint ignore:end */
 
         var id = '1234-5678';
 
@@ -128,11 +121,9 @@ describe('Intents', function() {
     });
 
     it('passes the imageError from its state', function() {
-        /*jshint ignore:start */
         var intentsCmp = TestUtils.renderIntoDocument(
             <Intents />
         );
-        /*jshint ignore:end */
 
         var error = 'Error uploading image';
 
@@ -148,11 +139,9 @@ describe('Intents', function() {
     });
 
     it('calls opts.onChange when the icon input\'s onChange method is called', function() {
-        /*jshint ignore:start */
         var intentsCmp = TestUtils.renderIntoDocument(
             <Intents />
         );
-        /*jshint ignore:end */
 
         var onChange = sinon.spy();
         var newValue = 'test value';
@@ -168,11 +157,9 @@ describe('Intents', function() {
     });
 
     it('saves images and then calls _onCreate when an intent is created', function() {
-        /*jshint ignore:start */
         var intentsCmp = TestUtils.renderIntoDocument(
             <Intents />
         );
-        /*jshint ignore:end */
 
         var crud = TestUtils.findRenderedComponentWithType(intentsCmp, Crud);
 
@@ -202,11 +189,9 @@ describe('Intents', function() {
     });
 
     it('saves images and then calls _onEdit when an intent is edited', function() {
-        /*jshint ignore:start */
         var intentsCmp = TestUtils.renderIntoDocument(
             <Intents />
         );
-        /*jshint ignore:end */
 
         var crud = TestUtils.findRenderedComponentWithType(intentsCmp, Crud);
 
@@ -236,11 +221,9 @@ describe('Intents', function() {
     });
 
     it('uses the iconInput value as the id if it is a string', function() {
-        /*jshint ignore:start */
         var intentsCmp = TestUtils.renderIntoDocument(
             <Intents />
         );
-        /*jshint ignore:end */
 
         var crud = TestUtils.findRenderedComponentWithType(intentsCmp, Crud);
 
@@ -266,11 +249,9 @@ describe('Intents', function() {
     });
 
     it('uses the iconInput value as the id if it is null', function() {
-        /*jshint ignore:start */
         var intentsCmp = TestUtils.renderIntoDocument(
             <Intents />
         );
-        /*jshint ignore:end */
 
         var crud = TestUtils.findRenderedComponentWithType(intentsCmp, Crud);
 
@@ -296,11 +277,9 @@ describe('Intents', function() {
     });
 
     it('resets its state for crud\'s onResetState', function() {
-        /*jshint ignore:start */
         var intentsCmp = TestUtils.renderIntoDocument(
             <Intents />
         );
-        /*jshint ignore:end */
 
         var crud = TestUtils.findRenderedComponentWithType(intentsCmp, Crud);
 

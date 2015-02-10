@@ -6,7 +6,7 @@ var { TestUtils } = React.addons;
 
 describe('EmptyFieldValue', function () {
 
-    var EmptyFieldValue = require('../EmptyFieldValue');
+    var EmptyFieldValue = require('../EmptyFieldValue.jsx');
 
     it('supports `text` prop', function () {
         expect(EmptyFieldValue.defaultProps.text).to.equal('Not provided!');

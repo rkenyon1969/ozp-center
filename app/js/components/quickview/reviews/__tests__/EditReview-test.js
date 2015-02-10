@@ -7,14 +7,14 @@ var $ = require('jquery');
 var { TestUtils } = React.addons;
 
 describe('EditReview', function () {
-    var EditReview = require('../EditReview');
+    var EditReview = require('../EditReview.jsx');
     var {
         userReview,
         orgStewardReview,
         adminReview,
         reviews
     } = require('./reviews');
-    var IconRating = require('../../../shared/IconRating');
+    var IconRating = require('../../../shared/IconRating.jsx');
     var ListingActions = require('../../../../actions/ListingActions');
     var ProfileMock = require('../../../../__tests__/mocks/ProfileMock');
     var noop = $.noop;

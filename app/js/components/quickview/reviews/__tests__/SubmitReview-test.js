@@ -7,7 +7,7 @@ var $ = require('jquery');
 var { TestUtils } = React.addons;
 
 describe('SubmitReview', function () {
-    var SubmitReview = require('../SubmitReview');
+    var SubmitReview = require('../SubmitReview.jsx');
     var ListingActions = require('../../../../actions/ListingActions');
 
     it('saves review on Submit', function () {

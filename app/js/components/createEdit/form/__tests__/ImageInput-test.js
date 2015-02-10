@@ -18,12 +18,13 @@ var inputMixinStub = Object.freeze({
     getClasses: () => ''
 });
 
-var requireInputMixin = require('inject?./InputMixin!../ImageInput');
+var requireInputMixin = require('inject?./InputMixin.jsx!../ImageInput.jsx');
 
+/* global describe, it */
 describe('ImageInput', function() {
     it('has an initial state', function() {
         var ImageInput = requireInputMixin({
-            './InputMixin': Object.assign({}, inputMixinStub, {
+            './InputMixin.jsx': Object.assign({}, inputMixinStub, {
                 getInitialState: function() {
                     //a fake sample state that should be included in ImageInput's initial state
                     return {inputMixinState: true};
@@ -31,11 +32,9 @@ describe('ImageInput', function() {
             })
         });
 
-        /*jshint ignore:start */
         var input = TestUtils.renderIntoDocument(
             <ImageInput />
         );
-        /*jshint ignore:end */
 
         expect(input.getInitialState()).to.eql({
             changedSinceUpdate: false,
@@ -54,7 +53,7 @@ describe('ImageInput', function() {
             classes = 'css classes and stuff';
 
         var ImageInput = requireInputMixin({
-            './InputMixin': Object.assign({}, inputMixinStub, {
+            './InputMixin.jsx': Object.assign({}, inputMixinStub, {
                 getInputProps: function() {
                     return {value: value, id: id, ref: 'input'};
                 },
@@ -64,12 +63,10 @@ describe('ImageInput', function() {
             })
         });
 
-        /*jshint ignore:start */
         var imageInput = TestUtils.renderIntoDocument(
             <ImageInput id={id} label={label} imageUri={imageUri} description={description}
                 help={help} optional={optional} />
         );
-        /*jshint ignore:end */
 
         var input = imageInput.refs.input.getDOMNode(),
             img = imageInput.refs.image.getDOMNode(),
@@ -101,14 +98,12 @@ describe('ImageInput', function() {
 
     it('doesnt show the image container if there is no image', function() {
         var ImageInput = requireInputMixin({
-            './InputMixin': inputMixinStub
+            './InputMixin.jsx': inputMixinStub
         });
 
-        /*jshint ignore:start */
         var imageInput = TestUtils.renderIntoDocument(
             <ImageInput />
         );
-        /*jshint ignore:end */
 
         var img = imageInput.refs.image.getDOMNode();
 
@@ -118,7 +113,7 @@ describe('ImageInput', function() {
 
     it('passes the file to its setter when onChange is called', function() {
         var ImageInput = requireInputMixin({
-                './InputMixin': inputMixinStub
+                './InputMixin.jsx': inputMixinStub
             }),
             setter = sinon.stub(),
             evt = {
@@ -129,11 +124,9 @@ describe('ImageInput', function() {
             };
 
 
-        /*jshint ignore:start */
         var imageInput = TestUtils.renderIntoDocument(
             <ImageInput setter={setter} />
         );
-        /*jshint ignore:end */
 
         imageInput.onChange(evt);
 
@@ -156,7 +149,7 @@ describe('ImageInput', function() {
 
     it('sets to null when the file is removed', function() {
         var ImageInput = requireInputMixin({
-                './InputMixin': inputMixinStub
+                './InputMixin.jsx': inputMixinStub
             }),
             setter = sinon.stub(),
             evt = {
@@ -167,11 +160,9 @@ describe('ImageInput', function() {
             };
 
 
-        /*jshint ignore:start */
         var imageInput = TestUtils.renderIntoDocument(
             <ImageInput setter={setter} />
         );
-        /*jshint ignore:end */
 
         imageInput.removeImage(evt);
 
@@ -183,15 +174,13 @@ describe('ImageInput', function() {
 
     it('fixes up the DOM after update', function() {
         var ImageInput = requireInputMixin({
-                './InputMixin': inputMixinStub
+                './InputMixin.jsx': inputMixinStub
             });
 
 
-        /*jshint ignore:start */
         var imageInput = TestUtils.renderIntoDocument(
             <ImageInput imageUri="asdf.png"/>
         );
-        /*jshint ignore:end */
 
         imageInput.setProps({imageUri: null});
 
@@ -204,15 +193,13 @@ describe('ImageInput', function() {
     it('sets changedSinceUpdate to false when receiving new ' +
             'props with a serverError or no value', function() {
         var ImageInput = requireInputMixin({
-                './InputMixin': inputMixinStub
+                './InputMixin.jsx': inputMixinStub
             });
 
 
-        /*jshint ignore:start */
         var imageInput = TestUtils.renderIntoDocument(
             <ImageInput />
         );
-        /*jshint ignore:end */
 
         imageInput.setState({changedSinceUpdate: true});
         imageInput.setProps({value: null});
@@ -229,7 +216,7 @@ describe('ImageInput', function() {
             function() {
         var mixinUpdateFlag = true,
             ImageInput = requireInputMixin({
-                './InputMixin': Object.assign({}, inputMixinStub, {
+                './InputMixin.jsx': Object.assign({}, inputMixinStub, {
                     shouldComponentUpdate: function() {
                         return mixinUpdateFlag;
                     }
@@ -237,11 +224,9 @@ describe('ImageInput', function() {
             });
 
 
-        /*jshint ignore:start */
         var imageInput = TestUtils.renderIntoDocument(
             <ImageInput />
         );
-        /*jshint ignore:end */
 
         expect(
             imageInput.shouldComponentUpdate({serverError: undefined, imageUri: undefined}))
@@ -269,7 +254,7 @@ describe('ImageInput', function() {
     it('shows warnings if the InputMixing says so and changedSinceUpdate is false', function() {
         var mixinWarningFlag = true,
             ImageInput = requireInputMixin({
-                './InputMixin': Object.assign({}, inputMixinStub, {
+                './InputMixin.jsx': Object.assign({}, inputMixinStub, {
                     showWarning: function() {
                         return mixinWarningFlag;
                     }
@@ -277,11 +262,9 @@ describe('ImageInput', function() {
             });
 
 
-        /*jshint ignore:start */
         var imageInput = TestUtils.renderIntoDocument(
             <ImageInput />
         );
-        /*jshint ignore:end */
 
         expect(imageInput.showWarning({}, {changedSinceUpdate: false})).to.be.true();
         expect(imageInput.showWarning({}, {changedSinceUpdate: true})).to.be.false();
@@ -296,7 +279,7 @@ describe('ImageInput', function() {
            'and changedSinceUpdate is false', function() {
         var mixinErrorFlag = true,
             ImageInput = requireInputMixin({
-                './InputMixin': Object.assign({}, inputMixinStub, {
+                './InputMixin.jsx': Object.assign({}, inputMixinStub, {
                     showError: function() {
                         return mixinErrorFlag;
                     }
@@ -304,11 +287,9 @@ describe('ImageInput', function() {
             });
 
 
-        /*jshint ignore:start */
         var imageInput = TestUtils.renderIntoDocument(
             <ImageInput />
         );
-        /*jshint ignore:end */
 
         expect(imageInput.showError({}, {changedSinceUpdate: false})).to.be.ok();
         expect(imageInput.showError({}, {changedSinceUpdate: true})).to.be.false();

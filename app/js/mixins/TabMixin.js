@@ -9,7 +9,6 @@ var TabMixin = {
     renderTabs: function (LINKS, params) {
         var me = this;
 
-        /* jshint ignore:start */
         var linkComponents = LINKS.map(function (link) {
             var isActive = me.isActive(link.to, link.params);
             var className = isActive ? 'active' : '';
@@ -26,7 +25,6 @@ var TabMixin = {
                 { linkComponents }
             </ul>
         );
-        /* jshint ignore:end */
     }
 
 };

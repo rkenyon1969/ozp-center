@@ -23,15 +23,13 @@ $.ajaxPrefilter(function ( options, originalOptions, jqXHR ) {
     };
 });
 
-var Routes = require('./components/Routes');
+var Routes = require('./components/Routes.jsx');
 
 var isMounted = false;
 var mount = function () {
     isMounted = true;
     Router.run(Routes(), function (Handler) {
-        /* jshint ignore:start */
         React.render(<Handler />, document.getElementById('main'));
-        /* jshint ignore:end */
     });
 };
 

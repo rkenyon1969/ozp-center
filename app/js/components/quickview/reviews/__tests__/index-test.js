@@ -7,10 +7,10 @@ var $ = require('jquery');
 var { TestUtils } = React.addons;
 
 describe('Reviews Tab', function () {
-    var ReviewsTab = require('../index');
-    var SubmitReview = require('../SubmitReview');
-    var EditReview = require('../EditReview');
-    var UserReviews = require('../UserReviews');
+    var ReviewsTab = require('../index.jsx');
+    var SubmitReview = require('../SubmitReview.jsx');
+    var EditReview = require('../EditReview.jsx');
+    var UserReviews = require('../UserReviews.jsx');
 
     var {
         userReview,

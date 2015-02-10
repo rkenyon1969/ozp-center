@@ -5,13 +5,13 @@ var React = require('react');
 var Router = require('react-router');
 var $ = require('jquery');
 var { TestUtils } = React.addons;
-var Routes = require('../../../../components/Routes');
+var Routes = require('../../../../components/Routes.jsx');
 var TestLocation = require('react-router/modules/locations/TestLocation');
 var ProfileMock = require('../../../../__tests__/mocks/ProfileMock');
 var createRoutes = require('../../../../__tests__/createRoutes');
 
 describe('ListingManagement', function () {
-    var ListingManagement = require('../index.js');
+    var ListingManagement = require('../index.jsx');
     var routes, userMenu, router;
 
     beforeEach(function () {
