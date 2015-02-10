@@ -1,0 +1,13 @@
+.infiniteScroll{
+    margin:0;
+    padding:0;
+
+    .SearchListingTile{
+        line-height:0 !important;
+        margin: 0 25px 25px 0;
+
+        &:nth-child(4n){
+            margin: 0 0 25px 0;
+        }
+    }
+}
