@@ -62,7 +62,7 @@ var ListingApi = {
     },
 
     getMostPopular: function () {
-        return $.getJSON(API_URL + '/api/listing/search?sort=avgRate&order=DESC&max=24')
+        return $.getJSON(API_URL + '/api/listing/search?sort=avgRate&order=DESC&max=36')
             .then(parseList);
     },
     search: function (options) {
