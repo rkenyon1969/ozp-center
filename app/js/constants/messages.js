@@ -67,7 +67,7 @@ var listingMessages = {
 
     'help.title': 'May contain letters, numbers or symbols and must be 60 characters long or less.',
     'help.description': 'May contain letters, numbers or symbols and must be 4000 characters long or less.',
-    'help.descriptionShort': 'May contain letters, numbers or symbols and must be 150 characters long or less.',
+    'help.descriptionShort': 'May contain letters, numbers or symbols and must be 100 characters long or less.',
     'help.smallIcon': 'Image is required.',
     'help.largeIcon': 'Image is required.',
     'help.bannerIcon': 'Image is required.',
