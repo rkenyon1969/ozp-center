@@ -7687,11 +7687,6 @@
       "from": "../../../../tmp/npm-13194-6617591c/git-cache-778b006af6b2/771b7935ee575eedf96288dcd3a86f2fe63fecae",
       "resolved": "git://github.com/ozone-development/ozp-react-commons#771b7935ee575eedf96288dcd3a86f2fe63fecae",
       "dependencies": {
-        "bootstrap-sass": {
-          "version": "3.3.1",
-          "from": "../../../../tmp/npm-13194-6617591c/git-cache-60d67d5acc61/314905a9aa6cf0efb98806d6998a31b8f9532a97",
-          "resolved": "git://github.com/ozone-development/bootstrap-sass#314905a9aa6cf0efb98806d6998a31b8f9532a97"
-        },
         "es5-shim": {
           "version": "4.1.0",
           "from": "es5-shim@>=4.0.6 <5.0.0",
