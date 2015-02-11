@@ -3,7 +3,6 @@
 var React = require('react');
 var { Link, Navigation } = require('react-router');
 var RadioGroup = require('react-radio-group');
-var ProfileStore = require('../../../stores/ProfileStore');
 var SystemStateMixin = require('../../../mixins/SystemStateMixin');
 var _ = require('../../../utils/_');
 
@@ -111,7 +110,6 @@ var OrgListingsSidebarFilter = React.createClass({
                 </Link>
             </RadioGroup>
         );
-        /* jshint ignore:end */
     }
 
 });
@@ -129,12 +127,10 @@ var RecentActivitySidebar = React.createClass({
         var children = [];
         if (currentUser.isAdmin) {
             children.push(
-                /* jshint ignore:start */
                 <div className="filter-group">
                     <h4>Marketplace Overview</h4>
                     <AllListingsSidebarFilter handleChange={this.handleChange} />
                 </div>
-                /* jshint ignore:end */
             );
         }
 
@@ -145,24 +141,20 @@ var RecentActivitySidebar = React.createClass({
                 });
 
                 children.push(
-                    /* jshint ignore:start */
                     <div className="filter-group">
                         <h4>{ org.shortName } Review </h4>
                         <OrgListingsSidebarFilter handleChange={me.handleChange} org={org} />
                     </div>
-                    /* jshint ignore:end */
                 );
 
             });
         }
 
         children.push(
-            /* jshint ignore:start */
             <div className="filter-group">
                 <h4>My Listings Overview</h4>
                 <MyListingsSidebarFilter handleChange={this.handleChange} />
             </div>
-            /* jshint ignore:end */
         );
 
         return children;
@@ -170,8 +162,6 @@ var RecentActivitySidebar = React.createClass({
     },
 
     render: function () {
-
-        /* jshint ignore:start */
         return (
             <form className="RecentActivity__SidebarFilter">
                 { this.renderFilters() }

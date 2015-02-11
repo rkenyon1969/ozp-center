@@ -12,7 +12,7 @@ var PaginatedChangeLogStore = require('../../../stores/PaginatedChangeLogStore')
 var ActiveState = require('../../../mixins/ActiveStateMixin');
 var SystemStateMixin = require('../../../mixins/SystemStateMixin');
 
-var ProfileStore = require('../../../stores/ProfileStore');
+var ProfileStore = require('../../../stores/SelfStore');
 
 
 var RecentActivity = React.createClass({
