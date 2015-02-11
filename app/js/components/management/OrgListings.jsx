@@ -3,6 +3,8 @@
 var React = require('react');
 var Reflux = require('reflux');
 var _ = require('../../utils/_');
+var Router = require('react-router');
+
 
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
 
@@ -31,11 +33,8 @@ var OrgListings = React.createClass({
             counts: {},
             listings: [],
             hasMore: false,
-            filter: {
-                approvalStatus: null,
-                org: this.props.org.params.org,
-                enabled: null
-            }
+            filter: _.assign(this.getQuery(),
+            { org: this.props.org.params.org })
         };
     },
 

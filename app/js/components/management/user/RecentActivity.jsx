@@ -5,17 +5,19 @@ var Reflux = require('reflux');
 var { Link, Navigation, CurrentPath } = require('react-router');
 var Sidebar = require('./RecentActivitySidebar.jsx');
 var ListingActions = require('../../../actions/ListingActions');
-var fetchAllChangeLogs = ListingActions.fetchAllChangeLogs;
 var GlobalListingStore = require('../../../stores/GlobalListingStore');
 var ChangeLog = require('../../shared/ChangeLog.jsx');
 var LoadMore = require('../../shared/LoadMore.jsx');
 var PaginatedChangeLogStore = require('../../../stores/PaginatedChangeLogStore');
 var ActiveState = require('../../../mixins/ActiveStateMixin');
+var SystemStateMixin = require('../../../mixins/SystemStateMixin');
+
+var ProfileStore = require('../../../stores/SelfStore');
 
 
 var RecentActivity = React.createClass({
 
-    mixins: [Reflux.listenTo(PaginatedChangeLogStore, 'onChangeLogsReceived'), Navigation, ActiveState],
+    mixins: [Navigation, ActiveState, SystemStateMixin],
 
     getInitialState: function () {
         return {
@@ -23,8 +25,13 @@ var RecentActivity = React.createClass({
         };
     },
 
+    componentDidMount: function () {
+        this.fetchAllChangeLogsIfEmpty();
+        this.listenTo(PaginatedChangeLogStore, this.onChangeLogsReceived);
+    },
+
     onLoadMore: function() {
-        ListingActions.fetchAllChangeLogs();
+        ListingActions.fetchAllChangeLogs(ProfileStore.getCurrentUser());
     },
 
     onChangeLogsReceived: function() {
@@ -54,7 +61,7 @@ var RecentActivity = React.createClass({
         if (noActions.indexOf(action) > -1) {
             return;
         } else {
-            var adminLinkMap = {
+            var linkMap = {
                 'APPROVED' : 'View',
                 'SUBMITTED' : 'View Submission',
                 'ENABLED' : 'View',
@@ -62,27 +69,39 @@ var RecentActivity = React.createClass({
                 'CREATED' : 'View Draft',
                 'APPROVED_ORG' : 'Review Listing',
                 'REVIEW_EDITED' : 'View',
-                'REVIEW_DELETED' : 'View',
+                'REVIEW_DELETED' : 'View'
             };
-
 
             var href = this.makeHref(this.getActiveRoutePath(), this.getParams(), {
                 listing: changeLog.listing.id,
                 action: 'view',
                 tab: 'overview'
             });
+
+            if (!ProfileStore.getCurrentUser().isAdmin) {
+                linkMap.APPROVED_ORG = 'View';
+            }
+
+            if (ProfileStore.getCurrentUser().highestRole === 'ORG_STEWARD') {
+                linkMap.SUBMITTED = 'Review Listing';
+            }
+
             return (
-                <a href={href}>{ adminLinkMap[action] } <i className="fa fa-angle-right"></i></a>
+                <a href={href}>{ linkMap[action] } <i className="fa fa-angle-right"></i></a>
             );
         }
     },
 
-    componentDidMount: function () {
-        fetchAllChangeLogs();
-    },
-
     getPaginatedList: function () {
         return PaginatedChangeLogStore.getChangeLogs();
+    },
+
+    fetchAllChangeLogsIfEmpty: function () {
+        var changeLogs = this.getPaginatedList();
+        if (!changeLogs) {
+            ListingActions.fetchAllChangeLogs(ProfileStore.getCurrentUser());
+        }
+        this.onChangeLogsReceived();
     },
 
     renderChangeLogs: function () {
@@ -92,7 +111,7 @@ var RecentActivity = React.createClass({
 
             return [
                 <ChangeLog showListingName={true} changeLog={changeLog}>
-                    <img className="recent-activity-icon" src={ changeLog.listing.iconUrl } />
+                    { changeLog.listing.iconUrl ? <img className="recent-activity-icon" src={ changeLog.listing.iconUrl } /> : <div></div> }
                     { me.createLink(changeLog) }
                 </ChangeLog>,
                 <br/>

@@ -77,9 +77,5 @@ describe('ChangeLog', function () {
 
         expect($(changeLog.getDOMNode()).find('a:last-of-type').text()).to.equal('FrameIt');
         router.teardown();
-
-});
-
-
-
+    });
 });
