@@ -2,20 +2,29 @@
 
 class PaginatedList {
     constructor (paginatedResponse) {
-        this.nextLink = paginatedResponse.nextLink();
-        this.total = paginatedResponse.total;
-        this.data = paginatedResponse.getItemAsList();
-        this.hasMore = !!this.nextLink;
-        this.isFetching = false;
-        this.counts = (paginatedResponse.getResponse().counts) ? paginatedResponse.getResponse().counts : {};
-        this.counts.total = paginatedResponse.getResponse().total;
+        if (paginatedResponse) {
+            this._update(paginatedResponse);
+        }
+        else {
+            this.total = 0;
+            this.nextLink = null;
+            this.hasMore = true;
+            this.isFetching = false;
+            this.data = [];
+            this.counts = null;
+        }
     }
 
     receivePage (paginatedResponse) {
+        this._update(paginatedResponse);
+    }
+
+    _update (paginatedResponse) {
+        this.total = paginatedResponse.total;
         this.nextLink = paginatedResponse.nextLink();
-        this.data = this.data.concat(paginatedResponse.getItemAsList());
         this.hasMore = !!this.nextLink;
         this.isFetching = false;
+        this.data = this.data.concat(paginatedResponse.getItemAsList());
         this.counts = (paginatedResponse.getResponse().counts) ? paginatedResponse.getResponse().counts : {};
         this.counts.total = paginatedResponse.getResponse().total;
     }

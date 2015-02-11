@@ -16,22 +16,23 @@ var CreateNotification = React.createClass({
         return {
             uuid: uuid(),
             expiresDate: new Date(new Date().getTime() + (250*60*1000)),
-            message: ''
+            message: '',
+            isSendDisabled: true
         };
     },
 
     onReset(event) {
-        event.preventDefault();
+        event && event.preventDefault();
         this.setState({
             uuid: uuid(),
             expiresDate: new Date(new Date().getTime() + (250*60*1000)),
-            message: ''
+            message: '',
+            isSendDisabled: true
         });
     },
 
     onSend(event) {
         event.preventDefault();
-        console.log(this.state);
         NotificationActions.create(this.state.uuid, this.state);
     },
 
@@ -48,7 +49,7 @@ var CreateNotification = React.createClass({
                 <form>
                     <div className="form-group">
                         <label htmlFor="notification-expires-time">Notification text</label>
-                        <input type="date" className="form-control" placeholder="Enter the text for the notification" name="notification-expires-time"  valueLink={this.linkState('expiresDate')}/>
+                        <input type="text" className="form-control" placeholder="Enter the text for the notification" name="notification-expires-time"  valueLink={this.linkState('expiresDate')}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="notification-message">Notification text</label>
@@ -56,7 +57,7 @@ var CreateNotification = React.createClass({
                     </div>
                     <div className="pull-right">
                         <button className="btn btn-default btn-small" onClick={ this.onReset }>Reset</button>
-                        <button className="btn btn-success btn-small" disabled onClick={ this.onSend }>Send</button>
+                        <button className="btn btn-success btn-small" onClick={ this.onSend }>Send</button>
                     </div>
                 </form>
             </div>

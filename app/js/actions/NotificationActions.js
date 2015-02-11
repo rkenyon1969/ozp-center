@@ -17,17 +17,20 @@ var NotificationActions = createActions({
     expire(notification) {
         notification.expiresDate = new Date();
         NotificationApi.update(notification)
-            .then(function (response) {
-                NotificationActions.fetchActive();
-                NotificationActions.expireCompleted(response);
-            })
+            .then(NotificationActions.expireCompleted)
             .fail(NotificationActions.expireFailed);
     },
 
     fetchActive() {
         NotificationApi.fetchActive()
-            .then(_.partial(NotificationActions.fetchActiveCompleted))
-            .fail(_.partial(NotificationActions.fetchActiveFailed));
+            .then(NotificationActions.fetchActiveCompleted)
+            .fail(NotificationActions.fetchActiveFailed);
+    },
+
+    fetchPast() {
+        NotificationApi.fetchPast()
+            .then(NotificationActions.fetchPastCompleted)
+            .fail(NotificationActions.fetchPastFailed);
     }
 
 });

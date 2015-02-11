@@ -31,6 +31,7 @@ module.exports = {
     zipObject: require('lodash/arrays/zipObject'),
     zip: require('lodash/arrays/zip'),
     last: require('lodash/arrays/last'),
+    remove: require('lodash/arrays/remove'),
 
     partial: require('lodash/functions/partial'),
     once: require('lodash/functions/once'),
