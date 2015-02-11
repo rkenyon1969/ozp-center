@@ -22,6 +22,7 @@
     width: $listing-tile-img-width;
     height: $listing-tile-img-height;
     display: block;
+    border: 1px solid $gray-lighter;
 }
 
 .AdminOwnerListingTile__actionMenu > ul {
@@ -36,7 +37,7 @@
 
     background-color: $white;
 
-    border: 1px solid $gray-lighter;
+    border-right: 1px solid $gray-lighter;
 
     > li {
         $spacing: 5px;

@@ -2,7 +2,7 @@
 
 var Reflux = require('reflux');
 var { ListingApi } = require('../webapi/Listing');
-var { ProfileApi } = require('../webapi/Profile');
+var { SelfApi } = require('../webapi/Self');
 var _ = require('../utils/_');
 var { PAGINATION_MAX } = require('../constants');
 var OzpAnalytics = require('../analytics/ozp-analytics');
@@ -60,7 +60,8 @@ ListingActions = createActions({
         if (paginatedList) {
             paginatedList.expectPage();
             nextLink = paginatedList.nextLink;
-        } else {
+        }
+        else {
             _.assign(opts, {
                 offset: 0,
                 max: PAGINATION_MAX
@@ -88,7 +89,19 @@ ListingActions = createActions({
     },
 
     search: function (options) {
-        ListingApi.search(options).then(ListingActions.searchCompleted);
+        var queryString = options.queryString;
+
+        // append '*'
+        if (!/\*$/.test(queryString)) {
+            queryString += '*';
+        }
+
+        ListingApi
+            .search(
+                Object.assign({}, options, {
+                    queryString: queryString
+                })
+            ).then(ListingActions.searchCompleted);
     },
 
     fetchChangeLogs: function (listingId) {
@@ -100,7 +113,8 @@ ListingActions = createActions({
     },
 
     fetchReviews: function (listing) {
-        ListingApi.fetchReviews(listing.id).then(ListingActions.fetchReviewsCompleted.bind(null, listing.id));
+        ListingApi.fetchReviews(listing.id)
+            .then(ListingActions.fetchReviewsCompleted.bind(null, listing.id));
         if(typeof(listing.title) !== 'undefined') { OzpAnalytics.trackListingReview(listing.title);}
     },
     saveReview: function (listing, review) {
@@ -108,19 +122,19 @@ ListingActions = createActions({
         ListingApi.saveReview(listing.id, review)
             .then(function (response) {
                 ListingActions.fetchById(listing.id);
-                ListingActions.fetchReviews(listing.id);
-                ListingActions.saveReviewCompleted(listing.id, response);
+                ListingActions.fetchReviews(listing);
+                ListingActions.saveReviewCompleted(listing, response);
             })
             .fail(ListingActions.saveReviewFailed);
     },
-    deleteReview: function (listingId, reviewId) {
-        ListingApi.deleteReview(listingId, reviewId)
+    deleteReview: function (listing, review) {
+        ListingApi.deleteReview(listing.id, review.id)
             .then(function () {
-                ListingActions.fetchById(listingId);
-                ListingActions.fetchReviews(listingId);
-                ListingActions.deleteReviewCompleted(listingId, reviewId);
+                ListingActions.fetchById(listing.id);
+                ListingActions.fetchReviews(listing);
+                ListingActions.deleteReviewCompleted(listing, review);
             })
-            .fail(ListingActions.deleteReviewFailed);
+            .fail(_.partial(ListingActions.deleteReviewFailed, listing, review));
     },
 
     launch: function (listing) {
@@ -128,7 +142,7 @@ ListingActions = createActions({
         window.open(listing.launchUrl);
     },
     addToLibrary: function (listing) {
-        ProfileApi
+        SelfApi
             .addToLibrary({
                 listing: {
                     id: listing.id
@@ -138,7 +152,7 @@ ListingActions = createActions({
         OzpAnalytics.trackEvent('Favorited Applications', listing.title);
     },
     removeFromLibrary: function (listing) {
-        ProfileApi
+        SelfApi
             .removeFromLibrary(listing)
             .then(ListingActions.removeFromLibraryCompleted.bind(null, listing));
     },

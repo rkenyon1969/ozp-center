@@ -94,7 +94,7 @@ var GlobalListingStore = Reflux.createStore({
     },
 
     getByOwner: function (profile) {
-        return _listingsByOwnerCache[profile.username] || [];
+        return _listingsByOwnerCache[profile.username];
     },
 
     getAllListings: function () {
@@ -109,12 +109,12 @@ var GlobalListingStore = Reflux.createStore({
         return _changeLogsCache[id];
     },
 
-    getReviewsForListing: function (id) {
-        if(!_reviewsCache[id]) {
-            ListingActions.fetchReviews(id);
+    getReviewsForListing: function (listing) {
+        if(!_reviewsCache[listing.id]) {
+            ListingActions.fetchReviews(listing);
             return null;
         }
-        return _reviewsCache[id];
+        return _reviewsCache[listing.id];
     }
 
 });

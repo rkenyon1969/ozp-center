@@ -2,7 +2,7 @@
 
 var Router = require('react-router');
 var { Route } = Router;
-var Routes = require('../components/Routes');
+var Routes = require('../components/Routes.jsx');
 
 module.exports = function createRoutes (Component, path) {
     path = path || 'test';

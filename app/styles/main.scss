@@ -3,12 +3,14 @@ $fa-font-path: "../../bower_components/font-awesome/fonts/";
 
 @import "variables";
 @import "../../bower_components/ubuntu-fontface/_ubuntu-base.scss";
+@import "../../bower_components/ubuntu-fontface/_ubuntu-mono.scss";
 
 @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap.scss";
 @import "../../bower_components/magnific-popup/src/css/main.scss";
 @import "../../bower_components/font-awesome/scss/font-awesome.scss";
 @import "../../node_modules/select2/select2.css";
 @import "../../node_modules/select2/select2-bootstrap.css";
+@import "../../node_modules/ozp-react-commons/app/styles/commons.scss";
 
 $header-height: 55px;
 $black: #191F25;
@@ -17,7 +19,8 @@ html, body {
     font-family: 'Ubuntu';
     font-weight: 300;
     height: 100%;
-    background: $gray-dark;
+    background: url('../images/bg_fractal_gray.png') $gray-dark no-repeat fixed;
+    background-size: cover;
 }
 
 .navbar-right {
@@ -42,7 +45,7 @@ html, body {
     left: 0;
 
     > .row {
-        background: #fff;
+        background: $white;
         margin: 0 auto;
         width: 1260px;
     }
@@ -84,6 +87,7 @@ html, body {
 @import 'create-edit';
 @import 'switches';
 @import 'toolbar';
+@import 'infiniteScroll';
 @import 'management/user/listing-management';
 @import 'management/user/my-listings';
 @import 'management/user/recent-activity';
@@ -107,14 +111,14 @@ html, body {
 }
 
 button.notifications {
-  color: $gray-lighter;
-  &:hover, &:focus {
-    color: $white;
-  }
+    color: $gray-lighter;
+    &:hover, &:focus {
+        color: $white;
+    }
 }
 
 .dropdown-menu .divider {
-  background: $gray-darkest !important;
+    background: $gray-darkest !important;
 }
 
 i {
@@ -192,6 +196,12 @@ label {
     top: 0;
 }
 
+.modal-header .close {
+    margin-top: -10px !important;
+    margin-right: -8px !important;
+    font-size: 200%;
+}
+
 /* Bookmark button */
 .btn-bookmark {
     color: $gray-darker;
@@ -200,7 +210,7 @@ label {
 
     &:active, &:focus, &:hover, &.bookmarked {
         background-color: $blue-dark;
-        
+
     }
 
     &.bookmarked {
@@ -210,7 +220,7 @@ label {
 }
 
 div.modal-header > button.close {
-  margin:-22px -13px 0 0;
+    margin:-22px -13px 0 0;
 }
 
 /*=======================
@@ -249,12 +259,12 @@ body > div.classBanner:last-of-type {
 }
 
 .sidebar {
-  padding: 20px 30px;
-  margin-top:-15px;
-  background: $gray-lightest;
+    padding: 20px 30px;
+    margin-top:-15px;
+    background: $gray-lightest;
 }
 
 
 .content {
-  background: $white;
+    background: $white;
 }

@@ -9,7 +9,14 @@ var expect = require('chai').expect;
 
 describe('ChangeLog', function () {
 
-    var ChangeLog = require('../ChangeLog');
+    var ChangeLog = require('inject?../profile/ProfileLink.jsx!../ChangeLog.jsx')({
+        '../profile/ProfileLink.jsx': React.createClass({
+            render: function() {
+                return <a href="profile">{this.props.children}</a>;
+            }
+        })
+    });
+
     var expect = require('chai').expect;
 
     it('renders a change log with no listing name', function () {
@@ -35,9 +42,9 @@ describe('ChangeLog', function () {
                 }}
             />);
 
-        expect($(changeLog.getDOMNode()).find('div.col-md-9 > div > span:first-child').text()).to.equal('Test Admin 1');
-        expect($(changeLog.getDOMNode()).find('div.col-md-9 > div > span:nth-child(3)').text()).to.equal('approved');
-        expect($(changeLog.getDOMNode()).find('div.col-md-9 > div > span:last-child').text()).to.equal('the listing');
+        expect(
+          $(changeLog.getDOMNode()).find('div.col-md-9 > div').text()
+        ).to.equal('Test Admin 1 approved the listing');
     });
 
     it('renders a change log with a listing name', function() {
@@ -68,7 +75,7 @@ describe('ChangeLog', function () {
             />);
         });
 
-        expect($(changeLog.getDOMNode()).find('a').text()).to.equal('FrameIt');
+        expect($(changeLog.getDOMNode()).find('a:last-of-type').text()).to.equal('FrameIt');
         router.teardown();
     });
 });

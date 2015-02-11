@@ -6,7 +6,7 @@ var { TestUtils } = React.addons;
 
 describe('IconRating', function () {
 
-    var IconRating = require('../IconRating');
+    var IconRating = require('../IconRating.jsx');
 
     it('rounds rating correctly', function () {
         [1,2,3,4,5].forEach(function (num) {
