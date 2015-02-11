@@ -29,7 +29,8 @@ var Discovery = React.createClass({
             featured: DiscoveryPageStore.getFeatured(),
             newArrivals: DiscoveryPageStore.getNewArrivals(),
             mostPopular: DiscoveryPageStore.getMostPopular(),
-            searchResults: DiscoveryPageStore.getSearchResults()
+            searchResults: DiscoveryPageStore.getSearchResults(),
+            mostPopularTiles: 12,
         };
     },
 
@@ -145,17 +146,32 @@ var Discovery = React.createClass({
         );
     },
 
+    handleLoadMore: function(button){
+        this.setState({
+            mostPopularTiles: this.state.mostPopularTiles += 4
+        });
+    },
+
     renderMostPopular: function () {
         if(!this.state.mostPopular.length) {
             return;
         }
 
+        var InfiniTiles = ListingTile.renderLimitedTiles(this.state.mostPopularTiles, this.state.mostPopular);
+
+        var LoadMore = (this.state.mostPopularTiles >= this.state.mostPopular.length) ?
+            <button onClick={ this.handleLoadMore } className="btn btn-default loadMoreBtn">Thats all!</button> :
+            <button onClick={ this.handleLoadMore } className="btn btn-default loadMoreBtn">Load More</button>;
+
         return (
             <section className="Discovery__MostPopular">
                 <h4>Most Popular</h4>
-                <Carousel className="most-popular-listings">
-                    { ListingTile.fromArray(this.state.mostPopular) }
-                </Carousel>
+                <ul className="infiniteScroll">
+                    { InfiniTiles }
+                </ul>
+                <div className="text-center">
+                    { LoadMore }
+                </div>
             </section>
         );
     },

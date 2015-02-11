@@ -85,7 +85,7 @@ var NavBar = React.createClass({
     },
 
     isOrgSteward: function(){
-        return this.state.currentUser.isOrgSteward();
+        return (this.state.currentUser.highestRole === "ORG_STEWARD") ? true : false;
     },
 
     isAdmin: function() {

@@ -15,7 +15,19 @@ var ListingTile = React.createClass({
 
     statics: {
         fromArray: function (array) {
+            /* jshint ignore:start  */
             return array.map((listing) => <ListingTile listing={listing} key={listing.id}/>);
+            /* jshint ignore:end  */
+        },
+        renderLimitedTiles: function(display, mostPopular) {
+            var ammount = 0;
+            /* jshint ignore:start  */
+            return(
+                mostPopular.filter(function(tile){
+                    if(ammount < display){ ammount++; return tile; }
+                }).map((tile) => <ListingTile listing={tile} key={tile.id}/>)
+            );
+            /* jshint ignore:end  */
         }
     },
 
