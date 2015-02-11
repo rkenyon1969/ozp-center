@@ -139,7 +139,6 @@ ListingActions = createActions({
 
     launch: function (listing) {
         OzpAnalytics.trackEvent('Applications', listing.title);
-        window.open(listing.launchUrl);
     },
     addToLibrary: function (listing) {
         ProfileApi

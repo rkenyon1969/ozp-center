@@ -9,21 +9,30 @@ var SelfStore = require('ozp-react-commons/stores/SelfStore');
 
 var ListingActions = require('../actions/ListingActions');
 
+function getState(profileData) {
+    var profile = profileData.currentUser,
+        launchInWebtop = profile ? profile.launchInWebtop : false;
+
+    return {launchInWebtop: launchInWebtop};
+}
+
 /**
  * A link for launching applications.  Depending on the user's preference,
  * this will either launch into webtop (in a new tab) or just in a new tab
  */
 var LaunchLink = React.createClass({
-    mixins: [Reflux.connect(SelfStore)],
+    mixins: [Reflux.listenTo(SelfStore, 'onStoreUpdate')],
 
     propTypes: {
         listing: React.PropTypes.object.isRequired
     },
 
     getInitialState: function() {
-        return {
-            launchInWebtop: false
-        };
+        return getState(SelfStore.getDefaultData());
+    },
+
+    onStoreUpdate: function(profileData) {
+        this.setState(getState(profileData));
     },
 
     render: function() {
@@ -34,7 +43,7 @@ var LaunchLink = React.createClass({
             //this function isn't expected to actually launch the listing, but just
             //to record that it was launched
             listingLaunchFn = ListingActions.launch.bind(null, this.props.listing),
-            className = this.props.className + ' btn';
+            className = this.props.className ? this.props.className + ' btn' : 'btn';
 
         return (
             launchInWebtop ?

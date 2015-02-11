@@ -5,7 +5,7 @@ var { Link, Navigation, CurrentPath } = require('react-router');
 var ActiveState = require('../../mixins/ActiveStateMixin');
 var _ = require('../../utils/_');
 var IconRating = require('../shared/IconRating.jsx');
-var launch = require('../../actions/ListingActions').launch;
+var LaunchLink = require('../LaunchLink.jsx');
 
 var BookmarkButton = require('../BookmarkButton.jsx');
 
@@ -37,25 +37,26 @@ var ListingTile = React.createClass({
 
         return this.transferPropsTo(
             <li className="listing SearchListingTile" key={listing.id} >
-                <a href={ href }>
-                    <img src={ imageLargeUrl } />
-                    <section className="slide-up">
-                        <p className="title">{ name }</p>
-                        <IconRating
-                            className="icon-rating"
-                            viewOnly
-                            currentRating = { avgRate }
-                            toggledClassName="fa fa-star"
-                            untoggledClassName="fa fa-star-o"
-                            halfClassName="fa fa-star-half-o" />
-                        {
-                            agencyShort &&
-                                <span className="company">{ agencyShort }</span>
-                        }
-                        <p className="description">{ description }</p>
-                        { this.renderActions() }
-                    </section>
+                <a className="listing-link"  href={ href }>
+                    {/* Empty link - css will make it cover entire <li>*/}
                 </a>
+                <img src={ imageLargeUrl } />
+                <section className="slide-up">
+                    <p className="title">{ name }</p>
+                    <IconRating
+                        className="icon-rating"
+                        viewOnly
+                        currentRating = { avgRate }
+                        toggledClassName="fa fa-star"
+                        untoggledClassName="fa fa-star-o"
+                        halfClassName="fa fa-star-half-o" />
+                    {
+                        agencyShort &&
+                            <span className="company">{ agencyShort }</span>
+                    }
+                    <p className="description">{ description }</p>
+                    { this.renderActions() }
+                </section>
             </li>
         );
     },
@@ -64,14 +65,10 @@ var ListingTile = React.createClass({
         return (
             <div className="btn-group actions">
                 {/* can't nest anchor tags, using button here with onClick listener */}
-                <button type="button" className="btn btn-default" onClick={ this.launch }><i className="icon-open"></i></button>
+                <LaunchLink className="btn-default" listing={this.props.listing} />
                 <BookmarkButton listing={this.props.listing} />
             </div>
         );
-    },
-
-    launch: function () {
-        launch(this.props.listing);
     }
 });
 
