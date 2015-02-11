@@ -5,7 +5,7 @@ var { Link, Navigation, CurrentPath } = require('react-router');
 var ActiveState = require('../../mixins/ActiveStateMixin');
 var _ = require('../../utils/_');
 var IconRating = require('../shared/IconRating.jsx');
-var LaunchLink = require('../LaunchLink.jsx');
+var CenterLaunchLink = require('../CenterLaunchLink.jsx');
 
 var BookmarkButton = require('../BookmarkButton.jsx');
 
@@ -76,8 +76,7 @@ var ListingTile = React.createClass({
     renderActions: function () {
         return (
             <div className="btn-group actions">
-                {/* can't nest anchor tags, using button here with onClick listener */}
-                <LaunchLink className="btn-default" listing={this.props.listing} />
+                <CenterLaunchLink className="btn-default" listing={this.props.listing} />
                 <BookmarkButton listing={this.props.listing} />
             </div>
         );

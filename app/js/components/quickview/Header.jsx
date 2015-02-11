@@ -6,7 +6,7 @@ var ListingActions = require('../../actions/ListingActions');
 var { UserRole } = require('ozp-react-commons/constants');
 
 var BookmarkButton = require('../BookmarkButton.jsx');
-var LaunchLink = require('../LaunchLink.jsx');
+var CenterLaunchLink = require('../CenterLaunchLink.jsx');
 
 var QuickviewHeader = React.createClass({
 
@@ -53,7 +53,7 @@ var QuickviewHeader = React.createClass({
 
         return (
             <div className="btn-group quickview-header-actions">
-                <LaunchLink listing={this.props.listing} className="btn btn-default"/>
+                <CenterLaunchLink listing={this.props.listing} className="btn btn-default"/>
                 <BookmarkButton listing={this.props.listing} />
               {this.props.allowEdit && <button type="button" className="btn btn-default" onClick={ this.props.onEdit }><i className="fa fa-pencil"></i></button>}
             </div>
