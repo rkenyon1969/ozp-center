@@ -46,7 +46,7 @@ describe('RecentActivity', function() {
 
     it('renders the organization steward filters', function() {
         var React = require('react');
-        var RecentActivity = require('../RecentActivity');
+        var RecentActivity = require('../RecentActivity.jsx');
         var expect = require('chai').expect;
         var TestUtils = React.addons.TestUtils;
         var recentActivity;
@@ -67,7 +67,7 @@ describe('RecentActivity', function() {
 
     it('renders the marketplace steward filters', function() {
         var React = require('react');
-        var RecentActivity = require('../RecentActivity');
+        var RecentActivity = require('../RecentActivity.jsx');
         var expect = require('chai').expect;
         var TestUtils = React.addons.TestUtils;
         var recentActivity;
