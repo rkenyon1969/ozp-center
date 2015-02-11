@@ -86,30 +86,30 @@ var OrgListingsSidebarFilter = React.createClass({
     render: function () {
         /* jshint ignore:start */
         return (
-            <RadioGroup name="recent-activity-all-listings" onChange={this.props.handleChange}>
-                <Link id="recent-activity-returned" to="org-listings" query={{approvalStatus: "PENDING"}} params={{org: this.props.org.title}}>
-                    <label htmlFor="recent-activity-all-returned" className="label-needs-action">
+            <RadioGroup name="recent-activity-org-listings" onChange={this.props.handleChange}>
+                <Link id="recent-activity-pending" to="org-listings" query={{approvalStatus: "PENDING"}} params={{org: this.props.org.title}}>
+                    <label htmlFor="recent-activity-org-pending" className="label-needs-action">
                         Pending { this.props.org.shortName } Review
                         <i className="fa fa-angle-right fa-2x"></i>
                     </label>
                 </Link>
 
-                <Link id="recent-activity-returned" to="org-listings" query={{approvalStatus: "APPROVED_ORG"}} params={{org: this.props.org.title}}>
-                    <label htmlFor="recent-activity-all-pending" className="label-pending">
+                <Link id="recent-activity-pending" to="org-listings" query={{approvalStatus: "APPROVED_ORG"}} params={{org: this.props.org.title}}>
+                    <label htmlFor="recent-activity-org-pending" className="label-pending">
                         Pending Marketplace Review
                         <i className="fa fa-angle-right fa-2x"></i>
                     </label>
                 </Link>
 
-                <Link id="recent-activity-returned" to="org-listings" query={{approvalStatus: "APPROVED"}} params={{org: this.props.org.title}}>
-                    <label htmlFor="recent-activity-all-published" className="label-published">
+                <Link id="recent-activity-published" to="org-listings" query={{approvalStatus: "APPROVED"}} params={{org: this.props.org.title}}>
+                    <label htmlFor="recent-activity-org-published" className="label-published">
                         Published
                         <i className="fa fa-angle-right fa-2x"></i>
                     </label>
                 </Link>
 
                 <Link id="recent-activity-returned" to="org-listings" query={{approvalStatus: "REJECTED"}} params={{org: this.props.org.title}}>
-                    <label htmlFor="recent-activity-all-returned" className="label-rejected">
+                    <label htmlFor="recent-activity-org-returned" className="label-rejected">
                         Returned to Owner
                         <i className="fa fa-angle-right fa-2x"></i>
                     </label>
