@@ -11,7 +11,7 @@ var ActiveNotificationStore = Reflux.createStore({
     init() {
         _notifications = new PaginatedList();
         this.listenTo(NotificationActions.fetchPastCompleted, this.fetchPastCompleted);
-        this.listenTo(NotificationActions.expireCompleted, this.onExpireCompleted);
+        this.listenTo(NotificationActions.expireNotificationCompleted, this.onExpireCompleted);
     },
 
     getNotifications() {

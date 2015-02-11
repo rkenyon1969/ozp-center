@@ -40,7 +40,7 @@ var ActiveNotifications = React.createClass({
     render() {
         var notificationComponents = ActiveNotification.fromArray(this.state.notifications);
         if (!notificationComponents || notificationComponents.length === 0) {
-            notificationComponents = <span>None found.</span>
+            notificationComponents = <span>None found.</span>;
         }
         return (
             <div>
@@ -81,7 +81,7 @@ var PastNotifications = React.createClass({
     render() {
         var notificationComponents = PastNotification.fromArray(this.state.notifications);
         if (!notificationComponents) {
-            notificationComponents = <span>None found.</span>
+            notificationComponents = <span>None found.</span>;
         }
         return (
             <div>

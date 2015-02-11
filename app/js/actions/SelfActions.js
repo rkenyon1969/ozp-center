@@ -5,15 +5,31 @@ var { SelfApi } = require('../webapi/Self');
 var createActions = require('../utils/createActions');
 
 var SelfActions = createActions({
-    fetchLibrary: function () {
+    fetchLibrary() {
         SelfApi.getLibrary()
             .then(SelfActions.fetchLibraryCompleted);
     },
 
-    fetchSelf: function () {
+    fetchSelf() {
         SelfApi.getSelf()
             .done(SelfActions.fetchSelfCompleted)
             .fail(SelfActions.fetchSelfFailed);
+    },
+
+    fetchNotifications() {
+        SelfApi.fetchNotifications()
+            .done(SelfActions.fetchNotificationsCompleted)
+            .fail(SelfActions.fetchNotificationsFailed);
+    },
+
+    dismissNotification(notification) {
+        SelfApi.dismissNotification(notification.id)
+            .done(function () {
+                SelfActions.dismissNotificationCompleted(notification);
+            })
+            .fail(function () {
+                SelfActions.dismissNotificationFailed(notification);
+            });
     }
 });
 

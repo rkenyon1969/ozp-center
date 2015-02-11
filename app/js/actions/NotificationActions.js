@@ -8,16 +8,16 @@ var NotificationApi = require('../webapi/Notification.js');
 
 var NotificationActions = createActions({
 
-    create(uuid, notification) {
+    createNotification(uuid, notification) {
         NotificationApi.create(notification)
-            .then(_.partial(NotificationActions.createCompleted, uuid))
-            .fail(_.partial(NotificationActions.createFailed, uuid));
+            .then(_.partial(NotificationActions.createNotificationCompleted, uuid))
+            .fail(_.partial(NotificationActions.createNotificationFailed, uuid));
     },
 
-    expire(notification) {
+    expireNotification(notification) {
         notification.expiresDate = new Date();
         NotificationApi.update(notification)
-            .then(NotificationActions.expireCompleted)
+            .then(NotificationActions.expireNotificationCompleted)
             .fail(NotificationActions.expireFailed);
     },
 

@@ -9,23 +9,25 @@ var CreateNotification = React.createClass({
 
     mixins: [
         React.addons.LinkedStateMixin,
-        Reflux.listenTo(NotificationActions.createCompleted, 'onNotificationCreated')
+        Reflux.listenTo(NotificationActions.createNotificationCompleted, 'onNotificationCreated')
     ],
 
     getInitialState() {
         return {
             uuid: uuid(),
-            expiresDate: new Date(new Date().getTime() + (250*60*1000)),
+            expiresDate: new Date(new Date().getTime() + (2500*60*1000)),
             message: '',
             isSendDisabled: true
         };
     },
 
     onReset(event) {
-        event && event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
         this.setState({
             uuid: uuid(),
-            expiresDate: new Date(new Date().getTime() + (250*60*1000)),
+            expiresDate: new Date(new Date().getTime() + (2500*60*1000)),
             message: '',
             isSendDisabled: true
         });
@@ -33,7 +35,7 @@ var CreateNotification = React.createClass({
 
     onSend(event) {
         event.preventDefault();
-        NotificationActions.create(this.state.uuid, this.state);
+        NotificationActions.createNotification(this.state.uuid, this.state);
     },
 
     onNotificationCreated(uuid, notification) {

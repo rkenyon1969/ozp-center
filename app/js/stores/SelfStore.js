@@ -4,6 +4,7 @@ var Reflux = require('reflux');
 var _ = require('../utils/_');
 var SelfActions = require('../actions/SelfActions');
 var ListingActions = require('../actions/ListingActions');
+var NotificationActions = require('../actions/NotificationActions.js');
 var { UserRole } = require('../constants');
 var { Listing } = require('../webapi/Listing');
 var { selfLoaded } = SelfActions;
@@ -11,6 +12,7 @@ var { ORG_STEWARD, ADMIN } = UserRole;
 
 var _library = [];
 var _self = null;
+var _notifications;
 
 var selfIsAdmin = () => UserRole[_self.highestRole] >= ADMIN;
 var selfIsOwner = (listing) => listing.owners.some(u => u.username === _self.username);
@@ -19,7 +21,8 @@ var selfIsOrgSteward = (org) => UserRole[_self.highestRole] >= ORG_STEWARD && _s
 var ProfileStore = Reflux.createStore({
 
     listenables: Object.assign({},
-        _.pick(SelfActions, 'fetchLibraryCompleted', 'fetchSelfCompleted'),
+        _.pick(SelfActions, 'fetchLibraryCompleted', 'fetchSelfCompleted', 'fetchNotificationsCompleted', 'dismissNotificationCompleted'),
+        _.pick(NotificationActions, 'createNotificationCompleted'),
         _.pick(ListingActions, 'addToLibraryCompleted', 'removeFromLibraryCompleted')
     ),
 
@@ -75,6 +78,25 @@ var ProfileStore = Reflux.createStore({
 
     currentUserCanEdit: function (listing) {
         return listing && (selfIsAdmin() || selfIsOwner(listing) || selfIsOrgSteward(listing.agency));
+    },
+
+    onFetchNotificationsCompleted: function (notifications) {
+        _notifications = notifications.getItemAsList();
+        this.trigger();
+    },
+
+    onCreateNotificationCompleted: function (uuid, notification) {
+        _notifications.unshift(notification);
+        this.trigger();
+    },
+
+    onDismissNotificationCompleted: function (notification) {
+        _.remove(_notifications, notification);
+        this.trigger();
+    },
+
+    getNotifications: function () {
+        return _notifications;
     }
 
 });

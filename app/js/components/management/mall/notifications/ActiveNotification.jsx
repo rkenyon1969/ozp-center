@@ -19,7 +19,7 @@ var ActiveNotification = React.createClass({
     },
 
     onStopClick() {
-        NotificationActions.expire(this.props.notification);
+        NotificationActions.expireNotification(this.props.notification);
     },
 
     render() {

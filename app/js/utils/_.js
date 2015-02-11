@@ -11,6 +11,7 @@ module.exports = {
     isBoolean: require('lodash/objects/isBoolean'),
     isFunction: require('lodash/objects/isFunction'),
     isString: require('lodash/objects/isString'),
+    isEmpty: require('lodash/objects/isEmpty'),
     isEqual: require('lodash/objects/isEqual'),
     pick: require('lodash/objects/pick'),
     omit: require('lodash/objects/omit'),
