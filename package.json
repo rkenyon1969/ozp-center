@@ -39,7 +39,6 @@
     "gulp-sourcemaps": "1.0.0",
     "gulp-util": "2.2.20",
     "inject-loader": "1.0.0",
-    "jshint": "2.5.11",
     "jsx-loader": "0.12.2",
     "jsxhint-loader": "0.2.0",
     "karma": "0.12.31",
@@ -56,7 +55,7 @@
     "sinon": "1.7.0",
     "style-loader": "0.8.2",
     "url-loader": "0.5.5",
-    "webpack": "1.4.15",
+    "webpack": "^1.5.3",
     "webpack-dev-server": "1.7.0"
   },
   "dependencies": {
