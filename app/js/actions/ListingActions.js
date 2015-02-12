@@ -140,21 +140,6 @@ ListingActions = createActions({
     launch: function (listing) {
         OzpAnalytics.trackEvent('Applications', listing.title);
     },
-    addToLibrary: function (listing) {
-        ProfileApi
-            .addToLibrary({
-                listing: {
-                    id: listing.id
-                }
-            })
-            .then(ListingActions.addToLibraryCompleted.bind(null, listing));
-        OzpAnalytics.trackEvent('Favorited Applications', listing.title);
-    },
-    removeFromLibrary: function (listing) {
-        ProfileApi
-            .removeFromLibrary(listing)
-            .then(ListingActions.removeFromLibraryCompleted.bind(null, listing));
-    },
     save: function (data) {
         var isNew = !data.id;
 
