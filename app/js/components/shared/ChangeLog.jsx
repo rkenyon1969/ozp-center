@@ -71,7 +71,7 @@ var RejectedChangeLog = React.createClass({
                 </div>
                 <a data-toggle="collapse" data-target={ '#' + id } onClick={ this.toggleIcon }>
                     <i className="fa fa-plus"></i> Feedback
-                </a>,
+                </a>
                 <ul id={ id } className="collapse list-unstyled ListingActivity__Changes">
                     <li>{ details }</li>
                 </ul>
@@ -127,7 +127,7 @@ var ModifiedChangeLog = React.createClass({
             return (
                 <div>
                     <div>
-                        <AuthorLink author={changeLog.author} /> modified { details }
+                        <AuthorLink author={changeLog.author} /> modified {this.props.listingName}
                     </div>
                     <a data-toggle="collapse" data-target={ '#' + id } onClick={ this.toggleIcon }>
                         <i className="fa fa-plus"></i> See {this.props.showListingName ? changeLog.listing.title : 'the listing'} changes
