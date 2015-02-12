@@ -10,12 +10,14 @@ var PaginatedChangeLogStore = require('../../../stores/PaginatedChangeLogStore')
 var ActiveState = require('../../../mixins/ActiveStateMixin');
 var SystemStateMixin = require('../../../mixins/SystemStateMixin');
 
-var ProfileStore = require('ozp-react-commons/stores/SelfStore');
-
 
 var RecentActivity = React.createClass({
 
-    mixins: [Navigation, ActiveState, SystemStateMixin],
+    mixins: [
+        Navigation,
+        ActiveState,
+        SystemStateMixin
+    ],
 
     getInitialState: function () {
         return {
@@ -29,7 +31,7 @@ var RecentActivity = React.createClass({
     },
 
     onLoadMore: function() {
-        ListingActions.fetchAllChangeLogs(ProfileStore.getCurrentUser());
+        ListingActions.fetchAllChangeLogs(this.state.currentUser);
     },
 
     onChangeLogsReceived: function() {
@@ -76,11 +78,11 @@ var RecentActivity = React.createClass({
                 tab: 'overview'
             });
 
-            if (!ProfileStore.getCurrentUser().isAdmin) {
+            if (!this.state.currentUser.isAdmin()) {
                 linkMap.APPROVED_ORG = 'View';
             }
 
-            if (ProfileStore.getCurrentUser().highestRole === 'ORG_STEWARD') {
+            if (this.state.currentUser.highestRole === 'ORG_STEWARD') {
                 linkMap.SUBMITTED = 'Review Listing';
             }
 
@@ -97,7 +99,7 @@ var RecentActivity = React.createClass({
     fetchAllChangeLogsIfEmpty: function () {
         var changeLogs = this.getPaginatedList();
         if (!changeLogs) {
-            ListingActions.fetchAllChangeLogs(ProfileStore.getCurrentUser());
+            ListingActions.fetchAllChangeLogs(this.state.currentUser);
         }
         this.onChangeLogsReceived();
     },
