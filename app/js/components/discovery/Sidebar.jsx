@@ -23,7 +23,6 @@ var Sidebar = React.createClass({
     },
 
     render: function () {
-        var me = this;
         var isBrowsing = this.props.isSearching || this.areFiltersApplied();
 
         var homeLinkClasses = React.addons.classSet({
@@ -63,7 +62,7 @@ var Sidebar = React.createClass({
     renderFacets: function (list, key) {
         var me = this;
 
-        return list.map(function (facetOption, index) {
+        return list.map(function (facetOption) {
             var classes = React.addons.classSet({
                 active: _.contains(me.state.selectedFilters[key], facetOption.title),
                 'facet-group-item': true
@@ -77,7 +76,7 @@ var Sidebar = React.createClass({
 
     areFiltersApplied: function () {
         var areFiltersApplied = false;
-        _.forOwn(this.state.selectedFilters, function (value, key) {
+        _.forOwn(this.state.selectedFilters, function (value) {
             areFiltersApplied = areFiltersApplied || value.length;
         });
         return areFiltersApplied;
@@ -97,7 +96,7 @@ var Sidebar = React.createClass({
         this.props.onGoHome();
     },
 
-    handleFilterToggle: function (type, clickedFilter, e) {
+    handleFilterToggle: function (type, clickedFilter) {
         var values = this.state.selectedFilters[type] || (this.state.selectedFilters[type] = []);
         var value = clickedFilter.title;
 

@@ -2,12 +2,11 @@
 'use strict';
 
 var React = require('react');
-var Reflux = require('reflux');
 var Alerts = require('../alerts/index.jsx');
 var HelpModal = require('./helpmodal.jsx');
 var ProfileLink = require('../profile/ProfileLink.jsx');
 var ModalLink = require('../ModalLink.jsx');
-var { HUD_URL, METRICS_URL, HELP_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL } = require('ozp-react-commons/OzoneConfig');
+var { HUD_URL, METRICS_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL } = require('ozp-react-commons/OzoneConfig');
 
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
 

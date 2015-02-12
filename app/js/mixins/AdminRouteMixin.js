@@ -10,7 +10,7 @@ SelfStore.listen(function(profileData) {
 var AdminRouteMixin = {
 
     statics: {
-        willTransitionTo: function (transition, component) {
+        willTransitionTo: function (transition) {
 
             if (!(currentUser && currentUser.isAdmin())) {
                 transition.abort();

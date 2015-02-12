@@ -2,13 +2,11 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var Modal = require('ozp-react-commons/components/Modal.jsx');
 var LoadMask = require('../LoadMask.jsx');
 var { pick, assign } = require('../../utils/_');
 var { approvalStatus } = require('ozp-react-commons/constants');
 var CurrentListingStore = require('../../stores/CurrentListingStore');
-var SelfStore = require('ozp-react-commons/stores/SelfStore');
-var { loadListing, updateListing, save, submit } = require('../../actions/CreateEditActions');
+var { updateListing, save, submit } = require('../../actions/CreateEditActions');
 var { Navigation } = require('react-router');
 
 var NavBar = require('../NavBar/index.jsx');
@@ -251,7 +249,7 @@ var CreateEditPage = React.createClass({
         );
     },
 
-    componentDidUpdate: function (prevProps, prevState) {
+    componentDidUpdate: function () {
         if (this.state.scrollToError && !this.state.isValid) {
             this.scrollToError(this.state.firstError);
         }

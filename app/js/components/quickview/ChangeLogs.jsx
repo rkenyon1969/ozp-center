@@ -2,10 +2,6 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var TimeAgo = require('../../components/shared/TimeAgo.jsx');
-var actions = require('ozp-react-commons/constants/index').listingActions;
-var uuid = require('../../utils/uuid');
-var fieldName = require('ozp-react-commons/constants/index').listingFieldName;
 var CurrentListingStore = require('../../stores/CurrentListingStore');
 var ChangeLog = require('../shared/ChangeLog.jsx');
 
@@ -46,7 +42,7 @@ var ChangeLogs = React.createClass({
     renderChangeLogs: function () {
         var me = this;
 
-        return this.state.changeLogs.map(function (changeLog, i) {
+        return this.state.changeLogs.map(function (changeLog) {
             return [
                 <ChangeLog showListingName={me.props.showListingName} changeLog={changeLog} />,
                 <br />

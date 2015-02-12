@@ -2,7 +2,7 @@
 
 var React = require('react');
 var t = require('tcomb-form');
-var { Str, struct, subtype, maybe, Bool } = t;
+var { Str, struct, subtype, Bool } = t;
 var Crud = require('../../shared/Crud.jsx');
 
 var { API_URL } = require('ozp-react-commons/OzoneConfig');

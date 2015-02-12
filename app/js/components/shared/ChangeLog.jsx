@@ -1,11 +1,10 @@
 'use strict';
 var React = require('react');
-var actions = require('ozp-react-commons/constants/index').listingActions;
 var uuid = require('../../utils/uuid');
 var timeAgo = require('../../utils/timeAgo');
 var fieldName = require('ozp-react-commons/constants/index').listingFieldName;
 
-var { Navigation, CurrentPath } = require('react-router');
+var { Navigation } = require('react-router');
 var ProfileLink = require('../profile/ProfileLink.jsx');
 
 var ActiveState = require('../../mixins/ActiveStateMixin');
@@ -16,8 +15,7 @@ var AuthorLink = React.createClass({
     },
 
     render: function() {
-        var author = this.props.author,
-            queryParams = {profile: author.id};
+        var author = this.props.author;
 
         return (
             <ProfileLink profileId={author.id}>

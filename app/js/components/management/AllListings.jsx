@@ -2,7 +2,6 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var _ = require('../../utils/_');
 var Router = require('react-router');
 
 var AdminRoute = require('../../mixins/AdminRouteMixin');

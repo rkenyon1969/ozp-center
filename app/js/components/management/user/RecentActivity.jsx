@@ -1,11 +1,9 @@
 'use strict';
 
 var React = require('react');
-var Reflux = require('reflux');
-var { Link, Navigation, CurrentPath } = require('react-router');
+var { Navigation } = require('react-router');
 var Sidebar = require('./RecentActivitySidebar.jsx');
 var ListingActions = require('../../../actions/ListingActions');
-var GlobalListingStore = require('../../../stores/GlobalListingStore');
 var ChangeLog = require('../../shared/ChangeLog.jsx');
 var LoadMore = require('../../shared/LoadMore.jsx');
 var PaginatedChangeLogStore = require('../../../stores/PaginatedChangeLogStore');
@@ -107,7 +105,7 @@ var RecentActivity = React.createClass({
     renderChangeLogs: function () {
         var me = this;
 
-        return this.state.changeLogs.map(function (changeLog, i) {
+        return this.state.changeLogs.map(function (changeLog) {
 
             return [
                 <ChangeLog showListingName={true} changeLog={changeLog}>

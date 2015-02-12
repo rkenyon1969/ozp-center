@@ -2,7 +2,6 @@
 
 var React = require('react');
 var Router = require('react-router');
-var { RouteHandler } = require('react-router');
 var Reflux = require('reflux');
 
 var Sidebar = require('../shared/Sidebar.jsx');

@@ -2,7 +2,6 @@
 
 var Reflux = require('reflux');
 var { ListingApi } = require('../webapi/Listing');
-var ProfileApi = require('ozp-react-commons/api/Profile');
 var _ = require('../utils/_');
 var { PAGINATION_MAX } = require('ozp-react-commons/constants');
 var OzpAnalytics = require('../analytics/ozp-analytics');

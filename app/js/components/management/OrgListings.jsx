@@ -3,7 +3,6 @@
 var React = require('react');
 var Reflux = require('reflux');
 var _ = require('../../utils/_');
-var Router = require('react-router');
 
 
 var SystemStateMixin = require('../../mixins/SystemStateMixin');

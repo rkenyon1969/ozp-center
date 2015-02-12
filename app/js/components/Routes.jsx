@@ -1,6 +1,6 @@
 'use strict';
 
-var { Route, DefaultRoute, Redirect, RouteHandler } = require('react-router');
+var { Route, Redirect } = require('react-router');
 var App = require('./app.jsx');
 var DiscoveryPage = require('./discovery/index.jsx');
 var UserManagement = require('./management/user/index.jsx');
@@ -8,7 +8,6 @@ var CreateEditPage = require('./createEdit/index.jsx');
 var AppsMallManagement = require('./management/mall/index.jsx');
 var AllListings = require('./management/AllListings.jsx');
 var OrgListings = require('./management/OrgListings.jsx');
-var _ = require('../utils/_');
 
 module.exports = function (childRoutes) {
 

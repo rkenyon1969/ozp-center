@@ -73,8 +73,7 @@ var UserReviews = React.createClass({
     renderReviews: function () {
         var { onEdit, user, listing } = this.props;
 
-        return this.props.reviews.map(function (review, i) {
-            var time = review.editedDate || review.createdDate;
+        return this.props.reviews.map(function (review) {
             return <UserReview
                         key={ review.id }
                         user={ user }

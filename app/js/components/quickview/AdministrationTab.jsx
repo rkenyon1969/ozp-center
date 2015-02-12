@@ -5,7 +5,6 @@ var _ = require('../../utils/_');
 var ChangeLogs = require('./ChangeLogs.jsx');
 var ListingActions = require('../../actions/ListingActions');
 var fetchChangeLogs = ListingActions.fetchChangeLogs;
-var saveListing = ListingActions.save;
 var rejectListing = ListingActions.reject;
 var enableListing = ListingActions.enable;
 var disableListing = ListingActions.disable;
@@ -184,8 +183,7 @@ var AdministrationTab = React.createClass({
     },
 
     renderReviewSection: function () {
-        var editing = this.state.editingRejection,
-            listing = this.props.listing;
+        var editing = this.state.editingRejection;
 
         var Justification = form.createForm(
             struct({ description: subtype(Str, s => s.length >= 1 && s.length <= 2000) }),

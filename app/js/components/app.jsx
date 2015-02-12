@@ -1,8 +1,6 @@
 'use strict';
 
 var React = require('react');
-var Reflux = require('reflux');
-var _ = require('../utils/_');
 var { RouteHandler } = require('react-router');
 var State = require('../mixins/ActiveStateMixin');
 var SystemStateMixin = require('../mixins/SystemStateMixin');
@@ -12,7 +10,6 @@ var { fetchLibrary } = require('../actions/LibraryActions');
 var Quickview = require('../components/quickview/index.jsx');
 var CenterProfileWindow = require('./profile/CenterProfileWindow.jsx');
 var SettingsWindow = require('ozp-react-commons/components/profile/SettingsWindow.jsx');
-var CreateEditListing = require('./createEdit/index.jsx');
 var FeedbackModal = require('./management/user/FeedbackModal.jsx');
 var { ListingDeleteConfirmation } = require('./shared/DeleteConfirmation.jsx');
 

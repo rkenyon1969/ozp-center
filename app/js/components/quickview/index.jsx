@@ -2,19 +2,15 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var { Navigation, RouteHandler } = require('react-router');
+var { Navigation } = require('react-router');
 
 var State = require('../../mixins/ActiveStateMixin');
-var Tab = require('../../mixins/TabMixin');
 var _ = require('../../utils/_');
 
 // component dependencies
 var Modal = require('ozp-react-commons/components/Modal.jsx');
-var IconRating = require('../shared/IconRating.jsx');
 var Header = require('./Header.jsx');
-var { UserRole } = require('ozp-react-commons/constants');
 var CurrentListingStore = require('../../stores/CurrentListingStore');
-var { loadListing } = require('../../actions/CreateEditActions');
 
 var OverviewTab = require('./OverviewTab.jsx');
 var ReviewsTab = require('./reviews/index.jsx');

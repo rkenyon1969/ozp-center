@@ -2,10 +2,9 @@
 
 var React = require('react');
 var moment = require('moment');
-var { Link, Navigation, CurrentPath } = require('react-router');
+var { Link, Navigation } = require('react-router');
 var ActiveState = require('../../mixins/ActiveStateMixin');
 var { UserRole } = require('ozp-react-commons/constants');
-var _ = require('../../utils/_');
 
 var ActionMenu = React.createClass({
 

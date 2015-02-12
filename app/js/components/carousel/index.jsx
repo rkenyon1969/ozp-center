@@ -43,7 +43,7 @@ var Carousel = React.createClass({
         this.renderCarousel();
     },
 
-    componentDidUpdate: function (prevProps, prevState) {
+    componentDidUpdate: function (prevProps) {
         if (prevProps.autoInit === false && this.props.autoInit === true) {
             this.renderCarousel();
         }

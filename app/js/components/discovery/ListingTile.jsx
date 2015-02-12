@@ -1,9 +1,8 @@
 'use strict';
 
 var React = require('react');
-var { Link, Navigation, CurrentPath } = require('react-router');
+var { Navigation, CurrentPath } = require('react-router');
 var ActiveState = require('../../mixins/ActiveStateMixin');
-var _ = require('../../utils/_');
 var IconRating = require('../shared/IconRating.jsx');
 var CenterLaunchLink = require('../CenterLaunchLink.jsx');
 
@@ -15,19 +14,15 @@ var ListingTile = React.createClass({
 
     statics: {
         fromArray: function (array) {
-            /* jshint ignore:start  */
             return array.map((listing) => <ListingTile listing={listing} key={listing.id}/>);
-            /* jshint ignore:end  */
         },
         renderLimitedTiles: function(display, mostPopular) {
             var ammount = 0;
-            /* jshint ignore:start  */
             return(
                 mostPopular.filter(function(tile){
                     if(ammount < display){ ammount++; return tile; }
                 }).map((tile) => <ListingTile listing={tile} key={tile.id}/>)
             );
-            /* jshint ignore:end  */
         }
     },
 
@@ -36,9 +31,7 @@ var ListingTile = React.createClass({
 
         var name = listing.title;
         var description = listing.descriptionShort && listing.descriptionShort.substr(0, 140);
-        var launchUrl = listing.launchUrl;
         var imageLargeUrl = listing.imageLargeUrl;
-        var totalVotes = listing.totalVotes;
         var avgRate = listing.avgRate;
         var agencyShort = listing.agencyShort;
         var href = this.makeHref(this.getActiveRoutePath(), null, {
