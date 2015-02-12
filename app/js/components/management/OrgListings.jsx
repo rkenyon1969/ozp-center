@@ -7,6 +7,8 @@ var Router = require('react-router');
 
 
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
+var ActiveStateMixin = require('../../mixins/ActiveStateMixin');
+
 
 var Sidebar = require('./shared/Sidebar.jsx');
 var ApprovalStatusFilter = require('./shared/ApprovalStatusFilter.jsx');
@@ -24,6 +26,7 @@ var OrgListings = React.createClass({
 
     mixins: [
         SystemStateMixin,
+        ActiveStateMixin,
         Reflux.listenTo(PaginatedListingsStore, 'onStoreChanged'),
         Reflux.listenTo(ListingActions.listingChangeCompleted, 'onListingChangeCompleted')
     ],
