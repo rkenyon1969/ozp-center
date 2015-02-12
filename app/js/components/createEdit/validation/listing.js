@@ -2,7 +2,7 @@
 
 var _ = require('../../../utils/_');
 var t = require('tcomb-form');
-var { Arr, maybe, subtype, struct, list, union, Num } = t;
+var { maybe, subtype, struct, list, union, Num } = t;
 var {
     StringMax,
     NonBlankString,
@@ -36,10 +36,6 @@ var Contact = subtype(struct({
     organization: maybe(StringMax(100)),
     type: NonBlankString(50)
 }), oneValidPhone);
-
-var Agency = struct({
-    title: NonBlankString(255)
-});
 
 var title = NonBlankString(60),
     type = NonBlankString(50),

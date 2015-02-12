@@ -179,7 +179,7 @@ var ListingApi = {
 
     getAllChangeLogs: function (profile, url, options) {
         if(!_.isString(url)) {
-            if (profile.isAdmin || profile.highestRole === 'ORG_STEWARD' ){
+            if (profile.isAdmin() || profile.highestRole === 'ORG_STEWARD' ){
                 url = API_URL + '/api/listing/activity?' + $.param(options);
             } else {
                 url = API_URL + '/api/profile/' + profile.id + '/listing/activity?' + $.param(options);

@@ -10,7 +10,7 @@ var AjaxMixin = {
         };
     },
 
-    handleError: function (jqXHR, textStatus, errorThrown) {
+    handleError: function (jqXHR) {
         var response = jqXHR.responseJSON;
         var status = jqXHR.status;
 

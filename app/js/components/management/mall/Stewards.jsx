@@ -2,8 +2,7 @@
 
 var React = require('react');
 var t = require('tcomb-form');
-var { Str, struct, subtype, maybe, enums, list } = t;
-var { URL_REGEX } = require('../../../constants');
+var { Str, struct, subtype, enums, list } = t;
 var Crud = require('../../shared/Crud.jsx');
 
 var { API_URL } = require('ozp-react-commons/OzoneConfig');

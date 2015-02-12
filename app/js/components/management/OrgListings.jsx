@@ -3,7 +3,6 @@
 var React = require('react');
 var Reflux = require('reflux');
 var _ = require('../../utils/_');
-var Router = require('react-router');
 
 
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
@@ -19,7 +18,7 @@ var LoadMore = require('../shared/LoadMore.jsx');
 var PaginatedListingsStore = require('../../stores/PaginatedListingsStore');
 
 var ListingActions = require('../../actions/ListingActions');
-var { UserRole } = require('../../constants');
+var { UserRole } = require('ozp-react-commons/constants');
 
 
 var OrgListings = React.createClass({

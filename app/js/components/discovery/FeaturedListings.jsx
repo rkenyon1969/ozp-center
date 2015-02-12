@@ -29,8 +29,6 @@ module.exports = React.createClass({
     },
 
     render: function () {
-        var me = this;
-
         var children = this.props.listings.map(function (listing) {
             return <FeaturedListingTile
                         key = { listing.id }

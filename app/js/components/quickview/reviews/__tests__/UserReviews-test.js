@@ -5,7 +5,16 @@ var React = require('react');
 var $ = require('jquery');
 var { TestUtils } = React.addons;
 
+/* global describe, it */
 describe('UserReviews', function () {
+    function makeProfile(admin, orgSteward, username) {
+        return {
+            isAdmin: () => admin,
+            isOrgSteward: () => orgSteward,
+            username: username
+        };
+    }
+
     var UserReviews = require('../UserReviews.jsx');
     var {
         userReview,
@@ -13,7 +22,6 @@ describe('UserReviews', function () {
         adminReview,
         reviews
     } = require('./reviews');
-    var ProfileMock = require('../../../../__tests__/mocks/ProfileMock');
 
     it('renders no reviews text when there are no reviews', function () {
         var userReviews = TestUtils.renderIntoDocument(<UserReviews reviews={null} />);
@@ -29,46 +37,48 @@ describe('UserReviews', function () {
 
     it('renders reviews', function () {
         var userReviews = TestUtils.renderIntoDocument(
-            <UserReviews reviews={reviews} user={ProfileMock} listing={{}} onEdit={$.noop} />
+            <UserReviews reviews={reviews} user={makeProfile(false, false)}
+                listing={{}} onEdit={$.noop} />
         );
-        var reviewComponents = TestUtils.scryRenderedComponentsWithType(userReviews, UserReviews.UserReview);
+        var reviewComponents =
+            TestUtils.scryRenderedComponentsWithType(userReviews, UserReviews.UserReview);
         expect(reviewComponents.length).to.equal(reviews.length);
     });
 
     it('shows edit icon for reviews to admins and org stewards', function () {
-        ProfileMock.mockAdmin();
+        var profile = makeProfile(true, false);
         var userReviews = TestUtils.renderIntoDocument(
-            <UserReviews reviews={reviews} user={ProfileMock} listing={{}} onEdit={$.noop} />
+            <UserReviews reviews={reviews} user={profile} listing={{}} onEdit={$.noop} />
         );
         expect($(userReviews.getDOMNode()).find('.fa-pencil').length).to.equal(3);
 
-        ProfileMock.mockOrgSteward(['Test Organization']);
-        var userReviews = TestUtils.renderIntoDocument(
-            <UserReviews reviews={reviews} user={ProfileMock} listing={{agency:'Test Organization'}} onEdit={$.noop} />
+        profile = makeProfile(false, true);
+        userReviews = TestUtils.renderIntoDocument(
+            <UserReviews reviews={reviews} user={profile}
+                listing={{agency:'Test Organization'}} onEdit={$.noop} />
         );
         expect($(userReviews.getDOMNode()).find('.fa-pencil').length).to.equal(3);
-        ProfileMock.restore();
-
     });
 
     it('users can only edit their own review', function () {
-        ProfileMock.mockUser();
+        var profile = makeProfile(false, false, 'testUser1');
         var review = TestUtils.renderIntoDocument(
-            <UserReviews.UserReview review={userReview} user={ProfileMock} listing={{}} onEdit={$.noop} />
+            <UserReviews.UserReview review={userReview} user={profile}
+                listing={{}} onEdit={$.noop} />
         );
         expect($(review.getDOMNode()).find('.fa-pencil').length).to.equal(1);
 
         review = TestUtils.renderIntoDocument(
-            <UserReviews.UserReview review={orgStewardReview} user={ProfileMock} listing={{}} onEdit={$.noop} />
+            <UserReviews.UserReview review={orgStewardReview} user={profile}
+                listing={{}} onEdit={$.noop} />
         );
         expect($(review.getDOMNode()).find('.fa-pencil').length).to.equal(0);
 
         review = TestUtils.renderIntoDocument(
-            <UserReviews.UserReview review={adminReview} user={ProfileMock} listing={{}} onEdit={$.noop} />
+            <UserReviews.UserReview review={adminReview} user={profile}
+                listing={{}} onEdit={$.noop} />
         );
         expect($(review.getDOMNode()).find('.fa-pencil').length).to.equal(0);
-        ProfileMock.restore();
-
     });
 
 });

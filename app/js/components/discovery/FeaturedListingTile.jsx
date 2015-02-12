@@ -10,7 +10,7 @@ var FeaturedListingTile = React.createClass({
     mixins: [ Navigation, State ],
 
     render: function () {
-        var { key, listing } = this.props;
+        var { listing } = this.props;
         var image = listing.imageXlargeUrl;
         var href = this.makeHref(this.getActiveRoutePath(), null, {
             listing: listing.id,

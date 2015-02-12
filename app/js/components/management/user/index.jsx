@@ -2,7 +2,7 @@
 
 var React = require('react');
 var Tab = require('../../../mixins/TabMixin');
-var { Link, RouteHandler } = require('react-router');
+var { RouteHandler } = require('react-router');
 var SystemStateMixin = require('../../../mixins/SystemStateMixin');
 var _ = require('../../../utils/_');
 
@@ -40,7 +40,7 @@ var ListingManagement = React.createClass({
         var { currentUser, system } = this.state;
         var tabs = _.cloneDeep(this.props.tabs);
 
-        if(!currentUser.isAdmin) {
+        if(!currentUser.isAdmin()) {
             tabs.splice(1, 1);
         }
 

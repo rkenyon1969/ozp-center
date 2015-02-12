@@ -2,7 +2,6 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var $ = require('jquery');
 var SystemHighMessage = require('../../shared/SystemHighMessage.jsx');
 var _ = require('../../../utils/_');
 var IconRating = require('../../shared/IconRating.jsx');
@@ -69,7 +68,7 @@ var EditReview = React.createClass({
         }
     },
 
-    onDeleteConfirm: function (hidePopover) {
+    onDeleteConfirm: function () {
         ListingActions.deleteReview(this.props.listing, this.state.review);
     },
 
@@ -84,7 +83,6 @@ var EditReview = React.createClass({
     },
 
     render: function () {
-        var { user } = this.props;
         var { rate, text } = this.state.review;
         var isEditingRateAllowed = this.isEditingRateAllowed();
 

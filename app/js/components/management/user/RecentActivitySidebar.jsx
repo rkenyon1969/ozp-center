@@ -125,7 +125,7 @@ var RecentActivitySidebar = React.createClass({
         var { currentUser, system } = this.state;
 
         var children = [];
-        if (currentUser.isAdmin) {
+        if (currentUser.isAdmin()) {
             children.push(
                 <div className="filter-group">
                     <h4>Marketplace Overview</h4>

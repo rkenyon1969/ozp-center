@@ -1,11 +1,10 @@
 'use strict';
 
 var React = require('react');
-var { Link, Navigation, CurrentPath } = require('react-router');
+var { Navigation, CurrentPath } = require('react-router');
 var ActiveState = require('../../mixins/ActiveStateMixin');
-var _ = require('../../utils/_');
 var IconRating = require('../shared/IconRating.jsx');
-var launch = require('../../actions/ListingActions').launch;
+var CenterLaunchLink = require('../CenterLaunchLink.jsx');
 
 var BookmarkButton = require('../BookmarkButton.jsx');
 
@@ -15,19 +14,15 @@ var ListingTile = React.createClass({
 
     statics: {
         fromArray: function (array) {
-            /* jshint ignore:start  */
             return array.map((listing) => <ListingTile listing={listing} key={listing.id}/>);
-            /* jshint ignore:end  */
         },
         renderLimitedTiles: function(display, mostPopular) {
             var ammount = 0;
-            /* jshint ignore:start  */
             return(
                 mostPopular.filter(function(tile){
                     if(ammount < display){ ammount++; return tile; }
                 }).map((tile) => <ListingTile listing={tile} key={tile.id}/>)
             );
-            /* jshint ignore:end  */
         }
     },
 
@@ -36,9 +31,7 @@ var ListingTile = React.createClass({
 
         var name = listing.title;
         var description = listing.descriptionShort && listing.descriptionShort.substr(0, 140);
-        var launchUrl = listing.launchUrl;
         var imageLargeUrl = listing.imageLargeUrl;
-        var totalVotes = listing.totalVotes;
         var avgRate = listing.avgRate;
         var agencyShort = listing.agencyShort;
         var href = this.makeHref(this.getActiveRoutePath(), null, {
@@ -49,25 +42,26 @@ var ListingTile = React.createClass({
 
         return this.transferPropsTo(
             <li className="listing SearchListingTile" key={listing.id} >
-                <a href={ href }>
-                    <img src={ imageLargeUrl } />
-                    <section className="slide-up">
-                        <p className="title">{ name }</p>
-                        <IconRating
-                            className="icon-rating"
-                            viewOnly
-                            currentRating = { avgRate }
-                            toggledClassName="fa fa-star"
-                            untoggledClassName="fa fa-star-o"
-                            halfClassName="fa fa-star-half-o" />
-                        {
-                            agencyShort &&
-                                <span className="company">{ agencyShort }</span>
-                        }
-                        <p className="description">{ description }</p>
-                        { this.renderActions() }
-                    </section>
+                <a className="listing-link"  href={ href }>
+                    {/* Empty link - css will make it cover entire <li>*/}
                 </a>
+                <img src={ imageLargeUrl } />
+                <section className="slide-up">
+                    <p className="title">{ name }</p>
+                    <IconRating
+                        className="icon-rating"
+                        viewOnly
+                        currentRating = { avgRate }
+                        toggledClassName="fa fa-star"
+                        untoggledClassName="fa fa-star-o"
+                        halfClassName="fa fa-star-half-o" />
+                    {
+                        agencyShort &&
+                            <span className="company">{ agencyShort }</span>
+                    }
+                    <p className="description">{ description }</p>
+                    { this.renderActions() }
+                </section>
             </li>
         );
     },
@@ -75,15 +69,10 @@ var ListingTile = React.createClass({
     renderActions: function () {
         return (
             <div className="btn-group actions">
-                {/* can't nest anchor tags, using button here with onClick listener */}
-                <button type="button" className="btn btn-default" onClick={ this.launch }><i className="icon-open"></i></button>
+                <CenterLaunchLink className="btn-default" listing={this.props.listing} />
                 <BookmarkButton listing={this.props.listing} />
             </div>
         );
-    },
-
-    launch: function () {
-        launch(this.props.listing);
     }
 });
 

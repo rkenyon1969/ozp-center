@@ -13,7 +13,7 @@ var Modal = require('ozp-react-commons/components/Modal.jsx');
 var _ = require('../../utils/_');
 var uuid = require('../../utils/uuid');
 var { DeleteConfirmation } = require('../shared/DeleteConfirmation.jsx');
-var { FOCUSABLE_ELEMENTS } = require('../../constants');
+var { FOCUSABLE_ELEMENTS } = require('ozp-react-commons/constants');
 var AjaxMixin = require('../../mixins/AjaxMixin');
 
 var CreateEditModal = React.createClass({

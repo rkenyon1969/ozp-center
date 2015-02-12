@@ -13,7 +13,7 @@ var Confirmation = React.createClass({
         onConfirm: React.PropTypes.func.isRequired
     },
     render: function () {
-        var { onCancel, onConfirm, message } = this.props;
+        var { message } = this.props;
         var confirmButtonClassName = {
             'btn btn-sm': true
         };
@@ -100,7 +100,6 @@ var PopoverConfirmationButton = React.createClass({
     },
 
     render: function () {
-        var { trigger, placement, content } = this.props;
         return (
             <a
                 tabIndex="0"

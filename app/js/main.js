@@ -9,7 +9,8 @@ var Router = require('react-router');
 require('bootstrap');
 require('classification');
 var _ = require('./utils/_');
-var SelfActions = require('./actions/SelfActions');
+var SelfStore = require('ozp-react-commons/stores/SelfStore');
+var ProfileActions = require('ozp-react-commons/actions/ProfileActions');
 var { METRICS_URL } = require('ozp-react-commons/OzoneConfig');
 
 window.jQuery = jQuery;
@@ -17,29 +18,34 @@ window.$ = jQuery;
 window.React = React;
 
 // Enable withCredentials for all requests
-$.ajaxPrefilter(function ( options, originalOptions, jqXHR ) {
+$.ajaxPrefilter(function (options) {
     options.xhrFields = {
         withCredentials: true
     };
 });
 
-var Routes = require('./components/Routes.jsx');
+var Routes = require('./components/Routes.jsx'),
+    routes = Routes();
 
-var isMounted = false;
-var mount = function () {
-    isMounted = true;
-    Router.run(Routes(), function (Handler) {
-        React.render(<Handler />, document.getElementById('main'));
+
+/*
+ * Render everything when we get our profile
+ */
+SelfStore.listen(_.once(function(profileData) {
+    Router.run(routes, function (Handler) {
+        var main = document.getElementById('main');
+
+        if (profileData.currentUser) {
+            React.render(<Handler />, main);
+        }
+        else if (profileData.currentUserError) {
+            React.unmountComponentAtNode(main);
+            alert('Something went wrong. Try again!');
+        }
     });
-};
-
-SelfActions.selfLoaded.listen(_.once(mount));
-SelfActions.fetchSelfFailed.listen(_.once(function () {
-    if (!isMounted) {
-        alert('Something went wrong. Try again!');
-    }
 }));
-SelfActions.fetchSelf();
+
+ProfileActions.fetchSelf();
 
 (function initPiwik() {
     var _paq = window._paq || [];

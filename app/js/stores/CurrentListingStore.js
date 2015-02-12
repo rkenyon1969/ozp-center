@@ -6,13 +6,13 @@ var _ = require('../utils/_');
 var { createStore } = require('reflux');
 var GlobalListingStore = require('./GlobalListingStore');
 var SystemStore = require('./SystemStore');
-var SelfStore = require('./SelfStore');
+var SelfStore = require('ozp-react-commons/stores/SelfStore');
 var actions = require('../actions/CreateEditActions');
 var { save } = require('../actions/ListingActions');
 var { validateDraft, validateFull } = require('../components/createEdit/validation/listing');
-var { listingMessages } = require('../constants/messages');
+var { listingMessages } = require('ozp-react-commons/constants/messages');
 var { Listing } = require('../webapi/Listing');
-var { approvalStatus } = require('../constants');
+var { approvalStatus } = require('ozp-react-commons/constants');
 var { cloneDeep, assign } = require('../utils/_');
 var { ListingApi } = require('../webapi/Listing');
 var { ImageApi } = require('../webapi/Image');
@@ -136,7 +136,9 @@ function revokeAllObjectURLs() {
 }
 
 var CurrentListingStore = createStore({
-    listenables: actions,
+    listenables: [actions, {profileUpdate: SelfStore}],
+
+    currentUser: null,
 
     refreshListing: function (listing) {
         revokeAllObjectURLs();
@@ -166,6 +168,10 @@ var CurrentListingStore = createStore({
                 this.refreshListing(cloneDeep(listing));
             }
         }
+    },
+
+    onProfileUpdate: function(profileData) {
+        this.currentUser = profileData.currentUser;
     },
 
     onUpdateListing: function (propertyPath, value) {
@@ -284,7 +290,7 @@ var CurrentListingStore = createStore({
     },
 
     currentUserCanEdit: function () {
-        return SelfStore.currentUserCanEdit(_listing);
+        return this.currentUser && this.currentUser.canEdit(_listing);
     },
 
     getChangeLogs: function () {
@@ -311,7 +317,7 @@ var CurrentListingStore = createStore({
                 });
             }
         } else {
-            this.refreshListing(new Listing({ owners: [SelfStore.getCurrentUser()] }));
+            this.refreshListing(new Listing({ owners: [this.currentUser] }));
             deferred.resolve(_listing);
         }
 

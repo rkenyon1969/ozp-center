@@ -2,7 +2,6 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var { RouteHandler } = require('react-router');
 var _ = require('../../utils/_');
 
 // actions
@@ -146,7 +145,7 @@ var Discovery = React.createClass({
         );
     },
 
-    handleLoadMore: function(button){
+    handleLoadMore: function(){
         this.setState({
             mostPopularTiles: this.state.mostPopularTiles += 4
         });
