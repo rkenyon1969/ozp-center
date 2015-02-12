@@ -3,7 +3,7 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var UserNotifications = require('./UserNotifications.jsx');
+var UserNotificationDropdown = require('../shared/UserNotificationDropdown.jsx');
 var HelpModal = require('./helpmodal.jsx');
 var ProfileLink = require('../profile/ProfileLink.jsx');
 var { HUD_URL, METRICS_URL, HELP_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL } = require('ozp-react-commons/OzoneConfig');
@@ -37,10 +37,7 @@ var NavBar = React.createClass({
 
                     <div className="navbar-right">
                         <ul className="nav navbar-nav">
-                            <li className="dropdown">
-                                <a href="#" data-toggle="dropdown"><i className="icon-bell-filled activeIcon"></i></a>
-                                <UserNotifications />
-                            </li>
+                            <UserNotificationDropdown />
                             <li>
                                 <a onClick={this.showHelpModal}><i className="icon-question"></i></a>
                             </li>

@@ -18,7 +18,7 @@ var selfIsAdmin = () => UserRole[_self.highestRole] >= ADMIN;
 var selfIsOwner = (listing) => listing.owners.some(u => u.username === _self.username);
 var selfIsOrgSteward = (org) => UserRole[_self.highestRole] >= ORG_STEWARD && _self.stewardedOrganizations.some(o => o === org);
 
-var ProfileStore = Reflux.createStore({
+var SelfStore = Reflux.createStore({
 
     listenables: Object.assign({},
         _.pick(SelfActions, 'fetchLibraryCompleted', 'fetchSelfCompleted', 'fetchNotificationsCompleted', 'dismissNotificationCompleted'),
@@ -82,17 +82,17 @@ var ProfileStore = Reflux.createStore({
 
     onFetchNotificationsCompleted: function (notifications) {
         _notifications = notifications.getItemAsList();
-        this.trigger();
+        this.trigger({notifications: _notifications});
     },
 
     onCreateNotificationCompleted: function (uuid, notification) {
         _notifications.unshift(notification);
-        this.trigger();
+        this.trigger({notifications: _notifications});
     },
 
     onDismissNotificationCompleted: function (notification) {
         _.remove(_notifications, notification);
-        this.trigger();
+        this.trigger({notifications: _notifications});
     },
 
     getNotifications: function () {
@@ -101,4 +101,4 @@ var ProfileStore = Reflux.createStore({
 
 });
 
-module.exports = ProfileStore;
+module.exports = SelfStore;
