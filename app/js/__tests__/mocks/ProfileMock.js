@@ -1,6 +1,11 @@
 'use strict';
 
-var profile = {
+var SelfStore = require('ozp-react-commons/stores/SelfStore');
+var $ = require('jquery');
+
+Object.assign = require('object-assign');
+
+var profileBase = Object.freeze({
     'stewardedOrganizations': [],
     'organizations': [],
     'bio': '',
@@ -26,32 +31,59 @@ var profile = {
         'self': {
             'href': 'https://www.owfgoss.org/ng/dev/mp/api/profile/2'
         }
-    },
+    }
+});
+
+function triggerStore(profile) {
+    SelfStore.handleProfileChange($.Deferred().resolve(profile).promise());
+}
+
+module.exports = {
     mockAdmin: function (stewardedOrganizations) {
-        profile.username = 'testAdmin1';
-        profile.highestRole = 'ADMIN';
-        profile.isAdmin = true;
-        profile.stewardedOrganizations = stewardedOrganizations || [];
+        var profile = Object.assign({}, profileBase, {
+            username: 'testAdmin1',
+            highestRole: 'ADMIN',
+            stewardedOrganizations: stewardedOrganizations || []
+        });
+
+        triggerStore(profile);
+
         return profile;
     },
+
     mockOrgSteward: function (stewardedOrganizations) {
-        profile.username = 'testOrgSteward1';
-        profile.highestRole = 'ORG_STEWARD';
-        profile.isAdmin = false;
-        profile.stewardedOrganizations = stewardedOrganizations || [];
+        var profile = Object.assign({}, profileBase, {
+            username: 'testOrgSteward1',
+            highestRole: 'ORG_STEWARD',
+            stewardedOrganizations: stewardedOrganizations || []
+        });
+
+        triggerStore(profile);
+
         return profile;
     },
+
     mockUser: function (stewardedOrganizations) {
-        profile.username = 'testUser1';
-        profile.highestRole = 'USER';
-        profile.isAdmin = false;
-        profile.stewardedOrganizations = stewardedOrganizations || [];
+        var profile = Object.assign({}, profileBase, {
+            username: 'testUser1',
+            highestRole: 'USER',
+            stewardedOrganizations: stewardedOrganizations || []
+        });
+
+        triggerStore(profile);
+
         return profile;
     },
+
     restore: function () {
         this.mockAdmin();
+    },
+
+    init: function() {
+        this.mockAdmin();
+    },
+
+    getBaseUser: function() {
+        return profileBase;
     }
-
 };
-
-module.exports = profile;

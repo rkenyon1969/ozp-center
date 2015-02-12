@@ -11,11 +11,10 @@ window.jQuery = jQuery;
 window.$ = jQuery;
 window.React = React;
 
-var SelfStore = require('ozp-react-commons/stores/SelfStore');
 var ProfileMock = require('./mocks/ProfileMock');
 
 //fake the loading of the current user's information
-SelfStore.handleProfileChange(jQuery.Deferred().resolve(ProfileMock).promise());
+ProfileMock.init();
 
 //require all tests
 //This snippet was pulled from the karma-webpack README

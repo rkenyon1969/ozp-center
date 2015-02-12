@@ -19,7 +19,7 @@ var UserReview = React.createClass({
     isEditAllowed: function () {
         var { review, user, listing } = this.props;
         return (
-            user.isAdmin ||
+            user.isAdmin() ||
             review.author.username === user.username ||
             user.isOrgSteward(listing.agency)
         );

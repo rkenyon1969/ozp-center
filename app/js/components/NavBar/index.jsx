@@ -88,7 +88,7 @@ var NavBar = React.createClass({
     },
 
     isAdmin: function() {
-        return this.state.currentUser.isAdmin;
+        return this.state.currentUser.isAdmin();
     },
 
     showHelpModal: function () {
