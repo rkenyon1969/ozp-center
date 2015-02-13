@@ -3,7 +3,7 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var UserNotificationDropdown = require('../shared/UserNotificationDropdown.jsx');
+var UserNotificationDropdown = require('ozp-react-commons/components/notification/UserNotificationDropdown.jsx');
 var HelpModal = require('./helpmodal.jsx');
 var ProfileLink = require('../profile/ProfileLink.jsx');
 var { HUD_URL, METRICS_URL, HELP_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL } = require('ozp-react-commons/OzoneConfig');

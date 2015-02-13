@@ -14,22 +14,6 @@ var SelfActions = createActions({
         SelfApi.getSelf()
             .done(SelfActions.fetchSelfCompleted)
             .fail(SelfActions.fetchSelfFailed);
-    },
-
-    fetchNotifications() {
-        SelfApi.fetchNotifications()
-            .done(SelfActions.fetchNotificationsCompleted)
-            .fail(SelfActions.fetchNotificationsFailed);
-    },
-
-    dismissNotification(notification) {
-        SelfApi.dismissNotification(notification.id)
-            .done(function () {
-                SelfActions.dismissNotificationCompleted(notification);
-            })
-            .fail(function () {
-                SelfActions.dismissNotificationFailed(notification);
-            });
     }
 });
 

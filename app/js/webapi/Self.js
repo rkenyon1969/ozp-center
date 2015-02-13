@@ -30,22 +30,6 @@ var SelfApi = {
 
     getSelf() {
         return $.getJSON(API_URL + '/api/profile/self');
-    },
-
-    fetchNotifications() {
-        return $.getJSON(API_URL + '/api/profile/self/notification').then(function (response) {
-            return new Response(response, function (json) {
-                json.expiresDate = new Date(json.expiresDate);
-                return json;
-            });
-        });
-    },
-
-    dismissNotification(notificationId) {
-        return $.ajax({
-            url: `${API_URL}/api/profile/self/notification/${notificationId}`,
-            type: 'delete'
-        });
     }
 };
 

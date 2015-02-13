@@ -1,8 +1,8 @@
 'use strict';
 
 var React = require('react');
-var _Date = require('../../../shared/Date.jsx');
-var Time = require('../../../shared/Time.jsx');
+var _Date = require('ozp-react-commons/components/Date.jsx');
+var Time = require('ozp-react-commons/components/Time.jsx');
 var NotificationActions = require('../../../../actions/NotificationActions.js');
 
 var ActiveNotification = React.createClass({
