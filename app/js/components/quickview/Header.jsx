@@ -2,11 +2,9 @@
 
 var React = require('react');
 var IconRating = require('../shared/IconRating.jsx');
-var ListingActions = require('../../actions/ListingActions');
-var launch = ListingActions.launch;
-var { UserRole } = require('../../constants');
 
 var BookmarkButton = require('../BookmarkButton.jsx');
+var CenterLaunchLink = require('../CenterLaunchLink.jsx');
 
 var QuickviewHeader = React.createClass({
 
@@ -47,21 +45,13 @@ var QuickviewHeader = React.createClass({
     },
 
     renderActions: function () {
-        var currentUser = this.props.currentUser;
-        var isOwner = this.props.listing.owners.some(o => o.username === currentUser.username);
-        var isAdmin = UserRole[currentUser.highestRole] >= UserRole.ADMIN;
-
         return (
             <div className="btn-group quickview-header-actions">
-                <button type="button" className="btn btn-default" onClick={ this.launch }><i className="icon-open"></i></button>
+                <CenterLaunchLink listing={this.props.listing} className="btn btn-default"/>
                 <BookmarkButton listing={this.props.listing} />
               {this.props.allowEdit && <button type="button" className="btn btn-default" onClick={ this.props.onEdit }><i className="fa fa-pencil"></i></button>}
             </div>
         );
-    },
-
-    launch: function () {
-        launch(this.props.listing);
     }
 });
 

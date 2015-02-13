@@ -2,9 +2,8 @@
 
 var Reflux = require('reflux');
 var { ListingApi } = require('../webapi/Listing');
-var { SelfApi } = require('../webapi/Self');
 var _ = require('../utils/_');
-var { PAGINATION_MAX } = require('../constants');
+var { PAGINATION_MAX } = require('ozp-react-commons/constants');
 var OzpAnalytics = require('../analytics/ozp-analytics');
 var createActions = require('../utils/createActions');
 var ListingActions;
@@ -49,7 +48,7 @@ ListingActions = createActions({
             .getAllListings(nextLink, opts)
             .then(_.partial(ListingActions.fetchAllListingsCompleted, filter));
     },
-    fetchAllChangeLogs: function (filter) {
+    fetchAllChangeLogs: function (profile, filter) {
 
         var PaginatedChangeLogStore = require('../stores/PaginatedChangeLogStore');
 
@@ -69,7 +68,7 @@ ListingActions = createActions({
         }
 
         ListingApi
-            .getAllChangeLogs(nextLink, opts)
+            .getAllChangeLogs(profile, nextLink, opts)
             .then(function (response) {
                 ListingActions.fetchAllChangeLogsCompleted(filter, response);
             });
@@ -139,22 +138,6 @@ ListingActions = createActions({
 
     launch: function (listing) {
         OzpAnalytics.trackEvent('Applications', listing.title);
-        window.open(listing.launchUrl);
-    },
-    addToLibrary: function (listing) {
-        SelfApi
-            .addToLibrary({
-                listing: {
-                    id: listing.id
-                }
-            })
-            .then(ListingActions.addToLibraryCompleted.bind(null, listing));
-        OzpAnalytics.trackEvent('Favorited Applications', listing.title);
-    },
-    removeFromLibrary: function (listing) {
-        SelfApi
-            .removeFromLibrary(listing)
-            .then(ListingActions.removeFromLibraryCompleted.bind(null, listing));
     },
     save: function (data) {
         var isNew = !data.id;

@@ -2,11 +2,11 @@
 'use strict';
 
 var React = require('react');
-var Reflux = require('reflux');
 var UserNotificationDropdown = require('ozp-react-commons/components/notification/UserNotificationDropdown.jsx');
 var HelpModal = require('./helpmodal.jsx');
 var ProfileLink = require('../profile/ProfileLink.jsx');
-var { HUD_URL, METRICS_URL, HELP_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL } = require('ozp-react-commons/OzoneConfig');
+var ModalLink = require('../ModalLink.jsx');
+var { HUD_URL, METRICS_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL } = require('ozp-react-commons/OzoneConfig');
 
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
 
@@ -51,7 +51,11 @@ var NavBar = React.createClass({
                                             <i className="icon-head"/>Profile
                                         </ProfileLink>
                                     </li>
-                                    <li><a href="#"><i className="icon-cog"></i>Settings</a></li>
+                                    <li>
+                                        <ModalLink queryParams={{settings: true}}>
+                                            <i className="icon-cog"></i>Settings
+                                        </ModalLink>
+                                    </li>
                                     <li className="divider"></li>
                                     <li className="dropdown-header">Create</li>
                                     <li><a href={'#/edit'}><i className="icon-square-plus"></i>Submit a Listing</a></li>
@@ -77,11 +81,11 @@ var NavBar = React.createClass({
     },
 
     isOrgSteward: function(){
-        return this.state.currentUser.isOrgSteward();
+        return (this.state.currentUser.highestRole === "ORG_STEWARD") ? true : false;
     },
 
     isAdmin: function() {
-        return this.state.currentUser.isAdmin;
+        return this.state.currentUser.isAdmin();
     },
 
     showHelpModal: function () {

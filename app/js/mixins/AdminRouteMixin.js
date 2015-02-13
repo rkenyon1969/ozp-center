@@ -1,12 +1,18 @@
 'use strict';
 
-var SelfStore = require('../stores/SelfStore');
+var SelfStore = require('ozp-react-commons/stores/SelfStore');
+
+var currentUser;
+SelfStore.listen(function(profileData) {
+    currentUser = profileData.currentUser;
+});
 
 var AdminRouteMixin = {
 
     statics: {
-        willTransitionTo: function (transition, component) {
-            if (!SelfStore.getCurrentUser().isAdmin) {
+        willTransitionTo: function (transition) {
+
+            if (!(currentUser && currentUser.isAdmin())) {
                 transition.abort();
                 transition.redirect('/');
             }

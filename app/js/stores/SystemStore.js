@@ -3,7 +3,6 @@
 var Reflux = require('reflux');
 var { capitalize } = require('../utils/string');
 var SystemApi = require('../webapi/System');
-var _ = require('../utils/_');
 
 var items = [
     'types',
@@ -40,7 +39,7 @@ var SystemStore = Reflux.createStore({
             })
         );
 
-        $.when.apply($, promises).then(data => {
+        $.when.apply($, promises).then(() => {
             this.trigger({ system: _system });
         });
     }

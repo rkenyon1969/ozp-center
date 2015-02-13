@@ -1,6 +1,5 @@
 'use strict';
 var React = require('react');
-var Reflux = require('reflux');
 var _ = require('../../../utils/_');
 var RadioGroup = require('react-radio-group');
 

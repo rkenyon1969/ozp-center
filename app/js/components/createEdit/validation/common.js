@@ -1,7 +1,7 @@
 'use strict';
 
 var { Str, subtype } = require('tcomb-form');
-var { EMAIL_REGEX, PHONE_REGEX, URL_REGEX } = require('../../../constants');
+var { EMAIL_REGEX, PHONE_REGEX, URL_REGEX } = require('ozp-react-commons/constants');
 
 var testPhone = s => PHONE_REGEX.test(s),
     testUrl = s => URL_REGEX.test(s),

@@ -1,7 +1,6 @@
 'use strict';
 
 var React = require('react');
-var { PropTypes } = React;
 var timeAgo = require('../../utils/timeAgo');
 
 var TimeAgo = React.createClass({

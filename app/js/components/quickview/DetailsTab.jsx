@@ -72,12 +72,9 @@ var DetailsTab = React.createClass({
     },
 
     renderOwners: function () {
-        var state = this.state,
-            owners = this.props.listing.owners;
+        var owners = this.props.listing.owners;
 
         return owners.map(function (owner) {
-            var queryParams = {profile: owner.id};
-
             return (
                 <span className="listing-owner">
                     <span> </span>
@@ -111,7 +108,7 @@ var DetailsTab = React.createClass({
     },
 
     renderGovSponser: function () {
-        return this.props.listing.contacts.map(function (contact, i) {
+        return this.props.listing.contacts.map(function (contact) {
             if (contact.type.indexOf("Government Sponser") >= 0) {
                 return  [<label>Government Sponser </label>,
                         <div className="col-md-offset-1">

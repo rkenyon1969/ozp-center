@@ -33,23 +33,28 @@
     li {
         position: relative;
         line-height: 2.5em;
-        border-left: transparent 4px solid;
 
         &.facet-group-item {
             cursor: pointer;
             padding-left: 15px;
             margin-left: -5px;
-            
+
             &:hover, &:focus{
               border-left-color: $link-color;
             }
         }
-        
+
 
 
         &.active {
             color: $link-color;
             border-left-color: $link-color;
+        }
+    }
+
+    .sidebar {
+        li {
+            border-left: transparent 4px solid;
         }
     }
 

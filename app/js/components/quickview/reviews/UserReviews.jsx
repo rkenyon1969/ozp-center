@@ -19,7 +19,7 @@ var UserReview = React.createClass({
     isEditAllowed: function () {
         var { review, user, listing } = this.props;
         return (
-            user.isAdmin ||
+            user.isAdmin() ||
             review.author.username === user.username ||
             user.isOrgSteward(listing.agency)
         );
@@ -73,8 +73,7 @@ var UserReviews = React.createClass({
     renderReviews: function () {
         var { onEdit, user, listing } = this.props;
 
-        return this.props.reviews.map(function (review, i) {
-            var time = review.editedDate || review.createdDate;
+        return this.props.reviews.map(function (review) {
             return <UserReview
                         key={ review.id }
                         user={ user }

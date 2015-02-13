@@ -2,7 +2,7 @@
 
 var _ = require('../../../utils/_');
 var t = require('tcomb-form');
-var { Arr, maybe, subtype, struct, list, union, Num } = t;
+var { maybe, subtype, struct, list, union, Num } = t;
 var {
     StringMax,
     NonBlankString,
@@ -37,10 +37,6 @@ var Contact = subtype(struct({
     type: NonBlankString(50)
 }), oneValidPhone);
 
-var Agency = struct({
-    title: NonBlankString(255)
-});
-
 var title = NonBlankString(60),
     type = NonBlankString(50),
     whatIsNew = maybe(StringMax(250)),
@@ -68,7 +64,7 @@ function ListingFull (requiredContactTypes) {
         categories: subtype(categories, atLeastOne),
         tags: subtype(tags, atLeastOne),
         description: NonBlankString(4000),
-        descriptionShort: NonBlankString(150),
+        descriptionShort: NonBlankString(100),
         versionName: NonBlankString(255),
         launchUrl: Url,
         requirements: NonBlankString(1000),
@@ -94,7 +90,7 @@ var ListingDraft = struct({
     categories: categories,
     tags: tags,
     description: maybe(StringMax(4000)),
-    descriptionShort: maybe(StringMax(150)),
+    descriptionShort: maybe(StringMax(100)),
     versionName: maybe(StringMax(255)),
     launchUrl: maybe(union([Url, BlankString])),
     requirements: maybe(StringMax(1000)),

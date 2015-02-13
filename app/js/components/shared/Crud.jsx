@@ -13,7 +13,7 @@ var Modal = require('ozp-react-commons/components/Modal.jsx');
 var _ = require('../../utils/_');
 var uuid = require('../../utils/uuid');
 var { DeleteConfirmation } = require('../shared/DeleteConfirmation.jsx');
-var { FOCUSABLE_ELEMENTS } = require('../../constants');
+var { FOCUSABLE_ELEMENTS } = require('ozp-react-commons/constants');
 var AjaxMixin = require('../../mixins/AjaxMixin');
 
 var CreateEditModal = React.createClass({
@@ -215,7 +215,7 @@ var Crud = React.createClass({
     //Retrieve form data process a create, using a potentially custom function
     onCreate: function () {
         //use the form data that we already have in state, if available
-        var formData = this.state.formState || this.refs.form.getValue(),
+        var formData = this.refs.form.getValue(),
             createFn = this.props.onCreate || this._onCreate;
 
         if (formData) {
@@ -238,7 +238,7 @@ var Crud = React.createClass({
     },
 
     onEdit: function () {
-        var formData = this.state.formState || this.refs.form.getValue(),
+        var formData = this.refs.form.getValue(),
             editFn = this.props.onEdit || this._onEdit;
 
         if (formData) {

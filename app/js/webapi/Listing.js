@@ -62,19 +62,22 @@ var ListingApi = {
     },
 
     getMostPopular: function () {
-        return $.getJSON(API_URL + '/api/listing/search?sort=avgRate&order=DESC&max=24')
+        return $.getJSON(API_URL + '/api/listing/search?sort=avgRate&order=DESC&max=36')
             .then(parseList);
     },
     search: function (options) {
         var params = $.param(options, true);
         return $.getJSON(API_URL + '/api/listing/search?' + params)
             .then(function (response) {
-                if (options.category && options.category.length > 0) {
-                    OzpAnalytics.trackCategorization('Categorization', options.category, response.total);
+                if (options.categories && options.categories.length > 0) {
+                    for(var index = 0; index < options.categories.length; index++) {
+                        OzpAnalytics.trackCategorization('Categorization', options.categories[index], response.total);
+                    }
                 }
                 else {
                     delaySearch(function(){
-                        OzpAnalytics.trackSiteSearch('Application Search', options.queryString, response.total);
+                        var queryStringNoStar = options.queryString.replace(/[*]$/,"");
+                        OzpAnalytics.trackSiteSearch('Application Search', queryStringNoStar, response.total);
                     }, 800);
                 }
                 return response;
@@ -174,9 +177,13 @@ var ListingApi = {
         });
     },
 
-    getAllChangeLogs: function (url, options) {
+    getAllChangeLogs: function (profile, url, options) {
         if(!_.isString(url)) {
-            url = API_URL + '/api/listing/activity?' + $.param(options);
+            if (profile.isAdmin() || profile.highestRole === 'ORG_STEWARD' ){
+                url = API_URL + '/api/listing/activity?' + $.param(options);
+            } else {
+                url = API_URL + '/api/profile/' + profile.id + '/listing/activity?' + $.param(options);
+            }
         }
         return $.getJSON(url).then((response) => {
             return new PaginatedResponse(response);

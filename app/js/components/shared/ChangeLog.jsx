@@ -1,11 +1,10 @@
 'use strict';
 var React = require('react');
-var actions = require('../../constants/index').listingActions;
 var uuid = require('../../utils/uuid');
 var timeAgo = require('../../utils/timeAgo');
-var fieldName = require('../../constants/index').listingFieldName;
+var fieldName = require('ozp-react-commons/constants/index').listingFieldName;
 
-var { Navigation, CurrentPath } = require('react-router');
+var { Navigation } = require('react-router');
 var ProfileLink = require('../profile/ProfileLink.jsx');
 
 var ActiveState = require('../../mixins/ActiveStateMixin');
@@ -16,8 +15,7 @@ var AuthorLink = React.createClass({
     },
 
     render: function() {
-        var author = this.props.author,
-            queryParams = {profile: author.id};
+        var author = this.props.author;
 
         return (
             <ProfileLink profileId={author.id}>
@@ -71,7 +69,7 @@ var RejectedChangeLog = React.createClass({
                 </div>
                 <a data-toggle="collapse" data-target={ '#' + id } onClick={ this.toggleIcon }>
                     <i className="fa fa-plus"></i> Feedback
-                </a>,
+                </a>
                 <ul id={ id } className="collapse list-unstyled ListingActivity__Changes">
                     <li>{ details }</li>
                 </ul>
@@ -127,7 +125,7 @@ var ModifiedChangeLog = React.createClass({
             return (
                 <div>
                     <div>
-                        <AuthorLink author={changeLog.author} /> modified { details }
+                        <AuthorLink author={changeLog.author} /> modified {this.props.listingName}
                     </div>
                     <a data-toggle="collapse" data-target={ '#' + id } onClick={ this.toggleIcon }>
                         <i className="fa fa-plus"></i> See {this.props.showListingName ? changeLog.listing.title : 'the listing'} changes

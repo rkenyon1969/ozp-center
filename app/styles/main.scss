@@ -3,6 +3,7 @@ $fa-font-path: "../../bower_components/font-awesome/fonts/";
 
 @import "variables";
 @import "../../bower_components/ubuntu-fontface/_ubuntu-base.scss";
+@import "../../bower_components/ubuntu-fontface/_ubuntu-mono.scss";
 
 @import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap.scss";
 @import "../../bower_components/magnific-popup/src/css/main.scss";
@@ -84,8 +85,8 @@ html, body {
 @import 'discovery';
 @import 'quickview';
 @import 'create-edit';
-@import 'switches';
 @import 'toolbar';
+@import 'infiniteScroll';
 @import 'management/user/listing-management';
 @import 'management/user/my-listings';
 @import 'management/user/recent-activity';

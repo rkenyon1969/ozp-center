@@ -3,6 +3,8 @@
 var React = require('react');
 var { Link, Navigation } = require('react-router');
 var RadioGroup = require('react-radio-group');
+var SystemStateMixin = require('../../../mixins/SystemStateMixin');
+var _ = require('../../../utils/_');
 
 var MyListingsSidebarFilter = React.createClass({
 
@@ -74,23 +76,95 @@ var AllListingsSidebarFilter = React.createClass({
 });
 
 
-
-var RecentActivitySidebar = React.createClass({
-
-    mixins: [ Navigation ],
+var OrgListingsSidebarFilter = React.createClass({
 
     render: function () {
         return (
-            <form className="RecentActivity__SidebarFilter">
-            <div className="filter-group">
-                <h4>Marketplace Overview</h4>
-                <AllListingsSidebarFilter handleChange={this.handleChange} />
-            </div>
+            <RadioGroup name="recent-activity-org-listings" onChange={this.props.handleChange}>
+                <Link id="recent-activity-pending" to="org-listings" query={{approvalStatus: "PENDING"}} params={{org: this.props.org.title}}>
+                    <label htmlFor="recent-activity-org-pending" className="label-needs-action">
+                        Pending { this.props.org.shortName } Review
+                        <i className="fa fa-angle-right fa-2x"></i>
+                    </label>
+                </Link>
+
+                <Link id="recent-activity-pending" to="org-listings" query={{approvalStatus: "APPROVED_ORG"}} params={{org: this.props.org.title}}>
+                    <label htmlFor="recent-activity-org-pending" className="label-pending">
+                        Pending Marketplace Review
+                        <i className="fa fa-angle-right fa-2x"></i>
+                    </label>
+                </Link>
+
+                <Link id="recent-activity-published" to="org-listings" query={{approvalStatus: "APPROVED"}} params={{org: this.props.org.title}}>
+                    <label htmlFor="recent-activity-org-published" className="label-published">
+                        Published
+                        <i className="fa fa-angle-right fa-2x"></i>
+                    </label>
+                </Link>
+
+                <Link id="recent-activity-returned" to="org-listings" query={{approvalStatus: "REJECTED"}} params={{org: this.props.org.title}}>
+                    <label htmlFor="recent-activity-org-returned" className="label-rejected">
+                        Returned to Owner
+                        <i className="fa fa-angle-right fa-2x"></i>
+                    </label>
+                </Link>
+            </RadioGroup>
+        );
+    }
+
+});
+
+
+
+var RecentActivitySidebar = React.createClass({
+
+    mixins: [ Navigation, SystemStateMixin ],
+
+    renderFilters: function() {
+        var me = this;
+        var { currentUser, system } = this.state;
+
+        var children = [];
+        if (currentUser.isAdmin()) {
+            children.push(
+                <div className="filter-group">
+                    <h4>Marketplace Overview</h4>
+                    <AllListingsSidebarFilter handleChange={this.handleChange} />
+                </div>
+            );
+        }
+
+        if(currentUser.stewardedOrganizations.length > 0 && system.organizations.length > 0) {
+            _.forEach(currentUser.stewardedOrganizations, function(orgName) {
+                var org = _.find(system.organizations, function(orgObj) {
+                    return orgObj.title === orgName;
+                });
+
+                children.push(
+                    <div className="filter-group">
+                        <h4>{ org.shortName } Review </h4>
+                        <OrgListingsSidebarFilter handleChange={me.handleChange} org={org} />
+                    </div>
+                );
+
+            });
+        }
+
+        children.push(
             <div className="filter-group">
                 <h4>My Listings Overview</h4>
                 <MyListingsSidebarFilter handleChange={this.handleChange} />
             </div>
+        );
 
+        return children;
+
+    },
+
+    render: function () {
+        return (
+            <form className="RecentActivity__SidebarFilter">
+                { this.renderFilters() }
             </form>
         );
     }

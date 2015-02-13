@@ -32,6 +32,7 @@
 
         span {
             line-height: 40px;
+            color: $gray-dark;
         }
 
         &::before {
@@ -41,21 +42,15 @@
         i {
             float: right;
             margin-top: 6px;
+            color: $gray-dark;
         }
 
-
     }
 
-    .label-pending strong {
-        background-color: $blue-dark;
-    }
-
-    .label-needs-action strong {
-        background-color: $red-orange-dark;
-    }
-
-    .label-published strong {
-        background-color: $green-dark;
+    .label-needs-action {
+        > span {
+            color: $red-orange-dark;
+        }
     }
 
     a:hover {

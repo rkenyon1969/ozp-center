@@ -10,12 +10,8 @@ var TextAreaInput = React.createClass({
         return (
             <textarea rows={this.props.rows || '3'} />
         );
-    },
-
-    getValue: function (value) {
-        //react textarea does not respond to a change from non-null to null
-        return value || '';
     }
+
 });
 
 module.exports = TextAreaInput;
