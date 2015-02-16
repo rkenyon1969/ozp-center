@@ -23,7 +23,7 @@ var LoadMore = React.createClass({
     renderList: function () {
         var { children } = this.props;
 
-        if (children.length > 0) {
+        if (children && children.length > 0) {
             return <ol className="list-unstyled">{ this.props.children }</ol>;
         }
         else {

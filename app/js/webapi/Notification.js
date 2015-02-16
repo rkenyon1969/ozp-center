@@ -2,6 +2,7 @@
 
 var $ = require('jquery');
 var { API_URL } = require('ozp-react-commons/OzoneConfig');
+var { PAGINATION_MAX } = require('ozp-react-commons/constants');
 
 var PaginatedResponse  =require ('./responses/PaginatedResponse');
 
@@ -36,8 +37,9 @@ module.exports = {
             .then((response) => new PaginatedResponse(response, parse));
     },
 
-    fetchPast() {
-        return $.getJSON(`${API_URL}/api/notification/expired`)
+    fetchPast(url) {
+        url = url || `${API_URL}/api/notification/expired?offset=0&max=${PAGINATION_MAX}`;
+        return $.getJSON(url)
             .then((response) => new PaginatedResponse(response, parse));
     }
 };

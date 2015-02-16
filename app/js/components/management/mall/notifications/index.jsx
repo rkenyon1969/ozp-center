@@ -5,6 +5,7 @@ var Reflux = require('reflux');
 var CreateNotification = require('./CreateNotification.jsx');
 var ActiveNotification = require('./ActiveNotification.jsx');
 var PastNotification = require('./PastNotification.jsx');
+var LoadMore = require('../../../shared/LoadMore.jsx');
 
 var ActiveNotificationsStore = require('../../../../stores/ActiveNotificationStore.js');
 var PastNotificationsStore = require('../../../../stores/PastNotificationStore.js');
@@ -56,38 +57,47 @@ var PastNotifications = React.createClass({
     mixins: [
         Reflux.listenTo(PastNotificationsStore, 'onStoreChanged')
     ],
-    getInitialState() {
+
+    getState() {
+        var notificationList = this.notifications();
         return {
-            notifications: this.notifications().data
+            notifications: notificationList.data,
+            hasMore: notificationList.hasMore
         };
     },
+
+    getInitialState() {
+        return this.getState();
+    },
+
     onStoreChanged() {
-        this.setState({
-            notifications: this.notifications().data
-        });
+        this.setState(this.getState());
     },
 
     notifications: function () {
         return PastNotificationsStore.getNotifications();
     },
 
-    componentDidMount() {
-        var notifications = this.notifications();
-        var { hasMore } = notifications;
+    fetchMore() {
+        var { hasMore } = this.state;
         if (hasMore) {
-            NotificationActions.fetchPast();
+            NotificationActions.fetchPast(this.notifications());
+        }
+    },
+
+    componentDidMount() {
+        if (!this.state.notifications || this.state.notifications.length === 0) {
+            this.fetchMore();
         }
     },
 
     render() {
-        var notificationComponents = PastNotification.fromArray(this.state.notifications);
-        if (!notificationComponents) {
-            notificationComponents = <span>None found.</span>;
-        }
         return (
             <div>
                 <h4 style={{marginTop: 0}}>Past Notifications</h4>
-                { notificationComponents }
+                <LoadMore hasMore={this.state.hasMore} onLoadMore={this.fetchMore}>
+                    { PastNotification.fromArray(this.state.notifications) }
+                </LoadMore>
             </div>
         );
     }

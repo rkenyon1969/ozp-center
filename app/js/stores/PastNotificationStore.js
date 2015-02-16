@@ -3,9 +3,19 @@
 var Reflux = require('reflux');
 var NotificationActions = require('../actions/NotificationActions.js');
 var PaginatedList = require('../utils/PaginatedList.js');
+
+var _resetNotifications = false;
+var resetNotifications = function () {
+    _resetNotifications = true;
+    NotificationActions.fetchPast();
+};
+
+NotificationActions.createNotificationCompleted.listen(resetNotifications);
+NotificationActions.expireNotificationCompleted.listen(resetNotifications);
+
 var _notifications;
 
-var ActiveNotificationStore = Reflux.createStore({
+var PastNotificationStore = Reflux.createStore({
 
     init() {
         _notifications = new PaginatedList();
@@ -18,6 +28,10 @@ var ActiveNotificationStore = Reflux.createStore({
     },
 
     fetchPastCompleted(notifications) {
+        if (_resetNotifications) {
+            _notifications = new PaginatedList();
+            _resetNotifications = false;
+        }
         _notifications.receivePage(notifications);
         this.trigger();
     },
@@ -29,4 +43,4 @@ var ActiveNotificationStore = Reflux.createStore({
 
 });
 
-module.exports = ActiveNotificationStore;
+module.exports = PastNotificationStore;
