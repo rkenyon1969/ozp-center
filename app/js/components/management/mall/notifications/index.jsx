@@ -16,9 +16,10 @@ var ActiveNotifications = React.createClass({
     ],
     getInitialState() {
         return {
-            notifications: null
+            notifications: this.notifications().data
         };
     },
+
     onStoreChanged() {
         this.setState({
             notifications: this.notifications().data
@@ -57,7 +58,7 @@ var PastNotifications = React.createClass({
     ],
     getInitialState() {
         return {
-            notifications: null
+            notifications: this.notifications().data
         };
     },
     onStoreChanged() {

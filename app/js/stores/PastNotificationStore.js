@@ -1,7 +1,6 @@
 'use strict';
 
 var Reflux = require('reflux');
-var _ = require('../utils/_');
 var NotificationActions = require('../actions/NotificationActions.js');
 var PaginatedList = require('../utils/PaginatedList.js');
 var _notifications;

@@ -22,7 +22,7 @@ var PastNotification = React.createClass({
                     <h5 style={{margin: 0, fontWeight: 400}}>Marketplace System</h5>
                     <em>Expired: <_Date date={expiresDate} /> at <Time date={expiresDate} /></em>
                 </div>
-                <p>{ this.props.notification.message }</p>
+                <p>{ message }</p>
             </div>
         );
     }
