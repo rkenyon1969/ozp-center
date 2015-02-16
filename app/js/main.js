@@ -16,6 +16,8 @@ var { METRICS_URL } = require('ozp-react-commons/OzoneConfig');
 window.jQuery = jQuery;
 window.$ = jQuery;
 window.React = React;
+window.moment = require('moment');
+window.Tether = require('tether');
 
 // Enable withCredentials for all requests
 $.ajaxPrefilter(function (options) {

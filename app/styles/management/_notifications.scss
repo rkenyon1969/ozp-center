@@ -14,3 +14,13 @@
         top: 0;
     }
 }
+
+.CreateNotification {
+    select[name="hour"],
+    select[name="minute"] {
+        display: inline-block;
+        width: auto;
+        margin-right: 5px;
+        height: 34px;
+    }
+}

@@ -2,8 +2,13 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var NotificationActions = require('../../../../actions/NotificationActions.js');
+var DatePicker = require('react-datepicker');
+var moment = require('moment');
+var Select = require('../../../shared/Select.jsx');
+
+var _ = require('../../../../utils/_.js');
 var uuid = require('../../../../utils/uuid.js');
+var NotificationActions = require('../../../../actions/NotificationActions.js');
 
 var CreateNotification = React.createClass({
 
@@ -12,12 +17,23 @@ var CreateNotification = React.createClass({
         Reflux.listenTo(NotificationActions.createNotificationCompleted, 'onNotificationCreated')
     ],
 
+    getDefaultProps() {
+        return {
+            minDate: moment(),
+            hours: _.range(0, 24).map((x) => {
+                return x < 10 ? `0${x}` : `${x}`;
+            }),
+            minutes: ['00', '15', '30', '45', '59']
+        };
+    },
+
     getInitialState() {
         return {
             uuid: uuid(),
-            expiresDate: new Date(new Date().getTime() + (2500*60*1000)),
+            date: null,
             message: '',
-            isSendDisabled: true
+            hour: '00',
+            minute: '00'
         };
     },
 
@@ -25,17 +41,36 @@ var CreateNotification = React.createClass({
         if (event) {
             event.preventDefault();
         }
+
         this.setState({
             uuid: uuid(),
-            expiresDate: new Date(new Date().getTime() + (2500*60*1000)),
+            date: null,
             message: '',
-            isSendDisabled: true
+            hour: '00',
+            minute: '00'
         });
+    },
+
+    onExpiresDateChange(date) {
+        this.setState({date: date});
+    },
+
+    onMessageChange(event) {
+        var { value } = event.target;
+        this.setState({message: value.substring(0, 150)});
     },
 
     onSend(event) {
         event.preventDefault();
-        NotificationActions.createNotification(this.state.uuid, this.state);
+        var { message, date, hour, minute } = this.state;
+        var expiresDate = new Date(
+            Date.UTC(date.year(), date.month(), date.date(), parseInt(hour, 10), parseInt(minute, 10))
+        );
+
+        NotificationActions.createNotification(this.state.uuid, {
+            expiresDate: expiresDate,
+            message: message
+        });
     },
 
     onNotificationCreated(uuid, notification) {
@@ -46,20 +81,46 @@ var CreateNotification = React.createClass({
 
     render() {
         return (
-            <div>
+            <div className="CreateNotification">
                 <h4 style={{marginTop: 0}}>Send a Notification</h4>
                 <form>
-                    <div className="form-group">
-                        <label htmlFor="notification-expires-time">Notification text</label>
-                        <input type="text" className="form-control" placeholder="Enter the text for the notification" name="notification-expires-time"  valueLink={this.linkState('expiresDate')}/>
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <label htmlFor="notification-expires-time">Expires On</label>
+                                <DatePicker
+                                    placeholderText="MM/DD/YYYY"
+                                    selected={ this.state.date }
+                                    minDate= { this.props.minDate }
+                                    dateFormat={ "MM/DD/YYYY" }
+                                    onChange= { this.onExpiresDateChange }
+                                />
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <label>Expires At (Zulu Time)</label>
+                                <div>
+                                    <Select name="hour" options={ this.props.hours } valueLink={ this.linkState('hour') } />
+                                    <Select name="minute" options={ this.props.minutes } valueLink={ this.linkState('minute') } />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div className="form-group">
                         <label htmlFor="notification-message">Notification text</label>
-                        <textarea className="form-control" placeholder="Enter the text for the notification" name="notification-message" valueLink={this.linkState('message')}></textarea>
+                        <textarea rows="5" className="form-control" placeholder="Enter the text for the notification" name="notification-message"
+                            value={this.state.message} onChange={this.onMessageChange}></textarea>
                     </div>
                     <div className="pull-right">
                         <button className="btn btn-default btn-small" onClick={ this.onReset }>Reset</button>
-                        <button className="btn btn-success btn-small" onClick={ this.onSend }>Send</button>
+                        <button
+                            className="btn btn-success btn-small"
+                            disabled={!this.state.message || !this.state.date}
+                            onClick={ this.onSend }
+                        >
+                            Send
+                        </button>
                     </div>
                 </form>
             </div>

@@ -10,6 +10,8 @@ require('bootstrap');
 window.jQuery = jQuery;
 window.$ = jQuery;
 window.React = React;
+window.moment = require('moment');
+window.Tether = require('tether');
 
 var ProfileMock = require('./mocks/ProfileMock');
 

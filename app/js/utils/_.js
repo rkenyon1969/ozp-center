@@ -33,6 +33,7 @@ module.exports = {
     zip: require('lodash/arrays/zip'),
     last: require('lodash/arrays/last'),
     remove: require('lodash/arrays/remove'),
+    range: require('lodash/arrays/range'),
 
     partial: require('lodash/functions/partial'),
     once: require('lodash/functions/once'),

@@ -261,3 +261,19 @@ body > div.classBanner:last-of-type {
 .content {
     background: $white;
 }
+
+
+// this is at the bottom so it doesn't override bootstrap variables
+@import "../../node_modules/react-datepicker/src/stylesheets/datepicker.scss";
+.datepicker__input {
+    display: block;
+    height: 34px;
+}
+
+.datepicker,
+.datepicker__header,
+.datepicker__day:hover,
+.datepicker__input,
+.datepicker__day--selected {
+    border-radius: 0px !important;
+}
