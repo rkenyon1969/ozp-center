@@ -7,7 +7,7 @@ var moment = require('moment');
 var sinon = require('sinon');
 var NotificationActions = require('../../../../../actions/NotificationActions');
 
-describe.only('CreateNotification', function () {
+describe('CreateNotification', function () {
 
     var CreateNotification = require('../CreateNotification.jsx');
 
