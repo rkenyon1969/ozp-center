@@ -27,7 +27,7 @@ var LoadMore = React.createClass({
             return <ol className="list-unstyled">{ this.props.children }</ol>;
         }
         else {
-            return <h2 style={{marginTop: 0}}>No results found!</h2>;
+            return <h5 style={{marginTop: 0}}>No results found!</h5>;
         }
     },
 

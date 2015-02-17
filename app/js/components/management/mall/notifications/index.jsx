@@ -15,25 +15,25 @@ var ActiveNotifications = React.createClass({
     mixins: [
         Reflux.listenTo(ActiveNotificationsStore, 'onStoreChanged')
     ],
-    getInitialState() {
+
+    getState() {
+        var notificationList = ActiveNotificationsStore.getNotifications();
         return {
-            notifications: this.notifications().data
+            notifications: notificationList.data,
+            hasMore: notificationList.hasMore
         };
     },
 
-    onStoreChanged() {
-        this.setState({
-            notifications: this.notifications().data
-        });
+    getInitialState() {
+        return this.getState();
     },
 
-    notifications: function () {
-        return ActiveNotificationsStore.getNotifications();
+    onStoreChanged() {
+        this.setState(this.getState());
     },
 
     componentDidMount() {
-        var notifications = this.notifications();
-        var { hasMore } = notifications;
+        var { hasMore } = this.state;
         if (hasMore) {
             NotificationActions.fetchActive();
         }
@@ -42,7 +42,7 @@ var ActiveNotifications = React.createClass({
     render() {
         var notificationComponents = ActiveNotification.fromArray(this.state.notifications);
         if (!notificationComponents || notificationComponents.length === 0) {
-            notificationComponents = <span>None found.</span>;
+            notificationComponents = <span>No results found!</span>;
         }
         return (
             <div>
@@ -124,3 +124,5 @@ var Notifications = React.createClass({
 });
 
 module.exports = Notifications;
+module.exports.ActiveNotifications = ActiveNotifications;
+module.exports.PastNotifications = PastNotifications;

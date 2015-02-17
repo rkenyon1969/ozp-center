@@ -18,6 +18,7 @@ module.exports = function (config) {
         webpack: {
             cache: true,
             resolve: webpackOptions.resolve,
+            devtool: 'inline-source-map',
             module: {
                 loaders: webpackOptions.module.loaders,
                 noParse: webpackOptions.module.noParse

@@ -11,7 +11,7 @@ var Select = React.createClass({
 
     _renderOptions() {
         return this.props.options.map(function (value) {
-            return <option value={value}>{value}</option>;
+            return <option key={value} value={value}>{value}</option>;
         });
     },
 

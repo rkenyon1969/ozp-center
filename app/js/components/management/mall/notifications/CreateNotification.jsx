@@ -101,20 +101,21 @@ var CreateNotification = React.createClass({
                             <div className="form-group">
                                 <label>Expires At (Zulu Time)</label>
                                 <div>
-                                    <Select name="hour" options={ this.props.hours } valueLink={ this.linkState('hour') } />
-                                    <Select name="minute" options={ this.props.minutes } valueLink={ this.linkState('minute') } />
+                                    <Select ref="hour" name="hour" options={ this.props.hours } valueLink={ this.linkState('hour') } />
+                                    <Select ref="minute" name="minute" options={ this.props.minutes } valueLink={ this.linkState('minute') } />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="form-group">
                         <label htmlFor="notification-message">Notification text</label>
-                        <textarea rows="5" className="form-control" placeholder="Enter the text for the notification" name="notification-message"
+                        <textarea ref="message" rows="5" className="form-control" placeholder="Enter the text for the notification" name="notification-message"
                             value={this.state.message} onChange={this.onMessageChange}></textarea>
                     </div>
                     <div className="pull-right">
                         <button className="btn btn-default btn-small" onClick={ this.onReset }>Reset</button>
                         <button
+                            ref="send"
                             className="btn btn-success btn-small"
                             disabled={!this.state.message || !this.state.date}
                             onClick={ this.onSend }
