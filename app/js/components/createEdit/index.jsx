@@ -22,7 +22,8 @@ var {
     ImageInput,
     Select2Input,
     Select2TagInput,
-    TextAreaInput
+    TextAreaInput,
+    OwnerInput
 } = require('./form');
 
 var savingMessages = {
@@ -99,7 +100,6 @@ var ListingForm = React.createClass({
         var listing = this.props.value;
         var system = this.props.system;
 
-        var owners = (listing.owners || []).map(o => o.username);
         var ownerSetter = usernames => {
             this.props.requestChange(['owners'], usernames.map(u => {
                 return { username: u };
@@ -148,11 +148,7 @@ var ListingForm = React.createClass({
 
                 <h2>Owner Information and Contacts</h2>
                 <Select2Input { ...p('agency') } options={ getOptionsForSystemObject(system.organizations) }/>
-                <Select2Input { ...p('owners') } value={ owners } setter={ ownerSetter } multiple options={
-                    this.props.system.users.map(u => {
-                        return { id: u.username, text: u.username };
-                    })
-                }/>
+                <OwnerInput { ...p('owners') } listing={listing} ownerSetter={ownerSetter} />
                 <ListInput { ...this.getSubFormProps('contacts') } itemForm={ ContactForm }/>
             </form>
         );

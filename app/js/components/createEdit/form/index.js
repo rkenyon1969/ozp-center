@@ -7,5 +7,6 @@ module.exports = {
     TextAreaInput: require('./TextAreaInput.jsx'),
     TextInput: require('./TextInput.jsx'),
     ImageInput: require('./ImageInput.jsx'),
-    ValidatedFormMixin: require('./ValidatedFormMixin')
+    ValidatedFormMixin: require('./ValidatedFormMixin'),
+    OwnerInput: require('./OwnerInput.jsx')
 };

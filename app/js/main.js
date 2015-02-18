@@ -3,6 +3,9 @@
 if (!Object.assign) {
     Object.assign = require('object-assign');
 }
+
+require('./services');
+
 var React = require('react');
 var jQuery = require('jquery');
 var Router = require('react-router');
