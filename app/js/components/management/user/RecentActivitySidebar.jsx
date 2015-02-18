@@ -44,7 +44,7 @@ var AllListingsSidebarFilter = React.createClass({
             <RadioGroup name="recent-activity-all-listings" onChange={this.props.handleChange}>
                 <Link id="recent-activity-returned" to="all-listings" query={{approvalStatus: "APPROVED_ORG"}}>
                     <label htmlFor="recent-activity-all-returned" className="label-needs-action">
-                        Pending AppsMall Review
+                        Pending Review
                         <i className="fa fa-angle-right fa-2x"></i>
                     </label>
                 </Link>
@@ -90,7 +90,7 @@ var OrgListingsSidebarFilter = React.createClass({
 
                 <Link id="recent-activity-pending" to="org-listings" query={{approvalStatus: "APPROVED_ORG"}} params={{org: this.props.org.title}}>
                     <label htmlFor="recent-activity-org-pending" className="label-pending">
-                        Pending Marketplace Review
+                        Organization Approved
                         <i className="fa fa-angle-right fa-2x"></i>
                     </label>
                 </Link>
