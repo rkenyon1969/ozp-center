@@ -147,7 +147,7 @@ var Discovery = React.createClass({
 
     handleLoadMore: function(){
         this.setState({
-            mostPopularTiles: this.state.mostPopularTiles += 4
+            mostPopularTiles: this.state.mostPopularTiles += 12
         });
     },
 
@@ -159,7 +159,7 @@ var Discovery = React.createClass({
         var InfiniTiles = ListingTile.renderLimitedTiles(this.state.mostPopularTiles, this.state.mostPopular);
 
         var LoadMore = (this.state.mostPopularTiles >= this.state.mostPopular.length) ?
-            <button onClick={ this.handleLoadMore } className="btn btn-default loadMoreBtn">Thats all!</button> :
+            '' :
             <button onClick={ this.handleLoadMore } className="btn btn-default loadMoreBtn">Load More</button>;
 
         return (
