@@ -131,6 +131,17 @@ function copyImageValidations(validation) {
     }, screenshotErrors);
 }
 
+//the following is not neccesarry to correctly validate the listing,
+//but for ensuring certain errors are reflected at the correct path
+function validateContacts(validation, instance) {
+    instance.contacts.forEach(function (contact, index) {
+        ['secure', 'unsecure'].forEach(function(suffix) {
+            var path = `contacts.${index}.${suffix}Phone`;
+            validation.errors[path] = validation.errors[path] || !oneValidPhone(contact);
+        });
+    });
+}
+
 function validate (instance, options, type) {
     var validation = t.validate(instance, type),
         errors = {};
@@ -150,14 +161,7 @@ function validate (instance, options, type) {
 function validateDraft (instance, options) {
     var validation = validate(instance, options, ListingDraft);
 
-    //the following is not neccesarry to correctly validate the listing,
-    //but for ensuring certain errors are reflected at the correct path
-
-    instance.contacts.forEach(function (contact, index) {
-        validation.errors['contacts.' + index + '.securePhone'] = !oneValidPhone(contact);
-        validation.errors['contacts.' + index + '.unsecurePhone'] = !oneValidPhone(contact);
-    });
-
+    validateContacts(validation, instance);
     copyImageValidations(validation);
 
     return validation;
@@ -167,14 +171,7 @@ function validateFull (instance, options) {
     var requiredContactTypes = getRequiredContactTypes((options || {}).contactTypes || []);
     var validation = validate(instance, options, ListingFull(requiredContactTypes));
 
-    //the following is not neccesarry to correctly validate the listing,
-    //but for ensuring certain errors are reflected at the correct path
-
-    instance.contacts.forEach(function (contact, index) {
-        validation.errors['contacts.' + index + '.securePhone'] = !oneValidPhone(contact);
-        validation.errors['contacts.' + index + '.unsecurePhone'] = !oneValidPhone(contact);
-    });
-
+    validateContacts(validation, instance);
     validation.errors.contacts = !hasRequiredContactTypes(requiredContactTypes, instance.contacts);
 
     copyImageValidations(validation);
