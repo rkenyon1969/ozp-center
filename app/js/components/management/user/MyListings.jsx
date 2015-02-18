@@ -135,7 +135,7 @@ var MyListings = React.createClass({
 
         return this.transferPropsTo(
             <div className="MyListings row">
-                <aside className="MyListings__sidebar col-md-2" >
+                <aside className="Listings__Sidebar col-md-2" >
                     <Sidebar>
                         <MyListingsStatusFilter { ...filterProps } />
                     </Sidebar>

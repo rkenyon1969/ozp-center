@@ -2,9 +2,21 @@
     padding-top: $padding-large-vertical;
 }
 
+.MyListings, .AllListings {
+    display: table;
+
+    > * {
+        display: table-cell;
+        float: none;
+    }
+}
+
+.Listings__Sidebar {
+    background: $gray-lightest;
+}
+
 .Listings__SidebarFilter {
   padding: $padding-small-vertical $padding-small-horizontal;
-  background: $gray-lightest;
 
     input[type="radio"] {
         display: none;

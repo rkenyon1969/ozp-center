@@ -95,7 +95,7 @@ var AllListings = React.createClass({
 
         return this.transferPropsTo(
             <div className="AllListings row">
-                <aside className="AllListings__sidebar col-md-2">
+                <aside className="Listings__Sidebar col-md-2">
                     <Sidebar>
                         <ApprovalStatusFilter role={ UserRole.ADMIN } { ...sidebarFilterOptions } />
                         <OrgFilter { ...sidebarFilterOptions } />
