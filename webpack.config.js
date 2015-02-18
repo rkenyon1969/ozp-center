@@ -49,8 +49,11 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 loader: "jsx-loader?harmony=true&insertPragma=React.DOM",
-                include: /app|node_modules\/ozp-react-commons|node_modules\/react-datepicker/,
-                exclude: /node_modules\/ozp-react-commons\/node_modules/
+                include: [
+                    new RegExp(path.join(__dirname, 'app/js')),
+                    new RegExp(path.join(__dirname, 'node_modules/ozp-react-commons/app/js')),
+                    new RegExp(path.join(__dirname, 'node_modules/react-datepicker/src')),
+                ]
             }
         ],
         noParse: /\.min\.js/
