@@ -1,3 +1,83 @@
+## 0.7.0 (2015-02-18)
+
+
+#### Bug Fixes
+
+* **All Listings:** hide badges when a filter is applied ([fcbc8f8f](https://github.com/ozone-development/center-ui.git/commit/fcbc8f8fd26859a0a4caca6e6763a2a3f1231e5a))
+* **Change Log:**
+  * OZF-912: change log for modified shows listing link ([319aff4f](https://github.com/ozone-development/center-ui.git/commit/319aff4fa21295e82284f56b79d958d0f7685dcc))
+  * OZF-912: changed the change log to show listing title for modified ([b7c83b37](https://github.com/ozone-development/center-ui.git/commit/b7c83b3705ade4cfe16c0773178115c30810f4e8))
+* **Contact:** OZF-985 Phone number validation ([37b3ecbc](https://github.com/ozone-development/center-ui.git/commit/37b3ecbcb7f9ddf4af15ac42f297dbe0902fa69e))
+* **Create Listing:** While editing the title, the cursor jumps to end ([3f89f521](https://github.com/ozone-development/center-ui.git/commit/3f89f521f8afcfe3f4cbc7c224f1a2006d4dd5ea))
+* **Mall Management:** OZF-979: required checkbox wasn't persisting ([2918613f](https://github.com/ozone-development/center-ui.git/commit/2918613ff7ecc77f6ccb8d8bd927eff2ddc265c1))
+* **Navbar:** corners of AppsMall logo are not clickable ([89a8a118](https://github.com/ozone-development/center-ui.git/commit/89a8a1184f5452d853c0b08a0fa017b0a2b1bf0d))
+* **OzoneConfig:** Fix OzoneConfig include in main.js ([951e9d41](https://github.com/ozone-development/center-ui.git/commit/951e9d410988ef20a80a239abf9a9c1fdf7b9cdc))
+* **Recent Activity:**
+  * OZF-576: fixed routing issues with Org Stewards page ([6f189b0b](https://github.com/ozone-development/center-ui.git/commit/6f189b0bb6fb1d8ba101376ba48d78f552f5a38b))
+  * OZF-576: update styling on change logs ([03b942f0](https://github.com/ozone-development/center-ui.git/commit/03b942f0ad9ec6c66d0d910231191b2e00791ebc))
+  * OZF-576: styling fix for recent activities sidebar ([d48c2268](https://github.com/ozone-development/center-ui.git/commit/d48c2268bda6a2697a162483d58a72af69cb1adf))
+* **Reviews:** reviews are not appearing until the page is refreshed. ([ae9ba01a](https://github.com/ozone-development/center-ui.git/commit/ae9ba01a1b6504eee4efa7637837273baeebeb8a))
+* **Search:** Add a wild card (*) to the end of the search query when sending the query to ela ([ba80b0ef](https://github.com/ozone-development/center-ui.git/commit/ba80b0ef12ba06e5479d64f294e850978247bc01))
+* **Short Description:** set max size to 100 ([7be5df85](https://github.com/ozone-development/center-ui.git/commit/7be5df85431dfd972522f9f603547189ad13980f))
+* **build:**
+  * fix build errors on Windows ([4abf94f9](https://github.com/ozone-development/center-ui.git/commit/4abf94f99470a6e391dfdccb6985ee1427626ae9))
+  * fix build errors on Windows ([b2f05111](https://github.com/ozone-development/center-ui.git/commit/b2f051119759948ad9be5e76493e14ab849e6c0e))
+  * fix build errors on Windows ([c3c2c4b4](https://github.com/ozone-development/center-ui.git/commit/c3c2c4b4a0846e97ac20f68c25a589a861582216))
+* **styling:**
+  * Fixed listing menu borders ([f9550f04](https://github.com/ozone-development/center-ui.git/commit/f9550f0495e34be41254a14a7bc7692f0976a877))
+  * Help Modal ([9746a477](https://github.com/ozone-development/center-ui.git/commit/9746a4774516231cebf982dd071e680bb3fed950))
+  * Help Modal ([bb54b93d](https://github.com/ozone-development/center-ui.git/commit/bb54b93d5766790437ee6a66c71db786bac3592b))
+  * OZF-671 ([27b28eee](https://github.com/ozone-development/center-ui.git/commit/27b28eee0ed6ccb28d4b2b8f3133be30db451bda))
+  * Fix classification banner bleed ([da11d572](https://github.com/ozone-development/center-ui.git/commit/da11d5729e6f42fe806dbe60ce332b27b4be1115))
+
+
+#### Features
+
+* **Launch:**
+  * Move some LaunchLink logic to commons ([5f1b3821](https://github.com/ozone-development/center-ui.git/commit/5f1b3821dc6a6a10c303924b642c5d482d90ebd1))
+  * Launch into webtop from discovery tile ([11573dc4](https://github.com/ozone-development/center-ui.git/commit/11573dc4f48484f74d904816e170776a5d885747))
+  * OZF-585 Initial code to launch into webtop ([842f3276](https://github.com/ozone-development/center-ui.git/commit/842f32764886ce044f5c1626754d4e90f86e4dbf))
+* **Most Popular:**
+  * OZF-720 fixed max listing count ([49c39c20](https://github.com/ozone-development/center-ui.git/commit/49c39c209b0d4ef40a5d586e27e2a61bc023d297))
+  * OZF-720 fixed max listing count ([e06c8668](https://github.com/ozone-development/center-ui.git/commit/e06c8668254499287c04019a8da2a054ab5d6866))
+  * OZF-720 load more button and layout added ([d13ed86a](https://github.com/ozone-development/center-ui.git/commit/d13ed86a8c5784973bb45812c114618f1562d051))
+  * OZF-720 load more button and layout added ([79912f68](https://github.com/ozone-development/center-ui.git/commit/79912f6841c3eeef4c2afb1a1ba2859dfb4243dd))
+* **Notifications:**
+  * OZF-838 use Ozone as author ([298bbd4d](https://github.com/ozone-development/center-ui.git/commit/298bbd4d9b6bd98b2e9d185cb1d5eddfa84f157c))
+  * OZF-838 add tests for past notification store ([13130e6c](https://github.com/ozone-development/center-ui.git/commit/13130e6c6443fa0d0eb919c1ec5e037e6fa126eb))
+  * OZF-838 add tests for create notification component ([69c098c1](https://github.com/ozone-development/center-ui.git/commit/69c098c1ba59936bf9b08b19e18488a245587b8c))
+  * OZF-838 paginate past notifications ([81cb2c82](https://github.com/ozone-development/center-ui.git/commit/81cb2c8208f42f8f46e6ca2e99bb6d9c3f94f7b9))
+  * OZF-838 allow users to set expires date ([a9cfd76b](https://github.com/ozone-development/center-ui.git/commit/a9cfd76b080444431a4f9a43cf60a39db32a4619))
+  * OZF-838 update op-react-commons ref ([009067a6](https://github.com/ozone-development/center-ui.git/commit/009067a6dc0d7ac0c994be9adbb76beda1728240))
+  * OZF-838 use common components ([5e004763](https://github.com/ozone-development/center-ui.git/commit/5e00476370f79b7f785045b5de06d4e2eba0cec6))
+  * move user notifications to shared component ([b664f07b](https://github.com/ozone-development/center-ui.git/commit/b664f07b4a5d8a8771e7e47b78f277796fe58cef))
+  * Implement displaying user notifications ([42143ad2](https://github.com/ozone-development/center-ui.git/commit/42143ad2904fb53bbd31ce1023e22f6208bd52e6))
+  * Implement displaying active and past notifications ([349b9020](https://github.com/ozone-development/center-ui.git/commit/349b902031c9df8f4c1a33d00794c5ed948096f4))
+  * Implement basic layout ([98193405](https://github.com/ozone-development/center-ui.git/commit/98193405c3ea0b0ca8fde89b40cff702cce2b294))
+* **Profile Window:**
+  * Fix React bind warning ([46bfbe0c](https://github.com/ozone-development/center-ui.git/commit/46bfbe0cc705dcddcd53134c301330e55a0e5e8e))
+  * OZF-573 Profile Window ([3e7c9d3c](https://github.com/ozone-development/center-ui.git/commit/3e7c9d3c06b5ded004cee8ed83cf23e691e7f518))
+  * Configurable close button ([734794db](https://github.com/ozone-development/center-ui.git/commit/734794db297db9911b81743d74f0fe1c512295f1))
+  * Encapsulate modal links as components ([7634497b](https://github.com/ozone-development/center-ui.git/commit/7634497baa33b171d5cfcf64b5c0822fd4bf8de2))
+  * UX Review tweaks ([43c55103](https://github.com/ozone-development/center-ui.git/commit/43c551039c6e03d89c2455613723e747887686cc))
+  * OZF-573 Fix reversed color variables ([2ff097de](https://github.com/ozone-development/center-ui.git/commit/2ff097de848d53d92b53cffec344fa39c7f4669b))
+  * OZF-573 Tweaks after merge ([a78d6b9b](https://github.com/ozone-development/center-ui.git/commit/a78d6b9b6b7fcb57a8b382b3344a03ff5b4eaed4))
+  * OZF-573 Add links to author from changelog ([655eaf0c](https://github.com/ozone-development/center-ui.git/commit/655eaf0cbbf1e013819ba3a260ab75ca511e7da4))
+  * OZF-573 Link to Profile Window from details tab ([40217367](https://github.com/ozone-development/center-ui.git/commit/40217367a3b2be1c7c18aec6f1151dd8781b3be8))
+  * OZF-573 Styling ([edede6d5](https://github.com/ozone-development/center-ui.git/commit/edede6d5ff92ff514574ef16b9513ebfcbf3b0ad))
+  * OZF-573 Profile Window basic functionality ([93297fff](https://github.com/ozone-development/center-ui.git/commit/93297fff91048b5c9a2dc8313fc40bf5921420d7))
+  * OZF-573 profile window initial code ([a8957fea](https://github.com/ozone-development/center-ui.git/commit/a8957fea900c766851b3d9d2df8add3c3edbc943))
+* **React Commons:** Move switches.scss to ozp-react-commons ([643347eb](https://github.com/ozone-development/center-ui.git/commit/643347ebb4a429ecb55aa79d79349fec2f054401))
+* **Recent Activity:**
+  * OZF-576: added unit tests for the filters on the recent activity page ([b3df6485](https://github.com/ozone-development/center-ui.git/commit/b3df6485ffe8facbc19a0c1803c85482792b0253))
+  * OZF-576: update links for org stewards ([d7879a91](https://github.com/ozone-development/center-ui.git/commit/d7879a9184497e47d33fc0df13a735205b849f7c))
+  * OZF-576: org steward filters for recent activity ([74caac2c](https://github.com/ozone-development/center-ui.git/commit/74caac2c9a080658bd4d5cc9253b4088227469af))
+  * OZF-576: updated front end to filter by orgs that user is a steward of ([7f2ace91](https://github.com/ozone-development/center-ui.git/commit/7f2ace91229974b50737fbd2b3e98cad45a8fbc7))
+  * OZF-577: user view ([563d2d53](https://github.com/ozone-development/center-ui.git/commit/563d2d53fb1331f15f1d58ce6e3f89df8c94a30e))
+  * OZF-577: filters and list updated for users ([4bd39fe1](https://github.com/ozone-development/center-ui.git/commit/4bd39fe1e679d7ab5da5b29ac46aa37716d7602b))
+* **Settings Window:** Connecting Settings Window ([49cb2a62](https://github.com/ozone-development/center-ui.git/commit/49cb2a6238cb47444a33b90b1cb7f2ee719fe3b2))
+
+
 ## 0.6.0 (2015-02-04)
 
 
