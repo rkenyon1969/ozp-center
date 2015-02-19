@@ -7753,7 +7753,7 @@
     "ozp-react-commons": {
       "version": "0.1.1",
       "from": "../../../../../var/folders/cg/jjg4n9r10b94n843fqvqbhfm0000gn/T/npm-42385-3da968ea/git-cache-adeab023b3a1/961ef7078d7136e0dcf9ba688a34f43b76356737",
-      "resolved": "git://github.com/ozone-development/ozp-react-commons#961ef7078d7136e0dcf9ba688a34f43b76356737",
+      "resolved": "git://github.com/ozone-development/ozp-react-commons#2998c9311a1540f541c2d6479e9612203d3e2361",
       "dependencies": {
         "es5-shim": {
           "version": "4.1.0",
