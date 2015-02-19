@@ -24,7 +24,12 @@ class PaginatedList {
         this.nextLink = paginatedResponse.nextLink();
         this.hasMore = !!this.nextLink;
         this.isFetching = false;
-        this.data = this.data.concat(paginatedResponse.getItemAsList());
+        if(this.data) {
+            this.data = this.data.concat(paginatedResponse.getItemAsList());
+        } else {
+            this.data = paginatedResponse.getItemAsList();
+        }
+        // this.data = this.data.concat(paginatedResponse.getItemAsList());
         this.counts = (paginatedResponse.getResponse().counts) ? paginatedResponse.getResponse().counts : {};
         this.counts.total = paginatedResponse.getResponse().total;
     }
