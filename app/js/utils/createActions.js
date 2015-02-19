@@ -6,7 +6,7 @@ var _ = require('./_');
 function createAsyncActions(definitions) {
     return _.reduce(definitions, function (actions, callback, name) {
         actions[name] = createAction({ sync: true });
-        actions[name].listen(callback);
+        if (callback) { actions[name].listen(callback); }
         actions[name + 'Completed'] = createAction({ sync: true });
         actions[name + 'Failed'] = createAction({ sync: true });
 

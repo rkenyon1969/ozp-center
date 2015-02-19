@@ -3,8 +3,6 @@
 var React = require('react');
 var Reflux = require('reflux');
 
-var LaunchLink = require('ozp-react-commons/components/LaunchLink.jsx');
-
 var SelfStore = require('ozp-react-commons/stores/SelfStore');
 
 var ListingActions = require('../actions/ListingActions');
@@ -36,18 +34,16 @@ var CenterLaunchLink = React.createClass({
     },
 
     render: function() {
-        //this function isn't expected to actually launch the listing, but just
-        //to record that it was launched
         var listingLaunchFn = ListingActions.launch.bind(null, this.props.listing),
             { className, ...otherProps } = this.props,
             linkClassName = className ? className + ' btn' : 'btn';
 
 
         return (
-            <LaunchLink {...otherProps} className={linkClassName}
-                    onClick={listingLaunchFn} newTab={true}>
+            <button { ...otherProps } className={linkClassName}
+                    onClick={listingLaunchFn}>
                 <span className="icon-open"></span>
-            </LaunchLink>
+            </button>
         );
     }
 });

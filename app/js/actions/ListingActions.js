@@ -1,171 +1,36 @@
 'use strict';
 
 var Reflux = require('reflux');
-var { ListingApi } = require('../webapi/Listing');
-var _ = require('../utils/_');
-var { PAGINATION_MAX } = require('ozp-react-commons/constants');
-var OzpAnalytics = require('../analytics/ozp-analytics');
 var createActions = require('../utils/createActions');
-var ListingActions;
 
-function updateListingProperty(propName, value, listing) {
-    var data = _.cloneDeep(listing);
-    data[propName] = value;
-    ListingActions.save(data);
-}
+//callbacks that used to be here have been moved to ListingService
+var ListingActions = createActions({
+    fetchAllListings: null,
+    fetchAllChangeLogs: null,
+    fetchNewArrivals: null,
+    fetchMostPopular: null,
+    fetchFeatured: null,
 
-var setEnabled = updateListingProperty.bind(null, 'isEnabled');
+    fetchById: null,
 
-ListingActions = createActions({
+    search: null,
 
-    fetchAllListings: function (filter) {
-        // work around circular dependency
-        var PaginatedListingsStore = require('../stores/PaginatedListingsStore');
+    fetchChangeLogs: null,
 
-        var paginatedList = PaginatedListingsStore.getListingsByFilter(filter),
-            opts = {},
-            nextLink;
+    fetchOwnedListings: null,
 
-        if (paginatedList) {
-            paginatedList.expectPage();
-            nextLink = paginatedList.nextLink;
-        }
-        else {
-            // remove undefined values
-            _.forOwn(filter || {}, function (value, key) {
-                if(value !== null) {
-                    opts[key] = value;
-                }
-            });
+    fetchReviews: null,
+    saveReview: null,
+    deleteReview: null,
 
-            _.assign(opts, {
-                offset: 0,
-                max: PAGINATION_MAX
-            });
-        }
-
-        ListingApi
-            .getAllListings(nextLink, opts)
-            .then(_.partial(ListingActions.fetchAllListingsCompleted, filter));
-    },
-    fetchAllChangeLogs: function (profile, filter) {
-
-        var PaginatedChangeLogStore = require('../stores/PaginatedChangeLogStore');
-
-        var paginatedList = PaginatedChangeLogStore.getChangeLogs(),
-            opts = {},
-            nextLink;
-
-        if (paginatedList) {
-            paginatedList.expectPage();
-            nextLink = paginatedList.nextLink;
-        }
-        else {
-            _.assign(opts, {
-                offset: 0,
-                max: PAGINATION_MAX
-            });
-        }
-
-        ListingApi
-            .getAllChangeLogs(profile, nextLink, opts)
-            .then(function (response) {
-                ListingActions.fetchAllChangeLogsCompleted(filter, response);
-            });
-    },
-    fetchNewArrivals: function () {
-        ListingApi.getNewArrivals().then(ListingActions.fetchNewArrivalsCompleted);
-    },
-    fetchMostPopular: function () {
-        ListingApi.getMostPopular().then(ListingActions.fetchMostPopularCompleted);
-    },
-    fetchFeatured: function () {
-        ListingApi.getFeatured().then(ListingActions.fetchFeaturedCompleted);
-    },
-
-    fetchById: function (id) {
-        ListingApi.getById(id).then(ListingActions.fetchByIdCompleted);
-    },
-
-    search: function (options) {
-        var queryString = options.queryString;
-
-        // append '*'
-        if (!/\*$/.test(queryString)) {
-            queryString += '*';
-        }
-
-        ListingApi
-            .search(
-                Object.assign({}, options, {
-                    queryString: queryString
-                })
-            ).then(ListingActions.searchCompleted);
-    },
-
-    fetchChangeLogs: function (listingId) {
-        ListingApi.getChangeLogs(listingId).then(ListingActions.fetchChangeLogsCompleted.bind(null, listingId));
-    },
-
-    fetchOwnedListings: function (profile) {
-        ListingApi.getOwnedListings(profile).then(ListingActions.fetchOwnedListingsCompleted);
-    },
-
-    fetchReviews: function (listing) {
-        ListingApi.fetchReviews(listing.id)
-            .then(ListingActions.fetchReviewsCompleted.bind(null, listing.id));
-        if(typeof(listing.title) !== 'undefined') { OzpAnalytics.trackListingReview(listing.title);}
-    },
-    saveReview: function (listing, review) {
-        OzpAnalytics.trackListingReview(listing.title);
-        ListingApi.saveReview(listing.id, review)
-            .then(function (response) {
-                ListingActions.fetchById(listing.id);
-                ListingActions.fetchReviews(listing);
-                ListingActions.saveReviewCompleted(listing, response);
-            })
-            .fail(ListingActions.saveReviewFailed);
-    },
-    deleteReview: function (listing, review) {
-        ListingApi.deleteReview(listing.id, review.id)
-            .then(function () {
-                ListingActions.fetchById(listing.id);
-                ListingActions.fetchReviews(listing);
-                ListingActions.deleteReviewCompleted(listing, review);
-            })
-            .fail(_.partial(ListingActions.deleteReviewFailed, listing, review));
-    },
-
-    launch: function (listing) {
-        OzpAnalytics.trackEvent('Applications', listing.title);
-    },
-    save: function (data) {
-        var isNew = !data.id;
-
-        if (isNew) { OzpAnalytics.trackListingCreation(data.title); }
-
-        ListingApi
-            .save(data)
-            .then(ListingActions.saveCompleted.bind(null, isNew))
-            .then(ListingActions.listingChangeCompleted)
-            .fail(ListingActions.saveFailed);
-    },
-    reject: function (listingId, description) {
-        ListingApi.rejectListing(listingId, description)
-            .then(ListingActions.rejectCompleted)
-            .then(ListingActions.listingChangeCompleted);
-    },
-    enable: setEnabled.bind(null, true),
-    disable: setEnabled.bind(null, false),
-    approve: function (listing) {
-        OzpAnalytics.trackListingApproval(listing.title);
-        updateListingProperty('approvalStatus', 'APPROVED', listing);
-    },
-    approveByOrg: function (listing) {
-        OzpAnalytics.trackListingOrgApproval(listing.title);
-        updateListingProperty('approvalStatus', 'APPROVED_ORG', listing);
-    },
-    setFeatured: updateListingProperty.bind(null, 'isFeatured')
+    launch: null,
+    save: null,
+    reject: null,
+    enable: null,
+    disable: null,
+    approve: null,
+    approveByOrg: null,
+    setFeatured: null
 });
 
 ListingActions.listingChangeCompleted = Reflux.createAction();
