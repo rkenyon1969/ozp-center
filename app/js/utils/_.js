@@ -18,6 +18,7 @@ module.exports = {
     values: require('lodash/objects/values'),
 
     find: require('lodash/collections/find'),
+    filter: require('lodash/collections/filter'),
     contains: require('lodash/collections/contains'),
     map: require('lodash/collections/map'),
     reduce: require('lodash/collections/reduce'),

@@ -35,7 +35,7 @@ var OwnerInput = React.createClass({
 
             //union of owners and matchedProfiles
             options = owners.concat(
-                _.find(matchedProfiles, p => ownersUsernames.indexOf(p.id) === -1) || []);
+                _.filter(matchedProfiles, p => ownersUsernames.indexOf(p.id) === -1) || []);
 
         return options;
     },
