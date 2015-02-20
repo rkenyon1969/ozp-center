@@ -53,8 +53,9 @@ var Discovery = React.createClass({
                     <form className="navbar-form navbar-left" role="search">
                         <div className="form-group">
                             <i className="fa fa-search"></i>
-                            <input
-                                ref="search" type="text" className="form-control" placeholder="Enter search term" value={ this.state.query }
+                            <input ref="search" type="text" className="form-control"
+                                placeholder="Enter search term"
+                                value={ this.state.queryString || ''}
                                 onChange={ this.onSearchInputChange } />
                         </div>
                     </form>
@@ -83,16 +84,20 @@ var Discovery = React.createClass({
         );
     },
 
+    componentDidUpdate: function(oldProps, oldState) {
+        if (oldState.queryString !== this.state.queryString) {
+            this.search();
+        }
+    },
+
     onStoreChange: function () {
         this.setState(this.getInitialState());
     },
 
-    onSearchInputChange: function () {
+    onSearchInputChange: function (evt) {
         this.setState({
-            queryString: this.refs.search.getDOMNode().value
+            queryString: evt.target.value
         });
-
-        this.search();
     },
 
     isSearching: function () {
@@ -108,16 +113,15 @@ var Discovery = React.createClass({
         this.setState({
             queryString: ''
         });
-        this.search();
     },
 
-    search: function () {
+    search: _.debounce(function () {
         ListingActions.search(
             _.assign({
-                queryString: this.refs.search.getDOMNode().value
+                queryString: this.state.queryString
             }, this.refs.sidebar.state.selectedFilters)
         );
-    },
+    }, 500),
 
     renderFeaturedListings: function () {
         if(!this.state.featured.length) {

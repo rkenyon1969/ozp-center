@@ -92,22 +92,34 @@ ListingActions.fetchById.listen(function (id) {
     ListingApi.getById(id).then(ListingActions.fetchByIdCompleted);
 });
 
+(function() {
+    var mostRecentSearch;
 
-ListingActions.search.listen(function (options) {
-    var queryString = options.queryString;
+    ListingActions.search.listen(function (options) {
+        var queryString = (options.queryString || '').trim();
 
-    // append '*'
-    if (!/\*$/.test(queryString)) {
-        queryString += '*';
-    }
+        // append '*'
+        if (!/["\*]$/.test(queryString)) {
+            queryString += '*';
+        }
 
-    ListingApi
-        .search(
-            Object.assign({}, options, {
-                queryString: queryString
-            })
-        ).then(ListingActions.searchCompleted);
-});
+        if (mostRecentSearch !== queryString) {
+            mostRecentSearch = queryString;
+
+            ListingApi
+                .search(
+                    Object.assign({}, options, {
+                        queryString: queryString
+                    })
+                ).then(function(searchResults) {
+                    //drop out-of-order results
+                    if (mostRecentSearch === queryString) {
+                        ListingActions.searchCompleted(searchResults);
+                    }
+                });
+        }
+    });
+})();
 
 
 ListingActions.fetchChangeLogs.listen(function (listingId) {

@@ -38,6 +38,7 @@ module.exports = {
 
     partial: require('lodash/functions/partial'),
     once: require('lodash/functions/once'),
+    debounce: require('lodash/functions/debounce'),
 
     escape: require('lodash/utilities/escape'),
 
