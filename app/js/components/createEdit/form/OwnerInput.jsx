@@ -19,10 +19,11 @@ var OwnerInput = React.createClass({
 
     getInitialState: () => ({storeData: { profiles: [] }, query: null }),
 
-    shouldComponentUpdate: function() {
-        //Select2 is a touchy, stateful jquery component.  Re-rendering it does not
-        //work as expected
-        return false;
+    shouldComponentUpdate: function(newProps) {
+        var diffOwners = !!_.find(_.zip(newProps.listing.owners, this.props.listing.owners),
+                os => (os[0] || {}).username !== (os[1] || {}).username);
+
+        return diffOwners || newProps.ownerSetter !== this.props.ownerSetter;
     },
 
     getSelect2Data: function(storeData) {
@@ -41,7 +42,8 @@ var OwnerInput = React.createClass({
     },
 
     render: function() {
-        var owners = (this.props.listing.owners || [])
+        var options = this.getSelect2Data(),
+            owners = (this.props.listing.owners || [])
                 .map(o => o.username);
 
         return (
@@ -49,15 +51,18 @@ var OwnerInput = React.createClass({
                 value={ owners }
                 setter={ this.props.ownerSetter }
                 multiple
-                handleQuery={this.handleQuery} />
+                handleQuery={this.handleQuery}
+                options={options} />
 
         );
     },
 
     handleQuery: function(query) {
+        if (!this.state.query || query.term !== this.state.query.term) {
+            this.setState({query: query});
+        }
 
         var userInput = query.term || '';
-        this.setState({query: query});
 
         if (userInput === '') {
             query.callback({ results: this.getSelect2Data() });

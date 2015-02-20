@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var _ = require('../../../utils/_');
 var InputMixin = require('./InputMixin.jsx');
 var Select2Mixin = require('./Select2Mixin');
 
@@ -21,11 +22,8 @@ var Select2Input = React.createClass({
     },
 
     initSelection: function(el, callback) {
-        this.props.handleQuery({
-            callback: function(selection) {
-                callback(selection.results);
-            }
-        });
+        //pass options objects that match list of values
+        callback(_.filter(this.props.options, o => _.contains(this.props.value, o.id)));
     }
 });
 
