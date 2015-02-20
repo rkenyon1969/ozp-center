@@ -225,15 +225,19 @@ div.modal-header > button.close {
     padding-top: 20px;
     padding-bottom: 20px;
 }
-body > div.classBanner:first-of-type {
+body > div.classBanner {
     position: fixed;
-    top: 0px;
-    z-index:100;
+    z-index: 1000000;
+
+    &:first-of-type {
+        top: 0px;
+    }
+
+    &:last-of-type {
+        bottom: 0px;
+    }
 }
-body > div.classBanner:last-of-type {
-    position: fixed;
-    bottom: 0px;
-}
+
 
 .corner-button {
     display: block;
