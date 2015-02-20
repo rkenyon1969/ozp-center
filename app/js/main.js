@@ -14,6 +14,7 @@ require('classification');
 var _ = require('./utils/_');
 var SelfStore = require('ozp-react-commons/stores/SelfStore');
 var ProfileActions = require('ozp-react-commons/actions/ProfileActions');
+var LoadError = require('ozp-react-commons/components/LoadError.jsx');
 var { METRICS_URL } = require('ozp-react-commons/OzoneConfig');
 
 window.jQuery = jQuery;
@@ -38,15 +39,17 @@ var Routes = require('./components/Routes.jsx'),
  */
 SelfStore.listen(_.once(function(profileData) {
     Router.run(routes, function (Handler) {
-        var main = document.getElementById('main');
+        var main = document.getElementById('main'),
+            component;
 
         if (profileData.currentUser) {
-            React.render(<Handler />, main);
+            component = <Handler />;
         }
         else if (profileData.currentUserError) {
-            React.unmountComponentAtNode(main);
-            alert('Something went wrong. Try again!');
+            component = <LoadError error={profileData.currentUserError} />;
         }
+
+        React.render(component, main);
     });
 }));
 
