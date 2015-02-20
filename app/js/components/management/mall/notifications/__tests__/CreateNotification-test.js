@@ -41,7 +41,10 @@ describe('CreateNotification', function () {
         var createNotification = TestUtils.renderIntoDocument(<CreateNotification />);
         var resetSpy = sinon.spy(createNotification, 'onReset');
         var setStateSpy = sinon.spy(createNotification, 'setState');
-        NotificationActions.createNotificationCompleted(createNotification.state.uuid);
+        NotificationActions.createNotificationCompleted(createNotification.state.uuid, {
+            id: Math.random(),
+            message: 'TEST'
+        });
         expect(resetSpy.calledOnce).to.be.ok;
 
         expect(setStateSpy.calledWithMatch({
