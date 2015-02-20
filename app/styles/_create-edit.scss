@@ -58,7 +58,7 @@
         right: 30px;
         top: 20px;
     }
-    
+
     button.tool{
       width: 75px;
     }
@@ -100,4 +100,16 @@
     position: absolute;
     top: 0;
     right: 0;
+}
+
+.create-edit-button {
+    display: none;
+}
+
+button.tool:hover .create-edit-button {
+    display: inline-block;
+}
+
+button.tool:hover i {
+    display: none;
 }

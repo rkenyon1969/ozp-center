@@ -224,12 +224,12 @@ var CreateEditPage = React.createClass({
                 <div className="alert alert-info alert-small" role="alert">All fields are required unless marked as “optional.”</div>
                 <div className="btn-toolbar" role="group">
                     <div className="btn-group" role="group">
-                      <button type="button" className={ classSet(saveBtnClasses) } onClick={ this.onSave }><i className={saveText}></i></button>
-                      { showPreview && <button className="btn btn-default tool" onClick={ this.onPreview }><i className="icon-eye"> </i></button> }
-                      { showSubmit && <button className="btn btn-default tool" onClick={ this.onSubmit }><i className="icon-cloud-upload"> </i></button> }
+                      <button type="button" className={ classSet(saveBtnClasses) } onClick={ this.onSave }><span className="create-edit-button">Save</span><i className={saveText}></i></button>
+                      { showPreview && <button className="btn btn-default tool" onClick={ this.onPreview }><span className="create-edit-button">Preview</span><i className="icon-eye"> </i></button> }
+                      { showSubmit && <button className="btn btn-default tool" onClick={ this.onSubmit }><span className="create-edit-button">Publish</span><i className="icon-cloud-upload"> </i></button> }
                         </div>
                     <div className="btn-group" role="group">
-                    <button type="button" className="btn btn-default" onClick={this.onClose}><i className="icon-layers"> </i> </button>
+                    <button type="button" className="btn btn-default" onClick={this.onClose}><span className="create-edit-button">Back</span><i className="icon-layers"> </i> </button>
                     </div>
                 </div>
             </div>
