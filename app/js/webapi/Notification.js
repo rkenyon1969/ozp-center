@@ -7,7 +7,7 @@ var { PAGINATION_MAX } = require('ozp-react-commons/constants');
 var PaginatedResponse  =require ('./responses/PaginatedResponse');
 
 function parse (json) {
-    json.expiresDate = new Date(json.expiresDate);
+    json.expiresDate = new Date(json.expiresDate.replace('+0000', ''));
     return json;
 }
 
