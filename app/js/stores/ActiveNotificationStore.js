@@ -30,7 +30,7 @@ var ActiveNotificationStore = Reflux.createStore({
     },
 
     onExpireCompleted(notification) {
-        _.remove(_notifications.data, notification);
+        _.remove(_notifications.data, { id: notification.id });
         this.trigger();
     }
 
