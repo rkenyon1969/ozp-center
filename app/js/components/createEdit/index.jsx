@@ -169,10 +169,8 @@ var CreateEditPage = React.createClass({
         },
 
         willTransitionFrom: function (transition, component) {
-            if (component.state.hasChanges) {
+            if (component.state && component.state.hasChanges) {
                 if(!window.confirm('You have unsaved information, are you sure you want to leave this page?')) {
-                    var path = component.props.params.listingId ? '#/edit/' + component.props.params.listingId : '#/edit';
-                    document.location.replace(path);
                     transition.abort(); //TODO: this throws a console warning about calling setState with null
                 }
             }
