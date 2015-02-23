@@ -91,7 +91,8 @@ var Sidebar = React.createClass({
         });
 
         this.setState({
-            selectedFilters: selectedFilters
+            selectedFilters: selectedFilters,
+            queryString: ''
         });
         this.props.onGoHome();
     },
