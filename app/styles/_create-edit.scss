@@ -106,10 +106,15 @@
     display: none;
 }
 
-button.tool:hover .create-edit-button {
-    display: inline-block;
-}
 
-button.tool:hover i {
-    display: none;
+button.tool:hover {
+
+    .create-edit-button {
+        display: inline-block;
+
+        + i {
+            display: none;
+        }
+    }
+
 }
