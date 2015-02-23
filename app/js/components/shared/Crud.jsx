@@ -302,6 +302,17 @@ var Crud = React.createClass({
                 toolbarReload: false,
                 toolbarColumns: false
             },
+            buttons: {
+                add: {
+                    icon: 'icon-square-plus'
+                },
+                edit: {
+                    icon: 'fa fa-pencil'
+                },
+                delete: {
+                    icon: 'fa fa-trash-o'
+                }
+            },
             url : this.props.url,
             parser: (responseText) => {
                 var data = JSON.parse(responseText);
