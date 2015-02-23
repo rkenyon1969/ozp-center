@@ -11,6 +11,7 @@ var { Navigation } = require('react-router');
 
 var NavBar = require('../NavBar/index.jsx');
 var Header = require('../header/index.jsx');
+var OrgStewardModal = require('./OrgStewardModal.jsx');
 var { classSet } = React.addons;
 var State = require('../../mixins/ActiveStateMixin');
 var $ = require('jquery');
@@ -180,7 +181,8 @@ var CreateEditPage = React.createClass({
     getInitialState: function () {
         return {
             scrollToError: false,
-            imageErrors: {screenshots: []}
+            imageErrors: {screenshots: []},
+            showStewards: false
         };
     },
 
@@ -219,6 +221,10 @@ var CreateEditPage = React.createClass({
         var subHeader = (
             <div className="CreateEdit__titlebar row">
                 <h1>{titleText}</h1>
+
+                <button type="button" className="btn btn-default" onClick={this.showStewardsModal}><i className="icon-question"></i></button>
+
+
                 <div className="alert alert-info alert-small" role="alert">All fields are required unless marked as “optional.”</div>
                 <div className="btn-toolbar" role="group">
                     <div className="btn-group" role="group">
@@ -239,6 +245,7 @@ var CreateEditPage = React.createClass({
                 <Header subHeader={subHeader} />
                 <ListingForm ref="form" { ...formProps } />
                 { savingText && <LoadMask message={savingText} /> }
+                { this.state.showStewards && <OrgStewardModal /> }
             </div>
         );
     },
@@ -282,6 +289,10 @@ var CreateEditPage = React.createClass({
 
             this.setState({ scrollToError: false });
         }
+    },
+
+    showStewardsModal: function() {
+        this.setState({ showStewards: true });
     }
 });
 
