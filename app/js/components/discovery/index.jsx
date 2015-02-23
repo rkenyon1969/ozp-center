@@ -57,6 +57,8 @@ var Discovery = React.createClass({
                                 placeholder="Enter search term"
                                 value={ this.state.queryString || ''}
                                 onChange={ this.onSearchInputChange } />
+
+                            <i className="fa fa-times" onClick={this.reset}></i>
                         </div>
                     </form>
                 </Header>
