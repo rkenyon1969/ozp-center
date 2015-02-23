@@ -95,15 +95,22 @@ ListingActions.fetchById.listen(function (id) {
 (function() {
     var mostRecentSearch;
 
+    /**
+     * Add *'s to all of the non-quoted terms that don't already end in a *
+     */
+    function processQuery(queryString) {
+        var matches = queryString.match(/"[^"]*"|\S+/g),
+            processedMatches = matches && matches.map(
+                m => /["\*]$/.test(m) ? m : m + '*'
+            );
+
+        return processedMatches && processedMatches.join(' ');
+    }
+
     ListingActions.search.listen(function (options) {
-        var queryString = (options.queryString || '').trim();
+        var queryString = processQuery((options.queryString || ''));
 
-        // append '*'
-        if (!/["\*]$/.test(queryString)) {
-            queryString += '*';
-        }
-
-        if (mostRecentSearch !== queryString) {
+        if (queryString && mostRecentSearch !== queryString) {
             mostRecentSearch = queryString;
 
             ListingApi
