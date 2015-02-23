@@ -245,7 +245,7 @@ var CreateEditPage = React.createClass({
                 <Header subHeader={subHeader} />
                 <ListingForm ref="form" { ...formProps } />
                 { savingText && <LoadMask message={savingText} /> }
-                { this.state.showStewards && <OrgStewardModal /> }
+                { this.state.showStewards && <OrgStewardModal onHidden={ this.onModalHidden } /> }
             </div>
         );
     },
@@ -293,6 +293,10 @@ var CreateEditPage = React.createClass({
 
     showStewardsModal: function() {
         this.setState({ showStewards: true });
+    },
+
+    onModalHidden: function () {
+        this.setState({ showStewards: false });
     }
 });
 

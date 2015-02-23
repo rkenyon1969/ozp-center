@@ -19,6 +19,25 @@ module.exports = React.createClass({
         );
     },
 
+    componentDidMount: function() {
+    $(this.getDOMNode())
+        .one('shown.bs.modal', () => {
+            if (this.props.onShown) {
+                this.props.onShown();
+            }
+        })
+        .one('hidden.bs.modal', () => {
+            if (this.props.onHidden) {
+                this.props.onHidden();
+            }
+        })
+        .modal({
+            backdrop: 'static',
+            keyboard: false,
+            show: true
+        });
+},
+
     renderStewards: function() {
         var me = this;
         var stewards = [];
@@ -29,14 +48,12 @@ module.exports = React.createClass({
                 }
             });
 
-            stewards.push(
-                <div>
-                <li>{org.title}</li>
+            stewards.push([
+                <li>{org.title}</li>,
                 <ul>
                     { stewardsForOrg }
                 </ul>
-                </div>
-            );
+            ]);
         });
 
         return(
