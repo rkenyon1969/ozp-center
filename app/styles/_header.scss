@@ -34,12 +34,24 @@
                 border: 0;
             }
 
-            > i {
+            > .fa-search {
                 position: absolute;
                 z-index: 1; // to place icon on top of search input box
                 top: 17px;
                 left: 30px;
                 color: $gray-dark;
+            }
+
+            > .fa-times {
+                position: absolute;
+                z-index: 1; // to place icon on top of search input box
+                top: 17px;
+                right: 30px;
+                color: $gray-dark;
+
+                &:hover{
+                    color: $gray-base;
+                }
             }
         }
     }
