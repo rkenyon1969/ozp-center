@@ -17,3 +17,7 @@
 .w2ui-grid .w2ui-grid-body .w2ui-grid-records table tr.w2ui-selected, .w2ui-grid .w2ui-grid-body .w2ui-grid-records table tr td.w2ui-selected {
     background-color: $blue-lighter !important;
 }
+
+.w2ui-toolbar table.w2ui-button .w2ui-tb-image>.icon-square-plus {
+    margin-top: -3px;
+}
