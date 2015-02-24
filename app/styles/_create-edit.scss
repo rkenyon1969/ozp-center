@@ -14,6 +14,15 @@
     border-color: $blue;
 }
 
+#main.create-edit-open {
+    height: 100%;
+
+    & > #App {
+        //subtract child element's top margin due to margin-collapsing
+        height: calc(100% - 149px);
+    }
+}
+
 .create-edit {
     background-color: $gray-lighter;
 
@@ -37,14 +46,13 @@
 
 
 .create-edit-body {
-    display: table;
     width: calc(100% * (11 / 12));
-    height: calc(100% - 149px);
-
-    overflow-y: hidden;
+    height: 100%;
 
     > * {
-        display: table-cell;
+        height: 100%;
+        display: inline-block;
+
         vertical-align: top;
     }
 
@@ -87,6 +95,7 @@
     background-color: $white;
 
     overflow-y: auto;
+    height: 100%;
 
     padding: 15px 20px;
 
