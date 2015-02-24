@@ -173,13 +173,20 @@ var Reminders = React.createClass({
                         View list of organization stewards
                     </a>
                 </p>
-                { this.state.showStewards && <OrgStewardModal /> }
+                {
+                    this.state.showStewards &&
+                    <OrgStewardModal onHidden={this.onStewardModalHidden}/>
+                }
             </section>
         );
     },
 
     showStewardsModal: function() {
         this.setState({ showStewards: true });
+    },
+
+    onStewardModalHidden: function() {
+        this.setState({ showStewards: false });
     }
 });
 
