@@ -8,35 +8,19 @@ var Modal = require('ozp-react-commons/components/Modal.jsx');
 
 module.exports = React.createClass({
 
-
     mixins: [SystemStateMixin],
+
+    propTypes: {
+        onHideen: React.PropTypes.func.isRequired
+    },
 
     render: function () {
         return (
-            <Modal ref="modal" className="StewardsModal" size="small" title="Organization Stewards">
+            <Modal ref="modal" className="StewardsModal" size="small" title="Organization Stewards" onHidden={this.props.onHidden}>
                 { this.renderStewards() }
             </Modal>
         );
     },
-
-    componentDidMount: function() {
-    $(this.getDOMNode())
-        .one('shown.bs.modal', () => {
-            if (this.props.onShown) {
-                this.props.onShown();
-            }
-        })
-        .one('hidden.bs.modal', () => {
-            if (this.props.onHidden) {
-                this.props.onHidden();
-            }
-        })
-        .modal({
-            backdrop: 'static',
-            keyboard: false,
-            show: true
-        });
-},
 
     renderStewards: function() {
         var me = this;
@@ -61,9 +45,5 @@ module.exports = React.createClass({
                 { stewards }
             </ul>
         );
-    },
-
-    componentWillUnmount: function() {
-        this.refs.modal.close();
     }
 });
