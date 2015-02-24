@@ -10,7 +10,6 @@ var { updateListing, save, submit } = require('../../actions/CreateEditActions')
 var { Navigation } = require('react-router');
 
 var NavBar = require('../NavBar/index.jsx');
-var Header = require('../header/index.jsx');
 var OrgStewardModal = require('./OrgStewardModal.jsx');
 var { classSet } = React.addons;
 var State = require('../../mixins/ActiveStateMixin');
@@ -110,7 +109,6 @@ var ListingForm = React.createClass({
         var p = this.getFormComponentProps;
         return (
             <form className="CreateEdit__form">
-                <h2>Basic Listing Information</h2>
                 <TextInput { ...p('title') }/>
                 <Select2Input { ...p('type') } options={ getOptionsForSystemObject(system.types) }/>
                 <Select2Input { ...p('categories') } multiple options={ getOptionsForSystemObject(system.categories) }/>
@@ -156,6 +154,39 @@ var ListingForm = React.createClass({
     }
 });
 
+var Reminders = React.createClass({
+    getInitialState: () => ({ showStewards: false }),
+
+    render: function() {
+        return (
+            <section className="reminders">
+                <h4>Reminders</h4>
+                <p>
+                    <strong>Remember to portion-mark your descriptions!</strong>
+                    <br/>
+                    Listings that are not portion-marked will be rejected.
+                </p>
+                <p className="questions">
+                    <strong>If you have any questions</strong> during the submission process,
+                    please contact your organization's steward.
+                    <a className="stewards-link" onClick={this.showStewardsModal}>
+                        View list of organization stewards
+                    </a>
+                </p>
+                { this.state.showStewards && <OrgStewardModal /> }
+            </section>
+        );
+    },
+
+    showStewardsModal: function() {
+        this.setState({ showStewards: true });
+    }
+});
+
+var ListingFormSidebar = React.createClass({
+    render: () => <aside /> //TODO
+});
+
 var CreateEditPage = React.createClass({
 
     mixins: [ Reflux.connect(CurrentListingStore), Navigation, State ],
@@ -181,8 +212,7 @@ var CreateEditPage = React.createClass({
     getInitialState: function () {
         return {
             scrollToError: false,
-            imageErrors: {screenshots: []},
-            showStewards: false
+            imageErrors: {screenshots: []}
         };
     },
 
@@ -218,34 +248,59 @@ var CreateEditPage = React.createClass({
             }
         );
 
-        var subHeader = (
-            <div className="CreateEdit__titlebar row">
+        var header = (
+            <div className="CreateEdit__titlebar">
                 <h1>{titleText}</h1>
-
-                <button type="button" className="btn btn-default" onClick={this.showStewardsModal}><i className="icon-question"></i></button>
-
-
-                <div className="alert alert-info alert-small" role="alert">All fields are required unless marked as “optional.”</div>
-                <div className="btn-toolbar" role="group">
-                    <div className="btn-group" role="group">
-                      <button type="button" className={ classSet(saveBtnClasses) } onClick={ this.onSave }><span className="create-edit-button">Save</span><i className={saveText}></i></button>
-                      { showPreview && <button className="btn btn-default tool" onClick={ this.onPreview }><span className="create-edit-button">Preview</span><i className="icon-eye"> </i></button> }
-                      { showSubmit && <button className="btn btn-default tool" onClick={ this.onSubmit }><span className="create-edit-button">Publish</span><i className="icon-cloud-upload"> </i></button> }
+                <div className="sub-header">
+                    <strong className="alert alert-info alert-small" role="alert">
+                        All fields are required unless marked as “optional.”
+                    </strong>
+                    <div className="btn-toolbar" role="group">
+                        <div className="btn-group" role="group">
+                            <button type="button" className={ classSet(saveBtnClasses) }
+                                    onClick={ this.onSave }>
+                                <span className="create-edit-button">Save</span>
+                                <i className={saveText}></i>
+                            </button>
+                            {
+                                showPreview &&
+                                <button className="btn btn-default tool"
+                                        onClick={ this.onPreview }>
+                                    <span className="create-edit-button">Preview</span>
+                                    <i className="icon-eye"> </i>
+                                </button>
+                            }
+                            {
+                                showSubmit &&
+                                <button className="btn btn-default tool"
+                                        onClick={ this.onSubmit }>
+                                    <span className="create-edit-button">Publish</span>
+                                    <i className="icon-cloud-upload"> </i>
+                                </button>
+                            }
+                            </div>
+                        <div className="btn-group" role="group">
+                            <button type="button" className="btn btn-default"
+                                    onClick={this.onClose}>
+                                <span className="create-edit-button">Back</span>
+                                <i className="icon-layers"> </i>
+                            </button>
                         </div>
-                    <div className="btn-group" role="group">
-                    <button type="button" className="btn btn-default" onClick={this.onClose}><span className="create-edit-button">Back</span><i className="icon-layers"> </i> </button>
                     </div>
                 </div>
             </div>
         );
 
         return (
-            <div>
+            <div className="create-edit">
                 <NavBar />
-                <Header subHeader={subHeader} />
-                <ListingForm ref="form" { ...formProps } />
+                {header}
+                <section className="create-edit-body">
+                    <ListingFormSidebar />
+                    <ListingForm ref="form" { ...formProps } />
+                    <Reminders />
+                </section>
                 { savingText && <LoadMask message={savingText} /> }
-                { this.state.showStewards && <OrgStewardModal /> }
             </div>
         );
     },
@@ -289,10 +344,6 @@ var CreateEditPage = React.createClass({
 
             this.setState({ scrollToError: false });
         }
-    },
-
-    showStewardsModal: function() {
-        this.setState({ showStewards: true });
     }
 });
 
