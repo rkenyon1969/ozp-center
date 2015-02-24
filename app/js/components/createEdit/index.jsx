@@ -206,6 +206,7 @@ var CreateEditPage = React.createClass({
         var { IN_PROGRESS, REJECTED } = approvalStatus;
         var showSubmit = [IN_PROGRESS, REJECTED].some(s => s === status);
         var showPreview = !!listing.id;
+        var showDelete = !!listing.id;
         var titleText = (this.getParams().listingId ? 'Edit ' : 'Create New ') + 'Listing';
         var saveText = showSave() ? 'fa fa-save' : 'icon-check';
         var savingText = savingMessages[this.state.saveStatus];
@@ -218,6 +219,11 @@ var CreateEditPage = React.createClass({
             }
         );
 
+        var deleteHref = this.makeHref(this.getActiveRoutePath(), this.getParams(), {
+                        listing: listing.id,
+                        action: 'delete'
+        });
+
         var subHeader = (
             <div className="CreateEdit__titlebar row">
                 <h1>{titleText}</h1>
@@ -227,7 +233,8 @@ var CreateEditPage = React.createClass({
                       <button type="button" className={ classSet(saveBtnClasses) } onClick={ this.onSave }><span className="create-edit-button">Save</span><i className={saveText}></i></button>
                       { showPreview && <button className="btn btn-default tool" onClick={ this.onPreview }><span className="create-edit-button">Preview</span><i className="icon-eye"> </i></button> }
                       { showSubmit && <button className="btn btn-default tool" onClick={ this.onSubmit }><span className="create-edit-button">Publish</span><i className="icon-cloud-upload"> </i></button> }
-                        </div>
+                      { showDelete && <a href={deleteHref} className="btn btn-default tool"><span className="create-edit-button">Delete</span><i className="icon-trash"></i></a> }
+                    </div>
                     <div className="btn-group" role="group">
                     <button type="button" className="btn btn-default" onClick={this.onClose}><span className="create-edit-button">Back</span><i className="icon-layers"> </i> </button>
                     </div>

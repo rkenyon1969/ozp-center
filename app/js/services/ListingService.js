@@ -256,4 +256,10 @@ ListingActions.approveByOrg.listen(function (listing) {
     updateListingProperty('approvalStatus', 'APPROVED_ORG', listing);
 });
 
+ListingActions.deleteListing.listen(function (listing) {
+    ListingApi.del(listing.id)
+        .then(ListingActions.deleteListingCompleted)
+        .fail(ListingActions.deleteListingFailed);
+});
+
 ListingActions.setFeatured.listen(updateListingProperty.bind(null, 'isFeatured'));

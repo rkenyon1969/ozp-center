@@ -7,8 +7,9 @@ var Router = require('react-router');
 var Navigation = Router.Navigation;
 var AjaxMixin = require('../../mixins/AjaxMixin');
 
-var ListingApi = require('../../webapi/Listing').ListingApi;
 var GlobalListingStore = require('../../stores/GlobalListingStore');
+var ListingActions = require('../../actions/ListingActions');
+
 var _ = require('../../utils/_');
 
 var DeleteConfirmation = React.createClass({
@@ -67,8 +68,13 @@ var ListingDeleteConfirmation = React.createClass({
     mixins: [ Reflux.ListenerMixin, Navigation, AjaxMixin ],
 
     getInitialState: function () {
-        this.listenTo(GlobalListingStore, this.onStoreChange);
         return this.getState();
+    },
+
+    componentDidMount: function() {
+        this.listenTo(GlobalListingStore, this.onStoreChange);
+        this.listenTo(ListingActions.deleteListingCompleted, this.onDeleteComplete);
+        this.listenTo(ListingActions.deleteListingFailed, this.handleError);
     },
 
     getState: function () {
@@ -79,6 +85,10 @@ var ListingDeleteConfirmation = React.createClass({
 
     onStoreChange: function () {
         this.setState(this.getState());
+    },
+
+    onDeleteComplete: function () {
+        this.close();
     },
 
     render: function () {
@@ -110,9 +120,7 @@ var ListingDeleteConfirmation = React.createClass({
     onDelete: function () {
         var listing = this.getListing();
 
-        ListingApi.del(listing.id)
-            .done(() => this.close())
-            .fail(this.handleError);
+        ListingActions.deleteListing(listing);
     }
 });
 
