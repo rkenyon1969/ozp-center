@@ -221,10 +221,6 @@ var CreateEditPage = React.createClass({
         var subHeader = (
             <div className="CreateEdit__titlebar row">
                 <h1>{titleText}</h1>
-
-                <button type="button" className="btn btn-default" onClick={this.showStewardsModal}><i className="icon-question"></i></button>
-
-
                 <div className="alert alert-info alert-small" role="alert">All fields are required unless marked as “optional.”</div>
                 <div className="btn-toolbar" role="group">
                     <div className="btn-group" role="group">
