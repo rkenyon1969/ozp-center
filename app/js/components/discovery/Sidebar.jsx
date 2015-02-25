@@ -98,18 +98,19 @@ var Sidebar = React.createClass({
     },
 
     handleFilterToggle: function (type, clickedFilter) {
-        var values = this.state.selectedFilters[type] || (this.state.selectedFilters[type] = []);
-        var value = clickedFilter.title;
+        var values = [].concat(this.state.selectedFilters[type] || []),
+            value = clickedFilter.title;
 
         if (_.contains(values, value)) {
-            this.state.selectedFilters[type] = _.without(values, value);
+            values = _.without(values, value);
         }
         else {
-            values.push(value);
+            values = values.concat(value);
         }
 
         this.setState({
-            selectedFilters: this.state.selectedFilters
+            selectedFilters: Object.assign({},
+                this.state.selectedFilters, _.zipObject([type], [values]))
         });
 
         this.props.onFilterChange();
