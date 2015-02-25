@@ -6,7 +6,7 @@ var LoadMask = require('../LoadMask.jsx');
 var { pick, assign } = require('../../utils/_');
 var { approvalStatus } = require('ozp-react-commons/constants');
 var CurrentListingStore = require('../../stores/CurrentListingStore');
-var { updateListing, save, submit } = require('../../actions/CreateEditActions');
+var CreateEditActions = require('../../actions/CreateEditActions');
 var { Navigation } = require('react-router');
 
 var NavBar = require('../NavBar/index.jsx');
@@ -156,23 +156,37 @@ var ListingForm = React.createClass({
     }
 });
 
+var transitionToMyListings = (transition) => {
+    transition.redirect('my-listings');
+};
+
 var CreateEditPage = React.createClass({
 
     mixins: [ Reflux.connect(CurrentListingStore), Navigation, State ],
 
     statics: {
+        PATH: /\/edit\/\d+/,
+
         willTransitionTo: function (transition, params) {
-            transition.wait(CurrentListingStore.loadListing(params.listingId).then(listing => {
-                if (!CurrentListingStore.currentUserCanEdit(listing)) {
-                    transition.redirect('my-listings');
-                }
-            }));
+            var loadListing = CurrentListingStore.loadListing(params.listingId)
+                .done((listing) => {
+                    if (!CurrentListingStore.currentUserCanEdit(listing)) {
+                        transitionToMyListings(transition);
+                    }
+                })
+                .fail(() => transitionToMyListings(transition));
+
+            transition.wait(loadListing);
         },
 
         willTransitionFrom: function (transition, component) {
-            if (component.state && component.state.hasChanges) {
-                if(!window.confirm('You have unsaved information, are you sure you want to leave this page?')) {
-                    transition.abort(); //TODO: this throws a console warning about calling setState with null
+            // display warning if moving away from the create path
+            if (!this.PATH.test(transition.path) && component.state && component.state.hasChanges) {
+                if(window.confirm('You have unsaved information, are you sure you want to leave this page?')) {
+                    CreateEditActions.discard(component.state.listing);
+                }
+                else {
+                    transition.abort();
                 }
             }
         }
@@ -180,10 +194,61 @@ var CreateEditPage = React.createClass({
 
     getInitialState: function () {
         return {
+            listing: null,
+            hasChanges: false,
             scrollToError: false,
             imageErrors: {screenshots: []},
             showStewards: false
         };
+    },
+
+    onSave: function () {
+        CreateEditActions.save();
+        this.setState({ scrollToError: true });
+    },
+
+    onClose: function () {
+        this.transitionTo('my-listings');
+    },
+
+    onPreview: function () {
+        var id = this.state.listing.id;
+        this.transitionTo('edit', { listingId: id }, { listing: id, action: 'preview', tab: 'overview' });
+    },
+
+    onSubmit: function () {
+        CreateEditActions.submit();
+        this.setState({ scrollToError: true });
+    },
+
+    scrollToError: function () {
+        var $target = $('div.form-group.has-error');
+        var $firstFormElement = $(this.refs.form.getDOMNode()).find(':first-child');
+        var $scrollable = $('html, body');
+
+        if ($target[0]) {
+            var scroll = $target.offset().top - $firstFormElement.offset().top;
+
+            $scrollable.animate({
+                scrollTop: scroll
+            }, 'medium');
+
+            this.setState({ scrollToError: false });
+        }
+    },
+
+    showStewardsModal: function() {
+        this.setState({ showStewards: true });
+    },
+
+    onModalHidden: function () {
+        this.setState({ showStewards: false });
+    },
+
+    componentDidUpdate: function () {
+        if (this.state.scrollToError && !this.state.isValid) {
+            this.scrollToError(this.state.firstError);
+        }
     },
 
     render: function () {
@@ -193,13 +258,13 @@ var CreateEditPage = React.createClass({
             return <p>loading...</p>;
         }
 
-        var showSave = () => this.state.hasChanges || !listing.id;
+        var showSave = this.state.hasChanges || !listing.id;
 
         var saveBtnClasses = {
             'btn': true,
             'tool': true,
-            'btn-success': !showSave(),
-            'btn-danger': showSave()
+            'btn-success': !showSave,
+            'btn-danger': showSave
         };
 
         var status = approvalStatus[listing.approvalStatus];
@@ -207,13 +272,17 @@ var CreateEditPage = React.createClass({
         var showSubmit = [IN_PROGRESS, REJECTED].some(s => s === status);
         var showPreview = !!listing.id;
         var titleText = (this.getParams().listingId ? 'Edit ' : 'Create New ') + 'Listing';
-        var saveText = showSave() ? 'fa fa-save' : 'icon-check';
+        var saveText = showSave ? 'fa fa-save' : 'icon-check';
         var savingText = savingMessages[this.state.saveStatus];
 
         var formProps = assign({},
             pick(this.state, ['errors', 'warnings', 'messages', 'firstError']),
-            { system: this.props.system, value: listing, requestChange: updateListing,
-                forceError: !this.state.isValid, currentUser: this.props.currentUser,
+            {
+                system: this.props.system,
+                value: listing,
+                requestChange: CreateEditActions.updateListing,
+                forceError: !this.state.isValid,
+                currentUser: this.props.currentUser,
                 imageErrors: this.state.imageErrors
             }
         );
@@ -244,55 +313,6 @@ var CreateEditPage = React.createClass({
                 { this.state.showStewards && <OrgStewardModal onHidden={ this.onModalHidden } /> }
             </div>
         );
-    },
-
-    componentDidUpdate: function () {
-        if (this.state.scrollToError && !this.state.isValid) {
-            this.scrollToError(this.state.firstError);
-        }
-    },
-
-    onSave: function () {
-        save();
-        this.setState({ scrollToError: true });
-    },
-
-    onClose: function () {
-        this.transitionTo('my-listings');
-    },
-
-    onPreview: function () {
-        var id = this.state.listing.id;
-        this.transitionTo('edit', { listingId: id }, { listing: id, action: 'preview', tab: 'overview' });
-    },
-
-    onSubmit: function () {
-        submit();
-        this.setState({ scrollToError: true });
-    },
-
-    scrollToError: function () {
-        var $target = $('div.form-group.has-error');
-        var $firstFormElement = $(this.refs.form.getDOMNode()).find(':first-child');
-        var $scrollable = $('html, body');
-
-        if ($target[0]) {
-            var scroll = $target.offset().top - $firstFormElement.offset().top;
-
-            $scrollable.animate({
-                scrollTop: scroll
-            }, 'medium');
-
-            this.setState({ scrollToError: false });
-        }
-    },
-
-    showStewardsModal: function() {
-        this.setState({ showStewards: true });
-    },
-
-    onModalHidden: function () {
-        this.setState({ showStewards: false });
     }
 });
 
