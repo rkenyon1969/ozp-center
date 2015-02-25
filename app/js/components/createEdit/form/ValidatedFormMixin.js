@@ -16,7 +16,7 @@ var ValidatedFormMixin = {
             error: (this.props.errors || {})[errPath],
             warning: (this.props.warnings || {})[errPath],
             forceError: this.props.forceError,
-            id: 'inputElement' + '.' + errPath
+            inputId: 'inputElement' + '.' + errPath
         };
     },
 
