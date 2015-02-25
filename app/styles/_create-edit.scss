@@ -207,3 +207,70 @@ button.tool:hover {
     }
 
 }
+
+.create-edit-sidebar {
+    ol {
+        list-style-type: none;
+    }
+
+    label {
+        display: block;
+
+        border: 1px solid $gray-lighter;
+        border-left: 4px solid $white;
+
+        background-color: $white;
+
+        margin-bottom: 0;
+
+        font-weight: inherit;
+
+        > ol {
+            display: none;
+
+            padding-left: 20px;
+        }
+
+        a {
+            color: $gray-darker;
+        }
+    }
+
+    .link-group:first-child > label {
+        border-top-style: none;
+    }
+
+    input {
+        display: none;
+
+        &:checked + label, + label:hover {
+            border-right-color: $white;
+            border-left-color: $blue-dark;
+
+            .group-title {
+                color: $blue-dark;
+            }
+        }
+
+        &:checked + label {
+            > ol {
+                display: block;
+            }
+        }
+    }
+
+    h5 {
+        font-weight: normal;
+        margin: 0;
+    }
+
+    .group-title {
+        display: block;
+
+        padding: 10px;
+
+        &:hover, &:focus, &:active {
+            text-decoration: none;
+        }
+    }
+}

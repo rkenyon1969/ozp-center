@@ -8,7 +8,7 @@ var SidebarLink = React.createClass({
 
         return (
             <li>
-                <a href={link.href} onClick={e => e.stopPropagation()}>{link.title}</a>
+                <a href={link.href}>{link.title}</a>
             </li>
         );
     }
@@ -21,17 +21,28 @@ var SidebarGroup = React.createClass({
 
     render: function() {
         var group = this.props.group,
-            links = group.links.map(l => <SidebarLink key={l.href} link={l} />);
+            links = group.links.map(l => <SidebarLink key={l.href} link={l} />),
+            inputId = `sidebar-${group.title.replace(/\s/g, '-')}`;
 
         return (
-            <li>
-                <label>
-                    <input type="radio" name="sidebar-active-group"/>
-                    <a href={group.href}>{group.title}</a>
+            <li className="link-group">
+                <input id={inputId} ref="radio" type="radio" name="sidebar-active-group"/>
+                <label htmlFor={inputId}>
+                    <h5>
+                        <a className="group-title" onClick={this.onTitleClick} href={group.href}>
+                            {group.title}
+                        </a>
+                    </h5>
                     <ol>{links}</ol>
                 </label>
             </li>
         );
+    },
+
+    onTitleClick: function(e) {
+        //since the title is an <a>, it has its own default action which prevents the
+        //label's default from executing.  So we have to activate the checkbox manually
+        this.refs.radio.getDOMNode().checked = true;
     }
 });
 
