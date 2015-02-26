@@ -14,10 +14,90 @@
     border-color: $blue;
 }
 
-.CreateEdit__form {
-    padding-top: 200px;
+#main.create-edit-open {
+    height: 100%;
 
-    margin-bottom: 20px;
+    & > #App {
+        //subtract child element's top margin due to margin-collapsing
+        height: calc(100% - 149px);
+    }
+}
+
+.create-edit {
+    background-color: $gray-lighter;
+
+    border-top: 4px solid $gray-lightest;
+
+    margin-top: 149px;
+
+    position: relative;
+
+    //deal with #main's padding
+    left: -15px;
+    width: 1260px;
+
+    height: 100%;
+
+    #header {
+        top: 62px;
+        margin-top: 0;
+    }
+}
+
+
+.create-edit-body {
+    width: calc(100% * (11 / 12));
+    height: 100%;
+
+    > * {
+        height: 100%;
+        display: inline-block;
+
+        vertical-align: top;
+    }
+
+    > nav {
+        width: calc(100% * (2 / 11));
+    }
+
+    > .CreateEdit__form {
+        width: calc(100% * (7 / 11));
+    }
+
+    > .reminders {
+        width: calc(100% * (2 / 11));
+    }
+}
+
+.reminders {
+    background-color: $gray-lightest;
+
+    padding: 0 10px;
+
+    font-size: .85em;
+
+    h4 {
+        font-weight: bolder;
+    }
+
+    .stewards-link {
+        display: block;
+
+        cursor: pointer;
+
+        &::after {
+            content: ' >';
+        }
+    }
+}
+
+.CreateEdit__form {
+    background-color: $white;
+
+    overflow-y: auto;
+    height: 100%;
+
+    padding: 15px 20px;
 
     label.input-optional::after {
         content: " (optional)";
@@ -41,6 +121,10 @@
 }
 
 .CreateEdit__titlebar {
+    position: fixed;
+    top: 62px;
+    width: 1260px;
+
     padding: 15px 15px 0 15px;
     background: #ffffff !important;
 
@@ -48,15 +132,20 @@
         margin-top: 0;
     }
 
-    h4 {
-        border-bottom: 4px solid $gray-lighter;
-        padding-bottom: 15px;
+    .sub-header {
+        position: relative;
+        overflow: hidden;
+
+        line-height: 34px;
+
+        &::after {
+            clear: both;
+        }
     }
 
     .btn-toolbar {
-        position: absolute;
-        right: 30px;
-        top: 20px;
+        float: right;
+        margin-right: 100px;
     }
 
     button.tool{
@@ -117,4 +206,80 @@ button.tool:hover {
         }
     }
 
+}
+
+.create-edit-sidebar {
+    ol {
+        list-style-type: none;
+    }
+
+    label {
+        display: block;
+
+        border: 1px solid $gray-lighter;
+        border-left: 4px solid $white;
+
+        background-color: $white;
+
+        margin-bottom: 0;
+
+        font-weight: inherit;
+
+        > ol {
+            display: none;
+
+            padding-left: 20px;
+
+            li {
+                margin: 5px 0;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
+        }
+
+        a {
+            color: $gray-darker;
+        }
+    }
+
+    .link-group:first-child > label {
+        border-top-style: none;
+    }
+
+    input {
+        display: none;
+
+        &:checked + label, + label:hover {
+            border-left-color: $blue-dark;
+
+            .group-title {
+                color: $blue-dark;
+            }
+        }
+
+        &:checked + label {
+            border-right-color: $white;
+
+            > ol {
+                display: block;
+            }
+        }
+    }
+
+    h5 {
+        font-weight: normal;
+        margin: 0;
+    }
+
+    .group-title {
+        display: block;
+
+        padding: 10px;
+
+        &:hover, &:focus, &:active {
+            text-decoration: none;
+        }
+    }
 }
