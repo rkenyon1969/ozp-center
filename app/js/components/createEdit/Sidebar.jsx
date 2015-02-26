@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var _ = require('../../utils/_');
 
 var SidebarLink = React.createClass({
     render: function() {
@@ -14,9 +15,26 @@ var SidebarLink = React.createClass({
     }
 });
 
+var groupStateFromProps = props => ({ active: !!props.initialActive });
+
 var SidebarGroup = React.createClass({
     propTypes: {
-        group: React.PropTypes.object.isRequired
+        group: React.PropTypes.object.isRequired,
+        initialActive: React.PropTypes.bool
+    },
+
+    getInitialState: function() {
+        return groupStateFromProps(this.props);
+    },
+
+    componentWillReceiveProps: function(newProps) {
+        this.setState(groupStateFromProps(newProps));
+    },
+
+    shouldComponentUpdate: function(newProps, newState) {
+        return !(_.isEqual(this.props.group, newProps.group) &&
+                this.props.initialActive === newProps.initialActive &&
+                this.state.active === newState.active);
     },
 
     render: function() {
@@ -26,7 +44,9 @@ var SidebarGroup = React.createClass({
 
         return (
             <li className="link-group">
-                <input id={inputId} ref="radio" type="radio" name="sidebar-active-group"/>
+                <input id={inputId} ref="radio" type="radio"
+                    name="sidebar-active-group" checked={this.state.active}
+                    onChange={this.onCheckboxChange}/>
                 <label htmlFor={inputId}>
                     <h5>
                         <a className="group-title" onClick={this.onTitleClick} href={group.href}>
@@ -42,7 +62,11 @@ var SidebarGroup = React.createClass({
     onTitleClick: function(e) {
         //since the title is an <a>, it has its own default action which prevents the
         //label's default from executing.  So we have to activate the checkbox manually
-        this.refs.radio.getDOMNode().checked = true;
+        this.setState({ active: true });
+    },
+
+    onCheckboxChange: function(e) {
+        this.setState({ active: e.target.checked });
     }
 });
 
@@ -52,18 +76,35 @@ var Sidebar = React.createClass({
          * should be an array of objects of the form
          * {
          *     title: "Listing Details",
+         *     id: "id",
          *     href="#section",
          *     links: [{
          *          title: "Version Number",
+         *          id: "something-id",
          *          href: "#something"
          *     }]
          * }
          */
-        groups: React.PropTypes.array.isRequired
+        groups: React.PropTypes.array.isRequired,
+        activeId: React.PropTypes.string
+    },
+
+    shouldComponentUpdate: function(newProps) {
+        return !_.isEqual(this.props.groups, newProps.groups) ||
+            this.props.activeId !== newProps.activeId;
     },
 
     render: function() {
-        var groupCmps = this.props.groups.map(g => <SidebarGroup key={g.href} group={g} />);
+        function renderGroup(activeId, group) {
+            var active = activeId &&
+                (activeId === group.id ||
+                    !!_.find(group.links, l => l.id === activeId));
+
+            return <SidebarGroup key={group.id} group={group}
+                initialActive={active} />;
+        }
+
+        var groupCmps = this.props.groups.map(renderGroup.bind(null, this.props.activeId));
 
         return (
             <nav className="create-edit-sidebar">

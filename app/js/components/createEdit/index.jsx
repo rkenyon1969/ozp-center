@@ -320,9 +320,9 @@ var ListingForm = React.createClass({
     },
 
     componentDidUpdate: function(prevProps, prevState) {
-        var elId = this.state.currentNavTarget;
+        var elId = this.state.currentNavTarget || formLinks.basicInformation.id;
 
-        if (elId && prevState.currentNavTarget !== elId) {
+        if (prevState.currentNavTarget !== elId) {
             var element = $(`#${elId}`),
                 form = $(this.getDOMNode()),
                 firstFormChild = form.find(':first-child');
@@ -523,8 +523,13 @@ var CreateEditPage = React.createClass({
 
                 return {
                     title: link.title,
+                    id: link.id,
                     href: makeFormLink(link.id),
-                    links: g.links.map(l => ({ title: l.title, href: makeFormLink(l.id)}))
+                    links: g.links.map(l => ({
+                        title: l.title,
+                        id: l.id,
+                        href: makeFormLink(l.id)
+                    }))
                 };
             });
 
@@ -533,7 +538,7 @@ var CreateEditPage = React.createClass({
                 <NavBar />
                 {header}
                 <section className="create-edit-body">
-                    <Sidebar groups={links} />
+                    <Sidebar groups={links} activeId={this.getQuery().el}/>
                     <ListingForm ref="form" { ...formProps } />
                     <Reminders />
                 </section>
