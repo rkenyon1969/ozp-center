@@ -99,7 +99,7 @@ ListingActions.fetchById.listen(function (id) {
      * Add *'s to all of the non-quoted terms that don't already end in a *
      */
     function processQuery(queryString) {
-        var matches = queryString.match(/"[^"]*"|\S+/g),
+        var matches = queryString && queryString.match(/"[^"]*"|\S+/g),
             processedMatches = matches && matches.map(
                 m => /["\*]$/.test(m) ? m : m + '*'
             );
@@ -108,19 +108,19 @@ ListingActions.fetchById.listen(function (id) {
     }
 
     ListingActions.search.listen(function (options) {
-        var queryString = processQuery((options.queryString || ''));
+        var queryString = processQuery((options.queryString)) || '',
+            apiOptions = Object.assign({}, options, {
+                queryString: queryString
+            });
 
-        if (queryString && mostRecentSearch !== queryString) {
-            mostRecentSearch = queryString;
+        //deep object comparison
+        if (!_.isEqual(apiOptions, mostRecentSearch)) {
+            mostRecentSearch = apiOptions;
 
-            ListingApi
-                .search(
-                    Object.assign({}, options, {
-                        queryString: queryString
-                    })
-                ).then(function(searchResults) {
+            ListingApi.search(apiOptions)
+                .then(function(searchResults) {
                     //drop out-of-order results
-                    if (mostRecentSearch === queryString) {
+                    if (_.isEqual(mostRecentSearch, apiOptions)) {
                         ListingActions.searchCompleted(searchResults);
                     }
                 });
