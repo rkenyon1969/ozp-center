@@ -86,7 +86,8 @@ var MyListings = React.createClass({
 
     mixins: [
         Router.State,
-        Reflux.listenTo(ListingActions.fetchOwnedListingsCompleted, 'onStoreChanged')
+        Reflux.listenTo(ListingActions.fetchOwnedListingsCompleted, 'onStoreChanged'),
+        Reflux.listenTo(ListingActions.deleteListingCompleted, 'onStoreChanged')
     ],
 
     getListings: function () {

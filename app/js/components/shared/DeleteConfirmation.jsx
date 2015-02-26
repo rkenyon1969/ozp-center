@@ -6,6 +6,7 @@ var Modal = require('ozp-react-commons/components/Modal.jsx');
 var Router = require('react-router');
 var Navigation = Router.Navigation;
 var AjaxMixin = require('../../mixins/AjaxMixin');
+var ActiveStateMixin = require('../../mixins/ActiveStateMixin');
 
 var GlobalListingStore = require('../../stores/GlobalListingStore');
 var ListingActions = require('../../actions/ListingActions');
@@ -65,7 +66,7 @@ var ListingDeleteConfirmation = React.createClass({
         listing: React.PropTypes.string.isRequired
     },
 
-    mixins: [ Reflux.ListenerMixin, Navigation, AjaxMixin ],
+    mixins: [ Reflux.ListenerMixin, Navigation, AjaxMixin, ActiveStateMixin ],
 
     getInitialState: function () {
         return this.getState();
@@ -111,10 +112,13 @@ var ListingDeleteConfirmation = React.createClass({
 
     close: function () {
         this.refs.modal.close();
+        if (this.getActiveRoute().name === 'edit') {
+            this.transitionTo('my-listings');
+        }
     },
 
     onHidden: function () {
-        this.goBack();
+        this.transitionTo(this.getActiveRoute().name);
     },
 
     onDelete: function () {

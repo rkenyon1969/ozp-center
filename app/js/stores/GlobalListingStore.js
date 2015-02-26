@@ -8,7 +8,6 @@ var Listing = require('../webapi/Listing').Listing;
 var _listingsCache = {};
 var _listingsByOwnerCache = {};
 var _allListings = [];
-// var _changelogs = [];
 var _changeLogsCache = {};
 var _reviewsCache = {};
 
@@ -79,6 +78,19 @@ var GlobalListingStore = Reflux.createStore({
             updateCache([new Listing(data)]);
             this.trigger();
         });
+        this.listenTo(ListingActions.deleteListingCompleted, function (data) {
+            var listing = _listingsCache[data.id];
+
+            listing.owners.forEach(function (owner) {
+                var ownedListings = _listingsByOwnerCache[owner.username].filter(function (item) {
+                    return item.id !== listing.id;
+                });
+                _listingsByOwnerCache[owner.username] = ownedListings;
+            });
+
+            this.trigger();
+        });
+
     },
 
     getById: function (id) {

@@ -258,7 +258,8 @@ ListingActions.approveByOrg.listen(function (listing) {
 
 ListingActions.deleteListing.listen(function (listing) {
     ListingApi.del(listing.id)
-        .then(ListingActions.deleteListingCompleted)
+        .then(ListingActions.deleteListingCompleted.bind(null, listing))
+        .then(ListingActions.listingChangeCompleted)
         .fail(ListingActions.deleteListingFailed);
 });
 
