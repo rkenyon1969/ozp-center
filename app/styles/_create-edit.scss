@@ -229,6 +229,14 @@ button.tool:hover {
             display: none;
 
             padding-left: 20px;
+
+            li {
+                margin: 5px 0;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
         }
 
         a {
@@ -244,7 +252,6 @@ button.tool:hover {
         display: none;
 
         &:checked + label, + label:hover {
-            border-right-color: $white;
             border-left-color: $blue-dark;
 
             .group-title {
@@ -253,6 +260,8 @@ button.tool:hover {
         }
 
         &:checked + label {
+            border-right-color: $white;
+
             > ol {
                 display: block;
             }
