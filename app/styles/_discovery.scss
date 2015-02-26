@@ -48,7 +48,7 @@
 
         &.active {
             color: $link-color;
-            border-left-color: $link-color;
+            border-left-color: $link-color !important;
         }
     }
 

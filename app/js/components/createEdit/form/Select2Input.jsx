@@ -16,6 +16,7 @@ var Select2Input = React.createClass({
         return {
             data: this.props.options || [],
             multiple: !!this.props.multiple,
+            separator: this.props.separator || "|",
             query: this.props.handleQuery,
             initSelection: this.props.handleQuery ? this.initSelection : undefined
         };
