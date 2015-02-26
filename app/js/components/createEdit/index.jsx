@@ -167,27 +167,22 @@ var CreateEditPage = React.createClass({
     statics: {
         PATH: /\/edit\/\d+/,
 
-        willTransitionTo: function (transition, params) {
-            var loadListing = CurrentListingStore.loadListing(params.listingId)
+        willTransitionTo: function (transition, params, query, callback) {
+            CurrentListingStore.loadListing(params.listingId)
                 .done((listing) => {
-                    if (!CurrentListingStore.currentUserCanEdit(listing)) {
+                    CurrentListingStore.currentUserCanEdit(listing) ?
+                        callback() :
                         transitionToMyListings(transition);
-                    }
                 })
                 .fail(() => transitionToMyListings(transition));
-
-            transition.wait(loadListing);
         },
 
         willTransitionFrom: function (transition, component) {
             // display warning if moving away from the create path
             if (!this.PATH.test(transition.path) && component.state && component.state.hasChanges) {
-                if(window.confirm('You have unsaved information, are you sure you want to leave this page?')) {
-                    CreateEditActions.discard(component.state.listing);
-                }
-                else {
+                window.confirm('You have unsaved information, are you sure you want to leave this page?') ?
+                    CreateEditActions.discard(component.state.listing) :
                     transition.abort();
-                }
             }
         }
     },
