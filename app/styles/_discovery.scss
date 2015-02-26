@@ -48,13 +48,18 @@
 
         &.active {
             color: $link-color;
-            border-left-color: $link-color !important;
+            border-left-color: $link-color;
         }
     }
 
     .sidebar {
         li {
             border-left: transparent 4px solid;
+            
+            &.active {
+                color: $link-color;
+                border-left-color: $link-color;
+            }
         }
     }
 
