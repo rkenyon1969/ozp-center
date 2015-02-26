@@ -5,7 +5,7 @@
     "bootstrap-sass": {
       "version": "3.3.1",
       "from": "../../../../tmp/npm-7802-0931989f/git-cache-c82ef63410ff/f7af9424caf977e0880273c837cc40bf979b9101",
-      "resolved": "git://github.com/ozone-development/bootstrap-sass#f7af9424caf977e0880273c837cc40bf979b9101"
+      "resolved": "git://github.com/ozone-development/bootstrap-sass#bb8b675447fc1a61df207e0d444de4ccc6d4e21c"
     },
     "bower": {
       "version": "1.3.12",
@@ -7753,7 +7753,7 @@
     "ozp-react-commons": {
       "version": "0.1.1",
       "from": "../../../../tmp/npm-10795-58e5ce58/git-cache-1b35d3c128f9/c0e4536b688d4ffe8a650b5064e45fcdbab6e76d",
-      "resolved": "git://github.com/ozone-development/ozp-react-commons#c0e4536b688d4ffe8a650b5064e45fcdbab6e76d",
+      "resolved": "git://github.com/ozone-development/ozp-react-commons#b4200464c69b3e5472829b5d68e95bf6a4aadaf9",
       "dependencies": {
         "es5-shim": {
           "version": "4.1.0",

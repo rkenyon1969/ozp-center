@@ -30,7 +30,7 @@ var ImageInput = React.createClass({
             helpOrErrorText = this.props.serverError || this.props.help;
 
         return (
-            <div className={ this.getClasses() }>
+            <div id={this.props.id} className={ this.getClasses() }>
                 <label htmlFor={ this.props.id } className={labelClasses}>
                     { this.props.label }
                 </label>

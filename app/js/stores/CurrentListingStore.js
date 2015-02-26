@@ -179,6 +179,8 @@ var CurrentListingStore = createStore({
             throw 'propertyPath needs to be an array with non zero length';
         }
 
+        _listing = cloneDeep(_listing);
+
         updateValue(_listing, propertyPath, value);
 
         if (imagePropertyPaths.indexOf(_.last(propertyPath)) !== -1){
@@ -399,7 +401,7 @@ var CurrentListingStore = createStore({
             _listing[listingIconPropertyUrlMap.largeIcon] = largeIconResponse._links.self.href;
         }
         if (bannerIconResponse) {
-            _listing.banner = null;
+            _listing.bannerIcon = null;
             _listing.bannerIconId = bannerIconResponse.id;
             _listing[listingIconPropertyUrlMap.bannerIcon] =
                 bannerIconResponse._links.self.href;

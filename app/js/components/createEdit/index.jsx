@@ -2,6 +2,7 @@
 
 var React = require('react');
 var Reflux = require('reflux');
+var _ = require('../../utils/_');
 var LoadMask = require('../LoadMask.jsx');
 var { pick, assign } = require('../../utils/_');
 var { approvalStatus } = require('ozp-react-commons/constants');
@@ -10,7 +11,7 @@ var { updateListing, save, submit } = require('../../actions/CreateEditActions')
 var { Navigation } = require('react-router');
 
 var NavBar = require('../NavBar/index.jsx');
-var Header = require('../header/index.jsx');
+var Sidebar = require('./Sidebar.jsx');
 var OrgStewardModal = require('./OrgStewardModal.jsx');
 var { classSet } = React.addons;
 var State = require('../../mixins/ActiveStateMixin');
@@ -31,6 +32,146 @@ var savingMessages = {
     images: 'Uploading Images...',
     listing: 'Saving Listing...'
 };
+
+//description of links for the sidebar
+var formLinks = {
+    basicInformation: {
+        title: 'Basic Information',
+        id: 'create-edit-basic-information'
+    },
+    title: {
+        title: 'Name',
+        id: 'create-edit-name'
+    },
+    type: {
+        title: 'Listing Type',
+        id: 'create-edit-type'
+    },
+    categories: {
+        title: 'Categories',
+        id: 'create-edit-categories'
+    },
+    tags: {
+        title: 'Tags',
+        id: 'create-edit-tags'
+    },
+    description: {
+        title: 'Full Description',
+        id: 'create-edit-full-description'
+    },
+    descriptionShort: {
+        title: 'Short Description',
+        id: 'create-edit-short-description'
+    },
+    listingDetails: {
+        title: 'Listing Details',
+        id: 'create-edit-listing-details'
+    },
+    versionNumber: {
+        title: 'Version Number',
+        id: 'create-edit-version-number'
+    },
+    launchUrl: {
+        title: 'Listing URL',
+        id: 'create-edit-listing-url'
+    },
+    requirements: {
+        title: 'Usage Requirements',
+        id: 'create-edit-usage-requirements'
+    },
+    whatsNew: {
+        title: "What's New",
+        id: 'create-edit-whats-new'
+    },
+    intents: {
+        title: 'Intents',
+        id: 'create-edit-intents'
+    },
+    resources: {
+        title: 'Resources',
+        id: 'create-edit-resources'
+    },
+    graphics: {
+        title: 'Graphics',
+        id: 'create-edit-graphics'
+    },
+    smallIcon: {
+        title: 'Small Icon',
+        id: 'create-edit-small-icon'
+    },
+    largeIcon: {
+        title: 'Large Icon',
+        id: 'create-edit-large-icon'
+    },
+    bannerIcon: {
+        title: 'Small Banner',
+        id: 'create-edit-small-banner'
+    },
+    featuredBannerIcon: {
+        title: 'Large Banner',
+        id: 'create-edit-large-banner'
+    },
+    screenshots: {
+        title: 'Screenshots',
+        id: 'create-edit-screenshots'
+    },
+    ownersAndContacts: {
+        title: 'Owners & Contacts',
+        id: 'create-edit-owners-contacts'
+    },
+    orgs: {
+        title: 'Associated Organization',
+        id: 'create-edit-orgs'
+    },
+    owners: {
+        title: 'Owners',
+        id: 'create-edit-owners'
+    },
+    contacts: {
+        title: 'Contacts',
+        id: 'create-edit-contacts'
+    }
+};
+
+var formLinkGroups = [{
+    link: formLinks.basicInformation,
+    links: [
+        formLinks.title,
+        formLinks.type,
+        formLinks.categories,
+        formLinks.tags,
+        formLinks.description,
+        formLinks.descriptionShort
+    ]
+}, {
+    link: formLinks.listingDetails,
+    links: [
+        formLinks.versionNumber,
+        formLinks.launchUrl,
+        formLinks.requirements,
+        formLinks.whatsNew,
+        formLinks.intents
+    ]
+}, {
+    link: formLinks.resources,
+    links: []
+}, {
+    link: formLinks.graphics,
+    links: [
+        formLinks.smallIcon,
+        formLinks.largeIcon,
+        formLinks.bannerIcon,
+        formLinks.featuredBannerIcon,
+        formLinks.screenshots
+    ]
+}, {
+    link: formLinks.ownersAndContacts,
+    links: [
+        formLinks.orgs,
+        formLinks.owners,
+        formLinks.contacts
+    ]
+}];
 
 function getOptionsForSystemObject (items) {
     return items.map(item => {
@@ -95,7 +236,9 @@ var ContactForm = React.createClass({
 });
 
 var ListingForm = React.createClass({
-    mixins: [ ValidatedFormMixin ],
+    mixins: [ ValidatedFormMixin, State ],
+
+    getInitialState: () => ({ currentNavTarget: null }),
 
     render: function () {
         var listing = this.props.value;
@@ -108,51 +251,127 @@ var ListingForm = React.createClass({
         };
 
         var p = this.getFormComponentProps;
+        var f = formLinks;
         return (
             <form className="CreateEdit__form">
-                <h2>Basic Listing Information</h2>
-                <TextInput { ...p('title') }/>
-                <Select2Input { ...p('type') } options={ getOptionsForSystemObject(system.types) }/>
-                <Select2Input { ...p('categories') } multiple options={ getOptionsForSystemObject(system.categories) }/>
-                <Select2TagInput { ...p('tags') } multiple/>
-                <TextAreaInput { ...p('description') } rows="6"/>
-                <TextAreaInput { ...p('descriptionShort') } rows="3"/>
+                <a id={f.basicInformation.id} />
+                <TextInput id={f.title.id} { ...p('title') }/>
+                <Select2Input id={f.type.id} { ...p('type') }
+                    options={ getOptionsForSystemObject(system.types) }/>
+                <Select2Input id={f.categories.id} { ...p('categories') } multiple
+                    options={ getOptionsForSystemObject(system.categories) }/>
+                <Select2TagInput id={f.tags.id} { ...p('tags') } multiple/>
+                <TextAreaInput id={f.description.id} { ...p('description') } rows="6"/>
+                <TextAreaInput id={f.descriptionShort.id} { ...p('descriptionShort') } rows="3"/>
 
-                <h2>Listing Details</h2>
-                <TextInput { ...p('versionName') }/>
-                <TextInput { ...p('launchUrl') }/>
-                <TextAreaInput { ...p('requirements') } rows="5"/>
-                <TextAreaInput { ...p('whatIsNew') } rows="3" optional/>
-                <Select2Input { ...p('intents') }  multiple options={
+                <h2 id={f.listingDetails.id} >Listing Details</h2>
+                <TextInput id={f.versionNumber.id} { ...p('versionName') }/>
+                <TextInput id={f.launchUrl.id} { ...p('launchUrl') }/>
+                <TextAreaInput id={f.requirements.id} { ...p('requirements') } rows="5"/>
+                <TextAreaInput id={f.whatsNew.id} { ...p('whatIsNew') } rows="3" optional/>
+                <Select2Input id={f.intents.id} { ...p('intents') }  multiple options={
                     this.props.system.intents.map(intent => {
                         var val = intent.type + '/' + intent.action;
                         return { id: val, text: val };
                     })
                 }/>
-                <ListInput { ...this.getSubFormProps('docUrls') } itemForm={ ResourceForm } optional/>
+                <ListInput id={f.resources.id} { ...this.getSubFormProps('docUrls') }
+                    itemForm={ ResourceForm } optional/>
 
-                <h2>Graphics</h2>
-                <ImageInput { ...p('smallIcon') }
+                <h2 id={f.graphics.id}>Graphics</h2>
+                <ImageInput id={f.smallIcon.id} { ...p('smallIcon') }
                     imageUri={this.props.value.imageSmallUrl}
                     serverError={this.props.imageErrors.smallIcon} />
-                <ImageInput { ...p('largeIcon') }
+                <ImageInput id={f.largeIcon.id} { ...p('largeIcon') }
                     imageUri={this.props.value.imageMediumUrl}
                     serverError={this.props.imageErrors.largeIcon} />
-                <ImageInput { ...p('bannerIcon') }
+                <ImageInput id={f.bannerIcon.id} { ...p('bannerIcon') }
                     imageUri={this.props.value.imageLargeUrl}
                     serverError={this.props.imageErrors.bannerIcon} />
-                <ImageInput { ...p('featuredBannerIcon') }
+                <ImageInput id={f.featuredBannerIcon.id} { ...p('featuredBannerIcon') }
                     imageUri={this.props.value.imageXlargeUrl}
                     serverError={this.props.imageErrors.featuredBannerIcon} />
 
-                <ListInput { ...this.getSubFormProps('screenshots') } itemForm={ ScreenshotForm }/>
+                <ListInput id={f.screenshots.id} { ...this.getSubFormProps('screenshots') }
+                    itemForm={ ScreenshotForm }/>
 
-                <h2>Owner Information and Contacts</h2>
-                <Select2Input { ...p('agency') } options={ getOptionsForSystemObject(system.organizations) }/>
-                <OwnerInput { ...p('owners') } listing={listing} ownerSetter={ownerSetter} />
-                <ListInput { ...this.getSubFormProps('contacts') } itemForm={ ContactForm }/>
+                <h2 id={f.ownersAndContacts.id}>Owner Information and Contacts</h2>
+                <Select2Input id={f.orgs.id} { ...p('agency') }
+                    options={ getOptionsForSystemObject(system.organizations) }/>
+                <OwnerInput id={f.owners.id} { ...p('owners') } listing={listing}
+                    ownerSetter={ownerSetter} />
+                <ListInput id={f.contacts.id} { ...this.getSubFormProps('contacts') }
+                    itemForm={ ContactForm }/>
             </form>
         );
+    },
+
+    componentWillReceiveProps: function() {
+        this.setState({ currentNavTarget: this.getQuery().el });
+    },
+
+    componentDidMount: function() {
+        this.setState({ currentNavTarget: this.getQuery().el });
+    },
+
+    shouldComponentUpdate: function(newProps, newState) {
+        return (!_.isEqual(newProps, this.props) ||
+                newState.currentNavTarget !== this.state.currentNavTarget);
+    },
+
+    componentDidUpdate: function(prevProps, prevState) {
+        var elId = this.state.currentNavTarget || formLinks.basicInformation.id;
+
+        if (prevState.currentNavTarget !== elId) {
+            var element = $(`#${elId}`),
+                form = $(this.getDOMNode()),
+                firstFormChild = form.find(':first-child');
+
+            if (element) {
+                var elementOffset = element.offset().top,
+                    formOffset = firstFormChild.offset().top;
+
+                form.animate({
+                    scrollTop: elementOffset - formOffset
+                });
+            }
+        }
+    }
+});
+
+var Reminders = React.createClass({
+    getInitialState: () => ({ showStewards: false }),
+
+    render: function() {
+        return (
+            <section className="reminders">
+                <h4>Reminders</h4>
+                <p>
+                    <strong>Remember to portion-mark your descriptions!</strong>
+                    <br/>
+                    Listings that are not portion-marked will be rejected.
+                </p>
+                <p className="questions">
+                    <strong>If you have any questions</strong> during the submission process,
+                    please contact your organizations steward.
+                    <a className="stewards-link" onClick={this.showStewardsModal}>
+                        View list of organization stewards
+                    </a>
+                </p>
+                {
+                    this.state.showStewards &&
+                    <OrgStewardModal onHidden={this.onStewardModalHidden}/>
+                }
+            </section>
+        );
+    },
+
+    showStewardsModal: function() {
+        this.setState({ showStewards: true });
+    },
+
+    onStewardModalHidden: function() {
+        this.setState({ showStewards: false });
     }
 });
 
@@ -162,27 +381,62 @@ var CreateEditPage = React.createClass({
 
     statics: {
         willTransitionTo: function (transition, params) {
-            transition.wait(CurrentListingStore.loadListing(params.listingId).then(listing => {
-                if (!CurrentListingStore.currentUserCanEdit(listing)) {
+            function checkPermission() {
+                if (!CurrentListingStore.currentUserCanEdit()) {
                     transition.redirect('my-listings');
                 }
-            }));
+            }
+
+            var listingId = params.listingId === undefined ? undefined :
+                    parseInt(params.listingId, 10),
+                loadedListing = CurrentListingStore.getDefaultData().listing;
+
+            if (loadedListing && loadedListing.id === listingId) {
+                checkPermission();
+            }
+            else {
+                transition.wait(CurrentListingStore.loadListing(listingId)
+                        .then(checkPermission));
+            }
         },
 
         willTransitionFrom: function (transition, component) {
-            if (component.state && component.state.hasChanges) {
-                if(!window.confirm('You have unsaved information, are you sure you want to leave this page?')) {
-                    transition.abort(); //TODO: this throws a console warning about calling setState with null
+            var stripQuery = path => path.replace(/\?.*/, ''),
+                currentPathBase = stripQuery(component.getPath()),
+                newPathBase = stripQuery(transition.path);
+
+            //if we are actually moving away from this page, and we have changes
+            if (currentPathBase !== newPathBase &&
+                    component.state && component.state.hasChanges) {
+                var conf = window.confirm( 'You have unsaved information, are you sure ' +
+                        'you want to leave this page?');
+
+                if (!conf) {
+                    //TODO: this throws a console warning about calling setState with null
+                    transition.abort();
                 }
             }
         }
     },
 
+    //HACK: need different height/overflow styling on the parent elements of this page,
+    //in order to get the form to be the only scrollable element
+    componentWillMount: function() {
+        var main = $('#main');
+
+        main.addClass('create-edit-open');
+    },
+
+    componentDidUnmount: function() {
+        var main = $('#main');
+
+        main.removeClass('create-edit-open');
+    },
+
     getInitialState: function () {
         return {
             scrollToError: false,
-            imageErrors: {screenshots: []},
-            showStewards: false
+            imageErrors: {screenshots: []}
         };
     },
 
@@ -210,6 +464,7 @@ var CreateEditPage = React.createClass({
         var titleText = (this.getParams().listingId ? 'Edit ' : 'Create New ') + 'Listing';
         var saveText = showSave() ? 'fa fa-save' : 'icon-check';
         var savingText = savingMessages[this.state.saveStatus];
+        var idString = listing ? listing.id ? listing.id.toString() : '' : '';
 
         var formProps = assign({},
             pick(this.state, ['errors', 'warnings', 'messages', 'firstError']),
@@ -224,31 +479,84 @@ var CreateEditPage = React.createClass({
                         action: 'delete'
         });
 
-        var subHeader = (
-            <div className="CreateEdit__titlebar row">
+
+        var header = (
+            <div className="CreateEdit__titlebar">
                 <h1>{titleText}</h1>
-                <div className="alert alert-info alert-small" role="alert">All fields are required unless marked as “optional.”</div>
-                <div className="btn-toolbar" role="group">
-                    <div className="btn-group" role="group">
-                      <button type="button" className={ classSet(saveBtnClasses) } onClick={ this.onSave }><span className="create-edit-button">Save</span><i className={saveText}></i></button>
-                      { showPreview && <button className="btn btn-default tool" onClick={ this.onPreview }><span className="create-edit-button">Preview</span><i className="icon-eye"> </i></button> }
-                      { showSubmit && <button className="btn btn-default tool" onClick={ this.onSubmit }><span className="create-edit-button">Publish</span><i className="icon-cloud-upload"> </i></button> }
-                      { showDelete && <a href={deleteHref} className="btn btn-default tool"><span className="create-edit-button">Delete</span><i className="icon-trash"></i></a> }
-                    </div>
-                    <div className="btn-group" role="group">
-                    <button type="button" className="btn btn-default" onClick={this.onClose}><span className="create-edit-button">Back</span><i className="icon-layers"> </i> </button>
+                <div className="sub-header">
+                    <strong className="alert alert-info alert-small" role="alert">
+                        All fields are required unless marked as “optional.”
+                    </strong>
+                    <div className="btn-toolbar" role="group">
+                        <div className="btn-group" role="group">
+                            <button type="button" className={ classSet(saveBtnClasses) }
+                                    onClick={ this.onSave }>
+                                <span className="create-edit-button">Save</span>
+                                <i className={saveText}></i>
+                            </button>
+                            {
+                                showPreview &&
+                                <button className="btn btn-default tool"
+                                        onClick={ this.onPreview }>
+                                    <span className="create-edit-button">Preview</span>
+                                    <i className="icon-eye"> </i>
+                                </button>
+                            }
+                            {
+                                showSubmit &&
+                                <button className="btn btn-default tool"
+                                        onClick={ this.onSubmit }>
+                                    <span className="create-edit-button">Publish</span>
+                                    <i className="icon-cloud-upload"> </i>
+                                </button>
+                            }
+                            {
+                                showDelete &&
+                                <a href={deleteHref} className="btn btn-default tool">
+                                    <span className="create-edit-button">Delete</span>
+                                    <i className="icon-trash"></i>
+                                </a>
+                            }
+                            </div>
+                        <div className="btn-group" role="group">
+                            <button type="button" className="btn btn-default"
+                                    onClick={this.onClose}>
+                                <span className="create-edit-button">Back</span>
+                                <i className="icon-layers"> </i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         );
 
+        var makeFormLink = elId => `#/edit/${idString}?el=${encodeURIComponent(elId)}`;
+
+        var links = formLinkGroups.map(function(g) {
+                var link = g.link;
+
+                return {
+                    title: link.title,
+                    id: link.id,
+                    href: makeFormLink(link.id),
+                    links: g.links.map(l => ({
+                        title: l.title,
+                        id: l.id,
+                        href: makeFormLink(l.id)
+                    }))
+                };
+            });
+
         return (
-            <div>
+            <div className="create-edit">
                 <NavBar />
-                <Header subHeader={subHeader} />
-                <ListingForm ref="form" { ...formProps } />
+                {header}
+                <section className="create-edit-body">
+                    <Sidebar groups={links} activeId={this.getQuery().el}/>
+                    <ListingForm ref="form" { ...formProps } />
+                    <Reminders />
+                </section>
                 { savingText && <LoadMask message={savingText} /> }
-                { this.state.showStewards && <OrgStewardModal onHidden={ this.onModalHidden } /> }
             </div>
         );
     },
@@ -270,7 +578,11 @@ var CreateEditPage = React.createClass({
 
     onPreview: function () {
         var id = this.state.listing.id;
-        this.transitionTo('edit', { listingId: id }, { listing: id, action: 'preview', tab: 'overview' });
+        this.transitionTo('edit', { listingId: id }, {
+            listing: id,
+            action: 'preview',
+            tab: 'overview'
+        });
     },
 
     onSubmit: function () {
@@ -280,26 +592,18 @@ var CreateEditPage = React.createClass({
 
     scrollToError: function () {
         var $target = $('div.form-group.has-error');
-        var $firstFormElement = $(this.refs.form.getDOMNode()).find(':first-child');
-        var $scrollable = $('html, body');
+        var form = $(this.refs.form.getDOMNode());
+        var $firstFormElement = form.find(':first-child');
 
         if ($target[0]) {
             var scroll = $target.offset().top - $firstFormElement.offset().top;
 
-            $scrollable.animate({
+            form.animate({
                 scrollTop: scroll
             }, 'medium');
 
             this.setState({ scrollToError: false });
         }
-    },
-
-    showStewardsModal: function() {
-        this.setState({ showStewards: true });
-    },
-
-    onModalHidden: function () {
-        this.setState({ showStewards: false });
     }
 });
 

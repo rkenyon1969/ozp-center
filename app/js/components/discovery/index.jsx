@@ -54,7 +54,7 @@ var Discovery = React.createClass({
                         <div className="form-group">
                             <i className="fa fa-search"></i>
                             <input ref="search" type="text" className="form-control"
-                                placeholder="Enter search term"
+                                placeholder="Search"
                                 value={ this.state.queryString || ''}
                                 onChange={ this.onSearchInputChange } />
 
