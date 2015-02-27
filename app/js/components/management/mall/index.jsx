@@ -4,7 +4,7 @@ var React = require('react');
 var Router = require('react-router');
 var { RouteHandler } = Router;
 var Tab = require('../../../mixins/TabMixin');
-var AdminRoute = require('../../../mixins/AdminRouteMixin');
+var UserRoleMixin = require('../../../mixins/UserRoleMixin');
 var SystemStore = require('../../../stores/SystemStore');
 
 // component dependencies
@@ -13,7 +13,7 @@ var Header = require('../../header/index.jsx');
 
 var MallManagement = React.createClass({
 
-    mixins: [ Tab, AdminRoute ],
+    mixins: [ Tab, UserRoleMixin.Admin ],
 
     statics: {
         willTransitionFrom: function () {
