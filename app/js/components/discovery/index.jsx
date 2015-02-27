@@ -80,7 +80,6 @@ var Discovery = React.createClass({
                                 ]
                         }
                     </section>
-                    <div className="clearfix"></div>
                 </div>
             </div>
         );

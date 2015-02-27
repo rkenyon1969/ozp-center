@@ -1,15 +1,22 @@
 #discovery {
     position: relative;
-    padding-top: $header-height + 10px;
+    padding-top: 96px;
+
+    //to combat #main's padding
+    margin-left: -15px;
+    margin-right: -15px;
+
+    width: 1260px;
+
+    display: table;
+    > * {
+        display: table-cell;
+        vertical-align: top;
+    }
 
     > aside {
-        float: left;
-        margin-left: -15px;
         width: 265px;
-        height: 55px;
         padding: 20px 30px;
-        margin-top:30px;
-        height: auto;
     }
 
     .facet-group {
@@ -55,7 +62,7 @@
     .sidebar {
         li {
             border-left: transparent 4px solid;
-            
+
             &.active {
                 color: $link-color;
                 border-left-color: $link-color;
@@ -63,10 +70,8 @@
         }
     }
 
-    > section {
-        float: right;
-        width: 965px;
-        margin-bottom: 20px;
+    > .content {
+        padding: 10px 15px;
     }
 }
 
