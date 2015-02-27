@@ -118,7 +118,7 @@ var ListingDeleteConfirmation = React.createClass({
     },
 
     onHidden: function () {
-        this.transitionTo(this.getActiveRoute().name);
+        this.transitionTo(this.getActiveRoutePath(), this.getParams());
     },
 
     onDelete: function () {
