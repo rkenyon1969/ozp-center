@@ -151,6 +151,10 @@
     button.tool{
       width: 75px;
     }
+
+    .delete-button {
+        width: 75px;
+    }
 }
 
 .image-container {
@@ -202,6 +206,10 @@
         display: inline-block;
 
         + i {
+            display: none;
+        }
+
+        + span.fa {
             display: none;
         }
     }

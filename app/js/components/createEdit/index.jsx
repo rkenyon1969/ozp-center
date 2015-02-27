@@ -512,9 +512,9 @@ var CreateEditPage = React.createClass({
                             }
                             {
                                 showDelete &&
-                                <a href={deleteHref} className="btn btn-default tool">
+                                <a href={deleteHref} className="btn btn-default tool delete-button">
                                     <span className="create-edit-button">Delete</span>
-                                    <i className="icon-trash"></i>
+                                    <span className="fa fa-trash-o"></span>
                                 </a>
                             }
                             </div>
