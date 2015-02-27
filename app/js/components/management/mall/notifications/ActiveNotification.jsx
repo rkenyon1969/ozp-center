@@ -30,7 +30,7 @@ var ActiveNotification = React.createClass({
                 <div className="ActiveNotification__Header">
                     <h5 style={{margin: 0, fontWeight: 400}}>OZONE</h5>
                     <em>Expires: <_Date date={expiresDate} /> at <Time date={expiresDate} /></em>
-                    <button className="btn btn-link" onClick={this.onStopClick}><i className="fa fa-ban"></i></button>
+                    <button className="btn btn-link" onClick={this.onStopClick}><i className="icons icon-ban"></i></button>
                 </div>
                 <p>{ message }</p>
             </div>
