@@ -40,12 +40,17 @@ var BookmarkButton = React.createClass({
                 'btn btn-default btn-bookmark': true,
                 'bookmarked': this.inLibrary()
             });
+        var bookmarkIcon =  React.addons.classSet({
+                'icon-ribbon': !this.inLibrary(),
+                'icon-ribbon-filled': this.inLibrary()
+            });
+            
         return (
             <button type="button" className={bookmarkBtnStyles} onClick={this.toggleInLibrary}>
-                <i className="fa fa-bookmark"/>
+                <i className={bookmarkIcon}/>
             </button>
         );
     }
-});
+    });
 
 module.exports = BookmarkButton;
