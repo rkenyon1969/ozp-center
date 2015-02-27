@@ -11,9 +11,8 @@ var AdminRouteMixin = {
 
     statics: {
         willTransitionTo: function (transition) {
-
             if (!(currentUser && currentUser.isAdmin())) {
-                transition.abort();
+                window.alert('You are not authorized to view this page.');
                 transition.redirect('/');
             }
         }
