@@ -4,10 +4,9 @@ var React = require('react');
 var Reflux = require('reflux');
 var _ = require('../../utils/_');
 
-
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
 var ActiveStateMixin = require('../../mixins/ActiveStateMixin');
-
+var UserRoleMixin = require('../../mixins/UserRoleMixin');
 
 var Sidebar = require('./shared/Sidebar.jsx');
 var ApprovalStatusFilter = require('./shared/ApprovalStatusFilter.jsx');
@@ -20,12 +19,12 @@ var PaginatedListingsStore = require('../../stores/PaginatedListingsStore');
 var ListingActions = require('../../actions/ListingActions');
 var { UserRole } = require('ozp-react-commons/constants');
 
-
 var OrgListings = React.createClass({
 
     mixins: [
         SystemStateMixin,
         ActiveStateMixin,
+        UserRoleMixin.OrgSteward,
         Reflux.listenTo(PaginatedListingsStore, 'onStoreChanged'),
         Reflux.listenTo(ListingActions.listingChangeCompleted, 'onListingChangeCompleted')
     ],
@@ -35,8 +34,9 @@ var OrgListings = React.createClass({
             counts: {},
             listings: [],
             hasMore: false,
-            filter: _.assign(this.getQuery(),
-            { org: this.props.org.params.org })
+            filter: _.assign(this.getQuery(), {
+                org: this.props.org.params.org
+            })
         };
     },
 
