@@ -110,6 +110,13 @@ html, body {
     line-height: 1;
 }
 
+.icons {
+    display: inline-block;
+    font-family: icons;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+}
 .dropdown-menu .divider {
     background: $gray-darkest !important;
 }
@@ -145,6 +152,8 @@ label {
 ==============================*/
 
 .label-draft, .label-pending, .label-needs-action, .label-published, .label-rejected {
+    @extend .icons;
+    
     padding-left: 0px !important;
     font-family: 'Ubuntu';
 
