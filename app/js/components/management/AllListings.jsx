@@ -4,7 +4,7 @@ var React = require('react');
 var Reflux = require('reflux');
 var Router = require('react-router');
 
-var AdminRoute = require('../../mixins/AdminRouteMixin');
+var UserRoleMixin = require('../../mixins/UserRoleMixin');
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
 
 var Sidebar = require('./shared/Sidebar.jsx');
@@ -23,7 +23,7 @@ var { UserRole } = require('ozp-react-commons/constants');
 var AllListings = React.createClass({
 
     mixins: [
-        AdminRoute,
+        UserRoleMixin.Admin,
         SystemStateMixin,
         Router.State,
         Reflux.listenTo(PaginatedListingsStore, 'onStoreChanged'),
