@@ -75,16 +75,8 @@ ListingActions.fetchAllChangeLogs.listen(function (profile, filter) {
         });
 });
 
-ListingActions.fetchNewArrivals.listen(function () {
-    ListingApi.getNewArrivals().then(ListingActions.fetchNewArrivalsCompleted);
-});
-
-ListingActions.fetchMostPopular.listen(function () {
-    ListingApi.getMostPopular().then(ListingActions.fetchMostPopularCompleted);
-});
-
-ListingActions.fetchFeatured.listen(function () {
-    ListingApi.getFeatured().then(ListingActions.fetchFeaturedCompleted);
+ListingActions.fetchStorefrontListings.listen(function() {
+    ListingApi.getStorefrontListings().then(ListingActions.fetchStorefrontListingsCompleted);
 });
 
 
