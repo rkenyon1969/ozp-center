@@ -99,7 +99,7 @@ var ListingDraft = struct({
     docUrls: docUrls,
     screenshots: screenshots,
     contacts: contacts,
-    owners: owners,
+    owners: subtype(owners, atLeastOne),
     agency: maybe(StringMax(255)),
     height: maybe(Num),
     width: maybe(Num)
