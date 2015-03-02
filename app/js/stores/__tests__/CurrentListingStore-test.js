@@ -81,7 +81,6 @@ describe('CurrentListingStore', function() {
 
             savingImages, savingListing,
             listenSpy = sinon.spy(function(triggerData) {
-
                 switch (triggerData.saveStatus) {
                     case 'images': savingImages = true; break;
                     case 'listing': savingListing = true; break;
@@ -96,7 +95,7 @@ describe('CurrentListingStore', function() {
             categories: [],
             tags: [],
             intents: [],
-            owners: [],
+            owners: [{username: "testAdmin1"}],
             docUrls: [],
             contacts: [],
             screenshots: []
