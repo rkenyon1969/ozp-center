@@ -23,8 +23,9 @@
         border-bottom: none;
         border-right: none;
 
-        > .form-group {
-            width: 100%;
+        > .Search {
+            width: 515px;
+            position: relative;
 
             > .form-control {
                 position: relative;
@@ -86,5 +87,27 @@
 .HelpModal {
     .modal-body {
         height: 100%;
+    }
+}
+
+.SelectBox__Types, .SelectBox__Organizations {
+    border-radius: 0;
+    box-shadow: none;
+    border-left: 1px solid $gray-lighter;
+
+    > .react-select-box {
+        padding: 20px 0;
+
+        > .react-select-box-label {
+            font-size: inherit;
+            font-weight: normal;
+        }
+    }
+
+    > .react-select-box-options {
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+        border: 1px solid $gray-lighter;
     }
 }

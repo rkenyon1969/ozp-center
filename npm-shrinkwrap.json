@@ -4,7 +4,7 @@
   "dependencies": {
     "bootstrap-sass": {
       "version": "3.3.1",
-      "from": "../../../../../var/folders/cg/jjg4n9r10b94n843fqvqbhfm0000gn/T/npm-29589-a314880f/git-cache-fc8899763f61/f7af9424caf977e0880273c837cc40bf979b9101",
+      "from": "../../../../../var/folders/cg/jjg4n9r10b94n843fqvqbhfm0000gn/T/npm-8584-138587b4/git-cache-38f58500b94f/138ca41e070f4c186eba6726a971a28f0168e9ea",
       "resolved": "git://github.com/ozone-development/bootstrap-sass#138ca41e070f4c186eba6726a971a28f0168e9ea"
     },
     "bower": {
@@ -7752,7 +7752,7 @@
     },
     "ozp-react-commons": {
       "version": "0.1.1",
-      "from": "../../../../../var/folders/cg/jjg4n9r10b94n843fqvqbhfm0000gn/T/npm-29589-a314880f/git-cache-0f31d9acc04e/c0e4536b688d4ffe8a650b5064e45fcdbab6e76d",
+      "from": "../../../../../var/folders/cg/jjg4n9r10b94n843fqvqbhfm0000gn/T/npm-10635-f6b6f0c3/git-cache-22659db3220d/8062bf89f9f2dfd36c613d0b67ce6c79f42bac8d",
       "resolved": "git://github.com/ozone-development/ozp-react-commons#8062bf89f9f2dfd36c613d0b67ce6c79f42bac8d",
       "dependencies": {
         "es5-shim": {
@@ -8047,15 +8047,20 @@
     },
     "react-router": {
       "version": "0.12.4",
-      "from": "react-router@0.12.4",
+      "from": "https://registry.npmjs.org/react-router/-/react-router-0.12.4.tgz",
       "resolved": "https://registry.npmjs.org/react-router/-/react-router-0.12.4.tgz",
       "dependencies": {
         "qs": {
           "version": "2.3.3",
-          "from": "qs@2.3.3",
+          "from": "https://registry.npmjs.org/qs/-/qs-2.3.3.tgz",
           "resolved": "https://registry.npmjs.org/qs/-/qs-2.3.3.tgz"
         }
       }
+    },
+    "react-select-box": {
+      "version": "1.0.0",
+      "from": "react-select-box@*",
+      "resolved": "https://registry.npmjs.org/react-select-box/-/react-select-box-1.0.0.tgz"
     },
     "reflux": {
       "version": "0.1.15",
@@ -8182,7 +8187,7 @@
     },
     "w2ui": {
       "version": "1.5.0",
-      "from": "../../../../../var/folders/cg/jjg4n9r10b94n843fqvqbhfm0000gn/T/npm-29589-a314880f/git-cache-a41255e2813b/aa364dd39b4425265f40e92650fd669ddc3803fc",
+      "from": "../../../../../var/folders/cg/jjg4n9r10b94n843fqvqbhfm0000gn/T/npm-3069-5fb2aea4/git-cache-094df4baf68c/aa364dd39b4425265f40e92650fd669ddc3803fc",
       "resolved": "git://github.com/vitmalina/w2ui#aa364dd39b4425265f40e92650fd669ddc3803fc"
     },
     "webpack": {

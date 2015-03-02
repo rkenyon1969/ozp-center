@@ -7,23 +7,60 @@ var Sidebar = React.createClass({
 
     propTypes: {
         isSearching: React.PropTypes.bool.isRequired,
-        system: React.PropTypes.shape({
-            categories: React.PropTypes.array.isRequired,
-            types: React.PropTypes.array.isRequired,
-            organizations: React.PropTypes.array.isRequired
-        }).isRequired,
+        categories: React.PropTypes.array.isRequired,
         onGoHome: React.PropTypes.func.isRequired,
-        onFilterChange: React.PropTypes.func.isRequired
+        onChange: React.PropTypes.func.isRequired
     },
 
-    getInitialState: function () {
+    getInitialState() {
         return {
-            selectedFilters: (this.state && this.state.selectedFilters) || {}
+            categories: []
         };
     },
 
-    render: function () {
-        var isBrowsing = this.props.isSearching || this.areFiltersApplied();
+    onHomeClick() {
+        this.state.categories.length = 0;
+        this.forceUpdate();
+
+        this.props.onGoHome();
+    },
+
+    onSelect(category) {
+        var { categories } = this.state;
+        var { title } = category;
+
+        if (_.contains(categories, title)) {
+            categories = _.without(categories, title);
+        }
+        else {
+            categories = categories.concat(title);
+        }
+
+        var state = {
+            categories: categories
+        };
+
+        this.setState(state);
+        this.props.onChange(categories);
+    },
+
+    renderCategories() {
+        var me = this;
+
+        return this.props.categories.map(function (category) {
+            var classes = React.addons.classSet({
+                active: _.contains(me.state.categories, category.title),
+                'facet-group-item': true
+            });
+
+            return (
+                <li className={ classes } onClick={ me.onSelect.bind(null, category) }>{category.title}</li>
+            );
+        });
+    },
+
+    render() {
+        var isBrowsing = this.props.isSearching || this.state.categories.length;
 
         var homeLinkClasses = React.addons.classSet({
             'active': !isBrowsing,
@@ -33,87 +70,13 @@ var Sidebar = React.createClass({
         return (
             <aside className="sidebar">
                 <ul className="list-unstyled facet-group">
-                    <li className={ homeLinkClasses } onClick={ this.clearFilters }>Home</li>
+                    <li className={ homeLinkClasses } onClick={ this.onHomeClick }>Home</li>
                 </ul>
                 <ul className="list-unstyled facet-group">
-                    <li>
-                        <span>Categories</span>
-                        <ul className="list-unstyled">
-                            { this.renderFacets(this.props.system.categories, 'categories') }
-                        </ul>
-                    </li>
-                    <li>
-                        <span>Types</span>
-                        <ul className="list-unstyled">
-                            { this.renderFacets(this.props.system.types, 'type') }
-                        </ul>
-                    </li>
-                    <li>
-                        <span>Organizations</span>
-                        <ul className="list-unstyled">
-                            { this.renderFacets(this.props.system.organizations, 'agency') }
-                        </ul>
-                    </li>
+                    { this.renderCategories() }
                 </ul>
             </aside>
         );
-    },
-
-    renderFacets: function (list, key) {
-        var me = this;
-
-        return list.map(function (facetOption) {
-            var classes = React.addons.classSet({
-                active: _.contains(me.state.selectedFilters[key], facetOption.title),
-                'facet-group-item': true
-            });
-
-            return (
-                <li className={ classes } onClick={ me.handleFilterToggle.bind(null, key, facetOption) }>{facetOption.title}</li>
-            );
-        });
-    },
-
-    areFiltersApplied: function () {
-        var areFiltersApplied = false;
-        _.forOwn(this.state.selectedFilters, function (value) {
-            areFiltersApplied = areFiltersApplied || value.length;
-        });
-        return areFiltersApplied;
-    },
-
-    clearFilters: function () {
-        var selectedFilters = this.state.selectedFilters;
-
-        // clear selected filter array
-        _.forOwn(selectedFilters, function (value, key) {
-            selectedFilters[key].length = 0;
-        });
-
-        this.setState({
-            selectedFilters: selectedFilters,
-            queryString: ''
-        });
-        this.props.onGoHome();
-    },
-
-    handleFilterToggle: function (type, clickedFilter) {
-        var values = [].concat(this.state.selectedFilters[type] || []),
-            value = clickedFilter.title;
-
-        if (_.contains(values, value)) {
-            values = _.without(values, value);
-        }
-        else {
-            values = values.concat(value);
-        }
-
-        this.setState({
-            selectedFilters: Object.assign({},
-                this.state.selectedFilters, _.zipObject([type], [values]))
-        });
-
-        this.props.onFilterChange();
     }
 
 });
