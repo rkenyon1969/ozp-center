@@ -4,11 +4,7 @@
   "dependencies": {
     "bootstrap-sass": {
       "version": "3.3.1",
-<<<<<<< HEAD
       "from": "../../../../var/folders/7z/d0kh0vld52g_sn6_ccydyvn80000gn/T/npm-3306-724b0fdb/git-cache-5cbfcd71b1e4/138ca41e070f4c186eba6726a971a28f0168e9ea",
-=======
-      "from": "../../../../../var/folders/cg/jjg4n9r10b94n843fqvqbhfm0000gn/T/npm-29589-a314880f/git-cache-fc8899763f61/f7af9424caf977e0880273c837cc40bf979b9101",
->>>>>>> af9f42273f0ab50365c08694e12fc3b625caec36
       "resolved": "git://github.com/ozone-development/bootstrap-sass#138ca41e070f4c186eba6726a971a28f0168e9ea"
     },
     "bower": {
@@ -8087,13 +8083,8 @@
     },
     "ozp-react-commons": {
       "version": "0.1.1",
-<<<<<<< HEAD
       "from": "../../../../var/folders/7z/d0kh0vld52g_sn6_ccydyvn80000gn/T/npm-3616-33ba24ae/git-cache-06561bbfa95a/b4200464c69b3e5472829b5d68e95bf6a4aadaf9",
       "resolved": "git://github.com/ozone-development/ozp-react-commons#b4200464c69b3e5472829b5d68e95bf6a4aadaf9",
-=======
-      "from": "../../../../../var/folders/cg/jjg4n9r10b94n843fqvqbhfm0000gn/T/npm-29589-a314880f/git-cache-0f31d9acc04e/c0e4536b688d4ffe8a650b5064e45fcdbab6e76d",
-      "resolved": "git://github.com/ozone-development/ozp-react-commons#8062bf89f9f2dfd36c613d0b67ce6c79f42bac8d",
->>>>>>> af9f42273f0ab50365c08694e12fc3b625caec36
       "dependencies": {
         "es5-shim": {
           "version": "4.1.0",
@@ -8522,11 +8513,7 @@
     },
     "w2ui": {
       "version": "1.5.0",
-<<<<<<< HEAD
       "from": "../../../../var/folders/7z/d0kh0vld52g_sn6_ccydyvn80000gn/T/npm-3306-724b0fdb/git-cache-6a566f740e1c/aa364dd39b4425265f40e92650fd669ddc3803fc",
-=======
-      "from": "../../../../../var/folders/cg/jjg4n9r10b94n843fqvqbhfm0000gn/T/npm-29589-a314880f/git-cache-a41255e2813b/aa364dd39b4425265f40e92650fd669ddc3803fc",
->>>>>>> af9f42273f0ab50365c08694e12fc3b625caec36
       "resolved": "git://github.com/vitmalina/w2ui#aa364dd39b4425265f40e92650fd669ddc3803fc"
     },
     "webpack": {
