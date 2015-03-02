@@ -71,7 +71,7 @@
     "react-datepicker": "0.5.1",
     "react-icon-rating": "0.2.0",
     "react-radio-group": "1.0.0",
-    "react-router": "0.11.6",
+    "react-router": "0.12.4",
     "reflux": "0.1.15",
     "select2": "3.5.1-browserify-fix",
     "spin.js": "2.0.2",

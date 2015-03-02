@@ -12,6 +12,7 @@
   "newcap": true,
   "noarg": true,
   "regexp": true,
+  "expr": true,
   "undef": true,
   "unused": "vars",
   "strict": true,

@@ -7,8 +7,8 @@ var { createStore } = require('reflux');
 var GlobalListingStore = require('./GlobalListingStore');
 var SystemStore = require('./SystemStore');
 var SelfStore = require('ozp-react-commons/stores/SelfStore');
-var actions = require('../actions/CreateEditActions');
-var { save } = require('../actions/ListingActions');
+var CreateEditActions = require('../actions/CreateEditActions');
+var ListingActions = require('../actions/ListingActions');
 var { validateDraft, validateFull } = require('../components/createEdit/validation/listing');
 var { listingMessages } = require('ozp-react-commons/constants/messages');
 var { Listing } = require('../webapi/Listing');
@@ -16,10 +16,6 @@ var { approvalStatus } = require('ozp-react-commons/constants');
 var { cloneDeep, assign } = require('../utils/_');
 var { ListingApi } = require('../webapi/Listing');
 var { ImageApi } = require('../webapi/Image');
-
-
-actions.systemUpdated = SystemStore;
-actions.cacheUpdated = GlobalListingStore;
 
 var _listing = null;
 var _submitting = false;
@@ -136,7 +132,13 @@ function revokeAllObjectURLs() {
 }
 
 var CurrentListingStore = createStore({
-    listenables: [actions, {profileUpdate: SelfStore}],
+    listenables: [
+        Object.assign({}, CreateEditActions, {
+            systemUpdated: SystemStore,
+            cacheUpdated: GlobalListingStore
+        }),
+        { profileUpdate: SelfStore }
+    ],
 
     currentUser: null,
 
@@ -225,6 +227,10 @@ var CurrentListingStore = createStore({
         this._save();
     },
 
+    onDiscard: function () {
+        _listing = null;
+    },
+
     /**
      * Save the listing.
      * @param oldListingData The data to set back on _listing if there is a validation
@@ -243,7 +249,7 @@ var CurrentListingStore = createStore({
                 Object.assign(_listing, oldListingData);
                 me.trigger(Object.assign({saveStatus: null}, validation));
             } else {
-                save(makeJsonForSave());
+                ListingActions.save(makeJsonForSave());
             }
         });
     },
@@ -305,9 +311,15 @@ var CurrentListingStore = createStore({
 
     loadListing: function (id) {
         var deferred = $.Deferred(),
-            promise = deferred.promise();
+            promise = deferred.promise(),
+            intId = parseInt(id, 10);
 
         if (id) {
+            if (_listing && _listing.id === intId) {
+                this.trigger({listing: _listing});
+                return deferred.resolve(_listing);
+            }
+
             var listing = GlobalListingStore.getCache()[id];
             if (listing) {
                 this.refreshListing(cloneDeep(listing));
