@@ -37,6 +37,27 @@ var ConfigApi = {
 
     getStewards: function() {
         return $.getJSON(API_URL + '/api/profile?role=ORG_STEWARD').pipe(parse);
+    },
+
+    //a single call to get categories,
+    //types, intents, contact types, and organizations
+    getMetadata: function() {
+        return $.getJSON(API_URL + '/api/metadata').then(function(response) {
+            var embedded = response._embedded,
+                categories = embedded && embedded['ozp:category'],
+                types = embedded && embedded['ozp:type'],
+                intents = embedded && embedded['ozp:intent'],
+                contactTypes = embedded && embedded['ozp:contact-type'],
+                organizations = embedded && embedded['ozp:organization'];
+
+            return {
+                categories: parse(categories),
+                types: parse(types),
+                intents: parse(intents),
+                contactTypes: parse(contactTypes),
+                organizations: parse(organizations)
+            };
+        });
     }
 
 };
