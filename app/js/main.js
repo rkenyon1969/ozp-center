@@ -15,7 +15,7 @@ var _ = require('./utils/_');
 var SelfStore = require('ozp-react-commons/stores/SelfStore');
 var ProfileActions = require('ozp-react-commons/actions/ProfileActions');
 var LoadError = require('ozp-react-commons/components/LoadError.jsx');
-var { METRICS_URL } = require('ozp-react-commons/OzoneConfig');
+var { METRICS_URL, APP_TITLE } = require('ozp-react-commons/OzoneConfig');
 
 window.jQuery = jQuery;
 window.$ = jQuery;
@@ -85,3 +85,6 @@ $(function() {
         level: 'U'
     });
 });
+
+//Configurable title
+document.title = APP_TITLE;
