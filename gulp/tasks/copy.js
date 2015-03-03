@@ -1,4 +1,8 @@
 var gulp = require('gulp');
+var shell = require('gulp-shell');
+var pjson = require('../../package.json');
+
+var build_dir = 'dist';
 
 gulp.task('copy', function() {
     return gulp.src([
@@ -8,5 +12,8 @@ gulp.task('copy', function() {
         '!app/styles',
         '!app/styles/**/*']
         )
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('dist'))
+        .on('end', function(){
+            gulp.run('version');
+        });
 });

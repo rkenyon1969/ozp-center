@@ -19,6 +19,8 @@
     "changelog": "gulp changelog"
   },
   "devDependencies": {
+    "babel-core": "4.6.6",
+    "babel-loader": "4.0.0",
     "bower": "1.3.12",
     "chai": "1.10.0",
     "coffee-script": "1.8.0",
@@ -36,6 +38,7 @@
     "gulp-minify-css": "0.3.12",
     "gulp-replace": "0.5.1",
     "gulp-sass": "0.7.3",
+    "gulp-shell": "0.3.0",
     "gulp-sourcemaps": "1.0.0",
     "gulp-util": "2.2.20",
     "inject-loader": "1.0.0",
@@ -56,10 +59,11 @@
     "sinon": "1.7.0",
     "style-loader": "0.8.2",
     "url-loader": "0.5.5",
-    "webpack": "1.6.0",
+    "webpack": "1.7.0",
     "webpack-dev-server": "1.7.0"
   },
   "dependencies": {
+    "babel-runtime": "4.6.6",
     "bootstrap-sass": "git://github.com/ozone-development/bootstrap-sass#138ca41e070f4c186eba6726a971a28f0168e9ea",
     "exports-loader": "0.6.2",
     "gulp-preprocess": "1.2.0",

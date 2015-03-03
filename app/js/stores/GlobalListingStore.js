@@ -39,9 +39,11 @@ var GlobalListingStore = Reflux.createStore({
     * Update local listingsCache when new data is fetched
     **/
     init: function () {
-        this.listenTo(ListingActions.fetchNewArrivalsCompleted, updateCache);
-        this.listenTo(ListingActions.fetchMostPopularCompleted, updateCache);
-        this.listenTo(ListingActions.fetchFeaturedCompleted, updateCache);
+        this.listenTo(ListingActions.fetchStorefrontListingsCompleted, function(storefront) {
+            updateCache(storefront.featured);
+            updateCache(storefront.newArrivals);
+            updateCache(storefront.mostPopular);
+        });
         this.listenTo(ListingActions.searchCompleted, updateCache);
         this.listenTo(ListingActions.fetchAllListingsCompleted, function (filter, response) {
             var listings = response.getItemAsList();
