@@ -25,7 +25,6 @@ var FILTERS = ['categories', 'types', 'organizations'];
 
 var areFiltersApplied = (state) => {
     return _.reduce(FILTERS, function (memo, filter) {
-        console.log(state[filter]);
         return memo || !!state[filter].length;
     }, false);
 };

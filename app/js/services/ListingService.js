@@ -109,7 +109,10 @@ ListingActions.fetchById.listen(function (id) {
 
     ListingActions.search.listen(function (options) {
         var queryString = processQuery((options.queryString)) || '',
-            apiOptions = Object.assign({}, options, {
+            apiOptions = Object.assign({}, {
+                categories: options.categories,
+                type: options.types,
+                agency: options.organizations,
                 queryString: queryString
             });
 
