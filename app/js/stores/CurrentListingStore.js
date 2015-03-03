@@ -378,9 +378,7 @@ var CurrentListingStore = createStore({
                 featuredBannerIconPromise
             ].concat(screenshotPromises);
 
-        //TODO when we get a less buggy ES6 parser we can use the spread operator to make the
-        //invocation of `when` cleaner
-        return $.when.apply($, promises).then(me.handleImageSaveResponses.bind(me));
+        return $.when(...promises).then(me.handleImageSaveResponses.bind(me));
     },
 
     /**
