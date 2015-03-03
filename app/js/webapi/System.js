@@ -33,10 +33,6 @@ var ConfigApi = {
 
     getUsers: function () {
         return $.getJSON(API_URL + '/api/profile').pipe(parse);
-    },
-
-    getStewards: function() {
-        return $.getJSON(API_URL + '/api/profile?role=ORG_STEWARD').pipe(parse);
     }
 
 };

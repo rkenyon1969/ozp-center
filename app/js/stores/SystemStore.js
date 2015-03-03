@@ -9,8 +9,7 @@ var items = [
     'categories',
     'intents',
     'contactTypes',
-    'organizations',
-    'stewards'
+    'organizations'
 ];
 
 var _system = {};
