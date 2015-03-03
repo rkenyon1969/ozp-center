@@ -91,14 +91,15 @@
 }
 
 .react-select-box:before {
-    border-left: 0px transparent;
     @extend .icons;
     @extend .icon-caret-down;
+    
+    border-left: 0px transparent;
+    padding-top: 7px;
+    
 }
 
 .react-select-box:after {
-    @extend .icons;
-    @extend .icon-caret-down;
     border: 0px;
 }
 
@@ -140,31 +141,52 @@
     }
 }
 
+.react-select-box .react-select-box-empty{
+    &:hover{
+        background:red;
+    }
+}
+
 .SelectBox__Types, .SelectBox__Organizations {
     border-radius: 0;
     box-shadow: none;
     border-left: 1px solid $gray-lighter;
-    
 
     > .react-select-box {
         padding: 20px 0;
-
+        border-top: transparent 4px solid;
+        
+        
+        &:hover{
+            border-top: $blue-dark 4px solid;
+            color: $gray-dark;
+        }
+        
+        &:active{
+            background: $gray-lightest;
+            border-top: $blue-dark 4px solid;
+            color: $blue-dark;
+        }
+        
         > .react-select-box-label {
             font-size: inherit;
             font-weight: 400;
             color: $gray-dark;
+
             
             & .react-select-box-empty {
                 color: $gray-dark;
+                
+                &:hover{
+                    border-top: $blue-dark 4px solid;
+                    color: $blue-dark;
+                }
             }
+            
         }
         
     }
     
-    .react-select-box-label {
-        color: $gray-darkest;
-        font-weight: 300;
-    }
     
 
     > .react-select-box-options {
@@ -176,9 +198,4 @@
 
     }
     
-    .active {
-            background: $gray-lightest;
-            border-top: $blue-dark 4px solid;
-            
-    }
 }
