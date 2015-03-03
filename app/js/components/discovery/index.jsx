@@ -40,7 +40,7 @@ var Discovery = React.createClass({
             mostPopular: DiscoveryPageStore.getMostPopular(),
             searchResults: DiscoveryPageStore.getSearchResults(),
             mostPopularTiles: 12,
-            queryString: '',
+            queryString: this.state ? this.state.queryString : '',
             categories: this.state ? this.state.categories : [],
             types: this.state ? this.state.types : [],
             organizations: this.state ? this.state.organizations : []
