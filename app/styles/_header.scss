@@ -134,16 +134,11 @@
 .react-select-box-close {
     color: $blue-dark;
     text-decoration: none;
+    text-transform: none;
     
     &:hover, &:focus{
         color: $blue-dark;
         text-decoration: underline;
-    }
-}
-
-.react-select-box .react-select-box-empty{
-    &:hover{
-        background:red;
     }
 }
 
