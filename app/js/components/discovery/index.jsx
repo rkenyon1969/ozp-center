@@ -37,9 +37,7 @@ var Discovery = React.createClass({
         this.listenTo(DiscoveryPageStore, this.onStoreChange);
 
         // fetch data when instantiated
-        ListingActions.fetchFeatured();
-        ListingActions.fetchNewArrivals();
-        ListingActions.fetchMostPopular();
+        ListingActions.fetchStorefrontListings();
     },
 
     render: function () {

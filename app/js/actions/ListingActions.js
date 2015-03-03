@@ -7,9 +7,7 @@ var createActions = require('../utils/createActions');
 var ListingActions = createActions({
     fetchAllListings: null,
     fetchAllChangeLogs: null,
-    fetchNewArrivals: null,
-    fetchMostPopular: null,
-    fetchFeatured: null,
+    fetchStorefrontListings: null,
 
     fetchById: null,
 
