@@ -111,6 +111,13 @@ html, body {
     line-height: 1;
 }
 
+.icons {
+    display: inline-block;
+    font-family: icons;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+}
 .dropdown-menu .divider {
     background: $gray-darkest !important;
 }
@@ -146,12 +153,13 @@ label {
 ==============================*/
 
 .label-draft, .label-pending, .label-needs-action, .label-published, .label-rejected {
-    @extend .fa2;
+    @extend .icons;
+    
     padding-left: 0px !important;
     font-family: 'Ubuntu';
 
     &::before {
-        font-family: 'FontAwesome';
+        font-family: 'icons';
         display: inline-block;
         width: 18px;
         text-align: center;
@@ -159,26 +167,26 @@ label {
 }
 
 .label-draft {
-    @extend .fa-file-text-o;
+    @extend .icon-paper;
 }
 
 .label-pending {
-    @extend .fa-spinner;
+    @extend .icon-loader;
     color: $blue-dark;
 }
 
 .label-needs-action {
-    @extend .fa-exclamation;
+    @extend .icon-exclamation;
     color: $red-orange-dark;
 }
 
 .label-published {
-    @extend .fa-thumbs-o-up;
+    @extend .icon-thumbs-up;
     color: $green-dark;
 }
 
 .label-rejected {
-    @extend .fa-repeat;
+    @extend .icon-reload;
 }
 
 /*====================

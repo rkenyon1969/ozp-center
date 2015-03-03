@@ -95,13 +95,14 @@ var Discovery = React.createClass({
                 <Header>
                     <form className="navbar-form navbar-left" role="search">
                         <div className="form-group Search">
-                            <i className="fa fa-search"></i>
+                            <i className="icon-search"></i>
+                            
                             <input ref="search" type="text" className="form-control"
                                 placeholder="Search"
                                 value={ this.state.queryString || ''}
                                 onChange={ this.onSearchInputChange } />
 
-                            <i className="fa fa-times" onClick={this.reset}></i>
+                            <i className="icon-cross" onClick={this.reset}></i>
                         </div>
                         <Types value={this.state.types} onChange={this.onTypeChange} />
                         <Organizations value={this.state.organizations} onChange={this.onOrganizationChange} />

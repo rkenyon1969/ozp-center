@@ -67,9 +67,9 @@
 .AdminOwnerListingTile__actionMenuButton {
     @extend .corner-button;
 
-    //style as font-awesome angle-down
-    @extend .fa2;
-    @extend .fa-angle-down;
+    //style as OZONE icons angle-down
+    @extend .icons;
+    @extend .icon-caret-down;
 
     margin-right: 0;
     margin-left: auto;
