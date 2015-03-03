@@ -22,7 +22,7 @@ var Organizations = React.createClass({
             <SelectBox className="SelectBox__Organizations" label="Organizations" onChange={this.onChange} value={this.props.value} multiple>
                 {
                     this.state.system.organizations.map((x) =>
-                        <option key={x.id} value={x.title}>{x.title}</option>
+                        <option key={x.id} value={x.shortName}>{x.shortName}</option>
                     )
                 }
             </SelectBox>
