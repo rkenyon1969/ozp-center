@@ -15,6 +15,12 @@ $fa-font-path: "../../bower_components/font-awesome/fonts/";
 $header-height: 55px;
 $black: #191F25;
 
+input, textarea {
+    &.placeholder {
+        $color: $input-color-placeholder;
+    }
+}
+
 html, body {
     font-family: 'Ubuntu';
     font-weight: 300;
