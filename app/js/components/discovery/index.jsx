@@ -15,9 +15,10 @@ var ListingTile = require('./ListingTile.jsx');
 var FeaturedListings = require('./FeaturedListings.jsx');
 var Carousel = require('../carousel/index.jsx');
 
+var Input = require('../shared/Input.jsx');
+
 // store dependencies
 var DiscoveryPageStore = require('../../stores/DiscoveryPageStore');
-
 
 var Discovery = React.createClass({
 
@@ -53,10 +54,9 @@ var Discovery = React.createClass({
                     <form className="navbar-form navbar-left" role="search">
                         <div className="form-group">
                             <i className="fa fa-search"></i>
-                            <input ref="search" type="text" className="form-control"
-                                placeholder="Search"
-                                value={ this.state.queryString || ''}
-                                onChange={ this.onSearchInputChange } />
+                            <Input
+                                ref="search" type="text" className="form-control"
+                                placeholder="Search" value={this.state.queryString} onChange={this.onSearchInputChange} />
 
                             <i className="fa fa-times" onClick={this.reset}></i>
                         </div>
