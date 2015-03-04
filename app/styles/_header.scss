@@ -22,13 +22,10 @@
         border-top: none;
         border-bottom: none;
         border-right: none;
-        
-
 
         > .Search {
             width: 515px;
             position: relative;
-            margin-top/**/: -10px;
 
             > .form-control {
                 position: relative;
@@ -60,7 +57,7 @@
             }
         }
     }
-    
+
     .spacer {
         height: 1px;
         background: $gray-lighter;
@@ -68,14 +65,6 @@
     }
 }
 
-/* IE 10+ Search Box Fix */
-@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-
-    #header .navbar-form > .Search {
-        margin-top: -10px;
-    }
-
-}
 
 #appsmall-logo {
     display: block;
