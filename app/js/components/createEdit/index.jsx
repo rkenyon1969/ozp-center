@@ -238,7 +238,7 @@ var ContactForm = React.createClass({
 var ListingForm = React.createClass({
     mixins: [ ValidatedFormMixin, State ],
 
-    getInitialState: () => ({ currentNavTarget: null }),
+    getInitialState: () => ({ currentNavTarget: undefined }),
 
     render: function () {
         var listing = this.props.value;
@@ -320,10 +320,10 @@ var ListingForm = React.createClass({
     },
 
     componentDidUpdate: function(prevProps, prevState) {
-        var elId = this.state.currentNavTarget || formLinks.basicInformation.id;
+        var elId = this.state.currentNavTarget;
 
         if (prevState.currentNavTarget !== elId) {
-            var element = $(`#${elId}`),
+            var element = $(`#${elId || formLinks.basicInformation.id}`),
                 form = $(this.getDOMNode()),
                 firstFormChild = form.find(':first-child');
 
@@ -387,22 +387,35 @@ var CreateEditPage = React.createClass({
         UNSAVED_MESSAGE: 'You have unsaved information, are you sure you want to leave this page?',
 
         willTransitionTo: function (transition, params, query, callback) {
-            var listingId = params.listingId === undefined ? undefined : parseInt(params.listingId, 10);
+            var listingId = params.listingId === undefined ? undefined :
+                    parseInt(params.listingId, 10),
+                loadedListing = CurrentListingStore.getDefaultData().listing,
+                myListingsTransition = transitionToMyListings.bind(null, transition);
 
-            CurrentListingStore.loadListing(listingId)
-                .done(() => {
-                    CurrentListingStore.currentUserCanEdit() ?
-                        callback() :
-                        transitionToMyListings(transition);
-                })
-                .fail(() => transitionToMyListings(transition));
+            function checkPermission() {
+                if (CurrentListingStore.currentUserCanEdit()) {
+                    callback();
+                }
+                else {
+                    myListingsTransition();
+                }
+            }
+
+            if (loadedListing && loadedListing.id === listingId) {
+                checkPermission();
+            }
+            else {
+                CurrentListingStore.loadListing(listingId)
+                    .done(checkPermission)
+                    .fail(myListingsTransition);
+            }
         },
 
         willTransitionFrom: function (transition, component) {
-            var stripQuery = path => path.replace(/\?.*/, ''),
+            var stripQuery = path => path.replace(/\/?\?.*/, ''),
                 currentPathBase = stripQuery(component.getPath()),
-                newPathBase = stripQuery(transition.path);
-            var { state } = component;
+                newPathBase = stripQuery(transition.path),
+                { state } = component;
 
             //if we are actually moving away from this page, and we have changes
             if (currentPathBase !== newPathBase && state && state.hasChanges) {
