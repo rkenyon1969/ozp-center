@@ -50,14 +50,14 @@ describe('UserReviews', function () {
         var userReviews = TestUtils.renderIntoDocument(
             <UserReviews reviews={reviews} user={profile} listing={{}} onEdit={$.noop} />
         );
-        expect($(userReviews.getDOMNode()).find('.fa-pencil').length).to.equal(3);
+        expect($(userReviews.getDOMNode()).find('.icon-pencil').length).to.equal(3);
 
         profile = makeProfile(false, true);
         userReviews = TestUtils.renderIntoDocument(
             <UserReviews reviews={reviews} user={profile}
                 listing={{agency:'Test Organization'}} onEdit={$.noop} />
         );
-        expect($(userReviews.getDOMNode()).find('.fa-pencil').length).to.equal(3);
+        expect($(userReviews.getDOMNode()).find('.icon-pencil').length).to.equal(3);
     });
 
     it('users can only edit their own review', function () {
@@ -66,19 +66,19 @@ describe('UserReviews', function () {
             <UserReviews.UserReview review={userReview} user={profile}
                 listing={{}} onEdit={$.noop} />
         );
-        expect($(review.getDOMNode()).find('.fa-pencil').length).to.equal(1);
+        expect($(review.getDOMNode()).find('.icon-pencil').length).to.equal(1);
 
         review = TestUtils.renderIntoDocument(
             <UserReviews.UserReview review={orgStewardReview} user={profile}
                 listing={{}} onEdit={$.noop} />
         );
-        expect($(review.getDOMNode()).find('.fa-pencil').length).to.equal(0);
+        expect($(review.getDOMNode()).find('.icon-pencil').length).to.equal(0);
 
         review = TestUtils.renderIntoDocument(
             <UserReviews.UserReview review={adminReview} user={profile}
                 listing={{}} onEdit={$.noop} />
         );
-        expect($(review.getDOMNode()).find('.fa-pencil').length).to.equal(0);
+        expect($(review.getDOMNode()).find('.icon-pencil').length).to.equal(0);
     });
 
 });

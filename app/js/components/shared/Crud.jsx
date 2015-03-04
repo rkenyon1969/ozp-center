@@ -307,7 +307,7 @@ var Crud = React.createClass({
                     icon: 'icon-square-plus'
                 },
                 edit: {
-                    icon: 'fa fa-pencil'
+                    icon: 'icons icon-pencil'
                 },
                 delete: {
                     icon: 'fa fa-trash-o'
