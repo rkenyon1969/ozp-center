@@ -2,31 +2,20 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var _ = require('../../utils/_');
 var LoadMask = require('../LoadMask.jsx');
 var { pick, assign } = require('../../utils/_');
 var { approvalStatus } = require('ozp-react-commons/constants');
 var CurrentListingStore = require('../../stores/CurrentListingStore');
 var CreateEditActions = require('../../actions/CreateEditActions');
 var { Navigation } = require('react-router');
+var State = require('../../mixins/ActiveStateMixin');
 
+var Reminders = require('./Reminders.jsx');
 var NavBar = require('../NavBar/index.jsx');
 var Sidebar = require('./Sidebar.jsx');
-var OrgStewardModal = require('./OrgStewardModal.jsx');
+var ListingForm = require('./ListingForm.jsx');
 var { classSet } = React.addons;
-var State = require('../../mixins/ActiveStateMixin');
 var $ = require('jquery');
-
-var {
-    ValidatedFormMixin,
-    ListInput,
-    TextInput,
-    ImageInput,
-    Select2Input,
-    Select2TagInput,
-    TextAreaInput,
-    OwnerInput
-} = require('./form');
 
 var savingMessages = {
     images: 'Uploading Images...',
@@ -173,207 +162,6 @@ var formLinkGroups = [{
     ]
 }];
 
-function getOptionsForSystemObject (items) {
-    return items.map(item => {
-        return { id: item.title, text: item.title };
-    });
-}
-
-var ResourceForm = React.createClass({
-    mixins: [ ValidatedFormMixin ],
-
-    render: function () {
-        return (
-            <div className="well">
-                <button type="button" className="close" onClick={ this.props.removeHandler }>
-                    <span aria-hidden="true">&times;</span><span className="sr-only">Close</span>
-                </button>
-                <TextInput { ...this.getFormComponentProps('name') }/>
-                <TextInput { ...this.getFormComponentProps('url') }/>
-            </div>
-        );
-    }
-});
-
-var ScreenshotForm = React.createClass({
-    mixins: [ ValidatedFormMixin ],
-
-    render: function () {
-        return (
-            <div className="well">
-                <button type="button" className="close" onClick={this.props.removeHandler}>
-                    <span aria-hidden="true">&times;</span><span className="sr-only">Close</span>
-                </button>
-                <ImageInput { ...this.getFormComponentProps('smallImage') }
-                    imageUri={this.props.value.smallImageUrl}
-                    serverError={this.props.imageErrors.smallImage} />
-                <ImageInput { ...this.getFormComponentProps('largeImage') }
-                    imageUri={this.props.value.largeImageUrl}
-                    serverError={this.props.imageErrors.largeImage} />
-            </div>
-        );
-    }
-});
-
-var ContactForm = React.createClass({
-    mixins: [ require('../../mixins/SystemStateMixin'), ValidatedFormMixin ],
-
-    render: function () {
-        return (
-            <div className="well">
-                <button type="button" className="close" onClick={this.props.removeHandler}>
-                    <span aria-hidden="true">&times;</span><span className="sr-only">Close</span>
-                </button>
-                <Select2Input { ...this.getFormComponentProps('type') } options={ getOptionsForSystemObject(this.state.system.contactTypes) }/>
-                <TextInput { ...this.getFormComponentProps('name') }/>
-                <TextInput { ...this.getFormComponentProps('organization') } optional/>
-                <TextInput { ...this.getFormComponentProps('email') }/>
-                <TextInput { ...this.getFormComponentProps('securePhone') }/>
-                <TextInput { ...this.getFormComponentProps('unsecurePhone') }/>
-            </div>
-        );
-    }
-});
-
-var ListingForm = React.createClass({
-    mixins: [ ValidatedFormMixin, State ],
-
-    getInitialState: () => ({ currentNavTarget: undefined }),
-
-    render: function () {
-        var listing = this.props.value;
-        var system = this.props.system;
-
-        var ownerSetter = usernames => {
-            this.props.requestChange(['owners'], usernames.map(u => {
-                return { username: u };
-            }));
-        };
-
-        var p = this.getFormComponentProps;
-        var f = formLinks;
-        return (
-            <form className="CreateEdit__form">
-                <a id={f.basicInformation.id} />
-                <TextInput id={f.title.id} { ...p('title') }/>
-                <Select2Input id={f.type.id} { ...p('type') }
-                    options={ getOptionsForSystemObject(system.types) }/>
-                <Select2Input id={f.categories.id} { ...p('categories') } multiple
-                    options={ getOptionsForSystemObject(system.categories) }/>
-                <Select2TagInput id={f.tags.id} { ...p('tags') } multiple/>
-                <TextAreaInput id={f.description.id} { ...p('description') } rows="6"/>
-                <TextAreaInput id={f.descriptionShort.id} { ...p('descriptionShort') } rows="3"/>
-
-                <h2 id={f.listingDetails.id} >Listing Details</h2>
-                <TextInput id={f.versionNumber.id} { ...p('versionName') }/>
-                <TextInput id={f.launchUrl.id} { ...p('launchUrl') }/>
-                <TextAreaInput id={f.requirements.id} { ...p('requirements') } rows="5"/>
-                <TextAreaInput id={f.whatsNew.id} { ...p('whatIsNew') } rows="3" optional/>
-                <Select2Input id={f.intents.id} { ...p('intents') }  multiple options={
-                    this.props.system.intents.map(intent => {
-                        var val = intent.type + '/' + intent.action;
-                        return { id: val, text: val };
-                    })
-                }/>
-                <ListInput id={f.resources.id} { ...this.getSubFormProps('docUrls') }
-                    itemForm={ ResourceForm } optional/>
-
-                <h2 id={f.graphics.id}>Graphics</h2>
-                <ImageInput id={f.smallIcon.id} { ...p('smallIcon') }
-                    imageUri={this.props.value.imageSmallUrl}
-                    serverError={this.props.imageErrors.smallIcon} />
-                <ImageInput id={f.largeIcon.id} { ...p('largeIcon') }
-                    imageUri={this.props.value.imageMediumUrl}
-                    serverError={this.props.imageErrors.largeIcon} />
-                <ImageInput id={f.bannerIcon.id} { ...p('bannerIcon') }
-                    imageUri={this.props.value.imageLargeUrl}
-                    serverError={this.props.imageErrors.bannerIcon} />
-                <ImageInput id={f.featuredBannerIcon.id} { ...p('featuredBannerIcon') }
-                    imageUri={this.props.value.imageXlargeUrl}
-                    serverError={this.props.imageErrors.featuredBannerIcon} />
-
-                <ListInput id={f.screenshots.id} { ...this.getSubFormProps('screenshots') }
-                    itemForm={ ScreenshotForm }/>
-
-                <h2 id={f.ownersAndContacts.id}>Owner Information and Contacts</h2>
-                <Select2Input id={f.orgs.id} { ...p('agency') }
-                    options={ getOptionsForSystemObject(system.organizations) }/>
-                <OwnerInput id={f.owners.id} { ...p('owners') } listing={listing}
-                    ownerSetter={ownerSetter} />
-                <ListInput id={f.contacts.id} { ...this.getSubFormProps('contacts') }
-                    itemForm={ ContactForm }/>
-            </form>
-        );
-    },
-
-    componentWillReceiveProps: function() {
-        this.setState({ currentNavTarget: this.getQuery().el });
-    },
-
-    componentDidMount: function() {
-        this.setState({ currentNavTarget: this.getQuery().el });
-    },
-
-    shouldComponentUpdate: function(newProps, newState) {
-        return (!_.isEqual(newProps, this.props) ||
-                newState.currentNavTarget !== this.state.currentNavTarget);
-    },
-
-    componentDidUpdate: function(prevProps, prevState) {
-        var elId = this.state.currentNavTarget;
-
-        if (prevState.currentNavTarget !== elId) {
-            var element = $(`#${elId || formLinks.basicInformation.id}`),
-                form = $(this.getDOMNode()),
-                firstFormChild = form.find(':first-child');
-
-            if (element) {
-                var elementOffset = element.offset().top,
-                    formOffset = firstFormChild.offset().top;
-
-                form.animate({
-                    scrollTop: elementOffset - formOffset
-                });
-            }
-        }
-    }
-});
-
-var Reminders = React.createClass({
-    getInitialState: () => ({ showStewards: false }),
-
-    render: function() {
-        return (
-            <section className="reminders">
-                <h4>Reminders</h4>
-                <p>
-                    <strong>Remember to portion-mark your descriptions!</strong>
-                    <br/>
-                    Listings that are not portion-marked will be rejected.
-                </p>
-                <p className="questions">
-                    <strong>If you have any questions</strong> during the submission process,
-                    please contact your organizations steward.
-                    <a className="stewards-link" onClick={this.showStewardsModal}>
-                        View list of organization stewards
-                    </a>
-                </p>
-                {
-                    this.state.showStewards &&
-                    <OrgStewardModal onHidden={this.onStewardModalHidden}/>
-                }
-            </section>
-        );
-    },
-
-    showStewardsModal: function() {
-        this.setState({ showStewards: true });
-    },
-
-    onStewardModalHidden: function() {
-        this.setState({ showStewards: false });
-    }
-});
 
 function transitionToMyListings (transition) {
     transition.redirect('my-listings');
@@ -528,7 +316,8 @@ var CreateEditPage = React.createClass({
                 requestChange: CreateEditActions.updateListing,
                 forceError: !this.state.isValid,
                 currentUser: this.props.currentUser,
-                imageErrors: this.state.imageErrors
+                imageErrors: this.state.imageErrors,
+                formLinks: formLinks
             }
         );
 
