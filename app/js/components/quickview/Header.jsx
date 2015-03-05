@@ -23,7 +23,7 @@ var QuickviewHeader = React.createClass({
         return (
             <div className="quickview-header">
                 <div className="quickview-header-info">
-                    <button type="button" className="close" aria-hidden="true" onClick={ this.props.onCancel }>×</button>
+                    <button type="button" className="close" aria-hidden="true" onClick={ this.props.onCancel }><i className="icons icon-cross" alt="Close" /></button>
                     <img className="listing-icon" src={ image } data-fallback="/store/images/types/3" />
                     <h3 className="listing-title" title={ title }>{ title }
                     {
@@ -49,7 +49,7 @@ var QuickviewHeader = React.createClass({
             <div className="btn-group quickview-header-actions">
                 <CenterLaunchLink listing={this.props.listing} className="btn btn-default"/>
                 <BookmarkButton listing={this.props.listing} />
-              {this.props.allowEdit && <button type="button" className="btn btn-default" onClick={ this.props.onEdit }><i className="fa fa-pencil"></i></button>}
+              {this.props.allowEdit && <button type="button" className="btn btn-default" onClick={ this.props.onEdit }><i className="icons icon-pencil"></i></button>}
             </div>
         );
     }

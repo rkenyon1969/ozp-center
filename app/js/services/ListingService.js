@@ -3,13 +3,9 @@
 var { ListingApi } = require('../webapi/Listing');
 var _ = require('../utils/_');
 var { PAGINATION_MAX } = require('ozp-react-commons/constants');
-var { WEBTOP_URL } = require('ozp-react-commons/OzoneConfig');
 var OzpAnalytics = require('../analytics/ozp-analytics');
 var ListingActions = require('../actions/ListingActions');
-var LibraryActions = require('../actions/LibraryActions');
 var PaginatedListingsStore = require('../stores/PaginatedListingsStore');
-var LibraryStore = require('../stores/LibraryStore');
-var SelfStore = require('ozp-react-commons/stores/SelfStore');
 
 function updateListingProperty(propName, value, listing) {
     var data = _.cloneDeep(listing);
@@ -20,8 +16,6 @@ function updateListingProperty(propName, value, listing) {
 var setEnabled = updateListingProperty.bind(null, 'isEnabled');
 
 ListingActions.fetchAllListings.listen(function (filter) {
-    // work around circular dependency
-
     var paginatedList = PaginatedListingsStore.getListingsByFilter(filter),
         opts = {},
         nextLink;
@@ -162,63 +156,10 @@ ListingActions.deleteReview.listen(function (listing, review) {
         .fail(_.partial(ListingActions.deleteReviewFailed, listing, review));
 });
 
-//grouping of launch code
-(function() {
-    function getLaunchInWebtop(profileData) {
-        var profile = profileData.currentUser;
-        return profile ? profile.launchInWebtop : null;
-    }
-
-    function doWebtopLaunch(uuid) {
-        var url = `${WEBTOP_URL}#/launchApp/${encodeURIComponent(uuid)}`;
-        window.open(url);
-    }
-
-    var launchInWebtop = getLaunchInWebtop(SelfStore.getDefaultData()),
-        library = LibraryStore.getDefaultData(),                //user's current library
-        pendingLaunches = [];   //list of UUIDs waiting to be bookmarked before being launched.
-
-    SelfStore.listen(function(profileData) {
-        launchInWebtop = getLaunchInWebtop(profileData);
-    });
-
-    //when the library store updates, check to see if any of the listings that are pending
-    //launch have been bookmarked
-    LibraryStore.listen(function(lib) {
-        library = lib;
-
-        //split the current pending list into those that have now been bookmarked and
-        //those that still haven't
-        var isBookmarked = uuid => _.find(lib, { listing: { uuid: uuid } }),
-            { stillPending, bookmarked } =
-                _.groupBy(pendingLaunches,
-                    uuid => isBookmarked(uuid) ? 'bookmarked' : 'stillPending');
-
-        pendingLaunches = stillPending || [];
-        if (bookmarked) { bookmarked.forEach(doWebtopLaunch); }
-    });
-
-    ListingActions.launch.listen(function (listing) {
-        OzpAnalytics.trackEvent('Applications', listing.title);
-
-        if (launchInWebtop) {
-            //only bookmarked listings can be launched into webtop.  If this listing is
-            //not yet bookmarked, bookmark it and add it to the pending list so it can
-            //be launched when bookmarking completes
-            if (_.contains(library.map(e => e.listing.id), listing.id)) {
-                doWebtopLaunch(listing.uuid);
-            }
-            else {
-                pendingLaunches = pendingLaunches.concat(listing.uuid);
-                LibraryActions.addToLibrary(listing);
-            }
-        }
-        else {
-            window.open(listing.launchUrl);
-        }
-    });
-
-})();
+ListingActions.launch.listen(function (listing) {
+    OzpAnalytics.trackEvent('Applications', listing.title);
+    window.open(listing.launchUrl);
+});
 
 ListingActions.save.listen(function (data) {
     var isNew = !data.id;

@@ -17,9 +17,12 @@ var Carousel = require('../carousel/index.jsx');
 var Types = require('./Types.jsx');
 var Organizations = require('./Organizations.jsx');
 
+var Input = require('../shared/Input.jsx');
+
 // store dependencies
 var DiscoveryPageStore = require('../../stores/DiscoveryPageStore');
 
+<<<<<<< HEAD
 
 var FILTERS = ['categories', 'types', 'organizations'];
 
@@ -29,6 +32,8 @@ var areFiltersApplied = (state) => {
     }, false);
 };
 
+=======
+>>>>>>> temp-master
 var Discovery = React.createClass({
 
     mixins: [ Reflux.ListenerMixin ],
@@ -92,6 +97,7 @@ var Discovery = React.createClass({
                 <NavBar />
                 <Header>
                     <form className="navbar-form navbar-left" role="search">
+<<<<<<< HEAD
                         <div className="form-group Search">
                             <i className="icon-search"></i>
                             
@@ -100,6 +106,15 @@ var Discovery = React.createClass({
                                 value={ this.state.queryString || ''}
                                 onChange={ this.onSearchInputChange } />
 
+=======
+                        <div className="form-group">
+                            <i className="icon-search"></i>
+                            <Input
+                                ref="search" type="text" className="form-control"
+                                placeholder="Search" 
+                                value={ this.state.queryString || '' }
+                                onChange={ this.onSearchInputChange } />
+>>>>>>> temp-master
                             <i className="icon-cross" onClick={this.reset}></i>
                         </div>
                         <Types value={this.state.types} onChange={this.onTypeChange} />

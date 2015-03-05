@@ -36,7 +36,7 @@ module.exports = React.createClass({
     render: function () {
         return (
             <Modal ref="modal" className="FeedbackModal" size="small">
-                <button className="close corner" onClick={ this.close }>×</button>
+                <button className="close corner" onClick={ this.close }><span className="icons icon-cross" alt="Close" /></button>
                 <h3>Steward Feedback</h3>
                 <dl>
                     <dt>Listing</dt>

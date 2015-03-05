@@ -65,7 +65,7 @@ describe('Reviews Tab', function () {
         );
 
         var review = TestUtils.findRenderedComponentWithType(reviewsTab, UserReviews.UserReview);
-        var editIcon = $(review.getDOMNode()).find('.fa-pencil')[0];
+        var editIcon = $(review.getDOMNode()).find('.icon-pencil')[0];
         TestUtils.Simulate.click(editIcon);
         expect(TestUtils.findRenderedComponentWithType(reviewsTab, EditReview)).be.ok;
 
