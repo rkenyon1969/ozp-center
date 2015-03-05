@@ -35,7 +35,7 @@ var UserReview = React.createClass({
                 <TimeAgo className="Review__time" time={ time } />
                 {
                     this.isEditAllowed() &&
-                        <i className="icons icon-pencil pull-right" onClick={ _.partial(onEdit, review) }></i>
+                        <i className="fa fa-pencil pull-right" onClick={ _.partial(onEdit, review) }></i>
                 }
                 <p className="Review__text">{ review.text }</p>
             </li>

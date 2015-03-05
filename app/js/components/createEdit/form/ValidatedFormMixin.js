@@ -29,12 +29,6 @@ var ValidatedFormMixin = {
             requestChange: this.props.requestChange,
             path: (this.props.path || []).concat(property)
         });
-    },
-
-    getOptionsForSystemObject: function(items) {
-        return items.map(item => {
-            return { id: item.title, text: item.title };
-        });
     }
 };
 
