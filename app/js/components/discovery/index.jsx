@@ -51,7 +51,7 @@ var Discovery = React.createClass({
             <div>
                 <NavBar />
                 <Header>
-                    <form className="navbar-form navbar-left" role="search">
+                    <form className="navbar-form navbar-left" onsubmit={(e)=>e.preventDefault()} role="search">
                         <div className="form-group">
                             <i className="fa fa-search"></i>
                             <Input
