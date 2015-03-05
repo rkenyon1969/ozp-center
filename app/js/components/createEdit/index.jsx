@@ -421,7 +421,7 @@ var CreateEditPage = React.createClass({
             if (currentPathBase !== newPathBase && state && state.hasChanges) {
                 window.confirm(CreateEditPage.UNSAVED_MESSAGE) ?
                     CreateEditActions.discard() :
-                    transition.abort();
+                    transition.redirect(component.getPath(), component.getParams(), component.getQuery());
             }
         }
     },
