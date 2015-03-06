@@ -304,13 +304,13 @@ var Crud = React.createClass({
             },
             buttons: {
                 add: {
-                    icon: 'icon-square-plus'
+                    icon: 'icon-square-plus-grayDark'
                 },
                 edit: {
-                    icon: 'fa fa-pencil'
+                    icon: 'icon-pencil-grayDark'
                 },
                 delete: {
-                    icon: 'fa fa-trash-o'
+                    icon: 'icon-trash-grayDark'
                 }
             },
             url : this.props.url,
