@@ -87,7 +87,7 @@ var RecentActivity = React.createClass({
             }
 
             return (
-                <a href={href}>{ linkMap[action] } <i className="fa fa-angle-right"></i></a>
+                <a href={href}>{ linkMap[action] } <i className="icon-caret-right"></i></a>
             );
         }
     },

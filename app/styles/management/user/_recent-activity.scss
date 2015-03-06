@@ -39,10 +39,13 @@
             margin-right: 15px;
         }
 
-        i {
+        .icon-caret-right {
             float: right;
             margin-top: 6px;
-            color: $gray-dark;
+        }
+
+        i {
+            margin-right: 4px;
         }
 
     }
@@ -66,6 +69,10 @@
         max-height: 30px;
         max-width: 30px;
         margin-right: 10px;
+    }
+
+    .icon-caret-right {
+        margin-top: 6px;
     }
 
 }
