@@ -42,7 +42,7 @@ var CenterLaunchLink = React.createClass({
         return (
             <button { ...otherProps } className={linkClassName}
                     onClick={listingLaunchFn}>
-                <span className="icon-open"></span>
+                <i className="icon-open-grayDark" />
             </button>
         );
     }

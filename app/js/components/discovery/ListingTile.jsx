@@ -52,9 +52,9 @@ var ListingTile = React.createClass({
                         className="icon-rating"
                         viewOnly
                         currentRating = { avgRate }
-                        toggledClassName="fa fa-star"
-                        untoggledClassName="fa fa-star-o"
-                        halfClassName="fa fa-star-half-o" />
+                        toggledClassName="icon-star-filled-yellow"
+                        untoggledClassName="icon-star-filled-grayLighter"
+                        halfClassName="icon-star-half-filled-yellow" />
                     {
                         agencyShort &&
                             <span className="company">{ agencyShort }</span>

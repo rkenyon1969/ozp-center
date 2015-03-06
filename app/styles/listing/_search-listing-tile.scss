@@ -20,7 +20,7 @@
         background: #f3f3f3;
         transition: all .1s ease-out 0.1s;
 
-        > :nth-child(2) {
+        > :nth-child(2) > i {
             display: inline-block;
         }
     }

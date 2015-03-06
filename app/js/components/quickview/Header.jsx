@@ -35,9 +35,9 @@ var QuickviewHeader = React.createClass({
                         className="icon-rating"
                         viewOnly
                         currentRating= { avgRate }
-                        toggledClassName="fa fa-star"
-                        untoggledClassName="fa fa-star-o"
-                        halfClassName="fa fa-star-half-o" />
+                        toggledClassName="icon-star-filled-yellow"
+                        untoggledClassName="icon-star-filled-grayLighter"
+                        halfClassName="icon-star-half-filled-yellow" />
                 </div>
                 { !this.props.preview && this.renderActions() }
             </div>
@@ -49,7 +49,7 @@ var QuickviewHeader = React.createClass({
             <div className="btn-group quickview-header-actions">
                 <CenterLaunchLink listing={this.props.listing} className="btn btn-default"/>
                 <BookmarkButton listing={this.props.listing} />
-              {this.props.allowEdit && <button type="button" className="btn btn-default" onClick={ this.props.onEdit }><i className="fa fa-pencil"></i></button>}
+              {this.props.allowEdit && <button type="button" className="btn btn-default" onClick={ this.props.onEdit }><i className="icon-pencil"></i></button>}
             </div>
         );
     }

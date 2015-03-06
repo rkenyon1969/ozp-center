@@ -1,16 +1,30 @@
-$icon-font-path: "../../node_modules/bootstrap-sass/assets/fonts/bootstrap/";
-$fa-font-path: "../../bower_components/font-awesome/fonts/";
-
 @import "variables";
+
 @import "../../bower_components/ubuntu-fontface/_ubuntu-base.scss";
 @import "../../bower_components/ubuntu-fontface/_ubuntu-mono.scss";
 
-@import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap.scss";
 @import "../../bower_components/magnific-popup/src/css/main.scss";
-@import "../../bower_components/font-awesome/scss/font-awesome.scss";
 @import "../../node_modules/select2/select2.css";
 @import "../../node_modules/select2/select2-bootstrap.css";
+@import "_bootstrap.scss";
 @import "../../node_modules/ozp-react-commons/app/styles/commons.scss";
+
+@import "../../node_modules/icons/dist/css/sprite.scss";
+
+[class^="icon-"], [class*=" icon-"] {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'icons';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
 $header-height: 55px;
 $black: #191F25;
@@ -108,14 +122,6 @@ html, body {
     margin-top: -10px;
 }
 
-.fa2 {
-    display: inline-block;
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 1;
-}
-
 .dropdown-menu .divider {
     background: $gray-darkest !important;
 }
@@ -124,13 +130,6 @@ i {
     margin-right: 1px;
 }
 
-i.fa-star, i.fa-star-half-o {
-    color: $star-color;
-}
-i.fa-star-o:before {
-    color: #dbdcdd;
-    content: "\f005";
-}
 
 label {
     font-weight: 400;
@@ -144,46 +143,6 @@ label {
 }
 .mfp-wrap {
     z-index: 10001;
-}
-
-/*==============================
-=   Approval Status Indicators =
-==============================*/
-
-.label-draft, .label-pending, .label-needs-action, .label-published, .label-rejected {
-    @extend .fa2;
-    padding-left: 0px !important;
-    font-family: 'Ubuntu';
-
-    &::before {
-        font-family: 'FontAwesome';
-        display: inline-block;
-        width: 18px;
-        text-align: center;
-    }
-}
-
-.label-draft {
-    @extend .fa-file-text-o;
-}
-
-.label-pending {
-    @extend .fa-spinner;
-    color: $blue-dark;
-}
-
-.label-needs-action {
-    @extend .fa-exclamation;
-    color: $red-orange-dark;
-}
-
-.label-published {
-    @extend .fa-thumbs-o-up;
-    color: $green-dark;
-}
-
-.label-rejected {
-    @extend .fa-repeat;
 }
 
 /*====================

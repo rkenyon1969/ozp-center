@@ -127,7 +127,7 @@ var AdministrationTab = React.createClass({
             statusText = status,
             isAdmin = UserRole[this.props.currentUser.highestRole] >= UserRole.ADMIN,
             isStewardOfOrg = _.contains(this.props.currentUser.stewardedOrganizations, listing.agency),
-            controls, statusClass;
+            controls, statusClass, iconClass;
 
         switch (status) {
             case 'Published':
@@ -140,32 +140,46 @@ var AdministrationTab = React.createClass({
                     ] : [enabledControl];
 
                 statusClass = 'label-published';
+                iconClass= 'icon-thumbs-up-14-greenDark';
                 break;
             case 'Pending, Organization':
                 if (isStewardOfOrg || isAdmin) {
                     controls = this.renderReviewSection();
                     statusClass = 'label-needs-action';
+                    iconClass= 'icon-exclamation-14-redOrangeDark';
+
                 } else {
                     controls = [];
                     statusClass = 'label-pending';
+                    iconClass= 'icon-loader-14-blueDark';
+
                 }
                 break;
             case 'Pending, Marketplace':
                 if (isAdmin) {
                     controls = this.renderReviewSection();
                     statusClass = 'label-needs-action';
+                    iconClass= 'icon-exclamation-14-redOrangeDark';
+
                 } else {
                     controls = [];
                     statusClass = 'label-pending';
+                    iconClass= 'icon-loader-14-blueDark';
+
                 }
                 break;
 
             case 'Returned to Owner':
                 statusClass = 'label-needs-action';
+                iconClass= 'icon-exclamation-14-redOrangeDark';
+
                 controls = [];
                 break;
+
             case 'Draft':
                 statusClass = 'label-draft';
+                iconClass= 'icon-paper-13-grayDark';
+
                 controls = [];
                 break;
         }
@@ -175,7 +189,7 @@ var AdministrationTab = React.createClass({
                 <section>
                     <h5>Listing Status</h5>
                     <hr/>
-                    <p className={ statusClass }>{ statusText }</p>
+                    <p className={statusClass}><i className={iconClass} />{ statusText }</p>
                 </section>
                 { controls }
             </div>

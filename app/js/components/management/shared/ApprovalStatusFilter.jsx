@@ -4,8 +4,14 @@ var _ = require('../../../utils/_');
 var RadioGroup = require('react-radio-group');
 var { UserRole } = require('ozp-react-commons/constants');
 
-function filterOption (currentValue, label, value, count, htmlFor, className) {
+function filterOption (currentValue, label, value, count, htmlFor, className, iconClass) {
     var badge;
+    var statusIcon;
+
+    if(iconClass) {
+        statusIcon = <i className={iconClass} />;
+    }
+
     if (currentValue === 'all') {
         badge = <strong className="badge">{ count || 0 }</strong>;
     }
@@ -16,6 +22,7 @@ function filterOption (currentValue, label, value, count, htmlFor, className) {
     return [
         <input id={htmlFor} type="radio" value={value} />,
         <label htmlFor={htmlFor} className={className}>
+            { statusIcon }
             { label }
             { badge }
         </label>,
@@ -44,25 +51,25 @@ var ApprovalStatusFilter = React.createClass({
         var value = this.props.value.approvalStatus || 'all';
 
         var components = [
-            filterOption(value, 'All', 'all', counts.total, 'all-listings-filter-all', 'label-all'),
-            filterOption(value, 'Published', 'APPROVED', counts.APPROVED, 'all-listings-filter-published', 'label-published')
+            filterOption(value, 'All', 'all', counts.total, 'all-listings-filter-all', 'label-all', undefined),
+            filterOption(value, 'Published', 'APPROVED', counts.APPROVED, 'all-listings-filter-published', 'label-published', 'icon-thumbs-up-12-greenDark')
         ];
 
         if (this.props.role === UserRole.ADMIN) {
             components.push(
-                filterOption(value, 'Needs action', 'APPROVED_ORG', counts.APPROVED_ORG, 'all-listings-filter-needs-action', 'label-needs-action'),
-                filterOption(value, 'Pending, Org.', 'PENDING', counts.PENDING, 'all-listings-filter-pending', 'label-pending')
+                filterOption(value, 'Needs action', 'APPROVED_ORG', counts.APPROVED_ORG, 'all-listings-filter-needs-action', 'label-needs-action', 'icon-exclamation-12-redOrangeDark'),
+                filterOption(value, 'Pending, Org.', 'PENDING', counts.PENDING, 'all-listings-filter-pending', 'label-pending', 'icon-loader-12-blueDark')
             );
         }
         else if (this.props.role === UserRole.ORG_STEWARD) {
             components.push(
-                filterOption(value, 'Needs action', 'PENDING', counts.PENDING, 'all-listings-filter-needs-action', 'label-needs-action'),
-                filterOption(value, 'Org approved', 'APPROVED_ORG', counts.APPROVED_ORG, 'all-listings-filter-pending', 'label-pending')
+                filterOption(value, 'Needs action', 'PENDING', counts.PENDING, 'all-listings-filter-needs-action', 'label-needs-action', 'icon-exclamation-12-redOrangeDark'),
+                filterOption(value, 'Org approved', 'APPROVED_ORG', counts.APPROVED_ORG, 'all-listings-filter-pending', 'label-pending', 'icon-reload-12-blueDark')
             );
         }
         components.push(
-            filterOption(value, 'Returned', 'REJECTED', counts.REJECTED, 'all-listings-filter-rejected', 'label-rejected'),
-            filterOption(value, 'Draft', 'IN_PROGRESS', counts.IN_PROGRESS, 'all-listings-filter-draft', 'label-draft')
+            filterOption(value, 'Returned', 'REJECTED', counts.REJECTED, 'all-listings-filter-rejected', 'label-rejected', 'icon-reload-12-blueDark'),
+            filterOption(value, 'Draft', 'IN_PROGRESS', counts.IN_PROGRESS, 'all-listings-filter-draft', 'label-draft', 'icon-paper-14-grayDark')
         );
         return components;
     },
