@@ -175,18 +175,15 @@ var CreateEditPage = React.createClass({
         UNSAVED_MESSAGE: 'You have unsaved information, are you sure you want to leave this page?',
 
         willTransitionTo: function (transition, params, query, callback) {
-            var listingId = params.listingId === undefined ? undefined :
-                    parseInt(params.listingId, 10),
-                loadedListing = CurrentListingStore.getDefaultData().listing,
-                myListingsTransition = transitionToMyListings.bind(null, transition);
+            var listingId = params.listingId || query.listing;
+            listingId = listingId === undefined ? undefined : parseInt(listingId, 10);
+            var loadedListing = CurrentListingStore.getDefaultData().listing;
+            var myListingsTransition = transitionToMyListings.bind(null, transition);
 
             function checkPermission() {
-                if (CurrentListingStore.currentUserCanEdit()) {
-                    callback();
-                }
-                else {
+                CurrentListingStore.currentUserCanEdit() ?
+                    callback() :
                     myListingsTransition();
-                }
             }
 
             if (loadedListing && loadedListing.id === listingId) {
@@ -205,8 +202,8 @@ var CreateEditPage = React.createClass({
                 newPathBase = stripQuery(transition.path),
                 { state } = component;
 
-            //if we are actually moving away from this page, and we have changes
-            if (currentPathBase !== newPathBase && state && state.hasChanges) {
+            // if we are actually moving away from this page, and we have changes
+            if (newPathBase.indexOf(currentPathBase) !== 0 && state && state.hasChanges) {
                 window.confirm(CreateEditPage.UNSAVED_MESSAGE) ?
                     CreateEditActions.discard() :
                     transition.redirect(component.getPath(), component.getParams(), component.getQuery());
