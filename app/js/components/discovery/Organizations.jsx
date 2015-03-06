@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react');
-var SelectBox = require('react-select-box');
+var SelectBox = require('../shared/SelectBox.jsx');
 
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
 
