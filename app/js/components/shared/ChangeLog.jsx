@@ -53,7 +53,7 @@ var SetToChangeLog = React.createClass({
 
 var RejectedChangeLog = React.createClass({
     toggleIcon: function (e) {
-        $(e.currentTarget).children('i').toggleClass('icon-minus-14 icon-plus-14');
+        $(e.currentTarget).children('i').toggleClass('icon-minus-10-blueDark icon-plus-10-blueDark');
     },
     render: function () {
         var changeLog = this.props.changeLog;
@@ -68,7 +68,7 @@ var RejectedChangeLog = React.createClass({
                     { this.props.listingName }
                 </div>
                 <a data-toggle="collapse" data-target={ '#' + id } onClick={ this.toggleIcon }>
-                    <i className="icon-plus-14-blueDark"></i> Feedback
+                    <i className="icon-plus-10-blueDark"></i> Feedback
                 </a>
                 <ul id={ id } className="collapse list-unstyled ListingActivity__Changes">
                     <li>{ details }</li>
@@ -93,7 +93,7 @@ var OrgApprovalChangeLog = React.createClass({
 
 var ModifiedChangeLog = React.createClass({
     toggleIcon: function (e) {
-        $(e.currentTarget).children('i').toggleClass('icon-minus-14 icon-plus-14');
+        $(e.currentTarget).children('i').toggleClass('icon-minus-10-blueDark icon-plus-10-blueDark');
     },
 
     render: function () {
@@ -128,7 +128,7 @@ var ModifiedChangeLog = React.createClass({
                         <AuthorLink author={changeLog.author} /> modified {this.props.listingName}
                     </div>
                     <a data-toggle="collapse" data-target={ '#' + id } onClick={ this.toggleIcon }>
-                        <i className="icon-plus-14"></i> See {this.props.showListingName ? changeLog.listing.title : 'the listing'} changes
+                        <i className="icon-plus-10-blueDark"></i> See {this.props.showListingName ? changeLog.listing.title : 'the listing'} changes
                     </a>
                     <ul id={ id } className="collapse list-unstyled ListingActivity__Changes">
                         { extendedDetails }

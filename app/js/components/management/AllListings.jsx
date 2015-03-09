@@ -95,13 +95,13 @@ var AllListings = React.createClass({
 
         return this.transferPropsTo(
             <div className="AllListings row">
-                <aside className="Listings__Sidebar col-md-2">
+                <div className="Listings__Sidebar col-md-2">
                     <Sidebar>
                         <ApprovalStatusFilter role={ UserRole.ADMIN } { ...sidebarFilterOptions } />
                         <OrgFilter { ...sidebarFilterOptions } />
                         <EnabledFilter { ...sidebarFilterOptions } />
                     </Sidebar>
-                </aside>
+                </div>
                 <LoadMore className="AllListings__listings col-md-10 all" hasMore={this.state.hasMore} onLoadMore={this.onLoadMore}>
                     { ListingTile.fromArray(this.state.listings, UserRole.ADMIN) }
                 </LoadMore>

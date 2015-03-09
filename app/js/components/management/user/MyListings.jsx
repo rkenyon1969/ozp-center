@@ -139,11 +139,11 @@ var MyListings = React.createClass({
 
         return this.transferPropsTo(
             <div className="MyListings row">
-                <aside className="Listings__Sidebar col-md-2" >
+                <div className="Listings__Sidebar col-md-2" >
                     <Sidebar>
                         <MyListingsStatusFilter { ...filterProps } />
                     </Sidebar>
-                </aside>
+                </div>
                 <ul className={"MyListings__listings col-md-10 " + filter}>
                     { ListingTile.fromArray(listings) }
                 </ul>
