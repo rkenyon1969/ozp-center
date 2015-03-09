@@ -43,6 +43,10 @@ var Discovery = React.createClass({
         ListingActions.fetchMostPopular();
     },
 
+    componentWillUnmount: function(){
+        $(this.refs.form.getDOMNode()).unbind('submit', false);
+    },
+
     render: function () {
         var isSearching = this.isSearching();
         var isBrowsing = this.isBrowsing();
@@ -87,7 +91,7 @@ var Discovery = React.createClass({
     },
 
     componentDidMount: function(){
-        $('.navbar-form').submit((e)=>e.preventDefault());
+        $(this.refs.form.getDOMNode()).submit((e)=>e.preventDefault());
     },
 
     componentDidUpdate: function(oldProps, oldState) {
