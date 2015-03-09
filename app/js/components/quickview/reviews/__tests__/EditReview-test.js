@@ -49,15 +49,15 @@ describe('EditReview', function () {
     it('shows lock icon for non review owners', function () {
         var editReview = render({id: 1}, userReview, ProfileMock.mockUser());
         var $el = $(editReview.getDOMNode());
-        expect($el.find('.fa-lock').length).to.equal(0);
+        expect($el.find('.icon-lock').length).to.equal(0);
 
         editReview = render({id: 1}, userReview, ProfileMock.mockOrgSteward());
         $el = $(editReview.getDOMNode());
-        expect($el.find('.fa-lock').length).to.equal(1);
+        expect($el.find('.icon-lock').length).to.equal(1);
 
         editReview = render({id: 1}, userReview, ProfileMock.mockAdmin());
         $el = $(editReview.getDOMNode());
-        expect($el.find('.fa-lock').length).to.equal(1);
+        expect($el.find('.icon-lock').length).to.equal(1);
 
         ProfileMock.restore();
     });
