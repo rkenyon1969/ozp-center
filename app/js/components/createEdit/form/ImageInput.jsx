@@ -36,7 +36,9 @@ var ImageInput = React.createClass({
                 </label>
                 <p className="small">{ this.props.description }</p>
                 <span className={imageContainerClasses}>
-                    <button onClick={this.removeImage} className="btn image-remove"/>
+                    <button onClick={this.removeImage} className="btn image-remove">
+                        <i className="icon-trash" />
+                        </button>
                     <img ref="image" className="image-preview"
                         src={this.props.imageUri || undefined} />
                 </span>

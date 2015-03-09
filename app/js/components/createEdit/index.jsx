@@ -207,7 +207,7 @@ var CreateEditPage = React.createClass({
         var showSubmit = [IN_PROGRESS, REJECTED].some(s => s === status);
         var showPreview = !!listing.id;
         var titleText = (this.getParams().listingId ? 'Edit ' : 'Create New ') + 'Listing';
-        var saveText = showSave() ? 'icon-save' : 'icon-check';
+        var saveText = showSave() ? 'icon-save-white' : 'icon-check-white';
         var savingText = savingMessages[this.state.saveStatus];
 
         var formProps = assign({},

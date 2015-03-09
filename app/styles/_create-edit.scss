@@ -94,9 +94,6 @@
 .image-remove {
     @extend .corner-button;
 
-    @extend .fa2;
-    @extend .fa-trash-o;
-
     position: absolute;
     top: 0;
     right: 0;
