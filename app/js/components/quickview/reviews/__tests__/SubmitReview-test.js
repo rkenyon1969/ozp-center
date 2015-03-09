@@ -15,7 +15,7 @@ describe('SubmitReview', function () {
         var text = 'Hello, world';
 
         TestUtils.Simulate.change(submitReview.refs.text.getDOMNode(), {target: {value: 'Hello, world'}});
-        TestUtils.Simulate.click($(submitReview.getDOMNode()).find('.fa-star-o')[0]);
+        TestUtils.Simulate.click($(submitReview.getDOMNode()).find('.icon-star-filled-grayLighter')[0]);
 
         var spy = sinon.stub(ListingActions, 'saveReview');
 
@@ -32,7 +32,7 @@ describe('SubmitReview', function () {
         var text = 'Hello, world';
 
         TestUtils.Simulate.change(submitReview.refs.text.getDOMNode(), {target: {value: 'Hello, world'}});
-        TestUtils.Simulate.click($(submitReview.getDOMNode()).find('.fa-star-o')[0]);
+        TestUtils.Simulate.click($(submitReview.getDOMNode()).find('.icon-star-filled-grayLighter')[0]);
 
         TestUtils.Simulate.click($(submitReview.getDOMNode()).find('.btn-default')[0]);
 

@@ -98,7 +98,7 @@ var EditReview = React.createClass({
                         viewOnly={ !isEditingRateAllowed }/>
                     {
                         !isEditingRateAllowed &&
-                            <i className="fa fa-lock"></i>
+                            <i className="icon-lock"></i>
                     }
                 </div>
                 <div>
