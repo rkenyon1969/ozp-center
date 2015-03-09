@@ -64,7 +64,7 @@ var ApprovalStatusFilter = React.createClass({
         else if (this.props.role === UserRole.ORG_STEWARD) {
             components.push(
                 filterOption(value, 'Needs action', 'PENDING', counts.PENDING, 'all-listings-filter-needs-action', 'label-needs-action', 'icon-exclamation-12-redOrangeDark'),
-                filterOption(value, 'Org approved', 'APPROVED_ORG', counts.APPROVED_ORG, 'all-listings-filter-pending', 'label-pending', 'icon-reload-12-blueDark')
+                filterOption(value, 'Org approved', 'APPROVED_ORG', counts.APPROVED_ORG, 'all-listings-filter-pending', 'label-pending', 'icon-loader-12-blueDark')
             );
         }
         components.push(
