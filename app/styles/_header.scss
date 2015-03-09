@@ -42,7 +42,7 @@
                 color: $gray-dark;
             }
 
-            > .icon-cross-14 {
+            > .icon-cross-14-grayDark {
                 position: absolute;
                 z-index: 1; // to place icon on top of search input box
                 top: 17px;
@@ -50,8 +50,7 @@
                 color: $gray-dark;
 
                 &:hover{
-                    cursor: pointer;
-                    color: $gray-base;
+                    @extend .icon-cross-14-grayDarker
                 }
             }
         }

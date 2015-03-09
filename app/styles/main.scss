@@ -246,3 +246,25 @@ body > div.classBanner {
 .datepicker__day--selected {
     border-radius: 0px !important;
 }
+
+
+
+
+
+
+
+// Icon Hovers
+
+@import "mixins";
+
+$icons: (
+    icon-ban-12-blueDark: icon-ban-12-red,
+    icon-open-grayDark: icon-open-white,
+    icon-pencil-grayDark: icon-pencil-white,
+    icon-ribbon: icon-ribbon-white,
+    icon-layers: icon-layers-white
+);
+
+
+@include sprite-icons($icons);
+

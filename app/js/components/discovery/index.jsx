@@ -62,7 +62,7 @@ var Discovery = React.createClass({
                                 ref="search" type="text" className="form-control"
                                 placeholder="Search" value={this.state.queryString} onChange={this.onSearchInputChange} />
 
-                            <i className="icon-cross-14" onClick={this.reset}></i>
+                            <i className="icon-cross-14-grayDark" onClick={this.reset}></i>
                         </div>
                     </form>
                 </Header>

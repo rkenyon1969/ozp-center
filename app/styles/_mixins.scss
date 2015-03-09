@@ -1,0 +1,15 @@
+@mixin sprite-icons($icons) {
+    @each $icon, $iconHover in $icons {
+        a {
+            &:hover > .#{$icon} {
+                @extend .#{$iconHover};
+            }
+        }
+
+        button {
+        	&:hover > .#{$icon} {
+        		@extend .#{$iconHover}
+        	}
+        }
+    }
+}
