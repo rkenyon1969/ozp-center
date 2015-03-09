@@ -30,6 +30,16 @@
 	color: $blue;
 }
 
+.activeIcon.icon-shopping-grayLightest {
+	@extend .icon-shopping-blue;
+}
+.activeIcon.icon-home-grayLightest {
+	@extend .icon-shopping-blue;
+}
+.activeIcon.icon-layout-grayLightest {
+	@extend .icon-shopping-blue;
+}
+
 .navbar-inverse .navbar-nav {
 
 	& li > a {
