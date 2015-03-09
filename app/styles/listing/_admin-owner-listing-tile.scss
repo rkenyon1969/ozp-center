@@ -138,24 +138,24 @@
 }
 
 .AdminOwnerListingTile.pending .approvalStatus {
-    @extend .label-pending;
+    @extend .icon-loader-14-blueDark;
     color: $blue-dark;
 }
 
 .AdminOwnerListingTile.published .approvalStatus {
-    @extend .label-published;
+    @extend .icon-thumbs-up-14-greenDark;
     color: $green-dark;
 }
 
 .AdminOwnerListingTile.needs-action .approvalStatus {
-    @extend .label-needs-action;
+    @extend .icon-exclamation-14-redOrangeDark;
 }
 
 .AdminOwnerListingTile.draft .approvalStatus {
-    @extend .label-draft;
+    @extend .icon-paper-14-grayDark;
 }
 
 .AdminOwnerListingTile.rejected .approvalStatus {
-    @extend .label-rejected;
+    @extend .icon-reload-14-blueDark;
     color: $blue-dark;
 }
