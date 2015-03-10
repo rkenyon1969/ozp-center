@@ -156,12 +156,6 @@
             color: $gray-dark;
         }
 
-        &:active {
-            background: $gray-lightest;
-            border-top: 4px solid $blue-dark;
-            color: $blue-dark;
-        }
-
         > .react-select-box-label {
             font-size: inherit;
             font-weight: 400;
@@ -188,5 +182,23 @@
 
     > .react-select-box-clear {
         top: 17px;
+    }
+
+}
+
+.SelectBox__Types.open, .react-select-box-empty.SelectBox__Types.open,.SelectBox__Organizations.open, .react-select-box-empty.SelectBox__Organizations.open,  {
+    > .react-select-box > .react-select-box-label {
+        color: $blue-dark;
+    }
+}
+
+.react-select-box-container.SelectBox__Types.react-select-box-multi.react-select-box-empty.open, .react-select-box-container.SelectBox__Organizations.react-select-box-multi.react-select-box-empty.open{
+    > .react-select-box {
+      background: $gray-lightest;
+      color: $blue-dark;
+    }
+
+    > .react-select-box-label, > .react-select-box-label .react-select-box-empty {
+      color: $blue-dark;
     }
 }
