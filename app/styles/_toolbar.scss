@@ -40,6 +40,13 @@
 	@extend .icon-shopping-blue;
 }
 
+
+.user-menu-dropdown.open {
+	.icon-menu-grayLightest {
+		@extend .icon-menu-blue;
+	}
+}
+
 .navbar-inverse .navbar-nav {
 
 	& li > a {

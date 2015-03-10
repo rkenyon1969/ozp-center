@@ -23,13 +23,13 @@ var RatingProgressBar = React.createClass({
         };
     },
     render: function () {
-        var { count, value } = this.props;
+        var { count, value, star } = this.props;
         var style = {
             width: `${value}%`
         };
         return (
             <div className="star-rating">
-                <span>{ count } stars</span>
+                <span>{ star } stars</span>
                 <div className="progress">
                     <div className="progress-bar" role="progressbar" aria-valuenow={value} aria-valuemin="0" aria-valuemax="100" style={style} ></div>
                 </div>
@@ -144,7 +144,7 @@ var ReviewsTab = React.createClass({
             var count = listing[`totalRate${star}`];
             var width = total === 0 ? 0 : Math.round(count * 100 / total).toFixed(2);
 
-            return <RatingProgressBar count={count} value={width} key={star} />;
+            return <RatingProgressBar count={count} value={width} star={star} />;
         });
 
         return (
