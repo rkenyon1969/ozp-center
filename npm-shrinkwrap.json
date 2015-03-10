@@ -5793,7 +5793,7 @@
     "icons": {
       "version": "0.0.1",
       "from": "icons@git://github.com/ozone-development/icons",
-      "resolved": "git://github.com/ozone-development/icons#ebbf8d15bfbb7cc31f2b49cdc92d7161ce61f2bb",
+      "resolved": "git://github.com/ozone-development/icons#3bcbef4add9829a47c9f7b41264fde7507ecbe35",
       "dependencies": {
         "bluebird": {
           "version": "2.9.13",
