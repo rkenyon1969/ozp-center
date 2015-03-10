@@ -11,15 +11,10 @@ $fa-font-path: "../../bower_components/font-awesome/fonts/";
 @import "../../node_modules/select2/select2.css";
 @import "../../node_modules/select2/select2-bootstrap.css";
 @import "../../node_modules/ozp-react-commons/app/styles/commons.scss";
+@import "../../node_modules/react-select-box/example/select-box.css";
 
 $header-height: 55px;
 $black: #191F25;
-
-input, textarea {
-    &.placeholder {
-        $color: $input-color-placeholder;
-    }
-}
 
 html, body {
     font-family: 'Ubuntu';
@@ -106,7 +101,6 @@ html, body {
     font-weight: lighter;
     top: 0;
     margin-top: -10px;
-    font-size: 200%;
 }
 
 .fa2 {
