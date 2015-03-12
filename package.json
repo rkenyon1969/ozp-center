@@ -60,7 +60,7 @@
     "webpack-dev-server": "1.7.0"
   },
   "dependencies": {
-    "icons": "git://github.com/ozone-development/icons",
+    "icons": "git://github.com/ozone-development/icons#master",
     "bootstrap-sass": "git://github.com/ozone-development/bootstrap-sass#138ca41e070f4c186eba6726a971a28f0168e9ea",
     "exports-loader": "0.6.2",
     "gulp-preprocess": "1.2.0",
