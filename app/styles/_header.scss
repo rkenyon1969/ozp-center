@@ -26,6 +26,7 @@
         > .Search {
             width: 515px;
             position: relative;
+            margin-top: -50px\9; //IE9 Fix for search box being pushed down
 
             > .form-control {
                 position: relative;
@@ -148,6 +149,7 @@
     border-radius: 0;
     box-shadow: none;
     border-left: 1px solid $gray-lighter;
+    height:54px;
 
     > .react-select-box {
         padding: 18px 0;
@@ -239,4 +241,18 @@
     > .react-select-box-label, > .react-select-box-label .react-select-box-empty {
       color: $blue-dark;
     }
+}
+
+/* IE10+ style fixes go here */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+
+    #header .navbar-form {
+
+      > .Search {
+        margin-top: -50px;
+      }
+
+    }
+
+
 }
