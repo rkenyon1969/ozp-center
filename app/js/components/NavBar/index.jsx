@@ -22,7 +22,7 @@ var NavBar = React.createClass({
 
     render: function () {
         var Metrics = (this.isAdmin() || this.isOrgSteward()) ?
-            <li><a href={METRICS_URL}><i className="icon-bar-graph-2-grayLightest"></i>Metrics</a></li> : '';
+            <li><a href={METRICS_URL} target="_blank"><i className="icon-bar-graph-2-grayLightest"></i>Metrics</a></li> : '';
 
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top" id="globalNav">
