@@ -5,6 +5,7 @@ if (!Object.assign) {
 }
 
 require('./services');
+require('console-polyfill');
 
 var React = require('react');
 var jQuery = require('jquery');
