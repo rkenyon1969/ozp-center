@@ -12,18 +12,27 @@ const SelectBox = React.createClass({
         };
     },
 
+    componentWillUnmount() {
+        this.$selectBox = $(this.refs.selectBox.getDOMNode());
+
+        // unbind prevent reloading page
+        this.$selectBox.unbind('submit', false);
+    },
+
     componentDidMount() {
         this.$selectBox = $(this.refs.selectBox.getDOMNode());
 
         // intercept handleOpen
         this.handleOpen = this.refs.selectBox.handleOpen;
-        this.refs.selectBox.handleOpen = (e) => {
-            e.preventDefault();
+        this.refs.selectBox.handleOpen = () => {
             this.handleOpen();
             this.$selectBox.addClass('open');
             // mutate directly, we don't have want to forceUpdate or setState
             this.state.open = true;
         };
+
+        // prevent reloading page
+        this.$selectBox.submit((e)=>e.preventDefault());
 
         // intercept handleClose
         this.handleClose = this.refs.selectBox.handleClose;
