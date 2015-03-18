@@ -254,7 +254,7 @@ var ListingForm = React.createClass({
         var f = formLinks;
         return (
             <form className="CreateEdit__form">
-                <a id={f.basicInformation.id} />
+                <h2 id={f.basicInformation.id}>Basic Information</h2>
                 <TextInput id={f.title.id} { ...p('title') }/>
                 <Select2Input id={f.type.id} { ...p('type') }
                     options={ getOptionsForSystemObject(system.types) }/>
