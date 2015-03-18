@@ -9044,9 +9044,9 @@
       "resolved": "git://github.com/vitmalina/w2ui#aa364dd39b4425265f40e92650fd669ddc3803fc"
     },
     "webpack": {
-      "version": "1.7.0",
-      "from": "webpack@1.7.0",
-      "resolved": "https://registry.npmjs.org/webpack/-/webpack-1.7.0.tgz",
+      "version": "1.7.3",
+      "from": "webpack@1.7.3",
+      "resolved": "https://registry.npmjs.org/webpack/-/webpack-1.7.3.tgz",
       "dependencies": {
         "esprima": {
           "version": "1.2.5",
