@@ -322,8 +322,8 @@ var Crud = React.createClass({
                     records: this.records
                 };
             },
-            getCellValue: () => {
-                var value = w2obj.grid.prototype.getCellValue.apply(this.grid, arguments);
+            getCellValue: (...args) => {
+                var value = w2obj.grid.prototype.getCellValue.apply(this.grid, args);
                 return _.escape(value);
             },
             onAdd: (event) => {

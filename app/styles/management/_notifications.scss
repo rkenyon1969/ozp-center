@@ -8,7 +8,10 @@
 }
 
 .ActiveNotification__Header {
-    > .fa-ban {
+    > .btn-link:hover, .btn-link:focus {
+        color: $red;
+    }
+    > .icon-ban {
         position: absolute;
         right: 0;
         top: 0;

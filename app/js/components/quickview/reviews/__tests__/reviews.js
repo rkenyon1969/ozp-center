@@ -1,6 +1,6 @@
 'use strict';
 
-var [adminReview, orgStewardReview, userReview,] = [
+var [adminReview, orgStewardReview, userReview] = [
     {
         "id": 1,
         "author": {

@@ -8,6 +8,7 @@
 @import "../../node_modules/select2/select2-bootstrap.css";
 @import "_bootstrap.scss";
 @import "../../node_modules/ozp-react-commons/app/styles/commons.scss";
+@import "../../node_modules/react-select-box/example/select-box.css";
 
 @import "../../node_modules/icons/dist/css/sprite.scss";
 
@@ -29,12 +30,6 @@
 $header-height: 55px;
 $black: #191F25;
 
-input, textarea {
-    &.placeholder {
-        $color: $input-color-placeholder;
-    }
-}
-
 html, body {
     font-family: 'Ubuntu';
     font-weight: 300;
@@ -49,7 +44,7 @@ html, body {
 
 #main {
     min-height: 100%;
-    height: auto !important;
+    height: auto;
     width: 1260px;
     background: $white;
     -moz-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
@@ -145,6 +140,50 @@ label {
     z-index: 10001;
 }
 
+<<<<<<< HEAD
+=======
+/*==============================
+=   Approval Status Indicators =
+==============================*/
+
+.label-draft, .label-pending, .label-needs-action, .label-published, .label-rejected {
+    @extend .icons;
+
+    padding-left: 0px !important;
+    font-family: 'Ubuntu';
+
+    &::before {
+        font-family: 'icons';
+        display: inline-block;
+        width: 18px;
+        text-align: center;
+    }
+}
+
+.label-draft {
+    @extend .icon-paper;
+}
+
+.label-pending {
+    @extend .icon-loader;
+    color: $blue-dark;
+}
+
+.label-needs-action {
+    @extend .icon-exclamation;
+    color: $red-orange-dark;
+}
+
+.label-published {
+    @extend .icon-thumbs-up;
+    color: $green-dark;
+}
+
+.label-rejected {
+    @extend .icon-reload;
+}
+
+>>>>>>> temp-master
 /*====================
 =     Close          =
 ====================*/
@@ -267,4 +306,3 @@ $icons: (
 
 
 @include sprite-icons($icons);
-

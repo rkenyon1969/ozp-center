@@ -2,12 +2,13 @@
 
 var React = require('react');
 var Router = require('react-router');
-var TestLocation = require('react-router/modules/locations/TestLocation');
+var TestLocation = require('react-router/lib/locations/TestLocation');
 var createRoutes = require('../../../__tests__/createRoutes');
 var { TestUtils } = React.addons;
 var expect = require('chai').expect;
 
 describe('ChangeLog', function () {
+    var location = new TestLocation(['/test']);;
 
     var ChangeLog = require('inject?../profile/ProfileLink.jsx!../ChangeLog.jsx')({
         '../profile/ProfileLink.jsx': React.createClass({
@@ -50,8 +51,7 @@ describe('ChangeLog', function () {
     it('renders a change log with a listing name', function() {
         var changeLog;
         var routes = createRoutes(ChangeLog);
-        TestLocation.history = ['/test'];
-        var router = Router.run(routes, TestLocation, function (Handler) {
+        var router = Router.run(routes, location, function (Handler) {
         changeLog = TestUtils.renderIntoDocument(
             <Handler
                 showListingName={true}
@@ -76,6 +76,6 @@ describe('ChangeLog', function () {
         });
 
         expect($(changeLog.getDOMNode()).find('a:last-of-type').text()).to.equal('FrameIt');
-        router.teardown();
+        router.stop();
     });
 });

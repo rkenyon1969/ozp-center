@@ -27,7 +27,7 @@ var ListInput = React.createClass({
         var labelClasses = classSet({'input-optional': this.props.optional});
 
         return (
-            <div>
+            <div id={this.props.id}>
                 <div className={this.getClasses()}>
                     <label className={labelClasses}>{this.props.label}</label>
                     <p className="small">{this.props.description}</p>

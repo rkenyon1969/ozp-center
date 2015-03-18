@@ -3,15 +3,13 @@
 }
 
 .MyListings, .AllListings {
-    position: relative;
+    display: table;
 
-    > aside {
-        min-height: 100%;
-        position: absolute;
-    }
+    > * {
+        display: table-cell;
+        float: none;
 
-    > &__listings {
-        float: right;
+        vertical-align: top;
     }
 }
 

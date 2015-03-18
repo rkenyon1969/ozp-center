@@ -14,40 +14,76 @@ var Sidebar = require('./Sidebar.jsx');
 var ListingTile = require('./ListingTile.jsx');
 var FeaturedListings = require('./FeaturedListings.jsx');
 var Carousel = require('../carousel/index.jsx');
-
-var Input = require('../shared/Input.jsx');
+var Types = require('./Types.jsx');
+var Organizations = require('./Organizations.jsx');
 
 // store dependencies
 var DiscoveryPageStore = require('../../stores/DiscoveryPageStore');
+
+
+var FILTERS = ['categories', 'types', 'organizations'];
+
+var areFiltersApplied = (state) => {
+    return _.reduce(FILTERS, function (memo, filter) {
+        return memo || !!state[filter].length;
+    }, false);
+};
 
 var Discovery = React.createClass({
 
     mixins: [ Reflux.ListenerMixin ],
 
-    getInitialState: function () {
+    getInitialState() {
         return {
             featured: DiscoveryPageStore.getFeatured(),
             newArrivals: DiscoveryPageStore.getNewArrivals(),
             mostPopular: DiscoveryPageStore.getMostPopular(),
             searchResults: DiscoveryPageStore.getSearchResults(),
             mostPopularTiles: 12,
+            queryString: this.state ? this.state.queryString : '',
+            categories: this.state ? this.state.categories : [],
+            types: this.state ? this.state.types : [],
+            organizations: this.state ? this.state.organizations : []
         };
     },
 
-    componentWillMount: function () {
+    onSearchInputChange(evt) {
+        this.setState({
+            queryString: evt.target.value
+        });
+    },
+
+    onCategoryChange(categories) {
+        this.setState({ categories });
+    },
+
+    onTypeChange(types) {
+        this.setState({ types });
+    },
+
+    onOrganizationChange(organizations) {
+        this.setState({ organizations });
+    },
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.queryString !== prevState.queryString) {
+            this.debounceSearch();
+        }
+        else if(!_.isEqual(this.state.categories, prevState.categories) ||
+            !_.isEqual(this.state.types, prevState.types) ||
+            !_.isEqual(this.state.organizations, prevState.organizations)) {
+            this.search();
+        }
+    },
+
+    componentWillMount() {
         this.listenTo(DiscoveryPageStore, this.onStoreChange);
 
         // fetch data when instantiated
-        ListingActions.fetchFeatured();
-        ListingActions.fetchNewArrivals();
-        ListingActions.fetchMostPopular();
+        ListingActions.fetchStorefrontListings();
     },
 
-    componentWillUnmount: function(){
-        $(this.refs.form.getDOMNode()).unbind('submit', false);
-    },
-
-    render: function () {
+    render() {
         var isSearching = this.isSearching();
         var isBrowsing = this.isBrowsing();
 
@@ -55,24 +91,28 @@ var Discovery = React.createClass({
             <div>
                 <NavBar />
                 <Header>
-                    <form className="navbar-form navbar-left" ref="form" role="search">
-                        <div className="form-group">
+                    <form className="navbar-form navbar-left" role="search">
+                        <div className="form-group Search">
                             <i className="icon-search"></i>
-                            <Input
-                                ref="search" type="text" className="form-control"
-                                placeholder="Search" value={this.state.queryString} onChange={this.onSearchInputChange} />
 
-                            <i className="icon-cross-14-grayDark" onClick={this.reset}></i>
+                            <input ref="search" type="text" className="form-control"
+                                placeholder="Search"
+                                value={ this.state.queryString || ''}
+                                onChange={ this.onSearchInputChange } />
+
+                            <i className="icon-cross" onClick={this.reset}></i>
                         </div>
+                        <Types value={this.state.types} onChange={this.onTypeChange} />
+                        <Organizations value={this.state.organizations} onChange={this.onOrganizationChange} />
                     </form>
                 </Header>
                 <div id="discovery">
                     <Sidebar
                         ref="sidebar"
                         isSearching= { isSearching }
-                        system={ this.props.system }
+                        categories={ this.props.system.categories }
                         onGoHome= { this.reset }
-                        onFilterChange= { this.search } />
+                        onChange= { this.onCategoryChange } />
                     <section className="content">
                         {
                             isBrowsing ?
@@ -84,56 +124,43 @@ var Discovery = React.createClass({
                                 ]
                         }
                     </section>
-                    <div className="clearfix"></div>
                 </div>
             </div>
         );
     },
 
-    componentDidMount: function(){
-        $(this.refs.form.getDOMNode()).submit((e)=>e.preventDefault());
-    },
-
-    componentDidUpdate: function(oldProps, oldState) {
-        if (oldState.queryString !== this.state.queryString) {
-            this.search();
-        }
-    },
-
-    onStoreChange: function () {
+    onStoreChange() {
         this.setState(this.getInitialState());
     },
 
-    onSearchInputChange: function (evt) {
-        this.setState({
-            queryString: evt.target.value
-        });
-    },
-
-    isSearching: function () {
+    isSearching() {
         return !!this.state.queryString;
     },
 
-    isBrowsing: function () {
-        var sidebar = this.refs.sidebar;
-        return (this.isSearching() || (sidebar && sidebar.areFiltersApplied()));
+    isBrowsing() {
+        return (this.isSearching() || areFiltersApplied(this.state));
     },
 
-    reset: function () {
+    reset() {
         this.setState({
             queryString: ''
         });
     },
 
-    search: _.debounce(function () {
+    debounceSearch: _.debounce(function () {
+        this.search();
+    }, 500),
+
+    search() {
+        var { types, categories, organizations } = this.state;
         ListingActions.search(
             _.assign({
                 queryString: this.state.queryString
-            }, this.refs.sidebar.state.selectedFilters)
+            }, { types, categories, organizations })
         );
-    }, 500),
+    },
 
-    renderFeaturedListings: function () {
+    renderFeaturedListings() {
         if(!this.state.featured.length) {
             return;
         }
@@ -144,7 +171,7 @@ var Discovery = React.createClass({
         );
     },
 
-    renderNewArrivals: function () {
+    renderNewArrivals() {
         if(!this.state.newArrivals.length) {
             return;
         }
@@ -159,13 +186,13 @@ var Discovery = React.createClass({
         );
     },
 
-    handleLoadMore: function(){
+    handleLoadMore() {
         this.setState({
             mostPopularTiles: this.state.mostPopularTiles += 12
         });
     },
 
-    renderMostPopular: function () {
+    renderMostPopular() {
         if(!this.state.mostPopular.length) {
             return;
         }
@@ -189,7 +216,7 @@ var Discovery = React.createClass({
         );
     },
 
-    renderSearchResults: function () {
+    renderSearchResults() {
         return (
             <section className="Discovery__SearchResults">
                 <h4>Search Results</h4>

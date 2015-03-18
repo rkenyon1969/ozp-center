@@ -50,6 +50,6 @@ var BookmarkButton = React.createClass({
             </button>
         );
     }
-});
+    });
 
 module.exports = BookmarkButton;

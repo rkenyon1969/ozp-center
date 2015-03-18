@@ -7,17 +7,6 @@
 	border-top-color: $blue !important;
 }
 
-
-.navbar-inverse .navbar-nav {
-	& li:hover, & li:hover, & ul.dropdown-menu > li > a:hover{
-		border-left-color: $blue !important;
-	}
-
-	& a:hover, & a:focus{
-		border-top-color: $blue !important;
-	}
-}
-
 .navbar-left {
 	margin-left: -60px !important;
 }
@@ -88,4 +77,5 @@
 		}
 
 	}
+
 }
