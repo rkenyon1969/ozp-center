@@ -1,3 +1,87 @@
+### 0.7.1 (2015-03-18)
+
+
+#### Bug Fixes
+
+* **Config:** update config for app title ([ec738628](https://github.com/ozone-development/center-ui.git/commit/ec7386280eacdf1e26454f711fe74ca0f8649be9))
+* **Create Edit:**
+  * #58 code consistency for react component ([c3f249db](https://github.com/ozone-development/center-ui.git/commit/c3f249db2cf0822876ff770b0a5c85097f29237d))
+  * remove button for testing ([29e2530c](https://github.com/ozone-development/center-ui.git/commit/29e2530c55e09f21db7a0abee24b40694d536364))
+* **Create Listing:**
+  * require one owner for draft, fix test ([521842b7](https://github.com/ozone-development/center-ui.git/commit/521842b73b9cea52953df4b0c9cc17637fe3a9bc))
+  * require one owner for draft ([c9cf9e48](https://github.com/ozone-development/center-ui.git/commit/c9cf9e488ea16b51236a5b6d0bafb4592108ea3d))
+  * Submit Listing fails when owner has comma in name ([4c49d0ec](https://github.com/ozone-development/center-ui.git/commit/4c49d0ec38d6197484dd87b63a619bc23c40c9c1))
+  * Clicking discard button after making changes to a listing throws error. ([b5ac30c8](https://github.com/ozone-development/center-ui.git/commit/b5ac30c8e40b49253562f2baddf0d3abf3df97cb))
+* **Dependencies:** update to master ozp-react-commons ([99f6d4f6](https://github.com/ozone-development/center-ui.git/commit/99f6d4f6ccc8668be7cb473720d0d7bbccf4a4bc))
+* **IE:** #83 Add IE compat header ([502e2200](https://github.com/ozone-development/center-ui.git/commit/502e2200d25b18132db34d435a5c529bfb8d2965))
+* **IE9:** fix placeholder ([ab4ca45a](https://github.com/ozone-development/center-ui.git/commit/ab4ca45a6a1dd8ab391e3767892747ec1d93a39b))
+* **Icons:**
+  * user menu dropdown icon blue on active ([8a891789](https://github.com/ozone-development/center-ui.git/commit/8a891789637c8aebf7af7b8e85e3c08bca79e88f))
+  * added sized icons ([beec9572](https://github.com/ozone-development/center-ui.git/commit/beec95723d507e18670d6e38026627a71316e1ec))
+  * change icon colors for active app ([46a948e4](https://github.com/ozone-development/center-ui.git/commit/46a948e4b0140de25ec9d83542327efdfe419aca))
+  * pencil icon for user review ([1e1201b4](https://github.com/ozone-development/center-ui.git/commit/1e1201b449075c59c2e2b22ace053393d433126d))
+  * #95 fixed icon for org stewards ([03b06f6c](https://github.com/ozone-development/center-ui.git/commit/03b06f6c0e0aa17ab9a9b372cc7da8ddbd3c9ada))
+  * styling for listing management icons ([bfe0887e](https://github.com/ozone-development/center-ui.git/commit/bfe0887e1aa3cf571431a68a62195d3793110731))
+  * listing management icon fix ([9ff35a5a](https://github.com/ozone-development/center-ui.git/commit/9ff35a5aea062eace4e9e614e189dbf64321ac3d))
+  * create edit trash image ([8d116515](https://github.com/ozone-development/center-ui.git/commit/8d116515040c76e827fd0f32ab3a1284fd03bf8e))
+  * review edit icon, help modal ([31bed705](https://github.com/ozone-development/center-ui.git/commit/31bed705f3d9fa42e426eeb6182de0b75d904070))
+  * review iicons ([8b1436ec](https://github.com/ozone-development/center-ui.git/commit/8b1436ec5c5e2c3b511bd01ff7d46d37bff23593))
+  * #95 icons for noficiations and new icons for recent activity ([7bab2abe](https://github.com/ozone-development/center-ui.git/commit/7bab2abea48cdee7a44c40933917b8c6ca706056))
+* **Listing Management:** fix sidebar width issue in Firefox ([bfbbaa13](https://github.com/ozone-development/center-ui.git/commit/bfbbaa1332990d56401baa0bc751c9141f85a4c8))
+* **Notifications:**
+  * fix Date parsing in IE11 and Firefox ([5f7eedbe](https://github.com/ozone-development/center-ui.git/commit/5f7eedbe146f5e4a186122aa3fa9c99a55d8d65c))
+  * handle dates correctly in IE ([b250c436](https://github.com/ozone-development/center-ui.git/commit/b250c43605e645c50f2f1f9372fc64dbe83c64a0))
+  * classification banners should be on top ([82161826](https://github.com/ozone-development/center-ui.git/commit/821618267110a8a3455719775303baa921551101))
+* **Search:**
+  * #80 Fix category search ([1eb0db9b](https://github.com/ozone-development/center-ui.git/commit/1eb0db9b030a5b424ad9506fce91bd7253597b50))
+  * #71 Fix various issues with search ([abf3007c](https://github.com/ozone-development/center-ui.git/commit/abf3007c74fde9e9679bf5fb2939afe68dacaf77))
+* **Styling:**
+  * #95 fixing navbar icons ([c3253e12](https://github.com/ozone-development/center-ui.git/commit/c3253e1266f9f4a09a291cb7e4b49b2ee6c5f889))
+  * #95 mall management page ([8a7a924b](https://github.com/ozone-development/center-ui.git/commit/8a7a924ba709924fd74e50f3335c726a67720f4d))
+  * #95 5 icons ([e780e665](https://github.com/ozone-development/center-ui.git/commit/e780e665daf6b754bdf825a2592f23ac065cf840))
+  * #95 updated to use svg icons ([fd8bc222](https://github.com/ozone-development/center-ui.git/commit/fd8bc2228b0306e87f0f578333c1a0a0d8f66a19))
+  * #68 fixed sass selectors ([242fa1e3](https://github.com/ozone-development/center-ui.git/commit/242fa1e3a652b8c6208c097ed6c14fcee9e7f673))
+  * #68 added hover text for create edit form icons ([72be28c1](https://github.com/ozone-development/center-ui.git/commit/72be28c1eda45706d63f49ccb0af68a53adf991a))
+* **TRR:**
+  * added console-polyfill to handle console logging ([fd87c375](https://github.com/ozone-development/center-ui.git/commit/fd87c375dba643b1131d52d610cb211b17c65888))
+  * update to window.console for React elements using warn ([6a64a894](https://github.com/ozone-development/center-ui.git/commit/6a64a8946fd3fa9edb0b7608def38743215354a4))
+  * IE9 weird issue with console logging #122 ([f61af66b](https://github.com/ozone-development/center-ui.git/commit/f61af66bd8e3bd33d641563092b70a1d4c813c14))
+* **gh-pages:** Update WEBTOP_URL in buildGhPages script ([354af18a](https://github.com/ozone-development/center-ui.git/commit/354af18a02e93eed7ea0a32a63b15431b62bc0d2))
+* **ozp-react-commons:** Changed hash to metrics fix ([c9f59c5e](https://github.com/ozone-development/center-ui.git/commit/c9f59c5e8de306281a67539103f988d647c7ec38))
+* **styling:**
+  * #78 Left Hand indicator ([775d15fb](https://github.com/ozone-development/center-ui.git/commit/775d15fb2e15fc08104b735bf6203173ac80ec4a))
+  * Removing old logo file ([3822b576](https://github.com/ozone-development/center-ui.git/commit/3822b5763fad016035f03bade31d4f65f8d8bb01))
+  * Adding favicon ([05af20bd](https://github.com/ozone-development/center-ui.git/commit/05af20bd6d961bb4c6d749799164797c50fcc30a))
+
+
+#### Features
+
+* **Configuration:**
+  * #91 Fix title configurability in Firefox ([d9080b58](https://github.com/ozone-development/center-ui.git/commit/d9080b5851e8366b5c1eba434a338e5688f00dbe))
+  * #91 Make title configurable ([5e832ef0](https://github.com/ozone-development/center-ui.git/commit/5e832ef08948047c14f0bed48c5d1bff3b9607bb))
+* **Create Edit Listing:**
+  * #58 reworked html for lists of stewards ([93a2e823](https://github.com/ozone-development/center-ui.git/commit/93a2e823879594280633b006059be75c62dd1ce4))
+  * #58 organization stewards modal for create edit page ([d5dfe7aa](https://github.com/ozone-development/center-ui.git/commit/d5dfe7aafbbdeb78dc0236643e0817014bb01699))
+* **Icons:**
+  * #95 hover icons update icon set ([c3bd97b7](https://github.com/ozone-development/center-ui.git/commit/c3bd97b7dce698b7032ce9a54529ffeef337397e))
+  * #95 hover states for icons in center ([b411affb](https://github.com/ozone-development/center-ui.git/commit/b411affb6ba60478ba680f5ae87bbd7a44fa18f6))
+* **Launch:**
+  * Ensure bookmark before launching to webtop ([cd9369c3](https://github.com/ozone-development/center-ui.git/commit/cd9369c3f71b26ece4ea14f0b5014cf2cac193b8))
+  * #60 ensure bookmark before webtop launch ([96124863](https://github.com/ozone-development/center-ui.git/commit/96124863962bebb0da4d770846a8e59c2e3aa654))
+* **Load Error:**
+  * #50 Page load error handling ([16511241](https://github.com/ozone-development/center-ui.git/commit/16511241e550a2c02ad8a6ad58ad04b5e6003f14))
+  * Update to newest ozp-react-commons ([44c2ec10](https://github.com/ozone-development/center-ui.git/commit/44c2ec1023608974601fc2c13a52e48a8dd08265))
+  * #50 Integrate LoadError component ([fa2d2119](https://github.com/ozone-development/center-ui.git/commit/fa2d21196b0d682b9393b82a81753d52db0bc7ef))
+* **Profile Search:**
+  * Fix profile search issues ([6f01c1c7](https://github.com/ozone-development/center-ui.git/commit/6f01c1c7605208dc7dcef7ecaea0c5d4d40c4134))
+  * Fix matching to work with more than one profile ([67379c82](https://github.com/ozone-development/center-ui.git/commit/67379c820cef2b5866c0dc6b26dd4f944688a400))
+* **Search:**
+  * Refine search string creation ([75ce1387](https://github.com/ozone-development/center-ui.git/commit/75ce13873446de7110852eb29d041ee8e14540f5))
+  * Added clear button to search box ([15810f83](https://github.com/ozone-development/center-ui.git/commit/15810f830903c8a4568ca52bc0c66a8a38226423), closes [#72](https://github.com/ozone-development/center-ui.git/issues/72))
+* **Title:** #91 Make page title configurable ([2549afa7](https://github.com/ozone-development/center-ui.git/commit/2549afa7ee779f2233fd977b31eaf96febb80d93))
+* **User search:** on-demand profile search instead of global profile list load ([179c19ac](https://github.com/ozone-development/center-ui.git/commit/179c19ace2055961b4e2177740a7f9eb7962ab39))
+
+
 ## 0.7.0 (2015-02-18)
 
 
