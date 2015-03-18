@@ -539,9 +539,9 @@ var CreateEditPage = React.createClass({
             <div className="CreateEdit__titlebar">
                 <h1>{titleText}</h1>
                 <div className="sub-header">
-                    <strong className="alert alert-info alert-small" role="alert">
+                    <span className="alert alert-info alert-small" role="alert">
                         All fields are required unless marked as “optional.”
-                    </strong>
+                    </span>
                     <div className="btn-toolbar" role="group">
                         <div className="btn-group" role="group">
                             <button type="button" className={ classSet(saveBtnClasses) }
