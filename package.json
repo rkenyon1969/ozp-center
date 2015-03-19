@@ -63,7 +63,7 @@
     "webpack-dev-server": "1.7.0"
   },
   "dependencies": {
-    "icons": "git://github.com/ozone-development/icons#cccb47e1e5dac7399509b7511e72c1a15d95cd25",
+    "icons": "git://github.com/ozone-development/icons",
     "babel-runtime": "4.6.6",
     "bootstrap-sass": "git://github.com/ozone-development/bootstrap-sass#138ca41e070f4c186eba6726a971a28f0168e9ea",
     "exports-loader": "0.6.2",
@@ -71,7 +71,7 @@
     "lodash-amd": "2.4.1",
     "moment": "2.9.0",
     "object-assign": "1.0.0",
-    "ozp-react-commons": "git://github.com/ozone-development/ozp-react-commons#temp-master",
+    "ozp-react-commons": "git://github.com/ozone-development/ozp-react-commons#master",
     "react": "0.12.2",
     "react-datepicker": "0.5.1",
     "react-icon-rating": "0.2.0",
