@@ -35,6 +35,10 @@ var ImageInput = React.createClass({
                     { this.props.label }
                 </label>
                 <p className="small">{ this.props.description }</p>
+                { helpOrErrorText &&
+                    <p className="help-block small">{helpOrErrorText}</p>
+                }
+                { cloneWithProps(this.renderInput(), props) }
                 <span className={imageContainerClasses}>
                     <button onClick={this.removeImage} className="btn image-remove">
                         <i className="icon-trash" />
@@ -42,10 +46,6 @@ var ImageInput = React.createClass({
                     <img ref="image" className="image-preview"
                         src={this.props.imageUri || undefined} />
                 </span>
-                { helpOrErrorText &&
-                    <p className="help-block small">{helpOrErrorText}</p>
-                }
-                { cloneWithProps(this.renderInput(), props) }
             </div>
         );
     },
