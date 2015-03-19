@@ -514,7 +514,7 @@ var CreateEditPage = React.createClass({
         var showPreview = !!listing.id;
         var showDelete = !!listing.id;
         var titleText = (this.getParams().listingId ? 'Edit ' : 'Create New ') + 'Listing';
-        var saveText = showSave() ? 'icon-save-white' : 'icon-check-white';
+        var saveText = showSave ? 'icon-save-white' : 'icon-check-white';
         var savingText = savingMessages[this.state.saveStatus];
         var idString = listing ? listing.id ? listing.id.toString() : '' : '';
 
