@@ -75,6 +75,7 @@
     "react": "0.12.2",
     "react-datepicker": "0.5.1",
     "react-icon-rating": "0.2.0",
+    "react-input-placeholder": "1.0.0",
     "react-radio-group": "1.0.0",
     "react-router": "0.12.4",
     "react-select-box": "^1.0.0",
