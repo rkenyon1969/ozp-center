@@ -95,7 +95,7 @@ var Discovery = React.createClass({
             <div>
                 <NavBar />
                 <Header>
-                    <form className="navbar-form navbar-left" role="search">
+                    <form className="navbar-form navbar-left" ref="form" role="search">
                         <div className="form-group Search">
                             <i className="icon-search"></i>
 
