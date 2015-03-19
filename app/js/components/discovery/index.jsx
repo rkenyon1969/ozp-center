@@ -83,7 +83,11 @@ var Discovery = React.createClass({
         ListingActions.fetchStorefrontListings();
     },
 
-    render() {
+    componentWillUnmount: function(){
+        $(this.refs.form.getDOMNode()).unbind('submit', false);
+    },
+
+    render: function () {
         var isSearching = this.isSearching();
         var isBrowsing = this.isBrowsing();
 
@@ -91,16 +95,16 @@ var Discovery = React.createClass({
             <div>
                 <NavBar />
                 <Header>
-                    <form className="navbar-form navbar-left" role="search">
-                        <div className="form-group Search">
+
+                    <form className="navbar-form navbar-left" ref="form" role="search">
+                        <div className="form-group">
                             <i className="icon-search"></i>
 
-                            <input ref="search" type="text" className="form-control"
-                                placeholder="Search"
-                                value={ this.state.queryString || ''}
-                                onChange={ this.onSearchInputChange } />
+                            <input
+                                ref="search" type="text" className="form-control"
+                                placeholder="Search" value={this.state.queryString} onChange={this.onSearchInputChange} />
 
-                            <i className="icon-cross" onClick={this.reset}></i>
+                            <i className="icon-cross-14-grayDark" onClick={this.reset}></i>
                         </div>
                         <Types value={this.state.types} onChange={this.onTypeChange} />
                         <Organizations value={this.state.organizations} onChange={this.onOrganizationChange} />
@@ -129,7 +133,13 @@ var Discovery = React.createClass({
         );
     },
 
-    onStoreChange() {
+
+    componentDidMount(){
+        $(this.refs.form.getDOMNode()).submit((e)=>e.preventDefault());
+    },
+
+
+    onStoreChange: function () {
         this.setState(this.getInitialState());
     },
 

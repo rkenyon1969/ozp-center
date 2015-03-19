@@ -68,13 +68,12 @@
     @extend .corner-button;
 
     //style as OZONE icons angle-down
-    @extend .icon-caret-down-14-grayDark;
-
+    @extend .icons;
+    @extend .icon-caret-down;
 
     margin-right: 0;
     margin-left: auto;
-    width: 18px;
-    height: 18px;
+    width: 25px;
     padding-left: 0;
     padding-right: 0;
     padding-bottom: 0;
@@ -139,24 +138,24 @@
 }
 
 .AdminOwnerListingTile.pending .approvalStatus {
-    @extend .icon-loader-14-blueDark;
+    @extend .label-pending;
     color: $blue-dark;
 }
 
 .AdminOwnerListingTile.published .approvalStatus {
-    @extend .icon-thumbs-up-14-greenDark;
+    @extend .label-published;
     color: $green-dark;
 }
 
 .AdminOwnerListingTile.needs-action .approvalStatus {
-    @extend .icon-exclamation-14-redOrangeDark;
+    @extend .label-needs-action;
 }
 
 .AdminOwnerListingTile.draft .approvalStatus {
-    @extend .icon-paper-14-grayDark;
+    @extend .label-draft;
 }
 
 .AdminOwnerListingTile.rejected .approvalStatus {
-    @extend .icon-reload-14-blueDark;
+    @extend .label-rejected;
     color: $blue-dark;
 }
