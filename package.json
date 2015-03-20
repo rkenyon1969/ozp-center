@@ -37,6 +37,7 @@
     "gulp-replace": "0.5.1",
     "gulp-sass": "0.7.3",
     "gulp-sourcemaps": "1.0.0",
+    "gulp-shell": "0.4.0",
     "gulp-util": "2.2.20",
     "inject-loader": "1.0.0",
     "jsx-loader": "0.12.2",

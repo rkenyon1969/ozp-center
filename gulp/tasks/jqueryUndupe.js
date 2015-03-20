@@ -11,5 +11,6 @@ var shell = require('gulp-shell');
  */
 
 gulp.task('jqueryUndupe', shell.task([
-  'rm -rf node_modules/ozp-react-commons/node_modules/jquery'
+  'rm -rf node_modules/ozp-react-commons/node_modules/jquery',
+  'rm -rf node_modules/ozp-react-commons/node_modules/bootstrap-sass'
   ]));
