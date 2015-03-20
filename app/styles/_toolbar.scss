@@ -1,10 +1,10 @@
 #globalNav {
-	top: 20px !important;
+	top: 20px;
 }
 
 #active {
-	color: $blue !important;
-	border-top-color: $blue !important;
+	color: $blue;
+	border-top-color: $blue;
 }
 
 
@@ -47,45 +47,87 @@
 	}
 }
 
-.navbar-inverse .navbar-nav {
+.nav.navbar-nav {
 
-	& li > a {
+    > .open {
+        > a, > a:hover, > a:focus {
 
-		color: $gray-lightest !important;
+            > .icon-caret-up-grayLightest{
+				@extend .icon-caret-up-blue;
+            }
 
-		&:hover, &:focus {
-			color: $white !important;
-		}
+            > .icon-menu-grayLightest{
+				@extend .icon-menu-blue;
+            }
+        }
+    }
+    a:hover, a:focus {
 
-	}
+        > .icon-home-grayLightest{
+			@extend .icon-home-white;
+        }
 
-	&  li.dropdown-header {
-		color: $blue;
-	}
+        > .icon-bell-grayLightest{
+			@extend .icon-bell-white;
+        }
 
-	& ul.dropdown-menu {
-		background: $gray-darker;
+        > .icon-question-grayLightest{
+			@extend .icon-question-white;
+        }
 
-		& > li {
+        > .icon-menu-grayLightest{
+			@extend .icon-menu-white;
+        }
 
-			&:hover, &:focus{
-				border-left: $blue;
-			}
+        > .icon-maximize-grayLightest{
+			@extend .icon-maximize-white;
+        }
 
-			& > a {
-				color: $white;
+        > .icon-minimize-grayLightest{
+			@extend .icon-minimize-white;
+        }
 
+        > .icon-stack-grayLightest{
+			@extend .icon-stack-white;
+        }
+   }
+}
 
-				&:hover, &:focus{
-					color: $white;
-				}
+.dropdown-menu > li > a{
 
-				& > i:hover, & > i:focus{
-					color:$white !important;
-				}
+  &:hover, &:focus {
 
-			}
-		}
+    > .icon-ribbon-grayLightest{
+      @extend .icon-ribbon-white;
+    }
 
-	}
+    > .icon-head-grayLightest{
+		@extend .icon-head-white;
+    }
+
+    > .icon-cog-grayLightest{
+		@extend .icon-cog-white;
+    }
+
+    > .icon-square-plus-grayLightest{
+		@extend .icon-square-plus-white;
+    }
+
+    > .icon-cloud-grayLightest{
+		@extend .icon-cloud-white;
+    }
+
+    > .icon-layers-grayLightest{
+		@extend .icon-layers-white;
+    }
+
+    > .icon-shopping-settings-grayLightest{
+		@extend .icon-shopping-settings-white;
+    }
+
+    > .icon-bar-graph-2-grayLightest{
+		@extend .icon-bar-graph-2-white;
+    }
+
+  }
 }
