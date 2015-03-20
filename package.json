@@ -65,7 +65,7 @@
   "dependencies": {
     "icons": "git://github.com/ozone-development/icons",
     "babel-runtime": "4.6.6",
-    "bootstrap-sass": "git://github.com/ozone-development/bootstrap-sass#138ca41e070f4c186eba6726a971a28f0168e9ea",
+    "bootstrap-sass": "git://github.com/ozone-development/bootstrap-sass#e1952acb7f248a1e2813d4c16af01a0bb5cdaa24",
     "exports-loader": "0.6.2",
     "gulp-preprocess": "1.2.0",
     "lodash-amd": "2.4.1",

@@ -33,6 +33,7 @@
                 width: 100%;
                 height: 54px;
                 border: 0;
+                margin-bottom: 10px;
             }
 
             > .icon-search {
@@ -99,6 +100,7 @@
         padding-top: 7px;
     }
     &:after {
+        @extend .icon-caret-down-14-grayDark;
         border: 0;
     }
 }
@@ -148,6 +150,7 @@
     border-left: 1px solid $gray-lighter;
 
     > .react-select-box {
+        margin: 4px 0 -4px 0;
         padding: 18px 0;
         border-top: 4px solid transparent;
 
@@ -181,14 +184,42 @@
     }
 
     > .react-select-box-clear {
-        top: 17px;
+        top: 20px;
+        background-color: $white;
+
+        &:before{
+            background-color: transparent;
+            @extend .icon-cross-14-grayDark;
+            content: ' ';
+        }
+
+    }
+    > .react-select-box-clear:hover, > .react-select-box-clear:focus
+    {
+        &:before {
+            @extend .icon-cross-14-blueDark;
+        }
     }
 
 }
 
 .SelectBox__Types.open, .react-select-box-empty.SelectBox__Types.open,.SelectBox__Organizations.open, .react-select-box-empty.SelectBox__Organizations.open,  {
-    > .react-select-box > .react-select-box-label {
-        color: $blue-dark;
+    > .react-select-box {
+        border-top: 4px solid $blue-dark;
+        background: $gray-lightest;
+
+        > .react-select-box-label {
+            color: $blue-dark;
+        }
+    }
+    > .react-select-box-clear {
+        background-color: $gray-lightest;
+    }
+    > .react-select-box-clear:hover, > .react-select-box-clear:focus
+    {
+        &:before{
+            @extend .icon-cross-14-blueDark;
+        }
     }
 }
 
@@ -196,9 +227,32 @@
     > .react-select-box {
       background: $gray-lightest;
       color: $blue-dark;
+      border-top: 4px solid $blue-dark;
+      &:after{
+          @extend .icon-caret-down-14-blueDark;
+      }
     }
 
     > .react-select-box-label, > .react-select-box-label .react-select-box-empty {
       color: $blue-dark;
+    }
+
+    > .react-select-box-clear {
+        top: 17px;
+        background-color: $gray-lightest;
+
+        &:before{
+            @extend .icon-cross-14-grayDark;
+            content: '';
+            top: 18px;
+            left: -1px;
+        }
+
+    }
+    > .react-select-box-clear:hover, > .react-select-box-clear:focus
+    {
+        &:before{
+            @extend .icon-cross-14-blueDark;
+        }
     }
 }

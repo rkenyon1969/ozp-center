@@ -527,7 +527,7 @@
     "bootstrap-sass": {
       "version": "3.3.1",
       "from": "../../../../var/folders/7z/d0kh0vld52g_sn6_ccydyvn80000gn/T/npm-18053-15d313a2/git-cache-47c05d0abbfc/138ca41e070f4c186eba6726a971a28f0168e9ea",
-      "resolved": "git://github.com/ozone-development/bootstrap-sass#138ca41e070f4c186eba6726a971a28f0168e9ea"
+      "resolved": "git://github.com/ozone-development/bootstrap-sass#e1952acb7f248a1e2813d4c16af01a0bb5cdaa24"
     },
     "bower": {
       "version": "1.3.12",
