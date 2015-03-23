@@ -6726,7 +6726,7 @@
     "icons": {
       "version": "0.0.1",
       "from": "../../../../var/folders/7z/d0kh0vld52g_sn6_ccydyvn80000gn/T/npm-18053-15d313a2/git-cache-c132e942eaf2/cccb47e1e5dac7399509b7511e72c1a15d95cd25",
-      "resolved": "git://github.com/ozone-development/icons#cccb47e1e5dac7399509b7511e72c1a15d95cd25",
+      "resolved": "git://github.com/ozone-development/icons#367e28a7eb92b4f928428f8da3880f470fed41bf",
       "dependencies": {
         "bluebird": {
           "version": "2.9.13",

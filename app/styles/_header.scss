@@ -10,6 +10,13 @@
       clear:both;
     }
 
+    .navbar-form > .Search > .icon-cross-14-grayDark{
+        &:hover, &:focus{
+            @extend .icon-cross-14-blueDark;
+            cursor: pointer;
+        }
+    }
+
     .navbar-form {
         margin: 0;
         padding: 0;

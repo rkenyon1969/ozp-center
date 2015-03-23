@@ -104,7 +104,7 @@ var Discovery = React.createClass({
                                 value={ this.state.queryString || ''}
                                 onChange={ this.onSearchInputChange } />
 
-                            <i className="icon-cross-14-grayDark" onClick={this.reset}></i>
+                            <i className="icon-cross-14-grayDark clearButton" onClick={this.reset}></i>
                         </div>
                         <Types value={this.state.types} onChange={this.onTypeChange} />
                         <Organizations value={this.state.organizations} onChange={this.onOrganizationChange} />
