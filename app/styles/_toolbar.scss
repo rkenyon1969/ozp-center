@@ -7,7 +7,6 @@
 	border-top-color: $blue;
 }
 
-
 .navbar-inverse .navbar-nav {
 	& li:hover, & li:hover, & ul.dropdown-menu > li > a:hover{
 		border-left-color: $blue !important;
@@ -30,17 +29,6 @@
 	color: $blue;
 }
 
-.activeIcon.icon-shopping-grayLightest {
-	@extend .icon-shopping-blue;
-}
-.activeIcon.icon-home-grayLightest {
-	@extend .icon-shopping-blue;
-}
-.activeIcon.icon-layout-grayLightest {
-	@extend .icon-shopping-blue;
-}
-
-
 .user-menu-dropdown.open {
 	.icon-menu-grayLightest {
 		@extend .icon-menu-blue;
@@ -61,73 +49,4 @@
             }
         }
     }
-    a:hover, a:focus {
-
-        > .icon-home-grayLightest{
-			@extend .icon-home-white;
-        }
-
-        > .icon-bell-grayLightest{
-			@extend .icon-bell-white;
-        }
-
-        > .icon-question-grayLightest{
-			@extend .icon-question-white;
-        }
-
-        > .icon-menu-grayLightest{
-			@extend .icon-menu-white;
-        }
-
-        > .icon-maximize-grayLightest{
-			@extend .icon-maximize-white;
-        }
-
-        > .icon-minimize-grayLightest{
-			@extend .icon-minimize-white;
-        }
-
-        > .icon-stack-grayLightest{
-			@extend .icon-stack-white;
-        }
-   }
-}
-
-.dropdown-menu > li > a{
-
-  &:hover, &:focus {
-
-    > .icon-ribbon-grayLightest{
-      @extend .icon-ribbon-white;
-    }
-
-    > .icon-head-grayLightest{
-		@extend .icon-head-white;
-    }
-
-    > .icon-cog-grayLightest{
-		@extend .icon-cog-white;
-    }
-
-    > .icon-square-plus-grayLightest{
-		@extend .icon-square-plus-white;
-    }
-
-    > .icon-cloud-grayLightest{
-		@extend .icon-cloud-white;
-    }
-
-    > .icon-layers-grayLightest{
-		@extend .icon-layers-white;
-    }
-
-    > .icon-shopping-settings-grayLightest{
-		@extend .icon-shopping-settings-white;
-    }
-
-    > .icon-bar-graph-2-grayLightest{
-		@extend .icon-bar-graph-2-white;
-    }
-
-  }
 }
