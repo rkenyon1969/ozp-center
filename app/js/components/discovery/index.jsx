@@ -21,7 +21,7 @@ var Organizations = require('./Organizations.jsx');
 var DiscoveryPageStore = require('../../stores/DiscoveryPageStore');
 
 
-var FILTERS = ['categories', 'types', 'organizations'];
+var FILTERS = ['categories', 'type', 'agency'];
 
 var areFiltersApplied = (state) => {
     return _.reduce(FILTERS, function (memo, filter) {
@@ -42,8 +42,8 @@ var Discovery = React.createClass({
             mostPopularTiles: 12,
             queryString: this.state ? this.state.queryString : '',
             categories: this.state ? this.state.categories : [],
-            types: this.state ? this.state.types : [],
-            organizations: this.state ? this.state.organizations : []
+            type: this.state ? this.state.type : [],
+            agency: this.state ? this.state.agency : []
         };
     },
 
@@ -57,12 +57,12 @@ var Discovery = React.createClass({
         this.setState({ categories });
     },
 
-    onTypeChange(types) {
-        this.setState({ types });
+    onTypeChange(type) {
+        this.setState({ type });
     },
 
-    onOrganizationChange(organizations) {
-        this.setState({ organizations });
+    onOrganizationChange(agency) {
+        this.setState({ agency });
     },
 
     componentDidUpdate(prevProps, prevState) {
@@ -70,8 +70,8 @@ var Discovery = React.createClass({
             this.debounceSearch();
         }
         else if(!_.isEqual(this.state.categories, prevState.categories) ||
-            !_.isEqual(this.state.types, prevState.types) ||
-            !_.isEqual(this.state.organizations, prevState.organizations)) {
+            !_.isEqual(this.state.type, prevState.type) ||
+            !_.isEqual(this.state.agency, prevState.agency)) {
             this.search();
         }
     },
@@ -106,8 +106,8 @@ var Discovery = React.createClass({
 
                             <i className="icon-cross-14-grayDark clearButton" onClick={this.reset}></i>
                         </div>
-                        <Types value={this.state.types} onChange={this.onTypeChange} />
-                        <Organizations value={this.state.organizations} onChange={this.onOrganizationChange} />
+                        <Types value={this.state.type} onChange={this.onTypeChange} />
+                        <Organizations value={this.state.agency} onChange={this.onOrganizationChange} />
                     </form>
                 </Header>
                 <div id="discovery">
@@ -162,11 +162,11 @@ var Discovery = React.createClass({
     }, 500),
 
     search() {
-        var { types, categories, organizations } = this.state;
+        var { type, categories, agency } = this.state;
         ListingActions.search(
             _.assign({
                 queryString: this.state.queryString
-            }, { types, categories, organizations })
+            }, { type, categories, agency })
         );
     },
 
