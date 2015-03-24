@@ -4,11 +4,11 @@ var webpack = require("webpack");
 var webpackConfig = require("../../webpack.config.js");
 var WebpackDevServer = require('webpack-dev-server');
 
-gulp.task('dev', ['sass', 'copy', 'config', 'fonts', 'images', 'svg'], function () {
+gulp.task('dev', ['sass', 'copy', 'config', 'fonts', 'images', 'svg', 'jqueryUndupe'], function () {
     var devConfig = Object.create(webpackConfig);
     devConfig.devtool = "eval";
     devConfig.debug = true;
-
+git
     // Start a webpack-dev-server
     var server = new WebpackDevServer(webpack(devConfig), {
         publicPath: "/dist/assets",
