@@ -7,6 +7,7 @@ var WebpackDevServer = require('webpack-dev-server');
 gulp.task("webpack:prod", function (callback) {
     var prodConfig = Object.create(webpackConfig);
     prodConfig.plugins = prodConfig.plugins.concat(
+        new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin()
     );
 
