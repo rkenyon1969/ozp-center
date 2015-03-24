@@ -152,8 +152,11 @@
       width: 75px;
     }
 
-    button.tool.myListings{
-        width: 100px;
+    a.myListings{
+        margin-left: 50px;
+        margin-right: -100px;
+
+        @extend .small;
     }
 
     .delete-button {
