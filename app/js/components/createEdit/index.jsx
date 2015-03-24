@@ -253,7 +253,7 @@ var ListingForm = React.createClass({
         var p = this.getFormComponentProps;
         var f = formLinks;
         return (
-            <form className="CreateEdit__form">
+            <form ref="form" className="CreateEdit__form">
                 <h2 id={f.basicInformation.id}>Basic Information</h2>
                 <TextInput id={f.title.id} { ...p('title') }/>
                 <Select2Input id={f.type.id} { ...p('type') }
@@ -320,21 +320,22 @@ var ListingForm = React.createClass({
     },
 
     componentDidUpdate: function(prevProps, prevState) {
-        var elId = this.state.currentNavTarget || formLinks.basicInformation.id;
+        if(this.scrollToError) this.scrollToError();
+    },
 
-        if (prevState.currentNavTarget !== elId) {
-            var element = $(`#${elId}`),
-                form = $(this.getDOMNode()),
-                firstFormChild = form.find(':first-child');
+    scrollToError: function () {
+        var $target = $('div.form-group.has-error');
+        var form = $(this.refs.form.getDOMNode());
+        var $firstFormElement = form.find(':first-child');
 
-            if (element) {
-                var elementOffset = element.offset().top,
-                    formOffset = firstFormChild.offset().top;
+        if ($target[0]) {
+            var scroll = $target.offset().top - $firstFormElement.offset().top;
 
-                form.animate({
-                    scrollTop: elementOffset - formOffset
-                });
-            }
+            form.animate({
+                scrollTop: scroll
+            }, 'medium');
+
+            this.setState({ scrollToError: false });
         }
     }
 });
