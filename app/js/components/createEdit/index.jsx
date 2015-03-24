@@ -33,7 +33,13 @@ var savingMessages = {
     listing: 'Saving Listing...'
 };
 
-//description of links for the sidebar
+
+/**
+ * formLinks Description.  This object is used to populate the sidebar in the edit view.
+ *
+ * @property formLinks
+ * @type {Object}
+ */
 var formLinks = {
     basicInformation: {
         title: 'Basic Information',
@@ -133,6 +139,13 @@ var formLinks = {
     }
 };
 
+/**
+ * formLinkGroups Description.  This object splits the formLinks into logical groups, with each link being the
+ * accordion header and the array of links being the contents of the expanded accordion.
+ *
+ * @property formLinkGroups
+ * @type {Object}
+ */
 var formLinkGroups = [{
     link: formLinks.basicInformation,
     links: [

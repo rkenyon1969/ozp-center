@@ -41,7 +41,7 @@ var title = NonBlankString(60),
     type = NonBlankString(50),
     whatIsNew = maybe(StringMax(250)),
     categories = list(NonBlankString(50)),
-    tags = list(NonBlankString(16)),
+    tags = list(StringMax(16)),
     intents = list(NonBlankString(127)),
     screenshots = list(Screenshot),
     contacts = list(Contact),
@@ -88,7 +88,7 @@ var ListingDraft = struct({
     title: title,
     type: type,
     categories: categories,
-    tags: tags,
+    tags: subtype(tags, StringMax(16)),
     description: maybe(StringMax(4000)),
     descriptionShort: maybe(StringMax(100)),
     versionName: maybe(StringMax(255)),
@@ -175,7 +175,6 @@ function validateFull (instance, options) {
     validation.errors.contacts = !hasRequiredContactTypes(requiredContactTypes, instance.contacts);
 
     copyImageValidations(validation);
-
     return validation;
 }
 
