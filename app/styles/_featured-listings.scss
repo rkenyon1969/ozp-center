@@ -4,7 +4,7 @@
     .SearchListingTile--featured {
         width: 600px;
         height: 375px;
-        border: none;
+        border: 1px solid $gray-lighter;
 
         img {
             width: 100%;
