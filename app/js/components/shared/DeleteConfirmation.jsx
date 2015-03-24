@@ -39,7 +39,7 @@ var DeleteConfirmation = React.createClass({
 
         return (
             <Modal ref="modal" className="DeleteConfirmation" size="small" onHidden={this.props.onHidden}>
-                <button className="close corner" data-dismiss="modal">×</button>
+                <button className="close corner" data-dismiss="modal"><i className="icon-cross-16"></i></button>
                 {
                     errorMessage && <div className="alert alert-danger">{errorMessage}</div>
                 }

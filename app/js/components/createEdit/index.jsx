@@ -575,7 +575,7 @@ var CreateEditPage = React.createClass({
                             </div>
                         <div className="btn-group" role="group">
                             <a type="button" className="btn-link btn myListings" onClick={this.onClose}>
-                                <i className="icon-layers-blueDark"></i>Listing Management
+                                    Listing Management
                             </a>
                         </div>
                     </div>
