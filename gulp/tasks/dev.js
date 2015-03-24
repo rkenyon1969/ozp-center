@@ -8,7 +8,7 @@ gulp.task('dev', ['sass', 'copy', 'config', 'fonts', 'images', 'svg', 'jqueryUnd
     var devConfig = Object.create(webpackConfig);
     devConfig.devtool = "eval";
     devConfig.debug = true;
-git
+
     // Start a webpack-dev-server
     var server = new WebpackDevServer(webpack(devConfig), {
         publicPath: "/dist/assets",
