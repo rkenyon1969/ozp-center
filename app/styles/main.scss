@@ -28,7 +28,7 @@
 }
 
 $header-height: 55px;
-$black: #191F25;
+$black: $gray-base;
 
 html, body {
     font-family: 'Ubuntu';
@@ -133,6 +133,27 @@ button.close {
             @extend .icon-cross-18-blueDark;
         }
     }
+
+    > i.icon-cross-10-grayDark{
+        &:hover, &:focus{
+            @extend .icon-cross-10-blueDark;
+        }
+    }
+    > i.icon-cross-14-grayDark{
+        &:hover, &:focus{
+            @extend .icon-cross-14-blueDark;
+        }
+    }
+    > i.icon-cross-16-grayDark{
+        &:hover, &:focus{
+            @extend .icon-cross-16-blueDark;
+        }
+    }
+    > i.icon-cross-18-grayDark{
+        &:hover, &:focus{
+            @extend .icon-cross-18-blueDark;
+        }
+    }
 }
 
 .dropdown-menu .divider {
@@ -203,6 +224,35 @@ label {
 /*====================
 =     Close          =
 ====================*/
+.icon-cross-18 {
+    @extend .icon-cross-18-grayDark;
+
+    &:hover, &:focus{
+        @extend .icon-cross-18-blueDark;
+    }
+}
+.icon-cross-16 {
+    @extend .icon-cross-16-grayDark;
+
+    &:hover, &:focus{
+        @extend .icon-cross-16-blueDark;
+    }
+}
+.icon-cross-14 {
+    @extend .icon-cross-14-grayDark;
+
+    &:hover, &:focus{
+        @extend .icon-cross-14-blueDark;
+    }
+}
+.icon-cross-10 {
+    @extend .icon-cross-10-grayDark;
+
+    &:hover, &:focus{
+        @extend .icon-cross-10-blueDark;
+    }
+}
+
 .close.corner {
     position: absolute;
     right: 8px;
@@ -234,6 +284,13 @@ label {
 
 div.modal-header > button.close {
     margin:-22px -13px 0 0;
+
+    &:hover, &:focus, &:active {
+
+        > .icon-cross-16-grayDark{
+            @extend .icon-cross-16-blueDark;
+        }
+    }
 }
 
 /*=======================
@@ -311,8 +368,12 @@ $icons: (
     icon-ban-12-blueDark: icon-ban-12-red,
     icon-open-grayDark: icon-open-white,
     icon-pencil-grayDark: icon-pencil-white,
-    icon-ribbon: icon-ribbon-white,
-    icon-layers: icon-layers-white
+    icon-ribbon-grayDark: icon-ribbon-white,
+    icon-layers-grayDark: icon-layers-white,
+    icon-cross-10-grayDark: icon-cross-10-blueDark,
+    icon-cross-14-grayDark: icon-cross-14-blueDark,
+    icon-cross-16-grayDark: icon-cross-16-blueDark,
+    icon-cross-18-grayDark: icon-cross-18-blueDark
 );
 
 
