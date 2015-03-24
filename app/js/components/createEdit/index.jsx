@@ -554,7 +554,7 @@ var CreateEditPage = React.createClass({
                                 <button className="btn btn-default tool"
                                         onClick={ this.onPreview }>
                                     <span className="create-edit-button">Preview</span>
-                                    <i className="icon-eye"> </i>
+                                    <i className="icon-eye-grayDark"> </i>
                                 </button>
                             }
                             {
@@ -562,22 +562,22 @@ var CreateEditPage = React.createClass({
                                 <button className="btn btn-default tool"
                                         onClick={ this.onSubmit }>
                                     <span className="create-edit-button">Publish</span>
-                                    <i className="icon-cloud-upload"> </i>
+                                    <i className="icon-cloud-upload-grayDark"> </i>
                                 </button>
                             }
                             {
                                 showDelete &&
                                 <a href={deleteHref} className="btn btn-default tool delete-button">
                                     <span className="create-edit-button">Delete</span>
-                                    <span className="fa fa-trash-o"></span>
+                                    <i className="icon-trash-grayDark"></i>
                                 </a>
                             }
                             </div>
                         <div className="btn-group" role="group">
-                            <button type="button" className="btn btn-default"
+                            <button type="button" className="btn btn-default tool myListings"
                                     onClick={this.onClose}>
-                                <span className="create-edit-button">Back</span>
-                                <i className="icon-layers"> </i>
+                                <span className="create-edit-button">My Listings</span>
+                                <i className="icon-layers-grayDark"> </i>
                             </button>
                         </div>
                     </div>

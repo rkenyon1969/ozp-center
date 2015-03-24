@@ -70,6 +70,20 @@ $quickview-nav-tabs-height: 42px;
         position: absolute;
         right: 60px;
         top: 23px;
+
+        button:hover, button:focus, button:active{
+
+            > .icon-open-grayDark {
+                @extend .icon-open-white;
+            }
+            > .icon-ribbon-grayDark {
+                @extend .icon-ribbon-white;
+            }
+            > .icon-pencil-grayDark {
+                @extend .icon-pencil-white;
+            }
+
+        }
     }
 
     .listing-icon {

@@ -118,6 +118,23 @@ html, body {
     margin-top: -10px;
 }
 
+button.close {
+    &:hover, &:focus, &:active{
+        > .icon-cross-10-grayDark{
+            @extend .icon-cross-10-blueDark;
+        }
+        > .icon-cross-14-grayDark{
+            @extend .icon-cross-14-blueDark;
+        }
+        > .icon-cross-16-grayDark{
+            @extend .icon-cross-16-blueDark;
+        }
+        > .icon-cross-18-grayDark{
+            @extend .icon-cross-18-blueDark;
+        }
+    }
+}
+
 .dropdown-menu .divider {
     background: $gray-darkest !important;
 }
