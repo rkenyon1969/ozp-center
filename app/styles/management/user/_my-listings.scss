@@ -2,12 +2,9 @@
     padding-top: $padding-large-vertical;
 }
 
-.MyListings {
-    background: $body-bg;
-}
-
 .MyListings, .AllListings {
     display: table;
+    background: $body-bg;
 
     > * {
         display: table-cell;
