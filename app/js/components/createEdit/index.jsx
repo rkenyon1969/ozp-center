@@ -559,27 +559,25 @@ var CreateEditPage = React.createClass({
                                 </button>
                             }
                             {
-                                showSubmit &&
-                                <button className="btn btn-default tool"
-                                        onClick={ this.onSubmit }>
-                                    <span className="create-edit-button">Publish</span>
-                                    <i className="icon-cloud-upload-grayDark"> </i>
-                                </button>
-                            }
-                            {
                                 showDelete &&
                                 <a href={deleteHref} className="btn btn-default tool delete-button">
                                     <span className="create-edit-button">Delete</span>
                                     <i className="icon-trash-grayDark"></i>
                                 </a>
                             }
+                            {
+                                showSubmit &&
+                                <button className="btn btn-default tool"
+                                        onClick={ this.onSubmit }>
+                                    <span className="create-edit-button">Submit</span>
+                                    <i className="icon-cloud-upload-grayDark"> </i>
+                                </button>
+                            }
                             </div>
                         <div className="btn-group" role="group">
-                            <button type="button" className="btn btn-default tool myListings"
-                                    onClick={this.onClose}>
-                                <span className="create-edit-button">My Listings</span>
-                                <i className="icon-layers-grayDark"> </i>
-                            </button>
+                            <a type="button" className="btn-link btn myListings" onClick={this.onClose}>
+                                    Listing Management
+                            </a>
                         </div>
                     </div>
                 </div>

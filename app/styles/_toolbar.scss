@@ -50,3 +50,7 @@
         }
     }
 }
+
+.navbar-inverse .navbar-nav .open .dropdown-menu > li.dropdown-header {
+	color: $blue !important;
+}
