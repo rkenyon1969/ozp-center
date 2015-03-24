@@ -14,7 +14,7 @@
     "start": "gulp dev",
     "test": "./node_modules/karma/bin/karma start",
     "build": "NODE_ENV=\"production\" gulp build",
-    "buildGhPages": "API_URL=\"https://www.owfgoss.org/ng/dev/mp\" HUD_URL=\"http://ozone-development.github.io/hud-ui/\" WEBTOP_URL=\"http://ozone-development.github.io/ozp-webtop/\" HELP_URL=\"http://ozone-development.github.io/hud-ui/assets/PlaceholderUserGuide.pdf\" gulp build",
+    "buildGhPages": "API_URL=\"https://www.owfgoss.org/ng/dev/mp\" HUD_URL=\"http://ozone-development.github.io/ozp-hud/\" WEBTOP_URL=\"http://ozone-development.github.io/ozp-webtop/\" HELP_URL=\"http://ozone-development.github.io/ozp-hud/assets/PlaceholderUserGuide.pdf\" gulp build",
     "deployGhPages": "npm run buildGhPages && gulp deploy",
     "changelog": "gulp changelog"
   },
