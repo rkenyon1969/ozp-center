@@ -62,11 +62,13 @@
     .sidebar {
         li {
             border-left: transparent 5px solid;
+            margin-right: -35px;
 
             &:hover, &:focus {
                 color: $link-color;
                 border-left-color: $link-color;
                 font-weight: 500;
+                background: $white;
             }
 
             &.active {
@@ -74,7 +76,6 @@
                 color: $white;
                 border-left-color: $link-color;
                 font-weight: 500;
-                margin-right: -35px;
             }
         }
     }
