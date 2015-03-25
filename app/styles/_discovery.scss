@@ -74,8 +74,13 @@
             &.active {
                 background-color: $link-color;
                 color: $white;
-                border-left-color: $link-color;
+                border-left-color: $blue-darker;
                 font-weight: 500;
+
+                &:hover, &:focus {
+                background-color: $blue-darker;
+                border-left-color: $gray-darkest;
+                }
             }
         }
     }
