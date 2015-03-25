@@ -114,6 +114,8 @@
 }
 
 .react-select-box-empty .react-select-box-close {
+    @extend .small;
+    font-weight: 400;
     color: $blue-dark;
     text-decoration: none;
 
@@ -145,6 +147,8 @@
     color: $blue-dark;
     text-decoration: none;
     text-transform: none;
+    font-weight: 400;
+    @extend .small;
 
     &:hover, &:focus {
         color: $blue-dark;

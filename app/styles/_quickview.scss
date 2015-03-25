@@ -291,6 +291,10 @@ ul.list-unstyled.RecentActivity
     }
     .switchLabel{
         margin-top: 3px;
+        > span
+        {
+            @extend .textBase;
+        }
     }
 }
 
