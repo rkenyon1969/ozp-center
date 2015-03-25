@@ -61,11 +61,20 @@
 
     .sidebar {
         li {
-            border-left: transparent 4px solid;
+            border-left: transparent 5px solid;
 
-            &.active {
+            &:hover, &:focus {
                 color: $link-color;
                 border-left-color: $link-color;
+                font-weight: 500;
+            }
+
+            &.active {
+                background-color: $link-color;
+                color: $white;
+                border-left-color: $link-color;
+                font-weight: 500;
+                margin-right: -35px;
             }
         }
     }
