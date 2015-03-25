@@ -320,7 +320,9 @@ var ListingForm = React.createClass({
     },
 
     componentDidUpdate: function(prevProps, prevState) {
-        if(this.scrollToError) this.scrollToError();
+        if(this.scrollToError) {
+            this.scrollToError();
+        }
     },
 
     scrollToError: function () {
