@@ -28,7 +28,6 @@ var DetailsTab = React.createClass({
                 <div className="col-md-4 col-left">
                     <section>
                         <h5>What&lsquo;s New</h5>
-                        <hr/>
                         {
                             whatsNew ?
                                 <p>{ whatsNew }</p> :
@@ -37,21 +36,19 @@ var DetailsTab = React.createClass({
                     </section>
                     <section>
                         <h5>Usage Requirements</h5>
-                        <hr/>
                         <p>{ requirements }</p>
                     </section>
                 </div>
                 <div className="col-md-4">
                     <section>
                         <h5>Marketplace Properties</h5>
-                        <hr/>
                         <p>
-                            <label>Type:</label><span> { type }</span><br />
-                            <label>URL:</label><span> { URL }</span><br />
-                            <label>Categories:</label><span> { categories ? categories : <EmptyFieldValue inline /> }</span><br />
-                            <label>Tags:</label><span> { tags ? tags : <EmptyFieldValue inline /> }</span><br />
-                            <label>Last Updated:</label><span> { updatedDate }</span><br />
-                            <label>Version Number:</label><span> { versionNumber } </span>
+                            <p><label>Type:</label><span> { type }</span></p>
+                            <p><label>URL:</label><span> <a href={URL}>{ URL }</a></span></p>
+                            <p><label>Categories:</label><span> { categories ? categories : <EmptyFieldValue inline /> }</span></p>
+                            <p><label>Tags:</label><span> { tags ? tags : <EmptyFieldValue inline /> }</span></p>
+                            <p><label>Last Updated:</label><span> { updatedDate }</span></p>
+                            <p><label>Version Number:</label><span> { versionNumber } </span></p>
                         </p>
                     </section>
                     { this.renderIntents() }
@@ -59,11 +56,12 @@ var DetailsTab = React.createClass({
                 <div className="col-md-4 col-right">
                     <section>
                         <h5>Ownership Information</h5>
-                        <hr/>
-                        <label>Owner(s):</label>{ this.renderOwners() }<br />
-                        <label>Associated Organization</label>
+                        <p>
+                        <p><label>Owner(s):</label>{ this.renderOwners() }</p>
+                        <p><label>Associated Organization</label></p>
                         <p className="col-md-offset-1">{ organization }</p>
                         { this.renderGovSponser() }
+                        </p>
                     </section>
 
                 </div>
@@ -76,12 +74,12 @@ var DetailsTab = React.createClass({
 
         return owners.map(function (owner) {
             return (
-                <span className="listing-owner">
+                <p className="listing-owner">
                     <span> </span>
                     <ProfileLink profileId={owner.id}>
                         {owner.displayName}
                     </ProfileLink>
-                </span>
+                </p>
             );
         });
     },
@@ -91,18 +89,20 @@ var DetailsTab = React.createClass({
         var singleton = (this.props.listing.singleton) ? "Yes" : "No";
         var intentComponents = this.props.listing.intents.map(function (intent) {
             var parts = intent.split('/');
-            return <p><label>{ parts[2] }: </label><span> { parts[0] + '/' + parts[1] }</span></p>;
+            return <p><span className="intentName">{ parts[2] }: </span><span> { parts[0] + '/' + parts[1] }</span></p>;
         });
 
         return (
             <section>
-                <h5>Ozone Properties</h5>
-                <hr/>
-                <label>Singleton:</label><span> { singleton }</span><br />
-                <label>Intents:</label>
-                <div className="col-md-offset-1">
-                    { intents.length ? intentComponents : <EmptyFieldValue /> }
-                </div>
+                <h5>OZONE Properties</h5>
+                <p>
+                    <p><label>Singleton:</label><span> { singleton }</span></p>
+                    <p><label>Intents:</label>
+                        <div className="col-md-offset-1">
+                            { intents.length ? intentComponents : <EmptyFieldValue /> }
+                        </div>
+                    </p>
+                </p>
             </section>
         );
     },

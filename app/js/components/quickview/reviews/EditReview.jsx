@@ -91,7 +91,7 @@ var EditReview = React.createClass({
                 <h5>Edit Review</h5>
                 <SystemHighMessage />
                 <div className="EditReview__Rating">
-                    <div>Star Rating</div>
+                    <h6>Star Rating</h6>
                     <IconRating
                         currentRating={ rate }
                         onChange={ this.onRatingChange }
@@ -102,7 +102,7 @@ var EditReview = React.createClass({
                     }
                 </div>
                 <div>
-                    <div>Description</div>
+                    <h6>Description</h6>
                     <textarea ref="text" value={ text } onChange={ this.onTextChange }></textarea>
                 </div>
                 <PopoverConfirmationButton

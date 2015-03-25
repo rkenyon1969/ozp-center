@@ -21,17 +21,98 @@ $quickview-nav-tabs-height: 42px;
         height: 416px;
         padding: $panel-body-padding;
         color: $gray-dark;
+
+
     }
 
-    section > h5 {
-        margin: 0;
+    .textBase{
+        @extend .small;
         color: $gray-dark;
+    }
+    .headingBase{
+        @extend .textBase;
+        font-weight: 400;
+    }
 
-        + hr {
-            margin: $panel-body-padding/4 0 $panel-body-padding/2 0;
+    h5 {
+        @extend .headingBase;
+        font-size: 100%;
+        margin: 0;
+        padding: 10px 0 5px 0;
+    }
+
+    h6 {
+        @extend .headingBase;
+        margin-top: 6px;
+        margin-bottom: 3px;
+    }
+
+    p, section > p, section > span {
+        @extend .textBase;
+        margin-top: 3px;
+        margin-bottom: 3px;
+    }
+
+    .alert-warning {
+        padding: 2px;
+    }
+
+    label {
+        font-weight: 400;
+        margin-right: 5px;
+    }
+
+    .intentName {
+        text-transform: uppercase;
+        font-weight: 400;
+        padding-right: 3px;
+    }
+
+    .alert-warning {
+        color: $white;
+    }
+    .review-filters{
+        padding-top: 5px;
+    }
+    em.numReviews{
+        margin-top: -15px;
+        padding-top: 0;
+    }
+
+    .stars{
+        font-weight: 400;
+    }
+
+    i.icon-pencil {
+        @extend .icon-pencil-grayDark;
+
+        &:hover, &:focus{
+            cursor: pointer;
+            @extend .icon-pencil-blueDark;
         }
     }
 }
+
+ul.list-unstyled.RecentActivity
+    {
+        > li {
+            @extend .small;
+
+            > div.row{
+
+                > div.col-md-3 {
+                    margin-left: 0px;
+                }
+
+                > div.col-md-9 {
+                margin-left: -50px;
+
+                }
+            }
+        }
+    }
+
+
 
 .quickview-header {
     position: relative;
@@ -177,7 +258,7 @@ $quickview-nav-tabs-height: 42px;
     }
 
     .icon-pencil {
-        float: right;
+        margin-left: 15px;
     }
 
 }
@@ -207,6 +288,9 @@ $quickview-nav-tabs-height: 42px;
     .track {
         display: inline-block;
         margin-left: 6px;
+    }
+    .switchLabel{
+        margin-top: 3px;
     }
 }
 

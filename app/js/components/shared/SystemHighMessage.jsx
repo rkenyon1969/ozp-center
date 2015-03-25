@@ -7,7 +7,7 @@ var SystemHighMessage = React.createClass({
 
     render: function () {
         return (
-            <p className="text-danger">{systemHigh}</p>
+            <p className="alert alert-warning">{systemHigh}</p>
         );
     }
 

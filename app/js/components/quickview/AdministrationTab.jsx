@@ -25,13 +25,13 @@ var Toggle = React.createClass({
         return (
             <section className={this.props.className}>
                 <h5>{title}</h5>
-                <hr/>
                 <p>{this.props.description}</p>
-                <label className="switch">{this.props.label || title}:
-                    <input type="checkbox" ref="checkbox" className="ios brand-success"
+                <label className="switchLabel">{this.props.label || title}:</label>
+                    <label className="switch"><input type="checkbox" ref="checkbox" className="ios brand-success"
                         checked={this.props.checked} onChange={this.props.onChange} />
                     <div className="track"><div className="knob"></div></div>
-                </label>
+                    </label>
+
             </section>
         );
     }
@@ -113,7 +113,6 @@ var AdministrationTab = React.createClass({
                 <div className="col-md-8 col-right">
                     <section>
                         <h5>Listing Changes</h5>
-                        <hr/>
                         <ChangeLogs showListingName={ false } org={this.props.listing.agency}/>
                     </section>
                 </div>
@@ -188,7 +187,6 @@ var AdministrationTab = React.createClass({
             <div className="col-md-4 col-left ListingAdmin__Controls">
                 <section>
                     <h5>Listing Status</h5>
-                    <hr/>
                     <p className={statusClass}><i className={iconClass} />{ statusText }</p>
                 </section>
                 { controls }
@@ -211,7 +209,6 @@ var AdministrationTab = React.createClass({
             return (
                 <section className="return-feedback">
                     <h5>Return to Owner Feedback</h5>
-                    <hr/>
                     <p>Please provide feedback for the listing owner about what they should do to make this listing ready for publication</p>
                     <form>
                         <Justification ref="justification" />
@@ -224,7 +221,6 @@ var AdministrationTab = React.createClass({
             return (
                 <section className="review-listing">
                     <h5>Review Listing</h5>
-                    <hr/>
                     <button type="button" className="btn btn-success" onClick={ this.approve }>Approve</button>
                     <button type="button" className="btn btn-warning" onClick={ this.editRejection }>Return to Owner</button>
                 </section>
