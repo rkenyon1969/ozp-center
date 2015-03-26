@@ -337,7 +337,7 @@ var ListingForm = React.createClass({
             }
         }
 
-        if(this.scrollToError) {
+        if(this.scrollToError && !this.state.currentNavTarget) {
             this.scrollToError();
         }
     },
