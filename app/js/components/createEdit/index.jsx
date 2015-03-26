@@ -336,26 +336,6 @@ var ListingForm = React.createClass({
                 });
             }
         }
-
-        if(this.scrollToError && !this.state.currentNavTarget) {
-            this.scrollToError();
-        }
-    },
-
-    scrollToError: function () {
-        var $target = $('div.form-group.has-error');
-        var form = $(this.refs.form.getDOMNode());
-        var $firstFormElement = form.find(':first-child');
-
-        if ($target[0]) {
-            var scroll = $target.offset().top - $firstFormElement.offset().top;
-
-            form.animate({
-                scrollTop: scroll
-            }, 'medium');
-
-            this.setState({ scrollToError: false });
-        }
     }
 });
 
