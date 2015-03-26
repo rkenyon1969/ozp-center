@@ -320,10 +320,6 @@ var ListingForm = React.createClass({
     },
 
     componentDidUpdate: function(prevProps, prevState) {
-        if(this.scrollToError) {
-            this.scrollToError();
-        }
-
         var elId = this.state.currentNavTarget || formLinks.basicInformation.id;
         if (prevState.currentNavTarget !== elId) {
 
@@ -341,6 +337,9 @@ var ListingForm = React.createClass({
             }
         }
 
+        if(this.scrollToError) {
+            this.scrollToError();
+        }
     },
 
     scrollToError: function () {
