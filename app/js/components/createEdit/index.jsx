@@ -325,7 +325,7 @@ var ListingForm = React.createClass({
 
             var element         = $(`#${elId}`),
                 form            = $(this.refs.form.getDOMNode()),
-                firstFormChild  = form.find(':first-child');
+                firstFormChild  = form;
 
             if (element) {
                 var elementOffset = element.offset().top,
