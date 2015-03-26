@@ -323,6 +323,24 @@ var ListingForm = React.createClass({
         if(this.scrollToError) {
             this.scrollToError();
         }
+
+        var elId = this.state.currentNavTarget || formLinks.basicInformation.id;
+        if (prevState.currentNavTarget !== elId) {
+
+            var element         = $(`#${elId}`),
+                form            = $(this.refs.form.getDOMNode()),
+                firstFormChild  = form.find(':first-child');
+
+            if (element) {
+                var elementOffset = element.offset().top,
+                    formOffset    = firstFormChild.offset().top;
+
+                form.animate({
+                    scrollTop: elementOffset - formOffset
+                });
+            }
+        }
+
     },
 
     scrollToError: function () {
