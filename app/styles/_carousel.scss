@@ -23,7 +23,7 @@
         right: 0px;
     }
 
-    &:hover {
+    &:hover, &:focus {
         .prev, .next {
             transition: all .1s ease-out 0.1s;
             background: rgba(25, 31, 37, 0.8);

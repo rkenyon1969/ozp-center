@@ -79,6 +79,9 @@ var Discovery = React.createClass({
     componentWillMount() {
         this.listenTo(DiscoveryPageStore, this.onStoreChange);
 
+        // Reload when a new review is added
+        this.listenTo(ListingActions.saveReviewCompleted, ListingActions.fetchStorefrontListings);
+
         // fetch data when instantiated
         ListingActions.fetchStorefrontListings();
     },
@@ -139,7 +142,7 @@ var Discovery = React.createClass({
     },
 
 
-    onStoreChange: function () {
+    onStoreChange() {
         this.setState(this.getInitialState());
     },
 
@@ -208,7 +211,6 @@ var Discovery = React.createClass({
         }
 
         var InfiniTiles = ListingTile.renderLimitedTiles(this.state.mostPopularTiles, this.state.mostPopular);
-
         var LoadMore = (this.state.mostPopularTiles >= this.state.mostPopular.length) ?
             '' :
             <button onClick={ this.handleLoadMore } className="btn btn-default loadMoreBtn">Load More</button>;

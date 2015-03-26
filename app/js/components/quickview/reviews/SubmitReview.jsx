@@ -50,13 +50,13 @@ var ReviewListing = React.createClass({
         return (
             <div className="SubmitReview">
                 <h5>Review this Listing</h5>
-                <SystemHighMessage />
                 <div className="SubmitReview__Rating">
-                    <div>Star Rating</div>
+                    <h6>Star Rating</h6>
                     <IconRating currentRating={ rate } onChange={ this.onRatingChange } />
                 </div>
                 <div>
-                    <div>Description</div>
+                    <h6>Description</h6>
+                    <SystemHighMessage />
                     <textarea ref="text" value={ text } onChange={ this.onTextChange }></textarea>
                 </div>
                 <div className="pull-right">

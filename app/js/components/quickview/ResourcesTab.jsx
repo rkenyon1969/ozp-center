@@ -16,14 +16,12 @@ var ResourcesTab = React.createClass({
                 <div className="col-md-6 col-left">
                     <section className="resources">
                         <h5>Resources</h5>
-                        <hr/>
                         { this.renderOtherResources() }
                     </section>
                 </div>
                 <div className="col-md-6 col-right">
                     <section className="tpoc">
                         <h5>Technical Support Contact Information</h5>
-                        <hr/>
                         { this.renderTechSuppot() }
                     </section>
                 </div>

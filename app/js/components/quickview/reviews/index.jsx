@@ -33,7 +33,7 @@ var RatingProgressBar = React.createClass({
                 <div className="progress">
                     <div className="progress-bar" role="progressbar" aria-valuenow={value} aria-valuemin="0" aria-valuemax="100" style={style} ></div>
                 </div>
-                <span className="count">({ count })</span>
+                <span className="count">( { count } )</span>
             </div>
         );
     }
@@ -150,8 +150,7 @@ var ReviewsTab = React.createClass({
         return (
             <div>
                 <h5>Average Rating</h5>
-                <IconRating currentRating = { listing.avgRate || 0 } viewOnly />
-                <p> From { listing.totalVotes || 0 } ratings </p>
+                <p><IconRating currentRating = { listing.avgRate || 0 } viewOnly /> ( { listing.totalVotes || 0 } Ratings )</p>
                 <div className="review-filters">
                     { starComponents }
                 </div>
