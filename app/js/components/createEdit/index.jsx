@@ -321,11 +321,11 @@ var ListingForm = React.createClass({
 
     componentDidUpdate: function(prevProps, prevState) {
         var elId = this.state.currentNavTarget || formLinks.basicInformation.id;
-        if (prevState.currentNavTarget !== elId) {
+        if (elId !== formLinks.basicInformation.id && prevState.currentNavTarget !== elId) {
 
             var element         = $(`#${elId}`),
                 form            = $(this.refs.form.getDOMNode()),
-                firstFormChild  = form;
+                firstFormChild  = form.find(':first-child');
 
             if (element) {
                 var elementOffset = element.offset().top,
