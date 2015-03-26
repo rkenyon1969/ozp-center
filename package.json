@@ -16,7 +16,9 @@
     "build": "NODE_ENV=\"production\" gulp build",
     "buildGhPages": "API_URL=\"https://www.owfgoss.org/ng/dev/mp\" HUD_URL=\"http://ozone-development.github.io/ozp-hud/\" WEBTOP_URL=\"http://ozone-development.github.io/ozp-webtop/\" HELP_URL=\"http://ozone-development.github.io/ozp-hud/assets/PlaceholderUserGuide.pdf\" gulp build",
     "deployGhPages": "npm run buildGhPages && gulp deploy",
-    "changelog": "gulp changelog"
+    "changelog": "gulp changelog",
+    "tarDistDate": "gulp tarDistDate",
+    "tarDistVersion": "gulp tarDistVersion"
   },
   "devDependencies": {
     "bower": "1.3.12",
