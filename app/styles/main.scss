@@ -169,6 +169,25 @@ label {
     font-weight: 400;
 }
 
+button.btn.image-remove {
+    margin-top: 0;
+    border: 1px solid $gray-lighter;
+
+    > .icon-trash {
+
+        @extend .icon-trash-grayDark;
+    }
+
+    &:hover, &:focus {
+        background-color: $blue-dark;
+        border: 1px solid $blue-darker;
+
+        > .icon-trash {
+            @extend .icon-trash-white;
+        }
+    }
+}
+
 /*===============================
 =            z-index            =
 ===============================*/
@@ -376,7 +395,8 @@ $icons: (
     icon-cross-10-grayDark: icon-cross-10-blueDark,
     icon-cross-14-grayDark: icon-cross-14-blueDark,
     icon-cross-16-grayDark: icon-cross-16-blueDark,
-    icon-cross-18-grayDark: icon-cross-18-blueDark
+    icon-cross-18-grayDark: icon-cross-18-blueDark,
+    icon-trash-grayDark: icon-trash-white
 );
 
 

@@ -186,7 +186,7 @@ var ResourceForm = React.createClass({
         return (
             <div className="well">
                 <button type="button" className="close" onClick={ this.props.removeHandler }>
-                    <span aria-hidden="true">&times;</span><span className="sr-only">Close</span>
+                    <span aria-hidden="true"><i className="icon-cross-14-grayDark"></i></span><span className="sr-only">Close</span>
                 </button>
                 <TextInput { ...this.getFormComponentProps('name') }/>
                 <TextInput { ...this.getFormComponentProps('url') }/>
@@ -202,7 +202,7 @@ var ScreenshotForm = React.createClass({
         return (
             <div className="well">
                 <button type="button" className="close" onClick={this.props.removeHandler}>
-                    <span aria-hidden="true">&times;</span><span className="sr-only">Close</span>
+                    <span aria-hidden="true"><i className="icon-cross-14-grayDark"></i></span><span className="sr-only">Close</span>
                 </button>
                 <ImageInput { ...this.getFormComponentProps('smallImage') }
                     imageUri={this.props.value.smallImageUrl}
@@ -222,7 +222,7 @@ var ContactForm = React.createClass({
         return (
             <div className="well">
                 <button type="button" className="close" onClick={this.props.removeHandler}>
-                    <span aria-hidden="true">&times;</span><span className="sr-only">Close</span>
+                    <span aria-hidden="true"><i className="icon-cross-14-grayDark"></i></span><span className="sr-only">Close</span>
                 </button>
                 <Select2Input { ...this.getFormComponentProps('type') } options={ getOptionsForSystemObject(this.state.system.contactTypes) }/>
                 <TextInput { ...this.getFormComponentProps('name') }/>
