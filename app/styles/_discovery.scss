@@ -60,15 +60,7 @@
     }
 
     .sidebar {
-        #home{
-            &.active, &:hover {
-                border-left: $link-color 4px solid;
-
-                &:before{
-                    content: " ";
-                }
-            }
-        }
+    
 
         li {
             border-left: transparent 5px solid;
