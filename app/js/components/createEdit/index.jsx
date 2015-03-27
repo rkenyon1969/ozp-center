@@ -427,6 +427,7 @@ var CreateEditPage = React.createClass({
     getInitialState: function () {
         return {
             listing: null,
+            activeId: null,
             hasChanges: false,
             scrollToError: false,
             imageErrors: {screenshots: []}
@@ -472,6 +473,28 @@ var CreateEditPage = React.createClass({
         }
     },
 
+    handleFormScroll: function(){
+        let that                = this,
+            form                = $(this.refs.form.getDOMNode()),
+            formTop             = form.offset().top,
+            lastScrolledPast    = null,
+            buffer              = 35.01; // Just past the set value for a click
+
+        form.children('h2').each(function() {
+            if ($(this).offset().top < (formTop + buffer)){
+                lastScrolledPast = $(this).context;
+            }
+        });
+
+        if(!that.state.activeId){
+            that.setState({activeId: formLinks.basicInformation.id});
+        }
+
+        if(lastScrolledPast.id !== that.state.activeId){
+            that.setState({activeId: lastScrolledPast.id});
+        }
+    },
+
     componentDidUpdate: function () {
         if (this.state.scrollToError && !this.state.isValid) {
             this.scrollToError(this.state.firstError);
@@ -484,6 +507,19 @@ var CreateEditPage = React.createClass({
         var main = $('#main');
 
         main.addClass('create-edit-open');
+    },
+
+    componentDidMount: function(){
+        let that             = this,
+            form             = $(this.refs.form.getDOMNode()),
+            scrollTimer; // Let's setup a timer so we don't check scroll
+
+        $(form).on('scroll', function(){
+            if (scrollTimer) { clearTimeout(scrollTimer); }
+            scrollTimer = setTimeout(function() {
+               that.handleFormScroll();
+           }, 10);
+        });
     },
 
     componentDidUnmount: function () {
@@ -605,7 +641,7 @@ var CreateEditPage = React.createClass({
                 <NavBar />
                 {header}
                 <section className="create-edit-body">
-                    <Sidebar groups={links} activeId={this.getQuery().el}/>
+                    <Sidebar groups={links} activeId={this.state.activeId || this.getQuery().el}/>
                     <ListingForm ref="form" { ...formProps } />
                     <Reminders />
                 </section>
