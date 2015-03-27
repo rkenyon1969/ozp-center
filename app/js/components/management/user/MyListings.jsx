@@ -76,7 +76,7 @@ var MyListingsStatusFilter = React.createClass({
                         </label>
                         <input id="my-listings-filter-draft" type="radio" value="IN_PROGRESS"/>
                         <label htmlFor="my-listings-filter-draft" className="label-draft">
-                            <i className="icon-paper-12" />
+                            <i className="icon-paper-12-grayDark" />
                             Draft
                             <strong className="badge">{counts.IN_PROGRESS || 0}</strong>
                         </label>
