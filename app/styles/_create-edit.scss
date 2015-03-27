@@ -24,7 +24,7 @@
 }
 
 .create-edit {
-    background-color: $gray-lighter;
+    background-color: $gray-light;
 
     border-top: 4px solid $gray-lightest;
 
@@ -54,6 +54,10 @@
         display: inline-block;
 
         vertical-align: top;
+    }
+
+    > form > h2 {
+        margin-top: 40px;
     }
 
     > nav {
@@ -229,7 +233,7 @@
         display: block;
 
         border: 1px solid $gray-lighter;
-        border-left: 4px solid $white;
+        border-left: 4px solid $gray-lightest;
 
         background-color: $white;
 
@@ -267,8 +271,13 @@
         &:checked + label, + label:hover {
             border-left-color: $blue-dark;
 
+            h5 {
+                font-weight: 500;
+            }
+
             .group-title {
                 color: $blue-dark;
+                background-color: $white;
             }
         }
 
@@ -282,13 +291,13 @@
     }
 
     h5 {
-        font-weight: normal;
+        font-weight: 400;
         margin: 0;
     }
 
     .group-title {
         display: block;
-
+        background-color: $gray-lightest;
         padding: 10px;
 
         &:hover, &:focus, &:active {
