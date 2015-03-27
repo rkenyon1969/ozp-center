@@ -71,23 +71,27 @@
         }
 
         li {
-            border-left: transparent 4px solid;
-            position:relative;
+            border-left: transparent 5px solid;
+            margin-right: -35px;
 
-            &.active, &:hover {
+            &:hover, &:focus {
                 color: $link-color;
-                border-left:none;
-                margin-left:-1px;
-
-                &:before{
-                    position:absolute;
-                    left:-10px;
-                    font-size:20px;
-                    content: "\2713 ";
-                    color:  $link-color;
-                }
+                border-left-color: $link-color;
+                font-weight: 500;
+                background: $white;
             }
 
+            &.active {
+                background-color: $link-color;
+                color: $white;
+                border-left-color: $blue-darker;
+                font-weight: 500;
+
+                &:hover, &:focus {
+                background-color: $blue-darker;
+                border-left-color: $gray-darkest;
+                }
+            }
         }
     }
 
