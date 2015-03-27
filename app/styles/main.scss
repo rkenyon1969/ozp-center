@@ -217,28 +217,6 @@ button.btn.image-remove {
     }
 }
 
-.label-draft {
-    @extend .icon-paper;
-}
-
-.label-pending {
-    @extend .icon-loader;
-    color: $blue-dark;
-}
-
-.label-needs-action {
-    @extend .icon-exclamation;
-    color: $red-orange-dark;
-}
-
-.label-published {
-    @extend .icon-thumbs-up;
-    color: $green-dark;
-}
-
-.label-rejected {
-    @extend .icon-reload;
-}
 
 
 /*====================
@@ -381,6 +359,37 @@ body > div.classBanner {
     border-radius: 0px !important;
 }
 
+//Listing Status Icons
+.icon-exclamation-14 {
+    @extend .icon-exclamation-14-redOrangeDark;
+}
+
+.icon-loader-14 {
+    @extend .icon-loader-14-blueDark;
+}
+
+.icon-thumbs-up-14 {
+    @extend .icon-thumbs-up-14-greenDark;
+}
+.icon-reload-14 {
+    @extend .icon-reload-14-blueDark;
+}
+
+.icon-exclamation-12 {
+    @extend .icon-exclamation-12-redOrangeDark;
+}
+
+.icon-loader-12 {
+    @extend .icon-loader-12-blueDark;
+}
+
+.icon-thumbs-up-12 {
+    @extend .icon-thumbs-up-12-greenDark;
+}
+.icon-reload-12 {
+    @extend .icon-reload-12-blueDark;
+}
+
 
 // Icon Hovers
 
@@ -395,8 +404,7 @@ $icons: (
     icon-cross-10-grayDark: icon-cross-10-blueDark,
     icon-cross-14-grayDark: icon-cross-14-blueDark,
     icon-cross-16-grayDark: icon-cross-16-blueDark,
-    icon-cross-18-grayDark: icon-cross-18-blueDark,
-    icon-trash-grayDark: icon-trash-white
+    icon-cross-18-grayDark: icon-cross-18-blueDark
 );
 
 

@@ -1,9 +1,18 @@
 .RecentActivity__SidebarFilter {
     background: $gray-lightest;
+    margin-top: -20px;
+    margin-left: -10px;
+    padding: 10px 5px 10px 5px;
 
     .filter-group {
-        padding: 5px;
-        padding-bottom: 15px;
+        background: $white;
+        padding: 0px;
+        border: 1px solid $gray-lighter;
+        margin-bottom: 10px;
+        width: 96%;
+        margin-left: 2%;
+        margin-right: 2%;
+
     }
 
     input[type="radio"] {
@@ -11,54 +20,108 @@
     }
 
     h4 {
+        padding: 10px;
         font-size: 16px;
     }
 
-    label {
-        display: block;
-        cursor: pointer;
-        font-size: 12px;
+    a {
+        margin: 0;
+        padding: 0;
 
+        label {
+            display: block;
+            cursor: pointer;
+            font-size: 12px;
+            border-left: 3px solid transparent;
+            border-bottom: 1px solid $gray-lighter;
 
-        border-bottom: 2px solid $gray-light;
+            padding-left: 10px;
+            vertical-align: middle;
 
-        border-left: 3px solid transparent;
-        padding-left: 4px;
+            height: 40px;
 
-        vertical-align: middle;
+            span {
+                line-height: 40px;
+                color: $gray-dark;
+            }
 
-        width: 80%;
-        height: 40px;
+            &::before {
+                margin-right: 15px;
+            }
 
-        span {
-            line-height: 40px;
-            color: $gray-dark;
+            .icon-caret-right {
+
+                @extend .icon-caret-right-grayDark;
+                float: right;
+                margin-top: 11px;
+
+            }
+
+            i {
+                margin-right: 4px;
+                top: 3px;
+                margin-left:4px;
+
+                .icon-exclamation-14 {
+                    @extend .icon-exclamation-14-redOrangeDark;
+                }
+
+                .icon-loader-14 {
+                    @extend .icon-loader-14-blueDark;
+                }
+
+                .icon-thumbs-up-14 {
+                    @extend .icon-thumbs-up-14-greenDark;
+                }
+                .icon-reload-14 {
+                    @extend .icon-reload-14-blueDark;
+                }
+            }
+
         }
 
-        &::before {
-            margin-right: 15px;
+        &:hover, &:focus {
+            text-decoration: none;
+            color: none;
+            background: $blue-dark;
+
+            label {
+                background: $blue-dark;
+                border-bottom: 1px solid $blue-darker;
+
+                span {
+                    color: $white;
+                }
+
+                .icon-caret-right {
+                    @extend .icon-caret-right-white;
+                }
+
+                .icon-exclamation-14 {
+                    @extend .icon-exclamation-14-white;
+                }
+
+                .icon-loader-14 {
+                    @extend .icon-loader-14-white;
+                }
+
+                .icon-thumbs-up-14 {
+                    @extend .icon-thumbs-up-14-white;
+                }
+                .icon-reload-14 {
+                    @extend .icon-reload-14-white;
+                }
+            }
+
         }
 
-        .icon-caret-right {
-            float: right;
-            margin-top: 6px;
+        &:last-child {
+
+            > label {
+                border-bottom: none;
+            }
+
         }
-
-        i {
-            margin-right: 4px;
-        }
-
-    }
-
-    .label-needs-action {
-        > span {
-            color: $red-orange-dark;
-        }
-    }
-
-    a:hover {
-        text-decoration: none;
-        color: none;
     }
 }
 
