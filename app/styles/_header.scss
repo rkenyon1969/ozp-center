@@ -167,9 +167,9 @@
         padding: 18px 0;
         border-top: 4px solid transparent;
 
-        &:hover {
+        &:hover, &:focus {
             border-top: 4px solid $blue-dark;
-            color: $gray-dark;
+            color: $blue-dark;
         }
 
         > .react-select-box-label {
@@ -180,7 +180,7 @@
             & .react-select-box-empty {
                 color: $gray-dark;
 
-                &:hover {
+                &:hover, &:focus {
                     border-top: 4px solid $blue-dark;
                     color: $blue-dark;
                 }

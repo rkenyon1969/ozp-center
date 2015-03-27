@@ -23,6 +23,10 @@
     }
 }
 
+#create-edit-basic-information{
+    margin-top: 0px;
+}
+
 .create-edit {
     background-color: $gray-light;
 
@@ -304,4 +308,34 @@
             text-decoration: none;
         }
     }
+}
+
+.listItemRow {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.contactRow{
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.screenshotNum {
+    @extend .large;
+    margin-left: 30px;
+}
+
+.addNew {
+    clear: both;
+    margin-left: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

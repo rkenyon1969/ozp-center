@@ -113,7 +113,7 @@ var formLinks = {
     },
     screenshots: {
         title: 'Screenshots',
-        id: 'create-edit-screenshots'
+        id: 'create-edit-screenshots',
     },
     ownersAndContacts: {
         title: 'Owners & Contacts',
@@ -184,12 +184,23 @@ var ResourceForm = React.createClass({
 
     render: function () {
         return (
-            <div className="well">
-                <button type="button" className="close" onClick={ this.props.removeHandler }>
-                    <span aria-hidden="true"><i className="icon-cross-14-grayDark"></i></span><span className="sr-only">Close</span>
-                </button>
+            <div className="well listItemRow">
+                <div className="clear"></div>
+                <div className="col-md-2">
+                <div><strong>Resource<br /> <span className="screenshotNum">{this.props.count+1}</span></strong></div>
+                </div>
+                <div className="col-md-4">
                 <TextInput { ...this.getFormComponentProps('name') }/>
+                </div>
+                <div className="col-md-4">
                 <TextInput { ...this.getFormComponentProps('url') }/>
+                </div>
+                <div className="col-md-2">
+                <button type="button" className="close" onClick={ this.props.removeHandler }>
+                    <span aria-hidden="true"><i className="icon-cross-14"></i></span><span className="sr-only">Remove</span>
+                </button>
+                </div>
+                <div className="clear"></div>
             </div>
         );
     }
@@ -200,16 +211,27 @@ var ScreenshotForm = React.createClass({
 
     render: function () {
         return (
-            <div className="well">
-                <button type="button" className="close" onClick={this.props.removeHandler}>
-                    <span aria-hidden="true"><i className="icon-cross-14-grayDark"></i></span><span className="sr-only">Close</span>
-                </button>
+            <div className="listItemRow">
+                <div className="clear"></div>
+                <div className="col-md-2">
+                <div><strong>Screenshot<br /> <span className="screenshotNum">{this.props.count+1}</span></strong></div>
+                </div>
+                <div className="col-md-4">
                 <ImageInput { ...this.getFormComponentProps('smallImage') }
                     imageUri={this.props.value.smallImageUrl}
                     serverError={this.props.imageErrors.smallImage} />
+                </div>
+                <div className="col-md-4">
                 <ImageInput { ...this.getFormComponentProps('largeImage') }
                     imageUri={this.props.value.largeImageUrl}
                     serverError={this.props.imageErrors.largeImage} />
+                </div>
+                <div className="col-md-2">
+                <button type="button" className="close" onClick={this.props.removeHandler}>
+                    <span aria-hidden="true"><i className="icon-cross-16"></i></span><span className="sr-only">Remove</span>
+                </button>
+                </div>
+                <div className="clear"></div>
             </div>
         );
     }
@@ -222,7 +244,7 @@ var ContactForm = React.createClass({
         return (
             <div className="well">
                 <button type="button" className="close" onClick={this.props.removeHandler}>
-                    <span aria-hidden="true"><i className="icon-cross-14-grayDark"></i></span><span className="sr-only">Close</span>
+                    <span aria-hidden="true"><i className="icon-cross-14"></i></span><span className="sr-only">Clear</span>
                 </button>
                 <Select2Input { ...this.getFormComponentProps('type') } options={ getOptionsForSystemObject(this.state.system.contactTypes) }/>
                 <TextInput { ...this.getFormComponentProps('name') }/>

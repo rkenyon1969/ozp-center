@@ -38,8 +38,16 @@ html, body {
     background-size: cover;
 }
 
+strong {
+    font-weight: 500;
+}
+
 .navbar-right {
     margin: 0px;
+}
+
+.clear {
+  clear: both;
 }
 
 #main {
