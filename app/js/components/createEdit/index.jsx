@@ -275,7 +275,8 @@ var ListingForm = React.createClass({
                         return { id: val, text: val };
                     })
                 }/>
-                <ListInput id={f.resources.id} { ...this.getSubFormProps('docUrls') }
+                <h2 id={f.resources.id} > Resources </h2>
+                <ListInput { ...this.getSubFormProps('docUrls') }
                     itemForm={ ResourceForm } optional/>
 
                 <h2 id={f.graphics.id}>Graphics</h2>

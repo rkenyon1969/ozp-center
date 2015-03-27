@@ -36,7 +36,7 @@ var ListInput = React.createClass({
                 <div>
                     {itemForms}
                 </div>
-                <button className="btn btn-sm btn-primary" onClick={this.handleNew}>Add</button>
+                <button className="btn btn-sm btn-primary" onClick={this.handleNew}><i className="icon-plus-14-white"></i> Add New</button>
             </div>
         );
     },
