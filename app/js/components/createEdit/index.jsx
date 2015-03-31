@@ -302,6 +302,8 @@ var ListingForm = React.createClass({
                     ownerSetter={ownerSetter} />
                 <ListInput id={f.contacts.id} { ...this.getSubFormProps('contacts') }
                     itemForm={ ContactForm }/>
+
+                <div className="space">&#32;</div>
             </form>
         );
     },
@@ -480,7 +482,7 @@ var CreateEditPage = React.createClass({
             buffer              = 35.01; // Just past the set value for a click
 
         form.children('h2').each(function() {
-            if ($(this).offset().top < (formTop.offset().top + buffer)){
+            if ($(this).offset().top < (form.offset().top + buffer)){
                 lastScrolledPast = $(this).context;
             }
         });
