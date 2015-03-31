@@ -476,12 +476,11 @@ var CreateEditPage = React.createClass({
     handleFormScroll: function(){
         let that                = this,
             form                = $(this.refs.form.getDOMNode()),
-            formTop             = form.offset().top,
-            lastScrolledPast    = null,
+            lastScrolledPast    = null, // Track this so we don't update state unessisarly
             buffer              = 35.01; // Just past the set value for a click
 
         form.children('h2').each(function() {
-            if ($(this).offset().top < (formTop + buffer)){
+            if ($(this).offset().top < (formTop.offset().top + buffer)){
                 lastScrolledPast = $(this).context;
             }
         });
@@ -510,15 +509,18 @@ var CreateEditPage = React.createClass({
     },
 
     componentDidMount: function(){
-        let that             = this,
-            form             = $(this.refs.form.getDOMNode()),
-            scrollTimer; // Let's setup a timer so we don't check scroll
+        let that = this,
+            scrollTimer;
 
-        $(form).on('scroll', function(){
+        // Let's setup a timer so we don't check scroll more often than nessisary.
+        // 20ms Seems to be a good mix between responsiveness and performance
+        // requestAnimationFrame may also be a future option. Will come back to after
+        // testing has been done.
+        $(this.refs.form.getDOMNode()).on('scroll', function(){
             if (scrollTimer) { clearTimeout(scrollTimer); }
             scrollTimer = setTimeout(function() {
                that.handleFormScroll();
-           }, 10);
+           }, 20);
         });
     },
 
