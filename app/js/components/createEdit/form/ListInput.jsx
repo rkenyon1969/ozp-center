@@ -3,7 +3,6 @@
 var React = require('react');
 var { classSet } = React.addons;
 var _ = require('../../../utils/_');
-var InputMixin = require('./InputMixin.jsx');
 
 var ListInput = React.createClass({
     render: function () {

@@ -33,13 +33,8 @@ var savingMessages = {
     listing: 'Saving Listing...'
 };
 
-
-/**
- * formLinks Description.  This object is used to populate the sidebar in the edit view.
- *
- * @property formLinks
- * @type {Object}
- */
+// formLinks object is used by formLinkGroups. formLinks is the config file to
+// set up the side navigation panel in the createEdit view.
 var formLinks = {
     basicInformation: {
         title: 'Basic Information',
@@ -139,13 +134,10 @@ var formLinks = {
     }
 };
 
-/**
- * formLinkGroups Description.  This object splits the formLinks into logical groups, with each link being the
- * accordion header and the array of links being the contents of the expanded accordion.
- *
- * @property formLinkGroups
- * @type {Object}
- */
+
+// formLinkGroups splits the formLinks into logical groups, with each link
+// being the accordion header and the array of links being the contents of
+// the expanded accordion.
 var formLinkGroups = [{
     link: formLinks.basicInformation,
     links: [
@@ -186,12 +178,15 @@ var formLinkGroups = [{
     ]
 }];
 
+
+//TODO
 function getOptionsForSystemObject (items) {
     return items.map(item => {
         return { id: item.title, text: item.title };
     });
 }
 
+// On the edit listing page, these are the wells users input the 'Type of Resource' and the resources 'URL'
 var ResourceForm = React.createClass({
     mixins: [ ValidatedFormMixin ],
 
@@ -219,6 +214,7 @@ var ResourceForm = React.createClass({
     }
 });
 
+// On the edit listing page, these are the Screenshot wells users input the 'Preview Image' and the 'Full Size Image'
 var ScreenshotForm = React.createClass({
     mixins: [ ValidatedFormMixin ],
 
@@ -270,6 +266,7 @@ var ContactForm = React.createClass({
     }
 });
 
+// This is the whole form for all the other createEdit createClass forms
 var ListingForm = React.createClass({
     mixins: [ ValidatedFormMixin, State ],
 
@@ -375,6 +372,7 @@ var ListingForm = React.createClass({
     }
 });
 
+// This is the reminders side panel
 var Reminders = React.createClass({
     getInitialState: () => ({ showStewards: false }),
 

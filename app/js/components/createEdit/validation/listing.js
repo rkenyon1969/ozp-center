@@ -4,13 +4,13 @@ var _ = require('../../../utils/_');
 var t = require('tcomb-form');
 var { maybe, subtype, struct, list, union, Num } = t;
 var {
-    StringMax,
-    NonBlankString,
-    Url,
-    Phone,
-    Email,
-    BlankString
-} = require('./common');
+      StringMax,
+      NonBlankString,
+      Url,
+      Phone,
+      Email,
+      BlankString
+  } = require('./common');
 
 var User = struct({
     username: NonBlankString(100)
@@ -88,7 +88,7 @@ var ListingDraft = struct({
     title: title,
     type: type,
     categories: categories,
-    tags: subtype(tags, StringMax(16)),
+    tags: tags,
     description: maybe(StringMax(4000)),
     descriptionShort: maybe(StringMax(100)),
     versionName: maybe(StringMax(255)),
@@ -145,11 +145,10 @@ function validateContacts(validation, instance) {
 function validate (instance, options, type) {
     var validation = t.validate(instance, type),
         errors = {};
-
     if (validation.errors) {
         validation.errors.forEach(function (e) {
-            var path = e.path.join('.');
-            errors[path] = true;
+            // var path = e.path.join('.');
+            errors[e.path[0]] = true;
         });
     }
 
