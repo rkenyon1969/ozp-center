@@ -4,6 +4,7 @@
 
     > .row {
         position: relative;
+
     }
 
     .clear {
@@ -59,7 +60,7 @@
                 right: 30px;
                 color: $gray-dark;
 
-                &:hover{
+                &:hover, &:focus{
                     cursor: pointer;
                     color: $gray-base;
                 }

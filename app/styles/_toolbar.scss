@@ -17,13 +17,7 @@
 	}
 }
 
-.navbar-left {
-	margin-left: -60px !important;
-}
 
-.navbar-right {
-	margin-right: -60px !important;
-}
 
 .activeIcon {
 	color: $blue;
@@ -62,5 +56,14 @@
 	&:hover, &:focus {
 		background-color: $blue !important;
 		border-left-color: $blue-dark !important;
+	}
+}
+@media all and (min-width: 1240px) and (max-width: 10000px) {
+	.navbar-left {
+		margin-left: -60px !important;
+	}
+
+	.navbar-right {
+		margin-right: -60px !important;
 	}
 }
