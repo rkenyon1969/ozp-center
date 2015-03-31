@@ -4,6 +4,7 @@ var minifyCSS = require('gulp-minify-css');
 var gutil = require('gulp-util');
 var replace = require('gulp-replace');
 var cssImport = require('gulp-cssimport');
+var bless = require('gulp-bless');
 
 var sassConfig = {
     includePaths: ['app/styles'],
@@ -22,5 +23,6 @@ gulp.task('sass', function() {
         .pipe(replace('select2x2.png', '../images/select2x2.png'))
         .pipe(replace('select2-spinner.gif', '../images/select2-spinner.gif'))
         .pipe(gulp.env.production ? minifyCSS() : gutil.noop())
+        .pipe(bless())
         .pipe(gulp.dest('dist/assets'));
 });
