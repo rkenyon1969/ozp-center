@@ -67,6 +67,22 @@
     > .reminders {
         width: calc(100% * (2 / 11));
     }
+
+    > form > h2 {
+        padding-top: 40px;
+        padding-bottom: 20px;
+    }
+
+    .space {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+}
+
+#create-edit-basic-information {
+    padding-top: 0px;
+    margin-top: 0px;
 }
 
 .reminders {

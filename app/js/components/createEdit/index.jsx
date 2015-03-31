@@ -302,6 +302,8 @@ var ListingForm = React.createClass({
                     ownerSetter={ownerSetter} />
                 <ListInput id={f.contacts.id} { ...this.getSubFormProps('contacts') }
                     itemForm={ ContactForm }/>
+
+                <div className="space">&#32;</div>
             </form>
         );
     },
