@@ -7,7 +7,7 @@ var Logo = React.createClass({
 
     render() {
         return (
-            <a href="#home" id="appsmall-logo">
+            <a href="#home" id="marketplace-logo">
                 <img src={logo} />
             </a>
         );

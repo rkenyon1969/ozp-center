@@ -18,6 +18,14 @@
         }
     }
 
+    .navbar-left {
+    		margin-left: -60px !important;
+    	}
+
+    .navbar-right {
+    		margin-right: -60px !important;
+    	}
+        
     .navbar-form {
         margin: 0;
         padding: 0;
@@ -26,6 +34,7 @@
         right: 0px;
         left: 323px;
         height: 54px;
+        width: 997px;
         border: 1px solid $gray-lighter;
         border-top: none;
         border-bottom: none;
@@ -76,7 +85,7 @@
 }
 
 
-#appsmall-logo {
+#marketplace-logo {
     display: block;
     float: left;
     width: 265px;
