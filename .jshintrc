@@ -12,6 +12,7 @@
   "newcap": true,
   "noarg": true,
   "regexp": true,
+  "expr": true,
   "undef": true,
   "unused": "vars",
   "strict": true,
@@ -29,6 +30,7 @@
     "DEVELOPER_RESOURCES_URL": true,
     "WEBTOP_URL": true,
     "METRICS_URL": true,
+    "FEEDBACK_ADDRESS": true,
     "w2utils": true,
     "w2obj": true
   }

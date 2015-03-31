@@ -15,7 +15,7 @@ var InputMixin = {
         var labelClasses = classSet({ 'input-optional': this.props.optional });
 
         return (
-            <div className={ this.getClasses() }>
+            <div id={this.props.id} className={ this.getClasses() }>
                 <label htmlFor={ this.props.id } className={labelClasses}>{ this.props.label }</label>
                 <p className="small">{ this.props.description }</p>
                 { this.props.help && <p className="help-block small">{ this.props.help }</p>}
@@ -104,7 +104,7 @@ var InputMixin = {
         return {
             ref: 'input',
             className: 'form-control',
-            id: this.props.id,
+            id: this.props.inputId,
             value: value,
             onBlur: onBlur,
             onChange: onChange

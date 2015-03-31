@@ -6,9 +6,11 @@ var Modal = require('ozp-react-commons/components/Modal.jsx');
 var Router = require('react-router');
 var Navigation = Router.Navigation;
 var AjaxMixin = require('../../mixins/AjaxMixin');
+var ActiveStateMixin = require('../../mixins/ActiveStateMixin');
 
-var ListingApi = require('../../webapi/Listing').ListingApi;
 var GlobalListingStore = require('../../stores/GlobalListingStore');
+var ListingActions = require('../../actions/ListingActions');
+
 var _ = require('../../utils/_');
 
 var DeleteConfirmation = React.createClass({
@@ -37,7 +39,7 @@ var DeleteConfirmation = React.createClass({
 
         return (
             <Modal ref="modal" className="DeleteConfirmation" size="small" onHidden={this.props.onHidden}>
-                <button className="close corner" data-dismiss="modal">×</button>
+                <button className="close corner" data-dismiss="modal"><i className="icon-cross-16"></i></button>
                 {
                     errorMessage && <div className="alert alert-danger">{errorMessage}</div>
                 }
@@ -64,11 +66,16 @@ var ListingDeleteConfirmation = React.createClass({
         listing: React.PropTypes.string.isRequired
     },
 
-    mixins: [ Reflux.ListenerMixin, Navigation, AjaxMixin ],
+    mixins: [ Reflux.ListenerMixin, Navigation, AjaxMixin, ActiveStateMixin ],
 
     getInitialState: function () {
-        this.listenTo(GlobalListingStore, this.onStoreChange);
         return this.getState();
+    },
+
+    componentDidMount: function() {
+        this.listenTo(GlobalListingStore, this.onStoreChange);
+        this.listenTo(ListingActions.deleteListingCompleted, this.onDeleteComplete);
+        this.listenTo(ListingActions.deleteListingFailed, this.handleError);
     },
 
     getState: function () {
@@ -79,6 +86,10 @@ var ListingDeleteConfirmation = React.createClass({
 
     onStoreChange: function () {
         this.setState(this.getState());
+    },
+
+    onDeleteComplete: function () {
+        this.close();
     },
 
     render: function () {
@@ -101,18 +112,19 @@ var ListingDeleteConfirmation = React.createClass({
 
     close: function () {
         this.refs.modal.close();
+        if (this.getActiveRoute().name === 'edit') {
+            this.transitionTo('my-listings');
+        }
     },
 
     onHidden: function () {
-        this.goBack();
+        this.transitionTo(this.getActiveRoutePath(), {listingId: this.state.listing.id});
     },
 
     onDelete: function () {
         var listing = this.getListing();
 
-        ListingApi.del(listing.id)
-            .done(() => this.close())
-            .fail(this.handleError);
+        ListingActions.deleteListing(listing);
     }
 });
 

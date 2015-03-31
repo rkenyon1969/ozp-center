@@ -51,6 +51,15 @@ var delaySearch = (function(){
 
 var ListingApi = {
 
+    getStorefrontListings: function() {
+        return $.getJSON(API_URL + '/api/storefront')
+            .then(resp => ({
+                featured: resp.featured,
+                newArrivals: resp.recent,
+                mostPopular: resp.mostPopular
+            }));
+    },
+
     getFeatured: function () {
         return $.getJSON(API_URL + '/api/listing/search?isFeatured=true&sort=avgRate&order=DESC&max=24')
             .then(parseList);

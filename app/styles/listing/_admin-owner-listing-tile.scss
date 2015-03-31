@@ -27,17 +27,11 @@
 
 .AdminOwnerListingTile__actionMenu > ul {
     //overridden when toggle is checked
-    display: none;
-
     @extend .list-unstyled;
-
+    display: none;
     width: 70px;
-
     font-size: .8em;
-
-    background-color: $white;
-
-    border-right: 1px solid $gray-lighter;
+    background-color: $gray-lightest;
 
     > li {
         $spacing: 5px;
@@ -55,7 +49,7 @@
             display: block;
         }
 
-        &:hover > a {
+        &:hover > a, &:focus > a {
             color: $blue-dark;
             border-color: $blue-dark;
 
@@ -67,21 +61,17 @@
 .AdminOwnerListingTile__actionMenuButton {
     @extend .corner-button;
 
-    //style as OZONE icons angle-down
-    @extend .icon-caret-down-14-grayDark;
-
     margin-right: 0;
     margin-left: auto;
     width: 18px;
-    height: 18px;
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: 0;
-    padding-top: 3px;
+    height: 17px;
+    border-top: 3px solid transparent;
 
-    &:hover{
+    @extend .icon-caret-down-14-grayDark;
+
+    &:hover, &:focus{
       border-top: 3px solid $blue-dark;
-      padding-top: 1px;
+      padding: 0;
     }
 }
 
@@ -90,7 +80,7 @@
 
     top: 0px;
     right: 0px;
-    border: 0px solid $gray-lighter;
+    border: none;
 
     > input {
         //the toggle checkbox is hidden
@@ -98,16 +88,25 @@
 
         //when the checkbox is checked, display the menu
         &:checked {
+
             & ~ ul {
                 display: block;
+                background-color: $gray-lightest;
             }
 
             & ~ .AdminOwnerListingTile__actionMenuButton {
+
                 border-top: 3px solid $blue-dark;
                 padding-top: 1px;
                 border-bottom: transparent;
                 padding-bottom: 1px;
                 color: $blue-dark;
+                background-color: $gray-lightest;
+                width: 18px;
+                height: 17px;
+                padding-left: 2px;
+                padding-right: 2px;
+                @extend .icon-caret-down-14-blueDark;
             }
         }
     }

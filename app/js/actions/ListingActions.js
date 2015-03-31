@@ -7,9 +7,7 @@ var createActions = require('../utils/createActions');
 var ListingActions = createActions({
     fetchAllListings: null,
     fetchAllChangeLogs: null,
-    fetchNewArrivals: null,
-    fetchMostPopular: null,
-    fetchFeatured: null,
+    fetchStorefrontListings: null,
 
     fetchById: null,
 
@@ -30,7 +28,8 @@ var ListingActions = createActions({
     disable: null,
     approve: null,
     approveByOrg: null,
-    setFeatured: null
+    setFeatured: null,
+    deleteListing: null
 });
 
 ListingActions.listingChangeCompleted = Reflux.createAction();

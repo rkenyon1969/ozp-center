@@ -14,14 +14,17 @@ var DiscoveryPageStore = Reflux.createStore({
     * Update local cache when new data is fetched
     **/
     init: function () {
-        this.listenTo(ListingActions.fetchNewArrivalsCompleted, this.onNewArrivalsFetched);
-        this.listenTo(ListingActions.fetchMostPopularCompleted, this.onMostPopularFetched);
-        this.listenTo(ListingActions.fetchFeaturedCompleted, this.onFeaturedFetched);
+        this.listenTo(ListingActions.fetchStorefrontListingsCompleted,
+                this.onStorefrontListingsFetched);
+
         this.listenTo(ListingActions.searchCompleted, this.onSearchCompleted);
     },
 
-    onNewArrivalsFetched: function (newArrivals) {
-        _newArrivals = newArrivals;
+    onStorefrontListingsFetched: function (storefrontListings) {
+        _newArrivals = storefrontListings.newArrivals;
+        _mostPopular = storefrontListings.mostPopular;
+        _featured = storefrontListings.featured;
+
         this.trigger();
     },
 
@@ -29,18 +32,8 @@ var DiscoveryPageStore = Reflux.createStore({
         return _newArrivals;
     },
 
-    onMostPopularFetched: function (mostPopular) {
-        _mostPopular = mostPopular;
-        this.trigger();
-    },
-
     getMostPopular: function () {
         return _mostPopular;
-    },
-
-    onFeaturedFetched: function (featured) {
-        _featured = featured;
-        this.trigger();
     },
 
     getFeatured: function () {

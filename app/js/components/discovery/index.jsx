@@ -14,33 +14,76 @@ var Sidebar = require('./Sidebar.jsx');
 var ListingTile = require('./ListingTile.jsx');
 var FeaturedListings = require('./FeaturedListings.jsx');
 var Carousel = require('../carousel/index.jsx');
-
-var Input = require('../shared/Input.jsx');
+var Types = require('./Types.jsx');
+var Organizations = require('./Organizations.jsx');
 
 // store dependencies
 var DiscoveryPageStore = require('../../stores/DiscoveryPageStore');
+
+
+var FILTERS = ['categories', 'type', 'agency'];
+
+var areFiltersApplied = (state) => {
+    return _.reduce(FILTERS, function (memo, filter) {
+        return memo || !!state[filter].length;
+    }, false);
+};
 
 var Discovery = React.createClass({
 
     mixins: [ Reflux.ListenerMixin ],
 
-    getInitialState: function () {
+    getInitialState() {
         return {
             featured: DiscoveryPageStore.getFeatured(),
             newArrivals: DiscoveryPageStore.getNewArrivals(),
             mostPopular: DiscoveryPageStore.getMostPopular(),
             searchResults: DiscoveryPageStore.getSearchResults(),
             mostPopularTiles: 12,
+            queryString: this.state ? this.state.queryString : '',
+            categories: this.state ? this.state.categories : [],
+            type: this.state ? this.state.type : [],
+            agency: this.state ? this.state.agency : []
         };
     },
 
-    componentWillMount: function () {
+    onSearchInputChange(evt) {
+        this.setState({
+            queryString: evt.target.value
+        });
+    },
+
+    onCategoryChange(categories) {
+        this.setState({ categories });
+    },
+
+    onTypeChange(type) {
+        this.setState({ type });
+    },
+
+    onOrganizationChange(agency) {
+        this.setState({ agency });
+    },
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.queryString !== prevState.queryString) {
+            this.debounceSearch();
+        }
+        else if(!_.isEqual(this.state.categories, prevState.categories) ||
+            !_.isEqual(this.state.type, prevState.type) ||
+            !_.isEqual(this.state.agency, prevState.agency)) {
+            this.search();
+        }
+    },
+
+    componentWillMount() {
         this.listenTo(DiscoveryPageStore, this.onStoreChange);
 
+        // Reload when a new review is added
+        this.listenTo(ListingActions.saveReviewCompleted, ListingActions.fetchStorefrontListings);
+
         // fetch data when instantiated
-        ListingActions.fetchFeatured();
-        ListingActions.fetchNewArrivals();
-        ListingActions.fetchMostPopular();
+        ListingActions.fetchStorefrontListings();
     },
 
     componentWillUnmount: function(){
@@ -56,23 +99,27 @@ var Discovery = React.createClass({
                 <NavBar />
                 <Header>
                     <form className="navbar-form navbar-left" ref="form" role="search">
-                        <div className="form-group">
+                        <div className="form-group Search">
                             <i className="icon-search"></i>
-                            <Input
-                                ref="search" type="text" className="form-control"
-                                placeholder="Search" value={this.state.queryString} onChange={this.onSearchInputChange} />
 
-                            <i className="icon-cross-14-grayDark" onClick={this.reset}></i>
+                            <input ref="search" type="text" className="form-control"
+                                placeholder="Search"
+                                value={ this.state.queryString || ''}
+                                onChange={ this.onSearchInputChange } />
+
+                            <i className="icon-cross-14-grayDark clearButton" onClick={this.reset}></i>
                         </div>
+                        <Types value={this.state.type} onChange={this.onTypeChange} />
+                        <Organizations value={this.state.agency} onChange={this.onOrganizationChange} />
                     </form>
                 </Header>
                 <div id="discovery">
                     <Sidebar
                         ref="sidebar"
                         isSearching= { isSearching }
-                        system={ this.props.system }
+                        categories={ this.props.system.categories }
                         onGoHome= { this.reset }
-                        onFilterChange= { this.search } />
+                        onChange= { this.onCategoryChange } />
                     <section className="content">
                         {
                             isBrowsing ?
@@ -84,56 +131,49 @@ var Discovery = React.createClass({
                                 ]
                         }
                     </section>
-                    <div className="clearfix"></div>
                 </div>
             </div>
         );
     },
 
-    componentDidMount: function(){
+
+    componentDidMount(){
         $(this.refs.form.getDOMNode()).submit((e)=>e.preventDefault());
     },
 
-    componentDidUpdate: function(oldProps, oldState) {
-        if (oldState.queryString !== this.state.queryString) {
-            this.search();
-        }
-    },
 
-    onStoreChange: function () {
+    onStoreChange() {
         this.setState(this.getInitialState());
     },
 
-    onSearchInputChange: function (evt) {
-        this.setState({
-            queryString: evt.target.value
-        });
-    },
-
-    isSearching: function () {
+    isSearching() {
         return !!this.state.queryString;
     },
 
-    isBrowsing: function () {
-        var sidebar = this.refs.sidebar;
-        return (this.isSearching() || (sidebar && sidebar.areFiltersApplied()));
+    isBrowsing() {
+        return (this.isSearching() || areFiltersApplied(this.state));
     },
 
-    reset: function () {
+    reset() {
         this.setState({
             queryString: ''
         });
     },
 
-    search: _.debounce(function () {
+    debounceSearch: _.debounce(function () {
+        this.search();
+    }, 500),
+
+    search() {
+        var { type, categories, agency } = this.state;
         ListingActions.search(
             _.assign({
                 queryString: this.state.queryString
-            }, this.refs.sidebar.state.selectedFilters)
+            }, { type, categories, agency })
         );
-    }, 500),
+    },
 
-    renderFeaturedListings: function () {
+    renderFeaturedListings() {
         if(!this.state.featured.length) {
             return;
         }
@@ -144,7 +184,7 @@ var Discovery = React.createClass({
         );
     },
 
-    renderNewArrivals: function () {
+    renderNewArrivals() {
         if(!this.state.newArrivals.length) {
             return;
         }
@@ -159,19 +199,18 @@ var Discovery = React.createClass({
         );
     },
 
-    handleLoadMore: function(){
+    handleLoadMore() {
         this.setState({
             mostPopularTiles: this.state.mostPopularTiles += 12
         });
     },
 
-    renderMostPopular: function () {
+    renderMostPopular() {
         if(!this.state.mostPopular.length) {
             return;
         }
 
         var InfiniTiles = ListingTile.renderLimitedTiles(this.state.mostPopularTiles, this.state.mostPopular);
-
         var LoadMore = (this.state.mostPopularTiles >= this.state.mostPopular.length) ?
             '' :
             <button onClick={ this.handleLoadMore } className="btn btn-default loadMoreBtn">Load More</button>;
@@ -189,7 +228,7 @@ var Discovery = React.createClass({
         );
     },
 
-    renderSearchResults: function () {
+    renderSearchResults() {
         return (
             <section className="Discovery__SearchResults">
                 <h4>Search Results</h4>

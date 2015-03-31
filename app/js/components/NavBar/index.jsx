@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 'use strict';
 
 var React = require('react');
@@ -6,7 +5,7 @@ var UserNotificationDropdown = require('ozp-react-commons/components/notificatio
 var HelpModal = require('./helpmodal.jsx');
 var ProfileLink = require('../profile/ProfileLink.jsx');
 var ModalLink = require('../ModalLink.jsx');
-var { HUD_URL, METRICS_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL } = require('ozp-react-commons/OzoneConfig');
+var { HUD_URL, METRICS_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL, FEEDBACK_ADDRESS } = require('ozp-react-commons/OzoneConfig');
 
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
 
@@ -68,6 +67,7 @@ var NavBar = React.createClass({
                                         <li><a href={'#/mall-management/categories'}><i className="icon-shopping-settings-grayLightest"></i>Marketplace Settings</a></li>
                                     }
                                     { Metrics }
+                                    <li><a href={FEEDBACK_ADDRESS} className="caboose"><i className="icon-mail-white"></i>Submit Feedback</a></li>
                                 </ul>
                             </li>
                         </ul>

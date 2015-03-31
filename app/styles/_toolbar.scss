@@ -1,12 +1,11 @@
 #globalNav {
-	top: 20px !important;
+	top: 20px;
 }
 
 #active {
-	color: $blue !important;
-	border-top-color: $blue !important;
+	color: $blue;
+	border-top-color: $blue;
 }
-
 
 .navbar-inverse .navbar-nav {
 	& li:hover, & li:hover, & ul.dropdown-menu > li > a:hover{
@@ -18,28 +17,11 @@
 	}
 }
 
-.navbar-left {
-	margin-left: -60px !important;
-}
 
-.navbar-right {
-	margin-right: -60px !important;
-}
 
 .activeIcon {
 	color: $blue;
 }
-
-.activeIcon.icon-shopping-grayLightest {
-	@extend .icon-shopping-blue;
-}
-.activeIcon.icon-home-grayLightest {
-	@extend .icon-shopping-blue;
-}
-.activeIcon.icon-layout-grayLightest {
-	@extend .icon-shopping-blue;
-}
-
 
 .user-menu-dropdown.open {
 	.icon-menu-grayLightest {
@@ -47,45 +29,42 @@
 	}
 }
 
-.navbar-inverse .navbar-nav {
+.nav.navbar-nav {
 
-	& li > a {
+    > .open {
+        > a, > a:hover, > a:focus {
 
-		color: $gray-lightest !important;
+            > .icon-caret-up-grayLightest{
+				@extend .icon-caret-up-blue;
+            }
 
-		&:hover, &:focus {
-			color: $white !important;
-		}
+            > .icon-menu-grayLightest{
+				@extend .icon-menu-blue;
+            }
+        }
+    }
+}
 
+.navbar-inverse .navbar-nav .open .dropdown-menu > li.dropdown-header {
+	color: $blue !important;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a.caboose {
+	background-color: $gray-dark !important;
+	color: $white !important;
+
+	&:hover, &:focus {
+		background-color: $blue !important;
+		border-left-color: $blue-dark !important;
+	}
+}
+
+@media all and (min-width: 1240px) and (max-width: 10000px) {
+	.navbar-left {
+		margin-left: -60px !important;
 	}
 
-	&  li.dropdown-header {
-		color: $blue;
-	}
-
-	& ul.dropdown-menu {
-		background: $gray-darker;
-
-		& > li {
-
-			&:hover, &:focus{
-				border-left: $blue;
-			}
-
-			& > a {
-				color: $white;
-
-
-				&:hover, &:focus{
-					color: $white;
-				}
-
-				& > i:hover, & > i:focus{
-					color:$white !important;
-				}
-
-			}
-		}
-
+	.navbar-right {
+		margin-right: -60px !important;
 	}
 }

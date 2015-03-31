@@ -8,6 +8,7 @@
 @import "../../node_modules/select2/select2-bootstrap.css";
 @import "_bootstrap.scss";
 @import "../../node_modules/ozp-react-commons/app/styles/commons.scss";
+@import "../../node_modules/react-select-box/example/select-box.css";
 
 @import "../../node_modules/icons/dist/css/sprite.scss";
 
@@ -27,13 +28,7 @@
 }
 
 $header-height: 55px;
-$black: #191F25;
-
-input, textarea {
-    &.placeholder {
-        $color: $input-color-placeholder;
-    }
-}
+$black: $gray-base;
 
 html, body {
     font-family: 'Ubuntu';
@@ -43,13 +38,21 @@ html, body {
     background-size: cover;
 }
 
+strong {
+    font-weight: 500;
+}
+
 .navbar-right {
     margin: 0px;
 }
 
+.clear {
+  clear: both;
+}
+
 #main {
     min-height: 100%;
-    height: auto !important;
+    height: auto;
     width: 1260px;
     background: $white;
     -moz-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
@@ -95,6 +98,7 @@ html, body {
 }
 
 @import 'w2ui';
+@import 'select2';
 @import 'loadmask';
 @import 'load-more';
 @import 'carousel';
@@ -122,6 +126,44 @@ html, body {
     margin-top: -10px;
 }
 
+button.close {
+    &:hover, &:focus, &:active{
+        > .icon-cross-10-grayDark{
+            @extend .icon-cross-10-blueDark;
+        }
+        > .icon-cross-14-grayDark{
+            @extend .icon-cross-14-blueDark;
+        }
+        > .icon-cross-16-grayDark{
+            @extend .icon-cross-16-blueDark;
+        }
+        > .icon-cross-18-grayDark{
+            @extend .icon-cross-18-blueDark;
+        }
+    }
+
+    > i.icon-cross-10-grayDark{
+        &:hover, &:focus{
+            @extend .icon-cross-10-blueDark;
+        }
+    }
+    > i.icon-cross-14-grayDark{
+        &:hover, &:focus{
+            @extend .icon-cross-14-blueDark;
+        }
+    }
+    > i.icon-cross-16-grayDark{
+        &:hover, &:focus{
+            @extend .icon-cross-16-blueDark;
+        }
+    }
+    > i.icon-cross-18-grayDark{
+        &:hover, &:focus{
+            @extend .icon-cross-18-blueDark;
+        }
+    }
+}
+
 .dropdown-menu .divider {
     background: $gray-darkest !important;
 }
@@ -135,6 +177,25 @@ label {
     font-weight: 400;
 }
 
+button.btn.image-remove {
+    margin-top: 0;
+    border: 1px solid $gray-lighter;
+
+    > .icon-trash {
+
+        @extend .icon-trash-grayDark;
+    }
+
+    &:hover, &:focus {
+        background-color: $blue-dark;
+        border: 1px solid $blue-darker;
+
+        > .icon-trash {
+            @extend .icon-trash-white;
+        }
+    }
+}
+
 /*===============================
 =            z-index            =
 ===============================*/
@@ -145,13 +206,63 @@ label {
     z-index: 10001;
 }
 
+/*==============================
+=   Approval Status Indicators =
+==============================*/
+
+.label-draft, .label-pending, .label-needs-action, .label-published, .label-rejected {
+    @extend .icons;
+
+    padding-left: 0px !important;
+    font-family: 'Ubuntu';
+    font-weight: 400;
+
+    &::before {
+        font-family: 'icons';
+        display: inline-block;
+        width: 18px;
+        text-align: center;
+    }
+}
+
+
+
 /*====================
 =     Close          =
 ====================*/
+.icon-cross-18 {
+    @extend .icon-cross-18-grayDark;
+
+    &:hover, &:focus{
+        @extend .icon-cross-18-blueDark;
+    }
+}
+.icon-cross-16 {
+    @extend .icon-cross-16-grayDark;
+
+    &:hover, &:focus{
+        @extend .icon-cross-16-blueDark;
+    }
+}
+.icon-cross-14 {
+    @extend .icon-cross-14-grayDark;
+
+    &:hover, &:focus{
+        @extend .icon-cross-14-blueDark;
+    }
+}
+.icon-cross-10 {
+    @extend .icon-cross-10-grayDark;
+
+    &:hover, &:focus{
+        @extend .icon-cross-10-blueDark;
+    }
+}
+
 .close.corner {
     position: absolute;
     right: 8px;
-    top: 0;
+    top: 12px;
 }
 
 .modal-header .close {
@@ -179,6 +290,13 @@ label {
 
 div.modal-header > button.close {
     margin:-22px -13px 0 0;
+
+    &:hover, &:focus, &:active {
+
+        > .icon-cross-16-grayDark{
+            @extend .icon-cross-16-blueDark;
+        }
+    }
 }
 
 /*=======================
@@ -211,6 +329,8 @@ body > div.classBanner {
     background-color: $white;
     font-size: 1.3em;
     border: 1px solid $gray-lighter;
+    border-top: 3px solid white;
+    margin-top: 1px;
 
     cursor: pointer;
 
@@ -247,10 +367,36 @@ body > div.classBanner {
     border-radius: 0px !important;
 }
 
+//Listing Status Icons
+.icon-exclamation-14 {
+    @extend .icon-exclamation-14-redOrangeDark;
+}
 
+.icon-loader-14 {
+    @extend .icon-loader-14-blueDark;
+}
 
+.icon-thumbs-up-14 {
+    @extend .icon-thumbs-up-14-greenDark;
+}
+.icon-reload-14 {
+    @extend .icon-reload-14-blueDark;
+}
 
+.icon-exclamation-12 {
+    @extend .icon-exclamation-12-redOrangeDark;
+}
 
+.icon-loader-12 {
+    @extend .icon-loader-12-blueDark;
+}
+
+.icon-thumbs-up-12 {
+    @extend .icon-thumbs-up-12-greenDark;
+}
+.icon-reload-12 {
+    @extend .icon-reload-12-blueDark;
+}
 
 
 // Icon Hovers
@@ -261,10 +407,13 @@ $icons: (
     icon-ban-12-blueDark: icon-ban-12-red,
     icon-open-grayDark: icon-open-white,
     icon-pencil-grayDark: icon-pencil-white,
-    icon-ribbon: icon-ribbon-white,
-    icon-layers: icon-layers-white
+    icon-ribbon-grayDark: icon-ribbon-white,
+    icon-layers-grayDark: icon-layers-white,
+    icon-cross-10-grayDark: icon-cross-10-blueDark,
+    icon-cross-14-grayDark: icon-cross-14-blueDark,
+    icon-cross-16-grayDark: icon-cross-16-blueDark,
+    icon-cross-18-grayDark: icon-cross-18-blueDark
 );
 
 
 @include sprite-icons($icons);
-

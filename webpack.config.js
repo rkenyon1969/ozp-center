@@ -5,6 +5,7 @@ var ENV = process.env.NODE_ENV || "development";
 var CENTER_URL = (process.env.CENTER_URL || "http://localhost:8000/dist") + '/#';
 var WEBTOP_URL = process.env.WEBTOP_URL || "http://localhost:9000/#/grid/sticky-0/0";
 var DEVELOPER_RESOURCES_URL = process.env.DEVELOPER_RESOURCES_URL || "#";
+var FEEDBACK_ADDRESS = process.env.FEEDBACK_ADDRESS || "#";
 
 module.exports = {
     // This is the main file that should include all other JS files
@@ -48,10 +49,18 @@ module.exports = {
             { test: /\.png/, loader: "url-loader?limit=10000&mimetype=image/png" },
             {
                 test: /\.jsx?$/,
-                loader: "jsx-loader?harmony=true&insertPragma=React.DOM",
+                loader: "jsx-loader?insertPragma=React.DOM!babel-loader?experimental&optional=runtime",
                 include: [
                     path.join(__dirname, 'app/js'),
-                    path.join(__dirname, 'node_modules/ozp-react-commons/app/js'),
+                    path.join(__dirname, 'node_modules/ozp-react-commons/app/js')
+                ]
+            },
+            // This is done separetly to not add 'use strict' as the plugin leaks global vars
+            // When this is fixed, include below can be moved in the above config
+            {
+                test: /\.jsx?$/,
+                loader: "jsx-loader",
+                include: [
                     path.join(__dirname, 'node_modules/react-datepicker/src')
                 ]
             }

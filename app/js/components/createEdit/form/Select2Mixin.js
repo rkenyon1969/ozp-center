@@ -15,6 +15,7 @@ var Select2Mixin = {
 
         $input.on('change', this.onChange);
         $input.on('select2-blur', this._onBlur);
+        $input.select2('val', this.props.value);
 
         this._$select2 = select2;
         this._$input = $input;

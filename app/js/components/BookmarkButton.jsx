@@ -41,7 +41,7 @@ var BookmarkButton = React.createClass({
                 'bookmarked': this.inLibrary()
             });
         var bookmarkIcon =  React.addons.classSet({
-                'icon-ribbon': !this.inLibrary(),
+                'icon-ribbon-grayDark': !this.inLibrary(),
                 'icon-ribbon-filled-yellow': this.inLibrary()
             });
         return (
@@ -50,6 +50,6 @@ var BookmarkButton = React.createClass({
             </button>
         );
     }
-});
+    });
 
 module.exports = BookmarkButton;

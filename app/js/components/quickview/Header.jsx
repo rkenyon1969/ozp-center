@@ -23,7 +23,7 @@ var QuickviewHeader = React.createClass({
         return (
             <div className="quickview-header">
                 <div className="quickview-header-info">
-                    <button type="button" className="close" aria-hidden="true" onClick={ this.props.onCancel }>×</button>
+                    <button type="button" className="close" aria-hidden="true" onClick={ this.props.onCancel }><i className="icon-cross-16-grayDark"></i></button>
                     <img className="listing-icon" src={ image } data-fallback="/store/images/types/3" />
                     <h3 className="listing-title" title={ title }>{ title }
                     {
