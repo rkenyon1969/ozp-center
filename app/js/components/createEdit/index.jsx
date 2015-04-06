@@ -474,6 +474,10 @@ var CreateEditPage = React.createClass({
 
     onClose: function () {
         this.transitionTo('my-listings');
+        var main = $('#main');
+        if(main.hasClass('create-edit-open')){
+          main.removeClass('create-edit-open');
+        }
     },
 
     onPreview: function () {
@@ -516,13 +520,11 @@ var CreateEditPage = React.createClass({
     //in order to get the form to be the only scrollable element
     componentWillMount: function () {
         var main = $('#main');
-
         main.addClass('create-edit-open');
     },
 
     componentDidUnmount: function () {
         var main = $('#main');
-
         main.removeClass('create-edit-open');
     },
 
