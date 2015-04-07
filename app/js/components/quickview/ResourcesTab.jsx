@@ -47,9 +47,7 @@ var ResourcesTab = React.createClass({
 
     renderOtherResources: function () {
         var resources = _.compact(this.props.listing.docUrls.map(function (doc) {
-            if (doc.name !== 'User Manual' && doc.name !== 'API Documentation') {
-                return <p><a target="_blank" href={ doc.url }>{ doc.name }</a></p>;
-            }
+          return <p><a target="_blank" href={ doc.url }>{ doc.name }</a></p>;
         }));
 
         return resources.length ? resources : <EmptyFieldValue text="None available" />;
