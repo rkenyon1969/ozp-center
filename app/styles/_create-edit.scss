@@ -16,7 +16,8 @@
 
 #main.create-edit-open {
     height: 100%;
-
+    overflow: auto;
+    
     & > #App {
         //subtract child element's top margin due to margin-collapsing
         height: calc(100% - 149px);
