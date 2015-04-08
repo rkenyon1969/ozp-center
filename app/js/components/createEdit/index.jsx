@@ -474,10 +474,6 @@ var CreateEditPage = React.createClass({
 
     onClose: function () {
         this.transitionTo('my-listings');
-        var main = $('#main');
-        if(main.hasClass('create-edit-open')){
-          main.removeClass('create-edit-open');
-        }
     },
 
     onPreview: function () {
@@ -523,7 +519,7 @@ var CreateEditPage = React.createClass({
         main.addClass('create-edit-open');
     },
 
-    componentDidUnmount: function () {
+    componentWillUnmount: function () {
         var main = $('#main');
         main.removeClass('create-edit-open');
     },
