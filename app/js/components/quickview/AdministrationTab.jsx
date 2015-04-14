@@ -139,18 +139,18 @@ var AdministrationTab = React.createClass({
                     ] : [enabledControl];
 
                 statusClass = 'label-published';
-                iconClass= 'icon-thumbs-up-14-greenDark';
+                iconClass= 'icon-thumbs-up-14';
                 break;
             case 'Pending, Organization':
                 if (isStewardOfOrg || isAdmin) {
                     controls = this.renderReviewSection();
                     statusClass = 'label-needs-action';
-                    iconClass= 'icon-exclamation-14-redOrangeDark';
+                    iconClass= 'icon-exclamation-14';
 
                 } else {
                     controls = [];
                     statusClass = 'label-pending';
-                    iconClass= 'icon-loader-14-blueDark';
+                    iconClass= 'icon-loader-14';
 
                 }
                 break;
@@ -158,26 +158,26 @@ var AdministrationTab = React.createClass({
                 if (isAdmin) {
                     controls = this.renderReviewSection();
                     statusClass = 'label-needs-action';
-                    iconClass= 'icon-exclamation-14-redOrangeDark';
+                    iconClass= 'icon-exclamation-14';
 
                 } else {
                     controls = [];
                     statusClass = 'label-pending';
-                    iconClass= 'icon-loader-14-blueDark';
+                    iconClass= 'icon-loader-14';
 
                 }
                 break;
 
             case 'Returned to Owner':
                 statusClass = 'label-needs-action';
-                iconClass= 'icon-exclamation-14-redOrangeDark';
+                iconClass= 'icon-exclamation-14';
 
                 controls = [];
                 break;
 
             case 'Draft':
                 statusClass = 'label-draft';
-                iconClass= 'icon-paper-13-grayDark';
+                iconClass= 'icon-paper-14';
 
                 controls = [];
                 break;

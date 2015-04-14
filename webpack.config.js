@@ -5,6 +5,7 @@ var ENV = process.env.NODE_ENV || "development";
 var CENTER_URL = (process.env.CENTER_URL || "http://localhost:8000/dist") + '/#';
 var WEBTOP_URL = process.env.WEBTOP_URL || "http://localhost:9000/#/grid/sticky-0/0";
 var DEVELOPER_RESOURCES_URL = process.env.DEVELOPER_RESOURCES_URL || "#";
+var FEEDBACK_ADDRESS = process.env.FEEDBACK_ADDRESS || "#";
 
 module.exports = {
     // This is the main file that should include all other JS files

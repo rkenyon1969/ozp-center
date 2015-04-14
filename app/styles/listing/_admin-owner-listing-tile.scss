@@ -49,7 +49,7 @@
             display: block;
         }
 
-        &:hover > a {
+        &:hover > a, &:focus > a {
             color: $blue-dark;
             border-color: $blue-dark;
 

@@ -4,13 +4,13 @@ var _ = require('../../../utils/_');
 var t = require('tcomb-form');
 var { maybe, subtype, struct, list, union, Num } = t;
 var {
-    StringMax,
-    NonBlankString,
-    Url,
-    Phone,
-    Email,
-    BlankString
-} = require('./common');
+      StringMax,
+      NonBlankString,
+      Url,
+      Phone,
+      Email,
+      BlankString
+  } = require('./common');
 
 var User = struct({
     username: NonBlankString(100)
@@ -41,7 +41,7 @@ var title = NonBlankString(60),
     type = NonBlankString(50),
     whatIsNew = maybe(StringMax(250)),
     categories = list(NonBlankString(50)),
-    tags = list(NonBlankString(16)),
+    tags = list(StringMax(16)),
     intents = list(NonBlankString(127)),
     screenshots = list(Screenshot),
     contacts = list(Contact),
@@ -145,11 +145,10 @@ function validateContacts(validation, instance) {
 function validate (instance, options, type) {
     var validation = t.validate(instance, type),
         errors = {};
-
     if (validation.errors) {
         validation.errors.forEach(function (e) {
-            var path = e.path.join('.');
-            errors[path] = true;
+            // var path = e.path.join('.');
+            errors[e.path[0]] = true;
         });
     }
 
@@ -175,7 +174,6 @@ function validateFull (instance, options) {
     validation.errors.contacts = !hasRequiredContactTypes(requiredContactTypes, instance.contacts);
 
     copyImageValidations(validation);
-
     return validation;
 }
 

@@ -16,15 +16,20 @@
 
 #main.create-edit-open {
     height: 100%;
-
+    overflow: auto;
+    
     & > #App {
         //subtract child element's top margin due to margin-collapsing
         height: calc(100% - 149px);
     }
 }
 
+#create-edit-basic-information{
+    margin-top: 0px;
+}
+
 .create-edit {
-    background-color: $gray-lighter;
+    background-color: $gray-light;
 
     border-top: 4px solid $gray-lightest;
 
@@ -54,6 +59,10 @@
         display: inline-block;
 
         vertical-align: top;
+    }
+
+    > form > h2 {
+        margin-top: 40px;
     }
 
     > nav {
@@ -202,6 +211,13 @@
     }
 }
 
+div.col-md-4 > .form-group >span.image-container.image-present {
+    width: 200px;
+    height: 125px;
+    line-height: 125px;
+}
+
+
 .image-preview {
     max-width: 100%;
     max-height: 100%;
@@ -245,7 +261,7 @@
         display: block;
 
         border: 1px solid $gray-lighter;
-        border-left: 4px solid $white;
+        border-left: 4px solid $gray-lightest;
 
         background-color: $white;
 
@@ -283,8 +299,13 @@
         &:checked + label, + label:hover {
             border-left-color: $blue-dark;
 
+            h5 {
+                font-weight: 500;
+            }
+
             .group-title {
                 color: $blue-dark;
+                background-color: $white;
             }
         }
 
@@ -298,17 +319,47 @@
     }
 
     h5 {
-        font-weight: normal;
+        font-weight: 400;
         margin: 0;
     }
 
     .group-title {
         display: block;
-
+        background-color: $gray-lightest;
         padding: 10px;
 
         &:hover, &:focus, &:active {
             text-decoration: none;
         }
     }
+}
+
+.listItemRow {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.contactRow{
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.screenshotNum {
+    @extend .large;
+    margin-left: 30px;
+}
+
+.addNew {
+    clear: both;
+    margin-left: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

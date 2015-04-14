@@ -38,8 +38,20 @@ html, body {
     background-size: cover;
 }
 
+strong {
+    font-weight: 500;
+}
+
 .navbar-right {
     margin: 0px;
+}
+
+.clear {
+  clear: both;
+}
+
+a:focus {
+    outline-color: $blue;
 }
 
 #main {
@@ -169,6 +181,25 @@ label {
     font-weight: 400;
 }
 
+button.btn.image-remove {
+    margin-top: 0;
+    border: 1px solid $gray-lighter;
+
+    > .icon-trash {
+
+        @extend .icon-trash-grayDark;
+    }
+
+    &:hover, &:focus {
+        background-color: $blue-dark;
+        border: 1px solid $blue-darker;
+
+        > .icon-trash {
+            @extend .icon-trash-white;
+        }
+    }
+}
+
 /*===============================
 =            z-index            =
 ===============================*/
@@ -198,28 +229,6 @@ label {
     }
 }
 
-.label-draft {
-    @extend .icon-paper;
-}
-
-.label-pending {
-    @extend .icon-loader;
-    color: $blue-dark;
-}
-
-.label-needs-action {
-    @extend .icon-exclamation;
-    color: $red-orange-dark;
-}
-
-.label-published {
-    @extend .icon-thumbs-up;
-    color: $green-dark;
-}
-
-.label-rejected {
-    @extend .icon-reload;
-}
 
 
 /*====================
@@ -360,6 +369,37 @@ body > div.classBanner {
 .datepicker__input,
 .datepicker__day--selected {
     border-radius: 0px !important;
+}
+
+//Listing Status Icons
+.icon-exclamation-14 {
+    @extend .icon-exclamation-14-redOrangeDark;
+}
+
+.icon-loader-14 {
+    @extend .icon-loader-14-blueDark;
+}
+
+.icon-thumbs-up-14 {
+    @extend .icon-thumbs-up-14-greenDark;
+}
+.icon-reload-14 {
+    @extend .icon-reload-14-blueDark;
+}
+
+.icon-exclamation-12 {
+    @extend .icon-exclamation-12-redOrangeDark;
+}
+
+.icon-loader-12 {
+    @extend .icon-loader-12-blueDark;
+}
+
+.icon-thumbs-up-12 {
+    @extend .icon-thumbs-up-12-greenDark;
+}
+.icon-reload-12 {
+    @extend .icon-reload-12-blueDark;
 }
 
 

@@ -13,7 +13,7 @@ var MyListingsSidebarFilter = React.createClass({
             <RadioGroup name="recent-activity-my-listings" onChange={this.props.handleChange}>
                 <Link id="recent-activity-returned" to="my-listings" query={{approvalStatus: "REJECTED"}}>
                     <label htmlFor="recent-activity-returned" className="label-needs-action">
-                        <i className="icon-exclamation-14-redOrangeDark"></i>
+                        <i className="icon-exclamation-14"></i>
                         Returned to Owner
                         <i className="icon-caret-right"></i>
                     </label>
@@ -21,7 +21,7 @@ var MyListingsSidebarFilter = React.createClass({
 
                 <Link id="recent-activity-returned" to="my-listings" query={{approvalStatus: "PENDING"}}>
                     <label htmlFor="recent-activity-pending" className="label-pending">
-                        <i className="icon-loader-14-blueDark"></i>
+                        <i className="icon-loader-14"></i>
                         Pending Review
                         <i className="icon-caret-right"></i>
                     </label>
@@ -29,7 +29,7 @@ var MyListingsSidebarFilter = React.createClass({
 
                 <Link id="recent-activity-returned" to="my-listings" query={{approvalStatus: "APPROVED"}}>
                     <label htmlFor="recent-activity-published" className="label-published">
-                        <i className="icon-thumbs-up-14-greenDark"></i>
+                        <i className="icon-thumbs-up-14"></i>
                         Published
                         <i className="icon-caret-right"></i>
                     </label>
@@ -47,7 +47,7 @@ var AllListingsSidebarFilter = React.createClass({
             <RadioGroup name="recent-activity-all-listings" onChange={this.props.handleChange}>
                 <Link id="recent-activity-returned" to="all-listings" query={{approvalStatus: "APPROVED_ORG"}}>
                     <label htmlFor="recent-activity-all-returned" className="label-needs-action">
-                        <i className="icon-exclamation-14-redOrangeDark"></i>
+                        <i className="icon-exclamation-14"></i>
                         Pending Review
                         <i className="icon-caret-right"></i>
                     </label>
@@ -55,7 +55,7 @@ var AllListingsSidebarFilter = React.createClass({
 
                 <Link id="recent-activity-returned" to="all-listings" query={{approvalStatus: "PENDING"}}>
                     <label htmlFor="recent-activity-all-pending" className="label-pending">
-                        <i className="icon-loader-14-blueDark"></i>
+                        <i className="icon-loader-14"></i>
                         Pending Organization Review
                         <i className="icon-caret-right"></i>
                     </label>
@@ -63,7 +63,7 @@ var AllListingsSidebarFilter = React.createClass({
 
                 <Link id="recent-activity-returned" to="all-listings" query={{approvalStatus: "APPROVED"}}>
                     <label htmlFor="recent-activity-all-published" className="label-published">
-                        <i className="icon-thumbs-up-14-greenDark"></i>
+                        <i className="icon-thumbs-up-14"></i>
                         Published
                         <i className="icon-caret-right"></i>
                     </label>
@@ -71,7 +71,7 @@ var AllListingsSidebarFilter = React.createClass({
 
                 <Link id="recent-activity-returned" to="all-listings" query={{approvalStatus: "REJECTED"}}>
                     <label htmlFor="recent-activity-all-returned" className="label-rejected">
-                        <i className="icon-reload-14-blueDark"></i>
+                        <i className="icon-reload-14"></i>
                         Returned to Owner
                         <i className="icon-caret-right"></i>
                     </label>
@@ -90,7 +90,7 @@ var OrgListingsSidebarFilter = React.createClass({
             <RadioGroup name="recent-activity-org-listings" onChange={this.props.handleChange}>
                 <Link id="recent-activity-pending" to="org-listings" query={{approvalStatus: "PENDING"}} params={{org: this.props.org.title}}>
                     <label htmlFor="recent-activity-org-pending" className="label-needs-action">
-                        <i className="icon-exclamation-14-redOrangeDark"></i>
+                        <i className="icon-exclamation-14"></i>
                         Pending { this.props.org.shortName } Review
                         <i className="icon-caret-right"></i>
                     </label>
@@ -98,7 +98,7 @@ var OrgListingsSidebarFilter = React.createClass({
 
                 <Link id="recent-activity-pending" to="org-listings" query={{approvalStatus: "APPROVED_ORG"}} params={{org: this.props.org.title}}>
                     <label htmlFor="recent-activity-org-pending" className="label-pending">
-                        <i className="icon-loader-14-blueDark"></i>
+                        <i className="icon-loader-14"></i>
                         Organization Approved
                         <i className="icon-caret-right"></i>
                     </label>
@@ -106,7 +106,7 @@ var OrgListingsSidebarFilter = React.createClass({
 
                 <Link id="recent-activity-published" to="org-listings" query={{approvalStatus: "APPROVED"}} params={{org: this.props.org.title}}>
                     <label htmlFor="recent-activity-org-published" className="label-published">
-                        <i className="icon-thumbs-up-14-greenDark"></i>
+                        <i className="icon-thumbs-up-14"></i>
                         Published
                         <i className="icon-caret-right"></i>
                     </label>
@@ -114,7 +114,7 @@ var OrgListingsSidebarFilter = React.createClass({
 
                 <Link id="recent-activity-returned" to="org-listings" query={{approvalStatus: "REJECTED"}} params={{org: this.props.org.title}}>
                     <label htmlFor="recent-activity-org-returned" className="label-rejected">
-                        <i className="icon-reload-14-blueDark"></i>
+                        <i className="icon-reload-14"></i>
                         Returned to Owner
                         <i className="icon-caret-right"></i>
                     </label>

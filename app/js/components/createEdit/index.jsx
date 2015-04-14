@@ -33,7 +33,8 @@ var savingMessages = {
     listing: 'Saving Listing...'
 };
 
-//description of links for the sidebar
+// formLinks object is used by formLinkGroups. formLinks is the config file to
+// set up the side navigation panel in the createEdit view.
 var formLinks = {
     basicInformation: {
         title: 'Basic Information',
@@ -113,7 +114,7 @@ var formLinks = {
     },
     screenshots: {
         title: 'Screenshots',
-        id: 'create-edit-screenshots'
+        id: 'create-edit-screenshots',
     },
     ownersAndContacts: {
         title: 'Owners & Contacts',
@@ -133,6 +134,10 @@ var formLinks = {
     }
 };
 
+
+// formLinkGroups splits the formLinks into logical groups, with each link
+// being the accordion header and the array of links being the contents of
+// the expanded accordion.
 var formLinkGroups = [{
     link: formLinks.basicInformation,
     links: [
@@ -173,43 +178,69 @@ var formLinkGroups = [{
     ]
 }];
 
+
+//TODO
 function getOptionsForSystemObject (items) {
     return items.map(item => {
         return { id: item.title, text: item.title };
     });
 }
 
+// On the edit listing page, these are the wells users input the 'Type of Resource' and the resources 'URL'
 var ResourceForm = React.createClass({
     mixins: [ ValidatedFormMixin ],
 
     render: function () {
         return (
-            <div className="well">
-                <button type="button" className="close" onClick={ this.props.removeHandler }>
-                    <span aria-hidden="true">&times;</span><span className="sr-only">Close</span>
-                </button>
+            <div className="well listItemRow">
+                <div className="clear"></div>
+                <div className="col-md-2">
+                <div><strong>Resource<br /> <span className="screenshotNum">{this.props.count+1}</span></strong></div>
+                </div>
+                <div className="col-md-4">
                 <TextInput { ...this.getFormComponentProps('name') }/>
+                </div>
+                <div className="col-md-4">
                 <TextInput { ...this.getFormComponentProps('url') }/>
+                </div>
+                <div className="col-md-2">
+                <button type="button" className="close" onClick={ this.props.removeHandler }>
+                    <span aria-hidden="true"><i className="icon-cross-14"></i></span><span className="sr-only">Remove</span>
+                </button>
+                </div>
+                <div className="clear"></div>
             </div>
         );
     }
 });
 
+// On the edit listing page, these are the Screenshot wells users input the 'Preview Image' and the 'Full Size Image'
 var ScreenshotForm = React.createClass({
     mixins: [ ValidatedFormMixin ],
 
     render: function () {
         return (
-            <div className="well">
-                <button type="button" className="close" onClick={this.props.removeHandler}>
-                    <span aria-hidden="true">&times;</span><span className="sr-only">Close</span>
-                </button>
+            <div className="listItemRow">
+                <div className="clear"></div>
+                <div className="col-md-2">
+                <div><strong>Screenshot<br /> <span className="screenshotNum">{this.props.count+1}</span></strong></div>
+                </div>
+                <div className="col-md-4">
                 <ImageInput { ...this.getFormComponentProps('smallImage') }
                     imageUri={this.props.value.smallImageUrl}
                     serverError={this.props.imageErrors.smallImage} />
+                </div>
+                <div className="col-md-4">
                 <ImageInput { ...this.getFormComponentProps('largeImage') }
                     imageUri={this.props.value.largeImageUrl}
                     serverError={this.props.imageErrors.largeImage} />
+                </div>
+                <div className="col-md-2">
+                <button type="button" className="close" onClick={this.props.removeHandler}>
+                    <span aria-hidden="true"><i className="icon-cross-16"></i></span><span className="sr-only">Remove</span>
+                </button>
+                </div>
+                <div className="clear"></div>
             </div>
         );
     }
@@ -222,7 +253,7 @@ var ContactForm = React.createClass({
         return (
             <div className="well">
                 <button type="button" className="close" onClick={this.props.removeHandler}>
-                    <span aria-hidden="true">&times;</span><span className="sr-only">Close</span>
+                    <span aria-hidden="true"><i className="icon-cross-14"></i></span><span className="sr-only">Clear</span>
                 </button>
                 <Select2Input { ...this.getFormComponentProps('type') } options={ getOptionsForSystemObject(this.state.system.contactTypes) }/>
                 <TextInput { ...this.getFormComponentProps('name') }/>
@@ -235,6 +266,7 @@ var ContactForm = React.createClass({
     }
 });
 
+// This is the whole form for all the other createEdit createClass forms
 var ListingForm = React.createClass({
     mixins: [ ValidatedFormMixin, State ],
 
@@ -275,7 +307,8 @@ var ListingForm = React.createClass({
                         return { id: val, text: val };
                     })
                 }/>
-                <ListInput id={f.resources.id} { ...this.getSubFormProps('docUrls') }
+                <h2 id={f.resources.id} > Resources </h2>
+                <ListInput { ...this.getSubFormProps('docUrls') }
                     itemForm={ ResourceForm } optional/>
 
                 <h2 id={f.graphics.id}>Graphics</h2>
@@ -341,6 +374,7 @@ var ListingForm = React.createClass({
     }
 });
 
+// This is the reminders side panel
 var Reminders = React.createClass({
     getInitialState: () => ({ showStewards: false }),
 
@@ -506,11 +540,8 @@ var CreateEditPage = React.createClass({
     //in order to get the form to be the only scrollable element
     componentWillMount: function () {
         var main = $('#main');
-
         main.addClass('create-edit-open');
-    },
 
-    componentDidMount: function(){
         let that = this,
             scrollTimer;
 
@@ -526,9 +557,8 @@ var CreateEditPage = React.createClass({
         });
     },
 
-    componentDidUnmount: function () {
+    componentWillUnmount: function () {
         var main = $('#main');
-
         main.removeClass('create-edit-open');
     },
 

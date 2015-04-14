@@ -17,13 +17,7 @@
 	}
 }
 
-.navbar-left {
-	margin-left: -60px !important;
-}
 
-.navbar-right {
-	margin-right: -60px !important;
-}
 
 .activeIcon {
 	color: $blue;
@@ -53,4 +47,24 @@
 
 .navbar-inverse .navbar-nav .open .dropdown-menu > li.dropdown-header {
 	color: $blue !important;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a.caboose {
+	background-color: $gray-dark !important;
+	color: $white !important;
+
+	&:hover, &:focus {
+		background-color: $blue !important;
+		border-left-color: $blue-dark !important;
+	}
+}
+
+@media all and (min-width: 1240px) and (max-width: 10000px) {
+	.navbar-left {
+		margin-left: -60px !important;
+	}
+
+	.navbar-right {
+		margin-right: -60px !important;
+	}
 }

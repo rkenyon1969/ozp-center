@@ -18,7 +18,8 @@ var ListInput = React.createClass({
                     imageErrors: imageErrors,
                     removeHandler: this.onDelete.bind(null, index),
                     key: index,
-                    path: this.props.path.concat(index)
+                    path: this.props.path.concat(index),
+                    count: index
                 });
 
             return <this.props.itemForm {...props} />;
@@ -36,7 +37,8 @@ var ListInput = React.createClass({
                 <div>
                     {itemForms}
                 </div>
-                <button className="btn btn-sm btn-primary" onClick={this.handleNew}>Add</button>
+                <div className="clear"></div>
+                <button className="btn btn-sm btn-primary addNew" onClick={this.handleNew}><i className="icon-plus-14-white"></i> Add New</button>
             </div>
         );
     },
