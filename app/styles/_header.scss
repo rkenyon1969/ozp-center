@@ -25,7 +25,7 @@
     .navbar-right {
     		margin-right: -60px !important;
     	}
-        
+
     .navbar-form {
         margin: 0;
         padding: 0;
@@ -204,6 +204,10 @@
         box-shadow: none;
         border: 0;
         background: $gray-lightest;
+
+        &:focus {
+            outline-color: $blue;
+        }
     }
 
     > .react-select-box-clear {
