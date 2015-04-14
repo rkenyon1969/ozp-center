@@ -538,7 +538,7 @@ var CreateEditPage = React.createClass({
 
     //HACK: need different height/overflow styling on the parent elements of this page,
     //in order to get the form to be the only scrollable element
-    componentWillMount: function () {
+    componentDidMount: function () {
         var main = $('#main');
         main.addClass('create-edit-open');
 
