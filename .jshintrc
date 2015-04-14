@@ -25,12 +25,6 @@
     "jQuery": true,
     "React": true,
     "API_URL": true,
-    "HUD_URL": true,
-    "CENTER_URL": true,
-    "DEVELOPER_RESOURCES_URL": true,
-    "WEBTOP_URL": true,
-    "METRICS_URL": true,
-    "FEEDBACK_ADDRESS": true,
     "w2utils": true,
     "w2obj": true
   }

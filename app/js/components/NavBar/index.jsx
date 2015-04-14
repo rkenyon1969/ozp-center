@@ -38,7 +38,7 @@ var NavBar = React.createClass({
                         <ul className="nav navbar-nav">
                             <UserNotificationDropdown />
                             <li>
-                                <a onClick={this.showHelpModal}><i className="icon-question-grayLightest"></i></a>
+                                <a href="#" onClick={this.showHelpModal}><i className="icon-question-grayLightest"></i></a>
                             </li>
                             <li className="dropdown user-menu-dropdown">
                                 <a href="#" className="lrg" data-toggle="dropdown"><i className="icon-menu-grayLightest"></i></a>
