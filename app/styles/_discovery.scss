@@ -80,7 +80,7 @@
             &:hover, &:focus {
                 color: $link-color;
                 border-left-color: $link-color;
-                font-weight: 500;
+                font-weight: 600;
                 background: $white;
 
                 > i.icon-shopping {
@@ -92,7 +92,7 @@
                 background-color: $link-color;
                 color: $white;
                 border-left-color: $blue-darker;
-                font-weight: 500;
+                font-weight: 600;
 
                 > .icon-shopping{
                     @extend .icon-shopping-white;
