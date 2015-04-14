@@ -516,13 +516,11 @@ var CreateEditPage = React.createClass({
     //in order to get the form to be the only scrollable element
     componentWillMount: function () {
         var main = $('#main');
-
         main.addClass('create-edit-open');
     },
 
-    componentDidUnmount: function () {
+    componentWillUnmount: function () {
         var main = $('#main');
-
         main.removeClass('create-edit-open');
     },
 
