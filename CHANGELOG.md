@@ -1,3 +1,15 @@
+### 0.7.3-rc (2015-04-07)
+
+
+#### Bug Fixes
+
+* **DraftedListing:**
+  * #160 users can no longer bookmark drafts ([a34685b6](https://github.com/ozone-development/center-ui.git/commit/a34685b686da260ef2d471f10e80675202e70b82))
+  * #160 users can no longer bookmark drafts ([28f970b3](https://github.com/ozone-development/center-ui.git/commit/28f970b30bc44bbfe7017d77273ffed67bed4288))
+* **createEdit:** Fixing issue with tags in the createEdit view. #123 ([ff3c07bb](https://github.com/ozone-development/center-ui.git/commit/ff3c07bb64edb311ecb6ec0f00c0894652d1ca70))
+* **detailedView:** When a user adds a resource label and URL, they show up on the resource tab of t ([94faa299](https://github.com/ozone-development/center-ui.git/commit/94faa29915d0bfa6e3f4a1ddecd214ef689f9c7e))
+
+
 ### 0.7.2 (2015-03-31)
 
 
