@@ -510,7 +510,7 @@ var CreateEditPage = React.createClass({
     },
 
     handleFormScroll: function(){
-        let that                = this,
+        var that                = this,
             form                = $(this.refs.form.getDOMNode()),
             lastScrolledPast    = null, // Track this so we don't update state unessisarly
             buffer              = 35.01; // Just past the set value for a click
@@ -534,15 +534,8 @@ var CreateEditPage = React.createClass({
         if (this.state.scrollToError && !this.state.isValid) {
             this.scrollToError(this.state.firstError);
         }
-    },
 
-    //HACK: need different height/overflow styling on the parent elements of this page,
-    //in order to get the form to be the only scrollable element
-    componentDidMount: function () {
-        var main = $('#main');
-        main.addClass('create-edit-open');
-
-        let that = this,
+        var that = this,
             scrollTimer;
 
         // Let's setup a timer so we don't check scroll more often than nessisary.
@@ -555,6 +548,13 @@ var CreateEditPage = React.createClass({
                that.handleFormScroll();
            }, 20);
         });
+    },
+
+    //HACK: need different height/overflow styling on the parent elements of this page,
+    //in order to get the form to be the only scrollable element
+    componentDidMount: function () {
+        var main = $('#main');
+        main.addClass('create-edit-open');
     },
 
     componentWillUnmount: function () {
