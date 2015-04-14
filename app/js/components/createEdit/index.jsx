@@ -356,7 +356,7 @@ var ListingForm = React.createClass({
 
     componentDidUpdate: function(prevProps, prevState) {
         var elId = this.state.currentNavTarget || formLinks.basicInformation.id;
-        if (elId !== formLinks.basicInformation.id && prevState.currentNavTarget !== elId) {
+        if (prevState.currentNavTarget !== elId) {
 
             var element         = $(`#${elId}`),
                 form            = $(this.refs.form.getDOMNode()),
