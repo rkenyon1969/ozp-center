@@ -335,6 +335,8 @@ var ListingForm = React.createClass({
                     ownerSetter={ownerSetter} />
                 <ListInput id={f.contacts.id} { ...this.getSubFormProps('contacts') }
                     itemForm={ ContactForm }/>
+
+                <div className="space">&#32;</div>
             </form>
         );
     },
@@ -354,7 +356,7 @@ var ListingForm = React.createClass({
 
     componentDidUpdate: function(prevProps, prevState) {
         var elId = this.state.currentNavTarget || formLinks.basicInformation.id;
-        if (elId !== formLinks.basicInformation.id && prevState.currentNavTarget !== elId) {
+        if (prevState.currentNavTarget !== elId) {
 
             var element         = $(`#${elId}`),
                 form            = $(this.refs.form.getDOMNode()),
@@ -461,6 +463,7 @@ var CreateEditPage = React.createClass({
     getInitialState: function () {
         return {
             listing: null,
+            activeId: null,
             hasChanges: false,
             scrollToError: false,
             imageErrors: {screenshots: []}
@@ -506,15 +509,50 @@ var CreateEditPage = React.createClass({
         }
     },
 
+    handleFormScroll: function(){
+        var that                = this,
+            form                = $(this.refs.form.getDOMNode()),
+            lastScrolledPast    = null, // Track this so we don't update state unessisarly
+            buffer              = 35.01; // Just past the set value for a click
+
+        form.children('h2').each(function() {
+            if ($(this).offset().top < (form.offset().top + buffer)){
+                lastScrolledPast = $(this).context;
+            }
+        });
+
+        if(!that.state.activeId){
+            that.setState({activeId: formLinks.basicInformation.id});
+        }
+
+        if(lastScrolledPast.id !== that.state.activeId){
+            that.setState({activeId: lastScrolledPast.id});
+        }
+    },
+
     componentDidUpdate: function () {
         if (this.state.scrollToError && !this.state.isValid) {
             this.scrollToError(this.state.firstError);
         }
+
+        var that = this,
+            scrollTimer;
+
+        // Let's setup a timer so we don't check scroll more often than nessisary.
+        // 20ms Seems to be a good mix between responsiveness and performance
+        // requestAnimationFrame may also be a future option. Will come back to after
+        // testing has been done.
+        $(this.refs.form.getDOMNode()).on('scroll', function(){
+            if (scrollTimer) { clearTimeout(scrollTimer); }
+            scrollTimer = setTimeout(function() {
+               that.handleFormScroll();
+           }, 20);
+        });
     },
 
     //HACK: need different height/overflow styling on the parent elements of this page,
     //in order to get the form to be the only scrollable element
-    componentWillMount: function () {
+    componentDidMount: function () {
         var main = $('#main');
         main.addClass('create-edit-open');
     },
@@ -637,7 +675,7 @@ var CreateEditPage = React.createClass({
                 <NavBar />
                 {header}
                 <section className="create-edit-body">
-                    <Sidebar groups={links} activeId={this.getQuery().el}/>
+                    <Sidebar groups={links} activeId={this.state.activeId || this.getQuery().el}/>
                     <ListingForm ref="form" { ...formProps } />
                     <Reminders />
                 </section>
