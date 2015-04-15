@@ -272,6 +272,7 @@ var ListingForm = React.createClass({
 
     getInitialState: () => ({ currentNavTarget: null }),
 
+
     render: function () {
         var listing = this.props.value;
         var system = this.props.system;
@@ -286,7 +287,7 @@ var ListingForm = React.createClass({
         var f = formLinks;
         return (
             <form ref="form" className="CreateEdit__form">
-                <h2 id={f.basicInformation.id}>Basic Information</h2>
+                <h2 id={f.basicInformation.id} >Basic Information</h2>
                 <TextInput id={f.title.id} { ...p('title') }/>
                 <Select2Input id={f.type.id} { ...p('type') }
                     options={ getOptionsForSystemObject(system.types) }/>
@@ -355,8 +356,8 @@ var ListingForm = React.createClass({
     },
 
     componentDidUpdate: function(prevProps, prevState) {
-        var elId = this.state.currentNavTarget || formLinks.basicInformation.id;
-        if (prevState.currentNavTarget !== elId) {
+        var elId = this.state.currentNavTarget || 'notyetset';
+        if (elId !== 'notyetset' && prevState.currentNavTarget !== elId) {
 
             var element         = $(`#${elId}`),
                 form            = $(this.refs.form.getDOMNode()),
@@ -552,6 +553,7 @@ var CreateEditPage = React.createClass({
 
     //HACK: need different height/overflow styling on the parent elements of this page,
     //in order to get the form to be the only scrollable element
+
     componentDidMount: function () {
         var main = $('#main');
         main.addClass('create-edit-open');
