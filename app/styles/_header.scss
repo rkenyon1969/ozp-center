@@ -142,15 +142,19 @@
 
     &:hover, &:focus {
         color: $blue-dark;
-        background: transparent;
+        background: $white;
         border-left: 4px solid $blue-dark;
     }
 }
 
 .react-select-box-option-selected, .react-select-box-multi .react-select-box-option-selected {
-    color: $blue-dark;
-    background: transparent;
-    border-left: 4px solid $blue-dark;
+    color: $white;
+    background: $blue-dark;
+    border-left: 4px solid $blue-darker;
+
+    &::before{
+        color:$blue-dark;
+    }
 }
 
 .react-select-box-close {
