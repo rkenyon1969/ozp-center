@@ -195,7 +195,7 @@ var ResourceForm = React.createClass({
             <div className="well listItemRow">
                 <div className="clear"></div>
                 <div className="col-md-2">
-                <div><strong>Resource<br /> <span className="screenshotNum">{this.props.count+1}</span></strong></div>
+                <div><strong>Resource<br /> <span className="resourceNum">{this.props.count+1}</span></strong></div>
                 </div>
                 <div className="col-md-4">
                 <TextInput { ...this.getFormComponentProps('name') }/>
