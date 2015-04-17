@@ -55,12 +55,14 @@ var MyListingsStatusFilter = React.createClass({
                             All
                             <strong className="badge">{this.props.listings.length}</strong>
                         </label>
+                        <div className="clear"></div>
                         <input id="my-listings-filter-published" type="radio" value="APPROVED"/>
                         <label htmlFor="my-listings-filter-published" className="label-published">
                             <i className="icon-thumbs-up-12-greenDark" />
                             Published
                             <strong className="badge">{counts.APPROVED || 0}</strong>
                         </label>
+                        <div className="clear"></div>
                         <input id="my-listings-filter-needs-action" type="radio" value="REJECTED"/>
                         <label htmlFor="my-listings-filter-needs-action"
                         className="label-needs-action">
@@ -68,12 +70,14 @@ var MyListingsStatusFilter = React.createClass({
                             Needs action
                             <strong className="badge">{counts.REJECTED || 0}</strong>
                         </label>
+                        <div className="clear"></div>
                         <input id="my-listings-filter-pending" type="radio" value="PENDING"/>
                         <label htmlFor="my-listings-filter-pending" className="label-pending">
                             <i className="icon-loader-12-blueDark" />
                             Pending
                             <strong className="badge">{ (counts.PENDING || 0) + (counts.APPROVED_ORG || 0) }</strong>
                         </label>
+                        <div className="clear"></div>
                         <input id="my-listings-filter-draft" type="radio" value="IN_PROGRESS"/>
                         <label htmlFor="my-listings-filter-draft" className="label-draft">
                             <i className="icon-paper-12-grayDark" />
