@@ -223,7 +223,7 @@ var AdministrationTab = React.createClass({
                     <p>Please provide feedback for the listing owner about what they should do to make this listing ready for publication</p>
                     <form>
                         <Justification ref="justification" />
-                        <button type="button" className="btn" onClick={ this.cancelRejection }>Cancel</button>
+                        <button type="button" className="btn btn-default" onClick={ this.cancelRejection }>Cancel</button>
                         <button type="button" className="btn btn-warning" onClick={ this.returnToOwner }>Return to Owner</button>
                     </form>
                 </section>
