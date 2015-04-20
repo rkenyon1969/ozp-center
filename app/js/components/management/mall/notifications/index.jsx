@@ -42,7 +42,7 @@ var ActiveNotifications = React.createClass({
     render() {
         var notificationComponents = ActiveNotification.fromArray(this.state.notifications);
         if (!notificationComponents || notificationComponents.length === 0) {
-            notificationComponents = <span>No results found!</span>;
+            notificationComponents = <span>There are no active notifications.</span>;
         }
         return (
             <div>
