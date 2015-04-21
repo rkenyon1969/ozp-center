@@ -307,7 +307,7 @@ var ListingForm = React.createClass({
                         var val = intent.type + '/' + intent.action;
                         return { id: val, text: val };
                     })
-                }/>
+                } optional />
                 <h2 id={f.resources.id} > Resources </h2>
                 <ListInput { ...this.getSubFormProps('docUrls') }
                     itemForm={ ResourceForm } optional/>
