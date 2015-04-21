@@ -214,7 +214,7 @@ var AdministrationTab = React.createClass({
 
         var isAdmin = UserRole[this.props.currentUser.highestRole] >= UserRole.ADMIN,
             isStewardOfOrg = _.contains(this.props.currentUser.stewardedOrganizations, this.props.listing.agency),
-            pendingOrg = (listingStatus[this.props.listing.approvalStatus]=='Pending, Organization') ? true : false;
+            pendingOrg = (listingStatus[this.props.listing.approvalStatus] === 'Pending, Organization') ? true : false;
 
         if (editing) {
             return (
