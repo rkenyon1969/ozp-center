@@ -51,13 +51,21 @@
 
 .navbar-inverse .navbar-nav .open .dropdown-menu > li > a.caboose {
 	background-color: $gray-dark !important;
-	color: $white !important;
-	font-weight: 500 !important;
+
+	> .icon-mail {
+		@extend .icon-mail-grayLightest;
+	}
 
 	&:hover, &:focus {
-		background-color: $blue !important;
-		border-left-color: $blue-dark !important;
+		border-left-color: $blue !important;
+
+		> .icon-mail {
+			@extend .icon-mail-white;
+		}
+
 	}
+
+
 }
 
 @media all and (min-width: 1240px) and (max-width: 10000px) {
