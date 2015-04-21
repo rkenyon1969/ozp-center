@@ -1,3 +1,12 @@
+### 0.7.4 (2015-04-14)
+
+
+#### Bug Fixes
+
+* **detailedView:** When a user adds a resource label and URL, they show up on the resource tab of t ([36dfb7ac](https://github.com/ozone-development/center-ui.git/commit/36dfb7ac01d81761f3e79bf449460f110b5a120f))
+* **listingManagement:** When component is unmounted, the dom elements updated on componentDidMount need  ([53dec790](https://github.com/ozone-development/center-ui.git/commit/53dec79098e28af1a428547cdaa2ade2f8557cba))
+
+
 ### 0.7.3-rc (2015-04-07)
 
 
