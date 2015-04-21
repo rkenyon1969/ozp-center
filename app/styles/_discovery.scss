@@ -56,32 +56,56 @@
         &.active {
             color: $link-color;
             border-left-color: $link-color;
+
+
         }
     }
 
     .sidebar {
-    
+
+        h3 {
+            @extend .h4;
+            color: $blue-dark;
+        }
 
         li {
             border-left: transparent 5px solid;
             margin-right: -35px;
 
+            i.icon-shopping {
+                @extend .icon-shopping-grayDarker;
+                top: 3px;
+            }
+
             &:hover, &:focus {
                 color: $link-color;
                 border-left-color: $link-color;
-                font-weight: 500;
+                font-weight: 600;
                 background: $white;
+
+                > i.icon-shopping {
+                    @extend .icon-shopping-blueDark;
+                }
             }
 
             &.active {
                 background-color: $link-color;
                 color: $white;
                 border-left-color: $blue-darker;
-                font-weight: 500;
+                font-weight: 600;
+
+                > .icon-shopping{
+                    @extend .icon-shopping-white;
+                }
 
                 &:hover, &:focus {
                 background-color: $blue-darker;
                 border-left-color: $gray-darkest;
+
+                    > .icon-shopping{
+                        @extend .icon-shopping-white;
+
+                    }
                 }
             }
         }

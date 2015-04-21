@@ -142,12 +142,19 @@ var AdministrationTab = React.createClass({
                 iconClass= 'icon-thumbs-up-14';
                 break;
             case 'Pending, Organization':
-                if (isStewardOfOrg || isAdmin) {
+                if (isStewardOfOrg) {
                     controls = this.renderReviewSection();
                     statusClass = 'label-needs-action';
                     iconClass= 'icon-exclamation-14';
 
-                } else {
+                }
+                if (isAdmin) {
+                    controls = this.renderReviewSection();
+                    statusClass = 'label-pending';
+                    iconClass= 'icon-loader-14';
+
+                }
+                else {
                     controls = [];
                     statusClass = 'label-pending';
                     iconClass= 'icon-loader-14';
@@ -205,6 +212,10 @@ var AdministrationTab = React.createClass({
             }}}
         );
 
+        var isAdmin = UserRole[this.props.currentUser.highestRole] >= UserRole.ADMIN,
+            isStewardOfOrg = _.contains(this.props.currentUser.stewardedOrganizations, this.props.listing.agency),
+            pendingOrg = (listingStatus[this.props.listing.approvalStatus]=='Pending, Organization') ? true : false;
+
         if (editing) {
             return (
                 <section className="return-feedback">
@@ -212,12 +223,23 @@ var AdministrationTab = React.createClass({
                     <p>Please provide feedback for the listing owner about what they should do to make this listing ready for publication</p>
                     <form>
                         <Justification ref="justification" />
-                        <button type="button" className="btn" onClick={ this.cancelRejection }>Cancel</button>
+                        <button type="button" className="btn btn-default" onClick={ this.cancelRejection }>Cancel</button>
                         <button type="button" className="btn btn-warning" onClick={ this.returnToOwner }>Return to Owner</button>
                     </form>
                 </section>
             );
-        } else {
+        }
+        if( isAdmin && !isStewardOfOrg && pendingOrg) {
+            var org = this.props.listing.agencyShort;
+            return (
+                <section className="review-listing">
+                    <h5>{"Review Listing for " + org}</h5>
+                    <button type="button" className="btn btn-default" onClick={ this.approve }>{"Approve for " + org}</button>
+                    <button type="button" className="btn btn-default" onClick={ this.editRejection }>{"Reject for " + org}</button>
+                </section>
+            );
+        }
+        else {
             return (
                 <section className="review-listing">
                     <h5>Review Listing</h5>

@@ -25,7 +25,7 @@
     .navbar-right {
     		margin-right: -60px !important;
     	}
-        
+
     .navbar-form {
         margin: 0;
         padding: 0;
@@ -142,15 +142,19 @@
 
     &:hover, &:focus {
         color: $blue-dark;
-        background: transparent;
+        background: $white;
         border-left: 4px solid $blue-dark;
     }
 }
 
 .react-select-box-option-selected, .react-select-box-multi .react-select-box-option-selected {
-    color: $blue-dark;
-    background: transparent;
-    border-left: 4px solid $blue-dark;
+    color: $white;
+    background: $blue-dark;
+    border-left: 4px solid $blue-darker;
+
+    &::before{
+        color:$blue-dark;
+    }
 }
 
 .react-select-box-close {
@@ -173,7 +177,7 @@
     height:54px;
 
     > .react-select-box {
-        margin: 4px 0 -4px 0;
+        margin: 3px 0 -4px 0;
         padding: 18px 0;
         border-top: 4px solid transparent;
 
@@ -204,6 +208,10 @@
         box-shadow: none;
         border: 0;
         background: $gray-lightest;
+
+        &:focus {
+            outline-color: $blue;
+        }
     }
 
     > .react-select-box-clear {

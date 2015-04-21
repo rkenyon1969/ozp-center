@@ -38,7 +38,7 @@ var NavBar = React.createClass({
                         <ul className="nav navbar-nav">
                             <UserNotificationDropdown />
                             <li>
-                                <a onClick={this.showHelpModal}><i className="icon-question-grayLightest"></i></a>
+                                <a href="#" onClick={this.showHelpModal}><i className="icon-question-grayLightest"></i></a>
                             </li>
                             <li className="dropdown user-menu-dropdown">
                                 <a href="#" className="lrg" data-toggle="dropdown"><i className="icon-menu-grayLightest"></i></a>
@@ -67,7 +67,7 @@ var NavBar = React.createClass({
                                         <li><a href={'#/mall-management/categories'}><i className="icon-shopping-settings-grayLightest"></i>Marketplace Settings</a></li>
                                     }
                                     { Metrics }
-                                    <li><a href={FEEDBACK_ADDRESS} className="caboose"><i className="icon-mail-white"></i>Submit Feedback</a></li>
+                                    <li><a href={'mailto:'+FEEDBACK_ADDRESS} className="caboose"><i className="icon-mail-white"></i>Submit Feedback</a></li>
                                 </ul>
                             </li>
                         </ul>

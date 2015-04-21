@@ -229,11 +229,12 @@ var Discovery = React.createClass({
     },
 
     renderSearchResults() {
+        var results = this.state.searchResults.length > 0 ? ListingTile.fromArray(this.state.searchResults) : <p>No results found.</p>;
         return (
             <section className="Discovery__SearchResults">
                 <h4>Search Results</h4>
                 <ul className="list-unstyled listings-search-results">
-                    { ListingTile.fromArray(this.state.searchResults) }
+                    { results }
                 </ul>
             </section>
         );

@@ -50,6 +50,10 @@ strong {
   clear: both;
 }
 
+a:focus {
+    outline-color: $blue;
+}
+
 #main {
     min-height: 100%;
     height: auto;

@@ -20,7 +20,9 @@ var OverviewTab = React.createClass({
     },
 
     render: function () {
-        var description = this.props.listing.description || 'No description provided!';
+        var description = this.props.listing.description.split(/\n/g).map((p)=>{
+          return(<span>{p}<br/></span>);
+        }) || 'No description provided!';
         var descriptionClasses = React.addons.classSet({
             'text-muted': !this.props.listing.description
         });

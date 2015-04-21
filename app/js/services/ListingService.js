@@ -163,6 +163,8 @@ ListingActions.save.listen(function (data) {
 
     if (isNew) { OzpAnalytics.trackListingCreation(data.title); }
 
+    if (data.launchUrl) { data.launchUrl = encodeURI(data.launchUrl); }
+
     ListingApi
         .save(data)
         .then(ListingActions.saveCompleted.bind(null, isNew))

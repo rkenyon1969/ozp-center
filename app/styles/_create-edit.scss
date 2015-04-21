@@ -17,7 +17,7 @@
 #main.create-edit-open {
     height: 100%;
     overflow: auto;
-    
+
     & > #App {
         //subtract child element's top margin due to margin-collapsing
         height: calc(100% - 149px);
@@ -76,6 +76,22 @@
     > .reminders {
         width: calc(100% * (2 / 11));
     }
+
+    > form > h2 {
+        padding-top: 40px;
+        padding-bottom: 20px;
+    }
+
+    .space {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+}
+
+#create-edit-basic-information {
+    padding-top: 0px;
+    margin-top: 0px;
 }
 
 .reminders {
@@ -220,7 +236,7 @@ div.col-md-4 > .form-group >span.image-container.image-present {
 }
 
 
-.tool:hover {
+.tool:hover, .tool:focus {
 
     .create-edit-button {
         display: inline-block;

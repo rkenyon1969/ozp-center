@@ -147,8 +147,8 @@ function validate (instance, options, type) {
         errors = {};
     if (validation.errors) {
         validation.errors.forEach(function (e) {
-            // var path = e.path.join('.');
-            errors[e.path[0]] = true;
+            var path = e.path.join('.');
+            errors[path] = true;
         });
     }
 
