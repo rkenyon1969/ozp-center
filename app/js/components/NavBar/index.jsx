@@ -58,7 +58,7 @@ var NavBar = React.createClass({
                                     <li className="divider"></li>
                                     <li className="dropdown-header">Create</li>
                                     <li><a href={'#/edit'}><i className="icon-square-plus-grayLightest"></i>Submit a Listing</a></li>
-                                    <li><a href={DEVELOPER_RESOURCES_URL}><i className="icon-cloud-grayLightest"></i>Developer Resources</a></li>
+                                    <li><a href={DEVELOPER_RESOURCES_URL} target="_blank"><i className="icon-cloud-grayLightest"></i>Developer Resources</a></li>
                                     <li className="divider"></li>
                                     <li className="dropdown-header">Manage</li>
                                     <li><a href={'#/user-management/my-listings'}><i className="icon-layers-grayLightest"></i>Listing Management</a></li>
