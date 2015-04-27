@@ -4,20 +4,20 @@
 #### Bug Fixes
 
 * **CreateEdit:**
-  * #176 encode urls before submission ([b294d8c2](https://github.com/ozone-development/center-ui.git/commit/b294d8c22fd1a54e68c5480eec978bf990af27a1))
-  * #191 fix the error messages for resources/contacts subforms ([e1439c7d](https://github.com/ozone-development/center-ui.git/commit/e1439c7d8d08a8eb4054393361ba1223d62a80b4))
-* **Discovery:** #147 added 'no search results found' message for search and discovery page ([59a16dec](https://github.com/ozone-development/center-ui.git/commit/59a16dec57c5e8d1814fd9889b7b8fceb0aef0fb))
-* **Feedback Link:** #158 Updating to configure only email address ([abeeeff3](https://github.com/ozone-development/center-ui.git/commit/abeeeff324c6b13f493e2e0364e0b709eedb3e8e))
-* **Styling:** Fixed Feedback Link styling ([d7057d30](https://github.com/ozone-development/center-ui.git/commit/d7057d305ef836e4a2ce8ef0bb9aa15e8d15d0c5))
+  * #176 encode urls before submission ([b294d8c2](https://github.com/ozone-development/ozp-center/commit/b294d8c22fd1a54e68c5480eec978bf990af27a1))
+  * #191 fix the error messages for resources/contacts subforms ([e1439c7d](https://github.com/ozone-development/ozp-center/commit/e1439c7d8d08a8eb4054393361ba1223d62a80b4))
+* **Discovery:** #147 added 'no search results found' message for search and discovery page ([59a16dec](https://github.com/ozone-development/ozp-center/commit/59a16dec57c5e8d1814fd9889b7b8fceb0aef0fb))
+* **Feedback Link:** #158 Updating to configure only email address ([abeeeff3](https://github.com/ozone-development/ozp-center/commit/abeeeff324c6b13f493e2e0364e0b709eedb3e8e))
+* **Styling:** Fixed Feedback Link styling ([d7057d30](https://github.com/ozone-development/ozp-center/commit/d7057d305ef836e4a2ce8ef0bb9aa15e8d15d0c5))
 * **styling:**
-  * Recent Activity Sidebar & Notifications "No Active" message ([100844a1](https://github.com/ozone-development/center-ui.git/commit/100844a10b938d5f188f3a0bd2a782405effa10d))
-  * MP Management Tab Divider #204 ([f7fd2fc6](https://github.com/ozone-development/center-ui.git/commit/f7fd2fc682c091de4b90917f3a24f06bf40d385c))
-  * Fixed button coloring ([7dcd0c31](https://github.com/ozone-development/center-ui.git/commit/7dcd0c312cc1b774d26f3df1dc3547ec52a0d828))
-  * #201 Admin tab styles reflect MP & Org Stewards ([1414d062](https://github.com/ozone-development/center-ui.git/commit/1414d062ff52e450152da8db70b9c7921d8d7db6))
-  * #152 Fixed My Listings filters ([f61eef88](https://github.com/ozone-development/center-ui.git/commit/f61eef88930ab330c515445b333f9ec35b7f4444))
-  * Fixed search filter margin & added focus to Create/Edit buttons ([b292195f](https://github.com/ozone-development/center-ui.git/commit/b292195fd9a3171e8bba93b318a03daa7e70073c))
-  * Org and Listing Type Filter Styles ([83059ee0](https://github.com/ozone-development/center-ui.git/commit/83059ee0fca4e277aa55768808c3be9609895896))
-  * Updating weight to avoid render issue ([6e4fd7fc](https://github.com/ozone-development/center-ui.git/commit/6e4fd7fc98098aeaa3be245b91097a8970bf16f7))
+  * Recent Activity Sidebar & Notifications "No Active" message ([100844a1](https://github.com/ozone-development/ozp-center/commit/100844a10b938d5f188f3a0bd2a782405effa10d))
+  * MP Management Tab Divider #204 ([f7fd2fc6](https://github.com/ozone-development/ozp-center/commit/f7fd2fc682c091de4b90917f3a24f06bf40d385c))
+  * Fixed button coloring ([7dcd0c31](https://github.com/ozone-development/ozp-center/commit/7dcd0c312cc1b774d26f3df1dc3547ec52a0d828))
+  * #201 Admin tab styles reflect MP & Org Stewards ([1414d062](https://github.com/ozone-development/ozp-center/commit/1414d062ff52e450152da8db70b9c7921d8d7db6))
+  * #152 Fixed My Listings filters ([f61eef88](https://github.com/ozone-development/ozp-center/commit/f61eef88930ab330c515445b333f9ec35b7f4444))
+  * Fixed search filter margin & added focus to Create/Edit buttons ([b292195f](https://github.com/ozone-development/ozp-center/commit/b292195fd9a3171e8bba93b318a03daa7e70073c))
+  * Org and Listing Type Filter Styles ([83059ee0](https://github.com/ozone-development/ozp-center/commit/83059ee0fca4e277aa55768808c3be9609895896))
+  * Updating weight to avoid render issue ([6e4fd7fc](https://github.com/ozone-development/ozp-center/commit/6e4fd7fc98098aeaa3be245b91097a8970bf16f7))
 
 
 ### 0.7.4 (2015-04-14)
