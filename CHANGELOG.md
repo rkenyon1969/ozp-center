@@ -1,3 +1,20 @@
+### 0.7.6 (2015-04-28)
+
+
+#### Bug Fixes
+
+* **CreateEdit:** #200 added the optional flag to intents ([ffaec89a](https://github.com/ozone-development/ozp-center.git/commit/ffaec89a0efc88b476241070f2355045ebfe82c0))
+* **Description:** Fixed undefined in description for #213 ([2a16cf77](https://github.com/ozone-development/ozp-center.git/commit/2a16cf777806abe19fcde3dd8978718150ee8c6a))
+* **Global Toolbar:** #212 Dev Resources now opens in new tab ([c1d99a20](https://github.com/ozone-development/ozp-center.git/commit/c1d99a205557c4cfc431a27800b3f383ed2e1ad7))
+* **Quickview:** #202 fixed the unit test by adjusting the code for the administration tab ([4e1ed977](https://github.com/ozone-development/ozp-center.git/commit/4e1ed9776684a2d3564fb3508ca99859f549cbf4))
+* **Screenshot:** #205 update the validation of screenshots for only on submit ([0589617d](https://github.com/ozone-development/ozp-center.git/commit/0589617de4edc9d46d17654a13bf9e14631f228b))
+* **feedback:** Feedback Link ([acf30c8f](https://github.com/ozone-development/ozp-center.git/commit/acf30c8fb993d4c55f4532042bcb67f3869ca9b4))
+* **jshint:** fixing jshint warnings ([54034730](https://github.com/ozone-development/ozp-center.git/commit/54034730ad29acbc4399da121e7f1c6c51c912eb))
+* **styling:**
+  * Recent Activity panel ([f7f7b0f9](https://github.com/ozone-development/ozp-center.git/commit/f7f7b0f93cf27cd44a67fb941db6da9b73862c44))
+  * Fixed Caboose styling ([5a6039a7](https://github.com/ozone-development/ozp-center.git/commit/5a6039a728a3daa779bae1fdf4919c4cd50341cf))
+
+
 ### 0.7.5 (2015-04-21)
 
 
