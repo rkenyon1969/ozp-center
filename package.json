@@ -3,9 +3,9 @@
   "version": "0.7.5",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ozone-development/center-ui.git"
+    "url": "https://github.com/ozone-development/ozp-center.git"
   },
-  "homepage": "https://github.com/ozone-development/center-ui/blob/master/README.md",
+  "homepage": "https://github.com/ozone-development/ozp-center/blob/master/README.md",
   "bugs": "https://www.owfgoss.org/jira/browse/OZF",
   "author": "",
   "description": "",

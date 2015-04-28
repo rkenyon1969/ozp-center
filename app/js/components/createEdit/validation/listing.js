@@ -97,7 +97,6 @@ var ListingDraft = struct({
     whatIsNew: whatIsNew,
     intents: intents,
     docUrls: docUrls,
-    screenshots: screenshots,
     contacts: contacts,
     owners: subtype(owners, atLeastOne),
     agency: maybe(StringMax(255)),

@@ -147,14 +147,12 @@ var AdministrationTab = React.createClass({
                     statusClass = 'label-needs-action';
                     iconClass= 'icon-exclamation-14';
 
-                }
-                if (isAdmin) {
+                } else if (isAdmin) {
                     controls = this.renderReviewSection();
                     statusClass = 'label-pending';
                     iconClass= 'icon-loader-14';
 
-                }
-                else {
+                } else {
                     controls = [];
                     statusClass = 'label-pending';
                     iconClass= 'icon-loader-14';
@@ -214,7 +212,8 @@ var AdministrationTab = React.createClass({
 
         var isAdmin = UserRole[this.props.currentUser.highestRole] >= UserRole.ADMIN,
             isStewardOfOrg = _.contains(this.props.currentUser.stewardedOrganizations, this.props.listing.agency),
-            pendingOrg = (listingStatus[this.props.listing.approvalStatus]=='Pending, Organization') ? true : false;
+            pendingOrg = (listingStatus[this.props.listing.approvalStatus] === 'Pending, Organization') ? true : false,
+            pendingAdmin = (listingStatus[this.props.listing.approvalStatus] === 'Pending, Marketplace') ? true : false;
 
         if (editing) {
             return (
@@ -228,27 +227,40 @@ var AdministrationTab = React.createClass({
                     </form>
                 </section>
             );
-        }
-        if( isAdmin && !isStewardOfOrg && pendingOrg) {
-            var org = this.props.listing.agencyShort;
-            return (
-                <section className="review-listing">
-                    <h5>{"Review Listing for " + org}</h5>
-                    <button type="button" className="btn btn-default" onClick={ this.approve }>{"Approve for " + org}</button>
-                    <button type="button" className="btn btn-default" onClick={ this.editRejection }>{"Reject for " + org}</button>
-                </section>
-            );
-        }
-        else {
-            return (
-                <section className="review-listing">
-                    <h5>Review Listing</h5>
-                    <button type="button" className="btn btn-success" onClick={ this.approve }>Approve</button>
-                    <button type="button" className="btn btn-warning" onClick={ this.editRejection }>Return to Owner</button>
-                </section>
-            );
-        }
+        } else {
+            if(pendingOrg) {
+                if(isAdmin && !isStewardOfOrg) {
+                   var org = this.props.listing.agencyShort;
+                    return (
+                        <section className="review-listing">
+                            <h5>{"Review Listing for " + org}</h5>
+                            <button type="button" className="btn btn-default" onClick={ this.approve }>{"Approve for " + org}</button>
+                            <button type="button" className="btn btn-default" onClick={ this.editRejection }>{"Reject for " + org}</button>
+                        </section>
+                    ); 
+                } else if(isStewardOfOrg) {
+                    return (
+                        <section className="review-listing">
+                           <h5>Review Listing</h5>
+                            <button type="button" className="btn btn-success" onClick={ this.approve }>Approve</button>
+                            <button type="button" className="btn btn-warning" onClick={ this.editRejection }>Return to Owner</button>
+                         </section>
+                    );
+                } 
+            } 
 
+            if(pendingAdmin) {
+                if(isAdmin) {
+                    return (
+                        <section className="review-listing">
+                           <h5>Review Listing</h5>
+                            <button type="button" className="btn btn-success" onClick={ this.approve }>Approve</button>
+                            <button type="button" className="btn btn-warning" onClick={ this.editRejection }>Return to Owner</button>
+                         </section>
+                    ); 
+                }
+            }
+        }
     },
 
     editRejection: function (event) {

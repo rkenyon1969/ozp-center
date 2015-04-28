@@ -73,27 +73,27 @@ describe('AdministrationTab', function () {
         expect(setFeaturedSpy.calledWith(false, listing)).to.be.true();
     });
 
-    it('renders Approve and Reject buttons if the user is an org steward of the org (or admin) and the listing is pending',
+
+    it('renders Approve and Reject buttons if the user is an admin',
+        function () {
+            var AdministrationTab = require('../AdministrationTab.jsx');
+
+            var adminTab = TestUtils.renderIntoDocument(
+                <AdministrationTab listing={{approvalStatus: 'PENDING'}}
+                currentUser={{highestRole: 'ADMIN'}} />
+            );
+            expect($(adminTab.getDOMNode()).find('.review-listing')[0]).to.exist();
+    });
+
+    it('renders Approve and Reject buttons if the user is an org steward of the org',
             function () {
         var AdministrationTab = require('../AdministrationTab.jsx');
 
         var adminTab = TestUtils.renderIntoDocument(
-                <AdministrationTab listing={{approvalStatus: 'PENDING'}}
-                    currentUser={{highestRole: 'ADMIN'}} />
-        );
-        expect($(adminTab.getDOMNode()).find('.review-listing')[0]).to.exist();
-
-        adminTab = TestUtils.renderIntoDocument(
                 <AdministrationTab listing={{approvalStatus: 'PENDING', agency: 'Test Org'}}
                     currentUser={{highestRole: 'ORG_STEWARD', stewardedOrganizations: 'Test Org'}} />
         );
         expect($(adminTab.getDOMNode()).find('.review-listing')[0]).to.exist();
-
-        adminTab = TestUtils.renderIntoDocument(
-                <AdministrationTab listing={{approvalStatus: 'PENDING'}}
-                    currentUser={{highestRole: 'USER'}} />
-        );
-        expect($(adminTab.getDOMNode()).find('.review-listing')[0]).to.not.exist();
     });
 
     it('renders Approve and Reject buttons if the user is an admin and the listing is approved_org',
