@@ -3,9 +3,9 @@
   "version": "0.7.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ozone-development/center-ui.git"
+    "url": "https://github.com/ozone-development/ozp-center.git"
   },
-  "homepage": "https://github.com/ozone-development/center-ui/blob/master/README.md",
+  "homepage": "https://github.com/ozone-development/ozp-center/blob/master/README.md",
   "bugs": "https://www.owfgoss.org/jira/browse/OZF",
   "author": "",
   "description": "",
@@ -14,7 +14,7 @@
     "start": "gulp dev",
     "test": "./node_modules/karma/bin/karma start",
     "build": "NODE_ENV=\"production\" gulp build",
-    "buildGhPages": "API_URL=\"https://www.owfgoss.org/ng/dev/mp\" HUD_URL=\"http://ozone-development.github.io/hud-ui/\" WEBTOP_URL=\"http://ozone-development.github.io/ozp-webtop/\" HELP_URL=\"http://ozone-development.github.io/hud-ui/assets/PlaceholderUserGuide.pdf\" gulp build",
+    "buildGhPages": "API_URL=\"https://www.owfgoss.org/ng/dev/mp\" HUD_URL=\"http://ozone-development.github.io/ozp-hud/\" WEBTOP_URL=\"http://ozone-development.github.io/ozp-webtop/\" HELP_URL=\"http://ozone-development.github.io/ozp-hud/assets/PlaceholderUserGuide.pdf\" gulp build",
     "deployGhPages": "npm run buildGhPages && gulp deploy",
     "changelog": "gulp changelog",
     "tarDistDate": "gulp tarDistDate",
