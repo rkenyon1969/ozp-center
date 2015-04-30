@@ -285,6 +285,13 @@ var ListingForm = React.createClass({
 
         var p = this.getFormComponentProps;
         var f = formLinks;
+
+        var decodedUrl = (()=>{
+            var durl = p('launchUrl');
+            durl.value = decodeURI(durl.value);
+            return durl;
+        })();
+
         return (
             <form ref="form" className="CreateEdit__form">
                 <h2 id={f.basicInformation.id} >Basic Information</h2>
@@ -299,7 +306,7 @@ var ListingForm = React.createClass({
 
                 <h2 id={f.listingDetails.id} >Listing Details</h2>
                 <TextInput id={f.versionNumber.id} { ...p('versionName') }/>
-                <TextInput id={f.launchUrl.id} { ...p('launchUrl') }/>
+                <TextInput id={f.launchUrl.id} { ...decodedUrl }/>
                 <TextAreaInput id={f.requirements.id} { ...p('requirements') } rows="5"/>
                 <TextAreaInput id={f.whatsNew.id} { ...p('whatIsNew') } rows="3" optional/>
                 <Select2Input id={f.intents.id} { ...p('intents') }  multiple options={
