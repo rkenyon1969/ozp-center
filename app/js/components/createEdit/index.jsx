@@ -690,7 +690,7 @@ var CreateEditPage = React.createClass({
                 {header}
                 <section className="create-edit-body">
                     <Sidebar groups={links} activeId={this.state.activeId || this.getQuery().el}/>
-                    <ListingForm ref="form" key={this.state.timestamp} { ...formProps } />
+                    <ListingForm ref="form" { ...formProps } />
                     <Reminders />
                 </section>
                 { savingText && <LoadMask message={savingText} /> }
