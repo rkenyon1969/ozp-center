@@ -1,3 +1,14 @@
+### 0.7.7 (2015-05-05)
+
+
+#### Bug Fixes
+
+* **CreateEdit:**
+  * Added padding to bottom of listing to fix side menu #155 ([34652642](https://github.com/ozone-development/ozp-center.git/commit/34652642ece6d5d22707703843745802f1139e39))
+  * Fixed decoding url when editing listing #222 ([387b1c5b](https://github.com/ozone-development/ozp-center.git/commit/387b1c5be030d7bf4c1d7899898abd87187dcc37))
+* **Feedback:** Updated Feedback Link ([eff253a7](https://github.com/ozone-development/ozp-center.git/commit/eff253a7ab88dbbed841cee12dafdd2885308c3f))
+
+
 ### 0.7.6 (2015-04-28)
 
 
