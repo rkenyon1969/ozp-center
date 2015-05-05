@@ -268,7 +268,7 @@ var ContactForm = React.createClass({
 
 // This is the whole form for all the other createEdit createClass forms
 var ListingForm = React.createClass({
-    mixins: [ ValidatedFormMixin, State ],
+    mixins: [ ValidatedFormMixin, State],
 
     getInitialState: () => ({ currentNavTarget: null }),
 
@@ -285,9 +285,16 @@ var ListingForm = React.createClass({
 
         var p = this.getFormComponentProps;
         var f = formLinks;
+
+        var decodedUrl = (()=>{
+            var durl = p('launchUrl');
+            durl.value = decodeURI(durl.value);
+            return durl;
+        })();
+
         return (
             <form ref="form" className="CreateEdit__form">
-                <h2 id={f.basicInformation.id} >Basic Information</h2>
+                <h2 id={f.basicInformation.id}>Basic Information</h2>
                 <TextInput id={f.title.id} { ...p('title') }/>
                 <Select2Input id={f.type.id} { ...p('type') }
                     options={ getOptionsForSystemObject(system.types) }/>
@@ -299,7 +306,7 @@ var ListingForm = React.createClass({
 
                 <h2 id={f.listingDetails.id} >Listing Details</h2>
                 <TextInput id={f.versionNumber.id} { ...p('versionName') }/>
-                <TextInput id={f.launchUrl.id} { ...p('launchUrl') }/>
+                <TextInput id={f.launchUrl.id} { ...decodedUrl }/>
                 <TextAreaInput id={f.requirements.id} { ...p('requirements') } rows="5"/>
                 <TextAreaInput id={f.whatsNew.id} { ...p('whatIsNew') } rows="3" optional/>
                 <Select2Input id={f.intents.id} { ...p('intents') }  multiple options={
@@ -337,7 +344,7 @@ var ListingForm = React.createClass({
                 <ListInput id={f.contacts.id} { ...this.getSubFormProps('contacts') }
                     itemForm={ ContactForm }/>
 
-                <div className="space">&#32;</div>
+                  <div className="space" style={{'height':'400px'}}>&#32;</div>
             </form>
         );
     },
@@ -467,7 +474,8 @@ var CreateEditPage = React.createClass({
             activeId: null,
             hasChanges: false,
             scrollToError: false,
-            imageErrors: {screenshots: []}
+            imageErrors: {screenshots: []},
+            timestamp: Date.now(),
         };
     },
 
@@ -557,6 +565,10 @@ var CreateEditPage = React.createClass({
     componentDidMount: function () {
         var main = $('#main');
         main.addClass('create-edit-open');
+
+        this.listenTo(CreateEditActions.resetForm, ()=>{
+            this.setState({ timestamp: Date.now() });
+        });
     },
 
     componentWillUnmount: function () {

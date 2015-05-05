@@ -6,6 +6,8 @@ var HelpModal = require('./helpmodal.jsx');
 var ProfileLink = require('../profile/ProfileLink.jsx');
 var ModalLink = require('../ModalLink.jsx');
 var { HUD_URL, METRICS_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL, FEEDBACK_ADDRESS } = require('ozp-react-commons/OzoneConfig');
+var emailString = FEEDBACK_ADDRESS.substring(0,7);
+var CreateEditActions = require('../../actions/CreateEditActions');
 
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
 
@@ -22,6 +24,9 @@ var NavBar = React.createClass({
     render: function () {
         var Metrics = (this.isAdmin() || this.isOrgSteward()) ?
             <li><a href={METRICS_URL} target="_blank"><i className="icon-bar-graph-2-grayLightest"></i>Metrics</a></li> : '';
+
+        var feedbackTarget = this.isEmail() ? "_self" : "_blank";
+
 
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top" id="globalNav">
@@ -57,7 +62,9 @@ var NavBar = React.createClass({
                                     </li>
                                     <li className="divider"></li>
                                     <li className="dropdown-header">Create</li>
-                                    <li><a href={'#/edit'}><i className="icon-square-plus-grayLightest"></i>Submit a Listing</a></li>
+                                    <li><a href={'#/edit'} onClick={()=>{
+                                          CreateEditActions.resetForm();
+                                      }}><i className="icon-square-plus-grayLightest"></i>Submit a Listing</a></li>
                                     <li><a href={DEVELOPER_RESOURCES_URL} target="_blank"><i className="icon-cloud-grayLightest"></i>Developer Resources</a></li>
                                     <li className="divider"></li>
                                     <li className="dropdown-header">Manage</li>
@@ -67,7 +74,7 @@ var NavBar = React.createClass({
                                         <li><a href={'#/mall-management/categories'}><i className="icon-shopping-settings-grayLightest"></i>Marketplace Settings</a></li>
                                     }
                                     { Metrics }
-                                    <li><a href={FEEDBACK_ADDRESS} className="caboose"><i className="icon-mail"></i>Submit Feedback</a></li>
+                                    <li><a href={FEEDBACK_ADDRESS} className="caboose" target={feedbackTarget}><i className="icon-mail"></i>Submit Feedback</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -78,6 +85,10 @@ var NavBar = React.createClass({
                 }
             </nav>
         );
+    },
+
+    isEmail: function(){
+        return (emailString === "mailto:") ? true : false;
     },
 
     isOrgSteward: function(){
