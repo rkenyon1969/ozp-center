@@ -173,6 +173,18 @@ var ReviewDeletedChangeLog = React.createClass({
     }
 });
 
+var GenericLegacyChangeLog = React.createClass({
+    render: function() {
+        var changeLog = this.props.changeLog;
+        return (
+            <div>
+                <AuthorLink author={changeLog.author} />
+                <span> { changeLog.action } </span>
+                 on { this.props.listingName }
+            </div>
+        );
+    }
+});
 
 var ChangeLog = React.createClass({
 
@@ -221,7 +233,7 @@ var ChangeLog = React.createClass({
         var time = timeAgo(this.props.changeLog.activityDate);
         var Handler = this.actionMapAdmin[this.props.changeLog.action];
         if(!Handler) {
-            return;
+            Handler = GenericLegacyChangeLog;
         }
         return (
             <li>
