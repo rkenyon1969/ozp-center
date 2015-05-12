@@ -61,8 +61,6 @@ var ResourcesTab = React.createClass({
 
         _.compact(tsc);
 
-        console.log(this.props.listing.contacts);
-
         if (tsc.length) {
             return tsc.map(function (contact, i) {
                 return (
