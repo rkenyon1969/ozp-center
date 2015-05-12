@@ -6,6 +6,10 @@
     "url": "https://github.com/ozone-development/ozp-center.git"
   },
   "homepage": "https://github.com/ozone-development/ozp-center/blob/master/README.md",
+  "license": {
+    "type": "Apache-2.0",
+    "url": "https://spdx.org/licenses/Apache-2.0"
+  },
   "bugs": "https://www.owfgoss.org/jira/browse/OZF",
   "author": "",
   "description": "",

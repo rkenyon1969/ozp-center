@@ -288,7 +288,7 @@ var ListingForm = React.createClass({
 
         var decodedUrl = (()=>{
             var durl = p('launchUrl');
-            durl.value = decodeURI(durl.value);
+            durl.value = (durl.value) ? decodeURI(durl.value) : '';
             return durl;
         })();
 
