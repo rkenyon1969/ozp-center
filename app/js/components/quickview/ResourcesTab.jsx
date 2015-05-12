@@ -21,7 +21,7 @@ var ResourcesTab = React.createClass({
                 </div>
                 <div className="col-md-6 col-right">
                     <section className="tpoc">
-                        <h5>Technical Support Contact Information</h5>
+                        <h5>Contact Information</h5>
                         { this.renderTechSuppot() }
                     </section>
                 </div>
@@ -30,6 +30,7 @@ var ResourcesTab = React.createClass({
     },
 
     renderUserGuide: function () {
+
         var userGuide = _.find(this.props.listing.docUrls, { name: 'User Manual'});
 
         return userGuide ?
@@ -55,18 +56,18 @@ var ResourcesTab = React.createClass({
 
     renderTechSuppot: function () {
         var tsc = this.props.listing.contacts.map(function (contact) {
-            if(contact.type.indexOf("Technical Support") > -1) {
-                return contact;
-            }
+            return contact;
         });
 
         _.compact(tsc);
+
+        console.log(this.props.listing.contacts);
 
         if (tsc.length) {
             return tsc.map(function (contact, i) {
                 return (
                     <div>
-                        <p><label>Technical Support Point of Contact { i + 1 }</label></p>
+                        <p><label>Point of Contact { i + 1 } ({contact.type})</label></p>
                         <div className="col-md-offset-1">
                             <p><label>Name:</label><span> {contact.name}</span></p>
                             <p><label>Email:</label><span> {contact.email}</span></p>
