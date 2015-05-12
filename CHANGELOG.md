@@ -1,3 +1,11 @@
+### 0.7.8 (2015-05-12)
+
+
+#### Bug Fixes
+
+* **Changelog:** Added fallback for legacy actions ([78b7f547](https://github.com/ozone-development/ozp-center.git/commit/78b7f547029df983cd3cda1dde490a0617d2dfac))
+
+
 ### 0.7.7 (2015-05-05)
 
 
