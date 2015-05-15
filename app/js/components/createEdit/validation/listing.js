@@ -146,8 +146,12 @@ function validate (instance, options, type) {
         errors = {};
     if (validation.errors) {
         validation.errors.forEach(function (e) {
-            var path = e.path.join('.');
-            errors[path] = true;
+            if(e.path[0] === 'tags'){
+                errors[e.path[0]] = true;
+            }
+            else{
+                errors[e.path.join('.')] = true;
+            }
         });
     }
 
