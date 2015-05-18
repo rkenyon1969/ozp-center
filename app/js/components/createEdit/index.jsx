@@ -17,6 +17,8 @@ var { classSet } = React.addons;
 var State = require('../../mixins/ActiveStateMixin');
 var $ = require('jquery');
 
+require('sweetalert');
+
 var {
     ValidatedFormMixin,
     ListInput,
@@ -274,6 +276,7 @@ var ListingForm = React.createClass({
 
 
     render: function () {
+
         var listing = this.props.value;
         var system = this.props.system;
 
@@ -509,6 +512,18 @@ var CreateEditPage = React.createClass({
 
         if ($target[0]) {
             var scroll = $target.offset().top - $firstFormElement.offset().top;
+
+            /* jshint ignore:start */
+            sweetAlert({
+              title: "Could not save!",
+              text: "Your listing could not be saved because you have errors!",
+              type: "error",
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "show errors",
+              closeOnConfirm: true,
+              html: false
+            });
+            /* jshint ignore:end */
 
             form.animate({
                 scrollTop: scroll
