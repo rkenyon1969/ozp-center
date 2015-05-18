@@ -163,7 +163,7 @@ ListingActions.save.listen(function (data) {
 
     if (isNew) { OzpAnalytics.trackListingCreation(data.title); }
 
-    if (data.launchUrl) { data.launchUrl = encodeURI(data.launchUrl); }
+    if (/\s/g.test(data.launchUrl)) { data.launchUrl = data.launchUrl.replace(/ /g,"%20"); }
 
     ListingApi
         .save(data)
