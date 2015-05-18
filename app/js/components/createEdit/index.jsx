@@ -30,6 +30,8 @@ var {
     OwnerInput
 } = require('./form');
 
+var Toggle = require('./form/Toggle.jsx');
+
 var savingMessages = {
     images: 'Uploading Images...',
     listing: 'Saving Listing...'
@@ -89,6 +91,10 @@ var formLinks = {
     intents: {
         title: 'Intents',
         id: 'create-edit-intents'
+    },
+    singleton: {
+        singleton: 'Singleton',
+        id: 'create-edit-singleton'
     },
     resources: {
         title: 'Resources',
@@ -157,7 +163,8 @@ var formLinkGroups = [{
         formLinks.launchUrl,
         formLinks.requirements,
         formLinks.whatsNew,
-        formLinks.intents
+        formLinks.intents,
+        formLinks.singleton,
     ]
 }, {
     link: formLinks.resources,
@@ -276,7 +283,6 @@ var ListingForm = React.createClass({
 
 
     render: function () {
-
         var listing = this.props.value;
         var system = this.props.system;
 
@@ -288,6 +294,8 @@ var ListingForm = React.createClass({
 
         var p = this.getFormComponentProps;
         var f = formLinks;
+
+        console.log(p('singleton'));
 
         var decodedUrl = (()=>{
             var durl = p('launchUrl');
@@ -318,6 +326,7 @@ var ListingForm = React.createClass({
                         return { id: val, text: val };
                     })
                 } optional />
+              <Toggle id={f.singleton.id} { ...p('singleton') }/>
                 <h2 id={f.resources.id} > Resources </h2>
                 <ListInput { ...this.getSubFormProps('docUrls') }
                     itemForm={ ResourceForm } optional/>
