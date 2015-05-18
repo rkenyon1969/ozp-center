@@ -513,6 +513,7 @@ var CreateEditPage = React.createClass({
         if ($target[0]) {
             var scroll = $target.offset().top - $firstFormElement.offset().top;
 
+            /* jshint ignore:start */
             sweetAlert({
               title: "Could not save!",
               text: "Your listing could not be saved because you have errors!",
@@ -522,6 +523,7 @@ var CreateEditPage = React.createClass({
               closeOnConfirm: true,
               html: false
             });
+            /* jshint ignore:end */
 
             form.animate({
                 scrollTop: scroll
