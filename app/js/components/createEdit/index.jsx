@@ -515,11 +515,11 @@ var CreateEditPage = React.createClass({
 
             /* jshint ignore:start */
             sweetAlert({
-              title: "Could not save!",
-              text: "Your listing could not be saved because you have errors!",
+              title: "Save Unsuccessful!",
+              text: "Your listing could not be saved because there is at least one error that must be corrected.",
               type: "error",
-              confirmButtonColor: "#DD6B55",
-              confirmButtonText: "show errors",
+              confirmButtonColor: "#c62a3d",
+              confirmButtonText: "Return to form",
               closeOnConfirm: true,
               html: false
             });
