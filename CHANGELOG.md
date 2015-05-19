@@ -1,3 +1,20 @@
+### 0.7.9 (2015-05-19)
+
+
+#### Bug Fixes
+
+* **Quickview:** Link display limited to 40 chars, url not affected. #221 ([a8b450e7](https://github.com/ozone-development/ozp-center.git/commit/a8b450e773a0938571129080b63c1689fa689171))
+* **Resources Tab:** fixes issue with contact being undefined #243'; ([74a53519](https://github.com/ozone-development/ozp-center.git/commit/74a535193268362d6de37e1eda81039579ee06a8))
+* **createEdit:** Original fix for this issue broke the error messages in the resources section of ([dd622271](https://github.com/ozone-development/ozp-center.git/commit/dd6222712321103b91c059e948a370a166f00f69))
+* **style:** Updating SweetAlert styling ([bb7e4194](https://github.com/ozone-development/ozp-center.git/commit/bb7e41948b808b447696964633e6c477c4b1df36))
+* **styling:** #251 Added pointer cursor ([cfa08818](https://github.com/ozone-development/ozp-center.git/commit/cfa08818b6cac0dc970dd28d70c9cabcf0d2a287))
+
+
+#### Features
+
+* **Global:** Sweet alert implimented ([788ae9f3](https://github.com/ozone-development/ozp-center.git/commit/788ae9f3297903aa6c7da19e9d24800dfea53306))
+
+
 ### 0.7.8 (2015-05-12)
 
 
