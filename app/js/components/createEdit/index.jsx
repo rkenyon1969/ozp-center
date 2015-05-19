@@ -17,6 +17,8 @@ var { classSet } = React.addons;
 var State = require('../../mixins/ActiveStateMixin');
 var $ = require('jquery');
 
+require('sweetalert');
+
 var {
     ValidatedFormMixin,
     ListInput,
@@ -274,6 +276,7 @@ var ListingForm = React.createClass({
 
 
     render: function () {
+
         var listing = this.props.value;
         var system = this.props.system;
 
@@ -285,12 +288,6 @@ var ListingForm = React.createClass({
 
         var p = this.getFormComponentProps;
         var f = formLinks;
-
-        var decodedUrl = (()=>{
-            var durl = p('launchUrl');
-            durl.value = (durl.value) ? decodeURI(durl.value) : '';
-            return durl;
-        })();
 
         return (
             <form ref="form" className="CreateEdit__form">
@@ -306,7 +303,7 @@ var ListingForm = React.createClass({
 
                 <h2 id={f.listingDetails.id} >Listing Details</h2>
                 <TextInput id={f.versionNumber.id} { ...p('versionName') }/>
-                <TextInput id={f.launchUrl.id} { ...decodedUrl }/>
+                <TextInput id={f.launchUrl.id} { ...p('launchUrl') }/>
                 <TextAreaInput id={f.requirements.id} { ...p('requirements') } rows="5"/>
                 <TextAreaInput id={f.whatsNew.id} { ...p('whatIsNew') } rows="3" optional/>
                 <Select2Input id={f.intents.id} { ...p('intents') }  multiple options={
@@ -509,6 +506,18 @@ var CreateEditPage = React.createClass({
 
         if ($target[0]) {
             var scroll = $target.offset().top - $firstFormElement.offset().top;
+
+            /* jshint ignore:start */
+            sweetAlert({
+              title: "Save Unsuccessful!",
+              text: "Your listing could not be saved because there is at least one error that must be corrected.",
+              type: "error",
+              confirmButtonColor: "#c62a3d",
+              confirmButtonText: "Return to form",
+              closeOnConfirm: true,
+              html: false
+            });
+            /* jshint ignore:end */
 
             form.animate({
                 scrollTop: scroll

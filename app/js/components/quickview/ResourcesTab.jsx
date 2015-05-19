@@ -21,8 +21,8 @@ var ResourcesTab = React.createClass({
                 </div>
                 <div className="col-md-6 col-right">
                     <section className="tpoc">
-                        <h5>Technical Support Contact Information</h5>
-                        { this.renderTechSuppot() }
+                        <h5>Contact Information</h5>
+                        { this.contactGroups() }
                     </section>
                 </div>
             </div>
@@ -30,6 +30,7 @@ var ResourcesTab = React.createClass({
     },
 
     renderUserGuide: function () {
+
         var userGuide = _.find(this.props.listing.docUrls, { name: 'User Manual'});
 
         return userGuide ?
@@ -53,35 +54,51 @@ var ResourcesTab = React.createClass({
         return resources.length ? resources : <EmptyFieldValue text="None available" />;
     },
 
-    renderTechSuppot: function () {
-        var tsc = this.props.listing.contacts.map(function (contact) {
-            if(contact.type.indexOf("Technical Support") > -1) {
-                return contact;
-            }
+    contactGroups: function(){
+      var contacts = {};
+
+      this.props.listing.contacts.map(function (contact) {
+          if(typeof(contacts[contact.type]) === 'undefined'){
+              contacts[contact.type] = [];
+              contacts[contact.type].push(contact);
+          }else{
+              contacts[contact.type].push(contact);
+          }
+      });
+
+      var sortedContacts = [];
+
+      for( var contactType in contacts ){
+        var contactBlocks = contacts[contactType].map((contact, i)=>{
+          _.compact(contact);
+          return(
+            <div>
+              <p><label>Point of Contact { i + 1 }</label></p>
+              <div className="col-md-offset-1">
+                  <p><label>Name:</label><span> {contact.name}</span></p>
+                  <p><label>Email:</label><span> {contact.email}</span></p>
+                  <p><label>Unsecure Phone:</label><span> {contact.unsecurePhone}</span></p>
+                  <p><label>Secure Phone:</label><span> {contact.securePhone}</span></p>
+              </div>
+            </div>
+          );
         });
-
-        _.compact(tsc);
-
-        if (tsc.length) {
-            return tsc.map(function (contact, i) {
-                return (
-                    <div>
-                        <p><label>Technical Support Point of Contact { i + 1 }</label></p>
-                        <div className="col-md-offset-1">
-                            <p><label>Name:</label><span> {contact.name}</span></p>
-                            <p><label>Email:</label><span> {contact.email}</span></p>
-                            <p><label>Unsecure Phone:</label><span> {contact.unsecurePhone}</span></p>
-                            <p><label>Secure Phone:</label><span> {contact.securePhone}</span></p>
-                        </div>
-                    </div>
-                );
-            });
-        }
-        else {
-            return <EmptyFieldValue text="None available" />;
-        }
+        sortedContacts.push(
+          <div style={{'margin-top': '2em'}}>
+            <p><strong>{contactType}</strong></p>
+            {contactBlocks}
+          </div>
+        );
+      }
+      var rsc = sortedContacts.map(function(r){
+        return(r);
+      });
+      if(this.props.listing.contacts.length){
+        return(rsc);
+      }else {
+          return <EmptyFieldValue text="None available" />;
+      }
     }
-
 });
 
 module.exports = ResourcesTab;
