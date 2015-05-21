@@ -326,7 +326,7 @@ var ListingForm = React.createClass({
                         return { id: val, text: val };
                     })
                 } optional />
-              <Toggle id={f.singleton.id} { ...p('singleton') }/>
+                <Toggle id={f.singleton.id} { ...p('singleton') }/>
                 <h2 id={f.resources.id} > Resources </h2>
                 <ListInput { ...this.getSubFormProps('docUrls') }
                     itemForm={ ResourceForm } optional/>

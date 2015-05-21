@@ -1,0 +1,197 @@
+
+.sweet-overlay {
+  background-color: rgb(25, 31, 37); /* IE8 */
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)"; /* IE8 */
+  background-color: rgba($black, 0.4);
+
+}
+
+.sweet-alert {
+  background-color: $white;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+
+  h2 {
+    color: $gray-dark;
+    font-family: ubuntu, 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  p {
+    color: $gray-dark;
+  }
+
+  .sa-error-container {
+    background-color: $gray-lightest;
+
+    .icon {
+      background-color: $red;
+      color: $white;
+    }
+
+  }
+
+  .sa-input-error {
+  
+    &::before, &::after {
+      background-color: $red;
+    }
+    
+  }
+
+  input {
+    border: 1px solid rgb(219, 220, 221);
+    box-shadow: inset 0px 1px 1px rgba($black, 0.06);
+    &:focus {
+      box-shadow: 0px 0px 3px rgb(198, 233, 245);
+      border: 1px solid rgb(198, 233, 245);
+    }
+    &::-moz-placeholder {
+      color: $gray-dark;
+    }
+    &:-ms-input-placeholder {
+      color: $gray-dark;
+    }
+    &::-webkit-input-placeholder {
+      color: $gray-dark;
+    }
+  }
+
+  button {
+    $btnBlue: $blue-dark;
+    $btnGray: $gray-dark;
+
+    background-color: $btnBlue;
+    color: $white;
+    
+    &:focus {
+      box-shadow: 0 0 2px rgba(128, 179, 235, 0.5), inset 0 0 0 1px rgba(25, 31, 37, 0.05);
+    }
+    &:hover {
+      background-color: $blue-darker;
+    }
+    &:active {
+      background-color: $blue-darker;
+    }
+    &.cancel {
+      background-color: $btnGray;
+
+      &:hover {
+      background-color: $gray-darker;
+      }
+      &:active {
+        background-color: $gray-darker;
+      }
+      // Cancel button should keep the same style
+      &:focus {
+        box-shadow: rgba(197, 205, 211, 0.8) 0px 0px 2px, rgba(25, 31, 37, 0.0470588) 0px 0px 0px 1px inset !important;
+      }
+    }
+  }
+
+  .sa-icon {
+    border: 4px solid $gray-lighter;
+
+    &.sa-error {
+      border-color: $red;
+
+      .sa-line {
+        background-color: $red;
+      }
+    }
+    &.sa-warning {
+      border-color: $red-orange-dark;
+
+      .sa-body { // Exclamation mark body
+        background-color: $red-orange-dark;
+      }
+      .sa-dot { // Exclamation mark dot
+        background-color: $red-orange-dark;
+      }
+    }
+    &.sa-info {
+      border-color: $blue-dark;
+
+      &::before { // i-letter body
+        background-color: $blue-dark;
+      }
+      &::after { // i-letter dot
+        background-color: $blue-dark;
+      }
+    }
+    &.sa-success {
+      border-color: $green-dark;
+
+      &::before, &::after { // Emulate moving circular line
+        background: $white;
+      }
+
+      .sa-placeholder { // Ring
+        border: 4px solid rgba($green-dark, 0.2);
+      }
+
+      .sa-fix { // Hide corners left from animation
+        background-color: $white;
+      }
+
+      .sa-line {
+        background-color: $green-dark;
+      }
+    }
+  }
+
+}
+
+/*
+ * Animations
+ */
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  animation: #{$str};
+}
+
+
+
+
+// Error icon animation
+
+@include keyframes(animateErrorIcon) {
+  0%    { transform: rotateX(100deg); -webkit-transform: rotateX(100deg); opacity: 0; }
+  100%  { transform: rotateX(0deg);   -webkit-transform: rotateX(0deg);   opacity: 1; }
+}
+.animateErrorIcon {
+  @include animation('animateErrorIcon 0.5s');
+}
+@include keyframes(animateXMark) {
+  0%    { transform: scale(0.4);  -webkit-transform: scale(0.4);  margin-top: 26px; opacity: 0; }
+  50%   { transform: scale(0.4);  -webkit-transform: scale(0.4);  margin-top: 26px; opacity: 0; }
+  80%   { transform: scale(1.15); -webkit-transform: scale(1.15); margin-top: -6px;             }
+  100%  { transform: scale(1);    -webkit-transform: scale(1);    margin-top: 0;    opacity: 1; }
+}
+.animateXMark {
+  @include animation('animateXMark 0.5s');
+}
+
+@include keyframes(pulseWarning) {
+  0%    { border-color: #ecc44d; }
+  100%  { border-color: #f59d4c; }
+}
+.pulseWarning {
+  @include animation('pulseWarning 0.75s infinite alternate');
+}
+
+@include keyframes(pulseWarningIns) {
+  0%    { background-color: #ecc44d; }
+  100%  { background-color: #f59d4c; }
+}
+.pulseWarningIns {
+  @include animation('pulseWarningIns 0.75s infinite alternate');
+}
