@@ -5,6 +5,10 @@ var { classSet } = React.addons;
 var _ = require('../../../utils/_');
 
 var ListInput = React.createClass({
+    contextTypes: {
+        lastUpdate: React.PropTypes.string.isRequired
+    },
+
     render: function () {
         var items = this.props.value || [];
 
@@ -17,7 +21,7 @@ var ListInput = React.createClass({
                     value: item,
                     imageErrors: imageErrors,
                     removeHandler: this.onDelete.bind(null, index),
-                    key: index,
+                    key: `${index}.${this.context.lastUpdate}`,
                     path: this.props.path.concat(index),
                     count: index
                 });
