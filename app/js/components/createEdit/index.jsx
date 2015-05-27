@@ -478,7 +478,7 @@ var CreateEditPage = React.createClass({
 
     onSave: function () {
         CreateEditActions.save();
-        this.setState({ scrollToError: true });
+        this.setState({ scrollToError: true, lastUpdate: Date.now() });
     },
 
     onClose: function () {
@@ -496,7 +496,17 @@ var CreateEditPage = React.createClass({
 
     onSubmit: function () {
         CreateEditActions.submit();
-        this.setState({ scrollToError: true });
+        this.setState({ scrollToError: true, lastUpdate: Date.now() });
+    },
+
+
+    childContextTypes: {
+        lastUpdate: React.PropTypes.string.isRequired
+    },
+
+    getChildContext: function() {
+        var lastUpdateState = this.state.lastUpdate || 'initial';
+        return { lastUpdate: `${lastUpdateState}` };
     },
 
     scrollToError: function () {
