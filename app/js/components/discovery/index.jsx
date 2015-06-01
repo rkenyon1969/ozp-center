@@ -43,26 +43,29 @@ var Discovery = React.createClass({
             queryString: this.state ? this.state.queryString : '',
             categories: this.state ? this.state.categories : [],
             type: this.state ? this.state.type : [],
-            agency: this.state ? this.state.agency : []
+            agency: this.state ? this.state.agency : [],
+            nextOffset: DiscoveryPageStore.getNextOffset(),
+            currentOffset: this.state ? this.state.currentOffset : 0
         };
     },
 
     onSearchInputChange(evt) {
         this.setState({
-            queryString: evt.target.value
+            queryString: evt.target.value,
+            currentOffset: 0
         });
     },
 
     onCategoryChange(categories) {
-        this.setState({ categories });
+        this.setState({ categories, currentOffset: 0 });
     },
 
     onTypeChange(type) {
-        this.setState({ type });
+        this.setState({ type, currentOffset: 0 });
     },
 
     onOrganizationChange(agency) {
-        this.setState({ agency });
+        this.setState({ agency, currentOffset: 0 });
     },
 
     componentDidUpdate(prevProps, prevState) {
@@ -71,7 +74,8 @@ var Discovery = React.createClass({
         }
         else if(!_.isEqual(this.state.categories, prevState.categories) ||
             !_.isEqual(this.state.type, prevState.type) ||
-            !_.isEqual(this.state.agency, prevState.agency)) {
+            !_.isEqual(this.state.agency, prevState.agency) ||
+            !_.isEqual(this.state.currentOffset, prevState.currentOffset)) {
             this.search();
         }
     },
@@ -156,7 +160,8 @@ var Discovery = React.createClass({
 
     reset() {
         this.setState({
-            queryString: ''
+            queryString: '',
+            currentOffset: 0
         });
     },
 
@@ -166,11 +171,10 @@ var Discovery = React.createClass({
 
     search() {
         var { type, categories, agency } = this.state;
-        ListingActions.search(
-            _.assign({
-                queryString: this.state.queryString
-            }, { type, categories, agency })
-        );
+        var combinedObj = _.assign(
+            { queryString: this.state.queryString, offset: this.state.currentOffset },
+            { type, categories, agency });
+        ListingActions.search(_.assign(combinedObj));
     },
 
     renderFeaturedListings() {
@@ -228,14 +232,27 @@ var Discovery = React.createClass({
         );
     },
 
+    handleMoreSearch() {
+        this.setState({
+            currentOffset: this.state.nextOffset
+        });
+    },
+
     renderSearchResults() {
         var results = this.state.searchResults.length > 0 ? ListingTile.fromArray(this.state.searchResults) : <p>No results found.</p>;
+        var MoreSearch = (this.state.nextOffset) ?
+            <button onClick={ this.handleMoreSearch } className="btn btn-default loadMoreBtn">Load More</button> :
+            '';
+
         return (
             <section className="Discovery__SearchResults">
                 <h4>Search Results</h4>
                 <ul className="list-unstyled listings-search-results">
                     { results }
                 </ul>
+                <div className="text-center">
+                    { MoreSearch }
+                </div>
             </section>
         );
     }

@@ -7,6 +7,14 @@ var _newArrivals = [];
 var _mostPopular = [];
 var _featured = [];
 var _searchResults = [];
+var _nextOffset = 0;
+
+function getParameterByName(url, name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(url);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
 var DiscoveryPageStore = Reflux.createStore({
 
@@ -40,8 +48,15 @@ var DiscoveryPageStore = Reflux.createStore({
         return _featured;
     },
 
+    getNextOffset: function () {
+        return _nextOffset;
+    },
+
     onSearchCompleted: function (searchResults) {
-        _searchResults = searchResults;
+        _searchResults = searchResults.getItemAsList();
+        _nextOffset = (searchResults.nextLink()) ?
+            getParameterByName(searchResults.nextLink(), "offset") : 0;
+
         this.trigger();
     },
 
