@@ -295,8 +295,6 @@ var ListingForm = React.createClass({
         var p = this.getFormComponentProps;
         var f = formLinks;
 
-        console.log(p('singleton'));
-
         var decodedUrl = (()=>{
             var durl = p('launchUrl');
             durl.value = (durl.value) ? decodeURI(durl.value) : '';
