@@ -6,6 +6,7 @@ module.exports = {
     Select2TagInput: require('./Select2TagInput.jsx'),
     TextAreaInput: require('./TextAreaInput.jsx'),
     TextInput: require('./TextInput.jsx'),
+    Toggle: require('./Toggle.jsx'),
     ImageInput: require('./ImageInput.jsx'),
     ValidatedFormMixin: require('./ValidatedFormMixin'),
     OwnerInput: require('./OwnerInput.jsx')
