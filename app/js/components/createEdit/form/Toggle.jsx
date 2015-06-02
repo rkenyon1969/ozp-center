@@ -5,7 +5,7 @@ var React = require('react');
 var Toggle = React.createClass({
   getInitialState: function(){
     return {
-      value: false
+      value: this.props.value || false
     };
   },
   render: function () {
