@@ -33,6 +33,11 @@ function updateCache (listings) {
     });
 }
 
+function updateCacheFromPaginatedResponse (listingsAsPaginatedResponse) {
+    var listings = listingsAsPaginatedResponse.getItemAsList();
+    updateCache(listings);
+}
+
 var GlobalListingStore = Reflux.createStore({
 
     /**
@@ -44,7 +49,7 @@ var GlobalListingStore = Reflux.createStore({
             updateCache(storefront.newArrivals);
             updateCache(storefront.mostPopular);
         });
-        this.listenTo(ListingActions.searchCompleted, updateCache);
+        this.listenTo(ListingActions.searchCompleted, updateCacheFromPaginatedResponse);
         this.listenTo(ListingActions.fetchAllListingsCompleted, function (filter, response) {
             var listings = response.getItemAsList();
             updateCache(listings);

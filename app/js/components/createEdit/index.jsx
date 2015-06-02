@@ -27,8 +27,10 @@ var {
     Select2Input,
     Select2TagInput,
     TextAreaInput,
-    OwnerInput
+    OwnerInput,
+    Toggle
 } = require('./form');
+
 
 var savingMessages = {
     images: 'Uploading Images...',
@@ -89,6 +91,10 @@ var formLinks = {
     intents: {
         title: 'Intents',
         id: 'create-edit-intents'
+    },
+    singleton: {
+        singleton: 'Singleton',
+        id: 'create-edit-singleton'
     },
     resources: {
         title: 'Resources',
@@ -157,7 +163,8 @@ var formLinkGroups = [{
         formLinks.launchUrl,
         formLinks.requirements,
         formLinks.whatsNew,
-        formLinks.intents
+        formLinks.intents,
+        formLinks.singleton,
     ]
 }, {
     link: formLinks.resources,
@@ -276,7 +283,6 @@ var ListingForm = React.createClass({
 
 
     render: function () {
-
         var listing = this.props.value;
         var system = this.props.system;
 
@@ -288,6 +294,12 @@ var ListingForm = React.createClass({
 
         var p = this.getFormComponentProps;
         var f = formLinks;
+
+        var decodedUrl = (()=>{
+            var durl = p('launchUrl');
+            durl.value = (durl.value) ? decodeURI(durl.value) : '';
+            return durl;
+        })();
 
         return (
             <form ref="form" className="CreateEdit__form">
@@ -303,7 +315,7 @@ var ListingForm = React.createClass({
 
                 <h2 id={f.listingDetails.id} >Listing Details</h2>
                 <TextInput id={f.versionNumber.id} { ...p('versionName') }/>
-                <TextInput id={f.launchUrl.id} { ...p('launchUrl') }/>
+                <TextInput id={f.launchUrl.id} { ...decodedUrl }/>
                 <TextAreaInput id={f.requirements.id} { ...p('requirements') } rows="5"/>
                 <TextAreaInput id={f.whatsNew.id} { ...p('whatIsNew') } rows="3" optional/>
                 <Select2Input id={f.intents.id} { ...p('intents') }  multiple options={
@@ -312,6 +324,10 @@ var ListingForm = React.createClass({
                         return { id: val, text: val };
                     })
                 } optional />
+                <Toggle
+                  explanation={['Multiple instances of this web application/widget can be launched in webtop',
+                    'Only one instance of this web application/widget can be launched in webtop']}
+                  id={f.singleton.id} { ...p('singleton') } />
                 <h2 id={f.resources.id} > Resources </h2>
                 <ListInput { ...this.getSubFormProps('docUrls') }
                     itemForm={ ResourceForm } optional/>
@@ -478,7 +494,7 @@ var CreateEditPage = React.createClass({
 
     onSave: function () {
         CreateEditActions.save();
-        this.setState({ scrollToError: true });
+        this.setState({ scrollToError: true, lastUpdate: Date.now() });
     },
 
     onClose: function () {
@@ -496,7 +512,17 @@ var CreateEditPage = React.createClass({
 
     onSubmit: function () {
         CreateEditActions.submit();
-        this.setState({ scrollToError: true });
+        this.setState({ scrollToError: true, lastUpdate: Date.now() });
+    },
+
+
+    childContextTypes: {
+        lastUpdate: React.PropTypes.string.isRequired
+    },
+
+    getChildContext: function() {
+        var lastUpdateState = this.state.lastUpdate || 'initial';
+        return { lastUpdate: `${lastUpdateState}` };
     },
 
     scrollToError: function () {
@@ -509,11 +535,11 @@ var CreateEditPage = React.createClass({
 
             /* jshint ignore:start */
             sweetAlert({
-              title: "Save Unsuccessful!",
-              text: "Your listing could not be saved because there is at least one error that must be corrected.",
+              title: "Could not save!",
+              text: "Your listing could not be saved because you have errors!",
               type: "error",
-              confirmButtonColor: "#c62a3d",
-              confirmButtonText: "Return to form",
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "show errors",
               closeOnConfirm: true,
               html: false
             });

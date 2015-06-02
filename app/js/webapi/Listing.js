@@ -41,6 +41,10 @@ function parseList (response) {
     return new PaginatedResponse(response, Listing).getItemAsList();
 }
 
+function parseListToPaginatedResponse (response) {
+    return new PaginatedResponse(response, Listing);
+}
+
 var delaySearch = (function(){
     var timer = 0;
     return function(callback, ms){
@@ -91,7 +95,7 @@ var ListingApi = {
                 }
                 return response;
             })
-            .then(parseList);
+            .then(parseListToPaginatedResponse);
     },
 
     getById: function (id) {
