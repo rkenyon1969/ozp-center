@@ -1,3 +1,19 @@
+### 0.7.10 (2015-06-02)
+
+
+#### Bug Fixes
+
+* **createEdit:** Forced updated display of contacts using undocumented (and future) react feature ([90a82e1a](https://github.com/ozone-development/ozp-center.git/commit/90a82e1ad207d12ef9650535e87a506537a9d79e))
+* **search:** Add LoadMore button to search results #268 ([0cc305b8](https://github.com/ozone-development/ozp-center.git/commit/0cc305b85619bcba9a4d17ddd2224e48bc3a7449))
+
+
+#### Features
+
+* **Create Edit:**
+  * Added singleton toggler #199 ([6b5dd9a4](https://github.com/ozone-development/ozp-center.git/commit/6b5dd9a43a5e21e6cf5f90625b57f0671b5e8c16))
+  * Added singleton toggler #199 ([49148d5c](https://github.com/ozone-development/ozp-center.git/commit/49148d5c5bbcac1c22d869db30d0ade01ff256a3))
+
+
 ### 0.7.9 (2015-05-19)
 
 
