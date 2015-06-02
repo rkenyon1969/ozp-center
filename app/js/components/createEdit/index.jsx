@@ -324,7 +324,10 @@ var ListingForm = React.createClass({
                         return { id: val, text: val };
                     })
                 } optional />
-                <Toggle id={f.singleton.id} { ...p('singleton') } />
+                <Toggle
+                  explanation={['Multiple instances of this web application/widget can be launched in webtop',
+                    'Only one instance of this web application/widget can be launched in webtop']}
+                  id={f.singleton.id} { ...p('singleton') } />
                 <h2 id={f.resources.id} > Resources </h2>
                 <ListInput { ...this.getSubFormProps('docUrls') }
                     itemForm={ ResourceForm } optional/>

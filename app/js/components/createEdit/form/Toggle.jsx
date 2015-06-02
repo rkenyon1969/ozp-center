@@ -14,7 +14,10 @@ var Toggle = React.createClass({
             <label className="switchLabel">{this.props.label}</label><br />
                 <p>{this.props.description}</p>
 
-                <label className="switch"><input ref="singletonCheck" type="checkbox" onClick={()=>{this.handleToggle();}} className="ios brand-success"
+
+                <h5>{this.state.value ? 'Enabled': 'Disabled'}</h5>
+                <p>{this.state.value? this.props.explanation[1] : this.props.explanation[0]}</p>
+                <label className="switch"><input ref="checkbox" type="checkbox" onClick={()=>{this.handleToggle();}} className="ios brand-success"
                      defaultChecked={this.props.value}/>
 
                 <div className="track">
@@ -26,8 +29,9 @@ var Toggle = React.createClass({
       );
   },
   handleToggle: function(){
-    var items = this.refs.singletonCheck.getDOMNode().checked || false;
+    var items = this.refs.checkbox.getDOMNode().checked || false;
     this.props.setter(items);
+    this.setState({value: this.refs.checkbox.getDOMNode().checked || false});
   }
 });
 
