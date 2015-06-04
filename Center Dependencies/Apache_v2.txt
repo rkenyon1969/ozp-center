@@ -15,5 +15,5 @@ limitations under the License.
 
 Some dependencies in this software were also licensed under the Apache 2.0 software
 license (see references in the NOTICE.txt file); full text of the license
-provided here.
+provided here in the LICENSE.txt file.
 
