@@ -50,6 +50,7 @@ var Discovery = React.createClass({
     },
 
     onSearchInputChange(evt) {
+        this._searching = true;
         this.setState({
             queryString: evt.target.value,
             currentOffset: 0
@@ -57,14 +58,17 @@ var Discovery = React.createClass({
     },
 
     onCategoryChange(categories) {
+        this._searching = true;
         this.setState({ categories, currentOffset: 0 });
     },
 
     onTypeChange(type) {
+        this._searching = true;
         this.setState({ type, currentOffset: 0 });
     },
 
     onOrganizationChange(agency) {
+        this._searching = true;
         this.setState({ agency, currentOffset: 0 });
     },
 
@@ -82,6 +86,9 @@ var Discovery = React.createClass({
 
     componentWillMount() {
         this.listenTo(DiscoveryPageStore, this.onStoreChange);
+
+        // Notice where a search is finished
+        this.listenTo(ListingActions.searchCompleted, this.onSearchCompleted);
 
         // Reload when a new review is added
         this.listenTo(ListingActions.saveReviewCompleted, ListingActions.fetchStorefrontListings);
@@ -159,6 +166,7 @@ var Discovery = React.createClass({
     },
 
     reset() {
+        this._searching = true;
         this.setState({
             queryString: '',
             currentOffset: 0
@@ -175,6 +183,13 @@ var Discovery = React.createClass({
             { queryString: this.state.queryString, offset: this.state.currentOffset },
             { type, categories, agency });
         ListingActions.search(_.assign(combinedObj));
+    },
+
+    onSearchCompleted() {
+        this._searching = false;
+        this.setState({
+            lastSearchCompleted: Date.now()
+        });
     },
 
     renderFeaturedListings() {
@@ -239,8 +254,14 @@ var Discovery = React.createClass({
     },
 
     renderSearchResults() {
-        var results = this.state.searchResults.length > 0 ? ListingTile.fromArray(this.state.searchResults) : <p>No results found.</p>;
-        var MoreSearch = (this.state.nextOffset) ?
+        var results = <p>Searching...</p>;
+        if (!this._searching) {
+            results = this.state.searchResults.length > 0 ?
+                ListingTile.fromArray(this.state.searchResults) :
+                <p>No results found.</p>;
+        }
+
+        var MoreSearch = (this.state.nextOffset && !this._searching) ?
             <button onClick={ this.handleMoreSearch } className="btn btn-default loadMoreBtn">Load More</button> :
             '';
 
