@@ -1,3 +1,11 @@
+### 0.7.11 (2015-06-09)
+
+
+#### Features
+
+* **search:** Show a message while searching, not 'No results found.' ([5f70916f](https://github.com/ozone-development/ozp-center.git/commit/5f70916f4ca0650c040f6f5245a4e248016525d3))
+
+
 ### 0.7.10 (2015-06-02)
 
 
