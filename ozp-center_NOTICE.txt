@@ -1,0 +1,362 @@
+﻿ozp-center (c) 2015
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+This product bundles the following software, which is available under the
+license listed with the software description below:
+
+
+
+
+Developer Dependencies
+
+babel-core
+https://babeljs.io/
+License: MIT License
+Babel v5.4.4
+
+babel-loader
+https://babeljs.io/
+License: MIT License
+Babel v5.4.4
+
+babel-runtime
+https://babeljs.io/
+License: MIT License
+Babel v5.4.4
+
+bower
+https://github.com/bower/bower/blob/master/LICENSE
+License: Twitter
+Copyright © 2015 Twitter and other contributors
+
+chai
+https://github.com/chaijs/chai
+License: MIT License
+Copyright (c) 2011-2015 Jake Luer jake@alogicalparadox.com
+
+CoffeeScript
+http://coffeescript.org/ 
+License: MIT License
+Copyright (c) 2009-2015 Jeremy Ashkenas
+
+conventional-changelog": "0.0.11",
+https://github.com/ajoslin/conventional-changelog
+BSD
+Andrew Joslin https://github.com/ajoslin 
+
+css-loader": "0.9.1",
+https://github.com/webpack/css-loader
+License: MIT License
+Webpack Module Bundler 
+
+File loader for Webpack
+https://github.com/webpack/file-loader
+License: MIT License
+Webpack Module Bundler 
+
+FS
+https://www.nuget.org/packages/FS/0.0.2
+License: Apache 2.0
+refractalize, Author Tim Macfarlane © 2013
+
+gulp
+https://github.com/gulpjs/gulp/blob/master/LICENSE
+License: MIT License
+Copyright (c) 2013-2015 Fractal contact@wearefractal.com
+
+gulp-bless
+https://github.com/2gis/gulp.bless
+License: BSD
+Copyright (c) 2014, 2GIS (http://2gis.ru); Copyright (c) 2014, Andrey Rublev All rights reserved.
+
+gulp-clean
+https://github.com/peter-vilja/gulp-clean
+License: MIT License
+© Peter Vilja
+
+gulp-concat
+https://github.com/wearefractal/gulp-concat
+License: MIT License
+Copyright (c) 2013 Fractal <contact@wearefractal.com>
+
+gulp-cssimport
+https://github.com/unlight/gulp-cssimport
+License: X.Net
+© Roman Vasilev
+
+gulp-filter
+https://github.com/sindresorhus/gulp-filter
+License: The MIT License
+Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+    
+gulp-flatten
+https://github.com/armed/gulp-flatten
+License: The MIT License
+Copyright (c) 2014 Artem Medeusheyev
+
+gulp-gh-pages
+https://github.com/shinnn/gulp-gh-pages
+License: The MIT License
+2014 Micheal Benedict (@micheal); 2015 Shinnosuke Watanabe (@shinnn)
+
+gulp-minify-css
+https://github.com/murphydanger/gulp-minify-css
+License: The MIT License
+Copyright (c) 2015 Jonathan Pollack, Cloudlabs Inc.
+
+gulp-preprocess
+https://github.com/jas/gulp-preprocess
+License: The MIT License
+Copyright (c) 2014 Jason Sandmeyer
+
+gulp-replace
+https://github.com/lazd/gulp-replace  
+License: The MIT License
+Copyright (c) 2013 Larry Davis
+
+gulp-sass
+https://github.com/dlmanning/gulp-sass/blob/master/LICENSE
+License: The MIT License
+Copyright © 2013 David Manning
+
+gulp-shell
+https://github.com/sun-zheng-an/gulp-shell
+License: The MIT License
+Copyright (c) 2014 Sun Zheng'an
+
+gulp-sourcemaps
+https://github.com/floridoo/gulp-sourcemaps
+License: ISC License
+Copyright (c) 2014, Florian Reiterer
+
+gulp-shell
+https://github.com/sun-zheng-an/gulp-shell
+License: The MIT License
+Copyright (c) 2014 Sun Zheng'an
+
+gulp-util
+https://github.com/gulpjs/gulp-util
+License: MIT License
+Copyright (c) 2014 Fractal <contact@wearefractal.com>
+
+inject-loader
+https://github.com/plasticine/inject-loader
+License: MIT License
+Copyright (c) 2014 Justin Morris
+
+jsx-loader
+https://github.com/petehunt/jsx-loader
+License: Apache 2
+Pete Hunt
+
+jsxhint-loader
+https://github.com/petehunt/jsx-loader
+License: BSD 2-Clause
+Pete Hunt
+
+Karma
+https://github.com/karma-runner/karma
+License: MIT License
+Copyright © 2011-2014 Google, Inc. 
+
+Karma Chrome Launcher
+https://github.com/karma-runner/karma-chrome-launcher
+License: MIT License
+Copyright © 2011-2013 Google, Inc. 
+
+Karma Firefox Launcher
+https://github.com/karma-runner/karma-firefox-launcher/blob/master/LICENSE
+License: MIT License
+Copyright © 2011-2013 Google, Inc. 
+
+Karma Mocha
+https://github.com/karma-runner/karma-mocha
+License: MIT License
+Copyright © 2011-2013 Google, Inc. 
+
+Karma Phantomjs Launcher
+https://github.com/karma-runner/karma-phantomjs-launcher
+License: MIT License
+Copyright © 2011-2013 Google, Inc. 
+
+Karma Sourcemap Loader
+https://github.com/demerzel3/karma-sourcemap-loader/blob/master/LICENSE
+License: MIT License
+Copyright © 2013 Sergey Todyshev
+
+Karma Webpack
+https://github.com/webpack/karma-webpack
+License: MIT License
+Copyright 2014-2015 Tobias Koppers
+
+Mocha
+https://github.com/mochajs/mocha
+License: MIT License
+Copyright (c) 2011-2015 TJ Holowaychuk <tj@vision-media.ca>
+
+Raw Loader
+https://github.com/webpack/raw-loader
+License: MIT License
+Copyright (c) webpack
+
+React Hot Loader
+https://github.com/gaearon/react-hot-loader
+License: MIT License
+Dan Abramov
+
+React Proxy Loader
+https://github.com/webpack/react-proxy-loader
+License: MIT License
+Copyright (c) webpack
+
+Script Loader
+https://github.com/webpack/script-loader
+License: MIT License
+Copyright (c) webpack
+
+Sinon
+https://github.com/cjohansen/Sinon.JS/blob/master/LICENSE
+BSD 3-Clause
+Copyright (c) 2010-2014, Christian Johansen, christian@cjohansen.no All rights reserved.
+
+Style Loader
+https://github.com/webpack/style-loader#readme
+License: MIT License
+Copyright (c) webpack
+
+Sweetalert
+https://github.com/t4t5/sweetalert
+License: MIT License
+Copyright (c) 2014 Tristan Edwards
+
+url-loader
+https://github.com/webpack/url-loader#readme
+License: MIT License
+Copyright (c) webpack
+
+Webpack
+https://github.com/webpack/webpack
+License: MIT License
+Copyright © 2012-2015 Tobias Koppers
+
+
+Webpack Dev Server
+https://github.com/webpack/webpack-dev-server
+License: MIT License
+Copyright © 2012-2014 Tobias Koppers
+
+
+ 
+
+
+Dependencies
+
+ozp-icons
+http://www.colebemis.com/feather
+License: MIT Licesnse
+Cole Bemis
+
+bootstrap-sass
+https://github.com/ozone-development/ozp-bootstrap-sass/blob/master/LICENSE
+Copyright (c) 2013 Twitter, Inc
+License: MIT Licesnse
+
+exports-loader
+https://github.com/webpack/exports-loader
+License: MIT License
+
+lodash-amd
+https://github.com/lodash/lodash-amd
+Copyright 2012-2013 The Dojo Foundation <http://dojofoundation.org/>
+Based on Underscore.js 1.5.2, copyright 2009-2013 Jeremy Ashkenas,
+DocumentCloud and Investigative Reporters & Editors http://underscorejs.org/
+License: MIT License
+
+moment
+https://github.com/moment/moment/tree/2.9.0
+Copyright (c) 2011-2014 Tim Wood, Iskren Chernev, Moment.js contributors
+License: MIT License
+
+object-assign
+https://github.com/sindresorhus/object-assign/blob/master/license
+Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+License: MIT License
+
+ozp-react-commons
+https://github.com/ozone-development/ozp-react-commons/blob/master/LICENSE
+License: Apache 2.0 License
+
+react
+https://github.com/facebook/react/blob/master/LICENSE
+Copyright (c) 2013-2015, Facebook, Inc.
+License: BSD License
+
+react-datepicker
+https://github.com/Hacker0x01/react-datepicker/blob/master/LICENSE
+Copyright (c) 2014 HackerOne Inc and individual contributers
+License: MIT License
+
+react-icon-rating,
+https://www.npmjs.com/package/react-icon-rating
+License: MIT License
+
+react-input-placeholder
+https://github.com/enigma-io/react-input-placeholder/blob/master/LICENSE
+Copyright (c) 2014 Enigma Technologies, Inc.
+License: MIT License
+
+react-radio-group
+https://github.com/jergason/react-radio-group
+Copyright (c) 2015 Cheng Lou
+License: MIT License
+
+react-router
+https://github.com/rackt/react-router/blob/master/LICENSE
+Copyright (c) 2015 Ryan Florence, Michael Jackson
+License: MIT License
+
+react-select-box
+https://github.com/prometheusresearch/react-selectbox/blob/master/LICENSE
+Copyright (c) 2014 Prometheus Research
+License: MIT License
+
+reflux
+https://github.com/spoike/refluxjs/blob/master/LICENSE.md
+Copyright (c) 2014, Mikael Brassman All rights reserved.
+License: BSD 3-Clause License
+
+select2: browserify-fix
+https://libraries.io/npm/select2/3.5.1-browserify-fix
+Copyright 2012 Igor Vaynberg
+License: MIT License
+
+spin.js
+https://github.com/fgnass/spin.js/blob/master/LICENSE.md
+Copyright (c) 2011-2015 Felix Gnass [fgnass at gmail dot com]
+License: MIT License
+
+tcomb-form
+https://github.com/gcanti/tcomb-form/blob/master/LICENSE
+Copyright (c) 2014 Giulio Canti
+License: MIT License
+
+tether
+https://www.versioneye.com/javascript/hubspot:tether/0.6.5
+Copyright (c) 2014 HubSpot, Inc.
+License: MIT License
+
+w2ui
+http://w2ui.com/web/
+Copyright © 2015.  .
+License: MIT License
