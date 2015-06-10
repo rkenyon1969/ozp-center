@@ -69,7 +69,7 @@ var HelpModal = React.createClass({
                         <h4 className="modal-title">OZONE Help Zone</h4>
                         </div>
                         <div className="modal-body">
-                          <div className="container">
+                          <div className="container" style={{'width': '100%'}}>
                             <div className="col-md-6">
                               <h4>Documents</h4>
                               <ul>
