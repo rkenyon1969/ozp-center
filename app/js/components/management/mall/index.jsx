@@ -52,7 +52,7 @@ var MallManagement = React.createClass({
                 <NavBar />
                 <Header />
                 <div className="MallManagement__body">
-                    <h1>Marketplace Settings</h1>
+                    <h1>Center Settings</h1>
                     <div className="MallManagement__TabContainer">
                         { this.renderTabs(this.props.tabs) }
                         <div className="tab-content">

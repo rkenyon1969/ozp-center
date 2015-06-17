@@ -80,7 +80,7 @@ var NavBar = React.createClass({
                                     <li><a href={'#/user-management/my-listings'}><i className="icon-layers-grayLightest"></i>Listing Management</a></li>
                                     {
                                         this.isAdmin() &&
-                                        <li><a href={'#/mall-management/categories'}><i className="icon-shopping-settings-grayLightest"></i>Marketplace Settings</a></li>
+                                        <li><a href={'#/mall-management/categories'}><i className="icon-shopping-settings-grayLightest"></i>Center Settings</a></li>
                                     }
                                     { Metrics }
                                     <li><a href={FEEDBACK_ADDRESS} className="caboose" target={feedbackTarget}><i className="icon-mail"></i>Submit Feedback</a></li>

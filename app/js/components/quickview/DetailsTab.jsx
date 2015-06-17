@@ -41,7 +41,7 @@ var DetailsTab = React.createClass({
                 </div>
                 <div className="col-md-4">
                     <section>
-                        <h5>Marketplace Properties</h5>
+                        <h5>Center Properties</h5>
                         <p>
                             <p><label>Type:</label><span> { type }</span></p>
                             <p><label>URL:</label><span> <a href={URL}>{ (URL.length > 40) ? URL.substring(0,40) + '...' : URL }</a></span></p>
@@ -94,7 +94,7 @@ var DetailsTab = React.createClass({
 
         return (
             <section>
-                <h5>OZONE Properties</h5>
+                <h5>AppsMall Properties</h5>
                 <p>
                     <p><label>Singleton:</label><span> { singleton }</span></p>
                     <p><label>Intents:</label>

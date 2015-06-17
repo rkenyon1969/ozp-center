@@ -21,7 +21,7 @@ var ListingManagement = React.createClass({
                 name: 'Recent Activity'
             }, {
                 to: 'all-listings',
-                name: 'All Marketplace Listings'
+                name: 'All Center Listings'
             }, {
                 to: 'my-listings',
                 name: 'My Listings'

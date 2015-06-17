@@ -159,7 +159,7 @@ var AdministrationTab = React.createClass({
 
                 }
                 break;
-            case 'Pending, Marketplace':
+            case 'Pending, Center':
                 if (isAdmin) {
                     controls = this.renderReviewSection();
                     statusClass = 'label-needs-action';
@@ -213,7 +213,7 @@ var AdministrationTab = React.createClass({
         var isAdmin = UserRole[this.props.currentUser.highestRole] >= UserRole.ADMIN,
             isStewardOfOrg = _.contains(this.props.currentUser.stewardedOrganizations, this.props.listing.agency),
             pendingOrg = (listingStatus[this.props.listing.approvalStatus] === 'Pending, Organization') ? true : false,
-            pendingAdmin = (listingStatus[this.props.listing.approvalStatus] === 'Pending, Marketplace') ? true : false;
+            pendingAdmin = (listingStatus[this.props.listing.approvalStatus] === 'Pending, Center') ? true : false;
 
         if (editing) {
             return (
