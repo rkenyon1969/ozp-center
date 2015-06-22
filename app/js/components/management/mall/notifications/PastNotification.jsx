@@ -19,7 +19,7 @@ var PastNotification = React.createClass({
         return (
             <div className="PastNotification">
                 <div className="PastNotification__Header">
-                    <h5 style={{margin: 0, fontWeight: 400}}>OZONE</h5>
+                    <h5 style={{margin: 0, fontWeight: 400}}>AppsMall</h5>
                     <em>Expired: <_Date date={expiresDate} /> at <Time date={expiresDate} /></em>
                 </div>
                 <p>{ message }</p>

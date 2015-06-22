@@ -66,10 +66,10 @@ var HelpModal = React.createClass({
                     <div className="modal-content">
                         <div className="modal-header">
                         <button type="button" className="close" data-dismiss="modal"><span aria-hidden="true"><i className="icon-cross-18"></i></span><span className="sr-only">Close</span></button>
-                        <h4 className="modal-title">OZONE Help Zone</h4>
+                        <h4 className="modal-title">AppsMall Help Zone</h4>
                         </div>
                         <div className="modal-body">
-                          <div className="container">
+                          <div className="container" style={{'width': '100%'}}>
                             <div className="col-md-6">
                               <h4>Documents</h4>
                               <ul>

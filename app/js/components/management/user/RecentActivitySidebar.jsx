@@ -139,7 +139,7 @@ var RecentActivitySidebar = React.createClass({
         if (currentUser.isAdmin()) {
             children.push(
                 <div className="filter-group">
-                    <h4>Marketplace Overview</h4>
+                    <h4>Center Overview</h4>
                     <AllListingsSidebarFilter handleChange={this.handleChange} />
                 </div>
             );
