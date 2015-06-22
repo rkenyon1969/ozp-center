@@ -1,3 +1,16 @@
+### 0.7.12 (2015-06-22)
+
+
+#### Bug Fixes
+
+* **CreateEdit:** form resets when coming from editing another listing #151 ([e59b12fe](https://github.com/ozone-development/ozp-center.git/commit/e59b12fececfd17a8e3fd555503a70b208ffcccf))
+
+
+#### Features
+
+* **Tooltips:** Added tooltips to the global navbar #283 ([d6b60e89](https://github.com/ozone-development/ozp-center.git/commit/d6b60e89999a13b14579bd9446a1196f8fb72cf7))
+
+
 ### 0.7.11 (2015-06-09)
 
 
