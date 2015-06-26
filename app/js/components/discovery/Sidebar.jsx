@@ -18,6 +18,12 @@ var Sidebar = React.createClass({
         };
     },
 
+    componentWillMount: function(){
+      if(this.props.initCategories){
+        this.setState({categories: this.props.initCategories});
+      }
+    },
+
     onHomeClick() {
         this.state.categories.length = 0;
         this.forceUpdate();
