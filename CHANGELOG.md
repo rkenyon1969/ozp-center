@@ -1,3 +1,14 @@
+### 0.7.14 (2015-06-30)
+
+
+#### Bug Fixes
+
+* **Webpack:** Updated webpack to 0.10.0 ([75100a39](https://github.com/ozone-development/ozp-center.git/commit/75100a397b3541adb9e65379e9a45759f6497f39))
+
+
+### 0.7.13 (2015-06-25)
+
+
 ### 0.7.12 (2015-06-22)
 
 

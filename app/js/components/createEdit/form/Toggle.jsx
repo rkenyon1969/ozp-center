@@ -10,7 +10,7 @@ var Toggle = React.createClass({
   },
   render: function () {
       return (
-        <div>
+        <div id={this.props.id}>
             <label className="switchLabel">{this.props.label}</label><br />
                 <p>{this.props.description}</p>
 

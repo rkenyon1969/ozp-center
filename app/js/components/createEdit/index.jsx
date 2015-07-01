@@ -93,7 +93,7 @@ var formLinks = {
         id: 'create-edit-intents'
     },
     singleton: {
-        singleton: 'Singleton',
+        title: 'Singleton',
         id: 'create-edit-singleton'
     },
     resources: {

@@ -1,6 +1,6 @@
 {
   "name": "center-ui",
-  "version": "0.7.12",
+  "version": "0.7.14",
   "repository": {
     "type": "git",
     "url": "https://github.com/ozone-development/ozp-center.git"
@@ -70,7 +70,7 @@
     "style-loader": "0.8.2",
     "sweetalert": "git://github.com/ozone-development/sweetalert",
     "url-loader": "0.5.5",
-    "webpack": "1.7.3",
+    "webpack": "1.10.0",
     "webpack-dev-server": "1.7.0"
   },
   "dependencies": {
@@ -80,7 +80,7 @@
     "lodash-amd": "2.4.1",
     "moment": "2.9.0",
     "object-assign": "1.0.0",
-    "ozp-react-commons": "git://github.com/ozone-development/ozp-react-commons#develop",
+    "ozp-react-commons": "git://github.com/ozone-development/ozp-react-commons#master",
     "react": "0.12.2",
     "react-datepicker": "0.5.1",
     "react-icon-rating": "0.2.0",
