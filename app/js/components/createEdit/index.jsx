@@ -493,8 +493,13 @@ var CreateEditPage = React.createClass({
     },
 
     onSave: function () {
+        var scrollToError = false;
+
+        if (this.state.listing.approvalStatus !== "IN_PROGRESS") {
+            scrollToError = true;
+        }
         CreateEditActions.save();
-        this.setState({ scrollToError: true, lastUpdate: Date.now() });
+        this.setState({ scrollToError: scrollToError, lastUpdate: Date.now() });
     },
 
     onClose: function () {
