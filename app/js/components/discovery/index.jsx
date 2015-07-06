@@ -63,7 +63,6 @@ var Discovery = React.createClass({
     onCategoryChange(categories) {
         this._searching = true;
         this.setState({ categories, currentOffset: 0 });
-        this.setState(this.state);
     },
 
     onTypeChange(type) {
