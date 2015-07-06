@@ -24,18 +24,16 @@ var DetailedQuery = React.createClass({
       }
     },
 
-    removeType: function(type){
-      this.props.me.setState({
-        categories: []
-      });
-    },
-
     getTypes: function(){
       if(this.props.data.type.length){
-        var prettyTypes = this.props.data.type.map(function(type){
+        var prettyTypes = this.props.data.type.map((type)=>{
           return (
             <span className="label label-primary">
-              <i className="icon-cross-14-white" onClick={this.removeType(type)}></i>
+              <i className="icon-cross-14-white" onClick={()=>{
+                var types = this.props.data.type;
+                types.splice(types.indexOf(type), 1);
+                this.props.onTypeChange(types);
+              }}></i>
               {type}
             </span>
           );
@@ -49,19 +47,16 @@ var DetailedQuery = React.createClass({
         return false;
       }
     },
-
-    removeOrg: function(org){
-      this.props.me.setState({
-        agency: []
-      });
-    },
-
     getOrgs: function(){
       if(this.props.data.agency.length){
         var prettyOrgs = this.props.data.agency.map((agent)=>{
           return (
             <span className="label label-primary">
-              <i className="icon-cross-14-white" onClick={this.removeOrg(agent)}></i>
+              <i className="icon-cross-14-white" onClick={()=>{
+                var orgs = this.props.data.agency;
+                orgs.splice(orgs.indexOf(agent), 1);
+                this.props.onOrganizationChange(orgs);
+              }}></i>
               {agent}
             </span>
           );
@@ -76,10 +71,6 @@ var DetailedQuery = React.createClass({
       }
     },
 
-    removeCategory: function(cat){
-
-    },
-
     getCategories: function(){
       if(this.props.data.categories.length){
         var prettyCats;
@@ -88,7 +79,11 @@ var DetailedQuery = React.createClass({
             return (
               <span>
                 <span className="label label-primary">
-                  <i className="icon-cross-14-white" onClick={this.removeCategory(cat)}></i>
+                  <i className="icon-cross-14-white" onClick={()=>{
+                    var cats = this.props.data.categories;
+                    cats.splice(cats.indexOf(cat), 1);
+                    this.props.onCategoryChange(cats);
+                  }}></i>
                   {cat}
                 </span>
                 {(i !== this.props.data.categories.length -1) &&
@@ -101,7 +96,11 @@ var DetailedQuery = React.createClass({
           prettyCats = this.props.data.categories.map((cat)=>{
             return (
               <span className="label label-primary">
-                <i className="icon-cross-14-white" onClick={this.removeCategory(cat)}></i>
+                <i className="icon-cross-14-white" onClick={()=>{
+                  var cats = this.props.data.categories;
+                  cats.splice(cats.indexOf(cat), 1);
+                  this.props.onCategoryChange(cats);
+                }}></i>
                 {cat}
               </span>
             );

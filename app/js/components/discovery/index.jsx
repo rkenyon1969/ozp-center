@@ -63,6 +63,7 @@ var Discovery = React.createClass({
     onCategoryChange(categories) {
         this._searching = true;
         this.setState({ categories, currentOffset: 0 });
+        this.setState(this.state);
     },
 
     onTypeChange(type) {
@@ -206,6 +207,11 @@ var Discovery = React.createClass({
     },
 
     onSearchCompleted() {
+        if(this.refs.shareResults){
+          $(this.refs.shareResults.getDOMNode()).popover({
+            html: true,
+          });
+        }
         this._searching = false;
         this.setState({
             lastSearchCompleted: Date.now()
@@ -287,12 +293,20 @@ var Discovery = React.createClass({
             '';
 
         var searchLink = `${CENTER_URL}/#/home/${encodeURIComponent(this.state.queryString)}/${(this.state.categories.length) ? encodeURIComponent(this.state.categories.toString()).replace(/%2C/g,'+') : ''}`;
-
         return (
             <section className="Discovery__SearchResults">
-                <h4>Search Results</h4>
-                <p><DetailedQuery me={this} data={this.state} /></p>
-                <p>Share the results: <a target="_blank" href={searchLink}>{searchLink}</a></p>
+                <h4>Search Results &nbsp;
+                  <span tabindex="0" className="shareLink" ref="shareResults" data-toggle="popover" title={"Share <span style='float: right' onclick=" + '$(this).parent().parent().popover("toggle")' + " class='icon-cross-14-grayDark'></span>"} data-content={"Copy the URL and paste it anywhere to share. <br /><input class='shareResults' onclick='" + '$(this).focus();$(this).select();' + "' style='width: 100%' type='text' value=" + searchLink + "></input>"}>Share
+                    &nbsp;<span className="icon-share-10-blueDark"></span>
+                  </span>
+                </h4>
+                <p><DetailedQuery
+                  onCategoryChange={this.onCategoryChange}
+                  onTypeChange={this.onTypeChange}
+                  onOrganizationChange={this.onOrganizationChange}
+                  me={this}
+                  data={this.state}
+                  /></p>
                 <ul className="list-unstyled listings-search-results">
                     { results }
                 </ul>

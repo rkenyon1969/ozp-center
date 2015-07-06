@@ -116,6 +116,12 @@
     }
 }
 
+.shareLink{
+  color: $blue-darker;
+  font-size:13pt;
+  cursor: pointer;
+}
+
 .Discovery__NewArrivals, .Discovery__MostPopular {
     margin-top: 40px;
 }
