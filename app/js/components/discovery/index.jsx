@@ -2,8 +2,9 @@
 
 var React = require('react');
 var Reflux = require('reflux');
+var Router = require('react-router');
 var _ = require('../../utils/_');
-
+var {CENTER_URL} = require('ozp-react-commons/OzoneConfig');
 // actions
 var ListingActions = require('../../actions/ListingActions');
 
@@ -16,6 +17,7 @@ var FeaturedListings = require('./FeaturedListings.jsx');
 var Carousel = require('../carousel/index.jsx');
 var Types = require('./Types.jsx');
 var Organizations = require('./Organizations.jsx');
+var DetailedQuery = require('./DetailedQuery.jsx');
 
 // store dependencies
 var DiscoveryPageStore = require('../../stores/DiscoveryPageStore');
@@ -31,10 +33,11 @@ var areFiltersApplied = (state) => {
 
 var Discovery = React.createClass({
 
-    mixins: [ Reflux.ListenerMixin ],
+    mixins: [ Router.State, Reflux.ListenerMixin ],
 
     getInitialState() {
         return {
+            initCategories: [],
             featured: DiscoveryPageStore.getFeatured(),
             newArrivals: DiscoveryPageStore.getNewArrivals(),
             mostPopular: DiscoveryPageStore.getMostPopular(),
@@ -87,7 +90,7 @@ var Discovery = React.createClass({
     componentWillMount() {
         this.listenTo(DiscoveryPageStore, this.onStoreChange);
 
-        // Notice where a search is finished
+        // Notice when a search is finished
         this.listenTo(ListingActions.searchCompleted, this.onSearchCompleted);
 
         // Reload when a new review is added
@@ -95,6 +98,17 @@ var Discovery = React.createClass({
 
         // fetch data when instantiated
         ListingActions.fetchStorefrontListings();
+
+        // If some categories, types, or orgs are provided, select them.
+        if(this.context.getCurrentParams().categories){
+          this.setState({initCategories: decodeURIComponent(this.context.getCurrentParams().categories).split('+')});
+        }
+        if(this.context.getCurrentParams().type){
+          this.setState({type: decodeURIComponent(this.context.getCurrentParams().type).split('+') });
+        }
+        if(this.context.getCurrentParams().org){
+          this.setState({agency: decodeURIComponent(this.context.getCurrentParams().org).split('+') });
+        }
     },
 
     componentWillUnmount: function(){
@@ -128,6 +142,7 @@ var Discovery = React.createClass({
                     <Sidebar
                         ref="sidebar"
                         isSearching= { isSearching }
+                        initCategories = { this.state.initCategories ? this.state.initCategories : false }
                         categories={ this.props.system.categories }
                         onGoHome= { this.reset }
                         onChange= { this.onCategoryChange } />
@@ -150,6 +165,17 @@ var Discovery = React.createClass({
 
     componentDidMount(){
         $(this.refs.form.getDOMNode()).submit((e)=>e.preventDefault());
+
+        // If a search string is provided to us, load it into the search feild
+        if(this.context.getCurrentParams().searchString){
+          this._searching = true;
+          this.setState({queryString: this.context.getCurrentParams().searchString});
+          this.onSearchCompleted;
+        }
+        // If some categories are provided, select them.
+        if(this.context.getCurrentParams().categories){
+          this.onCategoryChange(this.state.initCategories);
+        }
     },
 
 
@@ -186,6 +212,11 @@ var Discovery = React.createClass({
     },
 
     onSearchCompleted() {
+        if(this.refs.shareResults){
+          $(this.refs.shareResults.getDOMNode()).popover({
+            html: true,
+          });
+        }
         this._searching = false;
         this.setState({
             lastSearchCompleted: Date.now()
@@ -255,6 +286,7 @@ var Discovery = React.createClass({
 
     renderSearchResults() {
         var results = <p>Searching...</p>;
+
         if (!this._searching) {
             results = this.state.searchResults.length > 0 ?
                 ListingTile.fromArray(this.state.searchResults) :
@@ -265,9 +297,21 @@ var Discovery = React.createClass({
             <button onClick={ this.handleMoreSearch } className="btn btn-default loadMoreBtn">Load More</button> :
             '';
 
+        var searchLink = `${CENTER_URL}/#/home/${encodeURIComponent(this.state.queryString)}/${(this.state.categories.length) ? encodeURIComponent(this.state.categories.toString()).replace(/%2C/g,'+') : ''}/${(this.state.type.length) ? encodeURIComponent(this.state.type.toString()).replace(/%2C/g,'+') : ''}/${(this.state.agency.length) ? encodeURIComponent(this.state.agency.toString()).replace(/%2C/g,'+') : ''}`;
         return (
             <section className="Discovery__SearchResults">
-                <h4>Search Results</h4>
+                <h4>Search Results &nbsp;
+                  <span tabindex="0" className="shareLink" ref="shareResults" data-toggle="popover" title={"Share <span style='float: right' onclick=" + '$(this).parent().parent().popover("toggle")' + " class='icon-cross-14-grayDark'></span>"} data-content={"Copy the URL and paste it anywhere to share. <br /><input class='shareResults' onclick='" + '$(this).focus();$(this).select();' + "' style='width: 100%' type='text' value=" + searchLink + "></input>"}>Share
+                    &nbsp;<span className="icon-share-10-blueDark"></span>
+                  </span>
+                </h4>
+                <p><DetailedQuery
+                  onCategoryChange={this.onCategoryChange}
+                  onTypeChange={this.onTypeChange}
+                  onOrganizationChange={this.onOrganizationChange}
+                  reset={this.reset}
+                  data={this.state}
+                  /></p>
                 <ul className="list-unstyled listings-search-results">
                     { results }
                 </ul>
