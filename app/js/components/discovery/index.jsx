@@ -195,7 +195,9 @@ var Discovery = React.createClass({
         this._searching = true;
         this.setState({
             queryString: '',
-            currentOffset: 0
+            currentOffset: 0,
+            type: [],
+            agency: []
         });
     },
 
