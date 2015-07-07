@@ -90,7 +90,7 @@ var Discovery = React.createClass({
     componentWillMount() {
         this.listenTo(DiscoveryPageStore, this.onStoreChange);
 
-        // Notice where a search is finished
+        // Notice when a search is finished
         this.listenTo(ListingActions.searchCompleted, this.onSearchCompleted);
 
         // Reload when a new review is added
@@ -99,9 +99,15 @@ var Discovery = React.createClass({
         // fetch data when instantiated
         ListingActions.fetchStorefrontListings();
 
-        // If some categories are provided, select them.
+        // If some categories, types, or orgs are provided, select them.
         if(this.context.getCurrentParams().categories){
           this.setState({initCategories: decodeURIComponent(this.context.getCurrentParams().categories).split('+')});
+        }
+        if(this.context.getCurrentParams().type){
+          this.setState({type: decodeURIComponent(this.context.getCurrentParams().type).split('+') });
+        }
+        if(this.context.getCurrentParams().org){
+          this.setState({agency: decodeURIComponent(this.context.getCurrentParams().org).split('+') });
         }
     },
 
@@ -291,7 +297,7 @@ var Discovery = React.createClass({
             <button onClick={ this.handleMoreSearch } className="btn btn-default loadMoreBtn">Load More</button> :
             '';
 
-        var searchLink = `${CENTER_URL}/#/home/${encodeURIComponent(this.state.queryString)}/${(this.state.categories.length) ? encodeURIComponent(this.state.categories.toString()).replace(/%2C/g,'+') : ''}`;
+        var searchLink = `${CENTER_URL}/#/home/${encodeURIComponent(this.state.queryString)}/${(this.state.categories.length) ? encodeURIComponent(this.state.categories.toString()).replace(/%2C/g,'+') : ''}/${(this.state.type.length) ? encodeURIComponent(this.state.type.toString()).replace(/%2C/g,'+') : ''}/${(this.state.agency.length) ? encodeURIComponent(this.state.agency.toString()).replace(/%2C/g,'+') : ''}`;
         return (
             <section className="Discovery__SearchResults">
                 <h4>Search Results &nbsp;
@@ -303,7 +309,7 @@ var Discovery = React.createClass({
                   onCategoryChange={this.onCategoryChange}
                   onTypeChange={this.onTypeChange}
                   onOrganizationChange={this.onOrganizationChange}
-                  me={this}
+                  reset={this.reset}
                   data={this.state}
                   /></p>
                 <ul className="list-unstyled listings-search-results">

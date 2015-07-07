@@ -4,8 +4,14 @@ var React = require('react');
 
 var DetailedQuery = React.createClass({
 
+    getInitialState: function(){
+      return {
+        categories: []
+      };
+    },
+
     removeQueryString: function(){
-        this.props.me.reset();
+        this.props.reset();
     },
 
     getQueryString: function(){
@@ -14,8 +20,7 @@ var DetailedQuery = React.createClass({
           <span>
             for listings matching &nbsp;
             { this.props.data.queryString &&
-               <span className="label label-primary">
-                 <i className="icon-cross-14-white" onClick={this.removeQueryString}></i>
+               <span className="label label-default">
                  {this.props.data.queryString}
                </span>
             }
@@ -27,13 +32,14 @@ var DetailedQuery = React.createClass({
     getTypes: function(){
       if(this.props.data.type.length){
         var prettyTypes = this.props.data.type.map((type)=>{
+          /*
+          <i className="icon-cross-14-white" onClick={()=>{
+            var types = this.props.data.type;
+            types.splice(types.indexOf(type), 1);
+            this.props.onTypeChange(types);
+          }}></i>*/
           return (
-            <span className="label label-primary">
-              <i className="icon-cross-14-white" onClick={()=>{
-                var types = this.props.data.type;
-                types.splice(types.indexOf(type), 1);
-                this.props.onTypeChange(types);
-              }}></i>
+            <span className="label label-default">
               {type}
             </span>
           );
@@ -50,13 +56,14 @@ var DetailedQuery = React.createClass({
     getOrgs: function(){
       if(this.props.data.agency.length){
         var prettyOrgs = this.props.data.agency.map((agent)=>{
+          /*
+          <i className="icon-cross-14-white" onClick={()=>{
+            var orgs = this.props.data.agency;
+            orgs.splice(orgs.indexOf(agent), 1);
+            this.props.onOrganizationChange(orgs);
+          }}></i>*/
           return (
-            <span className="label label-primary">
-              <i className="icon-cross-14-white" onClick={()=>{
-                var orgs = this.props.data.agency;
-                orgs.splice(orgs.indexOf(agent), 1);
-                this.props.onOrganizationChange(orgs);
-              }}></i>
+            <span className="label label-default">
               {agent}
             </span>
           );
@@ -76,14 +83,16 @@ var DetailedQuery = React.createClass({
         var prettyCats;
         if(this.props.data.categories.length > 1){
           prettyCats = this.props.data.categories.map((cat, i)=>{
+            /*
+            <i className="icon-cross-14-white" onClick={()=>{
+              var cats = this.props.data.categories;
+              cats.splice(cats.indexOf(cat), 1);
+
+              this.props.onCategoryChange(cats);
+            }}></i>*/
             return (
               <span>
-                <span className="label label-primary">
-                  <i className="icon-cross-14-white" onClick={()=>{
-                    var cats = this.props.data.categories;
-                    cats.splice(cats.indexOf(cat), 1);
-                    this.props.onCategoryChange(cats);
-                  }}></i>
+                <span  className="label label-default">
                   {cat}
                 </span>
                 {(i !== this.props.data.categories.length -1) &&
@@ -94,13 +103,14 @@ var DetailedQuery = React.createClass({
           });
         }else{
           prettyCats = this.props.data.categories.map((cat)=>{
+            /*
+            <i className="icon-cross-14-white" onClick={()=>{
+              var cats = this.props.data.categories;
+              cats.splice(cats.indexOf(cat), 1);
+              this.props.onCategoryChange(cats);
+            }}></i>*/
             return (
-              <span className="label label-primary">
-                <i className="icon-cross-14-white" onClick={()=>{
-                  var cats = this.props.data.categories;
-                  cats.splice(cats.indexOf(cat), 1);
-                  this.props.onCategoryChange(cats);
-                }}></i>
+              <span  className="label label-default">
                 {cat}
               </span>
             );

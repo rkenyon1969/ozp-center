@@ -46,6 +46,7 @@ var Sidebar = React.createClass({
             categories: categories
         };
 
+
         this.setState(state);
         this.props.onChange(categories);
     },
