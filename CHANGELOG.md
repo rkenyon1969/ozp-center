@@ -1,3 +1,11 @@
+### 0.7.15 (2015-07-07)
+
+
+#### Bug Fixes
+
+* **createEdit:** Disable error modal on saving drafts #301 ([1423235a](https://github.com/ozone-development/ozp-center.git/commit/1423235a19ea95bc5520645650a02fe1948cdbb0))
+
+
 ### 0.7.14 (2015-06-30)
 
 
