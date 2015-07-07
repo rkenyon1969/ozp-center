@@ -93,7 +93,17 @@ var InputMixin = {
         event.preventDefault();
         var { value } = event.target;
         this.setState({ value: value });
-        this.props.setter(value);
+
+        // Unknown: why this prevents undeleteable characters in optional fields
+        if (this.props.optional) {
+            // Call CurrentListingStore.js's onUpdateListing with no value
+            // Will still do the validation
+            this.props.setter(null);
+        } else {
+            // Call CurrentListingStore.js's onUpdateListing with a value
+            // Update the value in the store and do the validation
+            this.props.setter(value);
+        }
     },
 
     getInputProps: function () {
