@@ -16,12 +16,19 @@ var DetailedQuery = React.createClass({
 
     getQueryString: function(){
       if(this.props.data.queryString){
+        var prettyQuery = this.props.data.queryString.split(' ').map((string)=>{
+          return (
+            <span className="label label-default">
+              {string}
+            </span>
+          );
+        });
         return (
           <span>
             for listings matching &nbsp;
             { this.props.data.queryString &&
-               <span className="label label-default">
-                 {this.props.data.queryString}
+               <span>
+                 {prettyQuery}
                </span>
             }
           </span>
