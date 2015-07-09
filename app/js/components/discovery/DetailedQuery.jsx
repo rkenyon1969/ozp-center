@@ -18,7 +18,7 @@ var DetailedQuery = React.createClass({
       if(this.props.data.queryString){
         return (
           <span>
-            for listings matching &nbsp;
+            for listings matching &#32;
             { this.props.data.queryString &&
                <span className="label label-default">
                  {this.props.data.queryString}
@@ -46,7 +46,7 @@ var DetailedQuery = React.createClass({
         });
         return (
           <span>
-            &nbsp;with the {(this.props.data.type.length > 1) ? 'types' : 'type'} {prettyTypes}
+            &#32;with the {(this.props.data.type.length > 1) ? 'types' : 'type'} {prettyTypes}
           </span>
         );
       }else{
@@ -70,7 +70,7 @@ var DetailedQuery = React.createClass({
         });
         return (
           <span>
-            &nbsp;in the {(this.props.data.agency.length > 1) ? 'orginizations' : 'orginization'} {prettyOrgs}
+            &#32;in the {(this.props.data.agency.length > 1) ? 'orginizations' : 'orginization'} {prettyOrgs}
           </span>
         );
       }else{
@@ -96,7 +96,7 @@ var DetailedQuery = React.createClass({
                   {cat}
                 </span>
                 {(i !== this.props.data.categories.length -1) &&
-                  <span>&nbsp;and&nbsp;</span>
+                  <span>&#32;and&#32;</span>
                 }
               </span>
             );
@@ -118,7 +118,7 @@ var DetailedQuery = React.createClass({
         }
         return (
           <span>
-            &nbsp;with the {(this.props.data.categories.length > 1) ? 'categories' : 'category'} {prettyCats}
+            &#32;with the {(this.props.data.categories.length > 1) ? 'categories' : 'category'} {prettyCats}
           </span>
         );
       }else{
