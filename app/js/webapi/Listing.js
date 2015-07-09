@@ -87,12 +87,11 @@ var ListingApi = {
                         OzpAnalytics.trackCategorization('Categorization', options.categories[index], response.total);
                     }
                 }
-                else {
-                    delaySearch(function(){
-                        var queryStringNoStar = options.queryString.replace(/[*]$/,"");
-                        OzpAnalytics.trackSiteSearch('Application Search', queryStringNoStar, response.total);
-                    }, 800);
-                }
+
+                delaySearch(function(){
+                    var queryStringNoStar = options.queryString.replace(/[*]$/,"");
+                    OzpAnalytics.trackSiteSearch('Application Search', queryStringNoStar, response.total);
+                }, 800);
                 return response;
             })
             .then(parseListToPaginatedResponse);
