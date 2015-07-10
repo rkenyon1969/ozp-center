@@ -25,6 +25,7 @@ var InputMixin = {
     },
 
     shouldComponentUpdate: function (nextProps, nextState) {
+
         if (nextProps.id !== this.props.id) {
             return true;
         }
