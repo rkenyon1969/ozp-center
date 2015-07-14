@@ -1,3 +1,17 @@
+### 0.7.16 (2015-07-14)
+
+
+#### Bug Fixes
+
+* **Discovery:** clicking reset does not clear dropdowns #308 ([1bc14ebe](https://github.com/ozone-development/ozp-center.git/commit/1bc14ebe53dc316a0d14561ee328237737aefdba))
+* **createEdit:** Prevent undeleteable characters in optional fields #256 #284 ([db76913a](https://github.com/ozone-development/ozp-center.git/commit/db76913ac674ae602f494a85704fc49d2c729fcc))
+
+
+#### Features
+
+* **Discovery:** Added detailed query to search #280 #161 ([b3565f78](https://github.com/ozone-development/ozp-center.git/commit/b3565f78598bc5ede8eac411f9d6e25c6774d863))
+
+
 ### 0.7.15 (2015-07-07)
 
 
