@@ -2,7 +2,6 @@
 
 var React = require('react');
 var Reflux = require('reflux');
-var _ = require('../../utils/_');
 var LoadMask = require('../LoadMask.jsx');
 var { pick, assign } = require('../../utils/_');
 var { approvalStatus } = require('ozp-react-commons/constants');
@@ -281,7 +280,6 @@ var ListingForm = React.createClass({
 
     getInitialState: () => ({ currentNavTarget: null }),
 
-
     render: function () {
         var listing = this.props.value;
         var system = this.props.system;
@@ -319,7 +317,7 @@ var ListingForm = React.createClass({
                 <TextAreaInput id={f.requirements.id} { ...p('requirements') } rows="5"/>
                 <TextAreaInput id={f.whatsNew.id} { ...p('whatIsNew') } rows="3" optional/>
                 <Select2Input id={f.intents.id} { ...p('intents') }  multiple options={
-                    this.props.system.intents.map(intent => {
+                    system.intents.map(intent => {
                         var val = intent.type + '/' + intent.action;
                         return { id: val, text: val };
                     })
@@ -368,11 +366,6 @@ var ListingForm = React.createClass({
 
     componentDidMount: function() {
         this.setState({ currentNavTarget: this.getQuery().el });
-    },
-
-    shouldComponentUpdate: function(newProps, newState) {
-        return (!_.isEqual(newProps, this.props) ||
-                newState.currentNavTarget !== this.state.currentNavTarget);
     },
 
     componentDidUpdate: function(prevProps, prevState) {
@@ -730,7 +723,7 @@ var CreateEditPage = React.createClass({
                 {header}
                 <section className="create-edit-body">
                     <Sidebar groups={links} activeId={this.state.activeId || this.getQuery().el}/>
-                    <ListingForm key={this.state.timestamp} ref="form" { ...formProps } />
+                    <ListingForm key={this.state.timestamp} ref="form" { ...formProps }  />
                     <Reminders />
                 </section>
                 { savingText && <LoadMask message={savingText} /> }
