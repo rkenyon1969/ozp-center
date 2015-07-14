@@ -1,7 +1,6 @@
 'use strict';
 
 var $ = require('jquery');
-var API_WAIT = 1000;
 
 require('select2');
 
@@ -22,20 +21,12 @@ var Select2Mixin = {
         this._$input = $input;
     },
 
-    componentDidMount: function () {
-        this._setOptions();
-        // Allow time for the api to return with listing type data. Horrible.
-        setTimeout(() => {
-            this._$input.select2(this.getSelect2Options()).data('select2');
-            this._$input.select2('val', this.props.value);
-        }, API_WAIT);
-    },
-
     componentDidUpdate: function () {
         this._$input.select2('val', this.props.value);
     },
 
     componentWillUnmount: function () {
+        clearInterval(apiTimer);
         this._$input.off('change');
         this._$input.off('select2-blur');
         this._$select2.destroy();

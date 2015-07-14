@@ -13,6 +13,10 @@ var Select2TagInput = React.createClass({
         );
     },
 
+    componentDidMount: function () {
+        this._setOptions();
+    },
+
     getSelect2Options: function () {
         return {locked: this.props.locked, tags: [], tokenSeparators: [',', ';'], selectOnBlur: 'true'};
     }
