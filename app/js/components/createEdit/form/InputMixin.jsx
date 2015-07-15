@@ -14,12 +14,20 @@ var InputMixin = {
     render: function () {
         var labelClasses = classSet({ 'input-optional': this.props.optional });
 
+        // if we have a charlimit and value is not undefined display the characters remaining.
+        var CharLimit = (this.props.charLimit && this.state.value) ?
+            `${this.props.charLimit - this.state.value.length}/${this.props.charLimit} characters remaining`:
+            // if we do have a character limit, but value is undefined set it to the char limit max remaining
+            `${this.props.charLimit}/${this.props.charLimit} characters remaining`;
         return (
             <div id={this.props.id} className={ this.getClasses() }>
                 <label htmlFor={ this.props.id } className={labelClasses}>{ this.props.label }</label>
                 <p className="small">{ this.props.description }</p>
                 { this.props.help && <p className="help-block small">{ this.props.help }</p>}
                 { cloneWithProps(this.renderInput(), this.getInputProps()) }
+                { this.props.charLimit &&
+                    <span>{CharLimit}</span>
+                }
             </div>
         );
     },
