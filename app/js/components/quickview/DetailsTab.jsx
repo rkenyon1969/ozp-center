@@ -30,7 +30,7 @@ var DetailsTab = React.createClass({
                         <h5>What&lsquo;s New</h5>
                         {
                             whatsNew ?
-                                <p>{ whatsNew }</p> :
+                                <p className="forceWrap">{ whatsNew }</p> :
                                 <EmptyFieldValue />
                         }
                     </section>
@@ -44,7 +44,9 @@ var DetailsTab = React.createClass({
                         <h5>Center Properties</h5>
                         <p>
                             <p><label>Type:</label><span> { type }</span></p>
-                            <p><label>URL:</label><span> <a href={URL}>{ (URL.length > 40) ? URL.substring(0,40) + '...' : URL }</a></span></p>
+
+                            <p><label>URL:</label><span> <a className="forceWrap" href={URL}>{ URL }</a></span></p>
+
                             <p><label>Categories:</label><span> { categories ? categories : <EmptyFieldValue inline /> }</span></p>
                             <p><label>Tags:</label><span> { tags ? tags : <EmptyFieldValue inline /> }</span></p>
                             <p><label>Last Updated:</label><span> { updatedDate }</span></p>
