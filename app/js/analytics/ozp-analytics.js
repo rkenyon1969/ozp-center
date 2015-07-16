@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = {
-    trackEvent: function (label, data) {
-        window._paq.push(['trackEvent', label, data]);
+    trackEvent: function (label, data, agency) {
+        window._paq.push(['trackEvent', label, data, agency]);
     },
 
     trackCategorization: function (label, category, total) {
