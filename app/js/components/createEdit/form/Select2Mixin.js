@@ -2,6 +2,7 @@
 
 var $ = require('jquery');
 var API_WAIT = 1000;
+var apiTimer;
 
 require('select2');
 
@@ -24,10 +25,16 @@ var Select2Mixin = {
 
     componentDidMount: function () {
         this._setOptions();
-        // Allow time for the api to return with listing type data. Horrible.
-        setTimeout(() => {
-            this._$input.select2(this.getSelect2Options()).data('select2');
-            this._$input.select2('val', this.props.value);
+
+        // HACK: allow time for the api to return with listing type data.
+        var apiTimer = setInterval(() => {
+            var data = this.getSelect2Options().data;
+            if ($(this.refs.input).length !== 0) {
+                this._setOptions();
+            }
+            if (data && data.length) {
+                clearInterval(apiTimer);
+            }
         }, API_WAIT);
     },
 
@@ -36,6 +43,7 @@ var Select2Mixin = {
     },
 
     componentWillUnmount: function () {
+        clearInterval(apiTimer);
         this._$input.off('change');
         this._$input.off('select2-blur');
         this._$select2.destroy();
