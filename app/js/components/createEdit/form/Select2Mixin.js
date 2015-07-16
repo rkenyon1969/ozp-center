@@ -26,7 +26,6 @@ var Select2Mixin = {
     },
 
     componentWillUnmount: function () {
-        clearInterval(apiTimer);
         this._$input.off('change');
         this._$input.off('select2-blur');
         this._$select2.destroy();

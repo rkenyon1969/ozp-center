@@ -5,7 +5,6 @@ var _ = require('../../../utils/_');
 var InputMixin = require('./InputMixin.jsx');
 var Select2Mixin = require('./Select2Mixin');
 var API_WAIT = 1000;
-var apiTimer;
 
 var Select2Input = React.createClass({
     mixins: [InputMixin, Select2Mixin],
