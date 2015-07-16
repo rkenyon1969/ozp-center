@@ -16,8 +16,11 @@
 		border-top-color: $blue !important;
 	}
 }
-
-
+.navbar-nav > li.disabled{
+	& a:hover, & a:focus{
+		border-top-color: transparent !important;
+	}
+}
 
 .activeIcon {
 	color: $blue;
@@ -28,6 +31,7 @@
 		@extend .icon-menu-blue;
 	}
 }
+
 
 .nav.navbar-nav {
 
@@ -66,6 +70,10 @@
 	}
 
 
+}
+
+.navbar-inverse .navbar-nav > .disabled > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus{
+	background: transparent !important;
 }
 
 @media all and (min-width: 1240px) and (max-width: 10000px) {
