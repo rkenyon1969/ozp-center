@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var _ = require('../../../utils/_');
 var { cloneWithProps, classSet } = React.addons;
 
 var InputMixin = {
@@ -72,6 +73,11 @@ var InputMixin = {
             return true;
         }
 
+        // Check if anything else in props has changed
+        if (!_.isEqual(nextProps, this.props)) {
+            return true;
+        }
+
         return false;
     },
 
@@ -102,17 +108,7 @@ var InputMixin = {
         event.preventDefault();
         var { value } = event.target;
         this.setState({ value: value });
-
-        // Unknown: why this prevents undeleteable characters in optional fields
-        if (this.props.optional) {
-            // Call CurrentListingStore.js's onUpdateListing with no value
-            // Will still do the validation
-            this.props.setter(null);
-        } else {
-            // Call CurrentListingStore.js's onUpdateListing with a value
-            // Update the value in the store and do the validation
-            this.props.setter(value);
-        }
+        this.props.setter(value);
     },
 
     getInputProps: function () {
