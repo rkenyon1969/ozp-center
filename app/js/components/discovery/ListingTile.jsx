@@ -5,8 +5,8 @@ var { Navigation, CurrentPath } = require('react-router');
 var ActiveState = require('../../mixins/ActiveStateMixin');
 var IconRating = require('../shared/IconRating.jsx');
 var CenterLaunchLink = require('../CenterLaunchLink.jsx');
-
 var BookmarkButton = require('../BookmarkButton.jsx');
+
 
 var ListingTile = React.createClass({
 
@@ -31,7 +31,7 @@ var ListingTile = React.createClass({
 
         var name = listing.title;
         var description = listing.descriptionShort && listing.descriptionShort.substr(0, 140);
-        var imageLargeUrl = listing.imageLargeUrl;
+        var imageLargeUrl = listing.banner_icon.url; // jshint ignore:line
         var avgRate = listing.avgRate;
         var agencyShort = listing.agencyShort;
         var href = this.makeHref(this.getActiveRoutePath(), null, {

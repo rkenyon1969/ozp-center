@@ -45,9 +45,16 @@ module.exports = function (config) {
         // - PhantomJS
         // - IE (only Windows)
         browsers: ['PhantomJS'],
-        reporters: ['progress'],
+        reporters: ['mocha'],
         captureTimeout: 60000,
         browserNoActivityTimeout: 60000,
-        singleRun: true
+        singleRun: true,
+        plugins: [
+            'karma-jasmine',
+            'karma-mocha-reporter',
+            'karma-phantomjs-launcher',
+            'karma-webpack',
+            'karma-mocha'
+        ]
     });
 };
