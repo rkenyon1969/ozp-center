@@ -4,12 +4,31 @@ var React = require('react');
 var _ = require('../../../utils/_');
 var InputMixin = require('./InputMixin.jsx');
 var Select2Mixin = require('./Select2Mixin');
+var API_WAIT = 1000;
 
 var Select2Input = React.createClass({
     mixins: [InputMixin, Select2Mixin],
 
     renderInput: function () {
         return <input type="text" />;
+    },
+
+    componentDidMount: function () {
+        var counter = 0;
+        this._setOptions();
+
+        // HACK: allow time for the api to return with listing type data.
+        var apiTimer = setInterval(() => {
+            var data = this.getSelect2Options().data;
+
+            counter++;
+            if ($(this.refs.input).length !== 0) {
+                this._setOptions();
+            }
+            if (data && data.length) {
+                clearInterval(apiTimer);
+            }
+        }, API_WAIT);
     },
 
     getSelect2Options: function () {
