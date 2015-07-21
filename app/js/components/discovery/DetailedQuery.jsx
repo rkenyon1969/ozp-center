@@ -77,7 +77,7 @@ var DetailedQuery = React.createClass({
         });
         return (
           <span>
-            &#32;in the {(this.props.data.agency.length > 1) ? 'orginizations' : 'orginization'} {prettyOrgs}
+            &#32;in the {(this.props.data.agency.length > 1) ? 'organizations' : 'organization'} {prettyOrgs}
           </span>
         );
       }else{
