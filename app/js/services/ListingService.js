@@ -154,7 +154,7 @@ ListingActions.deleteReview.listen(function (listing, review) {
 });
 
 ListingActions.launch.listen(function (listing) {
-    OzpAnalytics.trackEvent('Applications', listing.title);
+    OzpAnalytics.trackEvent('Applications', listing.title, listing.agencyShort);
     window.open(listing.launchUrl);
 });
 
