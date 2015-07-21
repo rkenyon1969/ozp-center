@@ -99,16 +99,10 @@ var Discovery = React.createClass({
         // fetch data when instantiated
         ListingActions.fetchStorefrontListings();
 
-        // If some categories, types, or orgs are provided, select them.
         if(this.context.getCurrentParams().categories){
           this.setState({initCategories: decodeURIComponent(this.context.getCurrentParams().categories).split('+')});
         }
-        if(this.context.getCurrentParams().type){
-          this.setState({type: decodeURIComponent(this.context.getCurrentParams().type).split('+') });
-        }
-        if(this.context.getCurrentParams().org){
-          this.setState({agency: decodeURIComponent(this.context.getCurrentParams().org).split('+') });
-        }
+
     },
 
     componentWillUnmount: function(){
@@ -169,12 +163,23 @@ var Discovery = React.createClass({
         // If a search string is provided to us, load it into the search feild
         if(this.context.getCurrentParams().searchString){
           this._searching = true;
-          this.setState({queryString: this.context.getCurrentParams().searchString});
-          this.onSearchCompleted;
+          this.setState({
+            queryString: this.context.getCurrentParams().searchString,
+            currentOffset: 0
+          });
         }
-        // If some categories are provided, select them.
+
+        // If some categories, types, or orgs are provided, select them.
         if(this.context.getCurrentParams().categories){
           this.onCategoryChange(this.state.initCategories);
+        }
+
+        if(this.context.getCurrentParams().type){
+          this.onTypeChange(decodeURIComponent(this.context.getCurrentParams().type).split('+'));
+        }
+
+        if(this.context.getCurrentParams().org){
+          this.onOrganizationChange(decodeURIComponent(this.context.getCurrentParams().org).split('+'));
         }
     },
 
