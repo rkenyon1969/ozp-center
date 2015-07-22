@@ -1,3 +1,23 @@
+## 1.0.0 (2015-07-22)
+
+
+#### Bug Fixes
+
+* **Detail View:** Word wrap forced for what's new & url #207 ([25942ec5](https://github.com/ozone-development/ozp-center.git/commit/25942ec5218056eda62f8f2cf29b27c78804ce08))
+* **Toolbar:** disable notification button style when no notifications are present #282 ([60e7b8e5](https://github.com/ozone-development/ozp-center.git/commit/60e7b8e5adc4cdbfed01f9a892f29dcd332e8b88))
+* **createEdit:**
+  * Prevent routing issues caused by original fix for #266 ([b3a3e666](https://github.com/ozone-development/ozp-center.git/commit/b3a3e6664da91cf47d297ef55a5154cd74aa913f))
+  * Maintain preview without undeleteable chars #324 ([5e8df9ae](https://github.com/ozone-development/ozp-center.git/commit/5e8df9ae09bc1a82ebc2bb8f526f2ab9202982f1))
+  * Prevent routing issues caused by original fix for #266 ([df79d6f8](https://github.com/ozone-development/ozp-center.git/commit/df79d6f88cf4707677139313d93a7c7dc5c55a1c))
+  * Prevent intermittently blank Listing Type ([d737468b](https://github.com/ozone-development/ozp-center.git/commit/d737468b848f8e9161c7789451e24581fde99ee4))
+
+
+#### Features
+
+* **CreateEdit:** Added character limit counter for short description #293 ([796f20aa](https://github.com/ozone-development/ozp-center.git/commit/796f20aa3cdcb915ac9e27a8a4d4e7e72ada7ace))
+* **Discovery:** Scroll to top on search results #289 ([9561d8c1](https://github.com/ozone-development/ozp-center.git/commit/9561d8c17feb784db801105383a4fc2be0bae241))
+
+
 ### 0.7.16 (2015-07-14)
 
 
