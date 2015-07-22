@@ -26,7 +26,7 @@ var DetailsTab = React.createClass({
         return (
             <div className="tab-pane active quickview-details row">
                 <div className="col-md-4 col-left">
-                    <section>
+                    <section className="forceWrap">
                         <h5>What&lsquo;s New</h5>
                         {
                             whatsNew ?
@@ -45,7 +45,7 @@ var DetailsTab = React.createClass({
                         <p>
                             <p><label>Type:</label><span> { type }</span></p>
 
-                            <p><label>URL:</label><span> <a className="forceWrap" href={URL}>{ URL }</a></span></p>
+                            <p className="forceWrap"><label>URL:</label><span> <a className="forceWrap" href={URL}>{ URL }</a></span></p>
 
                             <p><label>Categories:</label><span> { categories ? categories : <EmptyFieldValue inline /> }</span></p>
                             <p><label>Tags:</label><span> { tags ? tags : <EmptyFieldValue inline /> }</span></p>
