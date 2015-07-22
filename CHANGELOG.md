@@ -1,3 +1,12 @@
+### 1.0.2 (2015-07-22)
+
+
+#### Bug Fixes
+
+* **DetailView:** Force wrapping for long strings and links in detail view ([8c93e161](https://github.com/ozone-development/ozp-center.git/commit/8c93e1611e57aeae2c29b1beee3edc512de6733c))
+* **Quickview:** Wrap long strings with CSS ([a759f325](https://github.com/ozone-development/ozp-center.git/commit/a759f325e8577aa661b02652c0ce121f4c42ca53))
+
+
 ### 1.0.1 (2015-07-22)
 
 
