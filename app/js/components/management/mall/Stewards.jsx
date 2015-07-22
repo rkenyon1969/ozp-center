@@ -14,7 +14,7 @@ var Stewards = React.createClass({
     getDefaultProps: function () {
         return {
             title: 'Steward',
-            url: API_URL + '/api/profile?role=ORG_STEWARD',
+            url: API_URL + '/api/self/profile?role=ORG_STEWARD',
             getDisplayName: function (selectedRecord) {
                 return selectedRecord.displayName;
             },

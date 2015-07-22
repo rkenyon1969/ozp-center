@@ -11,7 +11,7 @@ var FeaturedListingTile = React.createClass({
 
     render: function () {
         var { listing } = this.props;
-        var image = listing.imageXlargeUrl;
+        var image = listing.large_banner_icon.url; // jshint ignore:line
         var href = this.makeHref(this.getActiveRoutePath(), null, {
             listing: listing.id,
             action: 'view',
@@ -21,7 +21,7 @@ var FeaturedListingTile = React.createClass({
         return (
             <li className="listing SearchListingTile SearchListingTile--featured">
                 <a href={href}>
-                    <img src={image} />
+                    <img src={ image } />
                 </a>
             </li>
         );

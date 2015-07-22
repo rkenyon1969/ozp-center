@@ -56,12 +56,14 @@ var delaySearch = (function(){
 var ListingApi = {
 
     getStorefrontListings: function() {
-        return $.getJSON(API_URL + '/api/storefront')
+        /* jshint ignore:start */
+        return $.getJSON(API_URL + '/api/storefront/')
             .then(resp => ({
                 featured: resp.featured,
                 newArrivals: resp.recent,
-                mostPopular: resp.mostPopular
+                mostPopular: resp.most_popular
             }));
+        /* jshint ignore:end */
     },
 
     getFeatured: function () {
@@ -165,7 +167,7 @@ var ListingApi = {
     getOwnedListings: function (profile) {
         var id = profile ? profile.id : 'self';
 
-        return $.getJSON(API_URL + '/api/profile/' + id + '/listing')
+        return $.getJSON(API_URL + '/api/self/profile/' + id + '/listing')
             .then(parseList);
     },
 
@@ -194,7 +196,7 @@ var ListingApi = {
             if (profile.isAdmin() || profile.highestRole === 'ORG_STEWARD' ){
                 url = API_URL + '/api/listing/activity?' + $.param(options);
             } else {
-                url = API_URL + '/api/profile/' + profile.id + '/listing/activity?' + $.param(options);
+                url = API_URL + '/api/self/profile/' + profile.id + '/listing/activity?' + $.param(options);
             }
         }
         return $.getJSON(url).then((response) => {
