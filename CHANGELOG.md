@@ -1,3 +1,11 @@
+### 1.0.1 (2015-07-22)
+
+
+#### Bug Fixes
+
+* **Discovery:** Makes searches with only orgs return results ([829f9e01](https://github.com/ozone-development/ozp-center.git/commit/829f9e0198be8f96f0c22927130cdf6e45efb419))
+
+
 ## 1.0.0 (2015-07-22)
 
 
