@@ -20,15 +20,13 @@ var LibraryApi = {
         });
     },
 
-    // TODO: update when alan changes endpoint
-    removeFromLibrary: function (listing) {
+    removeFromLibrary: function (libId) {
         return $.ajax({
-            url: `${API_URL}/api/self/library/${encodeURIComponent(listing.id)}`,
+            url: `${API_URL}/api/self/library/${encodeURIComponent(libId)}/`,
             type: 'delete'
         });
     },
 
-    // TODO: update when alan changes endpoint
     getLibrary: function () {
         return $.getJSON(`${API_URL}/api/self/library/`);
     }

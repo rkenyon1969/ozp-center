@@ -29,10 +29,10 @@ var LibraryStore = Reflux.createStore({
         });
     },
 
-    onRemoveFromLibrary: function (listing) {
+    onRemoveFromLibrary: function (listing, libId) {
         var me = this;
 
-        LibraryApi.removeFromLibrary(listing).then(function() {
+        LibraryApi.removeFromLibrary(libId).then(function() {
             var toRemove = _.find(me.library, {
                 listing: {
                     id: listing.id
