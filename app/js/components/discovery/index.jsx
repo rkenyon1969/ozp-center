@@ -209,8 +209,12 @@ var Discovery = React.createClass({
         $('body, html').scrollTop(0);
         var { type, categories, agency } = this.state;
         var combinedObj = _.assign(
-            { queryString: this.state.queryString, offset: this.state.currentOffset },
-            { type, categories, agency });
+            { search: this.state.queryString,
+              offset: this.state.currentOffset,
+              category: this.state.categories
+            },
+            { type, agency });
+
         ListingActions.search(_.assign(combinedObj));
     },
 

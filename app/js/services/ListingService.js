@@ -81,23 +81,8 @@ ListingActions.fetchById.listen(function (id) {
 (function() {
     var mostRecentSearch;
 
-    /**
-     * Add *'s to all of the non-quoted terms that don't already end in a *
-     */
-    function processQuery(queryString) {
-        var matches = queryString && queryString.match(/"[^"]*"|\S+/g),
-            processedMatches = matches && matches.map(
-                m => /["\*]$/.test(m) ? m : m + '*'
-            );
-
-        return processedMatches && processedMatches.join(' ');
-    }
-
     ListingActions.search.listen(function (options) {
-        var queryString = processQuery((options.queryString)) || '',
-            apiOptions = Object.assign({}, options, {
-                queryString: queryString
-            });
+        var apiOptions = Object.assign({}, options);
 
         //deep object comparison
         if (!_.isEqual(apiOptions, mostRecentSearch)) {
