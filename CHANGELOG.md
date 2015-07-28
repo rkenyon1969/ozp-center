@@ -1,3 +1,48 @@
+### 1.0.3 (2015-07-28)
+
+
+#### Bug Fixes
+
+* **CreateEdit:** Changed remaining characters text #293 ([17bc3583](https://github.com/ozone-development/ozp-center.git/commit/17bc35835d181baf8f21ce4f88bf6b07bab973ec))
+
+
+### 1.0.2 (2015-07-22)
+
+
+#### Bug Fixes
+
+* **DetailView:** Force wrapping for long strings and links in detail view ([8c93e161](https://github.com/ozone-development/ozp-center.git/commit/8c93e1611e57aeae2c29b1beee3edc512de6733c))
+* **Quickview:** Wrap long strings with CSS ([a759f325](https://github.com/ozone-development/ozp-center.git/commit/a759f325e8577aa661b02652c0ce121f4c42ca53))
+
+
+### 1.0.1 (2015-07-22)
+
+
+#### Bug Fixes
+
+* **Discovery:** Makes searches with only orgs return results ([829f9e01](https://github.com/ozone-development/ozp-center.git/commit/829f9e0198be8f96f0c22927130cdf6e45efb419))
+
+
+## 1.0.0 (2015-07-22)
+
+
+#### Bug Fixes
+
+* **Detail View:** Word wrap forced for what's new & url #207 ([25942ec5](https://github.com/ozone-development/ozp-center.git/commit/25942ec5218056eda62f8f2cf29b27c78804ce08))
+* **Toolbar:** disable notification button style when no notifications are present #282 ([60e7b8e5](https://github.com/ozone-development/ozp-center.git/commit/60e7b8e5adc4cdbfed01f9a892f29dcd332e8b88))
+* **createEdit:**
+  * Prevent routing issues caused by original fix for #266 ([b3a3e666](https://github.com/ozone-development/ozp-center.git/commit/b3a3e6664da91cf47d297ef55a5154cd74aa913f))
+  * Maintain preview without undeleteable chars #324 ([5e8df9ae](https://github.com/ozone-development/ozp-center.git/commit/5e8df9ae09bc1a82ebc2bb8f526f2ab9202982f1))
+  * Prevent routing issues caused by original fix for #266 ([df79d6f8](https://github.com/ozone-development/ozp-center.git/commit/df79d6f88cf4707677139313d93a7c7dc5c55a1c))
+  * Prevent intermittently blank Listing Type ([d737468b](https://github.com/ozone-development/ozp-center.git/commit/d737468b848f8e9161c7789451e24581fde99ee4))
+
+
+#### Features
+
+* **CreateEdit:** Added character limit counter for short description #293 ([796f20aa](https://github.com/ozone-development/ozp-center.git/commit/796f20aa3cdcb915ac9e27a8a4d4e7e72ada7ace))
+* **Discovery:** Scroll to top on search results #289 ([9561d8c1](https://github.com/ozone-development/ozp-center.git/commit/9561d8c17feb784db801105383a4fc2be0bae241))
+
+
 ### 0.7.16 (2015-07-14)
 
 

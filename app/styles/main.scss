@@ -138,6 +138,15 @@ a:focus {
     margin-top: -10px;
 }
 
+
+.error-text{
+  color: $red !important;
+}
+.forceWrap{
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
 button.close {
     &:hover, &:focus, &:active{
         > .icon-cross-10-grayDark{

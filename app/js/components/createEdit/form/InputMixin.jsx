@@ -8,18 +8,37 @@ var InputMixin = {
     getInitialState: function () {
         return {
             value: this.props.value,
-            blurred: false
+            blurred: false,
+            charLimit: this.props.charLimit
         };
     },
 
     render: function () {
         var labelClasses = classSet({ 'input-optional': this.props.optional });
 
-        // if we have a charlimit and value is not undefined display the characters remaining.
-        var CharLimit = (this.props.charLimit && this.state.value) ?
-            `${this.props.charLimit - this.state.value.length}/${this.props.charLimit} characters remaining`:
-            // if we do have a character limit, but value is undefined set it to the char limit max remaining
-            `${this.props.charLimit}/${this.props.charLimit} characters remaining`;
+        var CharLimit = (this.props.charLimit) ? `${this.props.charLimit}/${this.props.charLimit} characters remaining` : '';
+
+        if(this.props.charLimit && this.state.value){
+          if(this.props.charLimit - this.state.value.length < 0){
+            if(this.state.value.length === parseInt(this.props.charLimit) + 1){
+              CharLimit = `${Math.abs(this.props.charLimit - this.state.value.length)} character over the limit.`;
+            }else{
+              CharLimit = `${Math.abs(this.props.charLimit - this.state.value.length)} characters over the limit.`;
+            }
+          }else{
+            if(this.state.value.length === parseInt(this.props.charLimit) - 1){
+              CharLimit = `${this.props.charLimit - this.state.value.length} character remaining.`;
+            }else{
+              CharLimit = `${this.props.charLimit - this.state.value.length} characters remaining.`;
+            }
+          }
+        }else{
+          CharLimit = `${this.props.charLimit} characters remaining`;
+        }
+
+        var charClass = classSet({
+          'error-text': (this.state.value && this.state.value.length > this.state.charLimit)
+        });
         return (
             <div id={this.props.id} className={ this.getClasses() }>
                 <label htmlFor={ this.props.id } className={labelClasses}>{ this.props.label }</label>
@@ -27,7 +46,7 @@ var InputMixin = {
                 { this.props.help && <p className="help-block small">{ this.props.help }</p>}
                 { cloneWithProps(this.renderInput(), this.getInputProps()) }
                 { this.props.charLimit &&
-                    <span>{CharLimit}</span>
+                    <p className={charClass}>{CharLimit}</p>
                 }
             </div>
         );
