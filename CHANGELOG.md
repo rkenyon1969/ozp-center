@@ -1,3 +1,11 @@
+### 1.0.3 (2015-07-28)
+
+
+#### Bug Fixes
+
+* **CreateEdit:** Changed remaining characters text #293 ([17bc3583](https://github.com/ozone-development/ozp-center.git/commit/17bc35835d181baf8f21ce4f88bf6b07bab973ec))
+
+
 ### 1.0.2 (2015-07-22)
 
 
