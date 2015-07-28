@@ -91,8 +91,8 @@ var ListingApi = {
                 }
 
                 delaySearch(function(){
-                    var queryStringNoStar = options.queryString.replace(/[*]$/,"");
-                    OzpAnalytics.trackSiteSearch('Application Search', queryStringNoStar, response.total);
+                    var queryString = options.search;
+                    OzpAnalytics.trackSiteSearch('Application Search', queryString, response.total);
                 }, 800);
                 return response;
             })
