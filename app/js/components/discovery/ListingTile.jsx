@@ -7,6 +7,8 @@ var IconRating = require('../shared/IconRating.jsx');
 var CenterLaunchLink = require('../CenterLaunchLink.jsx');
 var BookmarkButton = require('../BookmarkButton.jsx');
 
+var { API_URL } = require('ozp-react-commons/OzoneConfig');
+var IMAGE_URL = API_URL + '/api/image/';
 
 var ListingTile = React.createClass({
 
@@ -31,7 +33,7 @@ var ListingTile = React.createClass({
 
         var name = listing.title;
         var description = listing.descriptionShort && listing.descriptionShort.substr(0, 140);
-        var imageLargeUrl = listing.banner_icon.url; // jshint ignore:line
+        var imageLargeUrl;
         var avgRate = listing.avgRate;
         var agencyShort = listing.agencyShort;
         var href = this.makeHref(this.getActiveRoutePath(), null, {
@@ -39,6 +41,13 @@ var ListingTile = React.createClass({
             action: 'view',
             tab: 'overview'
         });
+
+        // Some endpoints have the url; others have the id
+        if (listing.banner_icon.url) {
+            imageLargeUrl = listing.banner_icon.url;
+        } else {
+            imageLargeUrl = IMAGE_URL + listing.banner_icon.id;
+        }
 
         return this.transferPropsTo(
             <li className="listing SearchListingTile" key={listing.id} >

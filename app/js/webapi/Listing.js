@@ -67,22 +67,22 @@ var ListingApi = {
     },
 
     getFeatured: function () {
-        return $.getJSON(API_URL + '/api/listing/search?isFeatured=true&sort=avgRate&order=DESC&max=24')
+        return $.getJSON(API_URL + '/api/listings/search?isFeatured=true&sort=avgRate&order=DESC&max=24')
             .then(parseList);
     },
 
     getNewArrivals: function () {
-        return $.getJSON(API_URL + '/api/listing/search?sort=approvedDate&order=DESC&max=24')
+        return $.getJSON(API_URL + '/api/listings/search?sort=approvedDate&order=DESC&max=24')
             .then(parseList);
     },
 
     getMostPopular: function () {
-        return $.getJSON(API_URL + '/api/listing/search?sort=avgRate&order=DESC&max=36')
+        return $.getJSON(API_URL + '/api/listings/search?sort=avgRate&order=DESC&max=36')
             .then(parseList);
     },
     search: function (options) {
         var params = $.param(options, true);
-        return $.getJSON(API_URL + '/api/listing/search?' + params)
+        return $.getJSON(API_URL + '/api/listings/search?' + params)
             .then(function (response) {
                 if (options.categories && options.categories.length > 0) {
                     for(var index = 0; index < options.categories.length; index++) {
