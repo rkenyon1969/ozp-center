@@ -5,8 +5,9 @@ var UserNotificationDropdown = require('ozp-react-commons/components/notificatio
 var HelpModal = require('./helpmodal.jsx');
 var ProfileLink = require('../profile/ProfileLink.jsx');
 var ModalLink = require('../ModalLink.jsx');
-var { HUD_URL, METRICS_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL, FEEDBACK_ADDRESS } = require('ozp-react-commons/OzoneConfig');
-var emailString = FEEDBACK_ADDRESS.substring(0,7);
+var { HUD_URL, METRICS_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL, FEEDBACK_ADDRESS, HELPDESK_ADDRESS } = require('ozp-react-commons/OzoneConfig');
+var feedbackPrefix = FEEDBACK_ADDRESS.substring(0,7);
+var helpdeskPrefix = HELPDESK_ADDRESS.substring(0,7);
 var CreateEditActions = require('../../actions/CreateEditActions');
 
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
@@ -34,7 +35,8 @@ var NavBar = React.createClass({
         var Metrics = (this.isAdmin() || this.isOrgSteward()) ?
             <li><a href={METRICS_URL} target="_blank"><i className="icon-bar-graph-2-grayLightest"></i>Metrics</a></li> : '';
 
-        var feedbackTarget = this.isEmail() ? "_self" : "_blank";
+        var feedbackTarget = this.isFeedbackEmail() ? "_self" : "_blank";
+        var helpdeskTarget = this.isHelpdeskEmail() ? "_self" : "_blank";
 
 
         return (
@@ -84,6 +86,7 @@ var NavBar = React.createClass({
                                     }
                                     { Metrics }
                                     <li><a href={FEEDBACK_ADDRESS} className="caboose" target={feedbackTarget}><i className="icon-mail"></i>Submit Feedback</a></li>
+                                    <li><a href={HELPDESK_ADDRESS} className="caboose" target={helpdeskTarget}><i className="icon-mail"></i>Contact Help Desk</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -96,8 +99,12 @@ var NavBar = React.createClass({
         );
     },
 
-    isEmail: function(){
-        return (emailString === "mailto:") ? true : false;
+    isFeedbackEmail: function(){
+        return (feedbackPrefix === "mailto:") ? true : false;
+    },
+
+    isHelpdeskEmail: function(){
+        return (helpdeskPrefix === "mailto:") ? true : false;
     },
 
     isOrgSteward: function(){
