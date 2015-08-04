@@ -89,8 +89,15 @@ var ListingApi = {
                 }
 
                 delaySearch(function(){
-                    var queryStringNoStar = options.queryString.replace(/[*]$/,"");
-                    OzpAnalytics.trackSiteSearch('Application Search', queryStringNoStar, response.total);
+                    if (options.queryString) {
+                        var queryStringNoStar = options.queryString.replace(/[*]$/,"");
+                        if ((options.type && options.type.length > 0) ||
+                            (options.categories && options.categories.length > 0) ||
+                            (options.agency && options.agency.length > 0)) {
+                            queryStringNoStar = queryStringNoStar + ' (+)';
+                        }
+                        OzpAnalytics.trackSiteSearch('Application Search', queryStringNoStar, response.total);
+                    }
                 }, 800);
                 return response;
             })
