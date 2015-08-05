@@ -29,7 +29,7 @@ function Listing (json) {
     this.screenshots = this.screenshots || [];
     this.categories = this.categories || [];
     this.contacts = this.contacts || [];
-    this.docUrls = this.docUrls || [];
+    this.docUrls = this.doc_urls || [];
     this.owners = this.owners || [];
     this.tags = this.tags || [];
     this.changeLogs = [];
@@ -38,7 +38,7 @@ function Listing (json) {
 }
 
 function parseList (response) {
-    return new PaginatedResponse(response, Listing).getItemAsList();
+    return new PaginatedResponse(response, Listing).getResponse();
 }
 
 function parseListToPaginatedResponse (response) {
@@ -165,10 +165,12 @@ var ListingApi = {
     },
 
     getOwnedListings: function (profile) {
-        var id = profile ? profile.id : 'self';
+        var url = API_URL + '/api/self/listing/';
 
-        return $.getJSON(API_URL + '/api/self/profile/' + id + '/listing')
-            .then(parseList);
+        if (profile) {
+            url = url + profile.id + '/';
+        }
+        return $.getJSON(url).then(parseList);
     },
 
     rejectListing: function (id, description) {

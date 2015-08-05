@@ -6,7 +6,7 @@ var $ = require('jquery');
 Object.assign = require('object-assign');
 
 var profileBase = Object.freeze({
-    'stewardedOrganizations': [],
+    'stewarded_organizations': [],
     'organizations': [],
     'bio': '',
     'lastLogin': '2015-01-14T20:57:19.129+0000',
@@ -14,7 +14,9 @@ var profileBase = Object.freeze({
     'createdDate': '2015-01-07T17:16:51.000+0000',
     'email': 'testAdmin1@ozonePerfTesting.org',
     'displayName': 'testAdmin1',
-    'username': 'testAdmin1',
+    'user': {
+        username: 'testAdmin1'
+    },
     'id': 2,
     '_links': {
         'curies': {

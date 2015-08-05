@@ -44,17 +44,18 @@ var ListingManagement = React.createClass({
             tabs.splice(1, 1);
         }
 
-        if(currentUser.stewardedOrganizations.length > 0 && system.organizations.length > 0) {
-            _.forEach(currentUser.stewardedOrganizations, function(orgName) {
-                var org = _.find(system.organizations, function(orgObj) {
-                    return orgObj.title === orgName;
+        if(currentUser.stewarded_organizations.length > 0 && system.organizations.length > 0) {
+            _.forEach(currentUser.stewarded_organizations, function(org) {
+                var orgName = org.short_name;
+                org = _.find(system.organizations, function(orgObj) {
+                    return orgObj.short_name === orgName;
                 });
 
                 tabs.splice(2, 0, {
                     to: 'org-listings',
-                    name: org.shortName + ' Listings',
+                    name: org.short_name + ' Listings',
                     params: {
-                        org: org.title
+                        org: org.short_name
                     }
                 });
             });
