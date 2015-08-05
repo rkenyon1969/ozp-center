@@ -22,13 +22,13 @@ function updateCache (listings) {
         _listingsCache[listing.id] = listing;
 
         listing.owners.forEach(function (owner) {
-            var cachedListings = _listingsByOwnerCache[owner.username] || [];
+            var cachedListings = _listingsByOwnerCache[owner.user.username] || [];
 
             cachedListings = cachedListings.filter(function (l) {
                 return l.id !== listing.id;
             });
 
-            _listingsByOwnerCache[owner.username] = cachedListings.concat([listing]);
+            _listingsByOwnerCache[owner.user.username] = cachedListings.concat([listing]);
         });
     });
 }
@@ -64,7 +64,9 @@ var GlobalListingStore = Reflux.createStore({
             _reviewsCache[id] = reviews;
             this.trigger();
         });
-        this.listenTo(ListingActions.fetchOwnedListingsCompleted, updateCache);
+        this.listenTo(ListingActions.fetchOwnedListingsCompleted, (x)=>{
+            updateCache(x);
+        });
         this.listenTo(ListingActions.saveCompleted, function (isNew, data) {
             var listing = new Listing(data);
             updateCache([listing]);
@@ -89,10 +91,10 @@ var GlobalListingStore = Reflux.createStore({
             var listing = _listingsCache[data.id];
 
             listing.owners.forEach(function (owner) {
-                var ownedListings = _listingsByOwnerCache[owner.username].filter(function (item) {
+                var ownedListings = _listingsByOwnerCache[owner.user.username].filter(function (item) {
                     return item.id !== listing.id;
                 });
-                _listingsByOwnerCache[owner.username] = ownedListings;
+                _listingsByOwnerCache[owner.user.username] = ownedListings;
             });
 
             this.trigger();
@@ -113,7 +115,7 @@ var GlobalListingStore = Reflux.createStore({
     },
 
     getByOwner: function (profile) {
-        return _listingsByOwnerCache[profile.username];
+        return _listingsByOwnerCache[profile.user.username];
     },
 
     getAllListings: function () {

@@ -5,6 +5,7 @@ var moment = require('moment');
 var { Link, Navigation } = require('react-router');
 var ActiveState = require('../../mixins/ActiveStateMixin');
 var { UserRole } = require('ozp-react-commons/constants');
+var { API_URL } = require('ozp-react-commons/OzoneConfig');
 
 var ActionMenu = React.createClass({
 
@@ -156,19 +157,21 @@ var AdminOwnerListingTile = React.createClass({
 
     render: function () {
         var { listing } = this.props;
+
         var overview = this.makeHref(this.getActiveRoutePath(), this.getParams(), {
             listing: listing.id,
             action: 'view',
             tab: 'overview'
         });
         var classSet = React.addons.classSet(this._getApprovalStatusClass());
-
+        var imageUrl = listing.banner_icon.url ||
+                API_URL + '/api/image/' + listing.banner_icon.id + '/';
 
         return (
             <li className={classSet}>
                 <ActionMenu listing={listing} />
                 <a href={overview}>
-                    <img className="AdminOwnerListingTile__img" src={listing.imageLargeUrl} />
+                    <img className="AdminOwnerListingTile__img" src={imageUrl} />
                 </a>
                 <InfoBar listing={listing} />
             </li>
