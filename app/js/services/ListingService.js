@@ -43,6 +43,21 @@ ListingActions.fetchAllListings.listen(function (filter) {
         .then(_.partial(ListingActions.fetchAllListingsCompleted, filter));
 });
 
+ListingActions.fetchCounts.listen(function () {
+    var opts = {};
+
+    _.assign(opts, {
+        offset: 0,
+        max: 0,
+        enabled: true,
+        approvalStatus: "APPROVED"
+    });
+
+    ListingApi
+        .getCounts(opts)
+        .then(_.partial(ListingActions.fetchCountsCompleted));
+});
+
 ListingActions.fetchAllChangeLogs.listen(function (profile, filter) {
 
     var PaginatedChangeLogStore = require('../stores/PaginatedChangeLogStore');
