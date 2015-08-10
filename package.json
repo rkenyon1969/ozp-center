@@ -74,7 +74,7 @@
     "webpack-dev-server": "1.7.0"
   },
   "dependencies": {
-    "icons": "git://github.com/ozone-development/icons",
+    "icons": "git://github.com/ozone-development/ozp-icons",
     "bootstrap-sass": "git://github.com/ozone-development/bootstrap-sass",
     "exports-loader": "0.6.2",
     "lodash-amd": "2.4.1",

@@ -66,11 +66,19 @@
 		@extend .icon-mail-grayLightest;
 	}
 
+	> .icon-lightbulb {
+		@extend .icon-lightbulb-grayLightest;
+	}
+
 	&:hover, &:focus {
 		border-left-color: $blue !important;
 
 		> .icon-mail {
 			@extend .icon-mail-white;
+		}
+		
+		> .icon-lightbulb {
+		@extend .icon-lightbulb-white;
 		}
 
 	}

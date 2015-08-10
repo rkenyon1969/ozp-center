@@ -71,6 +71,7 @@ var NavBar = React.createClass({
                                             <i className="icon-cog-grayLightest"></i>Settings
                                         </ModalLink>
                                     </li>
+                                    <li><a href={HELPDESK_ADDRESS} target={helpdeskTarget}><i className="icon-speech-bubble-grayLightest"></i>Contact Help Desk</a></li>
                                     <li className="divider"></li>
                                     <li className="dropdown-header">Create</li>
                                     <li><a href={'#/edit'} onClick={()=>{
@@ -85,8 +86,7 @@ var NavBar = React.createClass({
                                         <li><a href={'#/mall-management/categories'}><i className="icon-shopping-settings-grayLightest"></i>Center Settings</a></li>
                                     }
                                     { Metrics }
-                                    <li><a href={FEEDBACK_ADDRESS} className="caboose" target={feedbackTarget}><i className="icon-mail"></i>Submit Feedback</a></li>
-                                    <li><a href={HELPDESK_ADDRESS} className="caboose" target={helpdeskTarget}><i className="icon-mail"></i>Contact Help Desk</a></li>
+                                    <li><a href={FEEDBACK_ADDRESS} className="caboose" target={feedbackTarget}><i className="icon-lightbulb"></i>Submit Feedback</a></li>
                                 </ul>
                             </li>
                         </ul>
