@@ -121,12 +121,14 @@ var RecentActivity = React.createClass({
 
     render: function () {
         return (
-            <div className="RecentActivity">
-                <div className="RecentActivity__Sidebar col-md-3"><Sidebar /></div>
-                <h3>Recent Activity</h3>
-                <LoadMore className="RecentActivity__activities col-md-9 all" hasMore={this.state.hasMore} onLoadMore={this.onLoadMore}>
-                    { this.renderChangeLogs() }
-                </LoadMore>
+            <div className="RecentActivity row">
+                <div className="RecentActivity__Sidebar col-xs-5 col-lg-4"><Sidebar /></div>
+                <div className="RecentActivity__Content col-xs-7 col-lg-8">
+                    <h3>Recent Activity</h3>
+                    <LoadMore className="RecentActivity__activities all" hasMore={this.state.hasMore} onLoadMore={this.onLoadMore}>
+                        { this.renderChangeLogs() }
+                    </LoadMore>
+                </div>
             </div>
         );
     }

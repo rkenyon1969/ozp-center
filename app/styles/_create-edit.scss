@@ -16,11 +16,11 @@
 
 #main.create-edit-open {
     height: 100%;
-    overflow: auto;
+    padding: 0;
 
     & > #App {
         //subtract child element's top margin due to margin-collapsing
-        height: calc(100% - 149px);
+        height: calc(100% - 165px);
     }
 }
 
@@ -29,57 +29,27 @@
 }
 
 .create-edit {
-    background-color: $gray-light;
-
-    border-top: 4px solid $gray-lightest;
-
-    margin-top: 149px;
-
     position: relative;
-
-    //deal with #main's padding
-    left: -15px;
-    width: 1260px;
-
+    min-width: 768px;
     height: 100%;
-
-    #header {
-        top: 62px;
-        margin-top: 0;
-    }
+    margin-top: 65px;
 }
 
 
 .create-edit-body {
-    width: calc(100% * (11 / 12));
     height: 100%;
 
     > * {
         height: 100%;
         display: inline-block;
-
         vertical-align: top;
     }
 
     > form > h2 {
-        margin-top: 40px;
-    }
-
-    > nav {
-        width: calc(100% * (2 / 11));
-    }
-
-    > .CreateEdit__form {
-        width: calc(100% * (7 / 11));
-    }
-
-    > .reminders {
-        width: calc(100% * (2 / 11));
-    }
-
-    > form > h2 {
-        padding-top: 40px;
-        padding-bottom: 20px;
+        margin-top: 30px;
+        padding-top: 30px;
+        border-top: 2px solid $gray-lightest;
+        padding-bottom: 15px;
     }
 
     .space {
@@ -90,23 +60,15 @@
 
 #create-edit-basic-information {
     padding-top: 0px;
-    margin-top: 0px;
+    border-top: none;
 }
 
 .reminders {
-    background-color: $gray-lightest;
-
-    padding: 0 10px;
-
+    padding: 40px 25px 0 25px;
     font-size: .85em;
-
-    h4 {
-        font-weight: bolder;
-    }
 
     .stewards-link {
         display: block;
-
         cursor: pointer;
 
         &::after {
@@ -117,11 +79,9 @@
 
 .CreateEdit__form {
     background-color: $white;
-
     overflow-y: auto;
     height: 100%;
-
-    padding: 15px 20px;
+    padding: 15px 30px;
 
     label.input-optional::after {
         content: " (optional)";
@@ -145,26 +105,11 @@
 }
 
 .CreateEdit__titlebar {
-    position: fixed;
-    top: 62px;
-    width: 1260px;
-
-    padding: 15px 15px 0 15px;
-    background: $body-bg !important;
+    padding: 20px 30px;
+    background: $gray-lightest !important;
 
     h1 {
-        margin-top: 0;
-    }
-
-    .sub-header {
-        position: relative;
-        overflow: hidden;
-
-        line-height: 34px;
-
-        &::after {
-            clear: both;
-        }
+        margin: 0;
     }
 
     .btn-toolbar {
@@ -252,26 +197,26 @@ div.col-md-4 > .form-group >span.image-container.image-present {
 }
 
 .create-edit-sidebar {
+    padding: 0;
+    background: $gray-lightest;
+
     ol {
         list-style-type: none;
+        margin: 0;
+        padding: 0;
     }
 
     label {
         display: block;
-
-        border: 1px solid $gray-lighter;
-        border-left: 4px solid $gray-lightest;
-
+        border-bottom: 1px solid $gray-lighter;
+        border-left: 4px solid $gray-lighter;
         background-color: $white;
-
         margin-bottom: 0;
-
         font-weight: inherit;
 
         > ol {
             display: none;
-
-            padding-left: 20px;
+            padding-left: 25px;
 
             li {
                 margin: 5px 0;
@@ -279,12 +224,20 @@ div.col-md-4 > .form-group >span.image-container.image-present {
                 &:first-child {
                     margin-top: 0;
                 }
+
+                &:last-child {
+                    margin-bottom: 15px;
+                }
             }
         }
 
         a {
-            font-size: smaller;
             color: $gray-darker;
+
+            &:hover, &:focus, &:active {
+                text-decoration: none;
+                color: $blue;
+            }
         }
     }
 
@@ -296,7 +249,7 @@ div.col-md-4 > .form-group >span.image-container.image-present {
         display: none;
 
         &:checked + label, + label:hover {
-            border-left-color: $blue-dark;
+            border-left-color: $blue;
 
             h5 {
                 font-weight: 500;
@@ -325,7 +278,7 @@ div.col-md-4 > .form-group >span.image-container.image-present {
     .group-title {
         display: block;
         background-color: $gray-lightest;
-        padding: 10px;
+        padding: 15px 25px;
 
         &:hover, &:focus, &:active {
             text-decoration: none;

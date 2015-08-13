@@ -13,25 +13,25 @@ var MyListingsSidebarFilter = React.createClass({
             <RadioGroup name="recent-activity-my-listings" onChange={this.props.handleChange}>
                 <Link id="recent-activity-returned" to="my-listings" query={{approvalStatus: "REJECTED"}}>
                     <label htmlFor="recent-activity-returned" className="label-needs-action">
+                        <i className="icon-caret-right"></i>
                         <i className="icon-exclamation-14"></i>
                         Returned to Owner
-                        <i className="icon-caret-right"></i>
                     </label>
                 </Link>
 
                 <Link id="recent-activity-returned" to="my-listings" query={{approvalStatus: "PENDING"}}>
                     <label htmlFor="recent-activity-pending" className="label-pending">
+                        <i className="icon-caret-right"></i>
                         <i className="icon-loader-14"></i>
                         Pending Review
-                        <i className="icon-caret-right"></i>
                     </label>
                 </Link>
 
                 <Link id="recent-activity-returned" to="my-listings" query={{approvalStatus: "APPROVED"}}>
                     <label htmlFor="recent-activity-published" className="label-published">
+                        <i className="icon-caret-right"></i>
                         <i className="icon-thumbs-up-14"></i>
                         Published
-                        <i className="icon-caret-right"></i>
                     </label>
                 </Link>
             </RadioGroup>
@@ -47,33 +47,33 @@ var AllListingsSidebarFilter = React.createClass({
             <RadioGroup name="recent-activity-all-listings" onChange={this.props.handleChange}>
                 <Link id="recent-activity-returned" to="all-listings" query={{approvalStatus: "APPROVED_ORG"}}>
                     <label htmlFor="recent-activity-all-returned" className="label-needs-action">
+                        <i className="icon-caret-right"></i>
                         <i className="icon-exclamation-14"></i>
                         Pending Review
-                        <i className="icon-caret-right"></i>
                     </label>
                 </Link>
 
                 <Link id="recent-activity-returned" to="all-listings" query={{approvalStatus: "PENDING"}}>
                     <label htmlFor="recent-activity-all-pending" className="label-pending">
+                        <i className="icon-caret-right"></i>
                         <i className="icon-loader-14"></i>
                         Pending Organization Review
-                        <i className="icon-caret-right"></i>
                     </label>
                 </Link>
 
                 <Link id="recent-activity-returned" to="all-listings" query={{approvalStatus: "APPROVED"}}>
                     <label htmlFor="recent-activity-all-published" className="label-published">
+                        <i className="icon-caret-right"></i>
                         <i className="icon-thumbs-up-14"></i>
                         Published
-                        <i className="icon-caret-right"></i>
                     </label>
                 </Link>
 
                 <Link id="recent-activity-returned" to="all-listings" query={{approvalStatus: "REJECTED"}}>
                     <label htmlFor="recent-activity-all-returned" className="label-rejected">
+                        <i className="icon-caret-right"></i>
                         <i className="icon-reload-14"></i>
                         Returned to Owner
-                        <i className="icon-caret-right"></i>
                     </label>
                 </Link>
             </RadioGroup>

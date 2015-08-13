@@ -1,18 +1,19 @@
+.RecentActivity__Content {
+    background: $white;
+    padding: 30px;
+
+    h3 {
+        margin: 0 0 30px 0;
+    }
+}
+
 .RecentActivity__SidebarFilter {
     background: $gray-lightest;
-    margin-top: -20px;
-    margin-left: -10px;
-    padding: 10px 5px 10px 5px;
+    padding: 0 15px 30px 15px;
 
     .filter-group {
-        background: $white;
-        padding: 0px;
-        border: 1px solid $gray-lighter;
-        margin-bottom: 10px;
-        width: 96%;
-        margin-left: 2%;
-        margin-right: 2%;
-
+        padding: 0;
+        margin-bottom: 30px;
     }
 
     input[type="radio"] {
@@ -20,8 +21,9 @@
     }
 
     h4 {
-        padding: 10px;
-        font-size: 16px;
+        margin: 0;
+        padding: 15px 0;
+        color: $blue;
     }
 
     a {
@@ -31,19 +33,17 @@
         label {
             display: block;
             cursor: pointer;
-            font-size: 12px;
-            border-left: 3px solid transparent;
-            border-bottom: 1px solid $gray-lighter;
+            background: $white;
+            border: 1px solid $gray-lighter;
+            border-bottom: none;
             margin: 0;
-
-            padding-left: 10px;
+            padding: 15px;
             vertical-align: middle;
 
-            height: 40px;
-
             span {
-                line-height: 40px;
                 color: $gray-dark;
+                margin: 0 30px 0 40px;
+                display: block;
             }
 
             &::before {
@@ -51,17 +51,15 @@
             }
 
             .icon-caret-right {
-
                 @extend .icon-caret-right-grayDark;
                 float: right;
-                margin-top: 11px;
-
             }
 
             i {
-                margin-right: 4px;
+                margin-right: 5px;
                 top: 3px;
-                margin-left:4px;
+                margin-left:15px;
+                float: left;
 
                 .icon-exclamation-14 {
                     @extend .icon-exclamation-14-redOrangeDark;
@@ -84,11 +82,10 @@
         &:hover, &:focus {
             text-decoration: none;
             color: none;
-            background: $blue-dark;
+            background: $blue;
 
             label {
-                background: $blue-dark;
-                border-bottom: 1px solid $blue-darker;
+                background: $blue;
 
                 span {
                     color: $white;
@@ -119,7 +116,7 @@
         &:last-child {
 
             > label {
-                border-bottom: none;
+                border-bottom: 1px solid $gray-lighter;
             }
 
         }
@@ -139,9 +136,4 @@
         margin-top: 6px;
     }
 
-}
-
-div.RecentActivity__Sidebar.col-md-3 {
-    padding-left: 0px;
-    margin-left: -5px;
 }

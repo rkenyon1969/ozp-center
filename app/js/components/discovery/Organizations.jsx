@@ -63,7 +63,7 @@ var Organizations = React.createClass({
     render() {
         var orgCounts = this.state.counts;
         return (
-            <SelectBox className="SelectBox__Organizations" label="Organizations" onChange={this.onChange} value={this.props.value} multiple>
+            <SelectBox className="SelectBox__Organizations col-sm-3 col-xs-4" label="Organizations" onChange={this.onChange} value={this.props.value} multiple>
                 {
                     this.state.system.organizations.map(
                         (x) => <option

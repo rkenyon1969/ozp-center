@@ -1,6 +1,13 @@
 .ListingManagement__body {
-    padding-top: 95px;
+    padding-top: 45px;
     position: relative;
+    min-width: 768px;
+
+    h1 {
+        padding: 20px 30px;
+        margin: 0;
+        background: $gray-lightest;
+    }
 }
 
 .ListingManagement__CreateListingButton {
@@ -10,12 +17,10 @@
 }
 
 .ListingManagement__TabContainer {
-    margin-top: -32px;
+    margin-top: -44px;
 
 
     .nav-tabs {
-        padding-left: 40%;
-        margin-left: -15px;
-        margin-right: -15px;
+        padding-left: 50%;
     }
 }

@@ -9,7 +9,7 @@ var SystemStore = require('../../../stores/SystemStore');
 
 // component dependencies
 var NavBar = require('../../NavBar/index.jsx');
-var Header = require('../../header/index.jsx');
+// var Header = require('../../header/index.jsx');
 
 var MallManagement = React.createClass({
 
@@ -50,7 +50,6 @@ var MallManagement = React.createClass({
         return (
             <div className="MallManagement">
                 <NavBar />
-                <Header />
                 <div className="MallManagement__body">
                     <h1>Center Settings</h1>
                     <div className="MallManagement__TabContainer">

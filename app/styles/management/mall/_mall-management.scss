@@ -1,19 +1,28 @@
 .MallManagement__body {
-    padding-top: 95px;
+    padding-top: 45px;
+    position: relative;
+    min-width: 768px;
+
+    h1 {
+        padding: 20px 30px;
+        margin: 0;
+        background: $gray-lightest;
+    }
 }
 
 .MallManagement__TabContainer {
-    margin-top: -32px;
+    margin-top: -44px;
 
 
     .nav-tabs {
-        padding-left: 35%;
-        margin-left: -15px;
-        margin-right: -15px;
+        float: right;
+        padding-right: 30px;
     }
 
     .tab-content {
-        margin-top: 15px;
+        padding: 15px;
+        background: $white;
+        clear: both;
     }
 }
 

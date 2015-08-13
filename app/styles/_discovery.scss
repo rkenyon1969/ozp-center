@@ -1,31 +1,23 @@
 #discovery {
     position: relative;
     padding-top: 96px;
+    margin: 0 auto;
+    min-width: 768px;
+    /*-moz-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+    box-shadow: 0 0 3px rgba(0, 0, 0, .1);*/
 
-    //to combat #main's padding
-    margin-left: -15px;
-    margin-right: -15px;
-
-    width: 1260px;
-
-    display: table;
-    > * {
-        display: table-cell;
-        vertical-align: top;
-    }
-
-    > aside {
-        width: 265px;
-        padding: 20px 30px;
+    h4 {
+        color: $blue;
     }
 
     .facet-group {
         padding-bottom: 10px;
-        margin: 0 5px 0 5px;
-        border-bottom: 2px solid $gray-lighter;
+        margin: 0;
+        border-bottom: 1px solid $gray-lighter;
 
         + .facet-group {
-            margin-top: 10px;
+            margin-top: 20px;
         }
 
         ul {
@@ -43,19 +35,18 @@
 
         &.facet-group-item {
             cursor: pointer;
-            padding-left: 15px;
-            margin-left: -5px;
+            padding-left: 25px;
 
             &:hover, &:focus{
-              border-left-color: $link-color;
+              border-left-color: $blue;
             }
         }
 
 
 
         &.active {
-            color: $link-color;
-            border-left-color: $link-color;
+            color: $blue;
+            border-left-color: $blue;
 
 
         }
@@ -63,14 +54,8 @@
 
     .sidebar {
 
-        h3 {
-            @extend .h4;
-            color: $blue-dark;
-        }
-
         li {
             border-left: transparent 5px solid;
-            margin-right: -35px;
 
             i.icon-shopping {
                 @extend .icon-shopping-grayDarker;
@@ -78,10 +63,8 @@
             }
 
             &:hover, &:focus {
-                color: $link-color;
-                border-left-color: $link-color;
-                font-weight: 600;
-                background: $white;
+                color: $blue;
+                border-left-color: $blue;
 
                 > i.icon-shopping {
                     @extend .icon-shopping-blueDark;
@@ -89,9 +72,9 @@
             }
 
             &.active {
-                background-color: $link-color;
+                background-color: $blue;
                 color: $white;
-                border-left-color: $blue-darker;
+                border-left-color: $blue;
                 font-weight: 600;
 
                 > .icon-shopping{
@@ -99,8 +82,8 @@
                 }
 
                 &:hover, &:focus {
-                background-color: $blue-darker;
-                border-left-color: $gray-darkest;
+                background-color: $blue;
+                border-left-color: $blue;
 
                     > .icon-shopping{
                         @extend .icon-shopping-white;
@@ -112,14 +95,15 @@
     }
 
     > .content {
-        padding: 10px 15px;
+        padding: 30px;
     }
 }
 
 .shareLink{
-  color: $blue-darker;
-  font-size:10pt;
-  cursor: pointer;
+    color: $blue-darker;
+    font-size:10pt;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .Discovery__NewArrivals, .Discovery__MostPopular {
@@ -129,12 +113,6 @@
 .listings {
     padding: 0;
     overflow: hidden;
-}
-
-.listings-search-results, .new-arrival-listings, .most-popular-listings {
-    .SearchListingTile:nth-child(4n+4) {
-        margin-right: 0px;
-    }
 }
 
 .carousel {
