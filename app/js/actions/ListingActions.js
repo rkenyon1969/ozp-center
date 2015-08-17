@@ -6,6 +6,7 @@ var createActions = require('../utils/createActions');
 //callbacks that used to be here have been moved to ListingService
 var ListingActions = createActions({
     fetchAllListings: null,
+    fetchCounts: null,
     fetchAllChangeLogs: null,
     fetchStorefrontListings: null,
 

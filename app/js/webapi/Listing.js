@@ -196,6 +196,14 @@ var ListingApi = {
         });
     },
 
+    getCounts: function () {
+        var url = API_URL + '/api/listing/counts';
+
+        return $.getJSON(url).then((response) => {
+            return response;
+        });
+    },
+
     getAllChangeLogs: function (profile, url, options) {
         if(!_.isString(url)) {
             if (profile.isAdmin() || profile.highestRole === 'ORG_STEWARD' ){
