@@ -44,17 +44,8 @@ ListingActions.fetchAllListings.listen(function (filter) {
 });
 
 ListingActions.fetchCounts.listen(function () {
-    var opts = {};
-
-    _.assign(opts, {
-        offset: 0,
-        max: 0,
-        enabled: true,
-        approvalStatus: "APPROVED"
-    });
-
     ListingApi
-        .getCounts(opts)
+        .getCounts()
         .then(_.partial(ListingActions.fetchCountsCompleted));
 });
 

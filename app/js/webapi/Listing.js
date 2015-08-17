@@ -196,11 +196,11 @@ var ListingApi = {
         });
     },
 
-    getCounts: function (options) {
-        var url = API_URL + '/api/listing?' + $.param(options);
+    getCounts: function () {
+        var url = API_URL + '/api/listing/counts';
 
         return $.getJSON(url).then((response) => {
-            return response.counts;
+            return response;
         });
     },
 
