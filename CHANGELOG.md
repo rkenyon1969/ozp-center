@@ -1,3 +1,11 @@
+### 1.0.6 (2015-08-18)
+
+
+#### Features
+
+* **navbar:** Update to point to new /counts endpoint #342 ([76d70e5f](https://github.com/ozone-development/ozp-center.git/commit/76d70e5fcf903f35b1054829a3ddfa0305c0d8d3))
+
+
 ### 1.0.5 (2015-08-11)
 
 
