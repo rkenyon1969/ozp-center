@@ -41,7 +41,7 @@ var NavBar = React.createClass({
 
         return (
             <nav ref="hastooltips" className="navbar navbar-inverse navbar-fixed-top" id="globalNav">
-                <div className="container-fluid container" id="centered">
+                <div className="container-fluid" id="centered">
                     <div className="navbar-left">
                         <ul className="nav navbar-nav">
                             <li className="tooltiped" data-toggle="tooltip" data-placement="bottom" title="HUD"><a className="lrg" href={HUD_URL}><i className="icon-home-grayLightest"></i></a></li>

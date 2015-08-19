@@ -13,13 +13,13 @@ var ResourcesTab = React.createClass({
     render: function () {
         return (
             <div className="tab-pane active quickview-resources row">
-                <div className="col-md-6 col-left">
+                <div className="col-xs-6 col-left">
                     <section className="resources">
                         <h5>Resources</h5>
                         { this.renderOtherResources() }
                     </section>
                 </div>
-                <div className="col-md-6 col-right">
+                <div className="col-xs-6 col-right">
                     <section className="tpoc">
                         <h5>Contact Information</h5>
                         { this.contactGroups() }
@@ -74,7 +74,7 @@ var ResourcesTab = React.createClass({
           return(
             <div>
               <p><label>Point of Contact { i + 1 }</label></p>
-              <div className="col-md-offset-1">
+              <div className="col-xs-offset-1">
                   <p><label>Name:</label><span> {contact.name}</span></p>
                   <p><label>Email:</label><span> {contact.email}</span></p>
                   <p><label>Unsecure Phone:</label><span> {contact.unsecurePhone}</span></p>

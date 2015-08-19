@@ -36,8 +36,9 @@ html, body {
     font-family: 'Ubuntu';
     font-weight: 300;
     height: 100%;
-    background: url('../images/bg_fractal_gray.png') $gray-dark no-repeat fixed;
-    background-size: cover;
+    /*background: url('../images/bg_fractal_gray.png') $gray-dark no-repeat fixed;
+    background-size: cover;*/
+    background: $gray-lightest;
 }
 
 .no-list-style{
@@ -47,10 +48,6 @@ html, body {
 
 strong {
     font-weight: 500;
-}
-
-.navbar-right {
-    margin: 0px;
 }
 
 .clear {
@@ -64,11 +61,8 @@ a:focus {
 #main {
     min-height: 100%;
     height: auto;
-    width: 1260px;
-    background: $white;
-    -moz-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
-    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .1);
-    box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+	padding-left: 0;
+	padding-right: 0;
 }
 
 #header, #sub-header {
@@ -81,8 +75,14 @@ a:focus {
     > .row {
         background: $white;
         margin: 0 auto;
-        width: 1260px;
+	    min-width: 768px;
     }
+}
+
+@media (max-width: 768px) {
+	#header, #sub-header {
+		position: absolute;
+	}
 }
 
 #sub-header {
@@ -99,13 +99,6 @@ a:focus {
 .alert-small {
     width: 33%;
     padding: 5px 10px 5px 10px;
-}
-
-@media (max-width: 1023px) and (min-width: 800px) {
-    #main {
-        width: 800px !important;
-        transition: all .25s linear;
-    }
 }
 
 @import 'w2ui';
@@ -138,10 +131,10 @@ a:focus {
     margin-top: -10px;
 }
 
-
 .error-text{
   color: $red !important;
 }
+
 .forceWrap{
   word-wrap: break-word;
   word-break: break-all;
@@ -362,8 +355,7 @@ body > div.classBanner {
 }
 
 .sidebar {
-    padding: 20px 30px;
-    margin-top:-15px;
+    padding: 30px 0;
     background: $gray-lightest;
 }
 

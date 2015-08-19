@@ -1,5 +1,7 @@
 .AllListings__listings {
-    padding-top: 10px;
+    padding: 30px;
+    background: $white;
+    min-height: 500px;
 
     .AdminOwnerListingTile {
         display: inline-block;

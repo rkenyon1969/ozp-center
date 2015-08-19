@@ -117,30 +117,32 @@ var Discovery = React.createClass({
             <div>
                 <NavBar />
                 <Header>
-                    <form className="navbar-form navbar-left" ref="form" role="search">
-                        <div className="form-group Search">
-                            <i className="icon-search"></i>
+                    <form className="col-xs-9 col-lg-10" ref="form" role="search">
+			<div className="row">
+		                <div className="form-group Search col-sm-6 col-xs-4">
+		                    <i className="icon-search"></i>
 
-                            <input ref="search" type="text" className="form-control"
-                                placeholder="Search"
-                                value={ this.state.queryString || ''}
-                                onChange={ this.onSearchInputChange } />
+		                    <input ref="search" type="text" className="form-control"
+		                        placeholder="Search"
+		                        value={ this.state.queryString || ''}
+		                        onChange={ this.onSearchInputChange } />
 
-                            <i className="icon-cross-14-grayDark clearButton" onClick={this.reset}></i>
-                        </div>
-                        <Types value={this.state.type} onChange={this.onTypeChange} />
-                        <Organizations value={this.state.agency} onChange={this.onOrganizationChange} />
-                    </form>
+		                    <i className="icon-cross-14-grayDark clearButton" onClick={this.reset}></i>
+		                </div>
+		                <Types value={this.state.type} onChange={this.onTypeChange} />
+		                <Organizations value={this.state.agency} onChange={this.onOrganizationChange} />
+                    	</div>
+		    </form>
                 </Header>
-                <div id="discovery">
-                    <Sidebar
-                        ref="sidebar"
+                <div id="discovery" className="row">
+                    <Sidebar 
+			ref="sidebar"
                         isSearching= { isSearching }
                         initCategories = { this.state.initCategories ? this.state.initCategories : false }
                         categories={ this.props.system.categories }
                         onGoHome= { this.reset }
                         onChange= { this.onCategoryChange } />
-                    <section className="content">
+                    <section className="content col-xs-9 col-lg-10">
                         {
                             isBrowsing ?
                                 this.renderSearchResults() :
@@ -276,7 +278,7 @@ var Discovery = React.createClass({
         return (
             <section className="Discovery__MostPopular">
                 <h4>Most Popular</h4>
-                <ul className="infiniteScroll">
+                <ul className="infiniteScroll row clearfix">
                     { InfiniTiles }
                 </ul>
                 <div className="text-center">
@@ -293,12 +295,12 @@ var Discovery = React.createClass({
     },
 
     renderSearchResults() {
-        var results = <p>Searching...</p>;
+        var results = <h3 className="col-xs-12">Searching...</h3>;
 
         if (!this._searching) {
             results = this.state.searchResults.length > 0 ?
                 ListingTile.fromArray(this.state.searchResults) :
-                <p>No results found.</p>;
+                <h3 className="col-xs-12">No results found.</h3>;
         }
 
         var MoreSearch = (this.state.nextOffset && !this._searching) ?
@@ -320,7 +322,7 @@ var Discovery = React.createClass({
                   reset={this.reset}
                   data={this.state}
                   /></p>
-                <ul className="list-unstyled listings-search-results">
+                <ul className="list-unstyled listings-search-results row clearfix">
                     { results }
                 </ul>
                 <div className="text-center">

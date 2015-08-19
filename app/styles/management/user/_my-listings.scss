@@ -1,5 +1,7 @@
 .MyListings__listings {
-    padding-top: $padding-large-vertical;
+    padding: 30px;
+    background: $white;
+    min-height: 500px;
 }
 
 .MyListings, .AllListings {
@@ -20,61 +22,51 @@
 }
 
 .Listings__SidebarFilter {
-  padding: $padding-small-vertical $padding-small-horizontal;
+    padding: 0;
+    margin: 0 -15px;
 
     input[type="radio"] {
         display: none;
     }
 
     h4 {
-        font-size: 16px;
+        color: $gray-dark;
+        font-weight: bold;
+        padding: 0 30px;
+        font-size: 14px;
     }
 
     .badge{
         border-radius: 0px;
         padding: 4px 4px 2px 4px;
-        margin-top: 2px;
-        margin-right: 5px;
-        float: right;
-        right: 0;
+        top: 8px;
+        right: 15px;
+        position: absolute;
     }
 
     label {
         display: block;
         cursor: pointer;
-        font-size: 12px;
-
+        border-bottom: 1px solid $gray-lighter;
         border-left: 4px solid transparent;
-        padding-left: 4px;
-        padding-bottom: 25px;
+        padding: 8px 25px;
         margin-bottom: 0px;
-        height: 25px;
-        padding-top: 3px;
-
         vertical-align: middle;
-
-        width: 85%;
-        height: 20px;
+        position: relative;
 
         &:hover, &:focus{
-
             background: $white;
-            border-left-color: $blue-darker;
-            color:$blue-dark;
-
-            span {
-                padding-top: 2px;
-                color: $blue-dark;
-            }
+            border-left-color: $blue;
+            color:$blue;
 
             .badge {
-                background-color: $blue-dark;
+                background-color: $blue;
             }
         }
 
         span {
             line-height: 20px;
-            color: $gray-dark;
+            margin-right: 30px;
         }
 
         &::before {
@@ -82,49 +74,45 @@
         }
 
         strong {
-            float: right;
-            position: relative;
-            top: 0px;
-            right:0px;
             min-width: 20px;
-            padding: 0px;
         }
 
         .label-needs-action {
-            > span {
-                color: $red-orange-dark;
-            }
+            color: $red-orange-dark;
+
             > strong {
                 background-color: $red-orange-dark;
             }
         }
+    }
 
+    .label-draft, .label-pending, .label-needs-action, .label-published, .label-rejected {
+        i { 
+            float: left;
+        }
+
+        span {
+            display: block;
+            margin-left: 52px;
+        }
     }
 
     i {
-        margin-right: 5px;
-        margin-left: 5px;
+        margin-right: 15px;
+        margin-left: 25px;
     }
 
     input:checked + label {
-        border-left: 4px solid $blue-darker;
-        background: $blue-dark;
-        color: $white;
-
-        span {
-            color: $white;
-        }
+        border-left: 4px solid $blue;
+        background: $white;
+        color: $blue-dark;
+        font-weight: bold;
 
         .badge {
-            background-color: transparent;
+            background-color: $blue;
         }
 
-        &:hover, &:focus{
-            background: $blue-darker;
-            border-left-color: $blue-darker;
-        }
-
-        > .icon-thumbs-up-12-greenDark {
+        /*> .icon-thumbs-up-12-greenDark {
             @extend .icon-thumbs-up-12-white;
         }
 
@@ -142,7 +130,7 @@
 
         > .icon-paper-12-grayDark {
             @extend .icon-paper-12-white;
-        }
+        }*/
     }
 
 

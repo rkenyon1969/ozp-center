@@ -1,8 +1,10 @@
 .carousel-wrapper {
     position: relative;
+    margin-left: -15px;
 
     .carousel  {
         margin: 0 !important;
+        width: 100% !important;
     }
 
     .prev, .next {
@@ -11,6 +13,7 @@
         height: 100%;
         background: rgba(25, 31, 37, 0.4);
         top: 0;
+        left: 15px;
         color: $white;
         z-index:1;
 
@@ -20,7 +23,8 @@
     }
 
     .next {
-        right: 0px;
+        right: 0;
+        left: auto;
     }
 
     &:hover, &:focus {

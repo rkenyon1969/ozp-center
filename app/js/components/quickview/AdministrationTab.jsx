@@ -110,7 +110,7 @@ var AdministrationTab = React.createClass({
         return (
             <div className="tab-pane active Quickview__ChangeLog row">
                 { this.renderStatus() }
-                <div className="col-md-8 col-right">
+                <div className="col-xs-8 col-right">
                     <section>
                         <h5>Listing Changes</h5>
                         <ChangeLogs showListingName={ false } org={this.props.listing.agency}/>
@@ -189,7 +189,7 @@ var AdministrationTab = React.createClass({
         }
 
         return (
-            <div className="col-md-4 col-left ListingAdmin__Controls">
+            <div className="col-xs-4 col-left ListingAdmin__Controls">
                 <section>
                     <h5>Listing Status</h5>
                     <p className={statusClass}><i className={iconClass} />{ statusText }</p>
