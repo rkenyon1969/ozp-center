@@ -209,7 +209,7 @@ div.col-md-4 > .form-group >span.image-container.image-present {
     label {
         display: block;
         border-bottom: 1px solid $gray-lighter;
-        border-left: 4px solid $gray-lightest;
+        border-left: 4px solid $gray-lighter;
         margin-bottom: 0;
         font-weight: inherit;
 

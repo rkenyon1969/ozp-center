@@ -82,9 +82,10 @@
         &:hover, &:focus {
             text-decoration: none;
             color: none;
+            background: $blue-dark;
 
             label {
-                background: $blue-dark;
+                background: $blue;
 
                 span {
                     color: $white;

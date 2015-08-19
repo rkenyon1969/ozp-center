@@ -126,10 +126,6 @@
     }
 }
 
-.react-select-box-multi .react-select-box-option::before {
-    top: 11px;
-}
-
 .react-select-box-close {
     @extend .small;
     font-weight: 400;

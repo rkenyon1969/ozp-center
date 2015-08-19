@@ -77,10 +77,10 @@
                 &:hover, &:focus {
                     background-color: $white;
                     border-left-color: $blue;
-                }
 
-                > i.icon-shopping {
-                    @extend .icon-shopping-blueDark;
+                    > i.icon-shopping {
+                        @extend .icon-shopping-blueDark;
+                    }
                 }
             }
         }

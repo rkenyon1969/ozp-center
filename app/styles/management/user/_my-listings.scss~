@@ -55,6 +55,7 @@
         position: relative;
 
         &:hover, &:focus{
+            background: $white;
             border-left-color: $blue;
             color:$blue-dark;
 
