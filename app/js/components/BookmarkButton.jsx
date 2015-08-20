@@ -35,6 +35,12 @@ var BookmarkButton = React.createClass({
         return !!_.find(this.state.library, e => e.listing.id === this.props.listing.id);
     },
 
+    componentDidMount: function(){
+      $(this.refs.tooltipped.getDOMNode()).tooltip({
+        delay: 400
+      });
+    },
+
     render: function() {
         var bookmarkBtnStyles = React.addons.classSet({
                 'btn btn-default btn-bookmark': true,
@@ -45,9 +51,9 @@ var BookmarkButton = React.createClass({
                 'icon-ribbon-filled-yellow': this.inLibrary()
             });
         return (
-            <button type="button" className={bookmarkBtnStyles} onClick={this.toggleInLibrary}>
-                <i className={bookmarkIcon} />
-            </button>
+          <button ref="tooltipped" data-toggle="tooltip" data-placement="top" title="Bookmark" type="button" className={bookmarkBtnStyles} onClick={this.toggleInLibrary}>
+              <i className={bookmarkIcon} />
+          </button>
         );
     }
     });
