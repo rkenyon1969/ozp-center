@@ -2,7 +2,7 @@
 
 var React = require('react');
 var EmptyFieldValue = require('../shared/EmptyFieldValue.jsx');
-
+var _ = require('../../utils/_');
 var ProfileLink = require('../profile/ProfileLink.jsx');
 
 var DetailsTab = React.createClass({
@@ -13,15 +13,14 @@ var DetailsTab = React.createClass({
 
     render: function () {
         var whatsNew = this.props.listing.whatIsNew;
-        var organization = this.props.listing.agency;
+        var organization = this.props.listing.agency.title;
         var type = this.props.listing.type;
         var URL = this.props.listing.launchUrl;
         var updatedDate = this.props.listing.editedDate;
         var versionNumber = this.props.listing.versionName;
-        var categories = this.props.listing.categories.join(', ');
-        var tags = this.props.listing.tags.join(', ');
+        var categories = _.pluck(this.props.listing.categories, 'title').join(', ');
+        var tags = _.pluck(this.props.listing.tags, 'name').join(', ');
         var requirements = this.props.listing.requirements;
-
 
         return (
             <div className="tab-pane active quickview-details row">
@@ -43,7 +42,7 @@ var DetailsTab = React.createClass({
                     <section>
                         <h5>Center Properties</h5>
                         <p>
-                            <p><label>Type:</label><span> { type }</span></p>
+                            <p><label>Type:</label><span> { type.title }</span></p>
 
                             <p className="forceWrap"><label>URL:</label><span> <a className="forceWrap" href={URL}>{ URL }</a></span></p>
 
@@ -79,7 +78,7 @@ var DetailsTab = React.createClass({
                 <p className="listing-owner">
                     <span> </span>
                     <ProfileLink profileId={owner.id}>
-                        {owner.displayName}
+                        {owner.display_name}
                     </ProfileLink>
                 </p>
             );
@@ -111,13 +110,13 @@ var DetailsTab = React.createClass({
 
     renderGovSponser: function () {
         return this.props.listing.contacts.map(function (contact) {
-            if (contact.type.indexOf("Government Sponser") >= 0) {
+            if (contact.id >= 0) {
                 return  [<label>Government Sponser </label>,
                         <div className="col-md-offset-1">
                             <p><label>Name:</label><span> {contact.name}</span></p>
                             <p><label>Email:</label><span> {contact.email}</span></p>
-                            <p><label>Unsecure Phone:</label><span> {contact.unsecurePhone}</span></p>
-                            <p><label>Secure Phone:</label><span> {contact.securePhone}</span></p>
+                            <p><label>Unsecure Phone:</label><span> {contact.unsecure_phone}</span></p>
+                            <p><label>Secure Phone:</label><span> {contact.secure_phone}</span></p>
                         </div>];
             }
         });

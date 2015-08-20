@@ -11,13 +11,12 @@ var FeaturedListingTile = React.createClass({
 
     render: function () {
         var { listing } = this.props;
-        var image = listing.large_banner_icon.url; // jshint ignore:line
+        var image = listing.imageXlargeUrl;
         var href = this.makeHref(this.getActiveRoutePath(), null, {
             listing: listing.id,
             action: 'view',
             tab: 'overview'
         });
-
         return (
             <li className="listing SearchListingTile SearchListingTile--featured">
                 <a href={href}>

@@ -73,7 +73,6 @@ ListingActions.fetchStorefrontListings.listen(function() {
     ListingApi.getStorefrontListings().then(ListingActions.fetchStorefrontListingsCompleted);
 });
 
-
 ListingActions.fetchById.listen(function (id) {
     ListingApi.getById(id).then(ListingActions.fetchByIdCompleted);
 });
