@@ -28,7 +28,6 @@ var NavBar = React.createClass({
           delay: 400
         });
       });
-
     },
 
     render: function () {

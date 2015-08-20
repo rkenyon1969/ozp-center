@@ -33,6 +33,12 @@ var CenterLaunchLink = React.createClass({
         this.setState(getState(profileData));
     },
 
+    componentDidMount: function(){
+      $(this.refs.tooltipped.getDOMNode()).tooltip({
+        delay: 400
+      });
+    },
+
     render: function() {
         var listingLaunchFn = ListingActions.launch.bind(null, this.props.listing),
             { className, ...otherProps } = this.props,
@@ -40,7 +46,7 @@ var CenterLaunchLink = React.createClass({
 
 
         return (
-            <button { ...otherProps } className={linkClassName}
+            <button ref="tooltipped" data-toggle="tooltip" data-placement="top" title="Launch" { ...otherProps } className={linkClassName}
                     onClick={listingLaunchFn}>
                 <i className="icon-open-grayDark" />
             </button>
