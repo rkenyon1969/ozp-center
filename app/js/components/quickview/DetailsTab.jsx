@@ -24,7 +24,7 @@ var DetailsTab = React.createClass({
 
         return (
             <div className="tab-pane active quickview-details row">
-                <div className="col-md-4 col-left">
+                <div className="col-xs-4 col-left">
                     <section className="forceWrap">
                         <h5>What&lsquo;s New</h5>
                         {
@@ -38,7 +38,7 @@ var DetailsTab = React.createClass({
                         <p>{ requirements }</p>
                     </section>
                 </div>
-                <div className="col-md-4">
+                <div className="col-xs-4">
                     <section>
                         <h5>Center Properties</h5>
                         <p>
@@ -54,13 +54,13 @@ var DetailsTab = React.createClass({
                     </section>
                     { this.renderIntents() }
                 </div>
-                <div className="col-md-4 col-right">
+                <div className="col-xs-4 col-right">
                     <section>
                         <h5>Ownership Information</h5>
                         <p>
                         <p><label>Owner(s):</label>{ this.renderOwners() }</p>
                         <p><label>Associated Organization</label></p>
-                        <p className="col-md-offset-1">{ organization }</p>
+                        <p className="col-xs-offset-1">{ organization }</p>
                         { this.renderGovSponser() }
                         </p>
                     </section>
@@ -99,7 +99,7 @@ var DetailsTab = React.createClass({
                 <p>
                     <p><label>Singleton:</label><span> { singleton }</span></p>
                     <p><label>Intents:</label>
-                        <div className="col-md-offset-1">
+                        <div className="col-xs-offset-1">
                             { intents.length ? intentComponents : <EmptyFieldValue /> }
                         </div>
                     </p>
@@ -112,7 +112,7 @@ var DetailsTab = React.createClass({
         return this.props.listing.contacts.map(function (contact) {
             if (contact.id >= 0) {
                 return  [<label>Government Sponser </label>,
-                        <div className="col-md-offset-1">
+                        <div className="col-xs-offset-1">
                             <p><label>Name:</label><span> {contact.name}</span></p>
                             <p><label>Email:</label><span> {contact.email}</span></p>
                             <p><label>Unsecure Phone:</label><span> {contact.unsecure_phone}</span></p>

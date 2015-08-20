@@ -1,6 +1,6 @@
 {
   "name": "center-ui",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "repository": {
     "type": "git",
     "url": "https://github.com/ozone-development/ozp-center.git"
@@ -76,7 +76,7 @@
     "webpack-dev-server": "1.7.0"
   },
   "dependencies": {
-    "icons": "git://github.com/ozone-development/icons",
+    "icons": "git://github.com/ozone-development/ozp-icons",
     "bootstrap-sass": "git://github.com/ozone-development/bootstrap-sass",
     "exports-loader": "0.6.2",
     "humps": "git://github.com/domchristie/humps.git",
@@ -90,7 +90,7 @@
     "react-input-placeholder": "1.0.0",
     "react-radio-group": "1.0.0",
     "react-router": "0.12.4",
-    "react-select-box": "1.0.0",
+    "react-select-box": "git://github.com/ozone-development/react-select-box#master",
     "reflux": "0.1.15",
     "select2": "3.5.1-browserify-fix",
     "spin.js": "2.0.2",

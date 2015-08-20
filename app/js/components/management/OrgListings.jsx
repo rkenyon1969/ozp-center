@@ -102,13 +102,13 @@ var OrgListings = React.createClass({
         };
         return this.transferPropsTo(
             <div className="AllListings row">
-                <div className="Listings__Sidebar col-md-2">
+                <div className="Listings__Sidebar col-xs-3 col-lg-2">
                     <Sidebar>
                         <ApprovalStatusFilter role={ UserRole.ORG_STEWARD } { ...sidebarFilterOptions } />
                         <EnabledFilter { ...sidebarFilterOptions } />
                     </Sidebar>
                 </div>
-                <LoadMore className="AllListings__listings col-md-10 all" hasMore={this.state.hasMore} onLoadMore={this.onLoadMore}>
+                <LoadMore className="AllListings__listings col-xs-9 col-lg-10 all" hasMore={this.state.hasMore} onLoadMore={this.onLoadMore}>
                     { ListingTile.fromArray(this.state.listings, UserRole.ORG_STEWARD) }
                 </LoadMore>
             </div>

@@ -16,10 +16,16 @@
 		border-top-color: $blue !important;
 	}
 }
+
 .navbar-nav > li.disabled{
 	& a:hover, & a:focus{
 		border-top-color: transparent !important;
+		cursor: default;
 	}
+}
+.navbar-inverse .navbar-nav > .disabled.open > a, .navbar-inverse .navbar-nav > .disabled.open > a:hover, .navbar-inverse .navbar-nav > .disabled.open > a:focus{
+	background: transparent !important;
+	border-color: transparent !important;
 }
 
 .activeIcon {
@@ -60,28 +66,22 @@
 		@extend .icon-mail-grayLightest;
 	}
 
+	> .icon-lightbulb {
+		@extend .icon-lightbulb-grayLightest;
+	}
+
 	&:hover, &:focus {
 		border-left-color: $blue !important;
 
 		> .icon-mail {
 			@extend .icon-mail-white;
 		}
+		
+		> .icon-lightbulb {
+		@extend .icon-lightbulb-white;
+		}
 
 	}
 
 
-}
-
-.navbar-inverse .navbar-nav > .disabled > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus{
-	background: transparent !important;
-}
-
-@media all and (min-width: 1240px) and (max-width: 10000px) {
-	.navbar-left {
-		margin-left: -60px !important;
-	}
-
-	.navbar-right {
-		margin-right: -60px !important;
-	}
 }

@@ -5,8 +5,9 @@ var UserNotificationDropdown = require('ozp-react-commons/components/notificatio
 var HelpModal = require('./helpmodal.jsx');
 var ProfileLink = require('../profile/ProfileLink.jsx');
 var ModalLink = require('../ModalLink.jsx');
-var { HUD_URL, METRICS_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL, FEEDBACK_ADDRESS } = require('ozp-react-commons/OzoneConfig');
-var emailString = FEEDBACK_ADDRESS.substring(0,7);
+var { HUD_URL, METRICS_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL, FEEDBACK_ADDRESS, HELPDESK_ADDRESS } = require('ozp-react-commons/OzoneConfig');
+var feedbackPrefix = FEEDBACK_ADDRESS.substring(0,7);
+var helpdeskPrefix = HELPDESK_ADDRESS.substring(0,7);
 var CreateEditActions = require('../../actions/CreateEditActions');
 
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
@@ -34,12 +35,13 @@ var NavBar = React.createClass({
         var Metrics = (this.isAdmin() || this.isOrgSteward()) ?
             <li><a href={METRICS_URL} target="_blank"><i className="icon-bar-graph-2-grayLightest"></i>Metrics</a></li> : '';
 
-        var feedbackTarget = this.isEmail() ? "_self" : "_blank";
+        var feedbackTarget = this.isFeedbackEmail() ? "_self" : "_blank";
+        var helpdeskTarget = this.isHelpdeskEmail() ? "_self" : "_blank";
 
 
         return (
             <nav ref="hastooltips" className="navbar navbar-inverse navbar-fixed-top" id="globalNav">
-                <div className="container-fluid container" id="centered">
+                <div className="container-fluid" id="centered">
                     <div className="navbar-left">
                         <ul className="nav navbar-nav">
                             <li className="tooltiped" data-toggle="tooltip" data-placement="bottom" title="HUD"><a className="lrg" href={HUD_URL}><i className="icon-home-grayLightest"></i></a></li>
@@ -69,6 +71,7 @@ var NavBar = React.createClass({
                                             <i className="icon-cog-grayLightest"></i>Settings
                                         </ModalLink>
                                     </li>
+                                    <li><a href={HELPDESK_ADDRESS} target={helpdeskTarget}><i className="icon-speech-bubble-grayLightest"></i>Contact Help Desk</a></li>
                                     <li className="divider"></li>
                                     <li className="dropdown-header">Create</li>
                                     <li><a href={'#/edit'} onClick={()=>{
@@ -83,7 +86,7 @@ var NavBar = React.createClass({
                                         <li><a href={'#/mall-management/categories'}><i className="icon-shopping-settings-grayLightest"></i>Center Settings</a></li>
                                     }
                                     { Metrics }
-                                    <li><a href={FEEDBACK_ADDRESS} className="caboose" target={feedbackTarget}><i className="icon-mail"></i>Submit Feedback</a></li>
+                                    <li><a href={FEEDBACK_ADDRESS} className="caboose" target={feedbackTarget}><i className="icon-lightbulb"></i>Submit Feedback</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -96,8 +99,12 @@ var NavBar = React.createClass({
         );
     },
 
-    isEmail: function(){
-        return (emailString === "mailto:") ? true : false;
+    isFeedbackEmail: function(){
+        return (feedbackPrefix === "mailto:") ? true : false;
+    },
+
+    isHelpdeskEmail: function(){
+        return (helpdeskPrefix === "mailto:") ? true : false;
     },
 
     isOrgSteward: function(){

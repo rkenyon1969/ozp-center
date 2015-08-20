@@ -8,7 +8,7 @@ var _ = require('../../../utils/_');
 
 // component dependencies
 var NavBar = require('../../NavBar/index.jsx');
-var Header = require('../../header/index.jsx');
+// var Header = require('../../header/index.jsx');
 
 var ListingManagement = React.createClass({
 
@@ -64,12 +64,11 @@ var ListingManagement = React.createClass({
         return (
             <div className="ListingManagement">
                 <NavBar />
-                <Header />
-                <div className="ListingManagement__body">
+                <div className="ListingManagement__body clearfix">
                     <h1>Listing Management</h1>
                       <div className="ListingManagement__TabContainer">
                         { this.renderTabs(tabs) }
-                        <div className="tab-content">
+                        <div className="tab-content container-fluid">
                             <RouteHandler org={this.getActiveTab(tabs)}/>
                         </div>
                     </div>

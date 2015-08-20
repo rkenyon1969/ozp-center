@@ -1,3 +1,28 @@
+### 1.0.6 (2015-08-18)
+
+
+#### Features
+
+* **navbar:** Update to point to new /counts endpoint #342 ([76d70e5f](https://github.com/ozone-development/ozp-center.git/commit/76d70e5fcf903f35b1054829a3ddfa0305c0d8d3))
+
+
+### 1.0.5 (2015-08-11)
+
+
+### 1.0.4 (2015-08-04)
+
+
+#### Bug Fixes
+
+* **Notifications:** fix notifications background on dropdown ([2ef16636](https://github.com/ozone-development/ozp-center.git/commit/2ef1663696b782de861f1b5ca42292dd1bcd9225))
+* **SearchMetrics:** Indicate to metrics where searches are combined with other terms ([c627cab3](https://github.com/ozone-development/ozp-center.git/commit/c627cab30f317e23f76b6318b5e4492304f3d8fe))
+
+
+#### Features
+
+* **Menu:** Add Helpdesk link to dropdown menu #345 ([54f05216](https://github.com/ozone-development/ozp-center.git/commit/54f05216c9c429e9bc8cc75e3e5a51ed3d2f3e0f))
+
+
 ### 1.0.3 (2015-07-28)
 
 

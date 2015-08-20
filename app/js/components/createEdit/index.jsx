@@ -11,7 +11,6 @@ var { Navigation } = require('react-router');
 
 var NavBar = require('../NavBar/index.jsx');
 var Sidebar = require('./Sidebar.jsx');
-var OrgStewardModal = require('./OrgStewardModal.jsx');
 var { classSet } = React.addons;
 var State = require('../../mixins/ActiveStateMixin');
 var $ = require('jquery');
@@ -300,7 +299,7 @@ var ListingForm = React.createClass({
         })();
 
         return (
-            <form ref="form" className="CreateEdit__form">
+            <form ref="form" className="CreateEdit__form col-xs-9 col-lg-10">
                 <h2 id={f.basicInformation.id}>Basic Information</h2>
                 <TextInput id={f.title.id} { ...p('title') }/>
                 <Select2Input id={f.type.id} { ...p('type') }
@@ -385,43 +384,6 @@ var ListingForm = React.createClass({
                 });
             }
         }
-    }
-});
-
-// This is the reminders side panel
-var Reminders = React.createClass({
-    getInitialState: () => ({ showStewards: false }),
-
-    render: function() {
-        return (
-            <section className="reminders">
-                <h4>Reminders</h4>
-                <p>
-                    <strong>Remember to portion-mark your descriptions!</strong>
-                    <br/>
-                    Listings that are not portion-marked will be rejected.
-                </p>
-                <p className="questions">
-                    <strong>If you have any questions</strong> during the submission process,
-                    please contact your organizations steward.
-                    <a className="stewards-link" onClick={this.showStewardsModal}>
-                        View list of organization stewards
-                    </a>
-                </p>
-                {
-                    this.state.showStewards &&
-                    <OrgStewardModal onHidden={this.onStewardModalHidden}/>
-                }
-            </section>
-        );
-    },
-
-    showStewardsModal: function() {
-        this.setState({ showStewards: true });
-    },
-
-    onStewardModalHidden: function() {
-        this.setState({ showStewards: false });
     }
 });
 
@@ -654,49 +616,44 @@ var CreateEditPage = React.createClass({
 
         var header = (
             <div className="CreateEdit__titlebar">
-                <h1>{titleText}</h1>
-                <div className="sub-header">
-                    <span className="alert alert-info alert-small" role="alert">
-                        All fields are required unless marked as “optional.”
-                    </span>
-                    <div className="btn-toolbar" role="group">
-                        <div className="btn-group" role="group">
-                            <button type="button" className={ classSet(saveBtnClasses) }
-                                    onClick={ this.onSave }>
-                                <span className="create-edit-button">Save</span>
-                                <i className={saveText}></i>
+                <div className="btn-toolbar" role="group">
+                    <div className="btn-group" role="group">
+                        <button type="button" className={ classSet(saveBtnClasses) }
+                                onClick={ this.onSave }>
+                            <span className="create-edit-button">Save</span>
+                            <i className={saveText}></i>
+                        </button>
+                        {
+                            showPreview &&
+                            <button className="btn btn-default tool"
+                                    onClick={ this.onPreview }>
+                                <span className="create-edit-button">Preview</span>
+                                <i className="icon-eye-grayDark"> </i>
                             </button>
-                            {
-                                showPreview &&
-                                <button className="btn btn-default tool"
-                                        onClick={ this.onPreview }>
-                                    <span className="create-edit-button">Preview</span>
-                                    <i className="icon-eye-grayDark"> </i>
-                                </button>
-                            }
-                            {
-                                showDelete &&
-                                <a href={deleteHref} className="btn btn-default tool delete-button">
-                                    <span className="create-edit-button">Delete</span>
-                                    <i className="icon-trash-grayDark"></i>
-                                </a>
-                            }
-                            {
-                                showSubmit &&
-                                <button className="btn btn-default tool"
-                                        onClick={ this.onSubmit }>
-                                    <span className="create-edit-button">Submit</span>
-                                    <i className="icon-cloud-upload-grayDark"> </i>
-                                </button>
-                            }
-                            </div>
-                        <div className="btn-group" role="group">
-                            <a type="button" className="btn-link btn myListings" onClick={this.onClose}>
-                                    Listing Management
+                        }
+                        {
+                            showDelete &&
+                            <a href={deleteHref} className="btn btn-default tool delete-button">
+                                <span className="create-edit-button">Delete</span>
+                                <i className="icon-trash-grayDark"></i>
                             </a>
+                        }
+                        {
+                            showSubmit &&
+                            <button className="btn btn-default tool"
+                                    onClick={ this.onSubmit }>
+                                <span className="create-edit-button">Submit</span>
+                                <i className="icon-cloud-upload-grayDark"> </i>
+                            </button>
+                        }
                         </div>
+                    <div className="btn-group" role="group">
+                        <a type="button" className="btn-link btn myListings" onClick={this.onClose}>
+                                Listing Management
+                        </a>
                     </div>
                 </div>
+                <h1>{titleText}</h1>
             </div>
         );
 
@@ -724,7 +681,6 @@ var CreateEditPage = React.createClass({
                 <section className="create-edit-body">
                     <Sidebar groups={links} activeId={this.state.activeId || this.getQuery().el}/>
                     <ListingForm key={this.state.timestamp} ref="form" { ...formProps }  />
-                    <Reminders />
                 </section>
                 { savingText && <LoadMask message={savingText} /> }
             </div>

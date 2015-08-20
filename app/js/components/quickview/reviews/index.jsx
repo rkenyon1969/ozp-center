@@ -95,17 +95,17 @@ var ReviewsTab = React.createClass({
 
         return (
             <div className="tab-pane active quickview-reviews row">
-                <section className="col-md-3 col-left">
+                <section className="col-xs-3 col-left">
                     { this.renderReviewFilters() }
                 </section>
-                <section className="col-md-5">
+                <section className="col-xs-5">
                     <UserReviews
                         listing={ listing }
                         user={ currentUser }
                         reviews={ reviews }
                         onEdit={ this.onEdit } />
                 </section>
-                <section className="col-md-4 col-right">
+                <section className="col-xs-4 col-right">
                     {
                         !currentUserReview && !reviewBeingEdited &&
                             <SubmitReview listing={ listing } />

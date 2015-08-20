@@ -33,7 +33,7 @@ var OverviewTab = React.createClass({
         return (
             <div className="tab-pane active row quickview-overview">
                 { this.renderScreenshots() }
-                <div className="col-md-4">
+                <div className="col-xs-12 col-md-3 pull-right">
                     <p className= { descriptionClasses }>{ description }</p>
                 </div>
             </div>
@@ -46,7 +46,7 @@ var OverviewTab = React.createClass({
         var screenshots = this.props.listing.screenshots;
 
         if (!screenshots.length) {
-            return (<p className="text-muted col-md-8">No screenshots provided!</p>);
+            return (<p className="text-muted col-xs-12 col-md-9">No screenshots provided!</p>);
         }
 
         var smallImageUrls = screenshots.map(function (screenshot, i) {
@@ -54,9 +54,11 @@ var OverviewTab = React.createClass({
         });
 
         return (
-            <Carousel autoInit={ shown } className="col-md-8">
-                { smallImageUrls }
-            </Carousel>
+            <div className="col-xs-12 col-md-9">
+                <Carousel autoInit={ shown }>
+                    { smallImageUrls }
+                </Carousel>
+            </div>
         );
     },
 

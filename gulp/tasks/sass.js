@@ -8,7 +8,8 @@ var bless = require('gulp-bless');
 
 var sassConfig = {
     includePaths: ['app/styles'],
-    precision: 10
+    precision: 10,
+    errLogToConsole: true
 };
 
 gulp.task('sass', function() {

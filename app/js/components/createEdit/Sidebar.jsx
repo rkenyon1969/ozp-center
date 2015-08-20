@@ -2,6 +2,7 @@
 
 var React = require('react');
 var _ = require('../../utils/_');
+var OrgStewardModal = require('./OrgStewardModal.jsx');
 
 var SidebarLink = React.createClass({
     render: function() {
@@ -70,6 +71,43 @@ var SidebarGroup = React.createClass({
     }
 });
 
+// This is the reminders section
+var Reminders = React.createClass({
+    getInitialState: () => ({ showStewards: false }),
+
+    render: function() {
+        return (
+            <div className="reminders">
+                <p>
+                    <strong>All fields are required</strong> unless marked as “optional.”
+                </p>
+                <p>
+                    <strong>Remember to portion-mark your descriptions!</strong> Listings that are not portion-marked will be rejected.
+                </p>
+                <p className="questions">
+                    <strong>If you have any questions</strong> during the submission process,
+                    please contact your organizations steward.
+                    <a className="stewards-link" onClick={this.showStewardsModal}>
+                        View list of organization stewards
+                    </a>
+                </p>
+                {
+                    this.state.showStewards &&
+                    <OrgStewardModal onHidden={this.onStewardModalHidden}/>
+                }
+            </div>
+        );
+    },
+
+    showStewardsModal: function() {
+        this.setState({ showStewards: true });
+    },
+
+    onStewardModalHidden: function() {
+        this.setState({ showStewards: false });
+    }
+});
+
 var Sidebar = React.createClass({
     propTypes: {
         /**
@@ -107,10 +145,11 @@ var Sidebar = React.createClass({
         var groupCmps = this.props.groups.map(renderGroup.bind(null, this.props.activeId));
 
         return (
-            <nav className="create-edit-sidebar">
+            <nav className="create-edit-sidebar col-xs-3 col-lg-2">
                 <form>
                     <ol>{groupCmps}</ol>
                 </form>
+                <Reminders />
             </nav>
         );
     }
