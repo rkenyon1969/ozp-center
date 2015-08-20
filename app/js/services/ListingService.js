@@ -135,16 +135,18 @@ ListingActions.fetchOwnedListings.listen(function (profile) {
 ListingActions.fetchReviews.listen(function (listing) {
     ListingApi.fetchReviews(listing.id)
         .then(ListingActions.fetchReviewsCompleted.bind(null, listing.id));
-    if(typeof(listing.title) !== 'undefined') { OzpAnalytics.trackListingReview(listing.title);}
+    if(typeof(listing.title) !== 'undefined') {
+      OzpAnalytics.trackListingReviewView(listing.title);
+    }
 });
 
 ListingActions.saveReview.listen(function (listing, review) {
-    OzpAnalytics.trackListingReview(listing.title);
     ListingApi.saveReview(listing.id, review)
         .then(function (response) {
             ListingActions.fetchById(listing.id);
             ListingActions.fetchReviews(listing);
             ListingActions.saveReviewCompleted(listing, response);
+            OzpAnalytics.trackListingReview(listing.title);
         })
         .fail(ListingActions.saveReviewFailed);
 });
