@@ -1,6 +1,7 @@
 'use strict';
 
 var $ = require('jquery');
+var humps = require('humps');
 var _ = require('../utils/_');
 var OzpAnalytics = require('../analytics/ozp-analytics');
 var PaginatedResponse  =require ('./responses/PaginatedResponse');
@@ -18,12 +19,31 @@ var FIELDS = [
      'featuredBannerIconId'
 ];
 
+
 function Listing (json) {
     json = json || {};
+    json = humps.camelizeKeys(json);
 
     FIELDS.forEach((key) => {
         this[key] = json[key];
     });
+
+    this.agencyShort = json.agency.shortName;
+    this.bannerIconId = json.bannerIcon.id;
+    this.editedDate = json.approvedDate;  // TODO: re-evaluate
+    this.featuredBannerIconId = json.largeBannerIcon.id;  // TODO: re-evaluate
+    this.height = json.largeBannerIcon.maxHeight;  // TODO: re-evaluate
+    this.imageLargeUrl = json.bannerIcon.url;
+    this.imageMediumUrl = json.largeIcon.url;
+    this.imageSmallUrl = json.smallIcon.url;
+    this.imageXlargeUrl = json.largeBannerIcon.url;
+    this.largeIconId = json.bannerIcon.id;
+    this.releaseDate = json.approvedDate;  // TODO: re-evaluate
+    this.smallIconId = json.smallIcon.id;
+    this.type = json.appType;
+    this.uuid = json.uniqueName;
+    this.width = json.largeBannerIcon.maxWidth;  // TODO: re-evaluate
+
 
     this.intents = this.intents || [];
     this.screenshots = this.screenshots || [];
@@ -55,35 +75,44 @@ var delaySearch = (function(){
 
 var ListingApi = {
 
+    newListing: function(listingData) {
+        return new Listing(listingData);
+    },
+
     getStorefrontListings: function() {
-        /* jshint ignore:start */
         return $.getJSON(API_URL + '/api/storefront/')
             .then(resp => ({
-                featured: resp.featured,
-                newArrivals: resp.recent,
-                mostPopular: resp.most_popular
+                featured: _.map(resp.featured, this.newListing),
+                newArrivals: _.map(resp.recent, this.newListing),
+                mostPopular: _.map(resp.most_popular, this.newListing)
             }));
-        /* jshint ignore:end */
     },
 
     getFeatured: function () {
         return $.getJSON(API_URL + '/api/listings/search?isFeatured=true&sort=avgRate&order=DESC&max=24')
-            .then(parseList);
+            .then(
+                resp => parseList(_.map(resp, this.newListing))
+            );
     },
 
     getNewArrivals: function () {
         return $.getJSON(API_URL + '/api/listings/search?sort=approvedDate&order=DESC&max=24')
-            .then(parseList);
+            .then(
+                resp => parseList(_.map(resp, this.newListing))
+            );
     },
 
     getMostPopular: function () {
         return $.getJSON(API_URL + '/api/listings/search?sort=avgRate&order=DESC&max=36')
-            .then(parseList);
+            .then(
+                resp => parseList(this.newListing(resp))
+            );
     },
     search: function (options) {
         var params = $.param(options, true);
-        return $.getJSON(API_URL + '/api/listings/search?' + params)
-            .then(function (response) {
+        return $.getJSON(API_URL + '/api/listings/search?' + params).then(
+            (response) => {
+                response = _.map(response, this.newListing);
                 if (options.categories && options.categories.length > 0) {
                     for(var index = 0; index < options.categories.length; index++) {
                         OzpAnalytics.trackCategorization('Categorization', options.categories[index], response.total);
@@ -95,12 +124,15 @@ var ListingApi = {
                     OzpAnalytics.trackSiteSearch('Application Search', queryString, response.total);
                 }, 800);
                 return response;
+
             })
             .then(parseListToPaginatedResponse);
     },
 
     getById: function (id) {
-        return $.getJSON(API_URL + '/api/listing/' + id);
+        return $.getJSON(API_URL + '/api/listing/' + id + '/').then(
+            resp => this.newListing(resp)
+        );
     },
 
     save: function (data) {
@@ -170,7 +202,9 @@ var ListingApi = {
         if (profile) {
             url = url + profile.id + '/';
         }
-        return $.getJSON(url).then(parseList);
+        return $.getJSON(url).then(
+            resp => parseList(_.map(resp, this.newListing))
+        );
     },
 
     rejectListing: function (id, description) {
@@ -189,7 +223,7 @@ var ListingApi = {
         }
 
         return $.getJSON(url).then((response) => {
-            return new PaginatedResponse(response, Listing);
+            return new PaginatedResponse(this.newListing(response), Listing);
         });
     },
 

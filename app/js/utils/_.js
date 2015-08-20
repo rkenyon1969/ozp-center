@@ -25,6 +25,7 @@ module.exports = {
     forEach: require('lodash/collections/forEach'),
     every: require('lodash/collections/every'),
     groupBy: require('lodash/collections/groupBy'),
+    pluck: require('lodash/collections/pluck'),
 
     findIndex: require('lodash/arrays/findIndex'),
     compact: require('lodash/arrays/compact'),

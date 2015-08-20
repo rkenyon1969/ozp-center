@@ -79,6 +79,7 @@
     "icons": "git://github.com/ozone-development/icons",
     "bootstrap-sass": "git://github.com/ozone-development/bootstrap-sass",
     "exports-loader": "0.6.2",
+    "humps": "git://github.com/domchristie/humps.git",
     "lodash-amd": "2.4.1",
     "moment": "2.9.0",
     "object-assign": "1.0.0",

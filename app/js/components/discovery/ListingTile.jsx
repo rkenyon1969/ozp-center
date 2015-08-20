@@ -7,9 +7,6 @@ var IconRating = require('../shared/IconRating.jsx');
 var CenterLaunchLink = require('../CenterLaunchLink.jsx');
 var BookmarkButton = require('../BookmarkButton.jsx');
 
-var { API_URL } = require('ozp-react-commons/OzoneConfig');
-var IMAGE_URL = API_URL + '/api/image/';
-
 var ListingTile = React.createClass({
 
     mixins: [Navigation, CurrentPath, ActiveState],
@@ -42,12 +39,7 @@ var ListingTile = React.createClass({
             tab: 'overview'
         });
 
-        // Some endpoints have the url; others have the id
-        if (listing.banner_icon.url) {
-            imageLargeUrl = listing.banner_icon.url;
-        } else {
-            imageLargeUrl = IMAGE_URL + listing.banner_icon.id;
-        }
+        imageLargeUrl = listing.imageLargeUrl;
 
         return this.transferPropsTo(
             <li className="listing SearchListingTile" key={listing.id} >
