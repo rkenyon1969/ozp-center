@@ -38,7 +38,7 @@ var DetailedQuery = React.createClass({
 
     getTypes: function(){
       if(this.props.data.type.length){
-        var prettyTypes = this.props.data.type.map((type)=>{
+        var prettyTypes = this.props.data.type.map((type, i)=>{
           /*
           <i className="icon-cross-14-white" onClick={()=>{
             var types = this.props.data.type;
@@ -46,8 +46,13 @@ var DetailedQuery = React.createClass({
             this.props.onTypeChange(types);
           }}></i>*/
           return (
-            <span className="label label-default">
-              {type}
+            <span>
+              <span className="label label-default">
+                {type}
+              </span>
+              {(i !== this.props.data.type.length -1) &&
+                <span>&#32;and&#32;</span>
+              }
             </span>
           );
         });
@@ -62,7 +67,7 @@ var DetailedQuery = React.createClass({
     },
     getOrgs: function(){
       if(this.props.data.agency.length){
-        var prettyOrgs = this.props.data.agency.map((agent)=>{
+        var prettyOrgs = this.props.data.agency.map((agent, i)=>{
           /*
           <i className="icon-cross-14-white" onClick={()=>{
             var orgs = this.props.data.agency;
@@ -70,8 +75,13 @@ var DetailedQuery = React.createClass({
             this.props.onOrganizationChange(orgs);
           }}></i>*/
           return (
-            <span className="label label-default">
-              {agent}
+            <span>
+              <span className="label label-default">
+                {agent}
+              </span>
+              {(i !== this.props.data.agency.length -1) &&
+                <span>&#32;and&#32;</span>
+              }
             </span>
           );
         });
