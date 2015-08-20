@@ -51,7 +51,7 @@ var DetailedQuery = React.createClass({
                 {type}
               </span>
               {(i !== this.props.data.type.length -1) &&
-                <span>&#32;and&#32;</span>
+                <span>&#32;or&#32;</span>
               }
             </span>
           );
@@ -80,7 +80,7 @@ var DetailedQuery = React.createClass({
                 {agent}
               </span>
               {(i !== this.props.data.agency.length -1) &&
-                <span>&#32;and&#32;</span>
+                <span>&#32;or&#32;</span>
               }
             </span>
           );
