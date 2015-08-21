@@ -430,3 +430,6 @@ $icons: (
 
 
 @include sprite-icons($icons);
+*{
+  -moz-transition: none !important;
+}
