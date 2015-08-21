@@ -326,7 +326,7 @@ var CurrentListingStore = createStore({
                 deferred.resolve(_listing);
             } else {
                 ListingApi.getById(id).then(l => {
-                    this.refreshListing(new Listing(l));
+                    this.refreshListing(cloneDeep(l));
                     deferred.resolve(_listing);
                 });
             }

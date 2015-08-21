@@ -67,8 +67,7 @@ var GlobalListingStore = Reflux.createStore({
         this.listenTo(ListingActions.fetchOwnedListingsCompleted, (x)=>{
             updateCache(x);
         });
-        this.listenTo(ListingActions.saveCompleted, function (isNew, data) {
-            var listing = new Listing(data);
+        this.listenTo(ListingActions.saveCompleted, function (isNew, listing) {
             updateCache([listing]);
             if (isNew) {
                 listingCreated(listing);
@@ -84,7 +83,7 @@ var GlobalListingStore = Reflux.createStore({
             this.trigger();
         });
         this.listenTo(ListingActions.fetchByIdCompleted, function (data) {
-            updateCache([new Listing(data)]);
+            updateCache([data]);
             this.trigger();
         });
         this.listenTo(ListingActions.deleteListingCompleted, function (data) {
