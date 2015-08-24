@@ -72,8 +72,8 @@ var UserReviews = React.createClass({
     },
 
     componentDidMount: function(){
-      var listing = this.props.listing;
-      if(typeof(listing.title) !== 'undefined') {
+      var listing = this.props.listing || false;
+      if(listing.title) {
         OzpAnalytics.trackListingReviewView(listing.title);
       }
     },
