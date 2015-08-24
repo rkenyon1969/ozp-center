@@ -135,9 +135,6 @@ ListingActions.fetchOwnedListings.listen(function (profile) {
 ListingActions.fetchReviews.listen(function (listing) {
     ListingApi.fetchReviews(listing.id)
         .then(ListingActions.fetchReviewsCompleted.bind(null, listing.id));
-    if(typeof(listing.title) !== 'undefined') {
-      OzpAnalytics.trackListingReviewView(listing.title);
-    }
 });
 
 ListingActions.saveReview.listen(function (listing, review) {

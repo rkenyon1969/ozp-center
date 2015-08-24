@@ -4,6 +4,7 @@ var React = require('react');
 var IconRating = require('../../shared/IconRating.jsx');
 var _ = require('../../../utils/_');
 var TimeAgo = require('../../shared/TimeAgo.jsx');
+var OzpAnalytics = require('../../../analytics/ozp-analytics');
 
 var UserReview = React.createClass({
 
@@ -68,6 +69,13 @@ var UserReviews = React.createClass({
                     <p>Please add a review to share your thoughts and experiences with others.</p>
                 </div>
         );
+    },
+
+    componentDidMount: function(){
+      var listing = this.props.listing;
+      if(typeof(listing.title) !== 'undefined') {
+        OzpAnalytics.trackListingReviewView(listing.title);
+      }
     },
 
     renderReviews: function () {
