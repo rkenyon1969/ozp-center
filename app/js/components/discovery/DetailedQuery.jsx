@@ -25,7 +25,7 @@ var DetailedQuery = React.createClass({
         });
         return (
           <span>
-            for listings matching &#32;
+            for listings matching&nbsp;
             { this.props.data.queryString &&
                <span>
                  {prettyQuery}
@@ -58,7 +58,7 @@ var DetailedQuery = React.createClass({
         });
         return (
           <span>
-            &#32;with the {(this.props.data.type.length > 1) ? 'types' : 'type'} {prettyTypes}
+            &nbsp;with the type {prettyTypes}
           </span>
         );
       }else{
@@ -87,7 +87,7 @@ var DetailedQuery = React.createClass({
         });
         return (
           <span>
-            &#32;in the {(this.props.data.agency.length > 1) ? 'organizations' : 'organization'} {prettyOrgs}
+            &nbsp;in the organization {prettyOrgs}
           </span>
         );
       }else{
@@ -135,7 +135,7 @@ var DetailedQuery = React.createClass({
         }
         return (
           <span>
-            &#32;with the {(this.props.data.categories.length > 1) ? 'categories' : 'category'} {prettyCats}
+            &nbsp;with the {(this.props.data.categories.length > 1) ? 'categories' : 'category'} {prettyCats}
           </span>
         );
       }else{
