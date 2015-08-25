@@ -79,7 +79,8 @@ var EditReview = React.createClass({
     },
 
     isEditingRateAllowed: function () {
-        return this.state.review.author.username === this.props.user.username;
+        // TODO: This needs to be re-thought. See #OZBE53
+        return this.state.review.author.user.username === this.props.user.username;
     },
 
     render: function () {
@@ -97,6 +98,7 @@ var EditReview = React.createClass({
                         onChange={ this.onRatingChange }
                         viewOnly={ !isEditingRateAllowed }/>
                     {
+                        // TODO: This needs to be re-thought. See #OZBE53
                         !isEditingRateAllowed &&
                             <i className="icon-lock"></i>
                     }

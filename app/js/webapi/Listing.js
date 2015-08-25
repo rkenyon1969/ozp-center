@@ -40,7 +40,7 @@ function Listing (json) {
     this.largeIconId = json.bannerIcon.id;
     this.releaseDate = json.approvedDate;  // TODO: re-evaluate
     this.smallIconId = json.smallIcon.id;
-    this.type = json.appType;
+    this.type = json.listingType;
     this.uuid = json.uniqueName;
     this.width = json.largeBannerIcon.maxWidth;  // TODO: re-evaluate
 
@@ -80,8 +80,8 @@ var ListingApi = {
     },
 
     getStorefrontListings: function() {
-        return $.getJSON(API_URL + '/api/storefront/')
-            .then(resp => ({
+        return $.getJSON(API_URL + '/api/storefront/').then(
+            resp => ({
                 featured: _.map(resp.featured, this.newListing),
                 newArrivals: _.map(resp.recent, this.newListing),
                 mostPopular: _.map(resp.most_popular, this.newListing)
@@ -91,22 +91,19 @@ var ListingApi = {
     getFeatured: function () {
         return $.getJSON(API_URL + '/api/listings/search?isFeatured=true&sort=avgRate&order=DESC&max=24')
             .then(
-                resp => parseList(_.map(resp, this.newListing))
-            );
+                resp => parseList(_.map(resp, this.newListing)));
     },
 
     getNewArrivals: function () {
         return $.getJSON(API_URL + '/api/listings/search?sort=approvedDate&order=DESC&max=24')
             .then(
-                resp => parseList(_.map(resp, this.newListing))
-            );
+                resp => parseList(_.map(resp, this.newListing)));
     },
 
     getMostPopular: function () {
         return $.getJSON(API_URL + '/api/listings/search?sort=avgRate&order=DESC&max=36')
             .then(
-                resp => parseList(this.newListing(resp))
-            );
+                resp => parseList(this.newListing(resp)));
     },
     search: function (options) {
         var params = $.param(options, true);
@@ -138,8 +135,7 @@ var ListingApi = {
 
     getById: function (id) {
         return $.getJSON(API_URL + '/api/listing/' + id + '/').then(
-            resp => this.newListing(resp)
-        );
+            (resp) => this.newListing(resp));
     },
 
     save: function (data) {
@@ -164,21 +160,21 @@ var ListingApi = {
     },
 
     getChangeLogs: function (id) {
-        return $.getJSON(API_URL + '/api/listing/' + id + '/activity')
-            .then((response) => new PaginatedResponse(response).getItemAsList());
+        return $.getJSON(API_URL + '/api/listing/' + id + '/activity/').then(
+            (response) => new PaginatedResponse(humps.camelizeKeys(response)).getItemAsList());
     },
 
     fetchReviews: function (id) {
-        return $.getJSON(API_URL + '/api/listing/' + id + '/itemComment')
-            .then((response) => new PaginatedResponse(response).getItemAsList());
+        return $.getJSON(API_URL + '/api/listing/' + id + '/itemComment/').then(
+            (response) => new PaginatedResponse(humps.camelizeKeys(response)).getResponse());
     },
 
     saveReview: function (listingId, review) {
-        var url = `${API_URL}/api/listing/${listingId}/itemComment`,
+        var url = `${API_URL}/api/listing/${listingId}/itemComment/`,
             method = 'POST';
         if (review.id) {
             method = 'PUT';
-            url += `/${review.id}`;
+            url += `${review.id}/`;
         }
         // default rate to 1 if not specified
         if (!review.rate) {
@@ -197,7 +193,7 @@ var ListingApi = {
     deleteReview: function (listingId, reviewId) {
         return $.ajax({
             type: 'DELETE',
-            url: `${API_URL}/api/listing/${listingId}/itemComment/${reviewId}`,
+            url: `${API_URL}/api/listing/${listingId}/itemComment/${reviewId}/`,
             dataType: 'json',
             contentType: 'application/json'
         });
@@ -210,8 +206,7 @@ var ListingApi = {
             url = url + profile.id + '/';
         }
         return $.getJSON(url).then(
-            resp => parseList(_.map(resp, this.newListing))
-        );
+            (resp) => parseList(_.map(resp, this.newListing)));
     },
 
     rejectListing: function (id, description) {
@@ -229,16 +224,21 @@ var ListingApi = {
             url = API_URL + '/api/listing?' + $.param(options);
         }
 
-        return $.getJSON(url).then((response) => {
-            return new PaginatedResponse(this.newListing(response), Listing);
-        });
+        return $.getJSON(url).then(
+            (response) => new PaginatedResponse(this.newListing(response), Listing));
     },
 
     getCounts: function () {
-        var url = API_URL + '/api/listing/counts';
+        // var url = API_URL + '/api/listing/counts';
+        // return $.getJSON(url).then((response) => {
+        //     return response;
+        // });
 
+        // TODO: Temporary until we get a /counts drf endpoint
+        var url = API_URL + '/api/listing/1/';
+        var hardCodedResponse = {"approved":45,"agencyCounts":{"1":24,"2":12,"3":9},"enabled":45};
         return $.getJSON(url).then((response) => {
-            return response;
+            return hardCodedResponse;
         });
     },
 
@@ -250,9 +250,8 @@ var ListingApi = {
                 url = API_URL + '/api/self/profile/' + profile.id + '/listing/activity?' + $.param(options);
             }
         }
-        return $.getJSON(url).then((response) => {
-            return new PaginatedResponse(response);
-        });
+        return $.getJSON(url).then(
+            (response) => new PaginatedResponse(humps.camelizeKeys(response)));
     }
 };
 
