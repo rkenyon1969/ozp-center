@@ -103,17 +103,6 @@
     }
 }
 
-.react-select-box-empty .react-select-box-close {
-    @extend .small;
-    font-weight: 400;
-    color: $blue;
-    text-decoration: none;
-
-    &:hover, &:focus {
-        color: $blue-dark;
-    }
-}
-
 .react-select-box-option {
     color: $gray-darkest;
     font-weight: 300;
@@ -121,7 +110,7 @@
     border-left: 4px solid transparent;
 
     &:hover, &:focus {
-        color: $blue;
+        color: $blue-dark;
         border-left: 4px solid $blue;
 		text-decoration: none;
 		background: none;
@@ -129,24 +118,39 @@
 }
 
 .react-select-box-option-selected, .react-select-box-multi .react-select-box-option-selected {
-    color: $white;
-    background: $blue;
-    border-left: 4px solid $blue;
+    font-weight: bold;
+    color: $blue-dark;
 
     &::before{
         color:$blue;
     }
 }
 
+.react-select-box-multi .react-select-box-option::before {
+    top: 11px;
+}
+
 .react-select-box-close {
-    color: $blue;
+    @extend .small;
+    font-weight: 400;
+    color: $gray-dark;
     text-decoration: none;
     text-transform: none;
-    font-weight: 400;
-    @extend .small;
+    text-align: right;
+    padding-right: 15px;
 
     &:hover, &:focus {
-        color: $blue;
+        color: $blue-dark;
+        text-decoration: none;
+    }
+}
+
+.react-select-box-empty .react-select-box-close {
+    color: $gray-dark;
+
+    &:hover, &:focus {
+        color: $blue-dark;
+        text-decoration: none;
     }
 }
 
@@ -177,7 +181,7 @@
 
                 &:hover, &:focus {
                     border-top: 4px solid $blue;
-                    color: $blue;
+                    color: $blue-dark;
                 }
             }
         }
@@ -222,7 +226,7 @@
         background: $gray-lightest;
 
         > .react-select-box-label {
-            color: $blue;
+            color: $blue-dark;
         }
     }
     > .react-select-box-clear {
