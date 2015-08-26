@@ -7,7 +7,7 @@ var LoadMore = React.createClass({
 
     propTypes: {
         children: PropTypes.arrayOf(PropTypes.element).isRequired,
-        hasMore: PropTypes.bool.isRequired,
+        hasMore: PropTypes.bool,
         onLoadMore: PropTypes.func.isRequired
     },
 
