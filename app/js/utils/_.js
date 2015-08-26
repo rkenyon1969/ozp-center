@@ -16,6 +16,8 @@ module.exports = {
     pick: require('lodash/objects/pick'),
     omit: require('lodash/objects/omit'),
     values: require('lodash/objects/values'),
+    keys: require('lodash/objects/keys'),
+    has: require('lodash/objects/has'),
 
     find: require('lodash/collections/find'),
     filter: require('lodash/collections/filter'),
@@ -36,6 +38,7 @@ module.exports = {
     last: require('lodash/arrays/last'),
     remove: require('lodash/arrays/remove'),
     range: require('lodash/arrays/range'),
+    difference: require('lodash/arrays/difference'),
 
     partial: require('lodash/functions/partial'),
     once: require('lodash/functions/once'),

@@ -2,7 +2,6 @@
 
 var React = require('react');
 var EmptyFieldValue = require('../shared/EmptyFieldValue.jsx');
-var _ = require('../../utils/_');
 var ProfileLink = require('../profile/ProfileLink.jsx');
 
 var DetailsTab = React.createClass({
@@ -18,8 +17,8 @@ var DetailsTab = React.createClass({
         var URL = this.props.listing.launchUrl;
         var updatedDate = this.props.listing.editedDate;
         var versionNumber = this.props.listing.versionName;
-        var categories = _.pluck(this.props.listing.categories, 'title').join(', ');
-        var tags = _.pluck(this.props.listing.tags, 'name').join(', ');
+        var categories = this.props.listing.categories.join(', ');
+        var tags = this.props.listing.tags.join(', ');
         var requirements = this.props.listing.requirements;
 
         return (
@@ -42,7 +41,7 @@ var DetailsTab = React.createClass({
                     <section>
                         <h5>Center Properties</h5>
                         <p>
-                            <p><label>Type:</label><span> { type.title }</span></p>
+                            <p><label>Type:</label><span> { type }</span></p>
 
                             <p className="forceWrap"><label>URL:</label><span> <a className="forceWrap" href={URL}>{ URL }</a></span></p>
 
@@ -78,7 +77,7 @@ var DetailsTab = React.createClass({
                 <p className="listing-owner">
                     <span> </span>
                     <ProfileLink profileId={owner.id}>
-                        {owner.display_name}
+                        {owner.displayName}
                     </ProfileLink>
                 </p>
             );

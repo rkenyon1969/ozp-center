@@ -50,23 +50,6 @@ var imagePropertyUrlMap =
     Object.assign({}, listingIconPropertyUrlMap, screenshotPropertyUrlMap);
 
 /**
- * From _listing create the json to be sent to the server to save the listing
- */
-function makeJsonForSave() {
-    var screenshots = _listing.screenshots.map(
-            s => _.omit(s, 'smallImage', 'largeImage', 'smallImageUrl', 'largeImageUrl')
-        ),
-        strippedListing = _.omit(_listing,
-            'imageSmallUrl', 'imageMediumUrl', 'imageLargeUrl', 'imageXlargeUrl',
-            'smallIcon', 'largeIcon', 'bannerIcon', 'featuredBannerIcon',
-            'screenshots'),
-        json = Object.assign(strippedListing, {screenshots: screenshots});
-
-    return json;
-}
-
-
-/**
  * Check to see if url is an object url and if so revoke it
  */
 function revokeObjectURL(url) {
@@ -249,7 +232,7 @@ var CurrentListingStore = createStore({
                 Object.assign(_listing, oldListingData);
                 me.trigger(Object.assign({saveStatus: null}, validation));
             } else {
-                ListingActions.save(makeJsonForSave());
+                ListingActions.save(_listing);
             }
         });
     },

@@ -193,6 +193,13 @@ function getOptionsForSystemObject (items) {
     });
 }
 
+function getOptionsForContactType (items) {
+    return items.map(item => {
+        return { id: item, text: item };
+    });
+}
+
+
 // On the edit listing page, these are the wells users input the 'Type of Resource' and the resources 'URL'
 var ResourceForm = React.createClass({
     mixins: [ ValidatedFormMixin ],
@@ -257,12 +264,13 @@ var ContactForm = React.createClass({
     mixins: [ require('../../mixins/SystemStateMixin'), ValidatedFormMixin ],
 
     render: function () {
+
         return (
             <div className="well">
                 <button type="button" className="close" onClick={this.props.removeHandler}>
                     <span aria-hidden="true"><i className="icon-cross-14"></i></span><span className="sr-only">Clear</span>
                 </button>
-                <Select2Input { ...this.getFormComponentProps('type') } options={ getOptionsForSystemObject(this.state.system.contactTypes) }/>
+                <Select2Input { ...this.getFormComponentProps('type') } options={ getOptionsForContactType(this.state.system.contactTypes) }/>
                 <TextInput { ...this.getFormComponentProps('name') }/>
                 <TextInput { ...this.getFormComponentProps('organization') } optional/>
                 <TextInput { ...this.getFormComponentProps('email') }/>
@@ -316,9 +324,8 @@ var ListingForm = React.createClass({
                 <TextAreaInput id={f.requirements.id} { ...p('requirements') } rows="5"/>
                 <TextAreaInput id={f.whatsNew.id} { ...p('whatIsNew') } rows="3" optional/>
                 <Select2Input id={f.intents.id} { ...p('intents') }  multiple options={
-                    system.intents.map(intent => {
-                        var val = intent.type + '/' + intent.action;
-                        return { id: val, text: val };
+                    this.props.system.intents.map(intent => {
+                        return { id: intent.action, text: intent.action };
                     })
                 } optional />
                 <Toggle

@@ -3,7 +3,6 @@
 var Reflux = require('reflux');
 var ListingActions = require('../actions/ListingActions');
 var {listingCreated} = require('../actions/CreateEditActions');
-var Listing = require('../webapi/Listing').Listing;
 
 var _listingsCache = {};
 var _listingsByOwnerCache = {};
@@ -22,13 +21,13 @@ function updateCache (listings) {
         _listingsCache[listing.id] = listing;
 
         listing.owners.forEach(function (owner) {
-            var cachedListings = _listingsByOwnerCache[owner.user.username] || [];
+            var cachedListings = _listingsByOwnerCache[owner.username] || [];
 
             cachedListings = cachedListings.filter(function (l) {
                 return l.id !== listing.id;
             });
 
-            _listingsByOwnerCache[owner.user.username] = cachedListings.concat([listing]);
+            _listingsByOwnerCache[owner.username] = cachedListings.concat([listing]);
         });
     });
 }
@@ -90,10 +89,10 @@ var GlobalListingStore = Reflux.createStore({
             var listing = _listingsCache[data.id];
 
             listing.owners.forEach(function (owner) {
-                var ownedListings = _listingsByOwnerCache[owner.user.username].filter(function (item) {
+                var ownedListings = _listingsByOwnerCache[owner.username].filter(function (item) {
                     return item.id !== listing.id;
                 });
-                _listingsByOwnerCache[owner.user.username] = ownedListings;
+                _listingsByOwnerCache[owner.username] = ownedListings;
             });
 
             this.trigger();

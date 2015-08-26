@@ -144,6 +144,7 @@ function validateContacts(validation, instance) {
 function validate (instance, options, type) {
     var validation = t.validate(instance, type),
         errors = {};
+
     if (validation.errors) {
         validation.errors.forEach(function (e) {
             if(e.path[0] === 'tags'){

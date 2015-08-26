@@ -1,6 +1,8 @@
 'use strict';
 
 var $ = require('jquery');
+var humps = require('humps');
+var _ = require('../utils/_');
 var Response = require('./responses/Response');
 
 var { API_URL } = require('ozp-react-commons/OzoneConfig');
@@ -39,15 +41,14 @@ var ConfigApi = {
     //types, intents, contact types, and organizations
     getMetadata: function() {
         return $.getJSON(API_URL + '/api/metadata/').then(function(response) {
-            /* jshint ignore:start */
+            response = humps.camelizeKeys(response);
             return {
                 categories: response.categories,
-                types: response.listing_types,
+                types: response.listingTypes,
                 intents: response.intents,
-                contactTypes: response.contact_types,
+                contactTypes: _.map(response.contactTypes, 'name'),
                 organizations: response.agencies
             };
-            /* jshint ignore:end */
         });
     }
 

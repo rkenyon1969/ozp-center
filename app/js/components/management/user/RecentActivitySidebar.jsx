@@ -145,11 +145,11 @@ var RecentActivitySidebar = React.createClass({
             );
         }
 
-        if(currentUser.stewarded_organizations.length > 0 && system.organizations.length > 0) {
-            _.forEach(currentUser.stewarded_organizations, function(org) {
-                var orgName = org.short_name;
+        if(currentUser.stewardedOrganizations.length > 0 && system.organizations.length > 0) {
+            _.forEach(currentUser.stewardedOrganizations, function(org) {
+                var orgName = org.shortName;
                 org = _.find(system.organizations, function(orgObj) {
-                    return orgObj.short_name === orgName;
+                    return orgObj.shortName === orgName;
                 });
 
                 children.push(

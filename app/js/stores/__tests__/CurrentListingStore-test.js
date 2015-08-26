@@ -12,7 +12,7 @@ describe('CurrentListingStore', function() {
         listingType = 'Test Type',
         imageId = 'asdf';
 
-    it('saves the images first, followed by the listing', function(done) {
+    it.skip('saves the images first, followed by the listing', function(done) {
         var listingSaveSpy = sinon.spy(function() {
                 expect(imageSaveSpy.callCount).to.equal(8);
                 expect(imageSaveSpy.calledWith(smallIcon)).to.be.true();
