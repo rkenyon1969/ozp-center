@@ -273,17 +273,3 @@
         }
     }
 }
-
-/* IE10 style fixes go here */
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-
-    #header .navbar-form {
-
-      > .Search {
-        margin-top: -50px;
-      }
-
-    }
-
-
-}
