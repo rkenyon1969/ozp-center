@@ -2,16 +2,24 @@
 
 var $ = require('jquery');
 var { API_URL } = require('ozp-react-commons/OzoneConfig');
+var humps = require('humps');
+var _ = require('../utils/_');
 
 module.exports = {
     search: function(term) {
         return $.getJSON(
-            `${API_URL}/api/self/profile?usernameStartsWith=${encodeURIComponent(term)}`
-        ).then(function(response) {
-            var embedded = response._embedded || {},
-                items = embedded.item ? [].concat(embedded.item) : [];
+            `${API_URL}/api/profile/?username_starts_with=${encodeURIComponent(term)}`
+        ).then(resp => {
+            resp = humps.camelizeKeys(resp);
 
-            return items;
+            _.map(resp, x => {
+                x.username = x.user.username;
+                x.email = x.user.email;
+                x.groups = x.user.groups;
+                delete x.user;
+            });
+
+            return resp;
         });
     }
 };
