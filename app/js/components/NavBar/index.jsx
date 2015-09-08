@@ -84,7 +84,7 @@ var NavBar = React.createClass({
                                         <li><a href={'#/mall-management/categories'}><i className="icon-shopping-settings-grayLightest"></i>Center Settings</a></li>
                                     }
                                     { Metrics }
-                                    <li><a href={contactHref} className="caboose" ><i className="icon-lightbulb"></i>Contact</a></li>
+                                    <li><a href={contactHref} className="caboose" ><i className="icon-speech-bubble-grayLightest"></i>Contact</a></li>
                                 </ul>
                             </li>
                         </ul>
