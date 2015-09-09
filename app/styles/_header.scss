@@ -20,7 +20,6 @@
 	.Search {
 		position: relative;
 		border-left: 1px solid $gray-lighter;
-		margin-top: -50px\9; //IE9 Fix for search box being pushed down
 		margin-bottom: 0;
 		padding: 0 2px;
 
@@ -273,18 +272,4 @@
             @extend .icon-cross-14-blueDark;
         }
     }
-}
-
-/* IE10 style fixes go here */
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-
-    #header .navbar-form {
-
-      > .Search {
-        margin-top: -50px;
-      }
-
-    }
-
-
 }
