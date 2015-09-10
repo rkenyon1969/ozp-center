@@ -91,15 +91,22 @@ var ImageApi = {
     save: function(file) {
         //File API supported
         if (window.Blob && file instanceof Blob) {
+            var form = new FormData();
+            form.append("file_extension", "png");
+            form.append("access_control", "UNCLASSIFIED");
+            form.append("image", file);
+            form.append("image_type", "listing_small_screenshot");
+
             return $.ajax({
-                url: IMAGE_URL,
-                type: 'POST',
-                data: file,
-                processData: false,
-                contentType: file.type,
-                accepts: {
-                    json: 'application/json'
-                }
+                "async": true,
+                "crossDomain": true,
+                "url": IMAGE_URL,
+                "method": "POST",
+                "headers": {},
+                "processData": false,
+                "contentType": false,
+                "mimeType": "multipart/form-data",
+                "data": form
             }).then(resp => resp); //only capture first arg
         }
         //File API not supported, use form upload and iframe

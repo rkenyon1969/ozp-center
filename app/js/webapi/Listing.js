@@ -26,7 +26,7 @@ var SAVE_FORMAT_FIELDS = [
     'is_private', 'last_activity', 'launch_url', 'listing_type', 'owners', 'required_listings',
     'requirements', 'screenshots', 'singleton', 'tags', 'title', 'total_comments', 'total_rate1',
     'total_rate2', 'total_rate3', 'total_rate4', 'total_rate5', 'total_votes', 'unique_name',
-    'version_name', 'what_is_new'
+    'version_name', 'what_is_new', 'small_icon', 'large_icon', 'banner_icon', 'large_banner_icon'
 ];
 
 function Listing (json) {
@@ -53,7 +53,7 @@ function Listing (json) {
     }
 
     if (viewingExistingListing(json)) {
-        console.log('viewing existing listing' );
+        console.log('viewing existing listing (data comes from API) ');
         this.type = json.listingType ? json.listingType.title : "";
         this.categories = _.map(json.categories, 'title') || [];
         this.tags = _.map(json.tags, 'name') || [];
@@ -66,20 +66,25 @@ function Listing (json) {
         });
         this.intents = _.map(this.intents, x => x.action);
         _.map(this.contacts, x => x.type = x.contactType.name);
-        this.bannerIconId = json.bannerIcon ? json.bannerIcon.id : "";
-        this.editedDate = json.approvedDate;
-        this.featuredBannerIconId = json.largeBannerIcon ? json.largeBannerIcon.id :  "";
-        this.imageLargeUrl = json.bannerIcon ? json.bannerIcon.url : "";
-        this.imageMediumUrl = json.largeIcon ? json.largeIcon.url : "";
-        this.imageSmallUrl = json.smallIcon ? json.smallIcon.url : "";
-        this.imageXlargeUrl = json.largeBannerIcon ? json.largeBannerIcon.url : "";
-        this.largeIconId = json.largeIcon ? json.largeIcon.id : "";
-        this.releaseDate = json.approvedDate;
+
         this.smallIconId = json.smallIcon ? json.smallIcon.id : "";
+        this.imageSmallUrl = json.smallIcon ? json.smallIcon.url : "";
+
+        this.largeIconId = json.largeIcon ? json.largeIcon.id : "";
+        this.imageMediumUrl = json.largeIcon ? json.largeIcon.url : "";
+
+        this.bannerIconId = json.bannerIcon ? json.bannerIcon.id : "";
+        this.imageLargeUrl = json.bannerIcon ? json.bannerIcon.url : "";
+
+        this.featuredBannerIconId = json.largeBannerIcon ? json.largeBannerIcon.id :  "";
+        this.imageXlargeUrl = json.largeBannerIcon ? json.largeBannerIcon.url : "";
+
+        this.editedDate = json.approvedDate;
+        this.releaseDate = json.approvedDate;
         this.uuid = json.uniqueName;
 
     } else if (creatingFreshListing(json)) {
-        console.log('creating fresh listing' );
+        console.log('creating fresh listing (in create/edit page)' );
         this.owners = _.map(json.owners, function (o) {
             return {displayName: o.displayName,
                     id: o.id,
@@ -93,7 +98,7 @@ function Listing (json) {
         this.contacts = this.contacts || [];
 
     } else {
-        console.log('editing listing');
+        console.log('editing listing (data comes from create/edit page)');
         this.title = json.title || "";
         this.type = json.type || "";
         this.owners = json.owners || [];
@@ -121,6 +126,7 @@ Listing.prototype.addAccessControl = function(ob){
 };
 
 Listing.prototype.saveFormat = function() {
+
     var saveFormat = humps.decamelizeKeys(this);
 
     // Improperly decamelized
@@ -159,6 +165,35 @@ Listing.prototype.saveFormat = function() {
         x.contact_type = {"name": x.type};
         delete x.type;
     });
+
+
+    if (saveFormat.image_small_url) {
+        saveFormat.small_icon = {};
+        saveFormat.small_icon.url = saveFormat.image_small_url;
+        saveFormat.small_icon.id = saveFormat.small_icon_id;
+        this.addAccessControl(saveFormat.small_icon);
+    }
+
+    if (saveFormat.image_medium_url) {
+        saveFormat.large_icon = {};
+        saveFormat.large_icon.url = saveFormat.image_medium_url;
+        saveFormat.large_icon.id = saveFormat.large_icon_id;
+        this.addAccessControl(saveFormat.large_icon);
+    }
+
+    if (saveFormat.image_large_url) {
+        saveFormat.banner_icon = {};
+        saveFormat.banner_icon.url = saveFormat.image_large_url;
+        saveFormat.banner_icon.id = saveFormat.banner_icon_id;
+        this.addAccessControl(saveFormat.banner_icon);
+    }
+
+    if (saveFormat.image_xlarge_url) {
+        saveFormat.large_banner_icon = {};
+        saveFormat.large_banner_icon.url = saveFormat.image_xlarge_url;
+        saveFormat.large_banner_icon.id = saveFormat.featured_banner_icon_id;
+        this.addAccessControl(saveFormat.large_banner_icon);
+    }
 
     // New data (to Center) - TODO: Have Center add it for real
     saveFormat.last_activity = { action: 'APPROVED' };

@@ -16,6 +16,7 @@ var { approvalStatus } = require('ozp-react-commons/constants');
 var { cloneDeep, assign } = require('../utils/_');
 var { ListingApi } = require('../webapi/Listing');
 var { ImageApi } = require('../webapi/Image');
+var { API_URL } = require('ozp-react-commons/OzoneConfig');
 
 var _listing = null;
 var _submitting = false;
@@ -384,26 +385,29 @@ var CurrentListingStore = createStore({
                 });
 
         if (smallIconResponse) {
+            smallIconResponse = JSON.parse(smallIconResponse);
             _listing.smallIcon = null;
             _listing.smallIconId = smallIconResponse.id;
-            _listing[listingIconPropertyUrlMap.smallIcon] = smallIconResponse._links.self.href;
+            _listing[listingIconPropertyUrlMap.smallIcon] = API_URL + '/api/image/' + _listing.smallIconId;
         }
         if (largeIconResponse) {
+            largeIconResponse = JSON.parse(largeIconResponse);
             _listing.largeIcon = null;
             _listing.largeIconId = largeIconResponse.id;
-            _listing[listingIconPropertyUrlMap.largeIcon] = largeIconResponse._links.self.href;
+            _listing[listingIconPropertyUrlMap.largeIcon] = API_URL + '/api/image/' + _listing.largeIconId;
         }
         if (bannerIconResponse) {
+            bannerIconResponse = JSON.parse(bannerIconResponse);
             _listing.bannerIcon = null;
             _listing.bannerIconId = bannerIconResponse.id;
-            _listing[listingIconPropertyUrlMap.bannerIcon] =
-                bannerIconResponse._links.self.href;
+            _listing[listingIconPropertyUrlMap.bannerIcon] = API_URL + '/api/image/' + _listing.bannerIconId;
         }
         if (featuredBannerIconResponse) {
+            featuredBannerIconResponse = JSON.parse(featuredBannerIconResponse);
             _listing.featuredBannerIcon = null;
             _listing.featuredBannerIconId = featuredBannerIconResponse.id;
-            _listing[listingIconPropertyUrlMap.featuredBannerIcon] =
-                featuredBannerIconResponse._links.self.href;
+            _listing[listingIconPropertyUrlMap.largeBannerIcon] = API_URL + '/api/image/' +
+                _listing.featuredBannerIconId;
         }
 
         _listing.screenshots =
