@@ -95,7 +95,9 @@ var ImageApi = {
             form.append("file_extension", "png");
             form.append("access_control", "UNCLASSIFIED");
             form.append("image", file);
-            form.append("image_type", "listing_small_screenshot");
+
+            // TODO: When size validation is ready, make this variable (new parameter)
+            form.append("image_type", "large_screenshot");
 
             return $.ajax({
                 "async": true,
