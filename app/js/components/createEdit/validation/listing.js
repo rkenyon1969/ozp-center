@@ -17,8 +17,8 @@ var User = struct({
 });
 
 var Screenshot = struct({
-    smallImageId: NonBlankString(36),
-    largeImageId: NonBlankString(36)
+    smallImageId: Num,
+    largeImageId: Num
 });
 
 var Resource = struct({
@@ -71,10 +71,10 @@ function ListingFull (requiredContactTypes) {
         whatIsNew: whatIsNew,
         intents: intents,
         docUrls: docUrls,
-        smallIconId: NonBlankString(36),
-        largeIconId: NonBlankString(36),
-        bannerIconId: NonBlankString(36),
-        featuredBannerIconId: NonBlankString(36),
+        smallIconId: Num,
+        largeIconId: Num,
+        bannerIconId: Num,
+        featuredBannerIconId: Num,
         screenshots: subtype(screenshots, atLeastOne),
         contacts: subtype(contacts, hasRequiredContactTypes.bind(null, requiredContactTypes)),
         owners: subtype(owners, atLeastOne),
@@ -101,7 +101,8 @@ var ListingDraft = struct({
     owners: subtype(owners, atLeastOne),
     agency: maybe(StringMax(255)),
     height: maybe(Num),
-    width: maybe(Num)
+    width: maybe(Num),
+    screenshots: screenshots
 });
 
 /**
