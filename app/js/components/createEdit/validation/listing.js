@@ -17,8 +17,8 @@ var User = struct({
 });
 
 var Screenshot = struct({
-    smallImageId: NonBlankString(36),
-    largeImageId: NonBlankString(36)
+    smallImageId: Num,
+    largeImageId: Num
 });
 
 var Resource = struct({
@@ -101,7 +101,8 @@ var ListingDraft = struct({
     owners: subtype(owners, atLeastOne),
     agency: maybe(StringMax(255)),
     height: maybe(Num),
-    width: maybe(Num)
+    width: maybe(Num),
+    screenshots: screenshots
 });
 
 /**

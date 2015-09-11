@@ -414,22 +414,22 @@ var CurrentListingStore = createStore({
             _.zip(_listing.screenshots, screenshotResponses).map(function(screenshot) {
                 var existing = screenshot[0],
                     responses = screenshot[1],
-                    smallResp = responses ? responses.smallImageResponse : null,
-                    largeResp = responses ? responses.largeImageResponse : null,
+                    smallResp = responses ? JSON.parse(responses.smallImageResponse) : null,
+                    largeResp = responses ? JSON.parse(responses.largeImageResponse) : null,
                     newScreenshot = Object.assign({}, existing);
 
                 if (smallResp) {
                     newScreenshot.smallImage = null;
                     newScreenshot.smallImageId = smallResp.id;
                     newScreenshot[screenshotPropertyUrlMap.smallImage] =
-                        smallResp._links.self.href;
+                        API_URL + '/api/image/' + newScreenshot.smallImageId;
                 }
 
                 if (largeResp) {
                     newScreenshot.largeImage = null;
                     newScreenshot.largeImageId = largeResp.id;
                     newScreenshot[screenshotPropertyUrlMap.largeImage] =
-                        largeResp._links.self.href;
+                        API_URL + '/api/image/' + newScreenshot.largeImageId;
                 }
 
                 return newScreenshot;

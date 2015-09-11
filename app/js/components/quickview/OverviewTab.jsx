@@ -50,7 +50,7 @@ var OverviewTab = React.createClass({
         }
 
         var smallImageUrls = screenshots.map(function (screenshot, i) {
-            return <img src={screenshot.smallImage.url} onClick={ me.showLargeScreenshots.bind(me, i) }/>;
+            return <img src={screenshot.smallImageUrl} onClick={ me.showLargeScreenshots.bind(me, i) }/>;
         });
 
         return (
@@ -64,7 +64,7 @@ var OverviewTab = React.createClass({
 
     showLargeScreenshots: function (index) {
         var largeScreenshots = this.props.listing.screenshots.map(function (screenshot) {
-            return { src: screenshot.largeImage.url || screenshot.smallImage.url };
+            return { src: screenshot.largeImageUrl || screenshot.smallImageUrl };
         });
 
         $.magnificPopup.open({

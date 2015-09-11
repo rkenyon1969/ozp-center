@@ -79,6 +79,15 @@ function Listing (json) {
         this.featuredBannerIconId = json.largeBannerIcon ? json.largeBannerIcon.id :  "";
         this.imageXlargeUrl = json.largeBannerIcon ? json.largeBannerIcon.url : "";
 
+        _.map(this.screenshots, x => {
+            x.smallImageId = x.smallImage.id;
+            x.smallImageUrl = x.smallImage.url;
+            x.largeImageId = x.largeImage.id;;
+            x.largeImageUrl = x.largeImage.url;
+            delete x.smallImage;
+            delete x.largeImage;
+        });
+
         this.editedDate = json.approvedDate;
         this.releaseDate = json.approvedDate;
         this.uuid = json.uniqueName;
@@ -194,6 +203,26 @@ Listing.prototype.saveFormat = function() {
         saveFormat.large_banner_icon.id = saveFormat.featured_banner_icon_id;
         this.addAccessControl(saveFormat.large_banner_icon);
     }
+
+    _.map(saveFormat.screenshots, x => {
+        if (x.small_image_url) {
+            x.small_image = {};
+            x.small_image.id = x.small_image_id;
+            x.small_image.url = x.small_image_url;
+            this.addAccessControl(x.small_image);
+            delete x.small_image_id;
+            delete x.small_image_url;
+        }
+
+        if (x.large_image_url) {
+            x.large_image = {};
+            x.large_image.id = x.large_image_id;
+            x.large_image.url = x.large_image_url;
+            this.addAccessControl(x.large_image);
+            delete x.large_image_id;
+            delete x.large_image_url;
+        }
+    });
 
     // New data (to Center) - TODO: Have Center add it for real
     saveFormat.last_activity = { action: 'APPROVED' };
