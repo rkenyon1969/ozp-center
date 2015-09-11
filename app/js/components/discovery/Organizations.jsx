@@ -47,7 +47,7 @@ var Organizations = React.createClass({
         }
 
         this.setState({
-            counts: counts.agencyCounts
+            counts: counts
         });
     },
 

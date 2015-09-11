@@ -417,16 +417,14 @@ var ListingApi = {
     },
 
     getCounts: function () {
-        // var url = API_URL + '/api/listing/counts';
-        // return $.getJSON(url).then((response) => {
-        //     return response;
-        // });
-
-        // TODO: Temporary until we get a /counts drf endpoint
-        var url = API_URL + '/api/listing/1/';
-        var hardCodedResponse = {"approved":45,"agencyCounts":{"1":24,"2":12,"3":9},"enabled":45};
+        var url = API_URL + '/api/metadata';
         return $.getJSON(url).then((response) => {
-            return hardCodedResponse;
+            var counts = _.reduce(response.agencies,
+                                  (result, o) => {
+                                      result[o.id] = o.listing_count;
+                                      return result;
+                                  }, {});
+            return counts;
         });
     },
 
