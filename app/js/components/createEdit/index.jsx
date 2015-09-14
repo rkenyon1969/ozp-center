@@ -290,6 +290,7 @@ var ListingForm = React.createClass({
     render: function () {
         var listing = this.props.value;
         var system = this.props.system;
+        var organizations = this.props.currentUser.organizations;
 
         var ownerSetter = usernames => {
             this.props.requestChange(['owners'], usernames.map(u => {
@@ -355,7 +356,7 @@ var ListingForm = React.createClass({
 
                 <h2 id={f.ownersAndContacts.id}>Owner Information and Contacts</h2>
                 <Select2Input id={f.orgs.id} { ...p('agency') }
-                    options={ getOptionsForSystemObject(system.organizations) }/>
+                    options={ getOptionsForSystemObject(organizations) }/>
                 <OwnerInput id={f.owners.id} { ...p('owners') } listing={listing}
                     ownerSetter={ownerSetter} />
                 <ListInput id={f.contacts.id} { ...this.getSubFormProps('contacts') }
