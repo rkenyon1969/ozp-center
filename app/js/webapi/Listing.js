@@ -53,7 +53,7 @@ function Listing (json) {
     }
 
     if (viewingExistingListing(json)) {
-        console.log('viewing existing listing (data comes from API) ');
+        // console.log('viewing existing listing (data comes from API) ');
         this.type = json.listingType ? json.listingType.title : "";
         this.categories = _.map(json.categories, 'title') || [];
         this.tags = _.map(json.tags, 'name') || [];
@@ -93,11 +93,11 @@ function Listing (json) {
         this.uuid = json.uniqueName;
 
     } else if (creatingFreshListing(json)) {
-        console.log('creating fresh listing (in create/edit page)' );
+        // console.log('creating fresh listing (in create/edit page)' );
         this.owners = _.map(json.owners, function (o) {
             return {displayName: o.displayName,
                     id: o.id,
-                    username: o.user.username};
+                    username: o.username};
         });
         this.categories = json.categories || [];
         this.tags = json.tags || [];
@@ -107,7 +107,7 @@ function Listing (json) {
         this.contacts = this.contacts || [];
 
     } else {
-        console.log('editing listing (data comes from create/edit page)');
+        // console.log('editing listing (data comes from create/edit page)');
         this.title = json.title || "";
         this.type = json.type || "";
         this.owners = json.owners || [];
@@ -123,7 +123,7 @@ function Listing (json) {
     this.docUrls = this.docUrls || [];
     this.changeLogs = [];
 
-    console.log('object Listing', this);
+    // console.log('object Listing', this);
 
     return this;
 }
@@ -234,8 +234,6 @@ Listing.prototype.saveFormat = function() {
     lingering.map(key => delete saveFormat[key]);
 
     this.addAccessControl(saveFormat);
-
-    console.log('saveFormat', saveFormat);
 
     return saveFormat;
 };
@@ -349,16 +347,18 @@ var ListingApi = {
 
     getChangeLogs: function (id) {
         return $.getJSON(API_URL + '/api/listing/' + id + '/activity/').then(
-            (response) => new PaginatedResponse(humps.camelizeKeys(response)).getItemAsList());
+            // TODO: consider paging
+            (response) => new humps.camelizeKeys(response));
     },
 
     fetchReviews: function (id) {
-        return $.getJSON(API_URL + '/api/listing/' + id + '/itemComment/').then(
-            (response) => new PaginatedResponse(humps.camelizeKeys(response)).getResponse());
+        // TODO: consider paging
+        return $.getJSON(API_URL + '/api/listing/' + id + '/review/').then(
+            (response) => new humps.camelizeKeys(response));
     },
 
     saveReview: function (listingId, review) {
-        var url = `${API_URL}/api/listing/${listingId}/itemComment/`,
+        var url = `${API_URL}/api/listing/${listingId}/review/`,
             method = 'POST';
         if (review.id) {
             method = 'PUT';
@@ -381,7 +381,7 @@ var ListingApi = {
     deleteReview: function (listingId, reviewId) {
         return $.ajax({
             type: 'DELETE',
-            url: `${API_URL}/api/listing/${listingId}/itemComment/${reviewId}/`,
+            url: `${API_URL}/api/listing/${listingId}/review/${reviewId}/`,
             dataType: 'json',
             contentType: 'application/json'
         });
@@ -431,7 +431,7 @@ var ListingApi = {
     getAllChangeLogs: function (profile, url, options) {
         if(!_.isString(url)) {
             if (profile.isAdmin() || profile.highestRole === 'ORG_STEWARD' ){
-                url = API_URL + '/api/listing/activity?' + $.param(options);
+                url = API_URL + '/api/listings/activity?' + $.param(options);
             } else {
                 url = API_URL + '/api/self/profile/' + profile.id + '/listing/activity?' + $.param(options);
             }

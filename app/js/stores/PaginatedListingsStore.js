@@ -21,6 +21,7 @@ var PaginatedListingsStore = Reflux.createStore({
     },
 
     onFetchAllListingsCompleted: function (filter, response) {
+
         var key = filterKey(filter);
         var paginatedList = _paginatedListByFilter[key];
 

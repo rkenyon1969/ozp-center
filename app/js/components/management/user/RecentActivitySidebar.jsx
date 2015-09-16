@@ -146,9 +146,8 @@ var RecentActivitySidebar = React.createClass({
         }
 
         if(currentUser.stewardedOrganizations.length > 0 && system.organizations.length > 0) {
-            _.forEach(currentUser.stewardedOrganizations, function(org) {
-                var orgName = org.shortName;
-                org = _.find(system.organizations, function(orgObj) {
+            _.forEach(currentUser.stewardedOrganizations, function(orgName) {
+                var org = _.find(system.organizations, function(orgObj) {
                     return orgObj.shortName === orgName;
                 });
 
