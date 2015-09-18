@@ -7,28 +7,9 @@ Object.assign = require('object-assign');
 
 var profileBase = Object.freeze({
     "url": "http://localhost:8181/api/profile/2/",
-    "organizations": [
-        {
-            "short_name": "Minitrue"
-        }
-    ],
-    "stewarded_organizations": [
-        {
-            "short_name": "Minitrue"
-        },
-        {
-            "short_name": "Miniluv"
-        }
-    ],
-    "user": {
-        "username": "julia",
-        "email": "julia@oceania.gov",
-        "groups": [
-            {
-                "name": "ORG_STEWARD"
-            }
-        ]
-    },
+    "organizations": ["Minitrue"],
+    "stewarded_organizations": ["Minitrue"],
+    "username": "julia",
     "display_name": "Julia Dixon",
     "bio": "",
     "access_control": "http://localhost:8181/api/accessControl/5/"

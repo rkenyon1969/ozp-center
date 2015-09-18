@@ -113,7 +113,7 @@ var GlobalListingStore = Reflux.createStore({
     },
 
     getByOwner: function (profile) {
-        return _listingsByOwnerCache[profile.user.username];
+        return _listingsByOwnerCache[profile.username];
     },
 
     getAllListings: function () {

@@ -68,7 +68,7 @@ var ReviewsTab = React.createClass({
             reviews: reviews,
             currentUserReview: _.find(reviews, { author:
                                                  { user:
-                                                   { username: currentUser.user.username }}})
+                                                   { username: currentUser.username }}})
         };
 
         // update reviewBeingEdited prop if editing

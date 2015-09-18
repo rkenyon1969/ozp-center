@@ -11,7 +11,7 @@ describe('UserReviews', function () {
         return {
             isAdmin: () => admin,
             isOrgSteward: () => orgSteward,
-            user: { username: username }
+            username: username
         };
     }
 

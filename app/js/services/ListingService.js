@@ -34,7 +34,7 @@ ListingActions.fetchAllListings.listen(function (filter) {
 
         _.assign(opts, {
             offset: 0,
-            max: PAGINATION_MAX
+            limit: PAGINATION_MAX
         });
     }
 
@@ -64,7 +64,7 @@ ListingActions.fetchAllChangeLogs.listen(function (profile, filter) {
     else {
         _.assign(opts, {
             offset: 0,
-            max: PAGINATION_MAX
+            limit: PAGINATION_MAX
         });
     }
 
