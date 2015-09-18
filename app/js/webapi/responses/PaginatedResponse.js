@@ -1,8 +1,6 @@
 'use strict';
 
-var Response = require('./Response');
-
-class PaginatedResponse extends Response {
+class PaginatedResponse {
 
     // TODO: handle parameter Type
     constructor (response, Type) {
@@ -10,6 +8,10 @@ class PaginatedResponse extends Response {
         this._results = response.results;
 
         return this;
+    }
+
+    getResponse () {
+        return this._response;
     }
 
     getItemAsList () {
