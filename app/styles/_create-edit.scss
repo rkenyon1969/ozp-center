@@ -209,8 +209,7 @@ div.col-md-4 > .form-group >span.image-container.image-present {
     label {
         display: block;
         border-bottom: 1px solid $gray-lighter;
-        border-left: 4px solid $gray-lighter;
-        background-color: $white;
+        border-left: 4px solid $gray-lightest;
         margin-bottom: 0;
         font-weight: inherit;
 
@@ -236,7 +235,7 @@ div.col-md-4 > .form-group >span.image-container.image-present {
 
             &:hover, &:focus, &:active {
                 text-decoration: none;
-                color: $blue;
+                color: $blue-dark;
             }
         }
     }
@@ -251,21 +250,25 @@ div.col-md-4 > .form-group >span.image-container.image-present {
         &:checked + label, + label:hover {
             border-left-color: $blue;
 
-            h5 {
-                font-weight: 500;
-            }
-
             .group-title {
                 color: $blue-dark;
-                background-color: $white;
             }
         }
 
         &:checked + label {
             border-right-color: $white;
+            background: $white;
 
             > ol {
                 display: block;
+            }
+
+            h5 {
+                font-weight: 500;
+            }
+
+            .group-title {
+                background-color: $white;
             }
         }
     }

@@ -1,3 +1,26 @@
+### 1.0.8 (2015-09-01)
+
+
+### 1.0.7 (2015-08-25)
+
+
+#### Bug Fixes
+
+* **DetailView:** Usage Requirements now wraps long text with no spaces or breaks.#343 ([37695c60](https://github.com/ozone-development/ozp-center.git/commit/37695c604f594b5bb0f624540d4efb97a5e9f29c))
+* **DetailedQuery:** Cleaned up some text, added some spaces ([b3cb5e2c](https://github.com/ozone-development/ozp-center.git/commit/b3cb5e2c8aae1e31e2925ee5779fc4c8872c2d3a))
+* **FireFox:** Disabled Bootstrap animations if the user is using FireFox ([4ce7c2f8](https://github.com/ozone-development/ozp-center.git/commit/4ce7c2f8e24ce66283a3224aa4614d38fd3d84bb))
+* **Metrics:** listing review view, and review fixed ([bd60ecdd](https://github.com/ozone-development/ozp-center.git/commit/bd60ecddf61113bf8250bc15cd7244bcbf987139))
+* **Mozilla:** Disabled css transitions for Firefox ([d85d0aea](https://github.com/ozone-development/ozp-center.git/commit/d85d0aea95cf7dc7b31a15d4b17b4ac985fe4d77))
+* **Reviews Metrics:** Only report review view when component is mounted. ([d55335e6](https://github.com/ozone-development/ozp-center.git/commit/d55335e6b5d2d4e2afee105a0bee89950fcc0916))
+* **Search Description:** added and where nessecery between labels ([ec2eb6f3](https://github.com/ozone-development/ozp-center.git/commit/ec2eb6f32b1678b6dccab5218a78e0d23b81f0c4))
+* **Tests:** fixed undefined error occuring in unit tests ([63d0bfc8](https://github.com/ozone-development/ozp-center.git/commit/63d0bfc8014a6b2f763c0ec68f4dc8d3cc7810fb))
+
+
+#### Features
+
+* **Tooltips:** added tooltips to quick & detail view #344 ([629a691f](https://github.com/ozone-development/ozp-center.git/commit/629a691f6ed312ba49f480f4e496ecd7245a4286))
+
+
 ### 1.0.6 (2015-08-18)
 
 
