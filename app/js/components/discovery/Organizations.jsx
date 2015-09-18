@@ -68,7 +68,7 @@ var Organizations = React.createClass({
                     this.state.system.organizations.map(
                         (x) => <option
                         key={x.id}
-                        value={x.title}
+                        value={x.shortName}
                         tag={JSON.stringify(orgCounts[x.id])}>
                             {x.shortName}
                         </option>

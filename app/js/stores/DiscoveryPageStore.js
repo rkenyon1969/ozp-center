@@ -53,7 +53,7 @@ var DiscoveryPageStore = Reflux.createStore({
     },
 
     onSearchCompleted: function (searchResults) {
-        var items = searchResults._response;
+        var items = searchResults.getItemAsList();
 
         // FIXME:  Makes the ugly, but currently accurate, assumption
         // that if a previous link exists then these new results should

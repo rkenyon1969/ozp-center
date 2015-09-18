@@ -269,31 +269,13 @@ var ListingApi = {
             }));
     },
 
-    getFeatured: function () {
-        return $.getJSON(API_URL + '/api/listings/search?isFeatured=true&sort=avgRate&order=DESC&max=24')
-            .then(
-                resp => parseList(_.map(resp, this.newListing)));
-    },
-
-    getNewArrivals: function () {
-        return $.getJSON(API_URL + '/api/listings/search?sort=approvedDate&order=DESC&max=24')
-            .then(
-                resp => parseList(_.map(resp, this.newListing)));
-    },
-
-    getMostPopular: function () {
-        return $.getJSON(API_URL + '/api/listings/search?sort=avgRate&order=DESC&max=36')
-            .then(
-                resp => parseList(this.newListing(resp)));
-    },
     search: function (options) {
         var params = $.param(options, true);
         return $.getJSON(API_URL + '/api/listings/search?' + params).then(
             (response) => {
-                response = _.map(response, this.newListing);
                 if (options.categories && options.categories.length > 0) {
                     for(var index = 0; index < options.categories.length; index++) {
-                        OzpAnalytics.trackCategorization('Categorization', options.categories[index], response.total);
+                        OzpAnalytics.trackCategorization('Categorization', options.categories[index], response.count);
                     }
                 }
 
@@ -305,9 +287,11 @@ var ListingApi = {
                             (options.agency && options.agency.length > 0)) {
                             queryStringNoStar = queryStringNoStar + ' (+)';
                         }
-                        OzpAnalytics.trackSiteSearch('Application Search', queryStringNoStar, response.total);
+                        OzpAnalytics.trackSiteSearch('Application Search', queryStringNoStar, response.count);
                     }
                 }, 800);
+
+                response.results = _.map(response.results, this.newListing);
                 return response;
 
             })

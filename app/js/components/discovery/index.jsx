@@ -48,7 +48,8 @@ var Discovery = React.createClass({
             type: this.state ? this.state.type : [],
             agency: this.state ? this.state.agency : [],
             nextOffset: DiscoveryPageStore.getNextOffset(),
-            currentOffset: this.state ? this.state.currentOffset : 0
+            currentOffset: this.state ? this.state.currentOffset : 0,
+            limit: this.state ? this.state.limit : 24
         };
     },
 
@@ -135,7 +136,7 @@ var Discovery = React.createClass({
 		    </form>
                 </Header>
                 <div id="discovery" className="row">
-                    <Sidebar 
+                    <Sidebar
 			ref="sidebar"
                         isSearching= { isSearching }
                         initCategories = { this.state.initCategories ? this.state.initCategories : false }
@@ -218,7 +219,8 @@ var Discovery = React.createClass({
         var combinedObj = _.assign(
             { search: this.state.queryString,
               offset: this.state.currentOffset,
-              category: this.state.categories
+              category: this.state.categories,
+              limit: this.state.limit
             },
             { type, agency });
 
