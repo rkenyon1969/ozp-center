@@ -393,11 +393,14 @@ var ListingApi = {
 
     getAllListings: function (url, options) {
         if (!_.isString(url)) {
-            url = API_URL + '/api/listing?' + $.param(options) + '/';
+            url = API_URL + '/api/listing?' + $.param(options);
         }
 
         return $.getJSON(url).then(
-            (response) => new PaginatedResponse(this.newListing(response), Listing));
+            (response) => {
+                response.results = _.map(response.results, this.newListing);
+                return new PaginatedResponse(response, Listing);
+            });
     },
 
     getCounts: function () {
