@@ -97,13 +97,13 @@ var AllListings = React.createClass({
             <div className="AllListings row">
                 <div className="Listings__Sidebar col-xs-3 col-lg-2">
                     <Sidebar>
-                        <ApprovalStatusFilter role={ UserRole.ADMIN } { ...sidebarFilterOptions } />
+                        <ApprovalStatusFilter role={ UserRole.APPS_MALL_STEWARD } { ...sidebarFilterOptions } />
                         <OrgFilter { ...sidebarFilterOptions } />
                         <EnabledFilter { ...sidebarFilterOptions } />
                     </Sidebar>
                 </div>
                 <LoadMore className="AllListings__listings col-xs-9 col-lg-10 all" hasMore={this.state.hasMore} onLoadMore={this.onLoadMore}>
-                    { ListingTile.fromArray(this.state.listings, UserRole.ADMIN) }
+                    { ListingTile.fromArray(this.state.listings, UserRole.APPS_MALL_STEWARD) }
                 </LoadMore>
             </div>
         );
