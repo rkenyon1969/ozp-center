@@ -103,7 +103,7 @@ var InfoBar = React.createClass({
 var AdminOwnerListingTile = React.createClass({
 
     propTypes: {
-        role: React.PropTypes.oneOf([UserRole.ADMIN, UserRole.ORG_STEWARD, null]),
+        role: React.PropTypes.oneOf([UserRole.APPS_MALL_STEWARD, UserRole.ORG_STEWARD, null]),
         listing: React.PropTypes.object
     },
 
@@ -122,7 +122,7 @@ var AdminOwnerListingTile = React.createClass({
         var approvalStatus = listing.approvalStatus;
         var approvalStatusClasses;
 
-        if (role === UserRole.ADMIN) {
+        if (role === UserRole.APPS_MALL_STEWARD) {
             approvalStatusClasses = {
                 'draft': approvalStatus === 'IN_PROGRESS',
                 'pending': approvalStatus === 'PENDING',

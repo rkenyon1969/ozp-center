@@ -227,7 +227,7 @@ var Crud = React.createClass({
     //by custom onCreate implementations
     _onCreate: function(data) {
         return $.ajax({
-            url: this.getUrlWithoutParams(),
+            url: `${this.getUrlWithoutParams()}/`,
             type: 'post',
             dataType: 'json',
             contentType: 'application/json',
@@ -252,7 +252,7 @@ var Crud = React.createClass({
         var id = this.getSelectedId();
 
         return $.ajax({
-            url: `${this.getUrlWithoutParams()}/${id}`,
+            url: `${this.getUrlWithoutParams()}/${id}/`,
             type: 'put',
             dataType: 'json',
             contentType: 'application/json',
@@ -265,7 +265,7 @@ var Crud = React.createClass({
     onDelete: function () {
         var id = this.getSelectedId();
         $.ajax({
-            url: `${this.getUrlWithoutParams()}/${id}`,
+            url: `${this.getUrlWithoutParams()}/${id}/`,
             type: 'delete',
             dataType: 'json',
             contentType: 'application/json'
@@ -316,7 +316,7 @@ var Crud = React.createClass({
             url : this.props.url,
             parser: (responseText) => {
                 var data = JSON.parse(responseText);
-                this.records = data.total > 0 ? [].concat(data._embedded.item) : [];
+                this.records = data.count > 0 ? [].concat(data.results) : [];
                 return {
                     total: this.records.length,
                     records: this.records

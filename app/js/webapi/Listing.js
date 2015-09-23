@@ -82,7 +82,7 @@ function Listing (json) {
         _.map(this.screenshots, x => {
             x.smallImageId = x.smallImage.id;
             x.smallImageUrl = x.smallImage.url;
-            x.largeImageId = x.largeImage.id;;
+            x.largeImageId = x.largeImage.id;
             x.largeImageUrl = x.largeImage.url;
             delete x.smallImage;
             delete x.largeImage;
@@ -159,7 +159,7 @@ Listing.prototype.saveFormat = function() {
                 user: {username: o.username}};
     });
 
-    if (saveFormat.agency != "") {
+    if (saveFormat.agency !== "") {
         var agencyTitle = saveFormat.agency;
         saveFormat.agency = {};
         saveFormat.agency.short_name = saveFormat.agency_short;

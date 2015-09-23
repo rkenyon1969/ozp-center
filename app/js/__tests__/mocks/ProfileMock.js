@@ -23,7 +23,7 @@ module.exports = {
     mockAdmin: function (stewardedOrganizations) {
         var profile = Object.assign({}, profileBase, {
             username: 'testAdmin1',
-            highestRole: 'ADMIN',
+            highestRole: 'APPS_MALL_STEWARD',
             stewardedOrganizations: stewardedOrganizations || []
         });
 
