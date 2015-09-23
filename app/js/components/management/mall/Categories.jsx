@@ -9,12 +9,12 @@ var { API_URL } = require('ozp-react-commons/OzoneConfig');
 
 // Category Schema
 var Category = struct({
-    title: subtype(Str, function (s) {
-        return s.length <= 50;
-    }),
-    description: maybe(subtype(Str, function (s) {
-        return s.length <= 255;
-    }))
+  title: subtype(Str, function (s) {
+      return s.length <= 50;
+  }),
+  description: maybe(subtype(Str, function (s) {
+      return s.length <= 255;
+  }))
 });
 
 var Categories = React.createClass({
