@@ -1,3 +1,16 @@
+### 1.0.9 (2015-09-23)
+
+
+#### Bug Fixes
+
+* **display:** Recent Activity positioning, QuickView ratings positioning ([baa3e8ea](https://github.com/ozone-development/ozp-center.git/commit/baa3e8ea387a2102476cd984f1fb7ec5af34db91))
+
+
+#### Features
+
+* **Contacts Modal:** Contacts modal added to global navbar ([ee501e92](https://github.com/ozone-development/ozp-center.git/commit/ee501e9206efd1c028067321a22e8baaa9db4674))
+
+
 ### 1.0.8 (2015-09-01)
 
 
