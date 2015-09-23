@@ -18,10 +18,7 @@ var ConfigApi = {
     },
 
     getCategories: function () {
-        return $.getJSON(API_URL + '/api/category/').then((res) => {
-          console.log('blaino');
-          return res.results;
-        });
+        return $.getJSON(API_URL + '/api/category/').pipe(parse);
     },
 
     getIntents: function () {

@@ -251,8 +251,6 @@ var Crud = React.createClass({
     _onEdit: function(data) {
         var id = this.getSelectedId();
 
-        console.log('trying to put');
-        console.log(JSON.stringify(data));
         return $.ajax({
             url: `${this.getUrlWithoutParams()}/${id}/`,
             type: 'put',
