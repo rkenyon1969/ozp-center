@@ -6,7 +6,6 @@ class PaginatedList {
             this._update(paginatedResponse);
         }
         else {
-            this.total = 0;
             this.nextLink = null;
             this.hasMore = true;
             this.isFetching = false;
@@ -20,7 +19,6 @@ class PaginatedList {
     }
 
     _update (paginatedResponse) {
-        this.total = paginatedResponse.total;
         this.nextLink = paginatedResponse.nextLink();
         this.hasMore = !!this.nextLink;
         this.isFetching = false;
@@ -29,9 +27,7 @@ class PaginatedList {
         } else {
             this.data = paginatedResponse.getItemAsList();
         }
-        // this.data = this.data.concat(paginatedResponse.getItemAsList());
         this.counts = (paginatedResponse.getResponse().counts) ? paginatedResponse.getResponse().counts : {};
-        this.counts.total = paginatedResponse.getResponse().total;
     }
 
     expectPage () {
