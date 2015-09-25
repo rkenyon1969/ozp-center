@@ -75,8 +75,8 @@ var GlobalListingStore = Reflux.createStore({
             this.trigger();
         });
         this.listenTo(ListingActions.rejectCompleted, function (rejection) {
-            var listing = _listingsCache[rejection.listingId];
-            listing.currentRejection= rejection;
+            var listing = _listingsCache[rejection.listing.id];
+            listing.rejection = rejection;
             listing.approvalStatus = 'REJECTED';
             ListingActions.fetchChangeLogs(listing.id);
             this.trigger();
