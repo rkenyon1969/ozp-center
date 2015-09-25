@@ -35,7 +35,7 @@ var OrgListings = React.createClass({
             listings: [],
             hasMore: false,
             filter: _.assign(this.getQuery(), {
-                org: this.props.org.params.org
+                agencyShort: this.props.org.params.org
             })
         };
     },
