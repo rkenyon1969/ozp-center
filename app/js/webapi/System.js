@@ -3,38 +3,33 @@
 var $ = require('jquery');
 var humps = require('humps');
 var _ = require('../utils/_');
-var Response = require('./responses/Response');
 
 var { API_URL } = require('ozp-react-commons/OzoneConfig');
-
-function parse (response) {
-    return new Response(response).getItemAsList();
-}
 
 var ConfigApi = {
 
     getTypes: function () {
-        return $.getJSON(API_URL + '/api/type/').pipe(parse);
+        return $.getJSON(API_URL + '/api/type/');
     },
 
     getCategories: function () {
-        return $.getJSON(API_URL + '/api/category/').pipe(parse);
+        return $.getJSON(API_URL + '/api/category/');
     },
 
     getIntents: function () {
-        return $.getJSON(API_URL + '/api/intent/').pipe(parse);
+        return $.getJSON(API_URL + '/api/intent/');
     },
 
     getContactTypes: function () {
-        return $.getJSON(API_URL + '/api/contactType/').pipe(parse);
+        return $.getJSON(API_URL + '/api/contactType/');
     },
 
     getOrganizations: function () {
-        return $.getJSON(API_URL + '/api/agency/').pipe(parse);
+        return $.getJSON(API_URL + '/api/agency/');
     },
 
     getUsers: function () {
-        return $.getJSON(API_URL + '/api/self/profile/').pipe(parse);
+        return $.getJSON(API_URL + '/api/self/profile/');
     },
 
     //a single call to get categories,
