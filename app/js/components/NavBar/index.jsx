@@ -5,16 +5,16 @@ var UserNotificationDropdown = require('ozp-react-commons/components/notificatio
 var HelpModal = require('./helpmodal.jsx');
 var ProfileLink = require('../profile/ProfileLink.jsx');
 var ModalLink = require('../ModalLink.jsx');
-var { HUD_URL, METRICS_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL, FEEDBACK_ADDRESS, HELPDESK_ADDRESS } = require('ozp-react-commons/OzoneConfig');
-var feedbackPrefix = FEEDBACK_ADDRESS.substring(0,7);
-var helpdeskPrefix = HELPDESK_ADDRESS.substring(0,7);
+var { HUD_URL, METRICS_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL} = require('ozp-react-commons/OzoneConfig');
 var CreateEditActions = require('../../actions/CreateEditActions');
 
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
 
+var ActiveState = require('../../mixins/ActiveStateMixin');
+var { Navigation } = require('react-router');
 var NavBar = React.createClass({
 
-    mixins: [ SystemStateMixin ],
+    mixins: [ SystemStateMixin, ActiveState, Navigation ],
 
     getInitialState: function() {
         return {
@@ -28,16 +28,15 @@ var NavBar = React.createClass({
           delay: 400
         });
       });
-
     },
 
     render: function () {
         var Metrics = (this.isAdmin() || this.isOrgSteward()) ?
             <li><a href={METRICS_URL} target="_blank"><i className="icon-bar-graph-2-grayLightest"></i>Metrics</a></li> : '';
 
-        var feedbackTarget = this.isFeedbackEmail() ? "_self" : "_blank";
-        var helpdeskTarget = this.isHelpdeskEmail() ? "_self" : "_blank";
-
+        var contactHref = this.makeHref( this.getActiveRoutePath(), this.getParams(), {
+            contacts:true
+        });
 
         return (
             <nav ref="hastooltips" className="navbar navbar-inverse navbar-fixed-top" id="globalNav">
@@ -71,7 +70,6 @@ var NavBar = React.createClass({
                                             <i className="icon-cog-grayLightest"></i>Settings
                                         </ModalLink>
                                     </li>
-                                    <li><a href={HELPDESK_ADDRESS} target={helpdeskTarget}><i className="icon-speech-bubble-grayLightest"></i>Contact Help Desk</a></li>
                                     <li className="divider"></li>
                                     <li className="dropdown-header">Create</li>
                                     <li><a href={'#/edit'} onClick={()=>{
@@ -86,7 +84,7 @@ var NavBar = React.createClass({
                                         <li><a href={'#/mall-management/categories'}><i className="icon-shopping-settings-grayLightest"></i>Center Settings</a></li>
                                     }
                                     { Metrics }
-                                    <li><a href={FEEDBACK_ADDRESS} className="caboose" target={feedbackTarget}><i className="icon-lightbulb"></i>Submit Feedback</a></li>
+                                    <li><a href={contactHref} className="caboose" ><i className="icon-speech-bubble-grayLightest"></i>Contact</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -97,14 +95,6 @@ var NavBar = React.createClass({
                 }
             </nav>
         );
-    },
-
-    isFeedbackEmail: function(){
-        return (feedbackPrefix === "mailto:") ? true : false;
-    },
-
-    isHelpdeskEmail: function(){
-        return (helpdeskPrefix === "mailto:") ? true : false;
     },
 
     isOrgSteward: function(){

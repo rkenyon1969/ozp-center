@@ -13,6 +13,14 @@ var QuickviewHeader = React.createClass({
         onCancel: React.PropTypes.func.isRequired
     },
 
+    componentDidMount: function(){
+      $(this.refs.hastooltips.getDOMNode()).find('.tooltiped').each(function(){
+        $(this).tooltip({
+          delay: 400
+        });
+      });
+    },
+
     render: function () {
         var listing = this.props.listing;
         var title = listing.title;
@@ -45,7 +53,7 @@ var QuickviewHeader = React.createClass({
 
     renderActions: function () {
         return (
-            <div className="btn-group quickview-header-actions">
+            <div ref="hastooltips" className="btn-group quickview-header-actions">
                 {
                     this.props.listing.approvalStatus === "APPROVED" &&
                     <CenterLaunchLink listing={this.props.listing} className="btn btn-default"/>
@@ -54,7 +62,7 @@ var QuickviewHeader = React.createClass({
                     this.props.listing.approvalStatus === "APPROVED" &&
                     <BookmarkButton listing={this.props.listing} />
                 }
-              {this.props.allowEdit && <button type="button" className="btn btn-default" onClick={ this.props.onEdit }><i className="icon-pencil-grayDark"></i></button>}
+              {this.props.allowEdit && <button data-toggle="tooltip" data-placement="top" title="Edit" type="button" className="tooltiped btn btn-default" onClick={ this.props.onEdit }><i className="icon-pencil-grayDark"></i></button>}
             </div>
         );
     }

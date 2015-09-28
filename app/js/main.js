@@ -89,3 +89,10 @@ $(function() {
 
 //Configurable title
 document.title = APP_TITLE;
+
+
+//Disable bootstrap animations on Firefox
+if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
+  console.log('Disabled Bootstrap animations. Reason: user is using Firefox.');
+  $.support.transition = false;
+}

@@ -25,7 +25,7 @@ var DetailedQuery = React.createClass({
         });
         return (
           <span>
-            for listings matching &#32;
+            for listings matching&nbsp;
             { this.props.data.queryString &&
                <span>
                  {prettyQuery}
@@ -38,7 +38,7 @@ var DetailedQuery = React.createClass({
 
     getTypes: function(){
       if(this.props.data.type.length){
-        var prettyTypes = this.props.data.type.map((type)=>{
+        var prettyTypes = this.props.data.type.map((type, i)=>{
           /*
           <i className="icon-cross-14-white" onClick={()=>{
             var types = this.props.data.type;
@@ -46,14 +46,19 @@ var DetailedQuery = React.createClass({
             this.props.onTypeChange(types);
           }}></i>*/
           return (
-            <span className="label label-default">
-              {type}
+            <span>
+              <span className="label label-default">
+                {type}
+              </span>
+              {(i !== this.props.data.type.length -1) &&
+                <span>&#32;or&#32;</span>
+              }
             </span>
           );
         });
         return (
           <span>
-            &#32;with the {(this.props.data.type.length > 1) ? 'types' : 'type'} {prettyTypes}
+            &nbsp;with the type {prettyTypes}
           </span>
         );
       }else{
@@ -62,7 +67,7 @@ var DetailedQuery = React.createClass({
     },
     getOrgs: function(){
       if(this.props.data.agency.length){
-        var prettyOrgs = this.props.data.agency.map((agent)=>{
+        var prettyOrgs = this.props.data.agency.map((agent, i)=>{
           /*
           <i className="icon-cross-14-white" onClick={()=>{
             var orgs = this.props.data.agency;
@@ -70,14 +75,19 @@ var DetailedQuery = React.createClass({
             this.props.onOrganizationChange(orgs);
           }}></i>*/
           return (
-            <span className="label label-default">
-              {agent}
+            <span>
+              <span className="label label-default">
+                {agent}
+              </span>
+              {(i !== this.props.data.agency.length -1) &&
+                <span>&#32;or&#32;</span>
+              }
             </span>
           );
         });
         return (
           <span>
-            &#32;in the {(this.props.data.agency.length > 1) ? 'organizations' : 'organization'} {prettyOrgs}
+            &nbsp;in the organization {prettyOrgs}
           </span>
         );
       }else{
@@ -125,7 +135,7 @@ var DetailedQuery = React.createClass({
         }
         return (
           <span>
-            &#32;with the {(this.props.data.categories.length > 1) ? 'categories' : 'category'} {prettyCats}
+            &nbsp;with the {(this.props.data.categories.length > 1) ? 'categories' : 'category'} {prettyCats}
           </span>
         );
       }else{

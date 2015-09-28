@@ -34,7 +34,7 @@ var DetailsTab = React.createClass({
                     </section>
                     <section>
                         <h5>Usage Requirements</h5>
-                        <p>{ requirements }</p>
+                        <p className="forceWrap">{ requirements }</p>
                     </section>
                 </div>
                 <div className="col-xs-4">

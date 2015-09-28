@@ -226,8 +226,6 @@ button.btn.image-remove {
 
 .label-draft, .label-pending, .label-needs-action, .label-published, .label-rejected {
     @extend .icons;
-
-    padding-left: 0px !important;
     font-family: 'Ubuntu';
     font-weight: 400;
 
@@ -430,3 +428,6 @@ $icons: (
 
 
 @include sprite-icons($icons);
+*{
+  -moz-transition: none !important;
+}

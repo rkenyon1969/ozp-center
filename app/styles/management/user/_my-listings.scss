@@ -55,12 +55,11 @@
         position: relative;
 
         &:hover, &:focus{
-            background: $white;
             border-left-color: $blue;
-            color:$blue;
+            color:$blue-dark;
 
             .badge {
-                background-color: $blue;
+                background-color: $blue-dark;
             }
         }
 
@@ -106,34 +105,11 @@
         border-left: 4px solid $blue;
         background: $white;
         color: $blue-dark;
-        font-weight: bold;
 
         .badge {
-            background-color: $blue;
+            background-color: $blue-dark;
         }
-
-        /*> .icon-thumbs-up-12-greenDark {
-            @extend .icon-thumbs-up-12-white;
-        }
-
-        > .icon-exclamation-12-redOrangeDark {
-            @extend .icon-exclamation-12-white;
-        }
-
-        > .icon-loader-12-blueDark{
-            @extend .icon-loader-12-white;
-        }
-
-        > .icon-reload-12-blueDark {
-            @extend .icon-reload-12-white;
-        }
-
-        > .icon-paper-12-grayDark {
-            @extend .icon-paper-12-white;
-        }*/
     }
-
-
 }
 
 .FeedbackModal {

@@ -23,7 +23,7 @@
     h4 {
         margin: 0;
         padding: 15px 0;
-        color: $blue;
+        color: $gray-dark;
     }
 
     a {
@@ -37,28 +37,25 @@
             border: 1px solid $gray-lighter;
             border-bottom: none;
             margin: 0;
-            padding: 15px;
+            padding: 15px 50px;
             vertical-align: middle;
+            position: relative;
 
             span {
                 color: $gray-dark;
-                margin: 0 30px 0 40px;
-                display: block;
-            }
-
-            &::before {
-                margin-right: 15px;
             }
 
             .icon-caret-right {
                 @extend .icon-caret-right-grayDark;
-                float: right;
+                position: absolute;
+                right: 20px;
+                top: 17px;
+                margin: 0;
             }
 
             i {
                 margin-right: 5px;
-                top: 3px;
-                margin-left:15px;
+                margin-left: -25px;
                 float: left;
 
                 .icon-exclamation-14 {
@@ -82,10 +79,9 @@
         &:hover, &:focus {
             text-decoration: none;
             color: none;
-            background: $blue;
 
             label {
-                background: $blue;
+                background: $blue-dark;
 
                 span {
                     color: $white;

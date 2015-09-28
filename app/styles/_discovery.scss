@@ -8,11 +8,12 @@
     box-shadow: 0 0 3px rgba(0, 0, 0, .1);*/
 
     h4 {
-        color: $blue;
+        color: $gray;
+        font-weight: bold;
+        font-size: 14pt;
     }
 
     .facet-group {
-        padding-bottom: 10px;
         margin: 0;
         border-bottom: 1px solid $gray-lighter;
 
@@ -42,13 +43,9 @@
             }
         }
 
-
-
         &.active {
             color: $blue;
             border-left-color: $blue;
-
-
         }
     }
 
@@ -63,7 +60,7 @@
             }
 
             &:hover, &:focus {
-                color: $blue;
+                color: $blue-dark;
                 border-left-color: $blue;
 
                 > i.icon-shopping {
@@ -72,23 +69,18 @@
             }
 
             &.active {
-                background-color: $blue;
-                color: $white;
+                background-color: $white;
+                color: $blue-dark;
                 border-left-color: $blue;
-                font-weight: 600;
-
-                > .icon-shopping{
-                    @extend .icon-shopping-white;
-                }
+                font-weight: bold;
 
                 &:hover, &:focus {
-                background-color: $blue;
-                border-left-color: $blue;
+                    background-color: $white;
+                    border-left-color: $blue;
+                }
 
-                    > .icon-shopping{
-                        @extend .icon-shopping-white;
-
-                    }
+                > i.icon-shopping {
+                    @extend .icon-shopping-blueDark;
                 }
             }
         }
@@ -96,14 +88,15 @@
 
     > .content {
         padding: 30px;
+        min-height: 500px;
     }
 }
 
 .shareLink{
     color: $blue-darker;
-    font-size:10pt;
-    font-weight: bold;
+    font-size: 10pt;
     cursor: pointer;
+    font-weight: normal;
 }
 
 .Discovery__NewArrivals, .Discovery__MostPopular {

@@ -317,7 +317,12 @@ var Discovery = React.createClass({
         return (
             <section className="Discovery__SearchResults">
                 <h4>Search Results &nbsp;
-                  <span tabindex="0" className="shareLink" ref="shareResults" data-toggle="popover" title={"Share <span style='float: right' onclick=" + '$(this).parent().parent().popover("toggle")' + " class='icon-cross-14-grayDark'></span>"} data-content={"Copy the URL and paste it anywhere to share. <br /><input class='shareResults' onclick='" + '$(this).focus();$(this).select();' + "' style='width: 100%' type='text' value=" + searchLink + "></input>"}>Share
+                  <span tabindex="0"
+                    className="shareLink"
+                    ref="shareResults"
+                    data-toggle="popover"
+                    title={"Share <span style='float: right' onclick=" + '$(this).parent().parent().popover("toggle")' + " class='icon-cross-14-grayDark'></span>"}
+                    data-content={"Copy the URL and paste it anywhere to share. <br /><input class='shareResults' onclick='" + '$(this).focus();$(this).select();' + "' style='width: 100%' type='text' value=" + searchLink + "></input>"}>Share
                     &nbsp;<span className="icon-share-10-blueDark"></span>
                   </span>
                 </h4>
