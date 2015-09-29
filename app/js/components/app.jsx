@@ -11,7 +11,7 @@ var Quickview = require('../components/quickview/index.jsx');
 var CenterProfileWindow = require('./profile/CenterProfileWindow.jsx');
 var CenterContactsWindow = require('./contacts/CenterContactsWindow.jsx');
 var SettingsWindow = require('ozp-react-commons/components/profile/SettingsWindow.jsx');
-
+var CenterListingsSettingsWindow = require('./CenterListingsSettings/index.jsx');
 var FeedbackModal = require('./management/user/FeedbackModal.jsx');
 var { ListingDeleteConfirmation } = require('./shared/DeleteConfirmation.jsx');
 
@@ -29,8 +29,7 @@ var App = React.createClass({
     },
 
     renderModal: function () {
-        var { listing, profile, contacts, settings, tab, action } = this.getQuery();
-
+        var { listing, profile, settings, tab, action, centerListingsSettings, saveKey, returnPath} = this.getQuery();
         if (listing) {
             if (tab) {
                 var preview = action === 'preview';
@@ -51,6 +50,9 @@ var App = React.createClass({
         }
         else if (settings) {
             return <SettingsWindow backRoute={this.getActiveRoutePath()}/>;
+        }
+        else if (centerListingsSettings) {
+            return <CenterListingsSettingsWindow backRoute={returnPath} saveKey={saveKey}/>;
         }
     },
 

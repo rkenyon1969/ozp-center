@@ -5,7 +5,8 @@ var PaginatedList = require('../utils/PaginatedList');
 var ListingActions = require('../actions/ListingActions');
 
 var _paginatedListByFilter = {};
-
+var _unPaginatedListByFilter = {};
+var collectAll = false;
 var filterKey = function (filter) {
     return JSON.stringify(filter);
 };
@@ -23,12 +24,26 @@ var PaginatedListingsStore = Reflux.createStore({
     onFetchAllListingsCompleted: function (filter, response) {
         var key = filterKey(filter);
         var paginatedList = _paginatedListByFilter[key];
+        var unPaginatedList = _unPaginatedListByFilter[key];
 
-        if (paginatedList) {
-            paginatedList.receivePage(response);
+        if (!collectAll) {
+            if (paginatedList) {
+                paginatedList.receivePage(response);
+                unPaginatedList.receivePage(response);
+            }
+            else {
+                _paginatedListByFilter[key] = new PaginatedList(response);
+                _unPaginatedListByFilter[key] = new PaginatedList(response);
+            }
+        } else {
+            unPaginatedList.receivePage(response);
         }
-        else {
-            _paginatedListByFilter[key] = new PaginatedList(response);
+
+        if (_unPaginatedListByFilter[key].hasMore) {
+            collectAll = true;
+            ListingActions.fetchAllListings(filter);
+        } else {
+            collectAll = false;
         }
         this.trigger();
     },
@@ -39,8 +54,16 @@ var PaginatedListingsStore = Reflux.createStore({
     },
 
     getListingsByFilter: function (filter) {
-        return _paginatedListByFilter[filterKey(filter)];
-    }
+        if (collectAll) {
+            return _unPaginatedListByFilter[filterKey(filter)];
+        } else {
+            return _paginatedListByFilter[filterKey(filter)];
+        }
+    },
+
+    getAllListingsByFilter: function (filter) {
+        return _unPaginatedListByFilter[filterKey(filter)];
+    },
 
 });
 
