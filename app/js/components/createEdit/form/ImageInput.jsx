@@ -43,7 +43,7 @@ var ImageInput = React.createClass({
                     <button onClick={this.removeImage} className="btn image-remove">
                         <i className="icon-trash" />
                         </button>
-                    <img ref="image" className="image-preview"
+                    <img alt="" ref="image" className="image-preview"
                         src={this.props.imageUri || undefined} />
                 </span>
             </div>

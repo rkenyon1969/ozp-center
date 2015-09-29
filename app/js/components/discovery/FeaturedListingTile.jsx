@@ -21,7 +21,7 @@ var FeaturedListingTile = React.createClass({
         return (
             <li className="listing SearchListingTile SearchListingTile--featured">
                 <a href={href}>
-                    <img src={image} />
+                    <img alt={`Launch ${listing.title} application`} src={image} />
                 </a>
             </li>
         );
