@@ -9,14 +9,13 @@ var PaginatedResponse = require ('./responses/PaginatedResponse');
 var { API_URL } = require('ozp-react-commons/OzoneConfig');
 
 var FIELDS = [
-    'id', 'title', 'description', 'descriptionShort', 'screenshots', 'contacts', 'totalComments',
-    'avgRate', 'totalRate1', 'totalRate2', 'totalRate3','totalRate4', 'height', 'width',
-    'totalRate5','totalVotes', 'state', 'tags', 'type','uuid', 'requirements', 'singleton',
+    'approvedDate', 'id', 'title', 'description', 'descriptionShort', 'screenshots', 'contacts',
+    'totalComments', 'avgRate', 'totalRate1', 'totalRate2', 'totalRate3','totalRate4', 'height',
+    'width', 'totalRate5','totalVotes', 'state', 'tags', 'type','uuid', 'requirements', 'singleton',
     'versionName', 'imageLargeUrl', 'imageSmallUrl', 'imageMediumUrl', 'imageXlargeUrl',
     'launchUrl', 'company', 'whatIsNew', 'owners', 'agency', 'agencyShort', 'rejection',
-    'isEnabled', 'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls',
-    'approvalStatus', 'isFeatured', 'smallIconId', 'largeIconId', 'bannerIconId',
-    'featuredBannerIconId'
+    'isEnabled', 'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls', 'approvalStatus',
+    'isFeatured', 'smallIconId', 'largeIconId', 'bannerIconId', 'featuredBannerIconId'
 ];
 
 // These don't have the icons, access_control
@@ -88,8 +87,6 @@ function Listing (json) {
             delete x.largeImage;
         });
 
-        this.editedDate = json.approvedDate;
-        this.releaseDate = json.approvedDate;
         this.uuid = json.uniqueName;
 
     } else if (creatingFreshListing(json)) {
