@@ -52,9 +52,9 @@ var ListingManagement = React.createClass({
 
                 tabs.splice(2, 0, {
                     to: 'org-listings',
-                    name: org.shortName + ' Listings',
+                    name: org.title + ' Listings',
                     params: {
-                        org: org.shortName
+                        org: org.title
                     }
                 });
             });
