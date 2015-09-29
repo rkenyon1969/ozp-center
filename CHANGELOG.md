@@ -1,3 +1,16 @@
+### 1.0.10 (2015-09-29)
+
+
+#### Bug Fixes
+
+* **508:** Text alternatives for non-text content ([c34f3b98](https://github.com/ozone-development/ozp-center.git/commit/c34f3b98aa528ba9e4df07c6a1758978b7e7c4fd))
+
+
+#### Features
+
+* **508:** Text alternatives for non-text content ([f3d9a921](https://github.com/ozone-development/ozp-center.git/commit/f3d9a921793a93fcc9e54d9898448246c9705a68))
+
+
 ### 1.0.9 (2015-09-23)
 
 
