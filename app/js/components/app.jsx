@@ -29,7 +29,7 @@ var App = React.createClass({
     },
 
     renderModal: function () {
-        var { listing, profile, settings, tab, action, centerListingsSettings, saveKey, returnPath} = this.getQuery();
+        var { listing, profile, settings, contacts, tab, action, centerListingsSettings, saveKey, returnPath} = this.getQuery();
         if (listing) {
             if (tab) {
                 var preview = action === 'preview';
