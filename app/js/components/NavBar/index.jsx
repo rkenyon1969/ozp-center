@@ -59,7 +59,8 @@ var NavBar = React.createClass({
                                 <a href="#" className="lrg" data-toggle="dropdown"><i className="icon-menu-grayLightest"></i></a>
                                 <ul className="dropdown-menu">
                                     <li className="dropdown-header">Interactie Tour</li>
-                                    <li><a id="tour-button" href="#">Take Homepage Tour</a></li>
+                                    <li><a id="tour-button-home" href="#">Take Homepage Tour</a></li>
+                                    <li><a id="tour-button-createEdit" href="#">Take Create Edit Tour</a></li>
                                     <li className="dropdown-header">Personalize</li>
                                     <li><a href={HUD_URL}><i className="icon-ribbon-grayLightest"></i>Bookmarks</a></li>
                                     <li>

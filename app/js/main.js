@@ -90,7 +90,7 @@ $(function() {
 
 
 require('tour');
-require('./utils/tour.js');
+require('./tour/tour.js');
 
 //Configurable title
 document.title = APP_TITLE;
