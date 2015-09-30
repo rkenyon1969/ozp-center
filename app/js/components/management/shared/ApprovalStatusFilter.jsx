@@ -43,7 +43,7 @@ var ApprovalStatusFilter = React.createClass({
         if (value === 'all') {
             value = null;
         }
-        this.props.onFilterChanged('approvalStatus', value);
+        this.props.onFilterChanged('approval_status', value);
     },
 
     _renderRadioGroupOptions: function () {
