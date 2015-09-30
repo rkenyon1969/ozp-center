@@ -18,6 +18,7 @@ var ProfileActions = require('ozp-react-commons/actions/ProfileActions');
 var LoadError = require('ozp-react-commons/components/LoadError.jsx');
 var { METRICS_URL, APP_TITLE } = require('ozp-react-commons/OzoneConfig');
 
+
 window.jQuery = jQuery;
 window.$ = jQuery;
 window.React = React;
@@ -87,9 +88,12 @@ $(function() {
     });
 });
 
+
+require('tour');
+require('./utils/tour.js');
+
 //Configurable title
 document.title = APP_TITLE;
-
 
 //Disable bootstrap animations on Firefox
 if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){

@@ -16,6 +16,7 @@ gulp.task('sass', function() {
     return gulp.src('app/styles/main.scss')
         .pipe(sass(sassConfig).on('error', gutil.log))
         .pipe(cssImport('main.css'))
+        .pipe(cssImport('../bower_components/bootstrap-tour/build/css/bootstrap-tour.css'))
         .pipe(replace('../bower_components/bootstrap-sass-official/assets/fonts/bootstrap', 'fonts'))
         .pipe(replace('../bower_components/font-awesome/fonts', 'fonts'))
         .pipe(replace('../node_modules/bootstrap-sass/assets/fonts/bootstrap', 'fonts'))

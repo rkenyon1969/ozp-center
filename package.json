@@ -49,7 +49,6 @@
     "gulp-sass": "2.0.4",
     "gulp-shell": "0.4.0",
     "gulp-sourcemaps": "1.0.0",
-    "gulp-shell": "0.4.0",
     "gulp-util": "2.2.20",
     "inject-loader": "1.0.0",
     "jsx-loader": "0.12.2",
@@ -74,9 +73,9 @@
     "webpack-dev-server": "1.7.0"
   },
   "dependencies": {
-    "icons": "git://github.com/ozone-development/ozp-icons",
     "bootstrap-sass": "git://github.com/ozone-development/bootstrap-sass",
     "exports-loader": "0.6.2",
+    "icons": "git://github.com/ozone-development/ozp-icons",
     "lodash-amd": "2.4.1",
     "moment": "2.9.0",
     "object-assign": "1.0.0",

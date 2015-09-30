@@ -5,7 +5,6 @@ if (!Object.assign) {
 }
 var React = require('react');
 var jQuery = require('jquery');
-require('bootstrap');
 
 window.jQuery = jQuery;
 window.$ = jQuery;

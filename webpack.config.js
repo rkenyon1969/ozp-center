@@ -28,7 +28,9 @@ module.exports = {
             w2ui$: "w2ui/dist/w2ui",
             classification$: "ozp-classification/jquery.classification.js",
             "ozp-react-commons": "ozp-react-commons/app/js",
-            tether$: "tether/tether"
+            tether$: "tether/tether",
+            bootstrapjs$: "bootstrap/dist/js/bootstrap.js",
+            tour$: "bootstrap-tour/build/js/bootstrap-tour.js"
         },
         // Configure webpack to look for required files in bower and node
         modulesDirectories: ['./bower_components', './node_modules']
