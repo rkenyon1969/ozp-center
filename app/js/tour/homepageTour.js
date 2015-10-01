@@ -17,6 +17,12 @@ module.exports = new Tour({
       placement: "top"
     },
     {
+      element: "#tour-center-settings",
+      title: "Moar apps!",
+      content: "Hit this button to browse more listings.",
+      placement: "top"
+    },
+    {
       element: ".icon-bell-grayLightest",
       title: "Notifications!",
       content: "Notifications happen here.",

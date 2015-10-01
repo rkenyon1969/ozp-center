@@ -55,7 +55,7 @@ var NavBar = React.createClass({
                             <li className="tooltiped" data-toggle="tooltip" data-placement="bottom" title="Help">
                                 <a href="#" onClick={this.showHelpModal}><i className="icon-question-grayLightest"></i></a>
                             </li>
-                            <li data-toggle="tooltip" data-placement="bottom" title="Menu" className="dropdown user-menu-dropdown tooltiped">
+                            <li data-toggle="tooltip" id="global-nav-dropdown" data-placement="bottom" title="Menu" className="dropdown user-menu-dropdown tooltiped">
                                 <a href="#" className="lrg" data-toggle="dropdown"><i className="icon-menu-grayLightest"></i></a>
                                 <ul className="dropdown-menu">
                                     <li className="dropdown-header">Interactie Tour</li>
@@ -84,7 +84,7 @@ var NavBar = React.createClass({
                                     <li><a href={'#/user-management/my-listings'}><i className="icon-layers-grayLightest"></i>Listing Management</a></li>
                                     {
                                         this.isAdmin() &&
-                                        <li><a href={'#/mall-management/categories'}><i className="icon-shopping-settings-grayLightest"></i>Center Settings</a></li>
+                                        <li id="tour-center-settings"><a href={'#/mall-management/categories'}><i className="icon-shopping-settings-grayLightest"></i>Center Settings</a></li>
                                     }
                                     { Metrics }
                                     <li><a href={contactHref} className="caboose" ><i className="icon-speech-bubble-grayLightest"></i>Contact</a></li>
