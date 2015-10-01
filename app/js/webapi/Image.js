@@ -128,13 +128,20 @@ var ImageApi = {
             inputPlaceholder = input.cloneNode(),
             form = document.createElement('form'),
             frameName = 'image-upload-frame-' + (iframeCounter++),
-            timeoutId;
+            timeoutId,
+            fileExtension = "png",
+            accessControl = "UNCLASSIFIED",
+            imageType = "large_screenshot";
 
         //hide all these elements
         container.setAttribute('style', 'display:none;');
 
         //server expects form-data with the image as a part called 'image'
         input.name = 'image';
+
+        fileExtension.name = 'file_extension';
+        accessControl.name = 'access_control';
+        imageType.name = 'image_type';
 
         //the real input will be moved to the hidden form.  Place a copy in its place to avoid
         //visual disruption when it is moved
@@ -148,6 +155,10 @@ var ImageApi = {
         form.method = 'post';
         form.enctype = 'multipart/form-data';
         form.appendChild(input);
+        form.appendChild(fileExtension);
+        form.appendChild(accessControl);
+        form.appendChild(imageType);
+
         container.appendChild(form);
 
         document.body.appendChild(container);
