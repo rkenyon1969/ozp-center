@@ -86,6 +86,15 @@ function cleanupDom(containerEl, placeholderInput) {
  * NOTE: The form-data upload only works if the API server is not cross domain.  If it is,
  * the upload will succeed but the response will be unreadable.  This is acceptable because
  * IE9 has other limitations (CORS) that prevent cross-domain REST anyway
+ *
+ * IE11 NOTE: For the new backend, we need to send some metadata with the image (e.g. access
+ * control). To do that we append that metadata and the image to FormData and post FormData. But,
+ * appending that does not work for IE11 on the first post when using basic authentation. With
+ * basic auth, when things work as expected, there are two posts, a first unsuccessful one that
+ * returns a 401 and a second successful one. The second one never happens in the IE11 + formData +
+ * append + image case. The workaround is to explicitly make two posts to the image endpoint, the
+ * first dummy post that the new backend tolerates (returns 200) and the second that posts the
+ * image for real.
  */
 var ImageApi = {
     save: function(file) {
@@ -99,17 +108,27 @@ var ImageApi = {
             // TODO: When size validation is ready, make this variable (new parameter)
             form.append("image_type", "large_screenshot");
 
+            var postForReal = function() {
+                return $.ajax({
+                    "async": true,
+                    "crossDomain": true,
+                    "url": IMAGE_URL,
+                    "method": "POST",
+                    "headers": {},
+                    "processData": false,
+                    "contentType": false,
+                    "mimeType": "multipart/form-data",
+                    "data": form
+                }).then(resp => resp); //only capture first arg
+            };
+
             return $.ajax({
-                "async": true,
-                "crossDomain": true,
                 "url": IMAGE_URL,
                 "method": "POST",
-                "headers": {},
-                "processData": false,
-                "contentType": false,
-                "mimeType": "multipart/form-data",
-                "data": form
-            }).then(resp => resp); //only capture first arg
+                data: JSON.stringify({ "cuz_ie": "Dummy empty first post for IE11" }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            }).then(() => postForReal());
         }
         //File API not supported, use form upload and iframe
         else if (file instanceof HTMLInputElement) {
