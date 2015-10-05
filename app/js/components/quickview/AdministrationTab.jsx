@@ -125,7 +125,7 @@ var AdministrationTab = React.createClass({
             status = listingStatus[listing.approvalStatus],
             statusText = status,
             isAdmin = UserRole[this.props.currentUser.highestRole] >= UserRole.APPS_MALL_STEWARD,
-            isStewardOfOrg = _.contains(this.props.currentUser.stewardedOrganizations, listing.agency),
+            isStewardOfOrg = _.contains(this.props.currentUser.stewardedOrganizations, listing.agencyShort),
             controls, statusClass, iconClass;
 
         switch (status) {
@@ -211,7 +211,7 @@ var AdministrationTab = React.createClass({
         );
 
         var isAdmin = UserRole[this.props.currentUser.highestRole] >= UserRole.APPS_MALL_STEWARD,
-            isStewardOfOrg = _.contains(this.props.currentUser.stewardedOrganizations, this.props.listing.agency),
+            isStewardOfOrg = _.contains(this.props.currentUser.stewardedOrganizations, this.props.listing.agencyShort),
             pendingOrg = (listingStatus[this.props.listing.approvalStatus] === 'Pending, Organization') ? true : false,
             pendingAdmin = (listingStatus[this.props.listing.approvalStatus] === 'Pending, Center') ? true : false;
 

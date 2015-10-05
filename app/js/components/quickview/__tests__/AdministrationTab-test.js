@@ -90,7 +90,7 @@ describe('AdministrationTab', function () {
         var AdministrationTab = require('../AdministrationTab.jsx');
 
         var adminTab = TestUtils.renderIntoDocument(
-                <AdministrationTab listing={{approvalStatus: 'PENDING', agency: 'Test Org'}}
+                <AdministrationTab listing={{approvalStatus: 'PENDING', agencyShort: 'Test Org'}}
                     currentUser={{highestRole: 'ORG_STEWARD', stewardedOrganizations: 'Test Org'}} />
         );
         expect($(adminTab.getDOMNode()).find('.review-listing')[0]).to.exist();
