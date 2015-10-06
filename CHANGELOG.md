@@ -1,3 +1,19 @@
+### 1.0.11 (2015-10-06)
+
+
+#### Bug Fixes
+
+* **Merge:** Tests are passing, merge failure fixed ([9b6393aa](https://github.com/ozone-development/ozp-center.git/commit/9b6393aa499e2ccc4eb1510ddb60c9269bd4557a))
+* **colors:**
+  * Remove extra accidental file ([2a5e7c30](https://github.com/ozone-development/ozp-center.git/commit/2a5e7c3090c934f1dfa1a17d339dd1e151c3e22e))
+  * Change table view sort icon color to be visible ([5f0c0a32](https://github.com/ozone-development/ozp-center.git/commit/5f0c0a320dd4c64ce0d382bb4b18fb42d5a46b7d))
+
+
+#### Features
+
+* **Table View:** Created table views for AllListings and OrgListings pages. ([64ccaa39](https://github.com/ozone-development/ozp-center.git/commit/64ccaa39d983ca2575b677e211b632dcb7efe3b9))
+
+
 ### 1.0.10 (2015-09-29)
 
 
