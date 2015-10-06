@@ -61,7 +61,7 @@ describe('TableView', function () {
     beforeEach(function () {
         ProfileMock.mockAdmin("Test Organization");
     });
-    
+
     var runRouter = function (listings) {
         var table;
         router = Router.run(route, location, function (Handler) {
@@ -91,9 +91,9 @@ describe('TableView', function () {
         //Render#1 with sortKey='name'
         tablePage = runRouter(null);
         ownerHeader = $(tablePage).find('th[class="ownersColumn"]')[0];
-        expect($(tablePage).find('i[class="headerSortIcon icon-caret-down-14-white"]')[0]).to.exist;
-        expect($(ownerHeader).find('i[class="headerSortIcon icon-caret-down-14-white"]')[0]).to.not.exist;
-        expect($(tablePage).find('i[class="headerSortIcon icon-caret-up-white"]')[0]).to.not.exist;
+        expect($(tablePage).find('i[class="headerSortIcon icon-caret-down-14-blueDark"]')[0]).to.exist;
+        expect($(ownerHeader).find('i[class="headerSortIcon icon-caret-down-14-blueDark"]')[0]).to.not.exist;
+        expect($(tablePage).find('i[class="headerSortIcon icon-caret-up-blueDark"]')[0]).to.not.exist;
 
         //Click changes sortKey => 'owner'
         TestUtils.Simulate.click(ownerHeader);
@@ -102,8 +102,8 @@ describe('TableView', function () {
         //Render#2 with sortKey='owner'
         tablePage = runRouter(null);
         ownerHeader = $(tablePage).find('th[class="ownersColumn"]')[0];
-        expect($(ownerHeader).find('i[class="headerSortIcon icon-caret-down-14-white"]')[0]).to.exist;
-        expect($(ownerHeader).find('i[class="headerSortIcon icon-caret-up-white"]')[0]).to.not.exist;        
+        expect($(ownerHeader).find('i[class="headerSortIcon icon-caret-down-14-blueDark"]')[0]).to.exist;
+        expect($(ownerHeader).find('i[class="headerSortIcon icon-caret-up-blueDark"]')[0]).to.not.exist;
 
         //Click changes sortKey => '!owner'
         TestUtils.Simulate.click(ownerHeader);
@@ -112,8 +112,8 @@ describe('TableView', function () {
         //Render#3 with sortKey='!owner'
         tablePage = runRouter(null);
         ownerHeader = $(tablePage).find('th[class="ownersColumn"]')[0];
-        expect($(ownerHeader).find('i[class="headerSortIcon icon-caret-down-14-white"]')[0]).to.not.exist;
-        expect($(ownerHeader).find('i[class="headerSortIcon icon-caret-up-white"]')[0]).to.exist;        
+        expect($(ownerHeader).find('i[class="headerSortIcon icon-caret-down-14-blueDark"]')[0]).to.not.exist;
+        expect($(ownerHeader).find('i[class="headerSortIcon icon-caret-up-blueDark"]')[0]).to.exist;
 
         //Click changes sortKey => 'owner'
         TestUtils.Simulate.click(ownerHeader);
