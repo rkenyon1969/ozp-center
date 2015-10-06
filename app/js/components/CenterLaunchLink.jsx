@@ -46,7 +46,7 @@ var CenterLaunchLink = React.createClass({
 
 
         return (
-            <button ref="tooltipped" data-toggle="tooltip" data-placement="top" title="Launch" { ...otherProps } className={linkClassName}
+            <button ref="tooltipped" data-toggle="tooltip" data-placement="top" alt="Click to launch this app" title="Launch" { ...otherProps } className={linkClassName}
                     onClick={listingLaunchFn}>
                 <i className="icon-open-grayDark" />
             </button>
