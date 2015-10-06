@@ -67,20 +67,20 @@ var TableView = React.createClass({
 
     renderHeaderColumn: function (type) {
         var nameIcon, ownerIcon, orgIcon, statusIcon, updatedIcon, enabledIcon, featuredIcon;
-        if (this.props.sortKey==="name") { nameIcon = <i className="headerSortIcon icon-caret-down-14-blueDark"/>; }
-        if (this.props.sortKey==="!name") { nameIcon = <i className="headerSortIcon icon-caret-up-blueDark"/>; }
-        if (this.props.sortKey==="owner") { ownerIcon = <i className="headerSortIcon icon-caret-down-14-blueDark"/>; }
-        if (this.props.sortKey==="!owner") { ownerIcon = <i className="headerSortIcon icon-caret-up-blueDark"/>; }
-        if (this.props.sortKey==="organization") { orgIcon = <i className="headerSortIcon icon-caret-down-14-blueDark"/>; }
-        if (this.props.sortKey==="!organization") { orgIcon = <i className="headerSortIcon icon-caret-up-blueDark"/>; }
-        if (this.props.sortKey==="status") { statusIcon = <i className="headerSortIcon icon-caret-down-14-blueDark"/>; }
-        if (this.props.sortKey==="!status") { statusIcon = <i className="headerSortIcon icon-caret-up-blueDark"/>; }
-        if (this.props.sortKey==="updated") { updatedIcon = <i className="headerSortIcon icon-caret-down-14-blueDark"/>; }
-        if (this.props.sortKey==="!updated") { updatedIcon = <i className="headerSortIcon icon-caret-up-blueDark"/>; }
-        if (this.props.sortKey==="enabled") { enabledIcon = <i className="headerSortIcon icon-caret-down-14-blueDark"/>; }
-        if (this.props.sortKey==="!enabled") { enabledIcon = <i className="headerSortIcon icon-caret-up-blueDark"/>; }
-        if (this.props.sortKey==="featured") { featuredIcon = <i className="headerSortIcon icon-caret-down-14-blueDark"/>; }
-        if (this.props.sortKey==="!featured") { featuredIcon = <i className="headerSortIcon icon-caret-up-blueDark"/>; }
+        if (this.props.sortKey==="name") { nameIcon = <i className="headerSortIcon icon-caret-down-14-grayLightest"/>; }
+        if (this.props.sortKey==="!name") { nameIcon = <i className="headerSortIcon icon-caret-up-grayLightest"/>; }
+        if (this.props.sortKey==="owner") { ownerIcon = <i className="headerSortIcon icon-caret-down-14-grayLightest"/>; }
+        if (this.props.sortKey==="!owner") { ownerIcon = <i className="headerSortIcon icon-caret-up-grayLightest"/>; }
+        if (this.props.sortKey==="organization") { orgIcon = <i className="headerSortIcon icon-caret-down-14-grayLightest"/>; }
+        if (this.props.sortKey==="!organization") { orgIcon = <i className="headerSortIcon icon-caret-up-grayLightest"/>; }
+        if (this.props.sortKey==="status") { statusIcon = <i className="headerSortIcon icon-caret-down-14-grayLightest"/>; }
+        if (this.props.sortKey==="!status") { statusIcon = <i className="headerSortIcon icon-caret-up-grayLightest"/>; }
+        if (this.props.sortKey==="updated") { updatedIcon = <i className="headerSortIcon icon-caret-down-14-grayLightest"/>; }
+        if (this.props.sortKey==="!updated") { updatedIcon = <i className="headerSortIcon icon-caret-up-grayLightest"/>; }
+        if (this.props.sortKey==="enabled") { enabledIcon = <i className="headerSortIcon icon-caret-down-14-grayLightest"/>; }
+        if (this.props.sortKey==="!enabled") { enabledIcon = <i className="headerSortIcon icon-caret-up-grayLightest"/>; }
+        if (this.props.sortKey==="featured") { featuredIcon = <i className="headerSortIcon icon-caret-down-14-grayLightest"/>; }
+        if (this.props.sortKey==="!featured") { featuredIcon = <i className="headerSortIcon icon-caret-up-grayLightest"/>; }
 
         switch (type) {
         case "name":
