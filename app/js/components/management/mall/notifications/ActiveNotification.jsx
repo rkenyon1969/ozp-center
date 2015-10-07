@@ -1,6 +1,8 @@
 'use strict';
 
 var React = require('react');
+var _ = require('../../../../utils/_');
+
 var _Date = require('ozp-react-commons/components/Date.jsx');
 var Time = require('ozp-react-commons/components/Time.jsx');
 var NotificationActions = require('../../../../actions/NotificationActions.js');
@@ -19,7 +21,9 @@ var ActiveNotification = React.createClass({
     },
 
     onStopClick() {
-        NotificationActions.expireNotification(this.props.notification);
+        // The backend complains when you send it listing and author, so send subset
+        var subset = _.pick(this.props.notification, ['id', 'expiresDate']);
+        NotificationActions.expireNotification(subset);
     },
 
     render() {

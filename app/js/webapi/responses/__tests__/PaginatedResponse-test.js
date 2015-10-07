@@ -6,7 +6,7 @@ chai.config.showDiff = true;
 chai.config.truncateThreshold = 0;
 
 var expect = require('chai').expect;
-
+var humps = require('humps');
 
 var PaginatedResponse = require('../PaginatedResponse');
 var { apiActivity } = require('./test-activity-data');
@@ -37,7 +37,7 @@ describe('PaginatedResponse', function () {
         });
 
         it('returns object that has _results transformed by (Date) parser', function () {
-            var pr = new PaginatedResponse(notificationData, parse);
+            var pr = new PaginatedResponse(humps.camelizeKeys(notificationData), parse);
 
             expect(pr).to.have.property('_results');
             expect(pr.getItemAsList()[0].expiresDate).to.be.an.instanceof(Date);
