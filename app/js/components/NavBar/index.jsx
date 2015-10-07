@@ -43,9 +43,9 @@ var NavBar = React.createClass({
                 <div className="container-fluid" id="centered">
                     <div className="navbar-left">
                         <ul className="nav navbar-nav">
-                            <li className="tooltiped" data-toggle="tooltip" data-placement="bottom" title="HUD"><a className="lrg" href={HUD_URL}><i className="icon-home-grayLightest"></i></a></li>
-                            <li className="active tooltiped" data-toggle="tooltip" data-placement="bottom" title="Center"><a className="lrg" href='#/home' ><i className="icon-shopping-grayLightest activeIcon"></i></a></li>
-                            <li className="tooltiped" data-toggle="tooltip" data-placement="bottom" title="Webtop"><a className="lrg" href={WEBTOP_URL}><i className="icon-layout-grayLightest"></i></a></li>
+                            <li id="tourstop-hud" className="tooltiped" data-toggle="tooltip" data-placement="bottom" title="HUD"><a className="lrg" href={HUD_URL}><i className="icon-home-grayLightest"></i></a></li>
+                            <li id="tourstop-center" className="active tooltiped" data-toggle="tooltip" data-placement="bottom" title="Center"><a className="lrg" href='#/home' ><i className="icon-shopping-grayLightest activeIcon"></i></a></li>
+                            <li id="tourstop-webtop" className="tooltiped" data-toggle="tooltip" data-placement="bottom" title="Webtop"><a className="lrg" href={WEBTOP_URL}><i className="icon-layout-grayLightest"></i></a></li>
                         </ul>
                     </div>
 

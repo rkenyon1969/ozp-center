@@ -1,0 +1,58 @@
+
+.popover {
+    border-color: $blue;
+
+    .popover-title,
+    .popover-content,
+    .popover-navigation {
+        padding: 5px 25px;
+    }
+
+    .popover-title {
+        background: transparent;
+        color: $blue;
+        font-weight: bold;
+        border: 0;
+        padding-top: 25px;
+    }
+
+    .popover-navigation {
+        padding-bottom: 25px;
+    }
+
+    &.bottom > .arrow { border-bottom-color: $blue; }
+    &.top > .arrow { border-top-color: $blue; }
+    &.left > .arrow { border-left-color: $blue; }
+    &.right > .arrow { border-right-color: $blue; }
+}
+
+.tour-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  background-color: #000;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+
+.tour-step-backdrop {
+  position: relative;
+  z-index: 1051;
+
+    > td {
+      position: relative;
+      z-index: 1051;
+    }
+}
+
+.tour-step-background {
+  position: absolute !important;
+  z-index: 1050;
+  background: inherit;
+  border-radius: 0;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+}
