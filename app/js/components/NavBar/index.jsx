@@ -53,14 +53,11 @@ var NavBar = React.createClass({
                         <ul className="nav navbar-nav">
                             <UserNotificationDropdown/>
                             <li className="tooltiped" data-toggle="tooltip" data-placement="bottom" title="Help">
-                                <a href="#" onClick={this.showHelpModal}><i className="icon-question-grayLightest"></i></a>
+                                <a href="#" id="tourstop-help" onClick={this.showHelpModal}><i className="icon-question-grayLightest"></i></a>
                             </li>
                             <li data-toggle="tooltip" id="global-nav-dropdown" data-placement="bottom" title="Menu" className="dropdown user-menu-dropdown tooltiped">
                                 <a href="#" className="lrg" data-toggle="dropdown"><i className="icon-menu-grayLightest"></i></a>
                                 <ul className="dropdown-menu">
-                                    <li className="dropdown-header">Interactie Tour</li>
-                                    <li><a id="tour-button-home" href="#">Take Homepage Tour</a></li>
-                                    <li><a id="tour-button-createEdit" href="#">Take Create Edit Tour</a></li>
                                     <li className="dropdown-header">Personalize</li>
                                     <li><a href={HUD_URL}><i className="icon-ribbon-grayLightest"></i>Bookmarks</a></li>
                                     <li>

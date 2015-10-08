@@ -319,7 +319,7 @@ div.modal-header > button.close {
 }
 body > div.classBanner {
     position: fixed;
-    z-index: 1000000;
+    z-index: 1050;
 
     &:first-of-type {
         top: 0px;
@@ -439,7 +439,7 @@ $icons: (
 // Help Tour
 
 
-.popover {
+.popover[class*="tour-"] {
     border-color: $blue;
 
     .popover-title,
@@ -464,6 +464,7 @@ $icons: (
     &.top > .arrow { border-top-color: $blue; }
     &.left > .arrow { border-left-color: $blue; }
     &.right > .arrow { border-right-color: $blue; }
+    &.orphan > .arrow { display: none; }
 }
 
 .tour-backdrop {

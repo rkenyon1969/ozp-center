@@ -117,20 +117,20 @@ var Discovery = React.createClass({
             <div>
                 <NavBar />
                 <Header>
-                    <form className="col-xs-9 col-lg-10" ref="form" role="search">
-			<div className="row">
-		                <div className="form-group Search col-sm-6 col-xs-4">
-		                    <i className="icon-search"></i>
+                    <form id="tourstop-center-search" className="col-xs-9 col-lg-10" ref="form" role="search">
+			            <div className="row">
+		                    <div className="form-group Search col-sm-6 col-xs-4">
+		                        <i className="icon-search"></i>
 
-		                    <input ref="search" type="text" className="form-control"
-		                        placeholder="Search"
-		                        value={ this.state.queryString || ''}
-		                        onChange={ this.onSearchInputChange } />
+		                        <input ref="search" type="text" className="form-control"
+		                            placeholder="Search"
+		                            value={ this.state.queryString || ''}
+		                            onChange={ this.onSearchInputChange } />
 
-		                    <i className="icon-cross-14-grayDark clearButton" onClick={this.reset}></i>
-		                </div>
-		                <Types value={this.state.type} onChange={this.onTypeChange} />
-		                <Organizations value={this.state.agency} onChange={this.onOrganizationChange} />
+		                        <i className="icon-cross-14-grayDark clearButton" onClick={this.reset}></i>
+		                    </div>
+		                    <Types value={this.state.type} onChange={this.onTypeChange} />
+		                    <Organizations value={this.state.agency} onChange={this.onOrganizationChange} />
                     	</div>
 		    </form>
                 </Header>

@@ -1,5 +1,4 @@
-
-.popover {
+.popover[class*="tour-"] {
     border-color: $blue;
 
     .popover-title,
@@ -24,6 +23,7 @@
     &.top > .arrow { border-top-color: $blue; }
     &.left > .arrow { border-left-color: $blue; }
     &.right > .arrow { border-right-color: $blue; }
+    &.orphan > .arrow { display: none; }
 }
 
 .tour-backdrop {
