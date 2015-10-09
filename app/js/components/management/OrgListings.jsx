@@ -42,7 +42,7 @@ var OrgListings = React.createClass({
             listings: [],
             hasMore: false,
             filter: _.assign(this.getQuery(), {
-                org: this.props.org
+                org: this.props.org.params.org
             }),
             tableView: useTableView,
             sortKey: "name",
