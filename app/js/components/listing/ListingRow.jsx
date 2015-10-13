@@ -90,9 +90,9 @@ var ListingRow = React.createClass({
         filterBySearch: function (listings, searchKey) {
 
             return listings.filter( function (listing) {
-                
-                var key = searchKey.toLowerCase(),
-                    title = listing.title.toLowerCase(),
+
+                var key = String(searchKey).toLowerCase(),
+                    title = String(listing.title).toLowerCase(),
                     inOwners = false;
 
                 if (title.indexOf(key) >= 0) {
@@ -100,7 +100,7 @@ var ListingRow = React.createClass({
                 }
 
                 listing.owners.forEach( function (owner) {
-                    var name = owner.displayName.toLowerCase();
+                    var name = String(owner.displayName).toLowerCase();
                     if (name.indexOf(key) >= 0) {
                         inOwners = true;
                     }
