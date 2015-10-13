@@ -93,7 +93,7 @@ ListingActions.fetchById.listen(function (id) {
     function processQuery(queryString) {
         var matches = queryString && queryString.match(/"[^"]*"|\S+/g),
             processedMatches = matches && matches.map(
-                m => /["\*]$/.test(m) ? m : m + '*'
+                m => /[""\*]$/.test(m) ? m : m + '*'   
             );
 
         return processedMatches && processedMatches.join(' ');
@@ -165,7 +165,6 @@ ListingActions.launch.listen(function (listing) {
 
 ListingActions.save.listen(function (data) {
     var isNew = !data.id;
-    console.info("data " + data);
 
     if (isNew) { OzpAnalytics.trackListingCreation(data.title, data.agency); }
 
