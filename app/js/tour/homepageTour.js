@@ -29,7 +29,7 @@ module.exports = new Tour({
     {
       element: ".icon-bell-grayLightest",
       title: "Notifications",
-      content: "If you have a notification, the icon will change colors and a line will display above it.",
+      content: "Receive notifications from your Center steward here. If you have an unread notification, the icon will change colors to alert you. Once you've read a notification, you can click the X to dismiss it. Otherwise, it will disappear from the list when it expires.",
       placement: "bottom",
       backdropContainer: ".navbar-fixed-top"
     },
@@ -44,7 +44,7 @@ module.exports = new Tour({
     {
       element: "#global-nav-dropdown",
       title: "Global Menu",
-      content: "The main menu provides a list of resources you can use to submit listings, manage your listings, change your settings, view your profile, etc.",
+      content: "The main menu provides a list of resources you can use to submit listings, manage your listings, view your profile, contact us, etc.",
       placement: "left",
       backdropContainer: ".navbar-fixed-top",
       backdropPadding: 0,
@@ -58,7 +58,7 @@ module.exports = new Tour({
     {
       element: "#tourstop-center-search",
       title: "Search and Filter",
-      content: "Use keywords and filters to explore listings. When you enter a search term, the system looks for your term in the listing name, description, tags, etc.",
+      content: "Use keywords and filters to explore listings. When you enter a search term, the system looks for your term in the listing's name, description, tags, etc.",
       placement: "bottom",
       backdropContainer: "#header"
     },
@@ -71,7 +71,7 @@ module.exports = new Tour({
     {
       element: "#tourstop-center-home",
       title: "Center Home",
-      content: "After searching and filtering, click here to return to the Center Discovery page.",
+      content: "After searching and filtering, click here to return to the Center Discovery page to see featured listings, new arrivals and most popular listings.",
       placement: "right"
     },
     {
@@ -87,12 +87,40 @@ module.exports = new Tour({
       }
     },
     {
-      orphan: true,
-      title: "Listing Detail View",
+      path: "/dist/#/home/?%2F%3F=&listing=1&action=view&tab=overview",
+      element: ".modal-body",
+      title: "Listing Overview",
       content: "Click a tile to access the listing detail view. From this popup you can see screenshots, long descriptions, reviews, and other resources. Use the links at the top of the listing to launch, bookmark or close it.",
-      onShow: function() {
-        return window.location.assign("/dist/#/home/?%2F%3F=&listing=1&action=view&tab=overview");
-      },
+      placement: "left",
+      backdropContainer: ".modal-content",
+      backdropPadding: 0
+    },
+    {
+      path: "/dist/#/home/?%2F%3F=&listing=1&action=view&tab=reviews",
+      element: ".modal-body .li.active",
+      title: "Listing Reviews",
+      content: "Rate and review the listing, or read reviews from other users.",
+      placement: "bottom",
+      backdropContainer: ".modal-content",
+      backdropPadding: 0
+    },
+    {
+      path: "/dist/#/home/?%2F%3F=&listing=1&action=view&tab=details",
+      element: ".modal-body li.active",
+      title: "Listing Details",
+      content: "Here you'll find a list of new features, usage requirements, ownership information, tags, categories, etc.",
+      placement: "bottom",
+      backdropContainer: ".modal-content",
+      backdropPadding: 0
+    },
+    {
+      path: "/dist/#/home/?%2F%3F=&listing=1&action=view&tab=resources",
+      element: ".modal-body .li.active",
+      title: "Listing Resources",
+      content: "If the listing includes instructions like user manuals and contact information, you will find it here.",
+      placement: "bottom",
+      backdropContainer: ".modal-content",
+      backdropPadding: 0,
       onHidden: function() {
         return window.location.assign("/dist/#/home/");
       }
