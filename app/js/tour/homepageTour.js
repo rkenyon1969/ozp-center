@@ -58,14 +58,14 @@ module.exports = new Tour({
     {
       element: "#tourstop-center-search",
       title: "Search and Filter",
-      content: "Use keywords and filters to explore listings.",
+      content: "Use keywords and filters to explore listings. When you enter a search term, the system looks for your term in the listing name, description, tags, etc.",
       placement: "bottom",
       backdropContainer: "#header"
     },
     {
       element: "#tourstop-center-categories",
       title: "Filter by Category",
-      content: "Click a category and only listings associated with that category will appear on the page. If you select multiple categories, only listings associated with all of the selected categories will appear.",
+      content: "Use categories to reduce your search results. When you click a category, only listings in that category will appear on the page. If you select multiple categories, only listings associated with all of the selected categories will appear.",
       placement: "right"
     },
     {
@@ -89,7 +89,7 @@ module.exports = new Tour({
     {
       orphan: true,
       title: "Listing Detail View",
-      content: "Click a tile to access the listing detail view. From this popup you can see screenshots, long descriptions, reviews, and other resources.",
+      content: "Click a tile to access the listing detail view. From this popup you can see screenshots, long descriptions, reviews, and other resources. Use the links at the top of the listing to launch, bookmark or close it.",
       onShow: function() {
         return window.location.assign("/dist/#/home/?%2F%3F=&listing=1&action=view&tab=overview");
       },
