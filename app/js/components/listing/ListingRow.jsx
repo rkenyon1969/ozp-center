@@ -130,20 +130,20 @@ var ListingRow = React.createClass({
                     aValue = b.title.toLowerCase();
                     break;
                 case "owner":
-                    aValue = a.owners[0].displayName.toLowerCase();
-                    bValue = b.owners[0].displayName.toLowerCase();
+                    aValue = a.owners[0] ? String(a.owners[0].displayName).toLowerCase() : "";
+                    bValue = b.owners[0] ? String(b.owners[0].displayName).toLowerCase() : "";
                     break;
                 case "!owner":
-                    bValue = a.owners[0].displayName.toLowerCase();
-                    aValue = b.owners[0].displayName.toLowerCase();
+                    bValue = a.owners[0] ? String(a.owners[0].displayName).toLowerCase() : "";
+                    aValue = b.owners[0] ? String(b.owners[0].displayName).toLowerCase() : "";
                     break;
                 case "organization":
-                    aValue = a.agency.toLowerCase();
-                    bValue = b.agency.toLowerCase();
+                    aValue = String(a.agency).toLowerCase();
+                    bValue = String(b.agency).toLowerCase();
                     break;
                 case "!organization":
-                    bValue = a.agency.toLowerCase();
-                    aValue = b.agency.toLowerCase();
+                    bValue = String(a.agency).toLowerCase();
+                    aValue = String(b.agency).toLowerCase();
                     break;
                 case "status":
                     aValue = ListingRow.convertStatus(a.approvalStatus);
