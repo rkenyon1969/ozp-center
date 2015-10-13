@@ -1,6 +1,7 @@
 module.exports = new Tour({
   backdrop: true,
   backdropPadding: 10,
+  template: "<div class='popover tour'><div class='arrow'></div><",
   steps: [
     {
       element: "#tourstop-hud",
