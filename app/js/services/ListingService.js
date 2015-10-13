@@ -38,9 +38,10 @@ ListingActions.fetchAllListings.listen(function (filter) {
         });
     }
 
+    var tmpPartial = _.partial(ListingActions.fetchAllListingsCompleted, _.clone(filter));
     ListingApi
         .getAllListings(nextLink, opts)
-        .then(_.partial(ListingActions.fetchAllListingsCompleted, filter));
+        .then(tmpPartial);
 });
 
 ListingActions.fetchCounts.listen(function () {

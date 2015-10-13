@@ -26,17 +26,13 @@ var PaginatedListingsStore = Reflux.createStore({
         var paginatedList = _paginatedListByFilter[key];
         var unPaginatedList = _unPaginatedListByFilter[key];
 
-        if (!collectAll) {
-            if (paginatedList) {
-                paginatedList.receivePage(response);
-                unPaginatedList.receivePage(response);
-            }
-            else {
-                _paginatedListByFilter[key] = new PaginatedList(response);
-                _unPaginatedListByFilter[key] = new PaginatedList(response);
-            }
-        } else {
+        if (paginatedList) {
+            paginatedList.receivePage(response);
             unPaginatedList.receivePage(response);
+        }
+        else {
+            _paginatedListByFilter[key] = new PaginatedList(response);
+            _unPaginatedListByFilter[key] = new PaginatedList(response);
         }
 
         if (_unPaginatedListByFilter[key].hasMore) {
@@ -51,6 +47,7 @@ var PaginatedListingsStore = Reflux.createStore({
     onListingChangeCompleted: function () {
         // clear cache when any listing is updated
         _paginatedListByFilter = {};
+        _unPaginatedListByFilter = {};
     },
 
     getListingsByFilter: function (filter) {
