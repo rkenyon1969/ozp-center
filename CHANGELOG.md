@@ -1,3 +1,15 @@
+### 1.0.12 (2015-10-14)
+
+
+#### Bug Fixes
+
+* **ListingManagement:**
+  * Quickly switching between Org tabs can cause data to be populated incorrectly ([661a60f2](https://github.com/ozone-development/ozp-center.git/commit/661a60f2e198831a37f355cb8cc59da9ab3d6fe1))
+  * Fix inaccurate results on first click of org steward tab ([05b9d504](https://github.com/ozone-development/ozp-center.git/commit/05b9d504b0a8f1312e4c3a70f87d72d7857dd0ed))
+  * Table view does not work if the owner displayname is blank ([13980b8a](https://github.com/ozone-development/ozp-center.git/commit/13980b8ac45ca09d6ba9961d00d59dc5f7116e10))
+* **TableView:** Enable tables which include drafts without owner or org to be sorted ([0230965f](https://github.com/ozone-development/ozp-center.git/commit/0230965fc4485ad11bb612d39d3f72f9c31cfa79))
+
+
 ### 1.0.11 (2015-10-06)
 
 
