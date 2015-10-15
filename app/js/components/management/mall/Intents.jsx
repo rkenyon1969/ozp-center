@@ -107,7 +107,7 @@ var Intents = React.createClass({
                     { field: 'icon', caption: 'Icon', size: '50px',
                         render: function (record) {
                             return record.icon ?
-                                `<img style="width:24px;height:24px;" src=${record.icon} >` :
+                                `<img style="width:24px;height:24px;" alt="" src=${record.icon} >` :
                                 '';
                         }
                     }

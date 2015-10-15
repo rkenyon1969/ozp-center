@@ -50,7 +50,7 @@ var OverviewTab = React.createClass({
         }
 
         var smallImageUrls = screenshots.map(function (screenshot, i) {
-            return <img src={screenshot.smallImageUrl} onClick={ me.showLargeScreenshots.bind(me, i) }/>;
+            return <img alt="show large screenshot once click" src={screenshot.smallImageUrl} onClick={ me.showLargeScreenshots.bind(me, i) }/>;
         });
 
         return (

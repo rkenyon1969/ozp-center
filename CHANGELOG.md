@@ -1,3 +1,44 @@
+### 1.0.12 (2015-10-14)
+
+
+#### Bug Fixes
+
+* **ListingManagement:**
+  * Quickly switching between Org tabs can cause data to be populated incorrectly ([661a60f2](https://github.com/ozone-development/ozp-center.git/commit/661a60f2e198831a37f355cb8cc59da9ab3d6fe1))
+  * Fix inaccurate results on first click of org steward tab ([05b9d504](https://github.com/ozone-development/ozp-center.git/commit/05b9d504b0a8f1312e4c3a70f87d72d7857dd0ed))
+  * Table view does not work if the owner displayname is blank ([13980b8a](https://github.com/ozone-development/ozp-center.git/commit/13980b8ac45ca09d6ba9961d00d59dc5f7116e10))
+* **TableView:** Enable tables which include drafts without owner or org to be sorted ([0230965f](https://github.com/ozone-development/ozp-center.git/commit/0230965fc4485ad11bb612d39d3f72f9c31cfa79))
+
+
+### 1.0.11 (2015-10-06)
+
+
+#### Bug Fixes
+
+* **Merge:** Tests are passing, merge failure fixed ([9b6393aa](https://github.com/ozone-development/ozp-center.git/commit/9b6393aa499e2ccc4eb1510ddb60c9269bd4557a))
+* **colors:**
+  * Remove extra accidental file ([2a5e7c30](https://github.com/ozone-development/ozp-center.git/commit/2a5e7c3090c934f1dfa1a17d339dd1e151c3e22e))
+  * Change table view sort icon color to be visible ([5f0c0a32](https://github.com/ozone-development/ozp-center.git/commit/5f0c0a320dd4c64ce0d382bb4b18fb42d5a46b7d))
+
+
+#### Features
+
+* **Table View:** Created table views for AllListings and OrgListings pages. ([64ccaa39](https://github.com/ozone-development/ozp-center.git/commit/64ccaa39d983ca2575b677e211b632dcb7efe3b9))
+
+
+### 1.0.10 (2015-09-29)
+
+
+#### Bug Fixes
+
+* **508:** Text alternatives for non-text content ([c34f3b98](https://github.com/ozone-development/ozp-center.git/commit/c34f3b98aa528ba9e4df07c6a1758978b7e7c4fd))
+
+
+#### Features
+
+* **508:** Text alternatives for non-text content ([f3d9a921](https://github.com/ozone-development/ozp-center.git/commit/f3d9a921793a93fcc9e54d9898448246c9705a68))
+
+
 ### 1.0.9 (2015-09-23)
 
 
