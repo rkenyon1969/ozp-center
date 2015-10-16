@@ -57,7 +57,7 @@ var BookmarkButton = React.createClass({
                 'icon-ribbon-filled-yellow': this.inLibrary()
             });
         return (
-          <button ref="tooltipped" data-toggle="tooltip" data-placement="top" title="Bookmark" type="button" className={bookmarkBtnStyles} onClick={this.toggleInLibrary}>
+          <button ref="tooltipped" data-toggle="tooltip" data-placement="top" title="Bookmark" type="button" alt="Click to bookmark this app" className={bookmarkBtnStyles} onClick={this.toggleInLibrary}>
               <i className={bookmarkIcon} />
           </button>
         );

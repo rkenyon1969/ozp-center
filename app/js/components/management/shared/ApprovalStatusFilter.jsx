@@ -47,8 +47,9 @@ var ApprovalStatusFilter = React.createClass({
     },
 
     _renderRadioGroupOptions: function () {
+
         var counts = this.props.counts;
-        var value = this.props.value.approvalStatus || 'all';
+        var value = this.props.value.approval_status || 'all';
 
         var components = [
             filterOption(value, 'All', 'all', counts.total, 'all-listings-filter-all', 'label-all', undefined),
@@ -75,7 +76,7 @@ var ApprovalStatusFilter = React.createClass({
     },
 
     render: function() {
-        var value = this.props.value.approvalStatus || 'all';
+        var value = this.props.value.approval_status || 'all';
 
         return (
             <div>

@@ -19,11 +19,39 @@
 
 .Listings__Sidebar {
     background: $gray-lightest;
+
+    .switchBox {
+        display: block;
+        float: right;
+        margin: 5px 15px 25px 0;
+        cursor: pointer;
+
+        .switch-blueDark, .switch-white {
+            padding: 5px 10px;
+            border: $gray-lighter 1px solid;
+            
+            i {
+                margin: 0px !important;
+            }
+        }
+
+        .switch-blueDark {
+            background-color: $blue-dark;
+        }
+
+        .switch-white {
+            background-color:white;
+        }
+    }
 }
 
 .Listings__SidebarFilter {
     padding: 0;
     margin: 0 -15px;
+
+    div {
+        clear: both;
+    }
 
     input[type="radio"] {
         display: none;
@@ -36,7 +64,7 @@
         font-size: 14px;
     }
 
-    .badge{
+    .badge {
         border-radius: 0px;
         padding: 4px 4px 2px 4px;
         top: 8px;

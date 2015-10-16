@@ -57,7 +57,7 @@ var RejectedChangeLog = React.createClass({
     },
     render: function () {
         var changeLog = this.props.changeLog;
-        var details = 'Details: ' + changeLog.rejectionDescription;
+        var details = 'Details: ' + changeLog.description;
         var id = uuid();
 
         return (

@@ -457,6 +457,7 @@ var CreateEditPage = React.createClass({
             scrollToError: false,
             imageErrors: {screenshots: []},
             timestamp: Date.now(),
+            isValid: true
         };
     },
 
