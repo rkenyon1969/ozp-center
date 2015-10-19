@@ -24,7 +24,7 @@ var Stewards = React.createClass({
                 return user;
               });
             },
-            getStweardOrgs: (data) => {
+            getStewardOrgs: (data) => {
               return data.map((user)=> {
                 user.stewardedOrganizations = user.stewardedOrganizations.map((org) => {
                   return org.title;

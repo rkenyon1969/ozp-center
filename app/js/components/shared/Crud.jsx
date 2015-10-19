@@ -338,7 +338,7 @@ var Crud = React.createClass({
                 }
 
                 if(data.results[0].stewardedOrganizations) {
-                  this.props.getStweardOrgs(data.results);
+                  this.props.getStewardOrgs(data.results);
                 }
 
                 this.records = data.count > 0 ? [].concat(data.results) : [];

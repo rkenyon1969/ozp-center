@@ -101,25 +101,25 @@ var Intents = React.createClass({
             },
             structIcon: function(data){
                 data = data.map(function(intent) {
-                  var iconObj = {
-                    accessControl: {
-                      title: intent.icon.accessControl.title
-                    },
-                    id: intent.icon.id,
-                    url: intent.icon.url
-                  };
+                    var iconObj = {
+                        accessControl: {
+                            title: intent.icon.accessControl.title
+                        },
+                        id: intent.icon.id,
+                        url: intent.icon.url
+                    };
 
-                  var structIntent = {
-                    action: intent.action,
-                    iconObj: iconObj,
-                    icon: iconObj.url,
-                    iconId: iconObj.id,
-                    id: intent.id,
-                    label: intent.label,
-                    mediaType: intent.mediaType,
-                    recid: intent.recid
-                  };
-                  return structIntent;
+                    var structIntent = {
+                        action: intent.action,
+                        iconObj: iconObj,
+                        icon: iconObj.url,
+                        iconId: iconObj.id,
+                        id: intent.id,
+                        label: intent.label,
+                        mediaType: intent.mediaType,
+                        recid: intent.recid
+                    };
+                    return structIntent;
                 });
                 return data;
             },
