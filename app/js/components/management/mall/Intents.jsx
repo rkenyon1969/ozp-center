@@ -212,7 +212,13 @@ var Intents = React.createClass({
     },
 
     saveIcon: function(icon) {
-        return ImageApi.save(icon).then((json => JSON.parse(json).id), this.handleImageSaveFailure);
+        return ImageApi.save(icon).then((json) => {
+          if(typeof json === 'string'){
+            return JSON.parse(json).id;
+          }else{
+            return json.id;
+          }
+        }, this.handleImageSaveFailure);
     },
 
     handleImageSaveFailure: function(response, err, statusText) {
