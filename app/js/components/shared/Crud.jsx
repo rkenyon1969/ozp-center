@@ -15,6 +15,7 @@ var uuid = require('../../utils/uuid');
 var { DeleteConfirmation } = require('../shared/DeleteConfirmation.jsx');
 var { FOCUSABLE_ELEMENTS } = require('ozp-react-commons/constants');
 var AjaxMixin = require('../../mixins/AjaxMixin');
+var humps = require('humps');
 
 var CreateEditModal = React.createClass({
 
@@ -226,12 +227,17 @@ var Crud = React.createClass({
     //The default implementation of this.props.onCreate.  This function may also be called
     //by custom onCreate implementations
     _onCreate: function(data) {
+        // Shim for new backend
+        if (data.stewardedOrganizations && data.stewardedOrganizations[0]) {
+          data = this.props.structStewardOrgs(data);
+        }
+
         return $.ajax({
             url: `${this.getUrlWithoutParams()}/`,
             type: 'post',
             dataType: 'json',
             contentType: 'application/json',
-            data: JSON.stringify(data)
+            data: JSON.stringify(humps.decamelizeKeys(data))
         })
         .done(this.reload)
         .fail(this.handleError);
@@ -251,12 +257,18 @@ var Crud = React.createClass({
     _onEdit: function(data) {
         var id = this.getSelectedId();
 
+        // Shim for new backend
+        if (data.stewardedOrganizations && data.stewardedOrganizations[0]) {
+          data = this.props.structStewardOrgs(data);
+        }
+
+
         return $.ajax({
             url: `${this.getUrlWithoutParams()}/${id}/`,
             type: 'put',
             dataType: 'json',
             contentType: 'application/json',
-            data: JSON.stringify(data)
+            data: JSON.stringify(humps.decamelizeKeys(data))
         })
         .done(this.reload)
         .fail(this.handleError);
@@ -315,7 +327,20 @@ var Crud = React.createClass({
             },
             url : this.props.url,
             parser: (responseText) => {
-                var data = JSON.parse(responseText);
+                var data = humps.camelizeKeys(JSON.parse(responseText));
+
+                if(data.results[0].user) {
+                  this.props.getUsername(data.results);
+                }
+
+                if (data.results[0].icon) {
+                  data.results = this.props.structIcon(data.results);
+                }
+
+                if(data.results[0].stewardedOrganizations) {
+                  this.props.getStewardOrgs(data.results);
+                }
+
                 this.records = data.count > 0 ? [].concat(data.results) : [];
                 return {
                     total: this.records.length,

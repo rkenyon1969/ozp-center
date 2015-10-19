@@ -2,7 +2,7 @@
 
 var React = require('react');
 var t = require('tcomb-form');
-var { Str, struct, subtype, maybe } = t;
+var { Str, struct, subtype, maybe, Num } = t;
 var Crud = require('../../shared/Crud.jsx');
 
 var ImageApi = require('../../../webapi/Image').ImageApi;
@@ -83,10 +83,10 @@ var Intent = struct({
     action: subtype(Str, function (s) {
         return s.length <= 64;
     }),
-    type: subtype(Str, function (s) {
+    mediaType: subtype(Str, function (s) {
         return s.length <= 129;
     }),
-    iconInput: maybe(t.union([Str, iconInputFileType]))
+    iconInput: maybe(t.union([Str, iconInputFileType, Num]))
 });
 
 var Intents = React.createClass({
@@ -97,13 +97,37 @@ var Intents = React.createClass({
             url: API_URL + '/api/intent',
             Schema: Intent,
             getDisplayName: function (selectedRecord) {
-                return `${selectedRecord.action}/${selectedRecord.type}`;
+                return `${selectedRecord.action}/${selectedRecord.mediaType}`;
+            },
+            structIcon: function(data){
+                data = data.map(function(intent) {
+                    var iconObj = {
+                        accessControl: {
+                            title: intent.icon.accessControl.title
+                        },
+                        id: intent.icon.id,
+                        url: intent.icon.url
+                    };
+
+                    var structIntent = {
+                        action: intent.action,
+                        iconObj: iconObj,
+                        icon: iconObj.url,
+                        iconId: iconObj.id,
+                        id: intent.id,
+                        label: intent.label,
+                        mediaType: intent.mediaType,
+                        recid: intent.recid
+                    };
+                    return structIntent;
+                });
+                return data;
             },
             grid: {
                 columns: [
                     { field: 'label', caption: 'Label', size: '10%' },
                     { field: 'action', caption: 'Action', size: '45%' },
-                    { field: 'type', caption: 'Type', size: '45%' },
+                    { field: 'mediaType', caption: 'Type', size: '45%' },
                     { field: 'icon', caption: 'Icon', size: '50px',
                         render: function (record) {
                             return record.icon ?
@@ -132,7 +156,7 @@ var Intents = React.createClass({
                     help: 'Max. 64 characters',
                     disabled: selectedRecord ? true : false
                 },
-                type: {
+                mediaType: {
                     disabled: selectedRecord ? true : false,
                     help: 'Max. 64 characters/Max. 64 characters. Ex: application/json, application/custom-type, etc.'
                 },
@@ -166,7 +190,7 @@ var Intents = React.createClass({
 
             //inputVal could be a string (the existing image id) or a File/Input to save,
             //or null (if the image was removed)
-            iconSave = (inputVal && typeof inputVal !== 'string') ?
+            iconSave = (inputVal && typeof inputVal !== 'number') ?
                 this.saveIcon(data.iconInput) :
                 $.Deferred().resolve(inputVal).promise();
 
@@ -174,6 +198,13 @@ var Intents = React.createClass({
             me.setState({imageError: null});
 
             intentSaveFunction(Object.assign({}, data, {
+                icon: {
+                  accessControl: {
+                    title: "UNCLASSIFIED"
+                  },
+                  id: iconId,
+                  url: `${API_URL}/api/image/${iconId}`
+                },
                 iconId: iconId,
                 iconInput: undefined
             }));
@@ -181,7 +212,13 @@ var Intents = React.createClass({
     },
 
     saveIcon: function(icon) {
-        return ImageApi.save(icon).then((json => json.id), this.handleImageSaveFailure);
+        return ImageApi.save(icon).then((json) => {
+          if(typeof json === 'string'){
+            return JSON.parse(json).id;
+          }else{
+            return json.id;
+          }
+        }, this.handleImageSaveFailure);
     },
 
     handleImageSaveFailure: function(response, err, statusText) {
