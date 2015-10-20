@@ -15,7 +15,8 @@ var FIELDS = [
     'versionName', 'imageLargeUrl', 'imageSmallUrl', 'imageMediumUrl', 'imageXlargeUrl',
     'launchUrl', 'company', 'whatIsNew', 'owners', 'agency', 'agencyShort', 'rejection',
     'isEnabled', 'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls', 'approvalStatus',
-    'isFeatured', 'smallIconId', 'largeIconId', 'bannerIconId', 'featuredBannerIconId'
+    'isFeatured', 'smallIconId', 'largeIconId', 'bannerIconId', 'featuredBannerIconId',
+    'currentRejection'
 ];
 
 // These don't have the icons, access_control

@@ -24,7 +24,7 @@ module.exports = React.createClass({
 
         return rejection ? {
             title: listing.title,
-            steward: rejection.author.username,
+            steward: rejection.author.displayName,
             feedback: rejection.description
         } : {
             title: '',
