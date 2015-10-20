@@ -94,7 +94,7 @@ ListingActions.fetchById.listen(function (id) {
     function processQuery(queryString) {
         var matches = queryString && queryString.match(/"[^"]*"|\S+/g),
             processedMatches = matches && matches.map(
-                m => /["\*]$/.test(m) ? m : m + '*'
+                m => /[""\*]$/.test(m) ? m : m + '*'   
             );
 
         return processedMatches && processedMatches.join(' ');
@@ -144,7 +144,7 @@ ListingActions.saveReview.listen(function (listing, review) {
             ListingActions.fetchById(listing.id);
             ListingActions.fetchReviews(listing);
             ListingActions.saveReviewCompleted(listing, response);
-            OzpAnalytics.trackListingReview(listing.title);
+            OzpAnalytics.trackListingReview(listing.title, listing.agencyShort);
         })
         .fail(ListingActions.saveReviewFailed);
 });
@@ -167,7 +167,7 @@ ListingActions.launch.listen(function (listing) {
 ListingActions.save.listen(function (data) {
     var isNew = !data.id;
 
-    if (isNew) { OzpAnalytics.trackListingCreation(data.title); }
+    if (isNew) { OzpAnalytics.trackListingCreation(data.title, data.agency); }
 
     if (/\s/g.test(data.launchUrl)) { data.launchUrl = data.launchUrl.replace(/ /g,"%20"); }
 
@@ -188,12 +188,12 @@ ListingActions.enable.listen(setEnabled.bind(null, true));
 ListingActions.disable.listen(setEnabled.bind(null, false));
 
 ListingActions.approve.listen(function (listing) {
-    OzpAnalytics.trackListingApproval(listing.title);
+    OzpAnalytics.trackListingApproval(listing.title, listing.agencyShort);
     updateListingProperty('approvalStatus', 'APPROVED', listing);
 });
 
 ListingActions.approveByOrg.listen(function (listing) {
-    OzpAnalytics.trackListingOrgApproval(listing.title);
+    OzpAnalytics.trackListingOrgApproval(listing.title, listing.agencyShort);
     updateListingProperty('approvalStatus', 'APPROVED_ORG', listing);
 });
 

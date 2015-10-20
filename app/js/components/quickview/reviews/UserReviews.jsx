@@ -74,7 +74,7 @@ var UserReviews = React.createClass({
     componentDidMount: function(){
       var listing = this.props.listing || false;
       if(listing.title) {
-        OzpAnalytics.trackListingReviewView(listing.title);
+        OzpAnalytics.trackListingReviewView(listing.title, listing.agencyShort);
       }
     },
 
