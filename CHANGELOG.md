@@ -1,3 +1,11 @@
+### 1.0.13 (2015-10-21)
+
+
+#### Bug Fixes
+
+* **style:** Fix bug that caused large table rows when displaying only a few results ([a0eef80e](https://github.com/ozone-development/ozp-center.git/commit/a0eef80e2c83dcb3cb8283616f311c4475bf4aab))
+
+
 ### 1.0.12 (2015-10-14)
 
 
