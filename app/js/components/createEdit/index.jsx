@@ -257,17 +257,22 @@ var ContactForm = React.createClass({
     mixins: [ require('../../mixins/SystemStateMixin'), ValidatedFormMixin ],
 
     render: function () {
+
+        var baseKey = this.props.value['name'] + '.' + this.props.value['type'];
+
         return (
             <div className="well">
                 <button type="button" className="close" onClick={this.props.removeHandler}>
                     <span aria-hidden="true"><i className="icon-cross-14"></i></span><span className="sr-only">Clear</span>
                 </button>
-                <Select2Input { ...this.getFormComponentProps('type') } options={ getOptionsForSystemObject(this.state.system.contactTypes) }/>
-                <TextInput { ...this.getFormComponentProps('name') }/>
-                <TextInput { ...this.getFormComponentProps('organization') } optional/>
-                <TextInput { ...this.getFormComponentProps('email') }/>
-                <TextInput { ...this.getFormComponentProps('securePhone') }/>
-                <TextInput { ...this.getFormComponentProps('unsecurePhone') }/>
+                <Select2Input { ...this.getFormComponentProps('type') }
+                              options={ getOptionsForSystemObject(this.state.system.contactTypes) }
+                              key={`${baseKey}.type`} />
+                <TextInput { ...this.getFormComponentProps('name') } key={`${baseKey}.name`} />
+                <TextInput { ...this.getFormComponentProps('organization') } key={`${baseKey}.organization`} optional />
+                <TextInput { ...this.getFormComponentProps('email') } key={`${baseKey}.email`} />
+                <TextInput { ...this.getFormComponentProps('securePhone') } key={`${baseKey}.securePhone`} />
+                <TextInput { ...this.getFormComponentProps('unsecurePhone') } key={`${baseKey}.unsecurePhone`} />
             </div>
         );
     }
@@ -354,7 +359,7 @@ var ListingForm = React.createClass({
                 <ListInput id={f.contacts.id} { ...this.getSubFormProps('contacts') }
                     itemForm={ ContactForm }/>
 
-                  <div className="space" style={{'height':'400px'}}>&#32;</div>
+                <div className="space" style={{'height':'400px'}}>&#32;</div>
             </form>
         );
     },
