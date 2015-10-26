@@ -9,7 +9,7 @@ var ProfileMock = require('../../../__tests__/mocks/ProfileMock');
 var createRoutes = require('../../../__tests__/createRoutes');
 
 describe ('OrgListings', function () {
-    var OrgListings = require('../OrgListings.jsx');
+    var OrgListings = require('../OrgListings/index.jsx');
     var router,
         routes = createRoutes(OrgListings),
         location = new TestLocation( ['/test'] );
@@ -44,11 +44,11 @@ describe ('OrgListings', function () {
 
         //Before click gridview (loadMore) should be loaded
         //After click gridview should not be loaded
-        expect($(listingManagementPage).find('div[class="LoadMore AllListings__listings col-xs-9 col-lg-10 all"]')[0]).to.exist;
+        expect($(listingManagementPage).find('div[class="LoadMore ListingsManagement__LoadMore col-xs-9 col-lg-10 all"]')[0]).to.exist;
 
         TestUtils.Simulate.click(switchBox);
 
-        expect($(listingManagementPage).find('div[class="LoadMore AllListings__listings col-xs-9 col-lg-10 all"]')[0]).to.not.exist;
+        expect($(listingManagementPage).find('div[class="LoadMore ListingsManagement__LoadMore col-xs-9 col-lg-10 all"]')[0]).to.not.exist;
     });
 
     afterEach( function () {

@@ -1,0 +1,20 @@
+.ListingsManagement__LoadMore{
+    padding: 30px;
+    background: $white;
+    min-height: 500px;
+    
+    .AdminOwnerListingTile {
+        display: inline-block;
+    }
+}
+.ListingsManagement__TableView{
+    background: $white;
+    min-height: 500px;
+    height: 750px;
+    padding: 0px;
+
+    .icon-search-down {
+    	position: relative;
+    	top: 20px;
+    }
+}

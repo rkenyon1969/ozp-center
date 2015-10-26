@@ -11,7 +11,7 @@ var createRoutes = require('../../../__tests__/createRoutes');
 describe ('AllListings', function () {
     var router,
         routes = createRoutes(),
-        location= new TestLocation( ['/user-management/all-listings'] );
+        location = new TestLocation( ['/user-management/all-listings'] );
     var listingManagement,
         listingManagementPage;
 
@@ -36,11 +36,11 @@ describe ('AllListings', function () {
 
         //Before click gridview (loadMore) should be loaded
         //After click gridview should not be loaded
-        expect($(listingManagementPage).find('div[class="LoadMore AllListings__listings col-xs-9 col-lg-10 all"]')[0]).to.exist;
+        expect($(listingManagementPage).find('div[class="LoadMore ListingsManagement__LoadMore col-xs-9 col-lg-10 all"]')[0]).to.exist;
 
         TestUtils.Simulate.click(switchBox);
         
-        expect($(listingManagementPage).find('div[class="LoadMore AllListings__listings col-xs-9 col-lg-10 all"]')[0]).to.not.exist;
+        expect($(listingManagementPage).find('div[class="LoadMore ListingsManagement__LoadMore col-xs-9 col-lg-10 all"]')[0]).to.not.exist;
     });
 
     afterEach( function () {
