@@ -43,9 +43,9 @@ var NavBar = React.createClass({
                 <div className="container-fluid" id="centered">
                     <div className="navbar-left">
                         <ul className="nav navbar-nav">
-                            <li className="tooltiped" data-toggle="tooltip" data-placement="bottom" title="HUD"><a className="lrg" href={HUD_URL}><i className="icon-home-grayLightest" alt="HUD"></i></a></li>
-                            <li className="active tooltiped" data-toggle="tooltip" data-placement="bottom" title="Center"><a className="lrg" href='#/home' ><i className="icon-shopping-grayLightest activeIcon" alt="Center"></i></a></li>
-                            <li className="tooltiped" data-toggle="tooltip" data-placement="bottom" title="Webtop"><a className="lrg" href={WEBTOP_URL}><i className="icon-layout-grayLightest" alt="Webtop"></i></a></li>
+                            <li className="tooltiped" data-toggle="tooltip" data-placement="bottom" title="HUD"><a className="lrg" href={HUD_URL}><i className="icon-home-grayLightest" alt=""></i></a></li>
+                            <li className="active tooltiped" data-toggle="tooltip" data-placement="bottom" title="Center"><a className="lrg" href='#/home' ><i className="icon-shopping-grayLightest activeIcon" alt=""></i></a></li>
+                            <li className="tooltiped" data-toggle="tooltip" data-placement="bottom" title="Webtop"><a className="lrg" href={WEBTOP_URL}><i className="icon-layout-grayLightest" alt=""></i></a></li>
                         </ul>
                     </div>
 
@@ -53,10 +53,10 @@ var NavBar = React.createClass({
                         <ul className="nav navbar-nav">
                             <UserNotificationDropdown/>
                             <li className="tooltiped" data-toggle="tooltip" data-placement="bottom" title="Help">
-                                <a href="#" onClick={this.showHelpModal}><i className="icon-question-grayLightest" alt="Help"></i></a>
+                                <a href="#" onClick={this.showHelpModal}><i className="icon-question-grayLightest"alt=""></i></a>
                             </li>
                             <li data-toggle="tooltip" data-placement="bottom" title="Menu" className="dropdown user-menu-dropdown tooltiped">
-                                <a href="#" className="lrg" data-toggle="dropdown"><i className="icon-menu-grayLightest" alt="Menu"></i></a>
+                                <a href="#" className="lrg" data-toggle="dropdown"><i className="icon-menu-grayLightest" alt=""></i></a>
                                 <ul className="dropdown-menu">
                                     <li className="dropdown-header">Personalize</li>
                                     <li><a href={HUD_URL}><i className="icon-ribbon-grayLightest"></i>Bookmarks</a></li>
