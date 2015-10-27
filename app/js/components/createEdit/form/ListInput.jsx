@@ -23,7 +23,8 @@ var ListInput = React.createClass({
                     removeHandler: this.onDelete.bind(null, index),
                     key: `${index}.${this.context.lastUpdate}`,
                     path: this.props.path.concat(index),
-                    count: index
+                    count: index,
+                    baseKey: `${index}`
                 });
 
             return <this.props.itemForm {...props} />;
