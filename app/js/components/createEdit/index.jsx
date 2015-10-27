@@ -255,10 +255,9 @@ var ScreenshotForm = React.createClass({
 
 var ContactForm = React.createClass({
     mixins: [ require('../../mixins/SystemStateMixin'), ValidatedFormMixin ],
-
     render: function () {
 
-        var baseKey = this.props.value['name'] + '.' + this.props.value['type'];
+        var baseKey = this.props.value['type'] + '.' + this.props.baseKey;
 
         return (
             <div className="well">
