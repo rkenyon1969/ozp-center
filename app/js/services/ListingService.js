@@ -6,6 +6,7 @@ var { PAGINATION_MAX } = require('ozp-react-commons/constants');
 var OzpAnalytics = require('../analytics/ozp-analytics');
 var ListingActions = require('../actions/ListingActions');
 var PaginatedListingsStore = require('../stores/PaginatedListingsStore');
+var UnpaginatedListingsStore = require('../stores/UnpaginatedListingsStore');
 
 function updateListingProperty(propName, value, listing) {
     var data = _.cloneDeep(listing);
@@ -39,6 +40,34 @@ ListingActions.fetchAllListings.listen(function (filter) {
     }
 
     var tmpPartial = _.partial(ListingActions.fetchAllListingsCompleted, _.clone(filter));
+    ListingApi
+        .getAllListings(nextLink, opts)
+        .then(tmpPartial);
+});
+
+ListingActions.fetchAllListingsAtOnce.listen(function (filter) {
+    var unpaginatedList = UnpaginatedListingsStore.getListingsByFilter(filter),
+        opts = {},
+        nextLink;
+
+    if (unpaginatedList) {
+        unpaginatedList.expectPage();
+        nextLink = unpaginatedList.nextLink;
+    }
+    else {
+        // remove undefined values
+        _.forOwn(filter || {}, function (value, key) {
+            if(value !== null) {
+                opts[key] = value;
+            }
+        });
+
+        _.assign(opts, {
+            offset: 0
+        });
+    }
+
+    var tmpPartial = _.partial(ListingActions.fetchAllListingsAtOnceCompleted, _.clone(filter));
     ListingApi
         .getAllListings(nextLink, opts)
         .then(tmpPartial);
