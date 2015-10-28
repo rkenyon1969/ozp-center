@@ -1,3 +1,11 @@
+### 1.0.14 (2015-10-28)
+
+
+#### Features
+
+* **Table View Refactor:** Refactored Listing Management section for better organization, refactored table  ([8c2e2605](https://github.com/ozone-development/ozp-center.git/commit/8c2e26059342bc7f8766a75c87d21455bf4226ec))
+
+
 ### 1.0.13 (2015-10-21)
 
 
