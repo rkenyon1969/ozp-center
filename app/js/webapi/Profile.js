@@ -7,7 +7,7 @@ var { API_URL } = require('ozp-react-commons/OzoneConfig');
 var ProfileApi = {
 
     getStewards: function() {
-        return $.getJSON(API_URL + '/api/self/profile?role=ORG_STEWARD');
+        return $.getJSON(API_URL + '/api/profile?role=ORG_STEWARD');
     }
 };
 
