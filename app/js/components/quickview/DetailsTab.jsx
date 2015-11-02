@@ -12,7 +12,7 @@ var DetailsTab = React.createClass({
 
     render: function () {
         var whatsNew = this.props.listing.whatIsNew;
-        var organization = this.props.listing.agency.title;
+        var organization = this.props.listing.agency;
         var type = this.props.listing.type;
         var URL = this.props.listing.launchUrl;
         var updatedDate = this.props.listing.editedDate;
@@ -109,13 +109,13 @@ var DetailsTab = React.createClass({
 
     renderGovSponser: function () {
         return this.props.listing.contacts.map(function (contact) {
-            if (contact.id >= 0) {
-                return  [<label>Government Sponser </label>,
+            if (contact.type.indexOf("Government Sponsor") >= 0) {
+                return  [<label>Government Sponsor </label>,
                         <div className="col-xs-offset-1">
                             <p><label>Name:</label><span> {contact.name}</span></p>
                             <p><label>Email:</label><span> {contact.email}</span></p>
-                            <p><label>Unsecure Phone:</label><span> {contact.unsecure_phone}</span></p>
-                            <p><label>Secure Phone:</label><span> {contact.secure_phone}</span></p>
+                            <p><label>Unsecure Phone:</label><span> {contact.unsecurePhone}</span></p>
+                            <p><label>Secure Phone:</label><span> {contact.securePhone}</span></p>
                         </div>];
             }
         });
