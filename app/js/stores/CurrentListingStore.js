@@ -264,7 +264,7 @@ var CurrentListingStore = createStore({
 
     resolveMessages: function () {
         var messages = listingMessages;
-        var requiredContactTypes = getSystem().contactTypes.filter(t => t.required).map(t => t.title);
+        var requiredContactTypes = getSystem().contactTypes.filter(t => t.required).map(t => t.name);
 
         if (requiredContactTypes.length > 0) {
             messages['help.contacts'] = 'At least one contact of each of the ' +

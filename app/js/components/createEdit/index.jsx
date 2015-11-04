@@ -201,7 +201,7 @@ function getOptionsForSimpleLists (items) {
 
 function getOptionsForContactType (items) {
     return items.map(item => {
-        return { id: item, text: item };
+        return { id: item.name, text: item.name };
     });
 }
 
@@ -275,7 +275,7 @@ var ContactForm = React.createClass({
                 <button type="button" className="close" onClick={this.props.removeHandler}>
                     <span aria-hidden="true"><i className="icon-cross-14"></i></span><span className="sr-only">Clear</span>
                 </button>
-                <Select2Input { ...this.getFormComponentProps('type') } options={ getOptionsForSimpleLists(this.state.system.contactTypes) }/>
+                <Select2Input { ...this.getFormComponentProps('type') } options={ getOptionsForContactType(this.state.system.contactTypes) }/>
                 <TextInput { ...this.getFormComponentProps('name') }/>
                 <TextInput { ...this.getFormComponentProps('organization') } optional/>
                 <TextInput { ...this.getFormComponentProps('email') }/>

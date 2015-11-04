@@ -41,7 +41,7 @@ var ConfigApi = {
                 categories: response.categories,
                 types: response.listingTypes,
                 intents: response.intents,
-                contactTypes: _.map(response.contactTypes, 'name'),
+                contactTypes: response.contactTypes,
                 organizations: response.agencies
             };
         });

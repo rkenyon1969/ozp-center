@@ -50,7 +50,7 @@ var title = NonBlankString(60),
     atLeastOne = l => l.length > 0;
 
 function getRequiredContactTypes (contactTypes) {
-    return contactTypes.filter(t => t.required).map(t => t.title);
+    return contactTypes.filter(t => t.required).map(t => t.name);
 }
 
 function hasRequiredContactTypes (requiredContactTypes, contacts) {
