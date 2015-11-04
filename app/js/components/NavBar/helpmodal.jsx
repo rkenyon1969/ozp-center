@@ -30,6 +30,20 @@ var HelpModal = React.createClass({
     },
 
     render: function () {
+        var docLinks = this.fetchDocs.map(function(doc, i){
+          return(
+            <li key={`docLinks.${i}`}>
+              <a target="_blank" href={ doc.link }>{ doc.name }</a>
+            </li>
+          );
+        });
+        var vidLinks = this.fetchVids.map(function(vid, i){
+          return(
+            <li key={`vidLinks.${i}`}>
+              <a target="_blank" href={ vid.link }>{ vid.name }</a>
+            </li>
+          );
+        });
         return (
             <div id="help-modal" className="modal fade" role="dialog" aria-hidden="true">
                 <div className="modal-dialog  modal-lg">
