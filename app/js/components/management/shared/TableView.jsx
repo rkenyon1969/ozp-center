@@ -13,7 +13,7 @@ var ActiveState = require('../../../mixins/ActiveStateMixin');
 var moment = require('moment');
 
 var TableView = React.createClass({
-    
+
     mixins: [
         Reflux.listenTo(UnpaginatedListingsStore, 'onStoreChanged'),
         Reflux.listenTo(ListingActions.listingChangeCompleted, 'onListingChangeCompleted'),
@@ -57,7 +57,7 @@ var TableView = React.createClass({
             },
             buttons: {
                 save : {
-                    caption: w2utils.lang('Export to Excel'),
+                    caption: w2utils.lang('Export to csv'),
                     icon: 'icon-save-grayDark'
                 }
             },
@@ -88,7 +88,7 @@ var TableView = React.createClass({
                 });
                 thisTable.JSONToCSVConvertor(records,thisTable.props.tableName, "false");
             },
-            
+
             onClick: function (event) {
                 event.preventDefault();
                 event.stopPropagation();
@@ -103,7 +103,7 @@ var TableView = React.createClass({
                             )[0];
                             ListingActions.setFeatured(target.checked, listing);
                         }
-                    }               
+                    }
                 }
             }
         });
