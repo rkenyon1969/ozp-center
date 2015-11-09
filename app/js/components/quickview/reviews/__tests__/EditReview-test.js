@@ -9,6 +9,7 @@ var { TestUtils } = React.addons;
 describe('EditReview', function () {
     var EditReview = require('../EditReview.jsx');
     var {
+        userReview2,
         userReview,
         orgStewardReview,
         adminReview,
@@ -75,5 +76,30 @@ describe('EditReview', function () {
 
         ProfileMock.restore();
     });
+
+    it('saves >20 character review on Edit', function () {
+
+        var editReview = render({id: 1}, userReview2, ProfileMock.mockUser(), spy);
+        var spy = sinon.stub(ListingActions, 'saveReview');
+
+        TestUtils.Simulate.click($(editReview.getDOMNode()).find('.btn-success')[0]);
+
+        expect(spy.calledOnce).to.be.ok;
+
+        spy.restore();
+    });
+
+    it('does not save <20 character review on Edit', function () {
+
+        var editReview = render({id: 1}, userReview, ProfileMock.mockUser(), spy);
+        var spy = sinon.stub(ListingActions, 'saveReview');
+
+        TestUtils.Simulate.click($(editReview.getDOMNode()).find('.btn-success')[0]);
+
+        expect(spy.calledOnce).to.not.be.ok;
+
+        spy.restore();
+    });
+
 
 });
