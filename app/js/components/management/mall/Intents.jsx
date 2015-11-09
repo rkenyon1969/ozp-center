@@ -206,8 +206,8 @@ var Intents = React.createClass({
     },
 
     render: function () {
-        return this.transferPropsTo(<Crud ref="crud" onCreate={this.onCreate}
-                onEdit={this.onEdit} onResetState={this.resetState} form={this.getForm} />);
+        return <Crud {...this.props} ref="crud" onCreate={this.onCreate}
+                onEdit={this.onEdit} onResetState={this.resetState} form={this.getForm} />;
     }
 
 });

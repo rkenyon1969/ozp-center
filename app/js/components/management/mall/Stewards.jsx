@@ -64,7 +64,7 @@ var Stewards = React.createClass({
     },
 
     render: function () {
-        return this.transferPropsTo(<Crud Schema={this.getSchema()} />);
+        return <Crud {...this.props} Schema={this.getSchema()} />;
     }
 
 });

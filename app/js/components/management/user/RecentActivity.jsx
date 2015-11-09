@@ -120,18 +120,23 @@ var RecentActivity = React.createClass({
     },
 
     render: function () {
+        var hasMore = this.state.hasMore || false;
+        var logs = this.renderChangeLogs();
+
         return (
             <div className="RecentActivity row">
                 <div className="RecentActivity__Sidebar col-xs-5 col-lg-4"><Sidebar /></div>
                 <div className="RecentActivity__Content col-xs-7 col-lg-8">
                     <h3>Recent Activity</h3>
-                    <LoadMore className="RecentActivity__activities all" hasMore={this.state.hasMore} onLoadMore={this.onLoadMore}>
-                        { this.renderChangeLogs() }
-                    </LoadMore>
+                        <LoadMore className="RecentActivity__activities all"
+                                  hasMore={hasMore} onLoadMore={this.onLoadMore}>
+                            { logs }
+                        </LoadMore>
                 </div>
             </div>
         );
     }
+
 
 });
 

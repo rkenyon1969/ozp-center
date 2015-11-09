@@ -1,0 +1,12 @@
+.AllListings__listings {
+    padding: 30px;
+    background: $white;
+    min-height: 500px;
+
+    .AdminOwnerListingTile {
+        display: inline-block;
+    }
+}
+.AllListings__sidebar{
+    display: table-cell;
+}

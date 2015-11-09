@@ -49,8 +49,8 @@ var IconRating = React.createClass({
 
     render: function () {
         // key is explicitly used here to destroy IconRating component for Reset
-        return this.transferPropsTo(
-            <_IconRating
+        return (
+            <_IconRating {...this.props}
                 key={ this.props.currentRating }
                 currentRating={ this.state.rating }
                 className={ this.props.className }

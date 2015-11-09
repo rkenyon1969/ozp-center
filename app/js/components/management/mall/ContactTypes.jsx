@@ -42,7 +42,7 @@ var ContactTypes = React.createClass({
     },
 
     render: function () {
-        return this.transferPropsTo(<Crud />);
+        return <Crud {...this.props} />;
     }
 
 });

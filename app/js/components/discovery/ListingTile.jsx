@@ -14,14 +14,16 @@ var ListingTile = React.createClass({
 
     statics: {
         fromArray: function (array) {
-            return array.map((listing) => <ListingTile listing={listing} key={listing.id}/>);
+            return array.map(function(listing, i) {
+                return <ListingTile listing={listing} key={`${listing.id}.${i}`}/>;
+            });
         },
         renderLimitedTiles: function(display, mostPopular) {
             var ammount = 0;
             return(
                 mostPopular.filter(function(tile){
                     if(ammount < display){ ammount++; return tile; }
-                }).map((tile) => <ListingTile listing={tile} key={tile.id}/>)
+                }).map((tile, i) => <ListingTile listing={tile} key={`${tile.id}.${i}`}/>)
             );
         }
     },
@@ -40,8 +42,10 @@ var ListingTile = React.createClass({
             tab: 'overview'
         });
 
-        return this.transferPropsTo(
-            <li className="listing SearchListingTile" key={listing.id} >
+        imageLargeUrl = listing.imageLargeUrl;
+
+        return (
+            <li className="listing SearchListingTile">
                 <a className="listing-link"  href={ href }>
                     {/* Empty link - css will make it cover entire <li>*/}
                 </a>
@@ -49,6 +53,7 @@ var ListingTile = React.createClass({
                 <section className="slide-up">
                     <p className="title">{ name }</p>
                     <IconRating
+                        {...this.props}
                         className="icon-rating"
                         viewOnly
                         currentRating = { avgRate }

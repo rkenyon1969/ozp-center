@@ -54,14 +54,16 @@ var Sidebar = React.createClass({
     renderCategories() {
         var me = this;
 
-        return this.props.categories.map(function (category) {
+        return this.props.categories.map(function (category, i) {
             var classes = React.addons.classSet({
                 active: _.contains(me.state.categories, category.title),
                 'facet-group-item': true
             });
 
             return (
-                <li className={ classes } onClick={ me.onSelect.bind(null, category) }>{category.title}</li>
+                <li className={ classes } key={`${category.title}.${i}`} onClick={ me.onSelect.bind(null, category) }>
+                    {category.title}
+                </li>
             );
         });
     },
