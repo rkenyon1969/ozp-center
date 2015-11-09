@@ -1,13 +1,17 @@
 'use strict';
 
 var React = require('react');
+var { classSet } = React.addons;
 var Reflux = require('reflux');
 var SystemHighMessage = require('../../shared/SystemHighMessage.jsx');
 var _ = require('../../../utils/_');
 var IconRating = require('../../shared/IconRating.jsx');
 var PopoverConfirmationButton = require('./../../shared/PopoverConfirmationButton.jsx');
-
 var ListingActions = require('../../../actions/ListingActions');
+var {CENTER_REVIEWS_CHAR_LIMIT} = require('ozp-react-commons/OzoneConfig');
+var t = require('tcomb-form');
+var Review = require('./validation');
+
 
 var EditReview = React.createClass({
 
@@ -59,7 +63,14 @@ var EditReview = React.createClass({
     },
 
     onSave: function () {
-        ListingActions.saveReview(this.props.listing, this.state.review);
+        var validation = t.validate(this.state.review, Review);
+
+        if (validation.errors.length > 0) {
+            this.setState({ errors: true });
+        } else {
+            this.setState({ errors: false });
+            ListingActions.saveReview(this.props.listing, this.state.review);
+        }
     },
 
     onSaveReviewCompleted: function (listing, review) {
@@ -85,11 +96,12 @@ var EditReview = React.createClass({
     render: function () {
         var { rate, text } = this.state.review;
         var isEditingRateAllowed = this.isEditingRateAllowed();
+        var limit = CENTER_REVIEWS_CHAR_LIMIT.toString();
+        var hasError = classSet({'has-error': this.state.errors});
 
         return (
             <div className="EditReview">
                 <h5>Edit Review</h5>
-                <SystemHighMessage />
                 <div className="EditReview__Rating">
                     <h6>Star Rating</h6>
                     <IconRating
@@ -101,9 +113,11 @@ var EditReview = React.createClass({
                             <i className="icon-lock"></i>
                     }
                 </div>
-                <div>
+                <div className={hasError}>
                     <h6>Description</h6>
+                    <SystemHighMessage />
                     <textarea ref="text" value={ text } onChange={ this.onTextChange }></textarea>
+                    <p className="help-block small">Must have more than {limit} characters</p>
                 </div>
                 <PopoverConfirmationButton
                     ref="deletePopover"
