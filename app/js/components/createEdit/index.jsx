@@ -305,7 +305,7 @@ var ListingForm = React.createClass({
         return (
             <form ref="form" className="CreateEdit__form col-xs-9 col-lg-10">
                 <h2 id={f.basicInformation.id}>Basic Information</h2>
-                <TextInput id={f.title.id} { ...p('title') }/>
+                <TextInput id={f.title.id} { ...p('title') } aria-label="Title of Listing"/>
                 <Select2Input id={f.type.id} { ...p('type') }
                     options={ getOptionsForSystemObject(system.types) }/>
                 <Select2Input id={f.categories.id} { ...p('categories') } multiple
