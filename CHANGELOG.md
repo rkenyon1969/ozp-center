@@ -1,3 +1,17 @@
+### 1.0.15 (2015-11-11)
+
+
+#### Bug Fixes
+
+* ***:** Eliminate many warnings. #423 ([791be59d](https://github.com/ozone-development/ozp-center.git/commit/791be59d54efb548c6c6bc8aaf9c285cb19375aa))
+
+
+#### Features
+
+* **Help Articles:** integrate help articles into center #418 ([3f5e3e05](https://github.com/ozone-development/ozp-center.git/commit/3f5e3e05ef1ed1aee7e1141a121ce20ce821a28b))
+* **reviews:** Require description when rating app #428 ([f0a09b1e](https://github.com/ozone-development/ozp-center.git/commit/f0a09b1e3b468f4a6b1a6fbb569fffe918164c9f))
+
+
 ### 1.0.14 (2015-10-28)
 
 
