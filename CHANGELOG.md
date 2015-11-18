@@ -1,3 +1,11 @@
+### 1.0.16 (2015-11-18)
+
+
+#### Features
+
+* **Help Articles:** Role based article display ([4008d193](https://github.com/ozone-development/ozp-center.git/commit/4008d193b4b502fc92415178c25b4dec8234b4ab))
+
+
 ### 1.0.15 (2015-11-11)
 
 
