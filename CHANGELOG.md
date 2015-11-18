@@ -1,3 +1,41 @@
+### 1.0.16 (2015-11-18)
+
+
+#### Features
+
+* **Help Articles:** Role based article display ([4008d193](https://github.com/ozone-development/ozp-center.git/commit/4008d193b4b502fc92415178c25b4dec8234b4ab))
+
+
+### 1.0.15 (2015-11-11)
+
+
+#### Bug Fixes
+
+* ***:** Eliminate many warnings. #423 ([791be59d](https://github.com/ozone-development/ozp-center.git/commit/791be59d54efb548c6c6bc8aaf9c285cb19375aa))
+
+
+#### Features
+
+* **Help Articles:** integrate help articles into center #418 ([3f5e3e05](https://github.com/ozone-development/ozp-center.git/commit/3f5e3e05ef1ed1aee7e1141a121ce20ce821a28b))
+* **reviews:** Require description when rating app #428 ([f0a09b1e](https://github.com/ozone-development/ozp-center.git/commit/f0a09b1e3b468f4a6b1a6fbb569fffe918164c9f))
+
+
+### 1.0.14 (2015-10-28)
+
+
+#### Features
+
+* **Table View Refactor:** Refactored Listing Management section for better organization, refactored table  ([8c2e2605](https://github.com/ozone-development/ozp-center.git/commit/8c2e26059342bc7f8766a75c87d21455bf4226ec))
+
+
+### 1.0.13 (2015-10-21)
+
+
+#### Bug Fixes
+
+* **style:** Fix bug that caused large table rows when displaying only a few results ([a0eef80e](https://github.com/ozone-development/ozp-center.git/commit/a0eef80e2c83dcb3cb8283616f311c4475bf4aab))
+
+
 ### 1.0.12 (2015-10-14)
 
 

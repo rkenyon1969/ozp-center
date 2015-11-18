@@ -30,7 +30,7 @@ var TableView = React.createClass({
             this.props.onSort("!"+key);
         } else {
             this.props.onSort(key);
-        }   
+        }
     },
 
     renderHeaderRow: function (columns) {
@@ -129,7 +129,7 @@ var TableView = React.createClass({
             sessionStorage.setItem(this.props.saveKey, columns);
         }
 
-        return this.transferPropsTo(
+        return (
             <table className="ListingManagement-TableView">
                 { this.renderHeaderRow(columns) }
                 <tbody>

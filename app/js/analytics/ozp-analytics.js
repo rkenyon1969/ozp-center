@@ -13,22 +13,22 @@ module.exports = {
         window._paq.push(['trackSiteSearch', query, label, total]);
     },
 
-    trackListingCreation: function(listingName){
-        window._paq.push(['trackEvent', 'Listing Creation', listingName]);
+    trackListingCreation: function(listingName, agency){
+        window._paq.push(['trackEvent', 'Listing Creation', listingName, agency]);
     },
 
-    trackListingOrgApproval: function(listingName){
-        window._paq.push(['trackEvent', 'Listing Org Approval', listingName]);
+    trackListingOrgApproval: function(listingName, agency){
+        window._paq.push(['trackEvent', 'Listing Org Approval', listingName, agency]);
     },
-    trackListingApproval: function(listingName){
-        window._paq.push(['trackEvent', 'Listing Approval', listingName]);
-    },
-
-    trackListingReview: function(listingName){
-        window._paq.push(['trackEvent', 'Listing Review', listingName]);
+    trackListingApproval: function(listingName, agency){
+        window._paq.push(['trackEvent', 'Listing Approval', listingName, agency]);
     },
 
-    trackListingReviewView: function(listingName){
-        window._paq.push(['trackEvent', 'Listing Review View', listingName]);
+    trackListingReview: function(listingName, agency){
+        window._paq.push(['trackEvent', 'Listing Review', listingName, agency]);
+    },
+
+    trackListingReviewView: function(listingName, agency){
+        window._paq.push(['trackEvent', 'Listing Review View', listingName, agency]);
     }
 };

@@ -16,9 +16,9 @@ var DetailedQuery = React.createClass({
 
     getQueryString: function(){
       if(this.props.data.queryString){
-        var prettyQuery = this.props.data.queryString.split(' ').map((string)=>{
+        var prettyQuery = this.props.data.queryString.split(' ').map((string, i)=>{
           return (
-            <span className="label label-default">
+            <span key={`getQueryString.${i}`} className="label label-default">
               {string}
             </span>
           );
@@ -46,7 +46,7 @@ var DetailedQuery = React.createClass({
             this.props.onTypeChange(types);
           }}></i>*/
           return (
-            <span>
+            <span key={`getTypes.${i}`}>
               <span className="label label-default">
                 {type}
               </span>
@@ -75,7 +75,7 @@ var DetailedQuery = React.createClass({
             this.props.onOrganizationChange(orgs);
           }}></i>*/
           return (
-            <span>
+            <span key={`getOrgs.${i}`}>
               <span className="label label-default">
                 {agent}
               </span>
@@ -108,7 +108,7 @@ var DetailedQuery = React.createClass({
               this.props.onCategoryChange(cats);
             }}></i>*/
             return (
-              <span>
+              <span key={`getCategories.${i}`}>
                 <span  className="label label-default">
                   {cat}
                 </span>
@@ -127,7 +127,7 @@ var DetailedQuery = React.createClass({
               this.props.onCategoryChange(cats);
             }}></i>*/
             return (
-              <span  className="label label-default">
+              <span key="getCategories" className="label label-default">
                 {cat}
               </span>
             );

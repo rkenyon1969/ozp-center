@@ -9,12 +9,12 @@ var TabMixin = {
     renderTabs: function (LINKS, params) {
         var me = this;
 
-        var linkComponents = LINKS.map(function (link) {
+        var linkComponents = LINKS.map(function (link, i) {
             var isActive = me.isActive(link.to, link.params);
             var className = isActive ? 'active' : '';
 
             return (
-                <li className={ className } >
+                    <li key={i} className={ className } >
                     <Link to={ link.to } params={ link.params || params }>{ link.name }</Link>
                 </li>
             );

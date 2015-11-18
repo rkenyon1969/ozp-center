@@ -24,8 +24,8 @@ var CreateEditModal = React.createClass({
     },
 
     render: function () {
-        return this.transferPropsTo(
-            <Modal ref="modal" confirm="Save" cancel="Cancel" size="small" title={this.props.title}
+        return (
+            <Modal {...this.props} ref="modal" confirm="Save" cancel="Cancel" size="small" title={this.props.title}
                 onShown={ this.onShown }>
                 { this.props.children }
             </Modal>

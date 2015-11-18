@@ -54,14 +54,16 @@ var Sidebar = React.createClass({
     renderCategories() {
         var me = this;
 
-        return this.props.categories.map(function (category) {
+        return this.props.categories.map(function (category, i) {
             var classes = React.addons.classSet({
                 active: _.contains(me.state.categories, category.title),
                 'facet-group-item': true
             });
 
             return (
-                <li className={ classes } onClick={ me.onSelect.bind(null, category) }>{category.title}</li>
+                <li className={ classes } key={`${category.title}.${i}`} onClick={ me.onSelect.bind(null, category) }>
+                    {category.title}
+                </li>
             );
         });
     },
@@ -77,7 +79,7 @@ var Sidebar = React.createClass({
         return (
             <aside className="sidebar col-xs-3 col-lg-2">
                 <ul className="list-unstyled facet-group">
-                    <li className={ homeLinkClasses } id="home" onClick={ this.onHomeClick }><i className="icon-shopping"></i> Center Home</li>
+                    <li className={ homeLinkClasses } id="home" onClick={ this.onHomeClick }><i className="icon-shopping" atl=""></i> Center Home</li>
                 </ul>
                 <ul className="list-unstyled facet-group">
                     { this.renderCategories() }

@@ -56,5 +56,6 @@ module.exports = function (config) {
             'karma-webpack',
             'karma-mocha'
         ]
+
     });
 };

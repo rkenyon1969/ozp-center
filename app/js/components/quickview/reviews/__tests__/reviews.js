@@ -1,6 +1,6 @@
 'use strict';
 
-var [adminReview, orgStewardReview, userReview] = [
+var [adminReview, orgStewardReview, userReview, userReview2] = [
     {
         "author": {
             "user": {
@@ -37,13 +37,27 @@ var [adminReview, orgStewardReview, userReview] = [
         },
         "listing": 2,
         "rate": 4,
-        "text": "This bread is stale!",
+        "text": "Test User 1 Review",
         "id": 4
+    },
+    {
+        "author": {
+            "user": {
+                "username": "testUser1",
+                "email": "testuser1@airstripone.com"
+            },
+            "display_name": "Jones"
+        },
+        "listing": 2,
+        "rate": 4,
+        "text": "Out out brief candle. Life is but a walking shadow.",
+        "id": 8
     }
-]
+];
 
 module.exports = {
     userReview: userReview,
+    userReview2: userReview2,
     orgStewardReview: orgStewardReview,
     adminReview: adminReview,
     reviews: [userReview, orgStewardReview, adminReview]

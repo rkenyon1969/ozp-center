@@ -24,12 +24,18 @@ describe('UserReviews', function () {
     } = require('./reviews');
 
     it('renders no reviews text when there are no reviews', function () {
-        var userReviews = TestUtils.renderIntoDocument(<UserReviews reviews={null} />);
+        var dummyObj = {},
+            dummyFunc = function () {};
+
+        var userReviews = TestUtils.renderIntoDocument(
+                <UserReviews reviews={null} listing={dummyObj} user={dummyObj} onEdit={dummyFunc} />);
+
         expect(
             $(userReviews.getDOMNode()).find('h4').text()
         ).to.equal('There are no user reviews yet.');
 
-        userReviews = TestUtils.renderIntoDocument(<UserReviews reviews={[]} />);
+        userReviews = TestUtils.renderIntoDocument(
+                <UserReviews reviews={[]} listing={dummyObj} user={dummyObj} onEdit={dummyFunc} />);
         expect(
             $(userReviews.getDOMNode()).find('h4').text()
         ).to.equal('There are no user reviews yet.');

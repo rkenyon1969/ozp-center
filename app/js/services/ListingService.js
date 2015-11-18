@@ -6,6 +6,7 @@ var { PAGINATION_MAX } = require('ozp-react-commons/constants');
 var OzpAnalytics = require('../analytics/ozp-analytics');
 var ListingActions = require('../actions/ListingActions');
 var PaginatedListingsStore = require('../stores/PaginatedListingsStore');
+var UnpaginatedListingsStore = require('../stores/UnpaginatedListingsStore');
 
 function updateListingProperty(propName, value, listing) {
     var data = _.cloneDeep(listing);
@@ -39,6 +40,35 @@ ListingActions.fetchAllListings.listen(function (filter) {
     }
 
     var tmpPartial = _.partial(ListingActions.fetchAllListingsCompleted, _.clone(filter));
+    ListingApi
+        .getAllListings(nextLink, opts)
+        .then(tmpPartial);
+});
+
+ListingActions.fetchAllListingsAtOnce.listen(function (filter) {
+    var unpaginatedList = UnpaginatedListingsStore.getListingsByFilter(filter),
+        opts = {},
+        nextLink;
+
+    if (unpaginatedList) {
+        unpaginatedList.expectPage();
+        nextLink = unpaginatedList.nextLink;
+    }
+    else {
+        // remove undefined values
+        _.forOwn(filter || {}, function (value, key) {
+            if(value !== null) {
+                opts[key] = value;
+            }
+        });
+
+        _.assign(opts, {
+            offset: 0,
+            limit: 999
+        });
+    }
+
+    var tmpPartial = _.partial(ListingActions.fetchAllListingsAtOnceCompleted, _.clone(filter));
     ListingApi
         .getAllListings(nextLink, opts)
         .then(tmpPartial);
@@ -128,7 +158,7 @@ ListingActions.saveReview.listen(function (listing, review) {
             ListingActions.fetchById(listing.id);
             ListingActions.fetchReviews(listing);
             ListingActions.saveReviewCompleted(listing, response);
-            OzpAnalytics.trackListingReview(listing.title);
+            OzpAnalytics.trackListingReview(listing.title, listing.agencyShort);
         })
         .fail(ListingActions.saveReviewFailed);
 });
@@ -151,7 +181,7 @@ ListingActions.launch.listen(function (listing) {
 ListingActions.save.listen(function (data) {
     var isNew = !data.id;
 
-    if (isNew) { OzpAnalytics.trackListingCreation(data.title); }
+    if (isNew) { OzpAnalytics.trackListingCreation(data.title, data.agency); }
 
     if (/\s/g.test(data.launchUrl)) { data.launchUrl = data.launchUrl.replace(/ /g,"%20"); }
 
@@ -172,12 +202,12 @@ ListingActions.enable.listen(setEnabled.bind(null, true));
 ListingActions.disable.listen(setEnabled.bind(null, false));
 
 ListingActions.approve.listen(function (listing) {
-    OzpAnalytics.trackListingApproval(listing.title);
+    OzpAnalytics.trackListingApproval(listing.title, listing.agencyShort);
     updateListingProperty('approvalStatus', 'APPROVED', listing);
 });
 
 ListingActions.approveByOrg.listen(function (listing) {
-    OzpAnalytics.trackListingOrgApproval(listing.title);
+    OzpAnalytics.trackListingOrgApproval(listing.title, listing.agencyShort);
     updateListingProperty('approvalStatus', 'APPROVED_ORG', listing);
 });
 

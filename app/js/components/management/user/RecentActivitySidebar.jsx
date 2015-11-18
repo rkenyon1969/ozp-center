@@ -138,7 +138,7 @@ var RecentActivitySidebar = React.createClass({
         var children = [];
         if (currentUser.isAdmin()) {
             children.push(
-                <div className="filter-group">
+                <div key="center-overview" className="filter-group">
                     <h4>Center Overview</h4>
                     <AllListingsSidebarFilter handleChange={this.handleChange} />
                 </div>
@@ -146,13 +146,13 @@ var RecentActivitySidebar = React.createClass({
         }
 
         if(currentUser.stewardedOrganizations.length > 0 && system.organizations.length > 0) {
-            _.forEach(currentUser.stewardedOrganizations, function(orgName) {
+            _.forEach(currentUser.stewardedOrganizations, function(orgName, i) {
                 var org = _.find(system.organizations, function(orgObj) {
                     return orgObj.shortName === orgName;
                 });
 
                 children.push(
-                    <div className="filter-group">
+                    <div key={`${orgName}.steward.${i}`}  className="filter-group">
                         <h4>{ org.shortName } Review </h4>
                         <OrgListingsSidebarFilter handleChange={me.handleChange} org={org} />
                     </div>
@@ -162,14 +162,13 @@ var RecentActivitySidebar = React.createClass({
         }
 
         children.push(
-            <div className="filter-group">
+            <div key="listings-overview" className="filter-group">
                 <h4>My Listings Overview</h4>
                 <MyListingsSidebarFilter handleChange={this.handleChange} />
             </div>
         );
 
         return children;
-
     },
 
     render: function () {

@@ -93,16 +93,16 @@ var Quickview = React.createClass({
             allowEdit: CurrentListingStore.currentUserCanEdit()
         };
 
-        return this.transferPropsTo(
+        return (
             <Modal ref="modal" className="quickview" onShown={this.onShown} onHidden={this.onHidden}>
                 {
                     !listing ?
                         <p>Loading...</p> :
                         [
-                            <Header { ...headerProps }></Header>,
-                            <div className="tabs-container">
-                                { this.renderTabs(tabs, listing.id) }
-                                <div className="tab-content">
+                            <Header { ...headerProps } key="header"></Header>,
+                            <div className="tabs-container" key="tabs-container">
+                            { this.renderTabs(tabs, listing.id) }
+                                <div className="tab-content" >
                                     <ActiveRouteHandler currentUser={currentUser} listing={listing} shown ={shown} />
                                 </div>
                             </div>

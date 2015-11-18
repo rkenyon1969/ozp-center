@@ -6,14 +6,16 @@ var { PropTypes } = React;
 var LoadMore = React.createClass({
 
     propTypes: {
-        children: PropTypes.arrayOf(PropTypes.element).isRequired,
-        hasMore: PropTypes.bool,
+        // The following results in "Invalid prop `0` supplied" warning.
+        // No callers explicitly pass a children prop.
+        // children: PropTypes.arrayOf(PropTypes.element).isRequired,
+        hasMore: PropTypes.bool.isRequired,
         onLoadMore: PropTypes.func.isRequired
     },
 
     render: function () {
-        return this.transferPropsTo(
-            <div className="LoadMore">
+        return (
+            <div className="LoadMore" {...this.props}>
                 { this.renderList() }
                 { this.renderLoadMoreButton() }
             </div>
@@ -21,13 +23,16 @@ var LoadMore = React.createClass({
     },
 
     renderList: function () {
-        var { children } = this.props;
+        var children = false;
+        if ( this.props && this.props.children.length ) {
+            children = this.props.children;
+        }
 
         if (children && children.length > 0) {
             return <ol className="list-unstyled">{ this.props.children }</ol>;
         }
         else {
-            return <h5 style={{marginTop: 0}}>No results found!</h5>;
+            return <h5 style={{marginTop: "0"}}>No results found!</h5>;
         }
     },
 

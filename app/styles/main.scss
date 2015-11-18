@@ -109,7 +109,6 @@ a:focus {
 @import 'header';
 @import 'listing/search-listing-tile';
 @import 'listing/admin-owner-listing-tile';
-@import 'listing/admin-owner-listing-table';
 @import 'featured-listings';
 @import 'discovery';
 @import 'quickview';
@@ -122,7 +121,7 @@ a:focus {
 @import 'management/user/recent-activity';
 @import 'management/mall/mall-management';
 @import 'management/deleteConfirmation';
-@import 'management/all-listings/all-listings';
+@import 'management/listings/listings';
 @import 'management/notifications';
 
 .close {
@@ -431,4 +430,16 @@ $icons: (
 @include sprite-icons($icons);
 *{
   -moz-transition: none !important;
+}
+
+/*=======================
+= Accessibility Section=
+=======================*/
+
+.hidden-span{ 
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  overflow: hidden;
+  top: -10px;
 }

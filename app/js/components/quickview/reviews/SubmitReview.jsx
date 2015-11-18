@@ -1,10 +1,15 @@
 'use strict';
 
 var React = require('react');
+var { classSet } = React.addons;
 var SystemHighMessage = require('../../shared/SystemHighMessage.jsx');
 var _ = require('../../../utils/_');
 var IconRating = require('../../shared/IconRating.jsx');
 var ListingActions = require('../../../actions/ListingActions');
+var {CENTER_REVIEWS_CHAR_LIMIT} = require('ozp-react-commons/OzoneConfig');
+var t = require('tcomb-form');
+var Review = require('./validation');
+
 
 var ReviewListing = React.createClass({
 
@@ -36,7 +41,14 @@ var ReviewListing = React.createClass({
     },
 
     onSave: function () {
-        ListingActions.saveReview(this.props.listing, this.state);
+        var validation = t.validate(this.state, Review);
+
+        if (validation.errors.length > 0) {
+            this.setState({ errors: true });
+        } else {
+            this.setState({ errors: false });
+            ListingActions.saveReview(this.props.listing, this.state);
+        }
     },
 
     onReset: function () {
@@ -47,6 +59,9 @@ var ReviewListing = React.createClass({
 
     render: function () {
         var { rate, text } = this.state;
+        var limit = CENTER_REVIEWS_CHAR_LIMIT.toString();
+        var hasError = classSet({'has-error': this.state.errors});
+
         return (
             <div className="SubmitReview">
                 <h5>Review this Listing</h5>
@@ -54,10 +69,11 @@ var ReviewListing = React.createClass({
                     <h6>Star Rating</h6>
                     <IconRating currentRating={ rate } onChange={ this.onRatingChange } />
                 </div>
-                <div>
+                <div className={hasError}>
                     <h6>Description</h6>
                     <SystemHighMessage />
                     <textarea ref="text" value={ text } onChange={ this.onTextChange }></textarea>
+                    <p className="help-block small">Must have more than {limit} characters</p>
                 </div>
                 <div className="pull-right">
                     <button className="btn btn-default btn-small" onClick={ this.onReset }>Reset</button>

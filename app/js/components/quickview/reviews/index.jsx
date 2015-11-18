@@ -142,11 +142,11 @@ var ReviewsTab = React.createClass({
         var listing = this.props.listing;
         var total = listing.totalVotes;
 
-        var starComponents = [5, 4, 3, 2, 1].map(function (star) {
+        var starComponents = [5, 4, 3, 2, 1].map(function (star, i) {
             var count = listing[`totalRate${star}`];
             var width = total === 0 ? 0 : Math.round(count * 100 / total).toFixed(2);
 
-            return <RatingProgressBar count={count} value={width} star={star} />;
+            return <RatingProgressBar count={count} value={width} star={star} key={i}/>;
         });
 
         return (

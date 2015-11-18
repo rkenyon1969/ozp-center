@@ -20,8 +20,8 @@ function filterOption (currentValue, label, value, count, htmlFor, className, ic
     }
 
     return [
-        <input id={htmlFor} type="radio" value={value} />,
-        <label htmlFor={htmlFor} className={className}>
+        <input id={htmlFor} key={"input" + htmlFor} type="radio" value={value} />,
+        <label htmlFor={htmlFor} key={"label" + htmlFor} className={className}>
             { statusIcon }
             { label }
             { badge }

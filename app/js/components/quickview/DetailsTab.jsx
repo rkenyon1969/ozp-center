@@ -72,9 +72,9 @@ var DetailsTab = React.createClass({
     renderOwners: function () {
         var owners = this.props.listing.owners;
 
-        return owners.map(function (owner) {
+        return owners.map(function (owner, i) {
             return (
-                <p className="listing-owner">
+                <p className="listing-owner" key={`renderOwners.${i}`}>
                     <span> </span>
                     <ProfileLink profileId={owner.id}>
                         {owner.displayName}
@@ -87,9 +87,9 @@ var DetailsTab = React.createClass({
     renderIntents: function () {
         var intents = this.props.listing.intents;
         var singleton = (this.props.listing.singleton) ? "Yes" : "No";
-        var intentComponents = this.props.listing.intents.map(function (intent) {
+        var intentComponents = this.props.listing.intents.map(function (intent, i) {
             var parts = intent.split('/');
-            return <p><span className="intentName">{ parts[2] }: </span><span> { parts[0] + '/' + parts[1] }</span></p>;
+            return <p key={`renderIntents.${i}`}><span className="intentName">{ parts[2] }: </span><span> { parts[0] + '/' + parts[1] }</span></p>;
         });
 
         return (
@@ -108,10 +108,10 @@ var DetailsTab = React.createClass({
     },
 
     renderGovSponser: function () {
-        return this.props.listing.contacts.map(function (contact) {
-            if (contact.type.indexOf("Government Sponsor") >= 0) {
-                return  [<label>Government Sponsor </label>,
-                        <div className="col-xs-offset-1">
+        return this.props.listing.contacts.map(function (contact, i) {
+            if (contact.type.indexOf("Government Sponser") >= 0) {
+                return  [<label key={`renderGovSponsorLabel.${i}`}>Government Sponser </label>,
+                         <div key={`renderGovSponsorDiv.${i}`} className="col-xs-offset-1">
                             <p><label>Name:</label><span> {contact.name}</span></p>
                             <p><label>Email:</label><span> {contact.email}</span></p>
                             <p><label>Unsecure Phone:</label><span> {contact.unsecurePhone}</span></p>
