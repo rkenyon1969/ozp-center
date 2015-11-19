@@ -59,7 +59,7 @@ var HelpModal = React.createClass({
                         <h3 className="modal-title">Help</h3>
                         </div>
                         <div className="modal-body" style={{padding: '0px'}}>
-                            <iframe style={{width:"100%", height:"400px", border: 'none'}} src={`${HELP_URL}${this.state.role}`} />
+                            <iframe style={{width:"100%", height:"500px", border: 'none'}} src={`${HELP_URL}${this.state.role}`} />
                         </div>
                         <div className="modal-footer">
                             <h5>Have a question not answered here?&nbsp;&nbsp;
