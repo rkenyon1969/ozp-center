@@ -56,15 +56,16 @@ var HelpModal = React.createClass({
                         <button type="button" className="close" data-dismiss="modal">
                           <span aria-hidden="true"><i className="icon-cross-18"></i></span><span className="sr-only">Close</span>
                         </button>
-                        <h4 className="modal-title">{`${APP_TITLE} Help Zone`}</h4>
+                        <h3 className="modal-title">Help</h3>
                         </div>
                         <div className="modal-body" style={{padding: '0px'}}>
                             <iframe style={{width:"100%", height:"400px", border: 'none'}} src={`${HELP_URL}${this.state.role}`} />
                         </div>
                         <div className="modal-footer">
-                            <h4>Have a question not answered here?&nbsp;&nbsp;</h4>
-                            <a href={HELPDESK_ADDRESS} type="button" className="btn btn-primary">Contact the Help Desk</a>
-                            <button type="button" className="btn btn-primary" title="Coming Soon" disabled="disabled">Take the Center tour</button>
+                            <h5>Have a question not answered here?&nbsp;&nbsp;
+                                <a href={HELPDESK_ADDRESS} type="button" className="btn btn-primary">Contact the Help Desk</a>
+                                {/*<button type="button" className="btn btn-primary" title="Coming Soon" disabled="disabled">Take the Center tour</button>*/}
+                            </h5>
                         </div>
                     </div>
                 </div>
