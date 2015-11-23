@@ -622,7 +622,7 @@ var CreateEditPage = React.createClass({
             <div className="CreateEdit__titlebar">
                 <div className="btn-toolbar" role="group">
                     <div className="btn-group" role="group">
-                        <button type="button" className={ classSet(saveBtnClasses) }
+                        <button type="button" tabIndex="0" className={ classSet(saveBtnClasses) }
                                 onClick={ this.onSave }>
                             <span className="create-edit-button">Save</span>
                             <i className={saveText}></i>
@@ -651,7 +651,7 @@ var CreateEditPage = React.createClass({
                             </button>
                         }
                         </div>
-                    <div className="btn-group" role="group">
+                    <div className="btn-group" tabIndex="0" role="group">
                         <a type="button" className="btn-link btn myListings" onClick={this.onClose}>
                                 Listing Management
                         </a>
