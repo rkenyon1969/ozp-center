@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react');
-var { HELP_URL, HELPDESK_ADDRESS, APP_TITLE } = require('ozp-react-commons/OzoneConfig');
+var { HELP_URL, HELPDESK_ADDRESS } = require('ozp-react-commons/OzoneConfig');
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
 
 var HelpModal = React.createClass({
