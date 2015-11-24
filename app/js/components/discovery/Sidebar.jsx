@@ -79,9 +79,9 @@ var Sidebar = React.createClass({
         return (
             <aside className="sidebar col-xs-3 col-lg-2">
                 <ul className="list-unstyled facet-group">
-                    <li className={ homeLinkClasses } id="home" onClick={ this.onHomeClick }><i className="icon-shopping" atl=""></i> Center Home</li>
+                    <li className={ homeLinkClasses } id="home" onClick={ this.onHomeClick }><i className="icon-shopping"></i> Center Home</li>
                 </ul>
-                <ul className="list-unstyled facet-group">
+                <ul className="list-unstyled facet-group" tabIndex="0">
                     { this.renderCategories() }
                 </ul>
             </aside>
