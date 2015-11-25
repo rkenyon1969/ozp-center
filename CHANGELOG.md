@@ -1,3 +1,13 @@
+### 1.0.17 (2015-11-25)
+
+
+#### Bug Fixes
+
+* **styling:**
+  * Change help modal iframe size ([e1bc59a8](https://github.com/ozone-development/ozp-center.git/commit/e1bc59a8d663233c1f1df51168a93b918eaa5661))
+  * Help modal style/language updates to maintain consistency ([21f21ff8](https://github.com/ozone-development/ozp-center.git/commit/21f21ff8abd8fb7e32aa4d5b308a676792f8e971))
+
+
 ### 1.0.16 (2015-11-18)
 
 
