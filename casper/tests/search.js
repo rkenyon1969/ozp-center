@@ -18,7 +18,7 @@ casper.test.begin('Apps Mall search returns listings', 8, function (test) {
     });
 
     casper.then(function () {
-        checkForSelector("input[placeholder='Search']", this);
+        checkForSelector("input[placeholder='Search']", this, "searchBox");
     });
 
     // Search for text and clear
@@ -47,7 +47,7 @@ casper.test.begin('Apps Mall search returns listings', 8, function (test) {
 
     // Search by category and clear
     casper.then(function () {
-        waitAndClick("li[data-reactid*='Communication']", this);
+        waitAndClick("li[data-reactid*='Communication']", this, "communicationCategoryButton");
     });
 
     casper.then(function() {
@@ -59,7 +59,7 @@ casper.test.begin('Apps Mall search returns listings', 8, function (test) {
     });
 
     casper.then(function () {
-        waitAndClick("li[data-reactid*='Communication']", this);
+        waitAndClick("li[data-reactid*='Communication']", this, "communicationCategoryButton2");
     });
 
     casper.then(function() {

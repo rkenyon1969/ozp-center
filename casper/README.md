@@ -68,6 +68,9 @@ selector or some text - and either do something like click or assert existence i
 there; if that item isn't found, its absence is noted in the log and a png image capture of the page
 is saved. The image can (sometimes) be used to quickly determine what went wrong.
 
+The helpers have an optional `description` parameter which will be used to name the png capture
+files. This is helpful when using the selector as the name is too unwieldy.
+
 ### Debugging
 
 `debug.js` allows you to specify how much debugging information you want passed from the browser

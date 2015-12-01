@@ -19,7 +19,7 @@ casper.test.begin('Submit minimal listing', 8, function (test) {
     });
 
     casper.then(function () {
-        waitAndClick("a[data-toggle='dropdown']", this);
+        waitAndClick("a[data-toggle='dropdown']", this, "menuHamburgerButton");
     });
 
     casper.then(function () {
@@ -27,7 +27,7 @@ casper.test.begin('Submit minimal listing', 8, function (test) {
     });
 
     casper.then(function () {
-        waitAndClick("a[href='#/edit']", this);
+        waitAndClick("a[href='#/edit']", this, "createEditButton");
     });
 
     casper.then(function () {
@@ -36,7 +36,7 @@ casper.test.begin('Submit minimal listing', 8, function (test) {
 
     // Make sure you can enter a listing title
     casper.then(function () {
-        checkForSelector('#inputElement\\.title', this);
+        checkForSelector('#inputElement\\.title', this, "titleField");
     });
 
     // Enter listing title
@@ -47,7 +47,7 @@ casper.test.begin('Submit minimal listing', 8, function (test) {
 
     // Make sure you can enter a listing type
     casper.then(function () {
-        checkForSelector('#s2id_inputElement\\.type', this);
+        checkForSelector('#s2id_inputElement\\.type', this, "typeField");
     });
 
     // Enter type and category

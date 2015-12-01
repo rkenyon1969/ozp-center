@@ -3,47 +3,50 @@ var waitAndClickTime = 5000;
 
 
 module.exports = {
-    waitAndClick: function(selector, that) {
+    waitAndClick: function(selector, that, description) {
+        description = description || selector;
         that.waitForSelector(
             selector,
             function () {
                 that.echo('++++ Found and clicking ' + selector);
                 that.click(selector);
-                // that.capture(selector + '.png');
+                // that.capture('captures/' + description + '.png');
             },
             function () {
-                that.echo("---- Can't find for clicking " + selector);
-                that.capture('no' + selector + '.png');
+                that.echo("---- Can't find for clicking " + description);
+                that.capture('captures/' + 'no' + description + '.png');
             },
             waitAndClickTime
         );
     },
-    checkForText: function(text, that) {
+    checkForText: function(text, that, description) {
+        description = description || text;
         that.waitForText(
             text,
             function () {
-                that.echo('++++ Found ' + text);
+                that.echo('++++ Found ' + description);
                 that.test.assertTextExists(text);
-                // that.capture(text + '.png');
+                // that.capture('captures/' + description + '.png');
             },
             function () {
-                that.echo("---- Can't find  " + text);
-                that.capture('no' + text + '.png');
+                that.echo("---- Can't find  " + description);
+                that.capture('captures/' + 'no' + description + '.png');
             },
             waitForTextTime
         );
     },
-    checkForSelector: function(selector, that) {
+    checkForSelector: function(selector, that, description) {
+        description = description || selector;
         that.waitForSelector(
             selector,
             function () {
-                that.echo('++++ Found ' + selector);
+                that.echo('++++ Found ' + description);
                 that.test.assertExists(selector);
-                // that.capture(selector + '.png');
+                // that.capture('captures/' + description + '.png');
             },
             function () {
-                that.echo("---- Can't find " + selector);
-                that.capture('no' + selector + '.png');
+                that.echo("---- Can't find " + description);
+                that.capture('captures/' + 'no' + description + '.png');
             },
             10000
         );
