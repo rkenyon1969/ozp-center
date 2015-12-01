@@ -19,7 +19,7 @@ First, clone ozp-center:
 
 Next, navigate to `ozp-center/casper` and, to run the tests on ci-latest, run:
 
-`casperjs test --ssl-protocol=any --web-security=false --ignore-ssl-errors=yes tests/>`
+`casperjs test --ssl-protocol=any --web-security=false --ignore-ssl-errors=yes tests`
 
 The `search.js`, for instance, test does the following:
 
@@ -57,8 +57,19 @@ Center is documented here.
 To instrument a ReactJS app like center, you need Function.prototype.bind(). PhantomJS v1.x does not
 support Function.prototype.bind(), and while PhantomJS v2.0 is out, there isn't an official CasperJS
 version that supports PhantomJS v2.0. So, for the time being, we need the shim in shim.js. Require
-the shim with: ```var turnOnShim = require('../shim');``` and turn it on with ```turnOnShim(casper);
-``` inside your test.
+the shim with:
+
+```javascript
+    var turnOnShim = require('../shim');
+```
+
+and turn it on with:
+
+```javascript
+    turnOnShim(casper);
+```
+
+inside your test.
 
 ### The helpers
 
