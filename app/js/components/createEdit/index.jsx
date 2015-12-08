@@ -82,6 +82,10 @@ var formLinks = {
         title: 'Usage Requirements',
         id: 'create-edit-usage-requirements'
     },
+    isPrivate: {
+        title: 'Private Listing',
+        id: 'create-edit-isPrivate'
+    },
     whatsNew: {
         title: "What's New",
         id: 'create-edit-whats-new'
@@ -159,6 +163,7 @@ var formLinkGroups = [{
     links: [
         formLinks.versionNumber,
         formLinks.launchUrl,
+        formLinks.isPrivate,
         formLinks.requirements,
         formLinks.whatsNew,
         formLinks.intents,
@@ -330,7 +335,14 @@ var ListingForm = React.createClass({
                 <h2 id={f.listingDetails.id} >Listing Details</h2>
                 <TextInput id={f.versionNumber.id} { ...p('versionName') }/>
                 <TextInput id={f.launchUrl.id} { ...decodedUrl }/>
+
+                <Toggle
+                    explanation={['This web application/widget is visible to all organizations in the community',
+                                  'This web application/widget is only visible to your organization']}
+                    id={f.isPrivate.id} { ...p('isPrivate') } />
+
                 <TextAreaInput id={f.requirements.id} { ...p('requirements') } rows="5"/>
+
                 <TextAreaInput id={f.whatsNew.id} { ...p('whatIsNew') } rows="3" optional/>
                 <Select2Input id={f.intents.id} { ...p('intents') }  multiple options={
                     this.props.system.intents.map(intent => {

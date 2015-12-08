@@ -75,6 +75,26 @@ var ListingStatus = React.createClass({
     }
 });
 
+var PrivateListing = React.createClass({
+    render: function () {
+        var isPrivate = this.props.listing.isPrivate;
+
+        var lockStyle = {
+            position: 'absolute',
+            left: '18px',
+            top: '0'
+        };
+
+        return (
+            <div style={lockStyle}>
+                { isPrivate &&
+                 <i className="icon-lock-blue"></i>
+                }
+            </div>
+        );
+    }
+});
+
 var EditedDate = React.createClass({
     render: function () {
         var editedDate = this.props.listing.editedDate,
@@ -93,6 +113,7 @@ var InfoBar = React.createClass({
         return (
             <h5 className="AdminOwnerListingTile__infoBar">
                 <ListingStatus listing={listing} />
+                <PrivateListing listing={listing} />
                 <p className="title">{listing.title}</p>
                 <EditedDate listing={listing} />
             </h5>

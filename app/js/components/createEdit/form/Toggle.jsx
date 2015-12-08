@@ -9,23 +9,28 @@ var Toggle = React.createClass({
     };
   },
   render: function () {
+      var isEnabled = this.state.value ? 'Enabled ' : 'Disabled ';
+      var fullExplanation = isEnabled + this.props.explanation[1];
+      if (!this.state.value) {
+          fullExplanation = isEnabled + this.props.explanation[0];
+      }
+
       return (
-        <div id={this.props.id}>
-            <label className="switchLabel">{this.props.label}</label><br />
-                <p>{this.props.description}</p>
-
-
-                <h5>{this.state.value ? 'Enabled': 'Disabled'}</h5>
-                <p>{this.state.value? this.props.explanation[1] : this.props.explanation[0]}</p>
-                <label className="switch"><input ref="checkbox" type="checkbox" onClick={()=>{this.handleToggle();}} className="ios brand-success"
-                     defaultChecked={this.props.value}/>
-
-                <div className="track">
-                  <div className="knob"></div>
-                </div>
-
-            </label>
-        </div>
+          <div id={this.props.id}>
+              <label className="switchLabel">{this.props.label}</label><br />
+              <p className="small">{this.props.description}</p>
+              <label className="createEditSwitch">
+                  <input ref="checkbox"
+                         type="checkbox"
+                         onClick={()=>{this.handleToggle();}}
+                         className="ios brand-success"
+                         defaultChecked={this.props.value}/>
+                  <div className="track">
+                      <div className="knob"></div>
+                  </div>
+              </label>
+              <p className="switchExplain">{fullExplanation}</p>
+          </div>
       );
   },
   handleToggle: function(){

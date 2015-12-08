@@ -318,3 +318,15 @@ div.col-md-4 > .form-group >span.image-container.image-present {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+.createEditSwitch {
+    @extend .switch;
+    float: left;
+}
+
+.switchExplain {
+    @extend .small;
+    display: inline-block;
+    padding-left: 10px;
+    padding-top: 3px;
+}

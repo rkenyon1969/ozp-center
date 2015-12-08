@@ -16,7 +16,7 @@ var FIELDS = [
     'launchUrl', 'company', 'whatIsNew', 'owners', 'agency', 'agencyShort', 'rejection',
     'isEnabled', 'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls', 'approvalStatus',
     'isFeatured', 'smallIconId', 'largeIconId', 'bannerIconId', 'featuredBannerIconId',
-    'currentRejection'
+    'currentRejection', 'isPrivate'
 ];
 
 // These don't have the icons, access_control
@@ -224,7 +224,6 @@ Listing.prototype.saveFormat = function() {
 
     // New data (to Center) - TODO: Have Center add it for real
     saveFormat.last_activity = { action: 'APPROVED' };
-    saveFormat.is_private = false;
     saveFormat.required_listings = null;
 
     // Clean up lingering Center-only keys (and impromperly decamelized keys)

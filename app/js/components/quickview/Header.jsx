@@ -27,6 +27,15 @@ var QuickviewHeader = React.createClass({
         var avgRate = listing.avgRate;
         var image = listing.imageMediumUrl;
         var agencyShort = listing.agencyShort;
+        var lockStyle = {
+            position: 'absolute',
+            left: '4px',
+            top: '4px'
+        };
+        var labelStyle = {
+            paddingLeft: '10px'
+        };
+
         return (
             <div className="quickview-header">
                 <div className="quickview-header-info">
@@ -35,7 +44,12 @@ var QuickviewHeader = React.createClass({
                     <h3 className="listing-title" title={ title }>{ title }
                     {
                         agencyShort &&
-                        <span className="company">{ agencyShort }</span>
+                        <span className="company">
+                            { listing.isPrivate &&
+                                <i className="icon-lock-blue" style={lockStyle}></i>
+                            }
+                            <span style={labelStyle}>{ agencyShort }</span>
+                        </span>
                     }
                     </h3>
                     <IconRating
