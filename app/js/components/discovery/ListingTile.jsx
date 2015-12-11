@@ -29,7 +29,6 @@ var ListingTile = React.createClass({
 
     render: function () {
         var listing = this.props.listing;
-
         var name = listing.title;
         var description = listing.descriptionShort && listing.descriptionShort.substr(0, 140);
         var imageLargeUrl;
@@ -61,7 +60,12 @@ var ListingTile = React.createClass({
                         halfClassName="icon-star-half-filled-yellow" />
                     {
                         agencyShort &&
-                            <span className="company">{ agencyShort }</span>
+                        <span className="company">
+                            { listing.isPrivate &&
+                                <i className="icon-lock-blue"></i>
+                            }
+                            { agencyShort }
+                        </span>
                     }
                     <p className="description">{ description }</p>
                     { this.renderActions() }

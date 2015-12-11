@@ -144,6 +144,15 @@ var TableView = React.createClass({
         }
 
         columns.push(
+            { field: 'private', caption: 'Private', size: '10%',
+              render: function (record) {
+                  if (record.private) {
+                      return '<i class="icon-lock-blue"></i> Private';
+                  } else {
+                      return 'Public';
+                  }
+              }
+            },
             { field: 'comments', caption: 'Comments', size: '20%' },
             { field: 'status', caption: 'Status', sortable: true, size: '5%',
                 render: function (record) {
@@ -263,7 +272,8 @@ var TableView = React.createClass({
                 updated: listing.editedDate,
                 enabled: listing.isEnabled ? "Enabled" : "Disabled",
                 featured: listing.isFeatured,
-                actions: null
+                actions: null,
+                private: listing.isPrivate
             };
         });
 
