@@ -16,7 +16,7 @@ var FIELDS = [
     'launchUrl', 'company', 'whatIsNew', 'owners', 'agency', 'agencyShort', 'rejection',
     'isEnabled', 'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls', 'approvalStatus',
     'isFeatured', 'smallIconId', 'largeIconId', 'bannerIconId', 'featuredBannerIconId',
-    'currentRejection', 'isPrivate'
+    'currentRejection', 'isPrivate', 'securityMarking'
 ];
 
 // These don't have the icons, access_control
@@ -26,7 +26,8 @@ var SAVE_FORMAT_FIELDS = [
     'is_private', 'last_activity', 'launch_url', 'listing_type', 'owners', 'required_listings',
     'requirements', 'screenshots', 'singleton', 'tags', 'title', 'total_comments', 'total_rate1',
     'total_rate2', 'total_rate3', 'total_rate4', 'total_rate5', 'total_votes', 'unique_name',
-    'version_name', 'what_is_new', 'small_icon', 'large_icon', 'banner_icon', 'large_banner_icon'
+    'version_name', 'what_is_new', 'small_icon', 'large_icon', 'banner_icon', 'large_banner_icon',
+    'security_marking'
 ];
 
 function Listing (json) {

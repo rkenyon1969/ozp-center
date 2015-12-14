@@ -9,5 +9,6 @@ module.exports = {
     Toggle: require('./Toggle.jsx'),
     ImageInput: require('./ImageInput.jsx'),
     ValidatedFormMixin: require('./ValidatedFormMixin'),
-    OwnerInput: require('./OwnerInput.jsx')
+    OwnerInput: require('./OwnerInput.jsx'),
+    SecurityMarking: require('./SecurityMarking.jsx')
 };

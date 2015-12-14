@@ -26,7 +26,8 @@ var {
     Select2TagInput,
     TextAreaInput,
     OwnerInput,
-    Toggle
+    Toggle,
+    SecurityMarking
 } = require('./form');
 
 
@@ -41,6 +42,10 @@ var formLinks = {
     basicInformation: {
         title: 'Basic Information',
         id: 'create-edit-basic-information'
+    },
+    securityMarking: {
+        title: 'Security Marking',
+        id: 'create-edit-security-marking'
     },
     title: {
         title: 'Name',
@@ -151,6 +156,7 @@ var formLinks = {
 var formLinkGroups = [{
     link: formLinks.basicInformation,
     links: [
+        formLinks.securityMarking,
         formLinks.title,
         formLinks.type,
         formLinks.categories,
@@ -323,6 +329,9 @@ var ListingForm = React.createClass({
         return (
             <form ref="form" className="CreateEdit__form col-xs-9 col-lg-10">
                 <h2 id={f.basicInformation.id}>Basic Information</h2>
+
+                <SecurityMarking id={f.securityMarking.id} { ...p('securityMarking') } aria-label="Classification and Control Marking"/>
+
                 <TextInput id={f.title.id} { ...p('title') } aria-label="Title of Listing"/>
                 <Select2Input id={f.type.id} { ...p('type') }
                     options={ getOptionsForSystemObject(system.types) }/>

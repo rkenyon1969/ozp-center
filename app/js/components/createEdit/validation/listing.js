@@ -37,7 +37,8 @@ var Contact = subtype(struct({
     type: NonBlankString(50)
 }), oneValidPhone);
 
-var title = NonBlankString(60),
+var securityMarking = NonBlankString(60),
+    title = NonBlankString(60),
     type = NonBlankString(50),
     whatIsNew = maybe(StringMax(250)),
     categories = list(NonBlankString(50)),
@@ -59,6 +60,7 @@ function hasRequiredContactTypes (requiredContactTypes, contacts) {
 
 function ListingFull (requiredContactTypes) {
     return struct({
+        securityMarking: securityMarking,
         title: title,
         type: type,
         categories: subtype(categories, atLeastOne),
@@ -85,6 +87,7 @@ function ListingFull (requiredContactTypes) {
 }
 
 var ListingDraft = struct({
+    securityMarking: securityMarking,
     title: title,
     type: type,
     categories: categories,
