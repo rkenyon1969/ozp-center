@@ -1,0 +1,7 @@
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+ <ShortName>Appsmall Center</ShortName>
+ <Description>Search the Appsmall for a widget.</Description>
+ <Tags>Appsmall Center</Tags>
+ <Url type="text/html"
+      template="http://localhost:8000/dist/#/home/{searchTerms}"/>
+</OpenSearchDescription>

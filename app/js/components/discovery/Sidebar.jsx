@@ -27,8 +27,7 @@ var Sidebar = React.createClass({
     onHomeClick() {
         this.state.categories.length = 0;
         this.forceUpdate();
-
-        this.props.onGoHome();
+        window.location = '#/home';
     },
 
     onSelect(category) {
@@ -79,7 +78,7 @@ var Sidebar = React.createClass({
         return (
             <aside className="sidebar col-xs-3 col-lg-2">
                 <ul className="list-unstyled facet-group">
-                    <li className={ homeLinkClasses } id="home" onClick={ this.onHomeClick }><i className="icon-shopping"></i> Center Home</li>
+                    <li className={ homeLinkClasses } id="home" onClick={ this.onHomeClick } ><i className="icon-shopping"></i> Center Home</li>
                 </ul>
                 <ul className="list-unstyled facet-group" tabIndex="0">
                     { this.renderCategories() }
