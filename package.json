@@ -89,7 +89,7 @@
     "react-icon-rating": "0.2.0",
     "react-input-placeholder": "1.0.0",
     "react-radio-group": "1.0.0",
-    "react-router": "0.12.4",
+    "react-router": "git://github.com/ozone-development/react-router#v0.12.4-ozp-npm",
     "react-select-box": "git://github.com/ozone-development/react-select-box#master",
     "reflux": "0.1.15",
     "select2": "3.5.1-browserify-fix",

@@ -86,7 +86,6 @@ var Discovery = React.createClass({
             this.search();
         }
         this._prevParams = prevContext.getCurrentParams();
-//        console.log(prevContext.getCurrentParams());
     },
 
     componentWillMount() {
@@ -102,10 +101,6 @@ var Discovery = React.createClass({
         ListingActions.fetchStorefrontListings();
 
         if(this.context.getCurrentParams().categories){
-          // console.log('categories ' + this.context.getCurrentParams().categories);
-          // console.log('categories decode ' + decodeURIComponent(this.context.getCurrentParams().categories));
-          // console.log('categories split ' + decodeURIComponent(this.context.getCurrentParams().categories).split('+'));
-
           this.setState({initCategories: decodeURIComponent(this.context.getCurrentParams().categories).split('+')});
         }
 
@@ -116,7 +111,6 @@ var Discovery = React.createClass({
     },
 
     render: function () {
-        // console.log("render");
         var isSearching = this.isSearching();
         var isBrowsing = this.isBrowsing();
 
@@ -169,10 +163,13 @@ var Discovery = React.createClass({
     shouldComponentUpdate(nextProps, nextState, nextContext) {
 
       this._prevParams = this._prevParams || {};
-      // console.log(this._prevParams);
-      // console.log(nextContext.getCurrentParams());
       if (!_.isEqual(nextContext.getCurrentParams(), this._prevParams)) {
-        // console.log("update");
+        console.log("Context changed");
+
+        this.setState({
+            currentOffset: 0,
+        });
+
         // If a search string is provided to us, load it into the search feild
         if(nextContext.getCurrentParams().searchString){
           this._searching = true;
@@ -180,19 +177,29 @@ var Discovery = React.createClass({
             queryString: nextContext.getCurrentParams().searchString,
             currentOffset: 0
           });
+        } else {
+          this.setState({ queryString: '' });
         }
 
         // If some categories, types, or orgs are provided, select them.
         if(nextContext.getCurrentParams().categories){
           this.onCategoryChange(decodeURIComponent(nextContext.getCurrentParams().categories).split('+'));
+          // TODO: force Sidebar update
+        } else {
+          this.onCategoryChange([]);
+          // TODO: this is not working correctly
         }
 
         if(nextContext.getCurrentParams().type){
           this.onTypeChange(decodeURIComponent(nextContext.getCurrentParams().type).split('+'));
+        } else {
+          this.setState({ type: [] });
         }
 
         if(nextContext.getCurrentParams().org){
           this.onOrganizationChange(decodeURIComponent(nextContext.getCurrentParams().org).split('+'));
+        } else {
+          this.setState({ agency: [] });
         }
       } else {
         // console.log("no update");

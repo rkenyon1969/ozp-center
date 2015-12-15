@@ -1,6 +1,6 @@
 'use strict';
 
-var { Route, Redirect, paramInjectTrailingSlashMatcher } = require('react-router');
+var { Route, Redirect } = require('react-router');
 var App = require('./app.jsx');
 var DiscoveryPage = require('./discovery/index.jsx');
 var UserManagement = require('./management/user/index.jsx');
@@ -12,23 +12,7 @@ var OrgListings = require('./management/OrgListings/index.jsx');
 module.exports = function (childRoutes) {
 
     var routes = [
-        <Redirect from='/' to="home"/>,
-        <Route path="home/?" name="home" key="home" handler={ DiscoveryPage }/>,
-        <Route path="home/:searchString/:categories/:type/:org/?" name="fifteen" key="home" handler={ DiscoveryPage }/>,
-        <Route path="home/:searchString/:categories/:type//?" name="fourteen" key="home" handler={ DiscoveryPage }/>,
-        <Route path="home/:searchString/:categories//:org/?" name="thirteen" key="home" handler={ DiscoveryPage }/>,
-        <Route path="home/:searchString/:categories///?" name="twelve" key="home" handler={ DiscoveryPage }/>,
-        <Route path="home/:searchString//:type/:org/?" name="eleven" key="home" handler={ DiscoveryPage }/>,
-        <Route path="home/:searchString//:type//?" name="ten" key="home" handler={ DiscoveryPage }/>,
-        <Route path="home/:searchString///:org/?" name="nine" key="home" handler={ DiscoveryPage }/>,
-        <Route path="home/:searchString////?" name="eight" key="home" handler={ DiscoveryPage }/>,
-        <Route path="home//:categories/:type/:org/?" name="seven" key="home" handler={ DiscoveryPage }/>,
-        <Route path="home//:categories/:type//?" name="six" key="home" handler={ DiscoveryPage }/>,
-        <Route path="home//:categories//:org/?" name="five" key="home" handler={ DiscoveryPage }/>,
-        <Route path="home//:categories///?" name="four" key="home" handler={ DiscoveryPage }/>,
-        <Route path="home///:type/:org/?" name="three" key="home" handler={ DiscoveryPage }/>,
-        <Route path="home///:type//?" name="two" key="home" handler={ DiscoveryPage }/>,
-        <Route path="home////:org/?" name="one" key="home" handler={ DiscoveryPage }/>,
+        <Route path="home/?:searchString?/?:categories?/?:type?/?:org?/?" name="home" key="home" handler={ DiscoveryPage }/>,
         <Route path="user-management" name="user-management" key="user-management" handler={ UserManagement }>
             <Route path="my-listings" name="my-listings" key="my-listings" handler={ UserManagement.MyListings } />
             <Route path="recent-activity" name="recent-activity" key="recent-activity" handler={ UserManagement.RecentActivity } />
@@ -48,6 +32,7 @@ module.exports = function (childRoutes) {
     if (childRoutes) {
         routes = routes.concat(childRoutes);
     }
+    routes.push(<Redirect to="home" key="redirect-home"/>);
 
     return (
         <Route handler={App}>
