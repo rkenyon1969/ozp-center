@@ -28,9 +28,9 @@ module.exports = new Tour({
       backdropPadding: 0
     },
     {
-      element: ".icon-bell-grayLightest",
+      element: "#tourstop-notifications",
       title: "Notifications",
-      content: "Receive notifications from your Center steward here. If you have an unread notification, the icon will change colors to alert you. Once you've read a notification, you can click the X to dismiss it. Otherwise, it will disappear from the list when it expires.",
+      content: "Receive notifications from your Center steward here. If you have an unread notification, the icon will change to blue to alert you. Once you've read a notification, you can click the X to dismiss it. Otherwise, it will disappear from the list when it expires.",
       placement: "bottom",
       backdropContainer: ".navbar-fixed-top"
     },
@@ -43,7 +43,7 @@ module.exports = new Tour({
       backdropPadding: 0
     },
     {
-      element: "#global-nav-dropdown",
+      element: "#tourstop-global-menu",
       title: "Global Menu",
       content: "The main menu provides a list of resources you can use to submit listings, manage your listings, view your profile, contact us, etc.",
       placement: "left",

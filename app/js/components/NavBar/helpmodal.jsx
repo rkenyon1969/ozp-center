@@ -85,7 +85,7 @@ var HelpModal = React.createClass({
                             {/*<iframe style={{width:"100%", height:"500px", border: 'none'}} src={HELP_URL} />*/}
                         </div>
                         <div className="modal-footer">
-                            <a id="tour-button-home" href="#" className="btn btn-primary" data-dismiss="modal">Take a Tour</a>
+                            <a id="tour-start" href="#" className="btn btn-primary" data-dismiss="modal">Take a Tour</a>
                         </div>
                     </div>
                 </div>
