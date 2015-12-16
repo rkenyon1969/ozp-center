@@ -50,10 +50,10 @@ module.exports = new Tour({
       backdropContainer: ".navbar-fixed-top",
       backdropPadding: 0,
       onShown: function() {
-        $("#global-nav-dropdown").addClass("open");
+        $("#tourstop-global-menu").addClass("open");
       },
       onHide: function() {
-        $("#global-nav-dropdown").removeClass("open");
+        $("#tourstop-global-menu").removeClass("open");
       }
     },
     {
