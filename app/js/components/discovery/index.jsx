@@ -117,8 +117,8 @@ var Discovery = React.createClass({
             <div>
                 <NavBar />
                 <Header>
-                    <form id="tourstop-center-search" className="col-xs-9 col-lg-10" ref="form" role="search">
-			            <div className="row">
+                  <form id="tourstop-center-search" className="col-xs-9 col-lg-10" ref="form" role="search">
+    			            <div className="row">
 		                    <div className="form-group Search col-sm-6 col-xs-4">
 		                        <i className="icon-search"></i>
 
@@ -132,7 +132,7 @@ var Discovery = React.createClass({
 		                    <Types value={this.state.type} onChange={this.onTypeChange} />
 		                    <Organizations value={this.state.agency} onChange={this.onOrganizationChange} />
                     	</div>
-		    </form>
+	                  </form>
                 </Header>
                 <div id="discovery" className="row">
                     <Sidebar
@@ -239,7 +239,7 @@ var Discovery = React.createClass({
         }
 
         return (
-            <FeaturedListings
+            <FeaturedListings key="FeaturedListings"
                 listings={ this.state.featured } />
         );
     },
@@ -250,7 +250,7 @@ var Discovery = React.createClass({
         }
 
         return (
-            <section className="Discovery__NewArrivals">
+            <section className="Discovery__NewArrivals" key="Discovery__NewArrivals">
                 <h4>New Arrivals</h4>
                 <Carousel className="new-arrival-listings">
                     { ListingTile.fromArray(this.state.newArrivals) }
@@ -276,7 +276,7 @@ var Discovery = React.createClass({
             <button onClick={ this.handleLoadMore } className="btn btn-default loadMoreBtn">Load More</button>;
 
         return (
-            <section className="Discovery__MostPopular">
+            <section className="Discovery__MostPopular" key="Discovery__MostPopular">
                 <h4>Most Popular</h4>
                 <ul className="infiniteScroll row clearfix">
                     { InfiniTiles }
@@ -311,7 +311,7 @@ var Discovery = React.createClass({
         return (
             <section className="Discovery__SearchResults">
                 <h4>Search Results &nbsp;
-                  <span tabindex="0"
+                  <span tabIndex="0"
                     className="shareLink"
                     ref="shareResults"
                     data-toggle="popover"

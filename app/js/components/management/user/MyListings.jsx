@@ -142,7 +142,7 @@ var MyListings = React.createClass({
             onFilterChanged: this.onFilterChanged
         };
 
-        return this.transferPropsTo(
+        return (
             <div className="MyListings row">
                 <div className="Listings__Sidebar col-xs-3 col-lg-2" >
                     <Sidebar>

@@ -22,8 +22,8 @@ var OverviewTab = React.createClass({
     render: function () {
         var description = 'No description provided!';
         if(this.props.listing.description){
-          description = this.props.listing.description.split(/\n/g).map((p)=>{
-            return(<span>{p}<br/></span>);
+          description = this.props.listing.description.split(/\n/g).map((p, i)=>{
+            return(<span key={i}>{p}<br/></span>);
           });
         }
         var descriptionClasses = React.addons.classSet({
@@ -50,7 +50,10 @@ var OverviewTab = React.createClass({
         }
 
         var smallImageUrls = screenshots.map(function (screenshot, i) {
-            return <img alt="show large screenshot once click" src={screenshot.smallImageUrl} onClick={ me.showLargeScreenshots.bind(me, i) }/>;
+            return <img alt="show large screenshot once click"
+                        src={screenshot.smallImageUrl}
+                        key={i}
+                        onClick={ me.showLargeScreenshots.bind(me, i) }/>;
         });
 
         return (

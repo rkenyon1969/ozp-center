@@ -255,19 +255,23 @@ var ScreenshotForm = React.createClass({
 
 var ContactForm = React.createClass({
     mixins: [ require('../../mixins/SystemStateMixin'), ValidatedFormMixin ],
-
     render: function () {
+
+        var baseKey = this.props.value['type'] + '.' + this.props.baseKey;
+
         return (
             <div className="well">
                 <button type="button" className="close" onClick={this.props.removeHandler}>
                     <span aria-hidden="true"><i className="icon-cross-14"></i></span><span className="sr-only">Clear</span>
                 </button>
-                <Select2Input { ...this.getFormComponentProps('type') } options={ getOptionsForSystemObject(this.state.system.contactTypes) }/>
-                <TextInput { ...this.getFormComponentProps('name') }/>
-                <TextInput { ...this.getFormComponentProps('organization') } optional/>
-                <TextInput { ...this.getFormComponentProps('email') }/>
-                <TextInput { ...this.getFormComponentProps('securePhone') }/>
-                <TextInput { ...this.getFormComponentProps('unsecurePhone') }/>
+                <Select2Input { ...this.getFormComponentProps('type') }
+                              options={ getOptionsForSystemObject(this.state.system.contactTypes) }
+                              key={`${baseKey}.type`} />
+                <TextInput { ...this.getFormComponentProps('name') } key={`${baseKey}.name`} />
+                <TextInput { ...this.getFormComponentProps('organization') } key={`${baseKey}.organization`} optional />
+                <TextInput { ...this.getFormComponentProps('email') } key={`${baseKey}.email`} />
+                <TextInput { ...this.getFormComponentProps('securePhone') } key={`${baseKey}.securePhone`} />
+                <TextInput { ...this.getFormComponentProps('unsecurePhone') } key={`${baseKey}.unsecurePhone`} />
             </div>
         );
     }
@@ -301,7 +305,7 @@ var ListingForm = React.createClass({
         return (
             <form ref="form" className="CreateEdit__form col-xs-9 col-lg-10">
                 <h2 id={f.basicInformation.id}>Basic Information</h2>
-                <TextInput id={f.title.id} { ...p('title') }/>
+                <TextInput id={f.title.id} { ...p('title') } aria-label="Title of Listing"/>
                 <Select2Input id={f.type.id} { ...p('type') }
                     options={ getOptionsForSystemObject(system.types) }/>
                 <Select2Input id={f.categories.id} { ...p('categories') } multiple
@@ -354,7 +358,7 @@ var ListingForm = React.createClass({
                 <ListInput id={f.contacts.id} { ...this.getSubFormProps('contacts') }
                     itemForm={ ContactForm }/>
 
-                  <div className="space" style={{'height':'400px'}}>&#32;</div>
+                <div className="space" style={{'height':'400px'}}>&#32;</div>
             </form>
         );
     },
@@ -618,7 +622,7 @@ var CreateEditPage = React.createClass({
             <div className="CreateEdit__titlebar">
                 <div className="btn-toolbar" role="group">
                     <div className="btn-group" role="group">
-                        <button type="button" className={ classSet(saveBtnClasses) }
+                        <button type="button" tabIndex="0" className={ classSet(saveBtnClasses) }
                                 onClick={ this.onSave }>
                             <span className="create-edit-button">Save</span>
                             <i className={saveText}></i>
@@ -647,7 +651,7 @@ var CreateEditPage = React.createClass({
                             </button>
                         }
                         </div>
-                    <div className="btn-group" role="group">
+                    <div className="btn-group" tabIndex="0" role="group">
                         <a type="button" className="btn-link btn myListings" onClick={this.onClose}>
                                 Listing Management
                         </a>

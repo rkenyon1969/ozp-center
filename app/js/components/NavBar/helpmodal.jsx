@@ -1,16 +1,34 @@
 'use strict';
 
 var React = require('react');
-var { /*HELP_URL,*/ HELP_DOCS, HELP_VIDEOS } = require('ozp-react-commons/OzoneConfig');
+var { HELP_URL, HELPDESK_ADDRESS } = require('ozp-react-commons/OzoneConfig');
+var SystemStateMixin = require('../../mixins/SystemStateMixin');
 
 var HelpModal = React.createClass({
+    mixins: [ SystemStateMixin ],
 
     propTypes: {
         onShown: React.PropTypes.func,
         onHidden: React.PropTypes.func
     },
 
+    getInitialState: function() {
+      return {
+        role: 0
+      };
+    },
+
     componentDidMount: function() {
+        var UserRole = {
+          USER: 0,
+          ORG_STEWARD: 1,
+          ADMIN: 2
+        };
+
+        this.setState({
+          role: UserRole[this.state.currentUser.highestRole.toString()]
+        });
+
         $(this.getDOMNode())
             .one('shown.bs.modal', () => {
                 if (this.props.onShown) {
@@ -29,60 +47,25 @@ var HelpModal = React.createClass({
             });
     },
 
-    fetchDocs: (()=>{
-      var docKeys = Object.keys(HELP_DOCS);
-      return docKeys.map(docKey => {
-        return {name: docKey, link: HELP_DOCS[docKey]};
-      });
-    })(),
-
-    fetchVids: (()=>{
-      var vidKeys = Object.keys(HELP_VIDEOS);
-      return vidKeys.map(vidKey => {
-        return {name: vidKey, link: HELP_VIDEOS[vidKey]};
-      });
-    })(),
-
     render: function () {
-        var docLinks = this.fetchDocs.map(function(doc){
-          return(
-            <li>
-              <a target="_blank" href={ doc.link }>{ doc.name }</a>
-            </li>
-          );
-        });
-        var vidLinks = this.fetchVids.map(function(vid){
-          return(
-            <li>
-              <a target="_blank" href={ vid.link }>{ vid.name }</a>
-            </li>
-          );
-        });
         return (
             <div id="help-modal" className="modal fade" role="dialog" aria-hidden="true">
                 <div className="modal-dialog  modal-lg">
                     <div className="modal-content">
                         <div className="modal-header">
-                        <button type="button" className="close" data-dismiss="modal"><span aria-hidden="true"><i className="icon-cross-18"></i></span><span className="sr-only">Close</span></button>
-                        <h4 className="modal-title">AppsMall Help Zone</h4>
+                        <button type="button" className="close" data-dismiss="modal">
+                          <span aria-hidden="true"><i className="icon-cross-18"></i></span><span className="sr-only">Close</span>
+                        </button>
+                        <h3 className="modal-title">Help</h3>
                         </div>
-                        <div className="modal-body">
-                          <div className="container" style={{'width': '100%'}}>
-                            <div className="col-md-6">
-                              <h4>Documents</h4>
-                              <ul>
-                                {docLinks}
-                              </ul>
-                            </div>
-
-                            <div className="col-md-6">
-                              <h4>Videos</h4>
-                              <ul>
-                                {vidLinks}
-                              </ul>
-                            </div>
-                          </div>
-                            {/*<iframe style={{width:"100%", height:"500px", border: 'none'}} src={HELP_URL} />*/}
+                        <div className="modal-body" style={{padding: '0px'}}>
+                            <iframe style={{width:"100%", height:"500px", border: 'none'}} src={`${HELP_URL}${this.state.role}`} />
+                        </div>
+                        <div className="modal-footer">
+                            <h5>Have a question not answered here?&nbsp;&nbsp;
+                                <a href={HELPDESK_ADDRESS} type="button" className="btn btn-primary">Contact the Help Desk</a>
+                                {/*<button type="button" className="btn btn-primary" title="Coming Soon" disabled="disabled">Take the Center tour</button>*/}
+                            </h5>
                         </div>
                         <div className="modal-footer">
                             <a id="tour-button-home" href="#" className="btn btn-primary" data-dismiss="modal">Take a Tour</a>

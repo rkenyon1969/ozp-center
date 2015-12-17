@@ -62,7 +62,7 @@ var ListingManagement = React.createClass({
 
         return (
             <div className="ListingManagement">
-                <NavBar />
+                <NavBar/>
                 <div className="ListingManagement__body clearfix">
                     <h1>Listing Management</h1>
                       <div className="ListingManagement__TabContainer">

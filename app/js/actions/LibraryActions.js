@@ -11,7 +11,7 @@ var LibraryActions = Reflux.createActions([
 ]);
 
 LibraryActions.addToLibrary.listen(function(listing) {
-    OzpAnalytics.trackEvent('Favorited Applications', listing.title);
+    OzpAnalytics.trackEvent('Favorited Applications', listing.title, listing.agencyShort);
 });
 
 module.exports = LibraryActions;

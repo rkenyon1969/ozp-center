@@ -5,7 +5,6 @@ var PaginatedList = require('../utils/PaginatedList');
 var ListingActions = require('../actions/ListingActions');
 
 var _paginatedListByFilter = {};
-
 var filterKey = function (filter) {
     return JSON.stringify(filter);
 };
@@ -26,10 +25,10 @@ var PaginatedListingsStore = Reflux.createStore({
 
         if (paginatedList) {
             paginatedList.receivePage(response);
-        }
-        else {
+        } else {
             _paginatedListByFilter[key] = new PaginatedList(response);
         }
+
         this.trigger();
     },
 
@@ -38,10 +37,17 @@ var PaginatedListingsStore = Reflux.createStore({
         _paginatedListByFilter = {};
     },
 
+    filterChange: function (filter) {
+        if (_paginatedListByFilter[ filterKey ( filter ) ] ) {
+            this.trigger();
+        } else {
+            ListingActions.fetchAllListings(filter);
+        }
+    },
+
     getListingsByFilter: function (filter) {
         return _paginatedListByFilter[filterKey(filter)];
     }
-
 });
 
 module.exports = PaginatedListingsStore;

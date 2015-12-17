@@ -118,7 +118,7 @@ a:focus {
 @import 'management/user/recent-activity';
 @import 'management/mall/mall-management';
 @import 'management/deleteConfirmation';
-@import 'management/all-listings/all-listings';
+@import 'management/listings/listings';
 @import 'management/notifications';
 
 .close {
@@ -435,7 +435,6 @@ $icons: (
 
 
 
-
 // Help Tour
 
 
@@ -496,4 +495,15 @@ $icons: (
   border-radius: 0;
   opacity: 0.9;
   filter: alpha(opacity=90);
+
+/*=======================
+= Accessibility Section=
+=======================*/
+
+.hidden-span{
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  overflow: hidden;
+  top: -10px;
 }

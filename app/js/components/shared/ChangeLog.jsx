@@ -110,7 +110,7 @@ var ModifiedChangeLog = React.createClass({
             }
 
             extendedDetails[i] = (
-                <li>{ changedField } changed from&nbsp;
+                <li key={i}>{ changedField } changed from&nbsp;
                     <span className="OldValue">{ changeDetail.oldValue }</span>
                     <span> to </span>
                     <span className="NewValue">{ changeDetail.newValue }</span>

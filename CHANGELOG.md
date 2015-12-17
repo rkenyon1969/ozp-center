@@ -1,3 +1,79 @@
+### 1.0.17 (2015-11-25)
+
+
+#### Bug Fixes
+
+* **styling:**
+  * Change help modal iframe size ([e1bc59a8](https://github.com/ozone-development/ozp-center.git/commit/e1bc59a8d663233c1f1df51168a93b918eaa5661))
+  * Help modal style/language updates to maintain consistency ([21f21ff8](https://github.com/ozone-development/ozp-center.git/commit/21f21ff8abd8fb7e32aa4d5b308a676792f8e971))
+
+
+### 1.0.16 (2015-11-18)
+
+
+#### Features
+
+* **Help Articles:** Role based article display ([4008d193](https://github.com/ozone-development/ozp-center.git/commit/4008d193b4b502fc92415178c25b4dec8234b4ab))
+
+
+### 1.0.15 (2015-11-11)
+
+
+#### Bug Fixes
+
+* ***:** Eliminate many warnings. #423 ([791be59d](https://github.com/ozone-development/ozp-center.git/commit/791be59d54efb548c6c6bc8aaf9c285cb19375aa))
+
+
+#### Features
+
+* **Help Articles:** integrate help articles into center #418 ([3f5e3e05](https://github.com/ozone-development/ozp-center.git/commit/3f5e3e05ef1ed1aee7e1141a121ce20ce821a28b))
+* **reviews:** Require description when rating app #428 ([f0a09b1e](https://github.com/ozone-development/ozp-center.git/commit/f0a09b1e3b468f4a6b1a6fbb569fffe918164c9f))
+
+
+### 1.0.14 (2015-10-28)
+
+
+#### Features
+
+* **Table View Refactor:** Refactored Listing Management section for better organization, refactored table  ([8c2e2605](https://github.com/ozone-development/ozp-center.git/commit/8c2e26059342bc7f8766a75c87d21455bf4226ec))
+
+
+### 1.0.13 (2015-10-21)
+
+
+#### Bug Fixes
+
+* **style:** Fix bug that caused large table rows when displaying only a few results ([a0eef80e](https://github.com/ozone-development/ozp-center.git/commit/a0eef80e2c83dcb3cb8283616f311c4475bf4aab))
+
+
+### 1.0.12 (2015-10-14)
+
+
+#### Bug Fixes
+
+* **ListingManagement:**
+  * Quickly switching between Org tabs can cause data to be populated incorrectly ([661a60f2](https://github.com/ozone-development/ozp-center.git/commit/661a60f2e198831a37f355cb8cc59da9ab3d6fe1))
+  * Fix inaccurate results on first click of org steward tab ([05b9d504](https://github.com/ozone-development/ozp-center.git/commit/05b9d504b0a8f1312e4c3a70f87d72d7857dd0ed))
+  * Table view does not work if the owner displayname is blank ([13980b8a](https://github.com/ozone-development/ozp-center.git/commit/13980b8ac45ca09d6ba9961d00d59dc5f7116e10))
+* **TableView:** Enable tables which include drafts without owner or org to be sorted ([0230965f](https://github.com/ozone-development/ozp-center.git/commit/0230965fc4485ad11bb612d39d3f72f9c31cfa79))
+
+
+### 1.0.11 (2015-10-06)
+
+
+#### Bug Fixes
+
+* **Merge:** Tests are passing, merge failure fixed ([9b6393aa](https://github.com/ozone-development/ozp-center.git/commit/9b6393aa499e2ccc4eb1510ddb60c9269bd4557a))
+* **colors:**
+  * Remove extra accidental file ([2a5e7c30](https://github.com/ozone-development/ozp-center.git/commit/2a5e7c3090c934f1dfa1a17d339dd1e151c3e22e))
+  * Change table view sort icon color to be visible ([5f0c0a32](https://github.com/ozone-development/ozp-center.git/commit/5f0c0a320dd4c64ce0d382bb4b18fb42d5a46b7d))
+
+
+#### Features
+
+* **Table View:** Created table views for AllListings and OrgListings pages. ([64ccaa39](https://github.com/ozone-development/ozp-center.git/commit/64ccaa39d983ca2575b677e211b632dcb7efe3b9))
+
+
 ### 1.0.10 (2015-09-29)
 
 

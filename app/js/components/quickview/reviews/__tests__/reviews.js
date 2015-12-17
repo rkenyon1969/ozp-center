@@ -1,6 +1,6 @@
 'use strict';
 
-var [adminReview, orgStewardReview, userReview] = [
+var [adminReview, orgStewardReview, userReview, userReview2] = [
     {
         "id": 1,
         "author": {
@@ -69,11 +69,36 @@ var [adminReview, orgStewardReview, userReview] = [
                 "href": "https://localhost:8443/marketplace/api/profile/4"
             }
         }
+    },
+    {
+        "id": 4,
+        "author": {
+            "id": 4,
+            "displayName": "Test User 1",
+            "username": "testUser1"
+        },
+        "text": "Out out brief candle. Life is but a walking shadow.",
+        "createdDate": "2015-01-22T21:01:05.645+0000",
+        "editedDate": "2015-01-22T21:01:05.645+0000",
+        "rate": 4,
+        "_links": {
+            "ozp:application": {
+                "href": "https://localhost:8443/marketplace/api/listing/1"
+            },
+            "self": {
+                "href": "https://localhost:8443/marketplace/api/listing/1/itemComment/4"
+            },
+            "via": {
+                "href": "https://localhost:8443/marketplace/api/profile/4"
+            }
+        }
     }
+
 ]
 
 module.exports = {
     userReview: userReview,
+    userReview2: userReview2,
     orgStewardReview: orgStewardReview,
     adminReview: adminReview,
     reviews: [userReview, orgStewardReview, adminReview]
