@@ -48,6 +48,7 @@ var ListingTile = React.createClass({
             <li className="listing SearchListingTile">
                 <a className="listing-link"  href={ href }>
                     {/* Empty link - css will make it cover entire <li>*/}
+                    <span className="hidden-span">{listing.title}</span>
                 </a>
                 <img alt={`${listing.title} app tile`} src={ imageLargeUrl } />
                 <section className="slide-up">
