@@ -64,11 +64,8 @@ var HelpModal = React.createClass({
                         <div className="modal-footer">
                             <h5>Have a question not answered here?&nbsp;&nbsp;
                                 <a href={HELPDESK_ADDRESS} type="button" className="btn btn-primary">Contact the Help Desk</a>
-                                {/*<button type="button" className="btn btn-primary" title="Coming Soon" disabled="disabled">Take the Center tour</button>*/}
+                                <a id="tour-start" href="#" className="btn btn-primary" data-dismiss="modal">Take the Tour</a>
                             </h5>
-                        </div>
-                        <div className="modal-footer">
-                            <a id="tour-start" href="#" className="btn btn-primary" data-dismiss="modal">Take a Tour</a>
                         </div>
                     </div>
                 </div>

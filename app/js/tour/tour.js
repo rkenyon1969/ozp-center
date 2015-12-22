@@ -1,9 +1,10 @@
 'use strict';
 
-var { homepageTour } = require('./');
+var { globalTour } = require('./');
+var { centerTour } = require('./');
 
 $(document).on('click', '#tour-start', function(){
   window.localStorage.clear();
-  homepageTour.init();
-  homepageTour.start();
+  globalTour.init();
+  globalTour.start();
 });

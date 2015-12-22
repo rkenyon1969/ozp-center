@@ -1,4 +1,4 @@
 module.exports = {
-  homepageTour: require('./homepageTour.js'),
-  createEditTour: require('./createEditTour.js')
+  globalTour: require('./globalTour.js'),
+  centerTour: require('./centerTour.js')
 };
