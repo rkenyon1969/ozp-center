@@ -47,15 +47,20 @@ var SecurityMarking = React.createClass({
     render: function () {
         var labelClasses = classSet({ 'input-optional': this.props.optional });
 
+        var bsClassifyOptions = {selector: '#bs-classify', mode: 'modal'};
+        // Clamp bootstrap-classify modal to selector specified in options
+        $.fn.classify(bsClassifyOptions);
+
         return (
             <div id={this.props.id} className={ this.getClasses() }>
-                <label htmlFor={ this.props.id } className={labelClasses}>{ this.props.label }</label>
+                <label id="bs-classify" htmlFor={ this.props.id } className={labelClasses}>{ this.props.label }</label>
                 <p className="small">{ this.props.description }</p>
 
                 { this.props.help && <p className="help-block small">{ this.props.help }</p>}
 
                 { cloneWithProps(this.renderInput(), this.getInputProps()) }
-                <button className="btn btn-sm btn-primary addNew"
+                <button
+                        className="btn btn-sm btn-primary addNew"
                         onClick={this.openModal}>
                     Build Marking
                 </button>
