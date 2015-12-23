@@ -5,7 +5,7 @@ var humps = require('humps');
 var _ = require('../utils/_');
 var OzpAnalytics = require('../analytics/ozp-analytics');
 var PaginatedResponse = require ('./responses/PaginatedResponse');
-
+var { PAGINATION_MAX } = require('ozp-react-commons/constants');
 var { API_URL } = require('ozp-react-commons/OzoneConfig');
 
 var FIELDS = [
@@ -327,15 +327,13 @@ var ListingApi = {
     },
 
     getChangeLogs: function (id) {
-        return $.getJSON(API_URL + '/api/listing/' + id + '/activity/').then(
-            // TODO: consider paging
-            (response) => new humps.camelizeKeys(response));
+        return $.getJSON(API_URL + '/api/listing/' + id + '/activity/?offset=0&limit=' + PAGINATION_MAX).then(
+            (response) => new PaginatedResponse(humps.camelizeKeys(response)).getItemAsList());
     },
 
     fetchReviews: function (id) {
-        // TODO: consider paging
-        return $.getJSON(API_URL + '/api/listing/' + id + '/review/').then(
-            (response) => new humps.camelizeKeys(response));
+        return $.getJSON(API_URL + '/api/listing/' + id + '/review/?offset=0&limit=' + PAGINATION_MAX).then(
+            (response) => new PaginatedResponse(humps.camelizeKeys(response)).getItemAsList());
     },
 
     saveReview: function (listingId, review) {
