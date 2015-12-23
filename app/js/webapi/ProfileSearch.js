@@ -8,7 +8,7 @@ var _ = require('../utils/_');
 module.exports = {
     search: function(term) {
         return $.getJSON(
-            `${API_URL}/api/profile/?username_starts_with=${encodeURIComponent(term)}`
+            `${API_URL}/api/profile/?search=${encodeURIComponent(term)}`
         ).then(resp => {
             resp = humps.camelizeKeys(resp);
 
