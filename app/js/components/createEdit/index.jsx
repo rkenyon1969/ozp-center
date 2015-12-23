@@ -204,12 +204,6 @@ function getOptionsForSimpleLists (items) {
     });
 }
 
-function getOptionsForContactType (items) {
-    return items.map(item => {
-        return { id: item.name, text: item.name };
-    });
-}
-
 // On the edit listing page, these are the wells users input the 'Type of Resource' and the resources 'URL'
 var ResourceForm = React.createClass({
     mixins: [ ValidatedFormMixin ],
@@ -274,7 +268,7 @@ var ContactForm = React.createClass({
     mixins: [ require('../../mixins/SystemStateMixin'), ValidatedFormMixin ],
     render: function () {
 
-        var baseKey = this.props.value['type'] + '.' + this.props.baseKey;
+        var baseKey = this.props.value.type + '.' + this.props.baseKey;
 
         return (
             <div className="well">
@@ -303,7 +297,7 @@ var ListingForm = React.createClass({
     render: function () {
         var listing = this.props.value;
         var system = this.props.system;
-        var organizations = this.props.currentUser.organizations;
+        var organizations = system.organizations.map((x) => x.shortName);
 
         var ownerSetter = usernames => {
             this.props.requestChange(['owners'], usernames.map(u => {
