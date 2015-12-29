@@ -2,7 +2,6 @@
 
 var React = require('react');
 var { cloneWithProps, classSet } = React.addons;
-var SecurityModal = require('./SecurityModal.jsx');
 
 
 var SecurityMarking = React.createClass({
@@ -11,8 +10,7 @@ var SecurityMarking = React.createClass({
         return {
             value: this.props.value,
             blurred: false,
-            charLimit: this.props.charLimit,
-            modalEnabled: false
+            charLimit: this.props.charLimit
         };
     },
 
@@ -23,51 +21,25 @@ var SecurityMarking = React.createClass({
         };
 
         return (
-            <input type="text" style={textStyle} readOnly/>
+            <input rel="bs-classify" type="text" style={textStyle}/>
         );
-    },
-
-    openModal: function () {
-        this.setState({
-            modalEnabled: true
-        });
-    },
-
-    onModalClosed: function () {
-        this.setState({
-            modalEnabled: false
-        });
-    },
-
-    onModalSubmit: function (marking) {
-        this.setState({value: marking})
-        this.props.setter(marking);
     },
 
     render: function () {
         var labelClasses = classSet({ 'input-optional': this.props.optional });
 
-        var bsClassifyOptions = {selector: '#bs-classify', mode: 'modal'};
         // Clamp bootstrap-classify modal to selector specified in options
+        var bsClassifyOptions = {selector: 'input[rel]', mode: 'modal', title: 'Security Marking'};
         $.fn.classify(bsClassifyOptions);
 
         return (
             <div id={this.props.id} className={ this.getClasses() }>
-                <label id="bs-classify" htmlFor={ this.props.id } className={labelClasses}>{ this.props.label }</label>
+                <label id="bs-classify" htmlFor={ this.props.id } className={labelClasses}>
+                    { this.props.label }
+                </label>
                 <p className="small">{ this.props.description }</p>
-
                 { this.props.help && <p className="help-block small">{ this.props.help }</p>}
-
                 { cloneWithProps(this.renderInput(), this.getInputProps()) }
-                <button
-                        className="btn btn-sm btn-primary addNew"
-                        onClick={this.openModal}>
-                    Build Marking
-                </button>
-                <SecurityModal enabled={this.state.modalEnabled}
-                               closeCallback={this.onModalClosed}
-                               submitCallback={this.onModalSubmit}
-                />
             </div>
         );
     },

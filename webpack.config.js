@@ -31,6 +31,7 @@ module.exports = {
             "ism$": "bootstrap-classify/js/ism.js",
             "ism-u.config$": "bootstrap-classify/js/ism-u.config.js",
             "bootstrap-classify$": "bootstrap-classify/js/bootstrap-classify.js",
+            "bootstrap-classify.css$": "bootstrap-classify/css/bootstrap-classify.css",
             "ozp-react-commons": "ozp-react-commons/app/js",
             tether$: "tether/tether"
         },
@@ -44,6 +45,7 @@ module.exports = {
             exclude: /node_modules|bower_components|gulp|dist/
         }],
         loaders: [
+            { test: /\.css$/, loader: "style-loader!css-loader" },
             { test: /\.gif/, loader: "url-loader?limit=10000&mimetype=image/gif" },
             { test: /\.jpg/, loader: "url-loader?limit=10000&mimetype=image/jpg" },
             { test: /\.png/, loader: "url-loader?limit=10000&mimetype=image/png" },
