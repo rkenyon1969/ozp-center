@@ -3,5 +3,5 @@
  <Description>Search the Appsmall for a widget.</Description>
  <Tags>Appsmall Center</Tags>
  <Url type="text/html"
-      template="http://localhost:8000/dist/#/home/{searchTerms}"/>
+      template="/#/home/{searchTerms}"/>
 </OpenSearchDescription>
