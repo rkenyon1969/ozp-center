@@ -27,7 +27,7 @@ var {
     TextAreaInput,
     OwnerInput,
     Toggle,
-    SecurityMarking
+    MarkingInput
 } = require('./form');
 
 
@@ -330,7 +330,7 @@ var ListingForm = React.createClass({
             <form ref="form" className="CreateEdit__form col-xs-9 col-lg-10">
                 <h2 id={f.basicInformation.id}>Basic Information</h2>
 
-                <SecurityMarking id={f.securityMarking.id} { ...p('securityMarking') } aria-label="Classification and Control Marking"/>
+                <MarkingInput id={f.securityMarking.id} { ...p('securityMarking') } aria-label="Classification and Control Marking"/>
 
                 <TextInput id={f.title.id} { ...p('title') } aria-label="Title of Listing"/>
                 <Select2Input id={f.type.id} { ...p('type') }
