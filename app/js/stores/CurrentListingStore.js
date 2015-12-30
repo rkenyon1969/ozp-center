@@ -327,8 +327,9 @@ var CurrentListingStore = createStore({
      * in the _listing object.  Returns a promise that resolves when everything is complete
      */
     saveImages: function() {
-        function optionalPromise(image, property) {
-            var promise = image ? ImageApi.save(image) : null;
+        function optionalPromise(image, property, marking) {
+
+            var promise = image ? ImageApi.save(image, marking) : null;
 
             if (promise) {
                 promise.fail(me.handleImageSaveFailure.bind(me, property));
@@ -341,13 +342,14 @@ var CurrentListingStore = createStore({
         imageErrors = {screenshots: []};
 
         var me = this,
-            {smallIcon, largeIcon, bannerIcon, featuredBannerIcon, screenshots} = _listing,
+            {smallIcon, largeIcon, bannerIcon, featuredBannerIcon, screenshots,
+             smallIconMarking, largeIconMarking, bannerIconMarking, featuredBannerIconMarking} = _listing,
 
-            smallIconPromise = optionalPromise(smallIcon, 'smallIcon'),
-            largeIconPromise = optionalPromise(largeIcon, 'largeIcon'),
-            bannerIconPromise = optionalPromise(bannerIcon, 'bannerIcon'),
+            smallIconPromise = optionalPromise(smallIcon, 'smallIcon', smallIconMarking),
+            largeIconPromise = optionalPromise(largeIcon, 'largeIcon', largeIconMarking),
+            bannerIconPromise = optionalPromise(bannerIcon, 'bannerIcon', bannerIconMarking),
             featuredBannerIconPromise =
-                optionalPromise(featuredBannerIcon, 'featuredBannerIcon'),
+                optionalPromise(featuredBannerIcon, 'featuredBannerIcon', featuredBannerIconMarking),
 
             screenshotPromises = _.flatten(screenshots.map(
                 (s, i) => [

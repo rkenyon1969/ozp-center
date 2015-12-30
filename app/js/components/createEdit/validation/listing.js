@@ -37,7 +37,7 @@ var Contact = subtype(struct({
     type: NonBlankString(50)
 }), oneValidPhone);
 
-var securityMarking = NonBlankString(60),
+var securityMarking = NonBlankString(200),
     title = NonBlankString(60),
     type = NonBlankString(50),
     whatIsNew = maybe(StringMax(250)),
@@ -74,9 +74,13 @@ function ListingFull (requiredContactTypes) {
         intents: intents,
         docUrls: docUrls,
         smallIconId: Num,
+        smallIconMarking: securityMarking,
         largeIconId: Num,
+        largeIconMarking: securityMarking,
         bannerIconId: Num,
+        bannerIconMarking: securityMarking,
         featuredBannerIconId: Num,
+        featuredBannerIconMarking: securityMarking,
         screenshots: subtype(screenshots, atLeastOne),
         contacts: subtype(contacts, hasRequiredContactTypes.bind(null, requiredContactTypes)),
         owners: subtype(owners, atLeastOne),

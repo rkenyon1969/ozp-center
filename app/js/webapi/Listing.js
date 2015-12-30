@@ -16,7 +16,8 @@ var FIELDS = [
     'launchUrl', 'company', 'whatIsNew', 'owners', 'agency', 'agencyShort', 'rejection',
     'isEnabled', 'categories', 'releaseDate', 'editedDate', 'intents', 'docUrls', 'approvalStatus',
     'isFeatured', 'smallIconId', 'largeIconId', 'bannerIconId', 'featuredBannerIconId',
-    'currentRejection', 'isPrivate', 'securityMarking'
+    'currentRejection', 'isPrivate', 'securityMarking', 'smallIconMarking',
+    'largeIconMarking', 'bannerIconMarking', 'featuredBannerIconMarking'
 ];
 
 // These don't have the icons, access_control
@@ -70,15 +71,19 @@ function Listing (json) {
 
         this.smallIconId = json.smallIcon ? json.smallIcon.id : "";
         this.imageSmallUrl = json.smallIcon ? json.smallIcon.url : "";
+        this.smallIconMarking = json.smallIcon ? json.smallIcon.securityMarking : "";
 
         this.largeIconId = json.largeIcon ? json.largeIcon.id : "";
         this.imageMediumUrl = json.largeIcon ? json.largeIcon.url : "";
+        this.largeIconMarking = json.largeIcon ? json.largeIcon.securityMarking : "";
 
         this.bannerIconId = json.bannerIcon ? json.bannerIcon.id : "";
         this.imageLargeUrl = json.bannerIcon ? json.bannerIcon.url : "";
+        this.bannerIconMarking = json.bannerIcon ? json.bannerIcon.securityMarking : "";
 
         this.featuredBannerIconId = json.largeBannerIcon ? json.largeBannerIcon.id :  "";
         this.imageXlargeUrl = json.largeBannerIcon ? json.largeBannerIcon.url : "";
+        this.featuredBannerIconMarking = json.largeBannerIcon ? json.largeBannerIcon.securityMarking :  "";
 
         _.map(this.screenshots, x => {
             x.smallImageId = x.smallImage.id;
@@ -179,7 +184,7 @@ Listing.prototype.saveFormat = function() {
         saveFormat.small_icon = {};
         saveFormat.small_icon.url = saveFormat.image_small_url;
         saveFormat.small_icon.id = saveFormat.small_icon_id;
-        this.addAccessControl(saveFormat.small_icon);
+        saveFormat.small_icon.security_marking = saveFormat.small_icon_marking;
     }
 
     if (saveFormat.image_medium_url) {

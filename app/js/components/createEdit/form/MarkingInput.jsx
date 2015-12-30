@@ -13,7 +13,8 @@ var MarkingInput = React.createClass({
         };
 
         // Clamp bootstrap-classify modal to selector specified in options
-        var bsClassifyOptions = {selector: 'input[rel]',
+        var selector = '[id="' + this.props.inputId + '"]';
+        var bsClassifyOptions = {selector: selector,
                                  mode: 'modal',
                                  title: 'Security Marking',
                                  format: 'bl',

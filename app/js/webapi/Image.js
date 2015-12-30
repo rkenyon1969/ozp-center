@@ -97,12 +97,12 @@ function cleanupDom(containerEl, placeholderInput) {
  * image for real.
  */
 var ImageApi = {
-    save: function(file) {
+    save: function(file, marking) {
         //File API supported
         if (window.Blob && file instanceof Blob) {
             var form = new FormData();
             form.append("file_extension", "png");
-            form.append("access_control", "UNCLASSIFIED");
+            form.append("security_marking", marking);
             form.append("image", file);
 
             // TODO: When size validation is ready, make this variable (new parameter)
@@ -132,14 +132,14 @@ var ImageApi = {
         }
         //File API not supported, use form upload and iframe
         else if (file instanceof HTMLInputElement) {
-            return this.saveViaFormData(file);
+            return this.saveViaFormData(file, marking);
         }
         else {
             throw new Error('Expected argument to be Blob or HTMLInputElement, but was '+file);
         }
     },
 
-    saveViaFormData: function(input) {
+    saveViaFormData: function(input, marking) {
         //assume it is a file input element, use hidden iframe to submit
         var deferred = $.Deferred(),
             container = document.createElement('div'),
@@ -149,7 +149,7 @@ var ImageApi = {
             frameName = 'image-upload-frame-' + (iframeCounter++),
             timeoutId,
             fileExtension = "png",
-            accessControl = "UNCLASSIFIED",
+            accessControl = marking,
             imageType = "large_screenshot";
 
         //hide all these elements
@@ -159,7 +159,7 @@ var ImageApi = {
         input.name = 'image';
 
         fileExtension.name = 'file_extension';
-        accessControl.name = 'access_control';
+        accessControl.name = 'security_marking';
         imageType.name = 'image_type';
 
         //the real input will be moved to the hidden form.  Place a copy in its place to avoid

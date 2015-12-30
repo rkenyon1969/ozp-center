@@ -113,7 +113,8 @@ var formLinks = {
     },
     smallIcon: {
         title: 'Small Icon',
-        id: 'create-edit-small-icon'
+        id: 'create-edit-small-icon',
+        markingId: 'create-edit-small-icon-marking'
     },
     largeIcon: {
         title: 'Large Icon',
@@ -367,18 +368,30 @@ var ListingForm = React.createClass({
                     itemForm={ ResourceForm } optional/>
 
                 <h2 id={f.graphics.id}>Graphics</h2>
+
                 <ImageInput id={f.smallIcon.id} { ...p('smallIcon') }
                     imageUri={this.props.value.imageSmallUrl}
                     serverError={this.props.imageErrors.smallIcon} />
+                <MarkingInput id={f.smallIcon.markingId} { ...p('smallIconMarking') }
+                              aria-label="Classification and Control Marking"/>
+
                 <ImageInput id={f.largeIcon.id} { ...p('largeIcon') }
                     imageUri={this.props.value.imageMediumUrl}
                     serverError={this.props.imageErrors.largeIcon} />
+                <MarkingInput id={f.largeIcon.markingId} { ...p('largeIconMarking') }
+                              aria-label="Classification and Control Marking"/>
+
                 <ImageInput id={f.bannerIcon.id} { ...p('bannerIcon') }
                     imageUri={this.props.value.imageLargeUrl}
                     serverError={this.props.imageErrors.bannerIcon} />
+                <MarkingInput id={f.bannerIcon.markingId} { ...p('bannerIconMarking') }
+                              aria-label="Classification and Control Marking"/>
+
                 <ImageInput id={f.featuredBannerIcon.id} { ...p('featuredBannerIcon') }
                     imageUri={this.props.value.imageXlargeUrl}
                     serverError={this.props.imageErrors.featuredBannerIcon} />
+                <MarkingInput id={f.featuredBannerIcon.markingId} { ...p('featuredBannerIconMarking') }
+                              aria-label="Classification and Control Marking"/>
 
                 <ListInput id={f.screenshots.id} { ...this.getSubFormProps('screenshots') }
                     itemForm={ ScreenshotForm }/>
