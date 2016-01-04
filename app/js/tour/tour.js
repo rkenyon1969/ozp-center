@@ -25,8 +25,8 @@ var centerStatus = tourDB.get('center');
 var initTour = function() {
   // If tour has never run before, start it.
   if(!centerStatus.ran) {
-    homepageTour.init();
-    homepageTour.start();
+    globalTour.init();
+    globalTour.start();
   }
 };
 
@@ -43,6 +43,6 @@ ProfileSearchActions.tourCheck.listen(() => {
 });
 
 $(document).on('click', '#tour-start', function(){
-  homepageTour.init();
-  homepageTour.start();
+  globalTour.init();
+  globalTour.start();
 });
