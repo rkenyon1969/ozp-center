@@ -10,5 +10,6 @@ module.exports = {
     ImageInput: require('./ImageInput.jsx'),
     ValidatedFormMixin: require('./ValidatedFormMixin'),
     OwnerInput: require('./OwnerInput.jsx'),
-    MarkingInput: require('./MarkingInput.jsx')
+    MarkingInput: require('./MarkingInput.jsx'),
+    markingInputHtmlTemplates: require('./markingInputHtmlTemplates.js')
 };

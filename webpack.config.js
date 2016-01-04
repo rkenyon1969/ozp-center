@@ -28,15 +28,14 @@ module.exports = {
             w2ui$: "w2ui/dist/w2ui",
             classification$: "ozp-classification/jquery.classification.js",
             "underscore$": "underscore/underscore.js",
+            "ism-u.config$": "ism-u.config.js",
             "ism$": "bootstrap-classify/js/ism.js",
-            "ism-u.config$": "bootstrap-classify/js/ism-u.config.js",
             "bootstrap-classify$": "bootstrap-classify/js/bootstrap-classify.js",
-            "bootstrap-classify.css$": "bootstrap-classify/css/bootstrap-classify.css",
             "ozp-react-commons": "ozp-react-commons/app/js",
             tether$: "tether/tether"
         },
         // Configure webpack to look for required files in bower and node
-        modulesDirectories: ['./bower_components', './node_modules']
+        modulesDirectories: ['./bower_components', './node_modules', './config']
     },
     module: {
         preLoaders: [{

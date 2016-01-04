@@ -12,7 +12,6 @@ var jQuery = require('jquery');
 var Router = require('react-router');
 require('bootstrap');
 require('classification');
-require('bootstrap-classify.css');
 require('ism-u.config');
 require('ism');
 require('bootstrap-classify');
