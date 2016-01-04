@@ -428,6 +428,9 @@ $icons: (
 *{
   -moz-transition: none !important;
 }
+
+
+
 // Help Tour
 
 
@@ -436,7 +439,8 @@ $icons: (
 
     .popover-title,
     .popover-content,
-    .popover-navigation {
+    .popover-navigation,
+    .popover-header {
         padding: 5px 25px;
     }
 
@@ -446,6 +450,10 @@ $icons: (
         font-weight: bold;
         border: 0;
         padding-top: 25px;
+    }
+
+    .popover-subtitle {
+        padding-top: 0;
     }
 
     .popover-navigation {
