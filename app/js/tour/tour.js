@@ -18,8 +18,7 @@ tourDB.subscribe((data) => {
 
 });
 
-var { globalTour } = require('./');
-var { centerTour } = require('./');
+var { globalTour, centerTour } = require('./');
 
 var centerStatus = tourDB.get('center');
 
