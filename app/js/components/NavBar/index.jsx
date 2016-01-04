@@ -7,6 +7,7 @@ var ProfileLink = require('../profile/ProfileLink.jsx');
 var ModalLink = require('../ModalLink.jsx');
 var { HUD_URL, METRICS_URL, WEBTOP_URL, DEVELOPER_RESOURCES_URL} = require('ozp-react-commons/OzoneConfig');
 var CreateEditActions = require('../../actions/CreateEditActions');
+var ProfileSearchActions = require('../../actions/ProfileSearchActions');
 
 var SystemStateMixin = require('../../mixins/SystemStateMixin');
 
@@ -28,6 +29,10 @@ var NavBar = React.createClass({
           delay: 400
         });
       });
+
+      // TODO: Move this to a backend request checking profile for tour status.
+      ProfileSearchActions.tourCheck();
+
     },
 
     render: function () {
