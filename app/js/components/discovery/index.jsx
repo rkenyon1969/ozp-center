@@ -164,7 +164,7 @@ var Discovery = React.createClass({
 
       this._prevParams = this._prevParams || {};
       if (!_.isEqual(nextContext.getCurrentParams(), this._prevParams)) {
-        console.log("Context changed");
+        // console.log("Context changed");
 
         this.setState({
             currentOffset: 0,
