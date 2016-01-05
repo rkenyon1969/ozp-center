@@ -353,8 +353,8 @@ var CurrentListingStore = createStore({
 
             screenshotPromises = _.flatten(screenshots.map(
                 (s, i) => [
-                    optionalPromise(s.smallImage, ['screenshots', i, 'smallImage']),
-                    optionalPromise(s.largeImage, ['screenshots', i, 'largeImage'])
+                    optionalPromise(s.smallImage, ['screenshots', i, 'smallImage'], s.smallImageMarking),
+                    optionalPromise(s.largeImage, ['screenshots', i, 'largeImage'], s.largeImageMarking)
                 ]
             )),
             promises = [

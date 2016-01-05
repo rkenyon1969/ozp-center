@@ -88,8 +88,10 @@ function Listing (json) {
         _.map(this.screenshots, x => {
             x.smallImageId = x.smallImage.id;
             x.smallImageUrl = x.smallImage.url;
+            x.smallImageMarking = x.smallImage.securityMarking;
             x.largeImageId = x.largeImage.id;
             x.largeImageUrl = x.largeImage.url;
+            x.largeImageMarking = x.largeImage.securityMarking;
             delete x.smallImage;
             delete x.largeImage;
         });
@@ -132,11 +134,6 @@ function Listing (json) {
     return this;
 }
 
-Listing.prototype.addAccessControl = function(ob){
-    ob.access_control = {
-        "title": "UNCLASSIFIED"
-    };
-};
 
 Listing.prototype.saveFormat = function() {
 
@@ -191,21 +188,21 @@ Listing.prototype.saveFormat = function() {
         saveFormat.large_icon = {};
         saveFormat.large_icon.url = saveFormat.image_medium_url;
         saveFormat.large_icon.id = saveFormat.large_icon_id;
-        this.addAccessControl(saveFormat.large_icon);
+        saveFormat.large_icon.security_marking = saveFormat.large_icon_marking;
     }
 
     if (saveFormat.image_large_url) {
         saveFormat.banner_icon = {};
         saveFormat.banner_icon.url = saveFormat.image_large_url;
         saveFormat.banner_icon.id = saveFormat.banner_icon_id;
-        this.addAccessControl(saveFormat.banner_icon);
+        saveFormat.banner_icon.security_marking = saveFormat.banner_icon_marking;
     }
 
     if (saveFormat.image_xlarge_url) {
         saveFormat.large_banner_icon = {};
         saveFormat.large_banner_icon.url = saveFormat.image_xlarge_url;
         saveFormat.large_banner_icon.id = saveFormat.featured_banner_icon_id;
-        this.addAccessControl(saveFormat.large_banner_icon);
+        saveFormat.large_banner_icon.security_marking = saveFormat.large_banner_icon_marking;
     }
 
     _.map(saveFormat.screenshots, x => {
@@ -213,18 +210,20 @@ Listing.prototype.saveFormat = function() {
             x.small_image = {};
             x.small_image.id = x.small_image_id;
             x.small_image.url = x.small_image_url;
-            this.addAccessControl(x.small_image);
+            x.small_image.security_marking = x.small_image_marking;
             delete x.small_image_id;
             delete x.small_image_url;
+            delete x.small_image_marking;
         }
 
         if (x.large_image_url) {
             x.large_image = {};
             x.large_image.id = x.large_image_id;
             x.large_image.url = x.large_image_url;
-            this.addAccessControl(x.large_image);
+            x.large_image.security_marking = x.large_image_marking;
             delete x.large_image_id;
             delete x.large_image_url;
+            delete x.large_image_marking;
         }
     });
 
@@ -235,8 +234,6 @@ Listing.prototype.saveFormat = function() {
     // Clean up lingering Center-only keys (and impromperly decamelized keys)
     var lingering = _.difference(_.keys(saveFormat), SAVE_FORMAT_FIELDS);
     lingering.map(key => delete saveFormat[key]);
-
-    this.addAccessControl(saveFormat);
 
     return saveFormat;
 };

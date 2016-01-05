@@ -256,16 +256,25 @@ var ScreenshotForm = React.createClass({
                 <div className="col-md-2">
                 <div><strong>Screenshot<br /> <span className="screenshotNum">{this.props.count+1}</span></strong></div>
                 </div>
+
                 <div className="col-md-4">
-                <ImageInput { ...this.getFormComponentProps('smallImage') }
-                    imageUri={this.props.value.smallImageUrl}
-                    serverError={this.props.imageErrors.smallImage} />
+                    <ImageInput { ...this.getFormComponentProps('smallImage') }
+                                imageUri={this.props.value.smallImageUrl}
+                                serverError={this.props.imageErrors.smallImage} />
+                    <MarkingInput id={this.props.value.smallImageMarking}
+                                  { ...this.getFormComponentProps('smallImageMarking') }
+                                  aria-label="Classification and Control Marking"/>
                 </div>
+
                 <div className="col-md-4">
-                <ImageInput { ...this.getFormComponentProps('largeImage') }
-                    imageUri={this.props.value.largeImageUrl}
-                    serverError={this.props.imageErrors.largeImage} />
+                    <ImageInput { ...this.getFormComponentProps('largeImage') }
+                                imageUri={this.props.value.largeImageUrl}
+                                serverError={this.props.imageErrors.largeImage} />
+                    <MarkingInput id={this.props.value.largeImageMarking}
+                                  { ...this.getFormComponentProps('largeImageMarking') }
+                                  aria-label="Classification and Control Marking"/>
                 </div>
+
                 <div className="col-md-2">
                 <button type="button" className="close" onClick={this.props.removeHandler}>
                     <span aria-hidden="true"><i className="icon-cross-16"></i></span><span className="sr-only">Remove</span>

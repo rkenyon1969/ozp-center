@@ -18,7 +18,9 @@ var User = struct({
 
 var Screenshot = struct({
     smallImageId: Num,
-    largeImageId: Num
+    smallImageMarking: NonBlankString(200),
+    largeImageId: Num,
+    largeImageMarking: NonBlankString(200)
 });
 
 var Resource = struct({
