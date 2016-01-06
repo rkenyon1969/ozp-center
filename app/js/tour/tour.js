@@ -8,15 +8,11 @@ var ObjectDB = require('object-db');
 // Webtop and Hud tours.
 var tourDB = new ObjectDB('ozp_tour').init({
   center: {
-    ran: false
+    ran: false,
+    startCenterTour: false,
   }
 });
 
-// Subscribe to our DB, this will at a later date allow us to know where our
-// tour is at in other applications.
-tourDB.subscribe((data) => {
-
-});
 
 var { globalTour, centerTour } = require('./');
 
@@ -39,10 +35,31 @@ ProfileSearchActions.tourCheck.listen(() => {
       }
     });
   });
+
   initTour();
 });
 
 $(document).on('click', '#tour-start', function(){
   globalTour.init();
   globalTour.start();
+});
+
+// Subscribe to our DB, this will at a later date allow us to know where our
+// tour is at in other applications.
+tourDB.subscribe((data) => {
+  // Ideally we would not want this debounce, Unfortunatly it takes a millisecond
+  // or two to pick up on localstorage changes
+  setTimeout(function(){
+    if(tourDB.get('center').startCenterTour) {
+      tourDB.set({
+        center: {
+          startCenterTour: false
+        }
+      });
+
+      centerTour.init();
+      centerTour.start();
+
+    }
+  }, 200);
 });
