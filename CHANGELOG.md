@@ -1,3 +1,11 @@
+### 1.0.19 (2016-01-06)
+
+
+#### Bug Fixes
+
+* **help:** Remove 5px of extra space ([2b8e77b4](https://github.com/ozone-development/ozp-center.git/commit/2b8e77b4318266eec772a9d8139497c6fd3801e4))
+
+
 ### 1.0.18 (2015-12-18)
 
 
