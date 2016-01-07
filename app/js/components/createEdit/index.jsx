@@ -14,6 +14,7 @@ var Sidebar = require('./Sidebar.jsx');
 var { classSet } = React.addons;
 var State = require('../../mixins/ActiveStateMixin');
 var $ = require('jquery');
+var ListingActions = require('../../actions/ListingActions');
 
 require('sweetalert');
 
@@ -33,7 +34,8 @@ var {
 
 var savingMessages = {
     images: 'Uploading Images...',
-    listing: 'Saving Listing...'
+    listing: 'Saving Listing...',
+    exception: false
 };
 
 // formLinks object is used by formLinkGroups. formLinks is the config file to
@@ -444,7 +446,7 @@ var ListingForm = React.createClass({
             }
         }
     }
-});
+}); // End ListingForm
 
 function transitionToMyListings (transition) {
     transition.redirect('my-listings');
@@ -624,6 +626,46 @@ var CreateEditPage = React.createClass({
         this.listenTo(CreateEditActions.resetForm, ()=>{
             this.setState({ timestamp: Date.now() });
         });
+
+        this.listenTo(ListingActions.saveFailed, this.handleMarkingError);
+    },
+
+    // Generate SweetAlert notifying user marking is too high for current user
+    handleMarkingError: function (response) {
+        var resp = JSON.parse(response.responseText);
+        var msg; // Stores just one error message; user iterates until all errors are gone
+
+        msg = resp.security_marking ? 'Listing ' + resp.security_marking[0].toLowerCase() : msg;
+        msg = resp.small_icon ? 'Small Icon ' + resp.small_icon.security_marking[0].toLowerCase() : msg;
+        msg = resp.large_icon ? 'Large Icon ' + resp.large_icon.security_marking[0].toLowerCase() : msg;
+        msg = resp.banner_icon ? 'Small Banner ' + resp.banner_icon.security_marking[0].toLowerCase() : msg;
+        msg = resp.large_banner_icon ? 'Large Banner ' + resp.large_banner_icon.security_marking[0].toLowerCase() : msg;
+
+        if (resp.screenshots) {
+            if (resp.screenshots[0].small_image) {
+                msg = 'Preview Image ' + resp.screenshots[0].small_image.security_marking[0].toLowerCase();
+            }
+            if (resp.screenshots[0].large_image) {
+                msg = 'Full Size Image ' + resp.screenshots[0].large_image.security_marking[0].toLowerCase();
+            }
+        }
+
+        if (msg) {
+            this.setState({
+                saveStatus: 'exception'
+            });
+            /* jshint ignore:start */
+            sweetAlert({
+                title: "Could not save!",
+                text: "Your listing could not be saved: " + msg,
+                type: "error",
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "ok",
+                closeOnConfirm: true,
+                html: false
+            });
+            /* jshint ignore:end */
+        }
     },
 
     componentWillUnmount: function () {
