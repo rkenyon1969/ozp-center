@@ -39,9 +39,9 @@ ProfileSearchActions.tourCheck.listen(() => {
   initTour();
 });
 
-$(document).on('click', '#tour-start', function(){
-  globalTour.init();
-  globalTour.start();
+$(document).on('click', '#tour-start', function(e){
+  e.preventDefault();
+  globalTour.restart();
 });
 
 // Subscribe to our DB, this will at a later date allow us to know where our

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = new Tour({
+const meTour = new Tour({
   backdrop: true,
   backdropPadding: 10,
   storage: false,
@@ -35,6 +35,12 @@ module.exports = new Tour({
       },
       onHide: function() {
         $(".Discovery__SearchResults .listing:first .slide-up, .infiniteScroll .listing:first .slide-up").css("top", "137px");
+      },
+      onNext: function() {
+        var nextStep = function() {
+          meTour.goTo(4);
+        };
+        window.setTimeout(nextStep, 1000);
       }
     },
     {
@@ -44,37 +50,54 @@ module.exports = new Tour({
       content: "Click a tile to access the listing detail view. From this popup you can see screenshots, long descriptions, reviews, and other resources. Use the links at the top of the listing to launch, bookmark or close it.",
       placement: "left",
       backdropContainer: ".modal-content",
-      backdropPadding: 0
+      backdropPadding: 0,
+      onNext: function() {
+        var nextStep = function() {
+          meTour.goTo(5);
+        };
+        window.setTimeout(nextStep, 1000);
+      }
     },
     {
       path: "/dist/#/home/?%2F%3F=&listing=1&action=view&tab=reviews",
-      element: ".modal-body .li.active",
+      element: ".modal-body .nav .active",
       title: "Listing Reviews",
       content: "Rate and review the listing, or read reviews from other users.",
       placement: "bottom",
       backdropContainer: ".modal-content",
-      backdropPadding: 0
+      backdropPadding: 0,
+      onNext: function() {
+        var nextStep = function() {
+          meTour.goTo(6);
+        };
+        window.setTimeout(nextStep, 1000);
+      }
     },
     {
       path: "/dist/#/home/?%2F%3F=&listing=1&action=view&tab=details",
-      element: ".modal-body li.active",
+      element: ".modal-body .nav .active",
       title: "Listing Details",
       content: "Here you'll find a list of new features, usage requirements, ownership information, tags, categories, etc.",
       placement: "bottom",
       backdropContainer: ".modal-content",
-      backdropPadding: 0
+      backdropPadding: 0,
+      onNext: function() {
+        var nextStep = function() {
+          meTour.goTo(7);
+        };
+        window.setTimeout(nextStep, 1000);
+      }
     },
     {
       path: "/dist/#/home/?%2F%3F=&listing=1&action=view&tab=resources",
-      element: ".modal-body .li.active",
+      element: ".modal-body .nav .active",
       title: "Listing Resources",
       content: "If the listing includes instructions like user manuals and contact information, you will find it here.",
       placement: "bottom",
       backdropContainer: ".modal-content",
-      backdropPadding: 0,
-      onHidden: function() {
-        return window.location.assign("/dist/#/home/");
-      }
+      backdropPadding: 0
     }
   ]
 });
+
+module.exports = meTour;
