@@ -13,8 +13,6 @@ var Router = require('react-router');
 require('bootstrap');
 require('classification');
 require('ism-u.config');
-require('ism');
-require('bootstrap-classify');
 var _ = require('./utils/_');
 var SelfStore = require('ozp-react-commons/stores/SelfStore');
 var ProfileActions = require('ozp-react-commons/actions/ProfileActions');
@@ -24,6 +22,11 @@ var { METRICS_URL, APP_TITLE } = require('ozp-react-commons/OzoneConfig');
 window.jQuery = jQuery;
 window.$ = jQuery;
 window.React = React;
+
+require('script!underscore');
+require('script!ism');
+require('script!bootstrap-classify');
+
 window.moment = require('moment');
 window.Tether = require('tether');
 

@@ -27,7 +27,7 @@ module.exports = {
             "magnific-popup$": "magnific-popup/dist/jquery.magnific-popup",
             w2ui$: "w2ui/dist/w2ui",
             classification$: "ozp-classification/jquery.classification.js",
-            "underscore$": "underscore/underscore.js",
+            "underscore$": "bootstrap-classify/node_modules/underscore/underscore.js",
             "ism-u.config$": "ism-u.config.js",
             "ism$": "bootstrap-classify/js/ism.js",
             "bootstrap-classify$": "bootstrap-classify/js/bootstrap-classify.js",
@@ -77,16 +77,10 @@ module.exports = {
         }),
         new webpack.ProvidePlugin({
             $: "jquery",
-            jQuery: "jquery"
-        }),
-        new webpack.ProvidePlugin({
-            "_": "underscore"
-        }),
-        new webpack.ProvidePlugin({
-            "ism": "ism"
-        }),
-        new webpack.ProvidePlugin({
-            "ISMConfig": "ism-u.config"
+            jQuery: "jquery",
+            "_": "underscore",
+            "ISMConfig": "ism-u.config",
+            "ism": "ism",
         }),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
