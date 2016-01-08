@@ -77,10 +77,7 @@ module.exports = {
         }),
         new webpack.ProvidePlugin({
             $: "jquery",
-            jQuery: "jquery",
-            "_": "underscore",
-            "ISMConfig": "ism-u.config",
-            "ism": "ism",
+            jQuery: "jquery"
         }),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
