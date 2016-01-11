@@ -14,7 +14,7 @@
   "author": "",
   "description": "",
   "scripts": {
-    "install": "bower install --allow-root",
+    "install": "bower install --allow-root --config.interactive=false",
     "start": "gulp dev",
     "test": "./node_modules/karma/bin/karma start",
     "build": "NODE_ENV=\"production\" gulp build",
