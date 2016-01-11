@@ -14,7 +14,7 @@
   "author": "",
   "description": "",
   "scripts": {
-    "install": "bower install --allow-root --config.interactive=false",
+    "install": "bower install --allow-root",
     "start": "gulp dev",
     "test": "./node_modules/karma/bin/karma start",
     "build": "NODE_ENV=\"production\" gulp build",
@@ -80,7 +80,7 @@
     "lodash-amd": "2.4.1",
     "moment": "2.9.0",
     "object-assign": "1.0.0",
-    "ozp-react-commons": "git://github.com/ozone-development/ozp-react-commons#master",
+    "ozp-react-commons": "git://github.com/ozone-development/ozp-react-commons#new-backend",
     "react": "0.12.2",
     "react-datepicker": "0.5.1",
     "react-icon-rating": "0.2.0",
