@@ -151,6 +151,29 @@ function validateContacts(validation, instance) {
     });
 }
 
+// Link validation of image and marking so when entering a draft, if
+// you enter either an image or a marking, you have to enter the other
+function checkMarkings(validation, instance) {
+
+    var icons = ['smallIcon', 'largeIcon', 'bannerIcon', 'featuredBannerIcon'];
+
+    icons.map((i) => {
+
+        var icon = i;
+        var iconId = i + 'Id';
+        var iconMarking = i + 'Marking';
+
+        if (instance[icon] || instance[iconMarking]) {
+            if (!((instance[icon] || instance[iconId]) && instance[iconMarking])) {
+                validation.errors[icon] = true;
+                validation.errors[iconId] = true;
+                validation.errors[iconMarking] = true;
+                validation.isValid = false;
+            }
+        }
+    });
+};
+
 function validate (instance, options, type) {
     var validation = t.validate(instance, type),
         errors = {};
@@ -175,7 +198,10 @@ function validateDraft (instance, options) {
     var validation = validate(instance, options, ListingDraft);
 
     validateContacts(validation, instance);
+
     copyImageValidations(validation);
+
+    checkMarkings(validation, instance);
 
     return validation;
 }

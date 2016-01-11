@@ -246,6 +246,7 @@ var CurrentListingStore = createStore({
 
     getDraftValidation: function () {
         var { errors, isValid } = validateDraft(_listing, getSystem());
+
         return {
             isValid: isValid,
             errors: errors,
@@ -329,7 +330,17 @@ var CurrentListingStore = createStore({
     saveImages: function() {
         function optionalPromise(image, property, marking) {
 
-            var promise = image ? ImageApi.save(image, marking) : null;
+            var markingLabel;
+            var promise;
+
+            if (property[0] === 'screenshots') {
+                var index = parseInt(property[1]);
+                markingLabel = property[2] + 'Marking';
+                promise = image && _listing.screenshots[index][markingLabel] ? ImageApi.save(image, marking) : null;
+            } else {
+                markingLabel = property + 'Marking';
+                promise = image && _listing[markingLabel] ? ImageApi.save(image, marking) : null;
+            }
 
             if (promise) {
                 promise.fail(me.handleImageSaveFailure.bind(me, property));
