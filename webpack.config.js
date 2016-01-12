@@ -42,7 +42,7 @@ module.exports = {
             { test: /\.png/, loader: "url-loader?limit=10000&mimetype=image/png" },
             {
                 test: /\.jsx?$/,
-                loader: "jsx-loader?insertPragma=React.DOM!babel-loader?experimental&optional=runtime",
+                loader: "jsx-loader?insertPragma=React.DOM!babel-loader",
                 include: [
                     path.join(__dirname, 'app/js'),
                     path.join(__dirname, 'node_modules/ozp-react-commons/app/js')
