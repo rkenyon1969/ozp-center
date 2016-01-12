@@ -24,12 +24,16 @@ var Admin = {
 
 var OrgSteward = {
     statics: {
+
+        /* eslint-disable no-unused-vars */
         willTransitionTo(transition, params, query) {
+        /* eslint-enable no-unused-vars */
             var { org } = params;
             if (org && !currentUser.isOrgSteward(org)) {
                 transitionToHome(transition);
             }
         }
+
     }
 };
 
