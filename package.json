@@ -24,9 +24,9 @@
     "tarDistVersion": "gulp tarDistVersion"
   },
   "devDependencies": {
-    "babel-core": "6.4.0",
+    "babel-core": "6.3.13",
     "babel-loader": "6.2.1",
-    "babel-runtime": "6.3.19",
+    "babel-runtime": "6.3.13",
     "caroufredsel": "git://github.com/ozone-utils/caroufredsel",
     "chai": "1.10.0",
     "coffee-script": "1.8.0",
