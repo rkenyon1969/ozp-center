@@ -10,7 +10,8 @@ module.exports = {
             "always"
         ],
         "no-undef": 0,
-        "quotes": 0
+        "quotes": 0,
+        "no-unused-vars": 0
     },
     "env": {
         "es6": true,
