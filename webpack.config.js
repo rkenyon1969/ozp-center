@@ -34,12 +34,9 @@ module.exports = {
         modulesDirectories: ['./bower_components', './node_modules']
     },
     module: {
-        preLoaders: [{
-            test: /\.jsx?$/,
-            loader: "jsxhint-loader",
-            exclude: /node_modules|bower_components|gulp|dist/
-        }],
         loaders: [
+            { test: /\.jsx$/, loader: "eslint-loader", exclude: /node_modules/ },
+            { test: /\.js$/, loader: "eslint-loader", exclude: /node_modules/ },
             { test: /\.gif/, loader: "url-loader?limit=10000&mimetype=image/gif" },
             { test: /\.jpg/, loader: "url-loader?limit=10000&mimetype=image/jpg" },
             { test: /\.png/, loader: "url-loader?limit=10000&mimetype=image/png" },
