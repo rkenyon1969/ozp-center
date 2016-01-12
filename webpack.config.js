@@ -31,7 +31,7 @@ module.exports = {
             tether$: "tether/tether"
         },
         // Configure webpack to look for required files in bower and node
-        modulesDirectories: ['./bower_components', './node_modules']
+        modulesDirectories: ['./node_modules']
     },
     module: {
         loaders: [
