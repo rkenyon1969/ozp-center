@@ -1,9 +1,9 @@
 @import "variables";
 
-@import "../../bower_components/ubuntu-fontface/_ubuntu-base.scss";
-@import "../../bower_components/ubuntu-fontface/_ubuntu-mono.scss";
+@import "../../node_modules/ubuntu-fontface/_ubuntu-base.scss";
+@import "../../node_modules/ubuntu-fontface/_ubuntu-mono.scss";
 
-@import "../../bower_components/magnific-popup/src/css/main.scss";
+@import "../../node_modules/magnific-popup/src/css/main.scss";
 @import "../../node_modules/select2/select2.css";
 @import "../../node_modules/select2/select2-bootstrap.css";
 @import "_bootstrap.scss";
@@ -314,7 +314,7 @@ div.modal-header > button.close {
 /*=======================
 = Classification Banner =
 =======================*/
-@import "../../bower_components/ozp-classification/classification.css";
+@import "../../node_modules/ozp-classification/classification.css";
 
 #main {
     padding-top: 20px;
@@ -436,7 +436,7 @@ $icons: (
 = Accessibility Section=
 =======================*/
 
-.hidden-span{ 
+.hidden-span{
   height: 1px;
   width: 1px;
   position: absolute;
