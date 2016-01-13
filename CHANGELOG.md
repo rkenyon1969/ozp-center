@@ -1,3 +1,13 @@
+### 1.0.20 (2016-01-13)
+
+
+#### Bug Fixes
+
+* **Bower:** Additional wording changes for bower ([895049aa](https://github.com/ozone-development/ozp-center.git/commit/895049aa56363d7d576507656094bd9ab8c73781))
+* **caroufredsel:** Update caroufredsel to all lowercase ([36fa7edf](https://github.com/ozone-development/ozp-center.git/commit/36fa7edfe4fbb0e8bb386ec4af33442295d9ad45))
+* **search:** Allow consecutive searches ([a0dbeeea](https://github.com/ozone-development/ozp-center.git/commit/a0dbeeea5c82eda59c7fe4903b10e1c16520f845))
+
+
 ### 1.0.19 (2016-01-06)
 
 
