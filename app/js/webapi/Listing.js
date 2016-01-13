@@ -202,7 +202,7 @@ Listing.prototype.saveFormat = function() {
         saveFormat.large_banner_icon = {};
         saveFormat.large_banner_icon.url = saveFormat.image_xlarge_url;
         saveFormat.large_banner_icon.id = saveFormat.featured_banner_icon_id;
-        saveFormat.large_banner_icon.security_marking = saveFormat.large_banner_icon_marking;
+        saveFormat.large_banner_icon.security_marking = saveFormat.featured_banner_icon_marking;
     }
 
     _.map(saveFormat.screenshots, x => {
