@@ -132,22 +132,17 @@ describe('CurrentListingStore', function() {
                 }
             }),
 
-            //note, in real operation these would be Files
+            //note, in real operation this would be a file
             smallIcon = 'asdf',
-            smallScreenshot1 = 'asdf',
+            smallIconMarking = 'someMarking',
 
             listenSpy = sinon.spy(function(triggerData) {
                 if (!triggerData.saveStatus) {
-
                     //trigger will get called multiple times with increasing imageErrors,
                     //wait until the last time to evaluate
-                    if (triggerData.imageErrors.smallIcon &&
-                            triggerData.imageErrors.screenshots &&
-                            triggerData.imageErrors.screenshots[0]) {
+                    if (triggerData.imageErrors.smallIcon)
+                    {
                         expect(triggerData.imageErrors.smallIcon).to.equal('Image too large');
-                        expect(triggerData.imageErrors.screenshots[0].smallImage)
-                            .to.equal('Image too large');
-
                         done();
                     }
                 }
@@ -166,10 +161,8 @@ describe('CurrentListingStore', function() {
         });
 
         CurrentListingStore.onUpdateListing(['smallIcon'], smallIcon);
-        CurrentListingStore.onUpdateListing(['screenshots',0, 'smallImage'], smallScreenshot1);
-
+        CurrentListingStore.onUpdateListing(['smallIconMarking'], smallIconMarking);
         CurrentListingStore.listen(listenSpy);
-
         CurrentListingStore.onSave();
     });
 });
