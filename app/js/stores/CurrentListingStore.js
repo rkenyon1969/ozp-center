@@ -2,6 +2,7 @@
 
 var $ = require('jquery');
 var _ = require('../utils/_');
+var humps = require('humps');
 
 var { createStore } = require('reflux');
 var GlobalListingStore = require('./GlobalListingStore');
@@ -17,11 +18,14 @@ var { cloneDeep, assign } = require('../utils/_');
 var { ListingApi } = require('../webapi/Listing');
 var { ImageApi } = require('../webapi/Image');
 var { API_URL } = require('ozp-react-commons/OzoneConfig');
+var { toTitleCase } = require('../utils/string.js');
 
 var _listing = null;
 var _submitting = false;
 
 var imageErrors = {screenshots: []};
+
+require('sweetalert');
 
 //list of property names that can be passed into onUpdateListing which are images
 //and which must therefore be treated specially.  The 'value' for these properties
@@ -465,8 +469,43 @@ var CurrentListingStore = createStore({
         }
 
         updateValue(imageErrors, property, errorMessage);
-
         this.trigger({imageErrors: imageErrors, saveStatus: null});
+
+        this.generateAlert(property, errorMessage);
+    },
+
+    /**
+     * Build and output error message via SweetAlert.
+     */
+    generateAlert: function(property, errorMessage) {
+        if (errorMessage.substring(0, 8) == 'Security') {
+
+            property = _.last(property);
+
+            if (property == 'smallImage') {
+                property = 'Preview Image';
+            } else if (property == 'largeImage') {
+                property = 'Full Size Image';
+            } else {
+                property = humps.decamelize(property);
+                property = property.replace('_', ' ');
+                property = toTitleCase(property);
+            }
+
+            var msg = property + ' ' + errorMessage.toLowerCase();
+
+            /* jshint ignore:start */
+            sweetAlert({
+                title: "Could not save!",
+                text: "Your listing could not be saved: " + msg,
+                type: "error",
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "ok",
+                closeOnConfirm: true,
+                html: false
+            });
+            /* jshint ignore:end */
+        }
     }
 });
 
