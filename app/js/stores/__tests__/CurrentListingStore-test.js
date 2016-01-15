@@ -119,7 +119,7 @@ describe('CurrentListingStore', function() {
 
         var imageSaveSpy = sinon.spy(function() {
                 return $.Deferred().reject({
-                    responseJSON: {"message": "Image too large"}
+                    'responseText: {"security_marking": ["Security marking too high for current user"]}'
                 }, 'error', 'Image tooooo large').promise();
             }),
 
