@@ -8,7 +8,7 @@ module.exports = function (config) {
         frameworks: ['mocha'],
         files: [
             // including es5-shim for PhantomJS
-            'bower_components/es5-shim/es5-shim.js',
+            'node_modules/es5-shim/es5-shim.js',
             'node_modules/ozp-react-commons/app/OzoneConfig.js', //default configs
             'app/js/__tests__/main.js'
         ],

@@ -126,7 +126,8 @@ var Discovery = React.createClass({
 		                    <i className="icon-search"></i>
 
 		                    <input ref="search" type="text" className="form-control"
-		                        placeholder="Search"
+		                        tabIndex="0"
+                            placeholder="Search"
 		                        value={ this.state.queryString || ''}
 		                        onChange={ this.onSearchInputChange } />
 

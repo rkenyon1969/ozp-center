@@ -64,7 +64,9 @@ var TableView = React.createClass({
             columns: this.getColumns(),
             records: [],
 
+            /* eslint-disable no-unused-vars */
             onSubmit: function (event) {
+            /* eslint-enable no-unused-vars */
                 var records = this.records.map( function (record) {
                     var owners = '';
                     record.owners.forEach( function (owner,index) {

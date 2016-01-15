@@ -49,16 +49,17 @@ var BookmarkButton = React.createClass({
 
     render: function() {
         var bookmarkBtnStyles = React.addons.classSet({
-                'btn btn-default btn-bookmark': true,
-                'bookmarked': this.inLibrary()
-            });
+            'btn btn-default btn-bookmark': true,
+            'bookmarked': this.inLibrary()
+        });
         var bookmarkIcon =  React.addons.classSet({
-                'icon-ribbon-grayDark': !this.inLibrary(),
-                'icon-ribbon-filled-yellow': this.inLibrary()
-            });
+            'icon-ribbon-grayDark': !this.inLibrary(),
+            'icon-ribbon-filled-yellow': this.inLibrary()
+        });
+
         return (
-          <button ref="tooltipped" data-toggle="tooltip" data-placement="top" title="Bookmark" type="button" alt="Click to bookmark this app" className={bookmarkBtnStyles} onClick={this.toggleInLibrary}>
-              <i className={bookmarkIcon}/>
+          <button ref="tooltipped" data-toggle="tooltip" data-placement="top" title="Bookmark" type="button" aria-label={(this.inLibrary()) ? 'This app is Bookmarked' : 'Click to bookmark this app'} className={bookmarkBtnStyles} onClick={this.toggleInLibrary}>
+              <i className={bookmarkIcon}/><span className="hidden-span">Bookmark</span>
           </button>
         );
     }

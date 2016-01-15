@@ -12,9 +12,10 @@ npm install -g gulp bower
 First clone the repo. Install module dependencies.
 
 ```
-git clone https://github.com/ozone-development/center-ui.git
-cd center-ui
+git clone https://github.com/ozone-development/ozp-center.git
+cd ozp-center
 npm install
+bower install
 ```
 
 Next, run `npm start` or `gulp dev`. Go to http://localhost:8000/webpack-dev-server/dist and browser will automatically reload when any file in /app changes. Alternatively, you can also go to http://localhost:8000/dist, if auto reload is undesirable.

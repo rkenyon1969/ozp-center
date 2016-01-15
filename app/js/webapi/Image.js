@@ -34,7 +34,6 @@ function readIframeResponse(deferred, timeoutId, evt) {
     }
     catch (e) {
         var msg = 'Error reading image upload response';
-        console.log(msg, e);
         deferred.reject(msg);
     }
 }

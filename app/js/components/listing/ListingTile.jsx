@@ -190,7 +190,8 @@ var AdminOwnerListingTile = React.createClass({
             <li className={classSet}>
                 <ActionMenu listing={listing} />
                 <a href={overview}>
-                    <img alt={`Click to manage ${listing.title}`} className="AdminOwnerListingTile__img" src={imageUrl} />
+                    <img alt={`Click to manage ${listing.title}`} className="AdminOwnerListingTile__img" src={imageLargeUrl} />
+                    <span className="hidden-span">{listing.title}</span>
                 </a>
                 <InfoBar listing={listing} />
             </li>

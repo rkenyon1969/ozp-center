@@ -73,11 +73,13 @@ var CreateNotification = React.createClass({
         });
     },
 
+    /* eslint-disable no-unused-vars */
     onNotificationCreated(uuid, notification) {
         if (this.state.uuid === uuid) {
             this.onReset();
         }
     },
+    /* eslint-enable no-unused-vars */
 
     render() {
         return (

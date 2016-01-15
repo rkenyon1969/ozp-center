@@ -117,21 +117,30 @@ ListingActions.fetchById.listen(function (id) {
 (function() {
     var mostRecentSearch;
 
+    /**
+     * Add *'s to all of the non-quoted terms that don't already end in a *
+     */
+    function processQuery(queryString) {
+        var matches = queryString && queryString.match(/"[^"]*"|\S+/g),
+            processedMatches = matches && matches.map(
+                m => /[""\*]$/.test(m) ? m : m + '*'
+            );
+
+        return processedMatches && processedMatches.join(' ');
+    }
+
     ListingActions.search.listen(function (options) {
         var apiOptions = Object.assign({}, options);
 
-        //deep object comparison
-        if (!_.isEqual(apiOptions, mostRecentSearch)) {
-            mostRecentSearch = apiOptions;
+        mostRecentSearch = apiOptions;
 
-            ListingApi.search(apiOptions)
-                .then(function(searchResults) {
-                    //drop out-of-order results
-                    if (_.isEqual(mostRecentSearch, apiOptions)) {
-                        ListingActions.searchCompleted(searchResults);
-                    }
-                });
-        }
+        ListingApi.search(apiOptions)
+            .then(function(searchResults) {
+                //drop out-of-order results
+                if (_.isEqual(mostRecentSearch, apiOptions)) {
+                    ListingActions.searchCompleted(searchResults);
+                }
+        });
     });
 })();
 

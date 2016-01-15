@@ -37,23 +37,23 @@ module.exports = React.createClass({
                 return _.map(s.stewarded_organizations, function (stew_org) {
                     if (_.contains(stew_org, org.title)){
                         return (<li>{s.display_name} | <a href={"mailto:" + s.user.email}>{s.user.email}</a></li>);
-                    };
-                });
-            });
+                    }
+                })
+            })
 
             stewards.push([
                 <li>{org.title}</li>,
                 <ul>
                     { stewardsForOrg }
                 </ul>
-            ]);
-        });
+            ])
+        })
 
         return(
             <ul>
                 { stewards }
             </ul>
-        );
+        )
     },
 
     componentWillMount() {

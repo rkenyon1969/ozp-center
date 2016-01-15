@@ -172,7 +172,7 @@ function checkMarkings(validation, instance) {
             }
         }
     });
-};
+}
 
 function validate (instance, options, type) {
     var validation = t.validate(instance, type),
