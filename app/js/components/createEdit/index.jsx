@@ -14,6 +14,7 @@ var Sidebar = require('./Sidebar.jsx');
 var { classSet } = React.addons;
 var State = require('../../mixins/ActiveStateMixin');
 var $ = require('jquery');
+var ListingActions = require('../../actions/ListingActions');
 
 require('sweetalert');
 
@@ -26,13 +27,15 @@ var {
     Select2TagInput,
     TextAreaInput,
     OwnerInput,
-    Toggle
+    Toggle,
+    MarkingInput
 } = require('./form');
 
 
 var savingMessages = {
     images: 'Uploading Images...',
-    listing: 'Saving Listing...'
+    listing: 'Saving Listing...',
+    exception: false
 };
 
 // formLinks object is used by formLinkGroups. formLinks is the config file to
@@ -41,6 +44,10 @@ var formLinks = {
     basicInformation: {
         title: 'Basic Information',
         id: 'create-edit-basic-information'
+    },
+    securityMarking: {
+        title: 'Security Marking',
+        id: 'create-edit-security-marking'
     },
     title: {
         title: 'Name',
@@ -108,7 +115,8 @@ var formLinks = {
     },
     smallIcon: {
         title: 'Small Icon',
-        id: 'create-edit-small-icon'
+        id: 'create-edit-small-icon',
+        markingId: 'create-edit-small-icon-marking'
     },
     largeIcon: {
         title: 'Large Icon',
@@ -151,6 +159,7 @@ var formLinks = {
 var formLinkGroups = [{
     link: formLinks.basicInformation,
     links: [
+        formLinks.securityMarking,
         formLinks.title,
         formLinks.type,
         formLinks.categories,
@@ -243,16 +252,25 @@ var ScreenshotForm = React.createClass({
                 <div className="col-md-2">
                 <div><strong>Screenshot<br /> <span className="screenshotNum">{this.props.count+1}</span></strong></div>
                 </div>
+
                 <div className="col-md-4">
-                <ImageInput { ...this.getFormComponentProps('smallImage') }
-                    imageUri={this.props.value.smallImageUrl}
-                    serverError={this.props.imageErrors.smallImage} />
+                    <ImageInput { ...this.getFormComponentProps('smallImage') }
+                                imageUri={this.props.value.smallImageUrl}
+                                serverError={this.props.imageErrors.smallImage} />
+                    <MarkingInput id={this.props.value.smallImageMarking}
+                                  { ...this.getFormComponentProps('smallImageMarking') }
+                                  aria-label="Classification and Control Marking"/>
                 </div>
+
                 <div className="col-md-4">
-                <ImageInput { ...this.getFormComponentProps('largeImage') }
-                    imageUri={this.props.value.largeImageUrl}
-                    serverError={this.props.imageErrors.largeImage} />
+                    <ImageInput { ...this.getFormComponentProps('largeImage') }
+                                imageUri={this.props.value.largeImageUrl}
+                                serverError={this.props.imageErrors.largeImage} />
+                    <MarkingInput id={this.props.value.largeImageMarking}
+                                  { ...this.getFormComponentProps('largeImageMarking') }
+                                  aria-label="Classification and Control Marking"/>
                 </div>
+
                 <div className="col-md-2">
                 <button type="button" className="close" onClick={this.props.removeHandler}>
                     <span aria-hidden="true"><i className="icon-cross-16"></i></span><span className="sr-only">Remove</span>
@@ -317,6 +335,9 @@ var ListingForm = React.createClass({
         return (
             <form ref="form" className="CreateEdit__form col-xs-9 col-lg-10">
                 <h2 id={f.basicInformation.id}>Basic Information</h2>
+
+                <MarkingInput id={f.securityMarking.id} { ...p('securityMarking') } aria-label="Classification and Control Marking"/>
+
                 <TextInput id={f.title.id} { ...p('title') } aria-label="Title of Listing"/>
                 <Select2Input id={f.type.id} { ...p('type') }
                     options={ getOptionsForSystemObject(system.types) }/>
@@ -352,18 +373,30 @@ var ListingForm = React.createClass({
                     itemForm={ ResourceForm } optional/>
 
                 <h2 id={f.graphics.id}>Graphics</h2>
+
                 <ImageInput id={f.smallIcon.id} { ...p('smallIcon') }
                     imageUri={this.props.value.imageSmallUrl}
                     serverError={this.props.imageErrors.smallIcon} />
+                <MarkingInput id={f.smallIcon.markingId} { ...p('smallIconMarking') }
+                              aria-label="Classification and Control Marking"/>
+
                 <ImageInput id={f.largeIcon.id} { ...p('largeIcon') }
                     imageUri={this.props.value.imageMediumUrl}
                     serverError={this.props.imageErrors.largeIcon} />
+                <MarkingInput id={f.largeIcon.markingId} { ...p('largeIconMarking') }
+                              aria-label="Classification and Control Marking"/>
+
                 <ImageInput id={f.bannerIcon.id} { ...p('bannerIcon') }
                     imageUri={this.props.value.imageLargeUrl}
                     serverError={this.props.imageErrors.bannerIcon} />
+                <MarkingInput id={f.bannerIcon.markingId} { ...p('bannerIconMarking') }
+                              aria-label="Classification and Control Marking"/>
+
                 <ImageInput id={f.featuredBannerIcon.id} { ...p('featuredBannerIcon') }
                     imageUri={this.props.value.imageXlargeUrl}
                     serverError={this.props.imageErrors.featuredBannerIcon} />
+                <MarkingInput id={f.featuredBannerIcon.markingId} { ...p('featuredBannerIconMarking') }
+                              aria-label="Classification and Control Marking"/>
 
                 <ListInput id={f.screenshots.id} { ...this.getSubFormProps('screenshots') }
                     itemForm={ ScreenshotForm }/>
@@ -407,7 +440,7 @@ var ListingForm = React.createClass({
             }
         }
     }
-});
+}); // End ListingForm
 
 function transitionToMyListings (transition) {
     transition.redirect('my-listings');
@@ -587,6 +620,46 @@ var CreateEditPage = React.createClass({
         this.listenTo(CreateEditActions.resetForm, ()=>{
             this.setState({ timestamp: Date.now() });
         });
+
+        this.listenTo(ListingActions.saveFailed, this.handleMarkingError);
+    },
+
+    // Generate SweetAlert notifying user marking is too high for current user
+    handleMarkingError: function (response) {
+        var resp = JSON.parse(response.responseText);
+        var msg; // Stores just one error message; user iterates until all errors are gone
+
+        msg = resp.security_marking ? 'Listing ' + resp.security_marking[0].toLowerCase() : msg;
+        msg = resp.small_icon ? 'Small Icon ' + resp.small_icon.security_marking[0].toLowerCase() : msg;
+        msg = resp.large_icon ? 'Large Icon ' + resp.large_icon.security_marking[0].toLowerCase() : msg;
+        msg = resp.banner_icon ? 'Small Banner ' + resp.banner_icon.security_marking[0].toLowerCase() : msg;
+        msg = resp.large_banner_icon ? 'Large Banner ' + resp.large_banner_icon.security_marking[0].toLowerCase() : msg;
+
+        if (resp.screenshots) {
+            if (resp.screenshots[0].small_image) {
+                msg = 'Preview Image ' + resp.screenshots[0].small_image.security_marking[0].toLowerCase();
+            }
+            if (resp.screenshots[0].large_image) {
+                msg = 'Full Size Image ' + resp.screenshots[0].large_image.security_marking[0].toLowerCase();
+            }
+        }
+
+        if (msg) {
+            this.setState({
+                saveStatus: 'exception'
+            });
+            /* jshint ignore:start */
+            sweetAlert({
+                title: "Could not save!",
+                text: "Your listing could not be saved: " + msg,
+                type: "error",
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "ok",
+                closeOnConfirm: true,
+                html: false
+            });
+            /* jshint ignore:end */
+        }
     },
 
     componentWillUnmount: function () {

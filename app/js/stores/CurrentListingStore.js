@@ -23,6 +23,8 @@ var _submitting = false;
 
 var imageErrors = {screenshots: []};
 
+require('sweetalert');
+
 //list of property names that can be passed into onUpdateListing which are images
 //and which must therefore be treated specially.  The 'value' for these properties
 //must be either a Blob, or if Blobs are not supported, an HTMLInputElement
@@ -246,6 +248,7 @@ var CurrentListingStore = createStore({
 
     getDraftValidation: function () {
         var { errors, isValid } = validateDraft(_listing, getSystem());
+
         return {
             isValid: isValid,
             errors: errors,
@@ -327,8 +330,19 @@ var CurrentListingStore = createStore({
      * in the _listing object.  Returns a promise that resolves when everything is complete
      */
     saveImages: function() {
-        function optionalPromise(image, property) {
-            var promise = image ? ImageApi.save(image) : null;
+        function optionalPromise(image, property, marking) {
+
+            var markingLabel;
+            var promise;
+
+            if (property[0] === 'screenshots') {
+                var index = parseInt(property[1]);
+                markingLabel = property[2] + 'Marking';
+                promise = image && _listing.screenshots[index][markingLabel] ? ImageApi.save(image, marking) : null;
+            } else {
+                markingLabel = property + 'Marking';
+                promise = image && _listing[markingLabel] ? ImageApi.save(image, marking) : null;
+            }
 
             if (promise) {
                 promise.fail(me.handleImageSaveFailure.bind(me, property));
@@ -341,18 +355,19 @@ var CurrentListingStore = createStore({
         imageErrors = {screenshots: []};
 
         var me = this,
-            {smallIcon, largeIcon, bannerIcon, featuredBannerIcon, screenshots} = _listing,
+            {smallIcon, largeIcon, bannerIcon, featuredBannerIcon, screenshots,
+             smallIconMarking, largeIconMarking, bannerIconMarking, featuredBannerIconMarking} = _listing,
 
-            smallIconPromise = optionalPromise(smallIcon, 'smallIcon'),
-            largeIconPromise = optionalPromise(largeIcon, 'largeIcon'),
-            bannerIconPromise = optionalPromise(bannerIcon, 'bannerIcon'),
+            smallIconPromise = optionalPromise(smallIcon, 'smallIcon', smallIconMarking),
+            largeIconPromise = optionalPromise(largeIcon, 'largeIcon', largeIconMarking),
+            bannerIconPromise = optionalPromise(bannerIcon, 'bannerIcon', bannerIconMarking),
             featuredBannerIconPromise =
-                optionalPromise(featuredBannerIcon, 'featuredBannerIcon'),
+                optionalPromise(featuredBannerIcon, 'featuredBannerIcon', featuredBannerIconMarking),
 
             screenshotPromises = _.flatten(screenshots.map(
                 (s, i) => [
-                    optionalPromise(s.smallImage, ['screenshots', i, 'smallImage']),
-                    optionalPromise(s.largeImage, ['screenshots', i, 'largeImage'])
+                    optionalPromise(s.smallImage, ['screenshots', i, 'smallImage'], s.smallImageMarking),
+                    optionalPromise(s.largeImage, ['screenshots', i, 'largeImage'], s.largeImageMarking)
                 ]
             )),
             promises = [
@@ -442,8 +457,8 @@ var CurrentListingStore = createStore({
      * handler
      */
     handleImageSaveFailure: function(property, response, err, statusText) {
-        var json = response.responseJSON,
-            jsonMessage = json ? json.message : null,
+        var json = JSON.parse(response.responseText),
+            jsonMessage = json ? json.security_marking[0] : null,
             errorMessage = jsonMessage || statusText ||
                 'Unknown error saving image';
 
@@ -452,8 +467,40 @@ var CurrentListingStore = createStore({
         }
 
         updateValue(imageErrors, property, errorMessage);
-
         this.trigger({imageErrors: imageErrors, saveStatus: null});
+
+        this.generateAlert(property, errorMessage);
+    },
+
+    /**
+     * Build and output error message via SweetAlert.
+     */
+    generateAlert: function(property, errorMessage) {
+        if (errorMessage.substring(0, 8) == 'Security') {
+
+            property = _.last(property);
+
+            property = (property == 'smallIcon') ? 'Small Icon' : property;
+            property = (property == 'largeIcon') ? 'Large Icon' : property;
+            property = (property == 'bannerIcon') ? 'Small Banner' : property;
+            property = (property == 'featuredBannerIcon') ? 'Large Banner' : property;
+            property = (property == 'smallImage') ? 'Preview Image' : property;
+            property = (property == 'largeImage') ? 'Full Size Image' : property;
+
+            var msg = property + ' ' + errorMessage.toLowerCase();
+
+            /* jshint ignore:start */
+            sweetAlert({
+                title: "Could not save!",
+                text: "Your listing could not be saved: " + msg,
+                type: "error",
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "ok",
+                closeOnConfirm: true,
+                html: false
+            });
+            /* jshint ignore:end */
+        }
     }
 });
 

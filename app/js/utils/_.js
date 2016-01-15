@@ -46,5 +46,7 @@ module.exports = {
 
     escape: require('lodash/utilities/escape'),
 
+    template: require('lodash/utilities/template'),
+
     noop: function () {}
 };

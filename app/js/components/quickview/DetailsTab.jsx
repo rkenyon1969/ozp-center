@@ -11,6 +11,7 @@ var DetailsTab = React.createClass({
     },
 
     render: function () {
+        var securityMarking = this.props.listing.securityMarking;
         var whatsNew = this.props.listing.whatIsNew;
         var organization = this.props.listing.agency;
         var type = this.props.listing.type;
@@ -25,6 +26,10 @@ var DetailsTab = React.createClass({
             <div className="tab-pane active quickview-details row">
                 <div className="col-xs-4 col-left">
                     <section className="forceWrap">
+                        <section>
+                            <h5>Security Marking</h5>
+                            <p className="forceWrap">{ securityMarking }</p>
+                        </section>
                         <h5>What&lsquo;s New</h5>
                         {
                             whatsNew ?

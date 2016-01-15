@@ -27,11 +27,15 @@ module.exports = {
             "magnific-popup$": "magnific-popup/dist/jquery.magnific-popup",
             w2ui$: "w2ui/dist/w2ui",
             classification$: "ozp-classification/jquery.classification.js",
+            "underscore$": "bootstrap-classify/node_modules/underscore/underscore.js",
+            "ism-u.config$": "ism-u.config.js",
+            "ism$": "bootstrap-classify/js/ism.js",
+            "bootstrap-classify$": "bootstrap-classify/js/bootstrap-classify.js",
             "ozp-react-commons": "ozp-react-commons/app/js",
             tether$: "tether/tether"
         },
         // Configure webpack to look for required files in bower and node
-        modulesDirectories: ['./bower_components', './node_modules']
+        modulesDirectories: ['./bower_components', './node_modules', './config']
     },
     module: {
         preLoaders: [{
