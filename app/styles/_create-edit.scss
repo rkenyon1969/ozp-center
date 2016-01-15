@@ -199,6 +199,7 @@ div.col-md-4 > .form-group >span.image-container.image-present {
 .create-edit-sidebar {
     padding: 0;
     background: $gray-lightest;
+    overflow-y: hidden;
 
     ol {
         list-style-type: none;
