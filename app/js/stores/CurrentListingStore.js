@@ -2,7 +2,6 @@
 
 var $ = require('jquery');
 var _ = require('../utils/_');
-var humps = require('humps');
 
 var { createStore } = require('reflux');
 var GlobalListingStore = require('./GlobalListingStore');
@@ -18,7 +17,6 @@ var { cloneDeep, assign } = require('../utils/_');
 var { ListingApi } = require('../webapi/Listing');
 var { ImageApi } = require('../webapi/Image');
 var { API_URL } = require('ozp-react-commons/OzoneConfig');
-var { toTitleCase } = require('../utils/string.js');
 
 var _listing = null;
 var _submitting = false;
@@ -482,15 +480,12 @@ var CurrentListingStore = createStore({
 
             property = _.last(property);
 
-            if (property == 'smallImage') {
-                property = 'Preview Image';
-            } else if (property == 'largeImage') {
-                property = 'Full Size Image';
-            } else {
-                property = humps.decamelize(property);
-                property = property.replace('_', ' ');
-                property = toTitleCase(property);
-            }
+            property = (property == 'smallIcon') ? 'Small Icon' : property;
+            property = (property == 'largeIcon') ? 'Large Icon' : property;
+            property = (property == 'bannerIcon') ? 'Small Banner' : property;
+            property = (property == 'featuredBannerIcon') ? 'Large Banner' : property;
+            property = (property == 'smallImage') ? 'Preview Image' : property;
+            property = (property == 'largeImage') ? 'Full Size Image' : property;
 
             var msg = property + ' ' + errorMessage.toLowerCase();
 
