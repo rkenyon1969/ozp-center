@@ -184,7 +184,7 @@ var AdminOwnerListingTile = React.createClass({
             tab: 'overview'
         });
         var classSet = React.addons.classSet(this._getApprovalStatusClass());
-        var imageUrl = listing.imageLargeUrl;
+        var imageLargeUrl = listing.imageLargeUrl;
 
         return (
             <li className={classSet}>
