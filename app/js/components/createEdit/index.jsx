@@ -402,7 +402,7 @@ var ListingForm = React.createClass({
                     itemForm={ ScreenshotForm }/>
 
                 <h2 id={f.ownersAndContacts.id}>Owner Information and Contacts</h2>
-                <Select2Input id={f.orgs.id} { ...p('agency') }
+                <Select2Input id={f.orgs.id} { ...p('agencyShort') }
                     options={ getOptionsForSimpleLists(organizations) }/>
                 <OwnerInput id={f.owners.id} { ...p('owners') } listing={listing}
                     ownerSetter={ownerSetter} />
@@ -667,8 +667,19 @@ var CreateEditPage = React.createClass({
         main.removeClass('create-edit-open');
     },
 
+    // Ensures agency title corresponds to the short name selected by the user
+    lookupAgencyTitle: function (listing) {
+        if (listing && listing.agencyShort) {
+            var title = _.find(this.props.system.organizations,
+                               { 'shortName': listing.agencyShort } ).title;
+            listing.agency = title;
+        }
+    },
+
     render: function () {
         var listing = this.state.listing;
+
+        this.lookupAgencyTitle(listing);
 
         if (!listing) {
             return <p>loading...</p>;
