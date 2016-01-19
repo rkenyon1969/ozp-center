@@ -60,6 +60,14 @@ var Discovery = React.createClass({
         });
     },
 
+    ignoreEnterKey(evt) {
+        var code = evt.keyCode || evt.which;
+        if (code == 13) {
+            evt.preventDefault();
+            return evt.stopPropagation();
+        }
+    },
+
     onCategoryChange(categories) {
         this._searching = true;
         this.setState({ categories, currentOffset: 0 });
@@ -126,8 +134,9 @@ var Discovery = React.createClass({
 		                        tabIndex="0"
                             placeholder="Search"
 		                        value={ this.state.queryString || ''}
-		                        onChange={ this.onSearchInputChange } />
-
+		                        onChange={ this.onSearchInputChange }
+                                        onKeyPress={ this.ignoreEnterKey }
+                                    />
 		                    <i className="icon-cross-14-grayDark clearButton" onClick={this.reset}></i>
 		                </div>
 		                <Types value={this.state.type} onChange={this.onTypeChange} />
