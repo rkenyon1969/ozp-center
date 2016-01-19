@@ -10,6 +10,7 @@ module.exports = {
     },
 
     trackSiteSearch: function (label, query, total) {
+        query = query.toLowerCase();
         window._paq.push(['trackSiteSearch', query, label, total]);
     },
 
