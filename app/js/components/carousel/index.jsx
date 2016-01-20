@@ -32,8 +32,8 @@ var Carousel = React.createClass({
                         { this.props.children }
                     </ul>
                     <div className="clearfix"></div>
-                    <button className="prev btn hidden" href="#" ref="prev"><i className="icon-caret-left-white" alt=""></i></button>
-                    <button className="next btn hidden" href="#" ref="next"><i className="icon-caret-right-white" alt=""></i></button>
+                    <button className="prev btn hidden" href="#" ref="prev" aria-label="previous carousel button"><i className="icon-caret-left-white" alt=""></i></button>
+                    <button className="next btn hidden" href="#" ref="next" aria-label="next carousel button"><i className="icon-caret-right-white" alt=""></i></button>
                 </div>
             </div>
         );
