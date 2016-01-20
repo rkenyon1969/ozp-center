@@ -1,3 +1,16 @@
+### 1.0.21 (2016-01-20)
+
+
+#### Bug Fixes
+
+* **createEdit:** Remove double scrollbar ([b285fc50](https://github.com/ozone-development/ozp-center.git/commit/b285fc503e184b8080e0569ce1ab6d2f7f8fd4ac))
+
+
+#### Features
+
+* **search:** Ignore enter key press in search box #187 ([70a70598](https://github.com/ozone-development/ozp-center.git/commit/70a7059854d302bca3b7e7be373b546341092b56))
+
+
 ### 1.0.20 (2016-01-13)
 
 
