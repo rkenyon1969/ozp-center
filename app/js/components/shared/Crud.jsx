@@ -227,7 +227,7 @@ var Crud = React.createClass({
     //The default implementation of this.props.onCreate.  This function may also be called
     //by custom onCreate implementations
     _onCreate: function(data) {
-        // Shim for new backend
+        // Shim for python backend
         if (data.stewardedOrganizations && data.stewardedOrganizations[0]) {
           data = this.props.structStewardOrgs(data);
         }
@@ -257,7 +257,7 @@ var Crud = React.createClass({
     _onEdit: function(data) {
         var id = this.getSelectedId();
 
-        // Shim for new backend
+        // Shim for python backend
         if (data.stewardedOrganizations && data.stewardedOrganizations[0]) {
           data = this.props.structStewardOrgs(data);
         }

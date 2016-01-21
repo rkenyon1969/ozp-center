@@ -1,11 +1,11 @@
 module.exports = {
-    // --- New backend  ---
+    // --- Python backend  ---
     // url: 'http://localhost:8000/dist/#/home',
     // username: 'bigbrother',
     // password: 'password',
 
-    // --- Old backend ---
-    url: 'https://ci-latest.amlng.di2e.net:7799/center/#/home',
+    // --- Java backend ---
+    url: 'https://ci-latest.FIX.ME.net:7799/center/#/home',
     username: 'testAdmin1',
     password: 'password',
 
