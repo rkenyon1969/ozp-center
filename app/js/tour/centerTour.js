@@ -1,5 +1,15 @@
 'use strict';
 
+var PubSub = require('browser-pubsub');
+var tourCh = new PubSub('tour');
+
+var readyObject = {};
+
+// HACK: for some reason window.localstorage is lost in this file.
+setInterval(() => {
+  readyObject = tourCh.get();
+}, 200);
+
 const meTour = new Tour({
   backdrop: true,
   backdropPadding: 10,
@@ -40,12 +50,18 @@ const meTour = new Tour({
         var nextStep = function() {
           meTour.goTo(4);
         };
-        window.setTimeout(nextStep, 1000);
+        (function checkStatus() {
+          if (readyObject.overviewLoaded) {
+            nextStep();
+          } else {
+            setTimeout(checkStatus, 200);
+          }
+        })();
       }
     },
     {
       path: "/dist/#/home/?%2F%3F=&listing=1&action=view&tab=overview",
-      element: ".modal-body",
+      element: ".modal-body .nav",
       title: "Listing Overview",
       content: "Click a tile to access the listing detail view. From this popup you can see screenshots, long descriptions, reviews, and other resources. Use the links at the top of the listing to launch, bookmark or close it.",
       placement: "left",
@@ -55,7 +71,13 @@ const meTour = new Tour({
         var nextStep = function() {
           meTour.goTo(5);
         };
-        window.setTimeout(nextStep, 1000);
+        (function checkStatus() {
+          if (readyObject.reviewsLoaded) {
+            nextStep();
+          } else {
+            setTimeout(checkStatus, 200);
+          }
+        })();
       }
     },
     {
@@ -70,7 +92,13 @@ const meTour = new Tour({
         var nextStep = function() {
           meTour.goTo(6);
         };
-        window.setTimeout(nextStep, 1000);
+        (function checkStatus() {
+          if (readyObject.detailsLoaded) {
+            nextStep();
+          } else {
+            setTimeout(checkStatus, 200);
+          }
+        })();
       }
     },
     {
@@ -85,7 +113,13 @@ const meTour = new Tour({
         var nextStep = function() {
           meTour.goTo(7);
         };
-        window.setTimeout(nextStep, 1000);
+        (function checkStatus() {
+          if (readyObject.resourcesLoaded) {
+            nextStep();
+          } else {
+            setTimeout(checkStatus, 200);
+          }
+        })();
       }
     },
     {

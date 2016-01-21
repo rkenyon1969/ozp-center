@@ -3,6 +3,9 @@
 require('jquery');
 require('magnific-popup');
 
+var PubSub = require('browser-pubsub');
+var tourCh = new PubSub('tour');
+
 var React = require('react');
 var Carousel = require('../carousel/index.jsx');
 
@@ -11,6 +14,18 @@ var OverviewTab = React.createClass({
     propTypes: {
         shown: React.PropTypes.bool,
         listing: React.PropTypes.object
+    },
+
+    componentDidMount: function() {
+      tourCh.publish({
+        overviewLoaded: true
+      });
+    },
+
+    componentWillUnount: function() {
+      tourCh.publish({
+        overviewLoaded: false
+      });
     },
 
     getDefaultProps: function () {

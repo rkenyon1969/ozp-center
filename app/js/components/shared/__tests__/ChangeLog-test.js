@@ -8,7 +8,7 @@ var { TestUtils } = React.addons;
 var expect = require('chai').expect;
 
 describe('ChangeLog', function () {
-    var location = new TestLocation(['/test']);;
+    var location = new TestLocation(['/test']);
 
     var ChangeLog = require('inject?../profile/ProfileLink.jsx!../ChangeLog.jsx')({
         '../profile/ProfileLink.jsx': React.createClass({

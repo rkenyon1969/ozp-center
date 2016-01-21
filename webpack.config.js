@@ -33,21 +33,18 @@ module.exports = {
             tour$: "bootstrap-tour/build/js/bootstrap-tour.js"
         },
         // Configure webpack to look for required files in bower and node
-        modulesDirectories: ['./bower_components', './node_modules']
+        modulesDirectories: ['./node_modules']
     },
     module: {
-        preLoaders: [{
-            test: /\.jsx?$/,
-            loader: "jsxhint-loader",
-            exclude: /node_modules|bower_components|gulp|dist/
-        }],
         loaders: [
+            { test: /\.jsx$/, loader: "eslint-loader", exclude: /node_modules/ },
+            { test: /\.js$/, loader: "eslint-loader", exclude: /node_modules/ },
             { test: /\.gif/, loader: "url-loader?limit=10000&mimetype=image/gif" },
             { test: /\.jpg/, loader: "url-loader?limit=10000&mimetype=image/jpg" },
             { test: /\.png/, loader: "url-loader?limit=10000&mimetype=image/png" },
             {
                 test: /\.jsx?$/,
-                loader: "jsx-loader?insertPragma=React.DOM!babel-loader?experimental&optional=runtime",
+                loader: "jsx-loader?insertPragma=React.DOM!babel-loader",
                 include: [
                     path.join(__dirname, 'app/js'),
                     path.join(__dirname, 'node_modules/ozp-react-commons/app/js')

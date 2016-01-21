@@ -60,11 +60,13 @@ var SidebarGroup = React.createClass({
         );
     },
 
+    /* eslint-disable no-unused-vars */
     onTitleClick: function(e) {
         //since the title is an <a>, it has its own default action which prevents the
         //label's default from executing.  So we have to activate the checkbox manually
         this.setState({ active: true });
     },
+    /* eslint-enable no-unused-vars */
 
     onCheckboxChange: function(e) {
         this.setState({ active: e.target.checked });

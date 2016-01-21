@@ -11,7 +11,7 @@ module.exports = {
 
     configureCasper: function(casper) {
         casper.options.clientScripts = [
-            '../bower_components/es5-shim/es5-shim.js',
+            '../node_modules/es5-shim/es5-shim.js',
             '../node_modules/ozp-react-commons/app/OzoneConfig.js',
             '../node_modules/select2/select2.js'
         ];

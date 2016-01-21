@@ -9,7 +9,7 @@ var ObjectDB = require('object-db');
 var tourDB = new ObjectDB('ozp_tour').init({
   center: {
     ran: false,
-    startCenterTour: false,
+    startCenterTour: false
   }
 });
 
@@ -41,7 +41,7 @@ ProfileSearchActions.tourCheck.listen(() => {
 
 $(document).on('click', '#tour-start', function(e){
   e.preventDefault();
-  globalTour.restart();
+  globalTour.restart().goTo(1);
 });
 
 // Subscribe to our DB, this will at a later date allow us to know where our
@@ -59,7 +59,6 @@ tourDB.subscribe((data) => {
 
       centerTour.init();
       centerTour.start();
-
     }
   }, 200);
 });

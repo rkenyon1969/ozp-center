@@ -2,7 +2,7 @@
 
 var React = require('react');
 
-require('carouFredSel');
+require('caroufredsel');
 
 
 var Carousel = React.createClass({
