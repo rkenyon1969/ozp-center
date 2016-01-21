@@ -2,7 +2,6 @@
 
 var React = require('react');
 var EmptyFieldValue = require('../shared/EmptyFieldValue.jsx');
-
 var ProfileLink = require('../profile/ProfileLink.jsx');
 
 var DetailsTab = React.createClass({
@@ -12,6 +11,7 @@ var DetailsTab = React.createClass({
     },
 
     render: function () {
+        var securityMarking = this.props.listing.securityMarking;
         var whatsNew = this.props.listing.whatIsNew;
         var organization = this.props.listing.agency;
         var type = this.props.listing.type;
@@ -22,11 +22,14 @@ var DetailsTab = React.createClass({
         var tags = this.props.listing.tags.join(', ');
         var requirements = this.props.listing.requirements;
 
-
         return (
             <div className="tab-pane active quickview-details row">
                 <div className="col-xs-4 col-left">
                     <section className="forceWrap">
+                        <section>
+                            <h5>Security Marking</h5>
+                            <p className="forceWrap">{ securityMarking }</p>
+                        </section>
                         <h5>What&lsquo;s New</h5>
                         {
                             whatsNew ?

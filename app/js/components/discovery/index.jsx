@@ -5,6 +5,8 @@ var Reflux = require('reflux');
 var Router = require('react-router');
 var _ = require('../../utils/_');
 var {CENTER_URL} = require('ozp-react-commons/OzoneConfig');
+var { PAGINATION_MAX } = require('ozp-react-commons/constants');
+
 // actions
 var ListingActions = require('../../actions/ListingActions');
 
@@ -48,7 +50,8 @@ var Discovery = React.createClass({
             type: this.state ? this.state.type : [],
             agency: this.state ? this.state.agency : [],
             nextOffset: DiscoveryPageStore.getNextOffset(),
-            currentOffset: this.state ? this.state.currentOffset : 0
+            currentOffset: this.state ? this.state.currentOffset : 0,
+            limit: this.state ? this.state.limit : PAGINATION_MAX
         };
     },
 
@@ -224,10 +227,15 @@ var Discovery = React.createClass({
 
     search() {
         $('body, html').scrollTop(0);
-        var { type, categories, agency } = this.state;
+        var { type, agency } = this.state;
         var combinedObj = _.assign(
-            { queryString: this.state.queryString, offset: this.state.currentOffset },
-            { type, categories, agency });
+            { search: this.state.queryString,
+              offset: this.state.currentOffset,
+              category: this.state.categories,
+              limit: this.state.limit
+            },
+            { type, agency });
+
         ListingActions.search(_.assign(combinedObj));
     },
 

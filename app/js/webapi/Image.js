@@ -85,32 +85,60 @@ function cleanupDom(containerEl, placeholderInput) {
  * NOTE: The form-data upload only works if the API server is not cross domain.  If it is,
  * the upload will succeed but the response will be unreadable.  This is acceptable because
  * IE9 has other limitations (CORS) that prevent cross-domain REST anyway
+ *
+ * IE11 NOTE: For the new backend, we need to send some metadata with the image (e.g. access
+ * control). To do that we append that metadata and the image to FormData and post FormData. But,
+ * appending that does not work for IE11 on the first post when using basic authentation. With
+ * basic auth, when things work as expected, there are two posts, a first unsuccessful one that
+ * returns a 401 and a second successful one. The second one never happens in the IE11 + formData +
+ * append + image case. The workaround is to explicitly make two posts to the image endpoint, the
+ * first dummy post that the new backend tolerates (returns 200) and the second that posts the
+ * image for real.
  */
 var ImageApi = {
-    save: function(file) {
+    save: function(file, marking) {
         //File API supported
         if (window.Blob && file instanceof Blob) {
+            var form = new FormData();
+            form.append("file_extension", "png");
+            form.append("security_marking", marking);
+            form.append("image", file);
+
+            // TODO: When size validation is ready, make this variable (new parameter)
+            form.append("image_type", "large_screenshot");
+
+            var postForReal = function() {
+                return $.ajax({
+                    "async": true,
+                    "crossDomain": true,
+                    "url": IMAGE_URL,
+                    "method": "POST",
+                    "headers": {},
+                    "processData": false,
+                    "contentType": false,
+                    "mimeType": "multipart/form-data",
+                    "data": form
+                }).then(resp => resp); //only capture first arg
+            };
+
             return $.ajax({
-                url: IMAGE_URL,
-                type: 'POST',
-                data: file,
-                processData: false,
-                contentType: file.type,
-                accepts: {
-                    json: 'application/json'
-                }
-            }).then(resp => resp); //only capture first arg
+                "url": IMAGE_URL,
+                "method": "POST",
+                data: JSON.stringify({ "cuz_ie": "Dummy empty first post for IE11" }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            }).then(() => postForReal());
         }
         //File API not supported, use form upload and iframe
         else if (file instanceof HTMLInputElement) {
-            return this.saveViaFormData(file);
+            return this.saveViaFormData(file, marking);
         }
         else {
             throw new Error('Expected argument to be Blob or HTMLInputElement, but was '+file);
         }
     },
 
-    saveViaFormData: function(input) {
+    saveViaFormData: function(input, marking) {
         //assume it is a file input element, use hidden iframe to submit
         var deferred = $.Deferred(),
             container = document.createElement('div'),
@@ -118,13 +146,20 @@ var ImageApi = {
             inputPlaceholder = input.cloneNode(),
             form = document.createElement('form'),
             frameName = 'image-upload-frame-' + (iframeCounter++),
-            timeoutId;
+            timeoutId,
+            fileExtension = "png",
+            accessControl = marking,
+            imageType = "large_screenshot";
 
         //hide all these elements
         container.setAttribute('style', 'display:none;');
 
         //server expects form-data with the image as a part called 'image'
         input.name = 'image';
+
+        fileExtension.name = 'file_extension';
+        accessControl.name = 'security_marking';
+        imageType.name = 'image_type';
 
         //the real input will be moved to the hidden form.  Place a copy in its place to avoid
         //visual disruption when it is moved
@@ -138,6 +173,10 @@ var ImageApi = {
         form.method = 'post';
         form.enctype = 'multipart/form-data';
         form.appendChild(input);
+        form.appendChild(fileExtension);
+        form.appendChild(accessControl);
+        form.appendChild(imageType);
+
         container.appendChild(form);
 
         document.body.appendChild(container);

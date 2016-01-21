@@ -35,7 +35,7 @@ ListingActions.fetchAllListings.listen(function (filter) {
 
         _.assign(opts, {
             offset: 0,
-            max: PAGINATION_MAX
+            limit: PAGINATION_MAX
         });
     }
 
@@ -63,7 +63,8 @@ ListingActions.fetchAllListingsAtOnce.listen(function (filter) {
         });
 
         _.assign(opts, {
-            offset: 0
+            offset: 0,
+            limit: 999
         });
     }
 
@@ -94,7 +95,7 @@ ListingActions.fetchAllChangeLogs.listen(function (profile, filter) {
     else {
         _.assign(opts, {
             offset: 0,
-            max: PAGINATION_MAX
+            limit: PAGINATION_MAX
         });
     }
 
@@ -108,7 +109,6 @@ ListingActions.fetchAllChangeLogs.listen(function (profile, filter) {
 ListingActions.fetchStorefrontListings.listen(function() {
     ListingApi.getStorefrontListings().then(ListingActions.fetchStorefrontListingsCompleted);
 });
-
 
 ListingActions.fetchById.listen(function (id) {
     ListingApi.getById(id).then(ListingActions.fetchByIdCompleted);
@@ -130,10 +130,7 @@ ListingActions.fetchById.listen(function (id) {
     }
 
     ListingActions.search.listen(function (options) {
-        var queryString = processQuery((options.queryString)) || '',
-            apiOptions = Object.assign({}, options, {
-                queryString: queryString
-            });
+        var apiOptions = Object.assign({}, options);
 
         mostRecentSearch = apiOptions;
 

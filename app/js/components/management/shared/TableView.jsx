@@ -117,7 +117,13 @@ var TableView = React.createClass({
 
         var columns = [];
 
-        columns.push({ field: 'title', caption: 'Title', sortable: true, size: '10%',
+        columns.push(
+            { field: 'securityMarking', caption: 'Security Marking', size: '15%',
+              render: function (record) {
+                  return record.securityMarking;
+              }
+            },
+            { field: 'title', caption: 'Title', sortable: true, size: '10%',
                 render: function (record) {
                     var overview = thisTable.makeHref(thisTable.getActiveRoutePath(), thisTable.getParams(), {
                         listing: record.recid,
@@ -146,6 +152,15 @@ var TableView = React.createClass({
         }
 
         columns.push(
+            { field: 'private', caption: 'Private', size: '10%',
+              render: function (record) {
+                  if (record.private) {
+                      return '<i class="icon-lock-blue"></i> Private';
+                  } else {
+                      return 'Public';
+                  }
+              }
+            },
             { field: 'comments', caption: 'Comments', size: '20%' },
             { field: 'status', caption: 'Status', sortable: true, size: '5%',
                 render: function (record) {
@@ -265,7 +280,9 @@ var TableView = React.createClass({
                 updated: listing.editedDate,
                 enabled: listing.isEnabled ? "Enabled" : "Disabled",
                 featured: listing.isFeatured,
-                actions: null
+                actions: null,
+                private: listing.isPrivate,
+                securityMarking: listing.securityMarking
             };
         });
 

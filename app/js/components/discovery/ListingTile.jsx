@@ -5,7 +5,6 @@ var { Navigation, CurrentPath } = require('react-router');
 var ActiveState = require('../../mixins/ActiveStateMixin');
 var IconRating = require('../shared/IconRating.jsx');
 var CenterLaunchLink = require('../CenterLaunchLink.jsx');
-
 var BookmarkButton = require('../BookmarkButton.jsx');
 
 var ListingTile = React.createClass({
@@ -30,10 +29,9 @@ var ListingTile = React.createClass({
 
     render: function () {
         var listing = this.props.listing;
-
         var name = listing.title;
         var description = listing.descriptionShort && listing.descriptionShort.substr(0, 140);
-        var imageLargeUrl = listing.imageLargeUrl;
+        var imageLargeUrl;
         var avgRate = listing.avgRate;
         var agencyShort = listing.agencyShort;
         var href = this.makeHref(this.getActiveRoutePath(), null, {
@@ -63,7 +61,12 @@ var ListingTile = React.createClass({
                         halfClassName="icon-star-half-filled-yellow" />
                     {
                         agencyShort &&
-                            <span className="company">{ agencyShort }</span>
+                        <span className="company">
+                            { listing.isPrivate &&
+                                <i className="icon-lock-blue"></i>
+                            }
+                            { agencyShort }
+                        </span>
                     }
                     <p className="description">{ description }</p>
                     { this.renderActions() }

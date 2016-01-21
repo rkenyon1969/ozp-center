@@ -72,6 +72,7 @@ describe('UserReviews', function () {
             <UserReviews.UserReview review={userReview} user={profile}
                 listing={{}} onEdit={$.noop} />
         );
+
         expect($(review.getDOMNode()).find('.icon-pencil').length).to.equal(1);
 
         review = TestUtils.renderIntoDocument(

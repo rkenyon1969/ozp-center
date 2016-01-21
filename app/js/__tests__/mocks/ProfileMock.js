@@ -6,32 +6,13 @@ var $ = require('jquery');
 Object.assign = require('object-assign');
 
 var profileBase = Object.freeze({
-    'stewardedOrganizations': [],
-    'organizations': [],
-    'bio': '',
-    'lastLogin': '2015-01-14T20:57:19.129+0000',
-    'highestRole': 'ADMIN',
-    'createdDate': '2015-01-07T17:16:51.000+0000',
-    'email': 'testAdmin1@ozonePerfTesting.org',
-    'displayName': 'testAdmin1',
-    'username': 'testAdmin1',
-    'id': 2,
-    '_links': {
-        'curies': {
-            'href': 'http://ozoneplatform.org/docs/rels/{rel}',
-            'name': 'ozp',
-            'templated': true
-        },
-        'ozp:application-library': {
-            'href': 'https://www.owfgoss.org/ng/dev/mp/api/profile/2/library'
-        },
-        'ozp:user-data': {
-            'href': 'https://www.owfgoss.org/ng/dev/mp/api/profile/2/data'
-        },
-        'self': {
-            'href': 'https://www.owfgoss.org/ng/dev/mp/api/profile/2'
-        }
-    }
+    "url": "http://localhost:8181/api/profile/2/",
+    "organizations": ["Minitrue"],
+    "stewarded_organizations": ["Minitrue"],
+    "username": "julia",
+    "display_name": "Julia Dixon",
+    "bio": "",
+    "access_control": "http://localhost:8181/api/accessControl/5/"
 });
 
 function triggerStore(profile) {
@@ -42,7 +23,7 @@ module.exports = {
     mockAdmin: function (stewardedOrganizations) {
         var profile = Object.assign({}, profileBase, {
             username: 'testAdmin1',
-            highestRole: 'ADMIN',
+            highestRole: 'APPS_MALL_STEWARD',
             stewardedOrganizations: stewardedOrganizations || []
         });
 
@@ -63,11 +44,10 @@ module.exports = {
         return profile;
     },
 
-    mockUser: function (stewardedOrganizations) {
+    mockUser: function () {
         var profile = Object.assign({}, profileBase, {
             username: 'testUser1',
-            highestRole: 'USER',
-            stewardedOrganizations: stewardedOrganizations || []
+            stewardedOrganizations: []
         });
 
         triggerStore(profile);

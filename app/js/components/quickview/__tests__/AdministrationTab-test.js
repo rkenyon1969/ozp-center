@@ -13,7 +13,7 @@ describe('AdministrationTab', function () {
 
         var adminTab = TestUtils.renderIntoDocument(
                 <AdministrationTab listing={{approvalStatus: 'APPROVED'}}
-                    currentUser={{highestRole: 'ADMIN'}} />
+                    currentUser={{highestRole: 'APPS_MALL_STEWARD'}} />
         );
         expect($(adminTab.getDOMNode()).find('.featured-toggle')[0]).to.exist();
 
@@ -44,7 +44,7 @@ describe('AdministrationTab', function () {
 
         var adminTab = TestUtils.renderIntoDocument(
                 <AdministrationTab listing={listing}
-                    currentUser={{highestRole: 'ADMIN'}} />
+                    currentUser={{highestRole: 'APPS_MALL_STEWARD'}} />
         );
 
         var node = adminTab.getDOMNode(),
@@ -60,7 +60,7 @@ describe('AdministrationTab', function () {
         listing.isFeatured = true
         adminTab = TestUtils.renderIntoDocument(
                 <AdministrationTab listing={listing}
-                    currentUser={{highestRole: 'ADMIN'}} />
+                    currentUser={{highestRole: 'APPS_MALL_STEWARD'}} />
         );
 
         node = adminTab.getDOMNode();
@@ -80,7 +80,7 @@ describe('AdministrationTab', function () {
 
             var adminTab = TestUtils.renderIntoDocument(
                 <AdministrationTab listing={{approvalStatus: 'PENDING'}}
-                currentUser={{highestRole: 'ADMIN'}} />
+                currentUser={{highestRole: 'APPS_MALL_STEWARD'}} />
             );
             expect($(adminTab.getDOMNode()).find('.review-listing')[0]).to.exist();
     });
@@ -90,7 +90,7 @@ describe('AdministrationTab', function () {
         var AdministrationTab = require('../AdministrationTab.jsx');
 
         var adminTab = TestUtils.renderIntoDocument(
-                <AdministrationTab listing={{approvalStatus: 'PENDING', agency: 'Test Org'}}
+                <AdministrationTab listing={{approvalStatus: 'PENDING', agencyShort: 'Test Org'}}
                     currentUser={{highestRole: 'ORG_STEWARD', stewardedOrganizations: 'Test Org'}} />
         );
         expect($(adminTab.getDOMNode()).find('.review-listing')[0]).to.exist();
@@ -102,7 +102,7 @@ describe('AdministrationTab', function () {
 
         var adminTab = TestUtils.renderIntoDocument(
                 <AdministrationTab listing={{approvalStatus: 'APPROVED_ORG'}}
-                    currentUser={{highestRole: 'ADMIN'}} />
+                    currentUser={{highestRole: 'APPS_MALL_STEWARD'}} />
         );
         expect($(adminTab.getDOMNode()).find('.review-listing')[0]).to.exist();
 

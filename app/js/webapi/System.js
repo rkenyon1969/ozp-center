@@ -1,57 +1,48 @@
 'use strict';
 
 var $ = require('jquery');
-var Response = require('./responses/Response');
+var humps = require('humps');
+var _ = require('../utils/_');
 
 var { API_URL } = require('ozp-react-commons/OzoneConfig');
-
-function parse (response) {
-    return new Response(response).getItemAsList();
-}
 
 var ConfigApi = {
 
     getTypes: function () {
-        return $.getJSON(API_URL + '/api/type').pipe(parse);
+        return $.getJSON(API_URL + '/api/type/');
     },
 
     getCategories: function () {
-        return $.getJSON(API_URL + '/api/category').pipe(parse);
+        return $.getJSON(API_URL + '/api/category/');
     },
 
     getIntents: function () {
-        return $.getJSON(API_URL + '/api/intent').pipe(parse);
+        return $.getJSON(API_URL + '/api/intent/');
     },
 
     getContactTypes: function () {
-        return $.getJSON(API_URL + '/api/contactType').pipe(parse);
+        return $.getJSON(API_URL + '/api/contactType/');
     },
 
     getOrganizations: function () {
-        return $.getJSON(API_URL + '/api/agency').pipe(parse);
+        return $.getJSON(API_URL + '/api/agency/');
     },
 
     getUsers: function () {
-        return $.getJSON(API_URL + '/api/profile').pipe(parse);
+        return $.getJSON(API_URL + '/api/self/profile/');
     },
 
     //a single call to get categories,
     //types, intents, contact types, and organizations
     getMetadata: function() {
-        return $.getJSON(API_URL + '/api/metadata').then(function(response) {
-            var embedded = response._embedded,
-                categories = embedded && embedded['ozp:category'],
-                types = embedded && embedded['ozp:type'],
-                intents = embedded && embedded['ozp:intent'],
-                contactTypes = embedded && embedded['ozp:contact-type'],
-                organizations = embedded && embedded['ozp:organization'];
-
+        return $.getJSON(API_URL + '/api/metadata/').then(function(response) {
+            response = humps.camelizeKeys(response);
             return {
-                categories: parse(categories),
-                types: parse(types),
-                intents: parse(intents),
-                contactTypes: parse(contactTypes),
-                organizations: parse(organizations)
+                categories: response.categories,
+                types: response.listingTypes,
+                intents: response.intents,
+                contactTypes: response.contactTypes,
+                organizations: response.agencies
             };
         });
     }

@@ -18,6 +18,33 @@ var Stewards = React.createClass({
             getDisplayName: function (selectedRecord) {
                 return selectedRecord.displayName;
             },
+            getUsername: (data) => {
+              return data.map((user)=> {
+                user.username = user.user.username;
+                return user;
+              });
+            },
+            getStewardOrgs: (data) => {
+              return data.map((user)=> {
+                user.stewardedOrganizations = user.stewardedOrganizations.map((org) => {
+                  return org.title;
+                });
+                return user;
+              });
+            },
+            structStewardOrgs: (data) => {
+              var dataArray = [];
+              data.stewardedOrganizations.map((org) => {
+                dataArray.push({
+                  title: org
+                });
+              });
+              var newData = {
+                displayName: data.displayName,
+                stewardedOrganizations: dataArray
+              };
+              return newData;
+            },
             form: {
                 fields: {
                     username: {
@@ -52,9 +79,10 @@ var Stewards = React.createClass({
 
     getSchema: function () {
         // Steward Schema
-        var organizations = this.state.system.organizations.map(function (org) {
+        var organizations = this.state.system.organizations
+          .map(function (org) {
             return org.title;
-        });
+          });
         return struct({
             displayName: subtype(Str, function (s) {
                 return s.length <= 255;

@@ -56,7 +56,6 @@ var Quickview = React.createClass({
     },
 
     render: function () {
-
         var currentUser = this.props.currentUser;
 
         var { shown, listing } = this.state;
@@ -76,11 +75,11 @@ var Quickview = React.createClass({
                 });
 
                 if (currentUser.isAdmin() || _.contains(owners, currentUser.username) ||
-                    _.contains(currentUser.stewardedOrganizations, listing.agency)) {
-                    tabs.push({
-                        to: 'administration',
-                        name: 'Administration'
-                    });
+                    _.contains(currentUser.stewardedOrganizations, listing.agencyShort)) {
+                        tabs.push({
+                            to: 'administration',
+                            name: 'Administration'
+                        });
                 }
             }
         }

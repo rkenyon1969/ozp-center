@@ -75,6 +75,26 @@ var ListingStatus = React.createClass({
     }
 });
 
+var PrivateListing = React.createClass({
+    render: function () {
+        var isPrivate = this.props.listing.isPrivate;
+
+        var lockStyle = {
+            position: 'absolute',
+            left: '18px',
+            top: '0'
+        };
+
+        return (
+            <div style={lockStyle}>
+                { isPrivate &&
+                 <i className="icon-lock-blue"></i>
+                }
+            </div>
+        );
+    }
+});
+
 var EditedDate = React.createClass({
     render: function () {
         var editedDate = this.props.listing.editedDate,
@@ -93,6 +113,7 @@ var InfoBar = React.createClass({
         return (
             <h5 className="AdminOwnerListingTile__infoBar">
                 <ListingStatus listing={listing} />
+                <PrivateListing listing={listing} />
                 <p className="title">{listing.title}</p>
                 <EditedDate listing={listing} />
             </h5>
@@ -103,7 +124,7 @@ var InfoBar = React.createClass({
 var AdminOwnerListingTile = React.createClass({
 
     propTypes: {
-        role: React.PropTypes.oneOf([UserRole.ADMIN, UserRole.ORG_STEWARD, null]),
+        role: React.PropTypes.oneOf([UserRole.APPS_MALL_STEWARD, UserRole.ORG_STEWARD, null]),
         listing: React.PropTypes.object
     },
 
@@ -122,7 +143,7 @@ var AdminOwnerListingTile = React.createClass({
         var approvalStatus = listing.approvalStatus;
         var approvalStatusClasses;
 
-        if (role === UserRole.ADMIN) {
+        if (role === UserRole.APPS_MALL_STEWARD) {
             approvalStatusClasses = {
                 'draft': approvalStatus === 'IN_PROGRESS',
                 'pending': approvalStatus === 'PENDING',
@@ -156,19 +177,20 @@ var AdminOwnerListingTile = React.createClass({
 
     render: function () {
         var { listing } = this.props;
+
         var overview = this.makeHref(this.getActiveRoutePath(), this.getParams(), {
             listing: listing.id,
             action: 'view',
             tab: 'overview'
         });
         var classSet = React.addons.classSet(this._getApprovalStatusClass());
-
+        var imageLargeUrl = listing.imageLargeUrl;
 
         return (
             <li className={classSet}>
                 <ActionMenu listing={listing} />
                 <a href={overview}>
-                    <img alt={`Click to manage ${listing.title}`} className="AdminOwnerListingTile__img" src={listing.imageLargeUrl} />
+                    <img alt={`Click to manage ${listing.title}`} className="AdminOwnerListingTile__img" src={imageLargeUrl} />
                     <span className="hidden-span">{listing.title}</span>
                 </a>
                 <InfoBar listing={listing} />

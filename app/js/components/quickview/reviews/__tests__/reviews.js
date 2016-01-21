@@ -2,99 +2,58 @@
 
 var [adminReview, orgStewardReview, userReview, userReview2] = [
     {
-        "id": 1,
         "author": {
-            "id": 2,
-            "displayName": "Test Admin 1",
-            "username": "testAdmin1"
+            "user": {
+                "username": "testAdmin1",
+                "email": "testadmin1@oceania.gov"
+            },
+            "display_name": "Winston Smith"
         },
-        "text": "Test Admin 1 Review",
-        "createdDate": "2015-01-22T17:27:30.418+0000",
-        "editedDate": "2015-01-22T17:49:23.625+0000",
+        "listing": 2,
         "rate": 3,
-        "_links": {
-            "ozp:application": {
-                "href": "https://localhost:8443/marketplace/api/listing/1"
-            },
-            "self": {
-                "href": "https://localhost:8443/marketplace/api/listing/1/itemComment/1"
-            },
-            "via": {
-                "href": "https://localhost:8443/marketplace/api/profile/2"
-            }
-        }
+        "text": "Admin review",
+        "id": 6
     },
     {
-        "id": 2,
         "author": {
-            "id": 3,
-            "displayName": "Test Org Steward 1",
-            "username": "testOrgSteward1"
+            "user": {
+                "username": "testOrgSteward1",
+                "email": "teststeward1@oceania.gov"
+            },
+            "display_name": "Julia Dixon"
         },
-        "text": "Test Org Steward 1 Review",
-        "createdDate": "2015-01-22T17:43:45.258+0000",
-        "editedDate": "2015-01-22T17:49:15.856+0000",
-        "rate": 2,
-        "_links": {
-            "ozp:application": {
-                "href": "https://localhost:8443/marketplace/api/listing/1"
-            },
-            "self": {
-                "href": "https://localhost:8443/marketplace/api/listing/1/itemComment/2"
-            },
-            "via": {
-                "href": "https://localhost:8443/marketplace/api/profile/3"
-            }
-        }
+        "listing": 3,
+        "rate": 5,
+        "text": "Org steward review",
+        "id": 7
     },
     {
-        "id": 3,
         "author": {
-            "id": 4,
-            "displayName": "Test User 1",
-            "username": "testUser1"
+            "user": {
+                "username": "testUser1",
+                "email": "testuser1@airstripone.com"
+            },
+            "display_name": "Jones"
         },
+        "listing": 2,
+        "rate": 4,
         "text": "Test User 1 Review",
-        "createdDate": "2015-01-22T21:01:05.645+0000",
-        "editedDate": "2015-01-22T21:01:05.645+0000",
-        "rate": 4,
-        "_links": {
-            "ozp:application": {
-                "href": "https://localhost:8443/marketplace/api/listing/1"
-            },
-            "self": {
-                "href": "https://localhost:8443/marketplace/api/listing/1/itemComment/3"
-            },
-            "via": {
-                "href": "https://localhost:8443/marketplace/api/profile/4"
-            }
-        }
+        "id": 4
     },
     {
-        "id": 4,
         "author": {
-            "id": 4,
-            "displayName": "Test User 1",
-            "username": "testUser1"
+            "user": {
+                "username": "testUser1",
+                "email": "testuser1@airstripone.com"
+            },
+            "display_name": "Jones"
         },
-        "text": "Out out brief candle. Life is but a walking shadow.",
-        "createdDate": "2015-01-22T21:01:05.645+0000",
-        "editedDate": "2015-01-22T21:01:05.645+0000",
+        "listing": 2,
         "rate": 4,
-        "_links": {
-            "ozp:application": {
-                "href": "https://localhost:8443/marketplace/api/listing/1"
-            },
-            "self": {
-                "href": "https://localhost:8443/marketplace/api/listing/1/itemComment/4"
-            },
-            "via": {
-                "href": "https://localhost:8443/marketplace/api/profile/4"
-            }
-        }
+        "text": "Out out brief candle. Life is but a walking shadow.",
+        "id": 8
     }
-
-]
+];
 
 module.exports = {
     userReview: userReview,

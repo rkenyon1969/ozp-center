@@ -9,7 +9,7 @@ var { API_URL } = require('ozp-react-commons/OzoneConfig');
 
 // ContactType Schema
 var ContactType = struct({
-    title: subtype(Str, function (s) {
+    name: subtype(Str, function (s) {
         return s.length <= 50;
     }),
     required: Bool
@@ -20,21 +20,21 @@ var ContactTypes = React.createClass({
     getDefaultProps: function () {
         return {
             title: 'Contact Type',
-            url: API_URL + '/api/contactType',
+            url: API_URL + '/api/contact_type',
             Schema: ContactType,
             getDisplayName: function (selectedRecord) {
-                return selectedRecord.title;
+                return selectedRecord.name;
             },
             form: {
                 fields: {
-                    title: {
+                    name: {
                         help: 'Max. 50 characters'
                     }
                 }
             },
             grid: {
                 columns: [
-                    { field: 'title', caption: 'Title', size: '50%' },
+                    { field: 'name', caption: 'Name', size: '50%' },
                     { field: 'required', caption: 'Required', size: '50%' }
                 ]
             }

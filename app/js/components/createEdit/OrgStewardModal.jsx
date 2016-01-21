@@ -30,26 +30,30 @@ module.exports = React.createClass({
     renderStewards() {
         var me = this;
         var stewards = [];
+
         this.state.system.organizations.map(function(org){
+
             var stewardsForOrg = _.map(me.state.stewards, function(s){
-                if (_.contains(s.stewardedOrganizations, org.title)){
-                    return (<li>{s.displayName} | <a href={"mailto:" + s.email}>{s.email}</a></li>);
-                }
-            });
+                return _.map(s.stewarded_organizations, function (stew_org) {
+                    if (_.contains(stew_org, org.title)){
+                        return (<li>{s.display_name} | <a href={"mailto:" + s.user.email}>{s.user.email}</a></li>);
+                    }
+                })
+            })
 
             stewards.push([
                 <li>{org.title}</li>,
                 <ul>
                     { stewardsForOrg }
                 </ul>
-            ]);
-        });
+            ])
+        })
 
         return(
             <ul>
                 { stewards }
             </ul>
-        );
+        )
     },
 
     componentWillMount() {

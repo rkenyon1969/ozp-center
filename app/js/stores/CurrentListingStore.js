@@ -16,11 +16,14 @@ var { approvalStatus } = require('ozp-react-commons/constants');
 var { cloneDeep, assign } = require('../utils/_');
 var { ListingApi } = require('../webapi/Listing');
 var { ImageApi } = require('../webapi/Image');
+var { API_URL } = require('ozp-react-commons/OzoneConfig');
 
 var _listing = null;
 var _submitting = false;
 
 var imageErrors = {screenshots: []};
+
+require('sweetalert');
 
 //list of property names that can be passed into onUpdateListing which are images
 //and which must therefore be treated specially.  The 'value' for these properties
@@ -48,23 +51,6 @@ var screenshotPropertyUrlMap = {
 };
 var imagePropertyUrlMap =
     Object.assign({}, listingIconPropertyUrlMap, screenshotPropertyUrlMap);
-
-/**
- * From _listing create the json to be sent to the server to save the listing
- */
-function makeJsonForSave() {
-    var screenshots = _listing.screenshots.map(
-            s => _.omit(s, 'smallImage', 'largeImage', 'smallImageUrl', 'largeImageUrl')
-        ),
-        strippedListing = _.omit(_listing,
-            'imageSmallUrl', 'imageMediumUrl', 'imageLargeUrl', 'imageXlargeUrl',
-            'smallIcon', 'largeIcon', 'bannerIcon', 'featuredBannerIcon',
-            'screenshots'),
-        json = Object.assign(strippedListing, {screenshots: screenshots});
-
-    return json;
-}
-
 
 /**
  * Check to see if url is an object url and if so revoke it
@@ -249,7 +235,7 @@ var CurrentListingStore = createStore({
                 Object.assign(_listing, oldListingData);
                 me.trigger(Object.assign({saveStatus: null}, validation));
             } else {
-                ListingActions.save(makeJsonForSave());
+                ListingActions.save(_listing);
             }
         });
     },
@@ -262,6 +248,7 @@ var CurrentListingStore = createStore({
 
     getDraftValidation: function () {
         var { errors, isValid } = validateDraft(_listing, getSystem());
+
         return {
             isValid: isValid,
             errors: errors,
@@ -280,7 +267,7 @@ var CurrentListingStore = createStore({
 
     resolveMessages: function () {
         var messages = listingMessages;
-        var requiredContactTypes = getSystem().contactTypes.filter(t => t.required).map(t => t.title);
+        var requiredContactTypes = getSystem().contactTypes.filter(t => t.required).map(t => t.name);
 
         if (requiredContactTypes.length > 0) {
             messages['help.contacts'] = 'At least one contact of each of the ' +
@@ -326,7 +313,7 @@ var CurrentListingStore = createStore({
                 deferred.resolve(_listing);
             } else {
                 ListingApi.getById(id).then(l => {
-                    this.refreshListing(new Listing(l));
+                    this.refreshListing(cloneDeep(l));
                     deferred.resolve(_listing);
                 });
             }
@@ -343,8 +330,19 @@ var CurrentListingStore = createStore({
      * in the _listing object.  Returns a promise that resolves when everything is complete
      */
     saveImages: function() {
-        function optionalPromise(image, property) {
-            var promise = image ? ImageApi.save(image) : null;
+        function optionalPromise(image, property, marking) {
+
+            var markingLabel;
+            var promise;
+
+            if (property[0] === 'screenshots') {
+                var index = parseInt(property[1]);
+                markingLabel = property[2] + 'Marking';
+                promise = image && _listing.screenshots[index][markingLabel] ? ImageApi.save(image, marking) : null;
+            } else {
+                markingLabel = property + 'Marking';
+                promise = image && _listing[markingLabel] ? ImageApi.save(image, marking) : null;
+            }
 
             if (promise) {
                 promise.fail(me.handleImageSaveFailure.bind(me, property));
@@ -357,18 +355,19 @@ var CurrentListingStore = createStore({
         imageErrors = {screenshots: []};
 
         var me = this,
-            {smallIcon, largeIcon, bannerIcon, featuredBannerIcon, screenshots} = _listing,
+            {smallIcon, largeIcon, bannerIcon, featuredBannerIcon, screenshots,
+             smallIconMarking, largeIconMarking, bannerIconMarking, featuredBannerIconMarking} = _listing,
 
-            smallIconPromise = optionalPromise(smallIcon, 'smallIcon'),
-            largeIconPromise = optionalPromise(largeIcon, 'largeIcon'),
-            bannerIconPromise = optionalPromise(bannerIcon, 'bannerIcon'),
+            smallIconPromise = optionalPromise(smallIcon, 'smallIcon', smallIconMarking),
+            largeIconPromise = optionalPromise(largeIcon, 'largeIcon', largeIconMarking),
+            bannerIconPromise = optionalPromise(bannerIcon, 'bannerIcon', bannerIconMarking),
             featuredBannerIconPromise =
-                optionalPromise(featuredBannerIcon, 'featuredBannerIcon'),
+                optionalPromise(featuredBannerIcon, 'featuredBannerIcon', featuredBannerIconMarking),
 
             screenshotPromises = _.flatten(screenshots.map(
                 (s, i) => [
-                    optionalPromise(s.smallImage, ['screenshots', i, 'smallImage']),
-                    optionalPromise(s.largeImage, ['screenshots', i, 'largeImage'])
+                    optionalPromise(s.smallImage, ['screenshots', i, 'smallImage'], s.smallImageMarking),
+                    optionalPromise(s.largeImage, ['screenshots', i, 'largeImage'], s.largeImageMarking)
                 ]
             )),
             promises = [
@@ -401,48 +400,51 @@ var CurrentListingStore = createStore({
                 });
 
         if (smallIconResponse) {
+            smallIconResponse = JSON.parse(smallIconResponse);
             _listing.smallIcon = null;
             _listing.smallIconId = smallIconResponse.id;
-            _listing[listingIconPropertyUrlMap.smallIcon] = smallIconResponse._links.self.href;
+            _listing[listingIconPropertyUrlMap.smallIcon] = API_URL + '/api/image/' + _listing.smallIconId;
         }
         if (largeIconResponse) {
+            largeIconResponse = JSON.parse(largeIconResponse);
             _listing.largeIcon = null;
             _listing.largeIconId = largeIconResponse.id;
-            _listing[listingIconPropertyUrlMap.largeIcon] = largeIconResponse._links.self.href;
+            _listing[listingIconPropertyUrlMap.largeIcon] = API_URL + '/api/image/' + _listing.largeIconId;
         }
         if (bannerIconResponse) {
+            bannerIconResponse = JSON.parse(bannerIconResponse);
             _listing.bannerIcon = null;
             _listing.bannerIconId = bannerIconResponse.id;
-            _listing[listingIconPropertyUrlMap.bannerIcon] =
-                bannerIconResponse._links.self.href;
+            _listing[listingIconPropertyUrlMap.bannerIcon] = API_URL + '/api/image/' + _listing.bannerIconId;
         }
         if (featuredBannerIconResponse) {
+            featuredBannerIconResponse = JSON.parse(featuredBannerIconResponse);
             _listing.featuredBannerIcon = null;
             _listing.featuredBannerIconId = featuredBannerIconResponse.id;
-            _listing[listingIconPropertyUrlMap.featuredBannerIcon] =
-                featuredBannerIconResponse._links.self.href;
+            _listing[listingIconPropertyUrlMap.largeBannerIcon] = API_URL + '/api/image/' +
+                _listing.featuredBannerIconId;
         }
 
         _listing.screenshots =
             _.zip(_listing.screenshots, screenshotResponses).map(function(screenshot) {
                 var existing = screenshot[0],
                     responses = screenshot[1],
-                    smallResp = responses ? responses.smallImageResponse : null,
-                    largeResp = responses ? responses.largeImageResponse : null,
+                    smallResp = responses ? JSON.parse(responses.smallImageResponse) : null,
+                    largeResp = responses ? JSON.parse(responses.largeImageResponse) : null,
                     newScreenshot = Object.assign({}, existing);
 
                 if (smallResp) {
                     newScreenshot.smallImage = null;
                     newScreenshot.smallImageId = smallResp.id;
                     newScreenshot[screenshotPropertyUrlMap.smallImage] =
-                        smallResp._links.self.href;
+                        API_URL + '/api/image/' + newScreenshot.smallImageId;
                 }
 
                 if (largeResp) {
                     newScreenshot.largeImage = null;
                     newScreenshot.largeImageId = largeResp.id;
                     newScreenshot[screenshotPropertyUrlMap.largeImage] =
-                        largeResp._links.self.href;
+                        API_URL + '/api/image/' + newScreenshot.largeImageId;
                 }
 
                 return newScreenshot;
@@ -455,8 +457,8 @@ var CurrentListingStore = createStore({
      * handler
      */
     handleImageSaveFailure: function(property, response, err, statusText) {
-        var json = response.responseJSON,
-            jsonMessage = json ? json.message : null,
+        var json = JSON.parse(response.responseText),
+            jsonMessage = json ? json.security_marking[0] : null,
             errorMessage = jsonMessage || statusText ||
                 'Unknown error saving image';
 
@@ -465,8 +467,40 @@ var CurrentListingStore = createStore({
         }
 
         updateValue(imageErrors, property, errorMessage);
-
         this.trigger({imageErrors: imageErrors, saveStatus: null});
+
+        this.generateAlert(property, errorMessage);
+    },
+
+    /**
+     * Build and output error message via SweetAlert.
+     */
+    generateAlert: function(property, errorMessage) {
+        if (errorMessage.substring(0, 8) == 'Security') {
+
+            property = _.last(property);
+
+            property = (property == 'smallIcon') ? 'Small Icon' : property;
+            property = (property == 'largeIcon') ? 'Large Icon' : property;
+            property = (property == 'bannerIcon') ? 'Small Banner' : property;
+            property = (property == 'featuredBannerIcon') ? 'Large Banner' : property;
+            property = (property == 'smallImage') ? 'Preview Image' : property;
+            property = (property == 'largeImage') ? 'Full Size Image' : property;
+
+            var msg = property + ' ' + errorMessage.toLowerCase();
+
+            /* jshint ignore:start */
+            sweetAlert({
+                title: "Could not save!",
+                text: "Your listing could not be saved: " + msg,
+                type: "error",
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "ok",
+                closeOnConfirm: true,
+                html: false
+            });
+            /* jshint ignore:end */
+        }
     }
 });
 
