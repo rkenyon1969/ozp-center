@@ -1,3 +1,66 @@
+## 1.1.0 (2016-01-26)
+
+
+#### Bug Fixes
+
+* **Amdin Tab:** org stewards were not seeing admin tab ([335e40f2](https://github.com/ozone-development/ozp-center.git/commit/335e40f2c683afd786e1f0e93bfda47373992510))
+* **OrgSteward Modal:** Hit endpoint for all stewards; modify display ([676e9630](https://github.com/ozone-development/ozp-center.git/commit/676e9630c46550cd964b58b2dc29f83d9de4dbea))
+* **activity and review:** Use paginated endpoint ([3a32da6c](https://github.com/ozone-development/ozp-center.git/commit/3a32da6cefc90ab69e9cbc733c55ca3c34c5867b))
+* **bootstrap-classify:**
+  * Fix small and large banner error messages. ([a9f7ebff](https://github.com/ozone-development/ozp-center.git/commit/a9f7ebffcb96b23ae8076f4c698447f2d5da4035))
+  * Add onFocus event handling. Fix unit test. ([66d1927f](https://github.com/ozone-development/ozp-center.git/commit/66d1927feeba6ba7646c6d8baa37e99fa632a88f))
+  * Add sweet alert for image PUT failures. ([7e4f951c](https://github.com/ozone-development/ozp-center.git/commit/7e4f951c78072a0db5bb414545a971556d8b78bd))
+  * Handle marking failures on image endpoint. ([4cc889d8](https://github.com/ozone-development/ozp-center.git/commit/4cc889d84cc4a64356f3c5e8ada51a029c0e9a67))
+  * patch up unit test. ([0a64d3fb](https://github.com/ozone-development/ozp-center.git/commit/0a64d3fba36e18e4c6bc21d230ff71357fddb9a3))
+  * Correct typo causing improper featured banner marking. ([534e6c3f](https://github.com/ozone-development/ozp-center.git/commit/534e6c3fc051640c47202028d2053df39fe28e62))
+  * Draft validation for images and screenshots. ([db7512eb](https://github.com/ozone-development/ozp-center.git/commit/db7512ebf436b67841d93e67f8899818a409add5))
+  * with script-loader don't need plugins. ([c18fadcd](https://github.com/ozone-development/ozp-center.git/commit/c18fadcde74ce09164c56ce87f374d262d64f34e))
+  * use the webpack script-loader to load bootstrap-classify ([92832061](https://github.com/ozone-development/ozp-center.git/commit/92832061ea70a1e03f90a5ea2236d6855af26eab))
+* **createEdit:**
+  * Remove double scrollbar ([b285fc50](https://github.com/ozone-development/ozp-center.git/commit/b285fc503e184b8080e0569ce1ab6d2f7f8fd4ac))
+  * Show labels for Associated Organization ([82debb03](https://github.com/ozone-development/ozp-center.git/commit/82debb03a594ba38653dde912e47248a095e39b9))
+* **feedback modal:** Alan added current_rejection to listing; hook it up. ([5ab0cf6d](https://github.com/ozone-development/ozp-center.git/commit/5ab0cf6d55d79524b07afe4002c12c5a6949c8a2))
+* **image updload:** Add dummy upload to make image upload work for IE11. ([ae9f929d](https://github.com/ozone-development/ozp-center.git/commit/ae9f929d2f4ebe5c0a772ff81e83c96b860d51c4))
+* **listing mgmt:**
+  * Fix merge problem. ([71e4fb50](https://github.com/ozone-development/ozp-center.git/commit/71e4fb503485ea7a510fe5c7f0cffcd828ec81c2))
+  * Prevent inappropriate display of error modal. ([cb016c4b](https://github.com/ozone-development/ozp-center.git/commit/cb016c4b1dd8f842fd52d26328b75fa48337c0fc))
+  * For org and all listings show only selected count. ([37850696](https://github.com/ozone-development/ozp-center.git/commit/3785069604bca06543d70ab3e878e6a054e7dc5c))
+  * Possible fix for IE9 image upload. ([fc0d6966](https://github.com/ozone-development/ozp-center.git/commit/fc0d6966fd691baaaee7590c6835cfed82cb7ce1))
+  * Fix org tab filter. ([f7352a82](https://github.com/ozone-development/ozp-center.git/commit/f7352a8246875269ee7d9d048cb79a886f6ecaba))
+  * show edited_date ([ed14d42c](https://github.com/ozone-development/ozp-center.git/commit/ed14d42c42564400a2150cc32e7d0d5b5c13d1fc))
+  * Use title vice short_name to list by org ([ce0edb88](https://github.com/ozone-development/ozp-center.git/commit/ce0edb8804e45b91d00b9bb16589d702a54dae95))
+  * Fix OrgListing tab by using agencyShort vice org OZBE#30 ([f5953a49](https://github.com/ozone-development/ozp-center.git/commit/f5953a49c182c7830dd0ac7edac0d94125a90c87))
+  * Match PaginatedList to new backend counts OZBE#30 ([85c012f2](https://github.com/ozone-development/ozp-center.git/commit/85c012f29addaf458060f4f81efbf0ea7e973951))
+  * Fix all center listings per new paging ([1bb85dd9](https://github.com/ozone-development/ozp-center.git/commit/1bb85dd9b96b0c7712552076697a7daba2766f99))
+* **pagination:** Replace hardcoded value with one from commons. ([cd46bfa2](https://github.com/ozone-development/ozp-center.git/commit/cd46bfa2e46c608b31ba0f24164fec5e3f7ac2dd))
+* **profile search:** Update endpoint. ([18f2f02c](https://github.com/ozone-development/ozp-center.git/commit/18f2f02cbf5b0cd67d0d6dfec9fd2cdd6ae9dbd8))
+* **quickview:** rejection details field name changed. ([da23e2e9](https://github.com/ozone-development/ozp-center.git/commit/da23e2e9edd035c57e2a07f0894b4dd204e5bbef))
+* **quickview details:** organization, phone numbers, Gov Sponsor ([88fb129b](https://github.com/ozone-development/ozp-center.git/commit/88fb129bc2c32a654e8e3f9b43cc190f82666e01))
+* **search:**
+  * For new backend catgegory searches should have 'or' ([35d7a120](https://github.com/ozone-development/ozp-center.git/commit/35d7a120edf9e8ccbf0c1cec9200177641929780))
+  * Updates to get search to work with paging changes. ([5f20ad46](https://github.com/ozone-development/ozp-center.git/commit/5f20ad46ce14e02fc3b2d58af8205a417915410c))
+* **webapi:** constructor needs to create object with new ([2475bc3e](https://github.com/ozone-development/ozp-center.git/commit/2475bc3e54000bd0bac213f31e0dcef173ea4e00))
+
+
+#### Features
+
+* **Administration:** reject and accept ([00192a0b](https://github.com/ozone-development/ozp-center.git/commit/00192a0bd2912e31dc0e744060942f827998cb1f))
+* **NewBackend:** Added support for the new backend on Center Cettings tabs. #27, #25, #28, #26 ([27c76dd7](https://github.com/ozone-development/ozp-center.git/commit/27c76dd7e82a35299050d25fd1e2ed4272701156))
+* **activities:** Hook-up activity endpoints OZBE#31 ([11877ba8](https://github.com/ozone-development/ozp-center.git/commit/11877ba8c8bd2594ed7b5f9d76559cb6b6df430a))
+* **bookmarks:** Bookmark toggling works in discovery OZBE8 ([cb0cc5da](https://github.com/ozone-development/ozp-center.git/commit/cb0cc5da8cb4f75f9f381b2083b3fe20bb28a17a))
+* **createEdit:** Preliminary create/edit functionality OZBE37 ([358781e8](https://github.com/ozone-development/ozp-center.git/commit/358781e8a12be2bbc609a6c9a308763d72ef253f))
+* **discovery:**
+  * hook up organization counts OZBE#49 ([015c7918](https://github.com/ozone-development/ozp-center.git/commit/015c79186ab38f0c9f522c10c284cf843cf9226c))
+  * Preliminary integration of discovery page OZBE3 ([1d500ccb](https://github.com/ozone-development/ozp-center.git/commit/1d500ccb5e48bd4c56dbba4c22393708ca156592))
+* **listing management:** Hook up my listings OZBE38 ([06928859](https://github.com/ozone-development/ozp-center.git/commit/06928859d54c3856de9d100a9dc789c31d8dd131))
+* **organizations:** Show short names in dropdown OZBE15 ([cd505df6](https://github.com/ozone-development/ozp-center.git/commit/cd505df6ed9bd45f771fa82797f831d5d176624b))
+* **private listings:** Add ability to make listings private #447 ([307416c2](https://github.com/ozone-development/ozp-center.git/commit/307416c263dce80d53df75b1c4eb47599cf6b132))
+* **search:**
+  * Ignore enter key press in search box #187 ([70a70598](https://github.com/ozone-development/ozp-center.git/commit/70a7059854d302bca3b7e7be373b546341092b56))
+  * Update /listing/search to /listings/search OZBE18 ([87f60db1](https://github.com/ozone-development/ozp-center.git/commit/87f60db10bb5113d75a5a01f1c619704eda8dea4))
+  * Changes to support search OZBE18 ([3ed6aaca](https://github.com/ozone-development/ozp-center.git/commit/3ed6aaca0af461ba020699b974e891e37b67976f))
+
+
 ### 1.0.21 (2016-01-20)
 
 
