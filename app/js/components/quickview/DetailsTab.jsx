@@ -20,7 +20,7 @@ var DetailsTab = React.createClass({
       });
     },
 
-    componentWillUnount: function() {
+    componentWillUnmount: function() {
       tourCh.publish({
         detailsLoaded: false
       });

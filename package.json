@@ -96,6 +96,7 @@
     "magnific-popup": "^0.9.9",
     "moment": "2.9.0",
     "object-assign": "1.0.0",
+    "object-db": "^1.2.4",
     "ozp-react-commons": "git://github.com/ozone-development/ozp-react-commons#master",
     "react": "0.12.2",
     "react-datepicker": "0.5.1",

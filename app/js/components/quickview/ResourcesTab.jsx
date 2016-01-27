@@ -19,7 +19,7 @@ var ResourcesTab = React.createClass({
       });
     },
 
-    componentWillUnount: function() {
+    componentWillUnmount: function() {
       tourCh.publish({
         resourcesLoaded: false
       });

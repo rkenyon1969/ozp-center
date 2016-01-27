@@ -16,13 +16,13 @@ var OverviewTab = React.createClass({
         listing: React.PropTypes.object
     },
 
-    componentDidMount: function() {
-      tourCh.publish({
-        overviewLoaded: true
-      });
+    componentDidUpdate: function() {
+        tourCh.publish({
+            overviewLoaded: true
+        });
     },
 
-    componentWillUnount: function() {
+    componentWillUnmount: function() {
       tourCh.publish({
         overviewLoaded: false
       });

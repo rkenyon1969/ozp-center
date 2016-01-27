@@ -32,7 +32,7 @@ var RatingProgressBar = React.createClass({
       });
     },
 
-    componentWillUnount: function() {
+    componentWillUnmount: function() {
       tourCh.publish({
         reviewsLoaded: false
       });
