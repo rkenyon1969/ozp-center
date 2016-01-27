@@ -20,11 +20,17 @@ var BookmarkButton = React.createClass({
     },
 
     toggleInLibrary: function (e) {
+        var that = this;
+
         e.preventDefault();
         e.stopPropagation();
 
         if (this.inLibrary()) {
-            removeFromLibrary(this.props.listing);
+            var libId = _.find(this.state.library, function(x) {
+                return x.listing.id === that.props.listing.id;
+            }).id;
+
+            removeFromLibrary(this.props.listing, libId);
         }
         else {
             addToLibrary(this.props.listing);

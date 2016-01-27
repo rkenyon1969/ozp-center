@@ -43,19 +43,20 @@ var ApprovalStatusFilter = React.createClass({
         if (value === 'all') {
             value = null;
         }
-        this.props.onFilterChanged('approvalStatus', value);
+        this.props.onFilterChanged('approval_status', value);
     },
 
     _renderRadioGroupOptions: function () {
+
         var counts = this.props.counts;
-        var value = this.props.value.approvalStatus || 'all';
+        var value = this.props.value.approval_status || 'all';
 
         var components = [
             filterOption(value, 'All', 'all', counts.total, 'all-listings-filter-all', 'label-all', undefined),
             filterOption(value, 'Published', 'APPROVED', counts.APPROVED, 'all-listings-filter-published', 'label-published', 'icon-thumbs-up-12-greenDark')
         ];
 
-        if (this.props.role === UserRole.ADMIN) {
+        if (this.props.role === UserRole.APPS_MALL_STEWARD) {
             components.push(
                 filterOption(value, 'Needs action', 'APPROVED_ORG', counts.APPROVED_ORG, 'all-listings-filter-needs-action', 'label-needs-action', 'icon-exclamation-12-redOrangeDark'),
                 filterOption(value, 'Pending, Org.', 'PENDING', counts.PENDING, 'all-listings-filter-pending', 'label-pending', 'icon-loader-12-blueDark')
@@ -75,7 +76,7 @@ var ApprovalStatusFilter = React.createClass({
     },
 
     render: function() {
-        var value = this.props.value.approvalStatus || 'all';
+        var value = this.props.value.approval_status || 'all';
 
         return (
             <div>

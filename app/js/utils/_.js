@@ -16,6 +16,8 @@ module.exports = {
     pick: require('lodash/objects/pick'),
     omit: require('lodash/objects/omit'),
     values: require('lodash/objects/values'),
+    keys: require('lodash/objects/keys'),
+    has: require('lodash/objects/has'),
 
     find: require('lodash/collections/find'),
     filter: require('lodash/collections/filter'),
@@ -25,6 +27,7 @@ module.exports = {
     forEach: require('lodash/collections/forEach'),
     every: require('lodash/collections/every'),
     groupBy: require('lodash/collections/groupBy'),
+    pluck: require('lodash/collections/pluck'),
 
     findIndex: require('lodash/arrays/findIndex'),
     compact: require('lodash/arrays/compact'),
@@ -35,12 +38,15 @@ module.exports = {
     last: require('lodash/arrays/last'),
     remove: require('lodash/arrays/remove'),
     range: require('lodash/arrays/range'),
+    difference: require('lodash/arrays/difference'),
 
     partial: require('lodash/functions/partial'),
     once: require('lodash/functions/once'),
     debounce: require('lodash/functions/debounce'),
 
     escape: require('lodash/utilities/escape'),
+
+    template: require('lodash/utilities/template'),
 
     noop: function () {}
 };

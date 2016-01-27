@@ -7,8 +7,9 @@ var readyObject = {};
 
 // HACK: for some reason window.localstorage is lost in this file.
 setInterval(() => {
-  readyObject = tourCh.get();
-}, 200);
+  readyObject = Object.assign({}, readyObject, tourCh.get());
+  console.log(readyObject);
+}, 1000);
 
 const meTour = new Tour({
   backdrop: true,
@@ -61,7 +62,7 @@ const meTour = new Tour({
     },
     {
       path: "/dist/#/home/?%2F%3F=&listing=1&action=view&tab=overview",
-      element: ".modal-body .nav",
+      element: ".quickview-overview",
       title: "Listing Overview",
       content: "Click a tile to access the listing detail view. From this popup you can see screenshots, long descriptions, reviews, and other resources. Use the links at the top of the listing to launch, bookmark or close it.",
       placement: "left",

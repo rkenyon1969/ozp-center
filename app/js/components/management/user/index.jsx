@@ -47,12 +47,12 @@ var ListingManagement = React.createClass({
         if(currentUser.stewardedOrganizations.length > 0 && system.organizations.length > 0) {
             _.forEach(currentUser.stewardedOrganizations, function(orgName) {
                 var org = _.find(system.organizations, function(orgObj) {
-                    return orgObj.title === orgName;
+                    return orgObj.shortName === orgName;
                 });
 
                 tabs.splice(2, 0, {
                     to: 'org-listings',
-                    name: org.shortName + ' Listings',
+                    name: org.title + ' Listings',
                     params: {
                         org: org.title
                     }

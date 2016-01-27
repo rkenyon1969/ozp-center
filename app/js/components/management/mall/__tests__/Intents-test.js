@@ -61,7 +61,7 @@ describe('Intents', function() {
 
         expect(form.fields.label).to.be.ok();
         expect(form.fields.action).to.be.ok();
-        expect(form.fields.type).to.be.ok();
+        expect(form.fields.mediaType).to.be.ok();
         expect(form.fields.iconInput).to.be.ok();
 
         var iconInputClass = form.fields.iconInput.input(null, {});
@@ -168,8 +168,9 @@ describe('Intents', function() {
         var iconId = 1;
         var intentData = {
             action: 'view',
-            dataType: 'text/plain',
-            iconInput: iconData
+            mediaType: 'text/plain',
+            iconInput: iconData,
+            label: 'test'
         };
 
         crud.props.onCreate(intentData);
@@ -182,9 +183,10 @@ describe('Intents', function() {
         expect(onCreateSpy.calledOnce).to.be.true();
         expect(onCreateSpy.calledWithMatch({
             action: intentData.action,
-            dataType: intentData.dataType,
+            mediaType: intentData.mediaType,
             iconInput: undefined,
-            iconId: iconId
+            iconId: iconId,
+            label: intentData.label
         })).to.be.true();
     });
 
@@ -220,14 +222,14 @@ describe('Intents', function() {
         })).to.be.true();
     });
 
-    it('uses the iconInput value as the id if it is a string', function() {
+    it('uses the iconInput value as the id if it is a number', function() {
         var intentsCmp = TestUtils.renderIntoDocument(
             <Intents />
         );
 
         var crud = TestUtils.findRenderedComponentWithType(intentsCmp, Crud);
 
-        var iconData = '1234-5678';
+        var iconData = 12345;
 
         var intentData = {
             action: 'view',

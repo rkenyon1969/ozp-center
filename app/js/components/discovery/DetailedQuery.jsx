@@ -113,7 +113,7 @@ var DetailedQuery = React.createClass({
                   {cat}
                 </span>
                 {(i !== this.props.data.categories.length -1) &&
-                  <span>&#32;and&#32;</span>
+                  <span>&#32;or&#32;</span>
                 }
               </span>
             );

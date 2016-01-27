@@ -73,7 +73,6 @@ var ReviewsTab = React.createClass({
     getState: function () {
         var currentUser = SelfStore.getDefaultData().currentUser;
         var reviews = CurrentListingStore.getReviews();
-
         if (!reviews) {
             return {
                 reviews: reviews,
@@ -83,8 +82,11 @@ var ReviewsTab = React.createClass({
         }
         var updates = {
             reviews: reviews,
-            currentUserReview: _.find(reviews, { author: { username: currentUser.username }})
+            currentUserReview: _.find(reviews, { author:
+                                                 { user:
+                                                   { username: currentUser.username }}})
         };
+
         // update reviewBeingEdited prop if editing
         if (this.state && this.state.reviewBeingEdited) {
             updates.reviewBeingEdited = _.find(reviews, { id: this.state.reviewBeingEdited.id });

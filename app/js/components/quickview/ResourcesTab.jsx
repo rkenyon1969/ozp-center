@@ -73,11 +73,12 @@ var ResourcesTab = React.createClass({
         var contacts = {};
 
         this.props.listing.contacts.map(function (contact) {
-            if(typeof(contacts[contact.type]) === 'undefined'){
-                contacts[contact.type] = [];
-                contacts[contact.type].push(contact);
+            var contactName = contact.contactType.name;
+            if(typeof(contacts[contactName]) === 'undefined'){
+                contacts[contactName] = [];
+                contacts[contactName].push(contact);
             }else{
-                contacts[contact.type].push(contact);
+                contacts[contactName].push(contact);
             }
         });
 

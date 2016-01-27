@@ -17,8 +17,10 @@ var User = struct({
 });
 
 var Screenshot = struct({
-    smallImageId: NonBlankString(36),
-    largeImageId: NonBlankString(36)
+    smallImageId: Num,
+    smallImageMarking: NonBlankString(200),
+    largeImageId: Num,
+    largeImageMarking: NonBlankString(200)
 });
 
 var Resource = struct({
@@ -37,7 +39,8 @@ var Contact = subtype(struct({
     type: NonBlankString(50)
 }), oneValidPhone);
 
-var title = NonBlankString(60),
+var securityMarking = NonBlankString(200),
+    title = NonBlankString(60),
     type = NonBlankString(50),
     whatIsNew = maybe(StringMax(250)),
     categories = list(NonBlankString(50)),
@@ -50,7 +53,7 @@ var title = NonBlankString(60),
     atLeastOne = l => l.length > 0;
 
 function getRequiredContactTypes (contactTypes) {
-    return contactTypes.filter(t => t.required).map(t => t.title);
+    return contactTypes.filter(t => t.required).map(t => t.name);
 }
 
 function hasRequiredContactTypes (requiredContactTypes, contacts) {
@@ -59,6 +62,7 @@ function hasRequiredContactTypes (requiredContactTypes, contacts) {
 
 function ListingFull (requiredContactTypes) {
     return struct({
+        securityMarking: securityMarking,
         title: title,
         type: type,
         categories: subtype(categories, atLeastOne),
@@ -71,10 +75,14 @@ function ListingFull (requiredContactTypes) {
         whatIsNew: whatIsNew,
         intents: intents,
         docUrls: docUrls,
-        smallIconId: NonBlankString(36),
-        largeIconId: NonBlankString(36),
-        bannerIconId: NonBlankString(36),
-        featuredBannerIconId: NonBlankString(36),
+        smallIconId: Num,
+        smallIconMarking: securityMarking,
+        largeIconId: Num,
+        largeIconMarking: securityMarking,
+        bannerIconId: Num,
+        bannerIconMarking: securityMarking,
+        featuredBannerIconId: Num,
+        featuredBannerIconMarking: securityMarking,
         screenshots: subtype(screenshots, atLeastOne),
         contacts: subtype(contacts, hasRequiredContactTypes.bind(null, requiredContactTypes)),
         owners: subtype(owners, atLeastOne),
@@ -85,6 +93,7 @@ function ListingFull (requiredContactTypes) {
 }
 
 var ListingDraft = struct({
+    securityMarking: securityMarking,
     title: title,
     type: type,
     categories: categories,
@@ -101,7 +110,8 @@ var ListingDraft = struct({
     owners: subtype(owners, atLeastOne),
     agency: maybe(StringMax(255)),
     height: maybe(Num),
-    width: maybe(Num)
+    width: maybe(Num),
+    screenshots: screenshots
 });
 
 /**
@@ -141,9 +151,33 @@ function validateContacts(validation, instance) {
     });
 }
 
+// Link validation of image and marking so when entering a draft, if
+// you enter either an image or a marking, you have to enter the other
+function checkMarkings(validation, instance) {
+
+    var icons = ['smallIcon', 'largeIcon', 'bannerIcon', 'featuredBannerIcon'];
+
+    icons.map((i) => {
+
+        var icon = i;
+        var iconId = i + 'Id';
+        var iconMarking = i + 'Marking';
+
+        if (instance[icon] || instance[iconMarking]) {
+            if (!((instance[icon] || instance[iconId]) && instance[iconMarking])) {
+                validation.errors[icon] = true;
+                validation.errors[iconId] = true;
+                validation.errors[iconMarking] = true;
+                validation.isValid = false;
+            }
+        }
+    });
+}
+
 function validate (instance, options, type) {
     var validation = t.validate(instance, type),
         errors = {};
+
     if (validation.errors) {
         validation.errors.forEach(function (e) {
             if(e.path[0] === 'tags'){
@@ -164,7 +198,10 @@ function validateDraft (instance, options) {
     var validation = validate(instance, options, ListingDraft);
 
     validateContacts(validation, instance);
+
     copyImageValidations(validation);
+
+    checkMarkings(validation, instance);
 
     return validation;
 }

@@ -47,7 +47,7 @@ var Organizations = React.createClass({
         }
 
         this.setState({
-            counts: counts.agencyCounts
+            counts: counts
         });
     },
 
@@ -69,7 +69,7 @@ var Organizations = React.createClass({
                         (x) => <option
                         tabIndex={0}
                         key={x.id}
-                        value={x.title}
+                        value={x.shortName}
                         tag={JSON.stringify(orgCounts[x.id])}>
                             {x.shortName}
                         </option>

@@ -9,7 +9,8 @@ var InputMixin = {
         return {
             value: this.props.value,
             blurred: false,
-            charLimit: this.props.charLimit
+            charLimit: this.props.charLimit,
+            focused: false
         };
     },
 
@@ -82,6 +83,10 @@ var InputMixin = {
             return true;
         }
 
+        if (nextState.focused !== this.state.focused) {
+            return true;
+        }
+
         if (this.showWarning(nextProps, nextState) !==
                 this.showWarning(this.props, this.state)) {
             return true;
@@ -123,6 +128,11 @@ var InputMixin = {
         this.setState({blurred: true});
     },
 
+    _onFocus: function (event) {
+        event.preventDefault();
+        this.setState({focused: true});
+    },
+
     _onChange: function (event) {
         event.preventDefault();
         var { value } = event.target;
@@ -134,6 +144,7 @@ var InputMixin = {
         var value = this.getValue ? this.getValue(this.props.value) : (this.state.value || this.props.value);
         var onChange = this.onChange ? this.onChange : this._onChange;
         var onBlur = this.onBlur ? this.onBlur : this._onBlur;
+        var onFocus = this.onFocus ? this.onFocus : this._onFocus;
 
         return {
             ref: 'input',
@@ -141,7 +152,8 @@ var InputMixin = {
             id: this.props.inputId,
             value: value,
             onBlur: onBlur,
-            onChange: onChange
+            onChange: onChange,
+            onFocus: onFocus
         };
     }
 };

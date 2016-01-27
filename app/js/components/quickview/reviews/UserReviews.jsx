@@ -21,14 +21,14 @@ var UserReview = React.createClass({
         var { review, user, listing } = this.props;
         return (
             user.isAdmin() ||
-            review.author.username === user.username ||
+            review.author.user.username === user.username ||
             user.isOrgSteward(listing.agency)
         );
     },
 
     render: function () {
         var { review, onEdit } = this.props;
-        var time = review.editedDate || review.createdDate;
+        var time = review.editedDate || review.createdDate || "";
         return (
             <li className="Review">
                 <IconRating currentRating = { review.rate } viewOnly={true} />

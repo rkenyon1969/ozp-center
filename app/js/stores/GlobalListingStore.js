@@ -3,7 +3,6 @@
 var Reflux = require('reflux');
 var ListingActions = require('../actions/ListingActions');
 var {listingCreated} = require('../actions/CreateEditActions');
-var Listing = require('../webapi/Listing').Listing;
 
 var _listingsCache = {};
 var _listingsByOwnerCache = {};
@@ -64,9 +63,10 @@ var GlobalListingStore = Reflux.createStore({
             _reviewsCache[id] = reviews;
             this.trigger();
         });
-        this.listenTo(ListingActions.fetchOwnedListingsCompleted, updateCache);
-        this.listenTo(ListingActions.saveCompleted, function (isNew, data) {
-            var listing = new Listing(data);
+        this.listenTo(ListingActions.fetchOwnedListingsCompleted, (x)=>{
+            updateCache(x);
+        });
+        this.listenTo(ListingActions.saveCompleted, function (isNew, listing) {
             updateCache([listing]);
             if (isNew) {
                 listingCreated(listing);
@@ -75,14 +75,14 @@ var GlobalListingStore = Reflux.createStore({
             this.trigger();
         });
         this.listenTo(ListingActions.rejectCompleted, function (rejection) {
-            var listing = _listingsCache[rejection.listingId];
-            listing.currentRejection= rejection;
+            var listing = _listingsCache[rejection.listing.id];
+            listing.rejection = rejection;
             listing.approvalStatus = 'REJECTED';
             ListingActions.fetchChangeLogs(listing.id);
             this.trigger();
         });
         this.listenTo(ListingActions.fetchByIdCompleted, function (data) {
-            updateCache([new Listing(data)]);
+            updateCache([data]);
             this.trigger();
         });
         this.listenTo(ListingActions.deleteListingCompleted, function (data) {

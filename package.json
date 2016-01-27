@@ -1,6 +1,6 @@
 {
   "name": "center-ui",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "repository": {
     "type": "git",
     "url": "https://github.com/ozone-development/ozp-center.git"
@@ -80,6 +80,7 @@
     "babel-plugin-syntax-object-rest-spread": "^6.3.13",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
+    "bootstrap-classify": "git://github.com/ozone-development/bootstrap-classify#ozp-integ",
     "bootstrap-sass": "git://github.com/ozone-development/bootstrap-sass",
     "bootstrap-tour": "git://github.com/ozone-utils/bootstrap-tour",
     "browser-pubsub": "^1.2.0",
@@ -88,6 +89,7 @@
     "eslint": "^1.10.3",
     "eslint-loader": "^1.2.0",
     "exports-loader": "0.6.2",
+    "humps": "git://github.com/domchristie/humps.git",
     "icons": "git://github.com/ozone-development/ozp-icons",
     "jquery": "^2.2.0",
     "lodash-amd": "2.4.1",

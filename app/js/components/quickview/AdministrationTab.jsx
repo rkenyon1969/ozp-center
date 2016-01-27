@@ -124,8 +124,8 @@ var AdministrationTab = React.createClass({
         var listing = this.props.listing,
             status = listingStatus[listing.approvalStatus],
             statusText = status,
-            isAdmin = UserRole[this.props.currentUser.highestRole] >= UserRole.ADMIN,
-            isStewardOfOrg = _.contains(this.props.currentUser.stewardedOrganizations, listing.agency),
+            isAdmin = UserRole[this.props.currentUser.highestRole] >= UserRole.APPS_MALL_STEWARD,
+            isStewardOfOrg = _.contains(this.props.currentUser.stewardedOrganizations, listing.agencyShort),
             controls, statusClass, iconClass;
 
         switch (status) {
@@ -210,8 +210,8 @@ var AdministrationTab = React.createClass({
             }}}
         );
 
-        var isAdmin = UserRole[this.props.currentUser.highestRole] >= UserRole.ADMIN,
-            isStewardOfOrg = _.contains(this.props.currentUser.stewardedOrganizations, this.props.listing.agency),
+        var isAdmin = UserRole[this.props.currentUser.highestRole] >= UserRole.APPS_MALL_STEWARD,
+            isStewardOfOrg = _.contains(this.props.currentUser.stewardedOrganizations, this.props.listing.agencyShort),
             pendingOrg = (listingStatus[this.props.listing.approvalStatus] === 'Pending, Organization') ? true : false,
             pendingAdmin = (listingStatus[this.props.listing.approvalStatus] === 'Pending, Center') ? true : false;
 
@@ -237,7 +237,7 @@ var AdministrationTab = React.createClass({
                             <button type="button" className="btn btn-default" onClick={ this.approve }>{"Approve for " + org}</button>
                             <button type="button" className="btn btn-default" onClick={ this.editRejection }>{"Reject for " + org}</button>
                         </section>
-                    ); 
+                    );
                 } else if(isStewardOfOrg) {
                     return (
                         <section className="review-listing">
@@ -246,8 +246,8 @@ var AdministrationTab = React.createClass({
                             <button type="button" className="btn btn-warning" onClick={ this.editRejection }>Return to Owner</button>
                          </section>
                     );
-                } 
-            } 
+                }
+            }
 
             if(pendingAdmin) {
                 if(isAdmin) {
@@ -257,7 +257,7 @@ var AdministrationTab = React.createClass({
                             <button type="button" className="btn btn-success" onClick={ this.approve }>Approve</button>
                             <button type="button" className="btn btn-warning" onClick={ this.editRejection }>Return to Owner</button>
                          </section>
-                    ); 
+                    );
                 }
             }
         }

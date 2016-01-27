@@ -17,7 +17,6 @@ var FeaturedListingTile = React.createClass({
             action: 'view',
             tab: 'overview'
         });
-
         return (
             <li className="listing SearchListingTile SearchListingTile--featured">
                 <a href={href}>
