@@ -19,12 +19,6 @@ var ResourcesTab = React.createClass({
       });
     },
 
-    componentWillUnmount: function() {
-      tourCh.publish({
-        resourcesLoaded: false
-      });
-    },
-
     render: function () {
         return (
             <div className="tab-pane active quickview-resources row">

@@ -21,8 +21,8 @@ var centerStatus = tourDB.get('center');
 var initTour = function() {
   // If tour has never run before, start it.
   if(!centerStatus.ran) {
-    globalTour.init();
-    globalTour.start();
+    centerTour.init();
+    centerTour.start();
   }
 };
 
@@ -41,24 +41,5 @@ ProfileSearchActions.tourCheck.listen(() => {
 
 $(document).on('click', '#tour-start', function(e){
   e.preventDefault();
-  globalTour.restart().goTo(1);
-});
-
-// Subscribe to our DB, this will at a later date allow us to know where our
-// tour is at in other applications.
-tourDB.subscribe((data) => {
-  // Ideally we would not want this debounce, Unfortunatly it takes a millisecond
-  // or two to pick up on localstorage changes
-  setTimeout(function(){
-    if(tourDB.get('center').startCenterTour) {
-      tourDB.set({
-        center: {
-          startCenterTour: false
-        }
-      });
-
-      centerTour.init();
-      centerTour.start();
-    }
-  }, 200);
+  centerTour.restart().goTo(1);
 });

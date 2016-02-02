@@ -20,12 +20,6 @@ var DetailsTab = React.createClass({
       });
     },
 
-    componentWillUnmount: function() {
-      tourCh.publish({
-        detailsLoaded: false
-      });
-    },
-
     render: function () {
         var securityMarking = this.props.listing.securityMarking;
         var whatsNew = this.props.listing.whatIsNew;

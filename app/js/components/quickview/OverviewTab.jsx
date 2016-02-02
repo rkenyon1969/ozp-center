@@ -3,9 +3,6 @@
 require('jquery');
 require('magnific-popup');
 
-var PubSub = require('browser-pubsub');
-var tourCh = new PubSub('tour');
-
 var React = require('react');
 var Carousel = require('../carousel/index.jsx');
 
@@ -14,18 +11,6 @@ var OverviewTab = React.createClass({
     propTypes: {
         shown: React.PropTypes.bool,
         listing: React.PropTypes.object
-    },
-
-    componentDidUpdate: function() {
-        tourCh.publish({
-            overviewLoaded: true
-        });
-    },
-
-    componentWillUnmount: function() {
-      tourCh.publish({
-        overviewLoaded: false
-      });
     },
 
     getDefaultProps: function () {
@@ -45,6 +30,15 @@ var OverviewTab = React.createClass({
             'text-muted': !this.props.listing.description
         });
 
+
+        setTimeout(() => {
+          var PubSub = require('browser-pubsub');
+          var tourCh = new PubSub('tour');
+          tourCh.publish({
+              overviewLoaded: true
+          });
+        }, 1000);
+        
         return (
             <div className="tab-pane active row quickview-overview">
                 { this.renderScreenshots() }
