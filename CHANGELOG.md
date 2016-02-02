@@ -1,3 +1,11 @@
+### 1.0.22 (2016-02-02)
+
+
+#### Bug Fixes
+
+* **IE10:** Update babel config to support IE10 (user visible as search issue) ([530502f2](https://github.com/ozone-development/ozp-center.git/commit/530502f2f47fd9892e9869916d2d25d1625688f2))
+
+
 ### 1.0.21 (2016-01-20)
 
 
