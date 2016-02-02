@@ -242,7 +242,7 @@ var Discovery = React.createClass({
     onSearchCompleted() {
         if(this.refs.shareResults){
           $(this.refs.shareResults.getDOMNode()).popover({
-            html: true,
+            html: true
           });
         }
         this._searching = false;

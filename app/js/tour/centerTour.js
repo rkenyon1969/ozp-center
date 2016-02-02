@@ -1,5 +1,8 @@
 'use strict';
 
+var {CENTER_URL} = require('ozp-react-commons/OzoneConfig');
+CENTER_URL = `/${CENTER_URL.match(/http.?:\/\/.*\/(.*)/)[1]}/`;
+
 var PubSub = require('browser-pubsub');
 var tourCh = new PubSub('tour');
 var ObjectDB = require('object-db');
@@ -106,7 +109,6 @@ const meTour = new Tour({
         $(".Discovery__SearchResults .listing:first .slide-up, .infiniteScroll .listing:first .slide-up").css("top", "137px");
       },
       onNext: function() {
-        $(".quickview").modal("show");
         var nextStep = function() {
           meTour.goTo(11);
         };
@@ -120,7 +122,7 @@ const meTour = new Tour({
       }
     },
     {
-      path: "/dist/#/home/?%2F%3F=&listing=1&action=view&tab=overview",
+      path: `${CENTER_URL}#/home/?%2F%3F=&listing=1&action=view&tab=overview`,
       element: ".modal-body",
       title: "Listing Overview",
       content: "Click a tile to access the listing detail view. From this popup you can see screenshots, long descriptions, reviews, and other resources. Use the links at the top of the listing to launch, bookmark or close it.",
@@ -144,10 +146,11 @@ const meTour = new Tour({
       },
       onPrev: function() {
         $(".quickview").modal("hide");
+
       }
     },
     {
-      path: "/dist/#/home/?%2F%3F=&listing=1&action=view&tab=reviews",
+      path: `${CENTER_URL}#/home/?%2F%3F=&listing=1&action=view&tab=reviews`,
       element: ".modal-body .nav .active",
       title: "Listing Reviews",
       content: "Rate and review the listing, or read reviews from other users.",
@@ -183,7 +186,7 @@ const meTour = new Tour({
       }
     },
     {
-      path: "/dist/#/home/?%2F%3F=&listing=1&action=view&tab=details",
+      path: `${CENTER_URL}#/home/?%2F%3F=&listing=1&action=view&tab=details`,
       element: ".modal-body .nav .active",
       title: "Listing Details",
       content: "Here you'll find a list of new features, usage requirements, ownership information, tags, categories, etc.",
@@ -219,7 +222,7 @@ const meTour = new Tour({
       }
     },
     {
-      path: "/dist/#/home/?%2F%3F=&listing=1&action=view&tab=resources",
+      path: `${CENTER_URL}#/home/?%2F%3F=&listing=1&action=view&tab=resources`,
       element: ".modal-body .nav .active",
       title: "Listing Resources",
       content: "If the listing includes instructions like user manuals and contact information, you will find it here.",
