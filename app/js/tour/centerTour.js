@@ -25,7 +25,7 @@ const meTour = new Tour({
       title: "We're glad you're here.",
       content: "To give you a quick overview, we've put together a simple tour to walk through each area of the platform - the Center, HUD, and Webtop. These three areas create an ecosystem of software that enables users from numerous organizations to share data and manipulate it solely within browser memory.",
       orphan: true,
-      template: '<div class="popover" role="tooltip"> <h1 class="popover-header">Welcome to <img src="./images/marketplace-logo.png"></h1><h3 class="popover-title popover-subtitle"></h3> <div class="popover-content"></div> <div class="popover-navigation"> <button class="btn btn-sm" data-role="end">No thanks</button> <div class="btn-group"> <button class="btn btn-sm btn-default" data-role="next">Start the tour &raquo;</button></div> </div> </div>'
+      template: '<div class="popover" role="tooltip"> <h1 class="popover-header">Welcome to <img src="./images/marketplace-logo.png"></h1><h3 class="popover-title popover-subtitle"></h3> <div class="popover-content"></div> <div class="popover-navigation"> <button class="btn btn-sm" id="end-tour-btn" data-role="end">No thanks</button> <div class="btn-group"> <button class="btn btn-sm btn-default" data-role="next">Start the tour &raquo;</button></div> </div> </div>'
     },
     {
       element: "#tourstop-hud",
