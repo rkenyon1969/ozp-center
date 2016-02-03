@@ -40,9 +40,10 @@ var OverviewTab = React.createClass({
         }, 1000);
         
         return (
-            <div className="tab-pane active row quickview-overview">
+            <div className="tab-pane active row quickview-overview" tabIndex="0">
                 { this.renderScreenshots() }
                 <div className="col-xs-12 col-md-3 pull-right">
+                    <h3 className="offscreen"> Description of app in Overview section of model </h3>
                     <p className= { descriptionClasses }>{ description }</p>
                 </div>
             </div>

@@ -43,7 +43,7 @@ module.exports = React.createClass({
         return (
             <section>
                 <h4>Featured</h4>
-                <Carousel ref="carousel" className="featured-listings-carousel" options={ this.props.options }>
+                <Carousel ref="carousel" className="featured-listings-carousel" aria-label="Featured Carousel" options={ this.props.options }>
                     { children }
                 </Carousel>
             </section>
