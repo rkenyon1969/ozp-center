@@ -94,7 +94,7 @@ var Quickview = React.createClass({
         };
 
         return (
-            <Modal ref="modal" className="quickview" onShown={this.onShown} onHidden={this.onHidden}>
+            <Modal ref="modal" className="quickview" onShown={this.onShown} onHidden={this.onHidden} tabIndex="0">
                 {
                     !listing ?
                         <p>Loading...</p> :
