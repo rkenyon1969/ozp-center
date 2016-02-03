@@ -63,7 +63,7 @@ var ReviewListing = React.createClass({
         var hasError = classSet({'has-error': this.state.errors});
 
         return (
-            <div className="SubmitReview">
+            <div className="SubmitReview" tabIndex="0">
                 <h5>Review this Listing</h5>
                 <div className="SubmitReview__Rating">
                     <h6>Star Rating</h6>

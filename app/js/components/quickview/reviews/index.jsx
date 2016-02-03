@@ -97,10 +97,11 @@ var ReviewsTab = React.createClass({
 
         return (
             <div className="tab-pane active quickview-reviews row">
+              <h5 className="offscreen"> App Reviews </h5>
                 <section className="col-xs-3 col-left">
                     { this.renderReviewFilters() }
                 </section>
-                <section className="col-xs-5">
+                <section className="col-xs-5" tabIndex="0">
                     <UserReviews
                         listing={ listing }
                         user={ currentUser }
@@ -150,7 +151,7 @@ var ReviewsTab = React.createClass({
         });
 
         return (
-            <div>
+            <div tabIndex="0">
                 <h5>Average Rating</h5>
                 <p><IconRating currentRating = { listing.avgRate || 0 } viewOnly /> ( { listing.totalVotes || 0 } Ratings )</p>
                 <div className="review-filters">

@@ -23,7 +23,8 @@ var DetailsTab = React.createClass({
         var requirements = this.props.listing.requirements;
 
         return (
-            <div className="tab-pane active quickview-details row">
+            <div className="tab-pane active quickview-details row" tabIndex="0">
+              <h5 className="offscreen"> App Details </h5>
                 <div className="col-xs-4 col-left">
                     <section className="forceWrap">
                         <section>
