@@ -18,7 +18,7 @@ var Types = React.createClass({
 
     render() {
         return (
-            <SelectBox className="SelectBox__Types col-sm-3 col-xs-4" tabIndex="0" label="Listing Type" onChange={this.onChange} value={this.props.value} multiple>
+            <SelectBox className="SelectBox__Types col-sm-3 col-xs-4" tabIndex="0" label="Listing Type" aria-haspopup="true" onChange={this.onChange} value={this.props.value} multiple>
                 {
                     this.state.system.types.map((x, i) =>
                         <option tabIndex={0} key={`${x.id}.${i}`} value={x.title}>{x.title}</option>
