@@ -270,7 +270,7 @@ var Discovery = React.createClass({
         return (
             <section className="Discovery__NewArrivals" key="Discovery__NewArrivals">
                 <h4>New Arrivals</h4>
-                <Carousel className="new-arrival-listings">
+                <Carousel className="new-arrival-listings" aria-label="New Arrivals Carousel">
                     { ListingTile.fromArray(this.state.newArrivals) }
                 </Carousel>
             </section>
