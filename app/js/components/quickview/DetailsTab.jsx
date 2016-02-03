@@ -2,12 +2,22 @@
 
 var React = require('react');
 var EmptyFieldValue = require('../shared/EmptyFieldValue.jsx');
+
+var PubSub = require('browser-pubsub');
+var tourCh = new PubSub('tour');
+
 var ProfileLink = require('../profile/ProfileLink.jsx');
 
 var DetailsTab = React.createClass({
 
     propTypes: {
         listing: React.PropTypes.object
+    },
+
+    componentDidMount: function() {
+      tourCh.publish({
+        detailsLoaded: true
+      });
     },
 
     render: function () {

@@ -171,6 +171,14 @@ var Quickview = React.createClass({
             // go back to the parent route
             this.transitionTo(this.getActiveRoutePath(), this.getParams());
         }
+        var PubSub = require('browser-pubsub');
+        var tourCh = new PubSub('tour');
+        tourCh.publish({
+          overviewLoaded: false,
+          reviewsLoaded: false,
+          detailsLoaded: false,
+          resourcesLoaded: false
+        });
     },
 
     close: function () {

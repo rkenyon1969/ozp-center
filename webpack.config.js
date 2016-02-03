@@ -32,7 +32,9 @@ module.exports = {
             "ism$": "bootstrap-classify/js/ism.js",
             "bootstrap-classify$": "bootstrap-classify/js/bootstrap-classify.js",
             "ozp-react-commons": "ozp-react-commons/app/js",
-            tether$: "tether/tether"
+            tether$: "tether/tether",
+            bootstrapjs$: "bootstrap/dist/js/bootstrap.js",
+            tour$: "bootstrap-tour/build/js/bootstrap-tour.js"
         },
         // Configure webpack to look for required files in bower and node
         modulesDirectories: ['./node_modules', './config']

@@ -128,24 +128,24 @@ var Discovery = React.createClass({
             <div>
                 <NavBar />
                 <Header>
-                    <form className="col-xs-9 col-lg-10" ref="form" role="search">
-			<div className="row">
-		                <div className="form-group Search col-sm-6 col-xs-4">
-		                    <i className="icon-search"></i>
+                <form id="tourstop-center-search" className="col-xs-9 col-lg-10" ref="form" role="search">
+                  <div className="row">
+                    <div className="form-group Search col-sm-6 col-xs-4">
+                      <i className="icon-search"></i>
 
-		                    <input ref="search" type="text" className="form-control"
-		                        tabIndex="0"
-                            placeholder="Search"
-		                        value={ this.state.queryString || ''}
-		                        onChange={ this.onSearchInputChange }
-                                        onKeyPress={ this.ignoreEnterKey }
-                                    />
-		                    <i className="icon-cross-14-grayDark clearButton" onClick={this.reset}></i>
-		                </div>
-		                <Types value={this.state.type} onChange={this.onTypeChange} />
-		                <Organizations value={this.state.agency} onChange={this.onOrganizationChange} />
-                    	</div>
-		    </form>
+                      <input ref="search" type="text" className="form-control"
+                        tabIndex="0"
+                        placeholder="Search"
+                        value={ this.state.queryString || ''}
+                        onChange={ this.onSearchInputChange }
+                        onKeyPress={ this.ignoreEnterKey }
+                        />
+                      <i className="icon-cross-14-grayDark clearButton" onClick={this.reset}></i>
+                    </div>
+                    <Types value={this.state.type} onChange={this.onTypeChange} />
+                    <Organizations value={this.state.agency} onChange={this.onOrganizationChange} />
+                  </div>
+                </form>
                 </Header>
                 <div id="discovery" className="row">
                     <Sidebar
@@ -242,7 +242,7 @@ var Discovery = React.createClass({
     onSearchCompleted() {
         if(this.refs.shareResults){
           $(this.refs.shareResults.getDOMNode()).popover({
-            html: true,
+            html: true
           });
         }
         this._searching = false;

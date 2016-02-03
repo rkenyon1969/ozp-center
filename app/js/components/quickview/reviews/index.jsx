@@ -4,6 +4,9 @@ var React = require('react');
 var Reflux = require('reflux');
 var _ = require('../../../utils/_');
 
+var PubSub = require('browser-pubsub');
+var tourCh = new PubSub('tour');
+
 var IconRating = require('../../shared/IconRating.jsx');
 var UserReviews = require('./UserReviews.jsx');
 var SubmitReview = require('./SubmitReview.jsx');
@@ -22,6 +25,19 @@ var RatingProgressBar = React.createClass({
             value: 0
         };
     },
+
+    componentDidMount: function() {
+      tourCh.publish({
+        reviewsLoaded: true
+      });
+    },
+
+    componentWillUnmount: function() {
+      tourCh.publish({
+        reviewsLoaded: false
+      });
+    },
+
     render: function () {
         var { count, value, star } = this.props;
         var style = {

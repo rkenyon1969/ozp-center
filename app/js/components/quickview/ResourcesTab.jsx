@@ -4,10 +4,19 @@ var React = require('react');
 var EmptyFieldValue = require('../shared/EmptyFieldValue.jsx');
 var _ = require('../../utils/_');
 
+var PubSub = require('browser-pubsub');
+var tourCh = new PubSub('tour');
+
 var ResourcesTab = React.createClass({
 
     propTypes: {
         listing: React.PropTypes.object
+    },
+
+    componentDidMount: function() {
+      tourCh.publish({
+        resourcesLoaded: true
+      });
     },
 
     render: function () {
