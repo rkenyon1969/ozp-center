@@ -70,11 +70,6 @@ var NavBar = React.createClass({
                                             <i className="icon-head-grayLightest"/>Profile
                                         </ProfileLink>
                                     </li>
-                                    <li>
-                                        <ModalLink queryParams={{settings: true}}>
-                                            <i className="icon-cog-grayLightest"></i>Settings
-                                        </ModalLink>
-                                    </li>
                                     <li className="divider"></li>
                                     <li className="dropdown-header">Create</li>
                                     <li><a href={'#/edit'} onClick={()=>{
