@@ -1,7 +1,7 @@
 'use strict';
 
 var {CENTER_URL} = require('ozp-react-commons/OzoneConfig');
-CENTER_URL = `/${CENTER_URL.match(/http.?:\/\/.*\/(.*)/)[1]}/`;
+CENTER_URL = `/${CENTER_URL.match(/http.?:\/\/[^/]*\/(.*?)\/?$/)[1]}/`;
 
 var PubSub = require('browser-pubsub');
 var tourCh = new PubSub('tour');
