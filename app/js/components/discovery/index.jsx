@@ -51,7 +51,8 @@ var Discovery = React.createClass({
             agency: this.state ? this.state.agency : [],
             nextOffset: DiscoveryPageStore.getNextOffset(),
             currentOffset: this.state ? this.state.currentOffset : 0,
-            limit: this.state ? this.state.limit : PAGINATION_MAX
+            limit: this.state ? this.state.limit : PAGINATION_MAX,
+            loadingMore: false
         };
     },
 
@@ -171,8 +172,17 @@ var Discovery = React.createClass({
         );
     },
 
-
     componentDidMount(){
+        $(window).scroll(() => {
+           if (
+             $(window).scrollTop() + $(window).height() == $(document).height()
+           ) {
+             if (!this.state.loadingMore) {
+               this.handleLoadMore();
+             }
+           }
+        });
+
         $(this.refs.form.getDOMNode()).submit((e)=>e.preventDefault());
 
         // If a search string is provided to us, load it into the search feild
@@ -279,7 +289,8 @@ var Discovery = React.createClass({
 
     handleLoadMore() {
         this.setState({
-            mostPopularTiles: this.state.mostPopularTiles += 12
+            mostPopularTiles: this.state.mostPopularTiles += 12,
+            loadingMore: true
         });
     },
 
@@ -289,9 +300,6 @@ var Discovery = React.createClass({
         }
 
         var InfiniTiles = ListingTile.renderLimitedTiles(this.state.mostPopularTiles, this.state.mostPopular);
-        var LoadMore = (this.state.mostPopularTiles >= this.state.mostPopular.length) ?
-            '' :
-            <button onClick={ this.handleLoadMore } className="btn btn-default loadMoreBtn">Load More</button>;
 
         return (
             <section className="Discovery__MostPopular" key="Discovery__MostPopular">
@@ -299,9 +307,6 @@ var Discovery = React.createClass({
                 <ul className="infiniteScroll row clearfix">
                     { InfiniTiles }
                 </ul>
-                <div className="text-center">
-                    { LoadMore }
-                </div>
             </section>
         );
     },
