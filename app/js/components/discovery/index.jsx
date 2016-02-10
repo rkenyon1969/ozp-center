@@ -174,11 +174,12 @@ var Discovery = React.createClass({
 
     componentDidMount(){
         $(window).scroll(() => {
-           if (
-             $(window).scrollTop() + $(window).height() == $(document).height()
-           ) {
+           if ($(window).scrollTop() + $(window).height() == $(document).height()) {
              if (!this.state.loadingMore) {
                this.handleLoadMore();
+               if (this.state.nextOffset && !this._searching) {
+                 this.handleMoreSearch();
+               }
              }
            }
         });
@@ -236,7 +237,6 @@ var Discovery = React.createClass({
     }, 500),
 
     search() {
-        $('body, html').scrollTop(0);
         var { type, agency } = this.state;
         var combinedObj = _.assign(
             { search: this.state.queryString,
@@ -292,6 +292,14 @@ var Discovery = React.createClass({
             mostPopularTiles: this.state.mostPopularTiles += 12,
             loadingMore: true
         });
+
+        // Debounce loading more so event is not triggered multiple times while
+        // listings are loading in.
+        setTimeout(() => {
+          this.setState({
+            loadingMore: false
+          });
+        }, 500);
     },
 
     renderMostPopular() {
@@ -307,6 +315,11 @@ var Discovery = React.createClass({
                 <ul className="infiniteScroll row clearfix">
                     { InfiniTiles }
                 </ul>
+                <p className="text-center">
+                  { this.state.loadingMore &&
+                    <span>Loading more listings...</span>
+                  }
+                </p>
             </section>
         );
     },
@@ -325,10 +338,6 @@ var Discovery = React.createClass({
                 ListingTile.fromArray(this.state.searchResults) :
                 <h3 className="col-xs-12">No results found.</h3>;
         }
-
-        var MoreSearch = (this.state.nextOffset && !this._searching) ?
-            <button onClick={ this.handleMoreSearch } className="btn btn-default loadMoreBtn">Load More</button> :
-            '';
 
         var searchLink = `${CENTER_URL}/#/home/${encodeURIComponent(this.state.queryString)}/${(this.state.categories.length) ? encodeURIComponent(this.state.categories.toString()).replace(/%2C/g,'+') : ''}/${(this.state.type.length) ? encodeURIComponent(this.state.type.toString()).replace(/%2C/g,'+') : ''}/${(this.state.agency.length) ? encodeURIComponent(this.state.agency.toString()).replace(/%2C/g,'+') : ''}`;
         return (
@@ -353,9 +362,6 @@ var Discovery = React.createClass({
                 <ul className="list-unstyled listings-search-results row clearfix">
                     { results }
                 </ul>
-                <div className="text-center">
-                    { MoreSearch }
-                </div>
             </section>
         );
     }
