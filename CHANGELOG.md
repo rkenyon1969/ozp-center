@@ -1,3 +1,11 @@
+### 1.1.2 (2016-02-10)
+
+
+#### Bug Fixes
+
+* **tour modal:** Fix regex that determines tour modal ([95ef3313](https://github.com/ozone-development/ozp-center.git/commit/95ef331366dbf321f756d0eb7463f7ee3070503e))
+
+
 ### 1.1.1 (2016-02-03)
 
 
