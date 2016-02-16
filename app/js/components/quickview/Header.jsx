@@ -14,11 +14,13 @@ var QuickviewHeader = React.createClass({
     },
 
     componentDidMount: function(){
-      $(this.refs.hastooltips.getDOMNode()).find('.tooltiped').each(function(){
-        $(this).tooltip({
-          delay: 400
+      if (!this.props.preview) {
+        $(this.refs.hastooltips.getDOMNode()).find('.tooltiped').each(function(){
+          $(this).tooltip({
+            delay: 400
+          });
         });
-      });
+      }
     },
 
     render: function () {
