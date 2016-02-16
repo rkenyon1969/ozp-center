@@ -207,6 +207,12 @@ function getOptionsForSystemObject (items) {
     });
 }
 
+function getOptionsForNamedSystemObject (items) {
+    return items.map(item => {
+        return { id: item.name, text: item.name };
+    });
+}
+
 function getOptionsForSimpleLists (items) {
     return items.map(item => {
         return { id: item, text: item };
@@ -294,7 +300,7 @@ var ContactForm = React.createClass({
                     <span aria-hidden="true"><i className="icon-cross-14"></i></span><span className="sr-only">Clear</span>
                 </button>
                 <Select2Input { ...this.getFormComponentProps('type') }
-                              options={ getOptionsForSystemObject(this.state.system.contactTypes) }
+                              options={ getOptionsForNamedSystemObject(this.state.system.contactTypes) }
                               key={`${baseKey}.type`} />
                 <TextInput { ...this.getFormComponentProps('name') } key={`${baseKey}.name`} />
                 <TextInput { ...this.getFormComponentProps('organization') } key={`${baseKey}.organization`} optional />
