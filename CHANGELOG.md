@@ -1,3 +1,17 @@
+### 1.1.3 (2016-02-17)
+
+
+#### Bug Fixes
+
+* **CreateEdit:** Populate ContactType dropdown correctly ([557f58d6](https://github.com/ozone-development/ozp-center.git/commit/557f58d679168a58e4ebc7dc7a56325e44c6782f))
+* **Quickview:** Previewing listing from create/edit displays error in console. #422 ([b0060e8b](https://github.com/ozone-development/ozp-center.git/commit/b0060e8be74afbafa20f8fd01528857cfa85331c))
+
+
+#### Features
+
+* **Infinite Scroll:** Search infinite scroll and most popular #510 ([412ec590](https://github.com/ozone-development/ozp-center.git/commit/412ec59035a5e1a5090fa52853018f3084ccbefb))
+
+
 ### 1.1.2 (2016-02-10)
 
 
