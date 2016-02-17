@@ -3,9 +3,9 @@
 Center UI built on [React](http://facebook.github.io/react/), [Gulp](http://gulpjs.com/) and [Webpack](http://webpack.github.io/).
 
 ## Prerequisites
-Install Node.js and npm. Head over to [the Node.js website](http://nodejs.org/) if you need to do that. Next, install Bower and Gulp, you might need to run them as sudo.
+Install Node.js and npm. Head over to [the Node.js website](http://nodejs.org/) if you need to do that. Next, install Gulp, you might need to run them as sudo.
 ```
-npm install -g gulp bower
+npm install -g gulp
 ```
 
 ## Setup
@@ -15,7 +15,6 @@ First clone the repo. Install module dependencies.
 git clone https://github.com/ozone-development/ozp-center.git
 cd ozp-center
 npm install
-bower install
 ```
 
 Next, run `npm start` or `gulp dev`. Go to http://localhost:8000/webpack-dev-server/dist and browser will automatically reload when any file in /app changes. Alternatively, you can also go to http://localhost:8000/dist, if auto reload is undesirable.
