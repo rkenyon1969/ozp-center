@@ -22,6 +22,7 @@ var HelpModal = React.createClass({
         var UserRole = {
           USER: 0,
           ORG_STEWARD: 1,
+          APPS_MALL_STEWARD: 2,
           ADMIN: 2
         };
 
