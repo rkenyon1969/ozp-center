@@ -17,7 +17,11 @@ var _ = require('./utils/_');
 var SelfStore = require('ozp-react-commons/stores/SelfStore');
 var ProfileActions = require('ozp-react-commons/actions/ProfileActions');
 var LoadError = require('ozp-react-commons/components/LoadError.jsx');
-var { METRICS_URL, APP_TITLE } = require('ozp-react-commons/OzoneConfig');
+var {
+  METRICS_URL,
+  APP_TITLE,
+  IE_REDIRECT_URL
+} = require('ozp-react-commons/OzoneConfig');
 
 
 window.jQuery = jQuery;
@@ -104,4 +108,17 @@ document.title = APP_TITLE;
 //Disable bootstrap animations on Firefox
 if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
   $.support.transition = false;
+}
+
+var IE;
+//@cc_on IE = navigator.appVersion;
+
+if (IE < 10) {
+alert(`
+OZP is test against the following browsers:
+IE 11 +
+FireFox 24+
+Chrome 36+
+`);
+window.location = IE_REDIRECT_URL;
 }
