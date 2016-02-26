@@ -115,7 +115,7 @@ var IE;
 
 if (IE < 10) {
 alert(`
-OZP is test against the following browsers:
+OZP is tested against the following browsers:
 IE 11 +
 FireFox 24+
 Chrome 36+
