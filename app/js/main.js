@@ -121,7 +121,7 @@ function detectIE() {
     return false;
 }
 
-if (detectIE() < 10) {
+if (detectIE() && detectIE() < 10) {
 alert(`
 OZP is tested against the following browsers:
 IE 11 +
