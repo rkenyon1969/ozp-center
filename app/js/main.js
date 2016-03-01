@@ -110,10 +110,32 @@ if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
   $.support.transition = false;
 }
 
-var IE;
-//@cc_on IE = navigator.appVersion;
+function detectIE() {
+    var ua = window.navigator.userAgent;
 
-if (IE < 10) {
+    var msie = ua.indexOf('MSIE ');
+    if (msie > 0) {
+        // IE 10 or older => return version number
+        return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+    }
+
+    var trident = ua.indexOf('Trident/');
+    if (trident > 0) {
+        // IE 11 => return version number
+        var rv = ua.indexOf('rv:');
+        return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+    }
+
+    var edge = ua.indexOf('Edge/');
+    if (edge > 0) {
+       // Edge (IE 12+) => return version number
+       return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
+    }
+
+    // other browser
+    return false;
+}
+if (detectIE() < 10) {
 alert(`
 OZP is tested against the following browsers:
 IE 11 +
