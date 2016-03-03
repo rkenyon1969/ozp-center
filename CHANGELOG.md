@@ -1,3 +1,17 @@
+### 1.1.4 (2016-03-03)
+
+
+#### Bug Fixes
+
+* **Help:** Fixed invalid role for appsmall stewards" ([ccf64070](https://github.com/ozone-development/ozp-center.git/commit/ccf64070af2814072c4efe4027cb3c22cdc0a3b7))
+* **typo:** Added missing single quote ([1de14bc0](https://github.com/ozone-development/ozp-center.git/commit/1de14bc0cb4c8e258f30cc01649edb7a4afd54cc))
+
+
+#### Features
+
+* **lt IE 10:** Redirect users below IE10 away ([51a47f12](https://github.com/ozone-development/ozp-center.git/commit/51a47f12563a75cab7b2da2047e17587146a4a04))
+
+
 ### 1.1.3 (2016-02-17)
 
 
