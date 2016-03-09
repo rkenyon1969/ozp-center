@@ -271,7 +271,7 @@ var ListingApi = {
 
     search: function (options) {
         var params = $.param(options, true);
-        return $.getJSON(API_URL + '/api/listings/search?' + params).then(
+        return $.getJSON(API_URL + '/api/listings/search/?' + params).then(
             (response) => {
                 if (options.categories && options.categories.length > 0) {
                     for(var index = 0; index < options.categories.length; index++) {
@@ -391,7 +391,7 @@ var ListingApi = {
 
     getAllListings: function (url, options) {
         if (!_.isString(url)) {
-            url = API_URL + '/api/listing?' + $.param(options);
+            url = API_URL + '/api/listing/?' + $.param(options);
         }
 
         return $.getJSON(url).then(
@@ -402,7 +402,7 @@ var ListingApi = {
     },
 
     getCounts: function () {
-        var url = API_URL + '/api/metadata';
+        var url = API_URL + '/api/metadata/';
         return $.getJSON(url).then((response) => {
             var counts = _.reduce(response.agencies,
                                   (result, o) => {
@@ -416,9 +416,9 @@ var ListingApi = {
     getAllChangeLogs: function (profile, url, options) {
         if(!_.isString(url)) {
             if (profile.isAdmin() || profile.highestRole === 'ORG_STEWARD' ){
-                url = API_URL + '/api/listings/activity?' + $.param(options);
+                url = API_URL + '/api/listings/activity/?' + $.param(options);
             } else {
-                url = API_URL + '/api/self/profile/' + profile.id + '/listing/activity?' + $.param(options);
+                url = API_URL + '/api/self/profile/' + profile.id + '/listing/activity/?' + $.param(options);
             }
         }
         return $.getJSON(url).then(
