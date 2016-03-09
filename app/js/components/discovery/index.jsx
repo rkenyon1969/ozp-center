@@ -223,13 +223,15 @@ var Discovery = React.createClass({
     },
 
     reset() {
-        this._searching = true;
-        this.setState({
-            queryString: '',
-            currentOffset: 0,
-            type: [],
-            agency: []
-        });
+	if (this.refs.search.getDOMNode().value.length > 0) {
+            this._searching = true;
+            this.setState({
+                queryString: '',
+                currentOffset: 0,
+                type: [],
+                agency: []
+            });
+        }
     },
 
     debounceSearch: _.debounce(function () {
