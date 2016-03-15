@@ -141,7 +141,7 @@ var Discovery = React.createClass({
                         onChange={ this.onSearchInputChange }
                         onKeyPress={ this.ignoreEnterKey }
                         />
-                      <i className="icon-cross-14-grayDark clearButton" onClick={this.reset}></i>
+                      <i className="icon-cross-14-grayDark clearButton" onClick={this.searchBarReset}></i>
                     </div>
                     <Types value={this.state.type} onChange={this.onTypeChange} />
                     <Organizations value={this.state.agency} onChange={this.onOrganizationChange} />
@@ -223,13 +223,21 @@ var Discovery = React.createClass({
     },
 
     reset() {
+        this._searching = true;
+        this.setState({
+            queryString: '',
+            currentOffset: 0,
+            type: [],
+            agency: []
+        });
+    },
+    
+    searchBarReset() {
 	if (this.refs.search.getDOMNode().value.length > 0) {
             this._searching = true;
             this.setState({
                 queryString: '',
-                currentOffset: 0,
-                type: [],
-                agency: []
+                currentOffset: 0
             });
         }
     },
