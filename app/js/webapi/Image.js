@@ -100,7 +100,7 @@ var ImageApi = {
         //File API supported
         if (window.Blob && file instanceof Blob) {
             var form = new FormData();
-            form.append("file_extension", "png");
+            form.append("file_extension", file.type.split('/')[1]);
             form.append("security_marking", marking);
             form.append("image", file);
 
@@ -147,7 +147,7 @@ var ImageApi = {
             form = document.createElement('form'),
             frameName = 'image-upload-frame-' + (iframeCounter++),
             timeoutId,
-            fileExtension = "png",
+            fileExtension = input.type.split('/')[1],
             accessControl = marking,
             imageType = "large_screenshot";
 
