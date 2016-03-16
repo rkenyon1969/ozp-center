@@ -1,3 +1,17 @@
+### 1.1.5 (2016-03-16)
+
+
+#### Bug Fixes
+
+* **Create Edit:** Missing labels for owners and contacts ([9ca4b75d](https://github.com/ozone-development/ozp-center.git/commit/9ca4b75d3af8a622bff83287ec7b6add1578e747))
+* **Helpdesk Link:** Helpdesk link now opens in a new tab. ([485b182d](https://github.com/ozone-development/ozp-center.git/commit/485b182d7fd46474764ef3bbe15bdfa871ff44c3))
+* **Image API:** Uploaded images pass original file type. ([717f1d13](https://github.com/ozone-development/ozp-center.git/commit/717f1d13f5da754f2c1370409ec44fc0d71539ff))
+* **SearchBar:**
+  * Clicking 'x' on the searchbar now only clears searchbar ([62064b37](https://github.com/ozone-development/ozp-center.git/commit/62064b37a1a07cd39456830305e3e4e2e5004933))
+  * Clicking 'x' on a blank search now does nothing. #490 ([5acd51f2](https://github.com/ozone-development/ozp-center.git/commit/5acd51f224c0a11c4b4f6dc2593f40534ab20d04))
+* **URL redirect:**  Avoids browser redirects by adding trailing slash ([1056e8f4](https://github.com/ozone-development/ozp-center.git/commit/1056e8f43f0d9239b2453e7962c2e1981ff44466))
+
+
 ### 1.1.4 (2016-03-03)
 
 
