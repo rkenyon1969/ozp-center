@@ -45,6 +45,7 @@ var Discovery = React.createClass({
             mostPopular: DiscoveryPageStore.getMostPopular(),
             searchResults: DiscoveryPageStore.getSearchResults(),
             mostPopularTiles: 12,
+            initialMostPopularTiles: 12,
             queryString: this.state ? this.state.queryString : '',
             categories: this.state ? this.state.categories : [],
             type: this.state ? this.state.type : [],
@@ -52,7 +53,8 @@ var Discovery = React.createClass({
             nextOffset: DiscoveryPageStore.getNextOffset(),
             currentOffset: this.state ? this.state.currentOffset : 0,
             limit: this.state ? this.state.limit : PAGINATION_MAX,
-            loadingMore: false
+            loadingMore: false,
+            searching: false
         };
     },
 
@@ -231,7 +233,7 @@ var Discovery = React.createClass({
             agency: []
         });
     },
-    
+
     searchBarReset() {
 	if (this.refs.search.getDOMNode().value.length > 0) {
             this._searching = true;
@@ -257,6 +259,10 @@ var Discovery = React.createClass({
             { type, agency });
 
         ListingActions.search(_.assign(combinedObj));
+
+        this.setState({
+          searching: true
+        });
     },
 
     onSearchCompleted() {
@@ -267,7 +273,8 @@ var Discovery = React.createClass({
         }
         this._searching = false;
         this.setState({
-            lastSearchCompleted: Date.now()
+            lastSearchCompleted: Date.now(),
+            searching: false
         });
     },
 
@@ -299,17 +306,25 @@ var Discovery = React.createClass({
 
     handleLoadMore() {
         this.setState({
-            mostPopularTiles: this.state.mostPopularTiles += 12,
-            loadingMore: true
+            mostPopularTiles: this.state.mostPopularTiles += 12
         });
 
-        // Debounce loading more so event is not triggered multiple times while
-        // listings are loading in.
-        setTimeout(() => {
+        if (this.state.mostPopularTiles < this.state.limit + this.state.initialMostPopularTiles) {
           this.setState({
-            loadingMore: false
+            loadingMore: true
           });
-        }, 500);
+
+          // TODO: this will cause a violation of updating an unmounted
+          // component if a user finds a way to navigate a way in 500ms.
+
+          // Debounce loading more so event is not triggered multiple times while
+          // listings are loading in.
+          setTimeout(() => {
+            this.setState({
+              loadingMore: false
+            });
+          }, 500);
+        }
     },
 
     renderMostPopular() {
@@ -327,7 +342,7 @@ var Discovery = React.createClass({
                 </ul>
                 <p className="text-center">
                   { this.state.loadingMore &&
-                    <span>Loading more listings...</span>
+                    <h3 className="col-xs-12">Searching...</h3>
                   }
                 </p>
             </section>
@@ -341,7 +356,7 @@ var Discovery = React.createClass({
     },
 
     renderSearchResults() {
-        var results = <h3 className="col-xs-12">Searching...</h3>;
+        var results = '';
 
         if (!this._searching) {
             results = this.state.searchResults.length > 0 ?
@@ -372,6 +387,11 @@ var Discovery = React.createClass({
                 <ul className="list-unstyled listings-search-results row clearfix">
                     { results }
                 </ul>
+                <div className="list-unstyled listings-search-results row clearfix">
+                    { this.state.searching &&
+                      <h3 className="col-xs-12">Searching...</h3>
+                    }
+                </div>
             </section>
         );
     }
