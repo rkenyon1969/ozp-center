@@ -411,7 +411,7 @@ var ListingForm = React.createClass({
                     itemForm={ ScreenshotForm }/>
 
                 <h2 id={f.ownersAndContacts.id}>Owner Information and Contacts</h2>
-                <Select2Input id={f.orgs.id} { ...p('agency') }
+                <Select2Input id={f.orgs.id} { ...p('agencyShort') }
                     options={ getOptionsForSimpleLists(organizations) }/>
                 <OwnerInput id={f.owners.id} { ...p('owners') } listing={listing}
                     ownerSetter={ownerSetter} />
