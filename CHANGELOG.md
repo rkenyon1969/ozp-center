@@ -1,3 +1,11 @@
+### 1.1.7 (2016-03-20)
+
+
+#### Bug Fixes
+
+* **package.json:** Use a version of gulp-bless that uses bless 3.x.x ([a7ca272b](https://github.com/ozone-development/ozp-center.git/commit/a7ca272b3cffca04f538c20a6715a67713dc7ec9))
+
+
 ### 1.1.6 (2016-03-20)
 
 
