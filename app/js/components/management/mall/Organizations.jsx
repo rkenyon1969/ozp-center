@@ -22,7 +22,7 @@ var Categories = React.createClass({
     getDefaultProps: function () {
         return {
             title: 'Organization',
-            url: API_URL + '/api/agency',
+            url: API_URL + '/api/agency/',
             Schema: Organization,
             getDisplayName: function (selectedRecord) {
                 return selectedRecord.title;
