@@ -1,3 +1,16 @@
+### 1.1.6 (2016-03-20)
+
+
+#### Bug Fixes
+
+* **Create Edit:** Fix display of associated agency ([dbf45f4d](https://github.com/ozone-development/ozp-center.git/commit/dbf45f4d57918c16f7aa279d5ab42e42ae222024))
+
+
+#### Features
+
+* **Infinite Scroll:** loading more is now more obvious ([d8264c6c](https://github.com/ozone-development/ozp-center.git/commit/d8264c6c7addc2ff3ba51525cffca3d9a8ea444b))
+
+
 ### 1.1.5 (2016-03-16)
 
 
