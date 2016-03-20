@@ -94,7 +94,7 @@ var Intents = React.createClass({
     getDefaultProps: function () {
         return {
             title: 'Intent',
-            url: API_URL + '/api/intent',
+            url: API_URL + '/api/intent/',
             Schema: Intent,
             getDisplayName: function (selectedRecord) {
                 return `${selectedRecord.action}/${selectedRecord.mediaType}`;

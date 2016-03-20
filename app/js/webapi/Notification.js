@@ -41,7 +41,7 @@ module.exports = {
     },
 
     fetchPast(url) {
-        url = url || `${API_URL}/api/notifications/expired?offset=0&limit=${PAGINATION_MAX}`;
+        url = url || `${API_URL}/api/notifications/expired/?offset=0&limit=${PAGINATION_MAX}`;
         return $.getJSON(url)
             .then((response) => new PaginatedResponse(humps.camelizeKeys(response), this.parse));
     }

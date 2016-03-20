@@ -20,7 +20,7 @@ var ContactTypes = React.createClass({
     getDefaultProps: function () {
         return {
             title: 'Contact Type',
-            url: API_URL + '/api/contact_type',
+            url: API_URL + '/api/contact_type/',
             Schema: ContactType,
             getDisplayName: function (selectedRecord) {
                 return selectedRecord.name;
