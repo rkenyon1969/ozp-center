@@ -30,7 +30,7 @@ const meTour = new Tour({
     {
       element: "#tourstop-hud",
       title: "HUD",
-      content: "Opens HUD (heads up display) where your bookmarks are stored. Think of HUD like the home screen on a smart phone.",
+      content: "Opens HUD (heads up display) where your bookmarked apps are stored, and can easily be organized and launched. Think of HUD as your homepage for favorite apps.",
       placement: "bottom",
       backdropContainer: ".navbar-fixed-top",
       backdropPadding: 0
@@ -38,7 +38,7 @@ const meTour = new Tour({
     {
       element: "#tourstop-center",
       title: "Center",
-      content: "Opens Center where you can search for listings to bookmark to your HUD or open in Webtop.",
+      content: "Opens the Center where you can search and discover app listings from across the IC. You can bookmark listings to your HUD and you can also launch apps into a seperate tab directly from the Center.",
       placement: "bottom",
       backdropContainer: ".navbar-fixed-top",
       backdropPadding: 0
@@ -46,7 +46,7 @@ const meTour = new Tour({
     {
       element: "#tourstop-webtop",
       title: "Webtop",
-      content: "Opens Webtop, your customizable workspace within the platform.",
+      content: "Opens the Webtop, a virtual desktop environment. It allows you to run web apps and widgets in a single window, and save your custom workflows as dashboards.",
       placement: "bottom",
       backdropContainer: ".navbar-fixed-top",
       backdropPadding: 0
@@ -54,7 +54,7 @@ const meTour = new Tour({
     {
       element: "#tourstop-notifications",
       title: "Notifications",
-      content: "Receive notifications from your Center steward here. If you have an unread notification, the icon will change to blue to alert you. Once you've read a notification, you can click the X to dismiss it. Otherwise, it will disappear from the list when it expires.",
+      content: "Receive AppsMall notifications here. If you have an unread notification, the icon will change to blue to alert you. Once you've read a notification, you can click the X to dismiss it. Otherwise, it will disappear from the list when it expires.",
       placement: "bottom",
       backdropContainer: ".navbar-fixed-top",
       backdropPadding: 0
@@ -62,7 +62,7 @@ const meTour = new Tour({
     {
       element: "#tourstop-help",
       title: "Help",
-      content: "Access help videos and articles explaining how to use the platform.",
+      content: "Access help videos and articles explaining how to use the platform. You can also contact the Help Desk or take this tour again from here.",
       placement: "left",
       backdropContainer: ".navbar-fixed-top",
       backdropPadding: 0
@@ -70,7 +70,7 @@ const meTour = new Tour({
     {
       element: "#tourstop-global-menu",
       title: "Global Menu",
-      content: "The main menu provides a list of resources you can use to submit listings, manage your listings, view your profile, contact us, etc.",
+      content: "The main menu provides a list of resources you can use to view your profile and settings, contact us, manage your listings, etc.",
       placement: "left",
       backdropContainer: ".navbar-fixed-top",
       backdropPadding: 0,
@@ -100,7 +100,7 @@ const meTour = new Tour({
     {
       element: ".Discovery__SearchResults .listing:first, .infiniteScroll .listing:first",
       title: "Listing Tiles",
-      content: "Hover over a tile to read more information and choose to launch it in a new tab or bookmark it to your HUD. Click the tile to open a detail popup.",
+      content: "Hover over a tile for a short description of the app, to bookmark it to your HUD, or to launch it into a new tab. Click the tile to open the listing overview for more listing details.",
       placement: "top",
       onShown: function() {
         $(".Discovery__SearchResults .listing:first .slide-up, .infiniteScroll .listing:first .slide-up").css("top", "0px");
@@ -125,7 +125,7 @@ const meTour = new Tour({
       path: `${CENTER_URL}#/home/?%2F%3F=&listing=1&action=view&tab=overview`,
       element: ".modal-body",
       title: "Listing Overview",
-      content: "Click a tile to access the listing detail view. From this popup you can see screenshots, long descriptions, reviews, and other resources. Use the links at the top of the listing to launch, bookmark or close it.",
+      content: "Within this view are screenshots, long descriptions, reviews, and other resources. Use the links at the top right of the listing to launch, bookmark or close it.",
       placement: "left",
       backdropContainer: ".modal-content",
       backdropPadding: 0,
@@ -225,7 +225,7 @@ const meTour = new Tour({
       path: `${CENTER_URL}#/home/?%2F%3F=&listing=1&action=view&tab=resources`,
       element: ".modal-body .nav .active",
       title: "Listing Resources",
-      content: "If the listing includes instructions like user manuals and contact information, you will find it here.",
+      content: "If the listing includes instructions like user manuals and contact information, you will find it here. Thank you for taking the time to tour AppsMall.",
       placement: "bottom",
       backdropContainer: ".modal-content",
       backdropPadding: 0,
