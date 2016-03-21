@@ -225,7 +225,7 @@ const meTour = new Tour({
       path: `${CENTER_URL}#/home/?%2F%3F=&listing=1&action=view&tab=resources`,
       element: ".modal-body .nav .active",
       title: "Listing Resources",
-      content: "If the listing includes instructions like user manuals and contact information, you will find it here. Thank you for taking the time to tour AppsMall. If you would like to view this tour again in the future, it is accessable from the AppsMall Help modal. ",
+      content: "If the listing includes instructions like user manuals and contact information, you will find it here. Thank you for taking the time to tour AppsMall.",
       placement: "bottom",
       backdropContainer: ".modal-content",
       backdropPadding: 0,
