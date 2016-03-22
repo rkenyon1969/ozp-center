@@ -1,3 +1,11 @@
+### 1.1.9 (2016-03-22)
+
+
+#### Bug Fixes
+
+* **Center Settings:** Scrolling to bottom of page breaks infinite scroll #559 ([1f0437a9](https://github.com/ozone-development/ozp-center.git/commit/1f0437a94ce566db0e46a0d2361e838d53a06c3c))
+
+
 ### 1.1.8 (2016-03-21)
 
 
