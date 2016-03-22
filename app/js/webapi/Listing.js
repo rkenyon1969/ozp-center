@@ -319,7 +319,9 @@ var ListingApi = {
             contentType: 'application/json'
         }).then(
             (response) => this.newListing(response)
-        );
+        ).fail(response => {
+          alert('This listing requires attention, please continue to the edit page to fix errors.');
+        });
     },
 
     del: function (id) {
