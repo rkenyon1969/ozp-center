@@ -17,7 +17,7 @@ cd ozp-center
 npm install
 ```
 
-Next, run `npm start` or `gulp dev`. Go to http://localhost:8000/webpack-dev-server/dist and browser will automatically reload when any file in /app changes. Alternatively, you can also go to http://localhost:8000/dist, if auto reload is undesirable.
+Next, run `npm start` or `gulp dev`. Go to http://localhost:8000/webpack-dev-server/dist and browser will automatically reload when any file in /app changes. Alternatively, you can also go to http://localhost:8000/dist, if auto reload is undesirable. You can specify API URL by running `API_URL="{API_URL}" npm start`
 
 ## Available tasks
 See `scripts` key in `package.json` for all options.
