@@ -304,29 +304,31 @@ var Discovery = React.createClass({
         );
     },
 
-    handleLoadMore() {
-        this.setState({
-            mostPopularTiles: this.state.mostPopularTiles += 12
-        });
+handleLoadMore() {
+        if (this.isMounted()) {
+          this.setState({
+              mostPopularTiles: this.state.mostPopularTiles += 12
+          });
+        }
 
         if (this.state.mostPopularTiles < this.state.limit + this.state.initialMostPopularTiles) {
-          this.setState({
-            loadingMore: true
-          });
-
-          // TODO: this will cause a violation of updating an unmounted
-          // component if a user finds a way to navigate a way in 500ms.
-
+          if (this.isMounted()) {
+            this.setState({
+              loadingMore: true
+            });
+          }
+          
           // Debounce loading more so event is not triggered multiple times while
           // listings are loading in.
           setTimeout(() => {
-            this.setState({
-              loadingMore: false
-            });
+            if (this.isMounted()) {
+              this.setState({
+                loadingMore: false
+              });
+            }
           }, 500);
         }
     },
-
     renderMostPopular() {
         if(!this.state.mostPopular.length) {
             return;
