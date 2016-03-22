@@ -323,10 +323,10 @@ var ListingApi = {
         ).fail(response => {
             sweetAlert({
               title: "Could not modify listing!",
-              text: "'This listing requires attention, please continue to the edit page to fix errors!",
+              text: "This listing requires attention, please continue to the edit page to fix errors!",
               type: "error",
               confirmButtonColor: "#DD6B55",
-              confirmButtonText: "done",
+              confirmButtonText: "close",
               closeOnConfirm: true,
               html: false
             });
