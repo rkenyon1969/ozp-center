@@ -7,6 +7,7 @@ var OzpAnalytics = require('../analytics/ozp-analytics');
 var PaginatedResponse = require ('./responses/PaginatedResponse');
 var { PAGINATION_MAX } = require('ozp-react-commons/constants');
 var { API_URL } = require('ozp-react-commons/OzoneConfig');
+require('sweetalert');
 
 var FIELDS = [
     'approvedDate', 'id', 'title', 'description', 'descriptionShort', 'screenshots', 'contacts',
@@ -320,7 +321,15 @@ var ListingApi = {
         }).then(
             (response) => this.newListing(response)
         ).fail(response => {
-          alert('This listing requires attention, please continue to the edit page to fix errors.');
+            sweetAlert({
+              title: "Could not modify listing!",
+              text: "'This listing requires attention, please continue to the edit page to fix errors!",
+              type: "error",
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "done",
+              closeOnConfirm: true,
+              html: false
+            });
         });
     },
 
