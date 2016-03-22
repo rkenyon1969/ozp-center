@@ -16,8 +16,7 @@ var notificationData = {
                     "username": "wsmith"
                 }
             },
-            "listing": null,
-            "dismissed_by": []
+            "listing": null
         },
         {
             "id": 2,
@@ -29,8 +28,7 @@ var notificationData = {
                     "username": "julia"
                 }
             },
-            "listing": null,
-            "dismissed_by": []
+            "listing": null
         },
         {
             "id": 3,
@@ -42,8 +40,7 @@ var notificationData = {
                     "username": "wsmith"
                 }
             },
-            "listing": null,
-            "dismissed_by": []
+            "listing": null
         }
     ]
 };
