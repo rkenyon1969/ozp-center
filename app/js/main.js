@@ -123,10 +123,11 @@ function detectIE() {
 
 if (detectIE() && detectIE() < 10) {
 alert(`
-OZP is tested against the following browsers:
+This site is tested against the following browsers:
 IE 11 +
 FireFox 24+
 Chrome 36+
+We have detected that you are using an unsupported browser and some features may not function correctly
 `);
-window.location = IE_REDIRECT_URL;
+window.open(IE_REDIRECT_URL);
 }
