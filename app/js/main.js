@@ -129,5 +129,5 @@ FireFox 24+
 Chrome 36+
 We have detected that you are using an unsupported browser and some features may not function correctly
 `);
-window.location = IE_REDIRECT_URL;
+window.open = IE_REDIRECT_URL;
 }
