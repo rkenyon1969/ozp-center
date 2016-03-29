@@ -105,7 +105,7 @@ var AllListings = React.createClass({
                 <div className="Listings__Sidebar col-xs-3 col-lg-2">
                     <Sidebar>
                         {toggleSwitch}
-                        <ApprovalStatusFilter role={ UserRole.ADMIN } { ...sidebarFilterOptions } />
+                        <ApprovalStatusFilter role={ UserRole.APPS_MALL_STEWARD } { ...sidebarFilterOptions } />
                         <OrgFilter { ...sidebarFilterOptions } />
                         <EnabledFilter { ...sidebarFilterOptions } />
                     </Sidebar>
