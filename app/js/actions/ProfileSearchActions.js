@@ -2,4 +2,6 @@
 
 var Reflux = require('reflux');
 
-module.exports = Reflux.createActions(['search', 'searchCompleted', 'tourCheck']);
+module.exports = Reflux.createActions([
+  'search', 'searchCompleted', 'tourCheck', 'goHome'
+]);

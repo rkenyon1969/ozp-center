@@ -12,6 +12,7 @@ var Modal = require('ozp-react-commons/components/Modal.jsx');
 var Header = require('./Header.jsx');
 var CurrentListingStore = require('../../stores/CurrentListingStore');
 
+var ProfileSearchActions = require('../../actions/ProfileSearchActions');
 var OverviewTab = require('./OverviewTab.jsx');
 var ReviewsTab = require('./reviews/index.jsx');
 var DetailsTab = require('./DetailsTab.jsx');
@@ -34,7 +35,17 @@ var tabs = {
 **/
 var Quickview = React.createClass({
 
-    mixins: [ Reflux.connect(CurrentListingStore), Navigation, State ],
+    mixins: [
+      Reflux.connect(CurrentListingStore),
+      Navigation,
+      State
+    ],
+
+    componentDidMount: function() {
+      this.listenTo(ProfileSearchActions.goHome, () => {
+        this.close();
+      });
+    },
 
     getDefaultProps: function () {
         return {
