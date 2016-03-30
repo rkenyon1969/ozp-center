@@ -317,7 +317,7 @@ handleLoadMore() {
               loadingMore: true
             });
           }
-          
+
           // Debounce loading more so event is not triggered multiple times while
           // listings are loading in.
           setTimeout(() => {
