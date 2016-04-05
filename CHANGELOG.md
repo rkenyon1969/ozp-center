@@ -1,3 +1,11 @@
+### 1.1.22 (2016-04-05)
+
+
+#### Bug Fixes
+
+* **Tour:** Close tour at end of tour ([9d07684c](https://github.com/ozone-development/ozp-center.git/commit/9d07684c3c5a85f2f51f5fcd9bebcb60973c4106))
+
+
 ### 1.1.21 (2016-03-30)
 
 
