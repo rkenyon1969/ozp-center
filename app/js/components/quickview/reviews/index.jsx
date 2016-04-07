@@ -163,7 +163,7 @@ var ReviewsTab = React.createClass({
             var count = listing[`totalRate${star}`];
             var width = total === 0 ? 0 : Math.round(count * 100 / total).toFixed(2);
 
-            return <RatingProgressBar count={count} value={width} star={star} key={i}/>;
+            return <RatingProgressBar count={count} value={width} star={star} key={`${i}-bar`}/>;
         });
 
         return (
