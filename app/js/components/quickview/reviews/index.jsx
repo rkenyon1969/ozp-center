@@ -168,7 +168,7 @@ var ReviewsTab = React.createClass({
 
         return (
             <div tabIndex="0">
-                <h5>Average Rating</h5>
+                <h5>Average Rating { listing.avgRate }</h5>
                 <p><IconRating currentRating = { listing.avgRate || 0 } viewOnly /> ( { listing.totalVotes || 0 } Ratings )</p>
                 <div className="review-filters">
                     { starComponents }
